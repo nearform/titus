@@ -3,20 +3,11 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { mainMenuItems, teamMembers } from '../mock/menuData';
-import { metaData } from '../mock/appData';
 import { theme } from '../theme/theme';
-
-const drawerWidth = 240;
+import TopBar from './TopBar';
 
 const styles = {
   root: {
@@ -26,22 +17,6 @@ const styles = {
     position: 'relative',
     display: 'flex',
     overflow: 'hidden'
-  },
-  appBar: {
-    position: 'absolute',
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    })
-  },
-  appBarShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen
-    })
   },
   menuButton: {
     marginLeft: 12,
@@ -53,7 +28,7 @@ const styles = {
   drawerPaper: {
     position: 'relative',
     whiteSpace: 'nowrap',
-    width: drawerWidth,
+    width: theme.menuWidth,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen
@@ -70,10 +45,7 @@ const styles = {
       width: theme.spacing.unit * 9
     }
   },
-  toolbar: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
+  toolbarPlaceholder: {
     padding: '0 8px',
     ...theme.mixins.toolbar
   },
@@ -85,10 +57,15 @@ const styles = {
 };
 
 class MainNav extends React.Component {
-  state = {
-    menuOpen: false,
-    currentSection: 'Concepts'
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      menuOpen: false,
+      currentSection: 'Concepts'
+    };
+    this.handleMenuOpen = this.handleMenuOpen.bind(this);
+    this.handleMenuClose = this.handleMenuClose.bind(this);
+  }
 
   handleMenuOpen = () => {
     this.setState({ menuOpen: true });
@@ -103,33 +80,13 @@ class MainNav extends React.Component {
 
     return (
       <div className={classes.root}>
-        <AppBar
-          color="primary"
-          className={classNames(
-            classes.appBar,
-            this.state.menuOpen && classes.appBarShift
-          )}
-        >
-          <Toolbar disableGutters={!this.state.menuOpen}>
-            <IconButton
-              color="inherit"
-              aria-label="Open Menu"
-              onClick={this.handleMenuOpen}
-              className={classNames(
-                classes.menuButton,
-                this.state.menuOpen && classes.hide
-              )}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="title" color="inherit" noWrap>
-              {metaData.name}
-              {this.state.currentSection
-                ? ' - ' + this.state.currentSection
-                : null}
-            </Typography>
-          </Toolbar>
-        </AppBar>
+        <TopBar
+          appName={this.props.appName}
+          onMenuOpen={this.handleMenuOpen}
+          onMenuClose={this.handleMenuClose}
+          menuOpen={this.state.menuOpen}
+          currentSection={this.state.currentSection}
+        />
         <Drawer
           color="primary"
           variant="permanent"
@@ -141,24 +98,13 @@ class MainNav extends React.Component {
           }}
           open={this.state.openMenu}
         >
-          <div className={classes.toolbar}>
-            <IconButton onClick={this.handleMenuClose}>
-              {theme.direction === 'rtl' ? (
-                <ChevronRightIcon />
-              ) : (
-                <ChevronLeftIcon />
-              )}
-            </IconButton>
-          </div>
+          <div className={classes.toolbarPlaceholder} />
           <Divider />
           <List color="inherit">{mainMenuItems}</List>
           <Divider />
           <List color="inherit">{teamMembers}</List>
         </Drawer>
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
-          <Typography>{metaData.description}</Typography>
-        </main>
+        {this.props.children}
       </div>
     );
   }
