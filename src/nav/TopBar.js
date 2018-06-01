@@ -12,14 +12,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { theme } from '../theme/theme';
 
 const styles = {
-  root: {
-    flexGrow: 1,
-    height: '100%',
-    zIndex: 1,
-    position: 'relative',
-    display: 'flex',
-    overflow: 'hidden'
-  },
+  root: {},
   appBar: {
     position: 'absolute',
     zIndex: theme.zIndex.drawer + 1,
