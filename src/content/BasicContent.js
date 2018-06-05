@@ -19,13 +19,13 @@ const styles = {
 
 class BasicContent extends React.Component {
   render() {
-    const { classes } = this.props;
+    const { classes, textContent } = this.props;
 
     return (
       <div className={classes.root}>
         <main className={classes.content}>
           <div className={classes.toolbarPlaceholder} />
-          <Typography>{this.props.textContent}</Typography>
+          <Typography>{textContent}</Typography>
         </main>
       </div>
     );

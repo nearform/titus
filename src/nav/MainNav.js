@@ -6,8 +6,8 @@ import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import { theme } from '../theme/theme';
 import TopBar from './TopBar';
-import TeamList from './TeamList';
-import MainMenuList from './MainMenuList';
+import MenuList from './MenuList';
+import { mainMenuData, teamMenuData } from '../mock/menuData';
 
 const styles = {
   root: {
@@ -65,6 +65,8 @@ class MainNav extends Component {
     };
     this.handleMenuOpen = this.handleMenuOpen.bind(this);
     this.handleMenuClose = this.handleMenuClose.bind(this);
+    this.handleMainMenuItemClicked = this.handleMainMenuItemClicked.bind(this);
+    this.handleTeamMenuItemClicked = this.handleTeamMenuItemClicked.bind(this);
   }
 
   handleMenuOpen = () => {
@@ -73,6 +75,14 @@ class MainNav extends Component {
 
   handleMenuClose = () => {
     this.setState({ menuOpen: false });
+  };
+
+  handleMainMenuItemClicked = section => {
+    this.setState({ currentSection: section });
+  };
+
+  handleTeamMenuItemClicked = section => {
+    this.setState({ currentSection: section });
   };
 
   render() {
@@ -100,9 +110,17 @@ class MainNav extends Component {
         >
           <div className={classes.toolbarPlaceholder} />
           <Divider />
-          <MainMenuList />
+          <MenuList
+            menuData={mainMenuData}
+            menuOpen={this.state.menuOpen}
+            onItemClicked={this.handleMainMenuItemClicked}
+          />
           <Divider />
-          <TeamList />
+          <MenuList
+            menuData={teamMenuData}
+            menuOpen={this.state.menuOpen}
+            onItemClicked={this.handleTeamMenuItemClicked}
+          />
         </Drawer>
         {children}
       </div>
