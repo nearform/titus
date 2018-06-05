@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
@@ -45,7 +45,7 @@ const styles = {
   }
 };
 
-class TopBar extends React.Component {
+class TopBar extends Component {
   constructor(props) {
     super(props);
     this.handleMenuOpen = this.handleMenuOpen.bind(this);
@@ -61,25 +61,25 @@ class TopBar extends React.Component {
   }
 
   render() {
-    const { classes, theme } = this.props;
+    const { classes, menuOpen, appName, currentSection } = this.props;
 
     return (
-      <div>
+      <div className={classes.root}>
         <AppBar
           color="primary"
           className={classNames(
             classes.appBar,
-            this.props.menuOpen && classes.appBarShift
+            menuOpen && classes.appBarShift
           )}
         >
-          <Toolbar disableGutters={!this.props.menuOpen}>
+          <Toolbar disableGutters={!menuOpen}>
             <IconButton
               color="inherit"
               aria-label="Open Menu"
               onClick={this.handleMenuOpen}
               className={classNames(
                 classes.menuButton,
-                this.props.menuOpen && classes.hide
+                menuOpen && classes.hide
               )}
             >
               <MenuIcon />
@@ -89,7 +89,7 @@ class TopBar extends React.Component {
               color="inherit"
               aria-label="Close Menu"
               onClick={this.handleMenuClose}
-              className={classNames(!this.props.menuOpen && classes.hide)}
+              className={classNames(!menuOpen && classes.hide)}
             >
               {theme.direction === 'rtl' ? (
                 <ChevronRightIcon />
@@ -98,10 +98,8 @@ class TopBar extends React.Component {
               )}
             </IconButton>
             <Typography variant="title" color="inherit" noWrap>
-              {this.props.appName}
-              {this.props.currentSection
-                ? ' - ' + this.props.currentSection
-                : null}
+              {appName}
+              {currentSection ? ' - ' + currentSection : null}
             </Typography>
           </Toolbar>
         </AppBar>

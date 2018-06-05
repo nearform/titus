@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
-import { mainMenuItems, teamMembers } from '../mock/menuData';
 import { theme } from '../theme/theme';
 import TopBar from './TopBar';
+import TeamList from './TeamList';
+import MainMenuList from './MainMenuList';
 
 const styles = {
   root: {
@@ -56,7 +56,7 @@ const styles = {
   }
 };
 
-class MainNav extends React.Component {
+class MainNav extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -76,12 +76,12 @@ class MainNav extends React.Component {
   };
 
   render() {
-    const { classes, theme } = this.props;
+    const { classes, appName, children } = this.props;
 
     return (
       <div className={classes.root}>
         <TopBar
-          appName={this.props.appName}
+          appName={appName}
           onMenuOpen={this.handleMenuOpen}
           onMenuClose={this.handleMenuClose}
           menuOpen={this.state.menuOpen}
@@ -100,11 +100,11 @@ class MainNav extends React.Component {
         >
           <div className={classes.toolbarPlaceholder} />
           <Divider />
-          <List color="inherit">{mainMenuItems}</List>
+          <MainMenuList />
           <Divider />
-          <List color="inherit">{teamMembers}</List>
+          <TeamList />
         </Drawer>
-        {this.props.children}
+        {children}
       </div>
     );
   }
