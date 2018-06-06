@@ -63,18 +63,15 @@ class MainNav extends Component {
       menuOpen: false,
       currentSection: 'Concepts'
     };
-    this.handleMenuOpen = this.handleMenuOpen.bind(this);
-    this.handleMenuClose = this.handleMenuClose.bind(this);
+    this.handleMenuToggle = this.handleMenuToggle.bind(this);
     this.handleMainMenuItemClicked = this.handleMainMenuItemClicked.bind(this);
     this.handleTeamMenuItemClicked = this.handleTeamMenuItemClicked.bind(this);
   }
 
-  handleMenuOpen = () => {
-    this.setState({ menuOpen: true });
-  };
-
-  handleMenuClose = () => {
-    this.setState({ menuOpen: false });
+  handleMenuToggle = () => {
+    this.setState(prevState => {
+      return { menuOpen: !prevState.menuOpen };
+    });
   };
 
   handleMainMenuItemClicked = section => {
@@ -92,8 +89,7 @@ class MainNav extends Component {
       <div className={classes.root}>
         <TopBar
           appName={appName}
-          onMenuOpen={this.handleMenuOpen}
-          onMenuClose={this.handleMenuClose}
+          onMenuToggle={this.handleMenuToggle}
           menuOpen={this.state.menuOpen}
           currentSection={this.state.currentSection}
         />
@@ -106,7 +102,7 @@ class MainNav extends Component {
               !this.state.menuOpen && classes.drawerPaperClose
             )
           }}
-          open={this.state.openMenu}
+          open={this.state.menuOpen}
         >
           <div className={classes.toolbarPlaceholder} />
           <Divider />

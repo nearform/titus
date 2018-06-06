@@ -48,16 +48,11 @@ const styles = {
 class TopBar extends Component {
   constructor(props) {
     super(props);
-    this.handleMenuOpen = this.handleMenuOpen.bind(this);
-    this.handleMenuClose = this.handleMenuClose.bind(this);
+    this.handleMenuToggle = this.handleMenuToggle.bind(this);
   }
 
-  handleMenuOpen(e) {
-    this.props.onMenuOpen(e.target.value);
-  }
-
-  handleMenuClose(e) {
-    this.props.onMenuClose(e.target.value);
+  handleMenuToggle(e) {
+    this.props.onMenuToggle(e.target.value);
   }
 
   render() {
@@ -76,7 +71,7 @@ class TopBar extends Component {
             <IconButton
               color="inherit"
               aria-label="Open Menu"
-              onClick={this.handleMenuOpen}
+              onClick={this.handleMenuToggle}
               className={classNames(
                 classes.menuButton,
                 menuOpen && classes.hide
@@ -88,7 +83,7 @@ class TopBar extends Component {
             <IconButton
               color="inherit"
               aria-label="Close Menu"
-              onClick={this.handleMenuClose}
+              onClick={this.handleMenuToggle}
               className={classNames(!menuOpen && classes.hide)}
             >
               {theme.direction === 'rtl' ? (
