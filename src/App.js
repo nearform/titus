@@ -1,17 +1,22 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component, Fragment } from 'react';
+import MainNav from './nav/MainNav';
+import BasicContent from './content/BasicContent';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { MuiThemeProvider } from '@material-ui/core/styles';
+import { theme } from './theme/theme';
+import { metaData } from './mock/appData';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Titus!</h1>
-        </header>
-        <p className="App-intro">Welcome to Titus!</p>
-      </div>
+      <Fragment>
+        <CssBaseline />
+        <MuiThemeProvider theme={theme}>
+          <MainNav appName={metaData.name}>
+            <BasicContent textContent={metaData.description} />
+          </MainNav>
+        </MuiThemeProvider>
+      </Fragment>
     );
   }
 }
