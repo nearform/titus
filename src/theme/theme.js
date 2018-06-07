@@ -5,5 +5,6 @@ export const theme = createMuiTheme({
     primary: { main: '#0B2A5C' },
     type: 'light'
   },
-  menuWidth: 300 // custom, maybe a better place for this...
+  menuWidth: 280, // custom, maybe a better place for this...
+  verticalPad: '20px'
 });

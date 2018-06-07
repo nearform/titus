@@ -46,17 +46,12 @@ const styles = {
 };
 
 class TopBar extends Component {
-  constructor(props) {
-    super(props);
-    this.handleMenuToggle = this.handleMenuToggle.bind(this);
-  }
-
-  handleMenuToggle(e) {
-    this.props.onMenuToggle(e.target.value);
-  }
+  handleMenuToggle = () => {
+    this.props.onMenuToggle();
+  };
 
   render() {
-    const { classes, menuOpen, appName, currentSection } = this.props;
+    const { classes, menuOpen, appName, sectionId } = this.props;
 
     return (
       <div className={classes.root}>
@@ -94,7 +89,7 @@ class TopBar extends Component {
             </IconButton>
             <Typography variant="title" color="inherit" noWrap>
               {appName}
-              {currentSection ? ' - ' + currentSection : null}
+              {sectionId ? ' - ' + sectionId : null}
             </Typography>
           </Toolbar>
         </AppBar>

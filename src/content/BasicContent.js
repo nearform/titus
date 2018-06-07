@@ -5,15 +5,8 @@ import Typography from '@material-ui/core/Typography';
 import { theme } from '../theme/theme';
 
 const styles = {
-  root: {},
-  content: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
-    padding: theme.spacing.unit * 3
-  },
-  toolbarPlaceholder: {
-    padding: '0 8px',
-    ...theme.mixins.toolbar
+  root: {
+    backgroundColor: theme.palette.background.default
   }
 };
 
@@ -23,10 +16,7 @@ class BasicContent extends React.Component {
 
     return (
       <div className={classes.root}>
-        <main className={classes.content}>
-          <div className={classes.toolbarPlaceholder} />
-          <Typography>{textContent}</Typography>
-        </main>
+        <Typography>{textContent}</Typography>
       </div>
     );
   }
