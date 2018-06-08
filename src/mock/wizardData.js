@@ -2,7 +2,7 @@ export const wizardData = {
   id: 'gandalf',
   title: 'Gandalf Tasks Wizard',
   description: 'Gandalf Tasks Wizard  v0.0.1',
-  requiredMessage: 'You Shall Not Pass (without entering some data)!',
+  defaultRequiredMessage: 'You Shall Not Pass (without entering a comment)!',
   steps: [
     {
       id: 'step1',
@@ -13,7 +13,8 @@ export const wizardData = {
     {
       id: 'step2',
       title: 'Assemble Fellowship',
-      description: 'Meet up with Aragorn, Legolas and Gimli'
+      description: 'Meet up with Aragorn, Legolas and Gimli',
+      requiredMessage: 'A comment is required (AND MY AXE!)'
     },
     {
       id: 'step3',
@@ -23,9 +24,10 @@ export const wizardData = {
     {
       id: 'step4',
       title: 'Mordor',
-      description: 'Break into Mordor',
+      description: 'Walk into Mordor',
       optional: false,
-      requiredMessage: 'One does not simply walk into Mordor!'
+      requiredMessage:
+        'One does not simply walk into Mordor (without entering a comment)!'
     },
     {
       id: 'step5',

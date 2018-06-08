@@ -58,8 +58,8 @@ class Wizard extends React.Component {
       if (!stepsSatisfied[stepIndex] && !data.steps[stepIndex].optional) {
         requiredMessage = data.steps[stepIndex].requiredMessage
           ? data.steps[stepIndex].requiredMessage
-          : data.requiredMessage
-            ? data.requiredMessage
+          : data.defaultRequiredMessage
+            ? data.defaultRequiredMessage
             : '';
       } else {
         newStepIndex++;
