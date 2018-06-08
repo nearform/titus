@@ -1,33 +1,37 @@
 export const wizardData = {
   id: 'gandalf',
-  title: 'Gandalf Notes Wizard',
+  title: 'Gandalf Tasks Wizard',
+  description: 'Gandalf Tasks Wizard  v0.0.1',
+  requiredMessage: 'You Shall Not Pass (without entering some data)!',
   steps: [
     {
       id: 'step1',
-      name: 'Frodo',
-      description: 'Get Frodo to Agree'
+      title: 'Frodo',
+      description: 'Get Frodo to Agree',
+      optional: true
     },
     {
       id: 'step2',
-      name: 'Asseble Fellowship',
+      title: 'Assemble Fellowship',
       description: 'Meet up with Aragorn, Legolas and Gimli'
     },
     {
       id: 'step3',
-      name: 'Minas Tirith',
+      title: 'Minas Tirith',
       description: 'Get Through Minis Tirith'
     },
     {
       id: 'step4',
-      name: 'Mordor',
-      description: 'One does not Simply Walk into Mordor',
-      optional: true
+      title: 'Mordor',
+      description: 'Break into Mordor',
+      optional: false,
+      requiredMessage: 'One does not simply walk into Mordor!'
     },
     {
       id: 'step5',
-      name: 'Destroy the Ring',
+      title: 'Destroy the Ring',
       description: 'Wait for Frodo'
     }
   ],
-  finishedMessage: 'Congrats Gandalf!'
+  finishedMessage: 'Congrats Gandalf!!! time to blow some smoke rings ô¿ô'
 };

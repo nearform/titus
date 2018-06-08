@@ -43,14 +43,38 @@ class Wizard extends React.Component {
     this.state = {
       stepIndex: 0,
       stepsSatisfied: [],
+      requiredMessage: '',
       finished: false
     };
   }
 
   handleNext = () => {
     this.setState(prevState => {
+      const { stepsSatisfied, stepIndex } = prevState;
+      const { data } = this.props;
+
+      let requiredMessage = '';
+      let newStepIndex = prevState.stepIndex;
+      if (!stepsSatisfied[stepIndex] && !data.steps[stepIndex].optional) {
+        requiredMessage = data.steps[stepIndex].requiredMessage
+          ? data.steps[stepIndex].requiredMessage
+          : data.requiredMessage
+            ? data.requiredMessage
+            : '';
+      } else {
+        newStepIndex++;
+      }
+
+      let finished = false;
+      if (newStepIndex === data.steps.length) {
+        finished = true;
+        if (this.props.onFinished) this.props.onFinished();
+      }
+
       return {
-        stepIndex: prevState.stepIndex + 1
+        stepIndex: newStepIndex,
+        requiredMessage: requiredMessage,
+        finished: finished
       };
     });
   };
@@ -58,19 +82,18 @@ class Wizard extends React.Component {
   handleBack = () => {
     this.setState(prevState => {
       return {
-        stepIndex: prevState.stepIndex - 1
+        stepIndex: prevState.stepIndex - 1,
+        requiredMessage: ''
       };
     });
   };
 
-  handleFinish = () => {
-    this.setState({ finished: true });
-    if (this.props.onFinished) this.props.onFinished();
-  };
-
   handleReset = () => {
-    this.setState(prevState => {
-      return { stepIndex: 0 };
+    this.setState({
+      stepIndex: 0,
+      stepsSatisfied: [],
+      requiredMessage: '',
+      finished: false
     });
   };
 
@@ -83,7 +106,7 @@ class Wizard extends React.Component {
 
   render() {
     const { classes, data } = this.props;
-    const { stepIndex, stepsSatisfied, finished } = this.state;
+    const { stepIndex, finished, requiredMessage } = this.state;
 
     const steps = data.steps;
     return (
@@ -111,6 +134,13 @@ class Wizard extends React.Component {
                     this.handleStepSatisfied(stepSatisfied)
                   }
                 />
+                <Typography
+                  variant="body"
+                  color="error"
+                  className={requiredMessage === '' ? classes.hide : null}
+                >
+                  {requiredMessage}
+                </Typography>
               </div>
             );
           })}
@@ -122,7 +152,7 @@ class Wizard extends React.Component {
           {steps.map((step, index) => {
             return (
               <Step key={step.id}>
-                <StepLabel>{index + 1 + ' - ' + step.name}</StepLabel>
+                <StepLabel>{index + 1 + ' - ' + step.title}</StepLabel>
               </Step>
             );
           })}
@@ -136,35 +166,20 @@ class Wizard extends React.Component {
             <div>
               <div>
                 <Button
-                  disabled={stepIndex === 0}
+                  disabled={stepIndex === 0 || finished}
                   onClick={this.handleBack}
                   className={classes.rightSpacing}
                 >
                   Back
                 </Button>
-                {stepIndex < steps.length - 1 ? (
-                  <Button
-                    disabled={
-                      !stepsSatisfied[stepIndex] && !steps[stepIndex].optional
-                    }
-                    variant="contained"
-                    color="primary"
-                    onClick={this.handleNext}
-                  >
-                    Next
-                  </Button>
-                ) : (
-                  <Button
-                    disabled={
-                      !stepsSatisfied[stepIndex] && !steps[stepIndex].optional
-                    }
-                    variant="contained"
-                    color="primary"
-                    onClick={this.handleFinish}
-                  >
-                    Finish
-                  </Button>
-                )}
+
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={this.handleNext}
+                >
+                  {stepIndex < steps.length - 1 ? 'Next' : 'Finish'}
+                </Button>
               </div>
             </div>
           )}
