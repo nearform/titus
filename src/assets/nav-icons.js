@@ -4,7 +4,7 @@ import NotificationsIcon from '@material-ui/icons/Alarm';
 import DocumentsIcon from '@material-ui/icons/Folder';
 import MessagesIcon from '@material-ui/icons/Message';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import ScheduleIcon from '@material-ui/icons/List';
+import StepsIcon from '@material-ui/icons/List';
 import AddIcon from '@material-ui/icons/PersonAdd';
 
 function AccountsIcon(props) {
@@ -17,8 +17,8 @@ function AccountsIcon(props) {
 
 export const menuIcons = {
   dashboard: DashboardIcon,
-  accounts: AccountsIcon,
-  schedule: ScheduleIcon,
+  custom: AccountsIcon,
+  steps: StepsIcon,
   messages: MessagesIcon,
   notifications: NotificationsIcon,
   documents: DocumentsIcon,

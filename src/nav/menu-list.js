@@ -7,7 +7,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import DefaultIcon from '@material-ui/icons/Block';
 import ListItemText from '@material-ui/core/ListItemText';
 import Badge from '@material-ui/core/Badge';
-import { menuIcons } from '../assets/navIcons';
+import { menuIcons } from '../assets/nav-icons';
 import Tooltip from '@material-ui/core/Tooltip';
 
 const styles = {
@@ -28,15 +28,14 @@ class MenuList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      lastClickedId: null
+      selectedId: null
     };
-    this.handleItemClicked = this.handleItemClicked.bind(this);
   }
 
-  handleItemClicked(menuItemId, e) {
-    this.props.onItemClicked(menuItemId);
-    this.setState({ lastClickedId: menuItemId });
-  }
+  handleItemClicked = id => {
+    this.props.onItemClicked(id);
+    this.setState({ selectedId: id });
+  };
 
   render() {
     const { classes, menuOpen, menuData } = this.props;
@@ -61,7 +60,7 @@ class MenuList extends Component {
         <ListItem
           key={menuItem.id}
           button
-          onClick={e => this.handleItemClicked(menuItem.id, e)}
+          onClick={() => this.handleItemClicked(menuItem.id)}
           selected={this.state.lastClickedId === menuItem.id}
         >
           <Tooltip

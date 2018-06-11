@@ -5,9 +5,9 @@ import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import { theme } from '../theme/theme';
-import TopBar from './TopBar';
-import MenuList from './MenuList';
-import { mainMenuData, teamMenuData } from '../mock/menuData';
+import TopBar from './top-bar';
+import MenuList from './menu-list';
+import { mainMenuData, teamMenuData } from '../mock/menu-data';
 
 const styles = {
   root: {
@@ -47,12 +47,16 @@ const styles = {
   },
   toolbarPlaceholder: {
     padding: '0 8px',
+    display: 'block',
+    width: '100%',
     ...theme.mixins.toolbar
   },
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
-    padding: theme.spacing.unit * 3
+    padding: theme.spacing.unit * 3,
+    width: '100%',
+    display: 'block'
   }
 };
 
@@ -60,12 +64,8 @@ class MainNav extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      menuOpen: false,
-      currentSection: 'Concepts'
+      menuOpen: false
     };
-    this.handleMenuToggle = this.handleMenuToggle.bind(this);
-    this.handleMainMenuItemClicked = this.handleMainMenuItemClicked.bind(this);
-    this.handleTeamMenuItemClicked = this.handleTeamMenuItemClicked.bind(this);
   }
 
   handleMenuToggle = () => {
@@ -74,24 +74,22 @@ class MainNav extends Component {
     });
   };
 
-  handleMainMenuItemClicked = section => {
-    this.setState({ currentSection: section });
-  };
-
-  handleTeamMenuItemClicked = section => {
-    this.setState({ currentSection: section });
+  handleMenuItemClicked = (menuId, menuItemId) => {
+    const newSectionId = menuId + '/' + menuItemId;
+    this.props.onSectionChange(newSectionId);
   };
 
   render() {
-    const { classes, appName, children } = this.props;
+    const { classes, appName, children, sectionId } = this.props;
+    const { menuOpen } = this.state;
 
     return (
       <div className={classes.root}>
         <TopBar
           appName={appName}
           onMenuToggle={this.handleMenuToggle}
-          menuOpen={this.state.menuOpen}
-          currentSection={this.state.currentSection}
+          menuOpen={menuOpen}
+          sectionId={sectionId}
         />
         <Drawer
           color="primary"
@@ -99,26 +97,33 @@ class MainNav extends Component {
           classes={{
             paper: classNames(
               classes.drawerPaper,
-              !this.state.menuOpen && classes.drawerPaperClose
+              !menuOpen && classes.drawerPaperClose
             )
           }}
-          open={this.state.menuOpen}
+          open={menuOpen}
         >
           <div className={classes.toolbarPlaceholder} />
           <Divider />
           <MenuList
             menuData={mainMenuData}
-            menuOpen={this.state.menuOpen}
-            onItemClicked={this.handleMainMenuItemClicked}
+            menuOpen={menuOpen}
+            onItemClicked={menuItemId =>
+              this.handleMenuItemClicked(mainMenuData.id, menuItemId)
+            }
           />
           <Divider />
           <MenuList
             menuData={teamMenuData}
-            menuOpen={this.state.menuOpen}
-            onItemClicked={this.handleTeamMenuItemClicked}
+            menuOpen={menuOpen}
+            onItemClicked={menuItemId =>
+              this.handleMenuItemClicked(teamMenuData.id, menuItemId)
+            }
           />
         </Drawer>
-        {children}
+        <div className={classes.content}>
+          <div className={classes.toolbarPlaceholder} />
+          {children}
+        </div>
       </div>
     );
   }

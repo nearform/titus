@@ -8,14 +8,9 @@ export const mainMenuData = {
       description: 'Dashboard'
     },
     {
-      id: 'accounts',
-      name: 'Accounts',
-      description: 'Accounts'
-    },
-    {
-      id: 'schedule',
-      name: 'Schedule',
-      description: 'Schedule'
+      id: 'steps',
+      name: 'Steps',
+      description: 'Steps'
     },
     {
       id: 'messages',
@@ -33,6 +28,11 @@ export const mainMenuData = {
       id: 'documents',
       name: 'Documents',
       description: 'Documents'
+    },
+    {
+      id: 'custom',
+      name: 'Custom Icon',
+      description: 'Custom Icon'
     }
   ]
 };
