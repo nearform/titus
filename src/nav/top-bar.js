@@ -46,14 +46,12 @@ const styles = {
 };
 
 class TopBar extends Component {
-  constructor(props) {
-    super(props);
-    this.handleMenuToggle = this.handleMenuToggle.bind(this);
-  }
+  static propTypes = {
+    classes: PropTypes.object.isRequired,
+    theme: PropTypes.object.isRequired
+  };
 
-  handleMenuToggle(e) {
-    this.props.onMenuToggle(e.target.value);
-  }
+  handleMenuToggle = ({ target: { value } }) => this.props.onMenuToggle(value);
 
   render() {
     const { classes, menuOpen, appName, currentSection } = this.props;
@@ -72,10 +70,9 @@ class TopBar extends Component {
               color="inherit"
               aria-label="Open Menu"
               onClick={this.handleMenuToggle}
-              className={classNames(
-                classes.menuButton,
-                menuOpen && classes.hide
-              )}
+              className={classNames(classes.menuButton, {
+                [classes.hide]: menuOpen
+              })}
             >
               <MenuIcon />
             </IconButton>
@@ -84,7 +81,9 @@ class TopBar extends Component {
               color="inherit"
               aria-label="Close Menu"
               onClick={this.handleMenuToggle}
-              className={classNames(!menuOpen && classes.hide)}
+              className={classNames({
+                [classes.hide]: !menuOpen
+              })}
             >
               {theme.direction === 'rtl' ? (
                 <ChevronRightIcon />
@@ -102,10 +101,5 @@ class TopBar extends Component {
     );
   }
 }
-
-TopBar.propTypes = {
-  classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired
-};
 
 export default withStyles(styles, { withTheme: true })(TopBar);

@@ -5,9 +5,9 @@ import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import { theme } from '../theme/theme';
-import TopBar from './TopBar';
-import MenuList from './MenuList';
-import { mainMenuData, teamMenuData } from '../mock/menuData';
+import TopBar from './top-bar';
+import MenuList from './menu-list';
+import { mainMenuData, teamMenuData } from '../mock/menu-data';
 
 const styles = {
   root: {
@@ -57,65 +57,55 @@ const styles = {
 };
 
 class MainNav extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      menuOpen: false,
-      currentSection: 'Concepts'
-    };
-    this.handleMenuToggle = this.handleMenuToggle.bind(this);
-    this.handleMainMenuItemClicked = this.handleMainMenuItemClicked.bind(this);
-    this.handleTeamMenuItemClicked = this.handleTeamMenuItemClicked.bind(this);
-  }
-
-  handleMenuToggle = () => {
-    this.setState(prevState => {
-      return { menuOpen: !prevState.menuOpen };
-    });
+  static propTypes = {
+    classes: PropTypes.object.isRequired,
+    theme: PropTypes.object.isRequired
   };
 
-  handleMainMenuItemClicked = section => {
-    this.setState({ currentSection: section });
+  state = {
+    menuOpen: false,
+    currentSection: 'Concepts'
   };
 
-  handleTeamMenuItemClicked = section => {
-    this.setState({ currentSection: section });
-  };
+  handleMenuToggle = () => this.setState({ menuOpen: !this.state.menuOpen });
+
+  handleMenuItemClicked = section => this.setState({ currentSection: section });
 
   render() {
+    const { handleMenuItemClicked } = this;
     const { classes, appName, children } = this.props;
+    const { menuOpen, currentSection } = this.state;
 
     return (
       <div className={classes.root}>
         <TopBar
           appName={appName}
           onMenuToggle={this.handleMenuToggle}
-          menuOpen={this.state.menuOpen}
-          currentSection={this.state.currentSection}
+          menuOpen={menuOpen}
+          currentSection={currentSection}
         />
         <Drawer
           color="primary"
           variant="permanent"
           classes={{
-            paper: classNames(
-              classes.drawerPaper,
-              !this.state.menuOpen && classes.drawerPaperClose
-            )
+            paper: classNames(classes.drawerPaper, {
+              [classes.drawerPaperClose]: !menuOpen
+            })
           }}
-          open={this.state.menuOpen}
+          open={menuOpen}
         >
           <div className={classes.toolbarPlaceholder} />
           <Divider />
           <MenuList
             menuData={mainMenuData}
-            menuOpen={this.state.menuOpen}
-            onItemClicked={this.handleMainMenuItemClicked}
+            menuOpen={menuOpen}
+            onItemClicked={handleMenuItemClicked}
           />
           <Divider />
           <MenuList
             menuData={teamMenuData}
-            menuOpen={this.state.menuOpen}
-            onItemClicked={this.handleTeamMenuItemClicked}
+            menuOpen={menuOpen}
+            onItemClicked={handleMenuItemClicked}
           />
         </Drawer>
         {children}
@@ -123,10 +113,5 @@ class MainNav extends Component {
     );
   }
 }
-
-MainNav.propTypes = {
-  classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired
-};
 
 export default withStyles(styles, { withTheme: true })(MainNav);
