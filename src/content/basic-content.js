@@ -17,20 +17,14 @@ const styles = {
   }
 };
 
-class BasicContent extends React.Component {
-  render() {
-    const { classes, textContent } = this.props;
-
-    return (
-      <div className={classes.root}>
-        <main className={classes.content}>
-          <div className={classes.toolbarPlaceholder} />
-          <Typography>{textContent}</Typography>
-        </main>
-      </div>
-    );
-  }
-}
+const BasicContent = ({ classes, textContent }) => (
+  <div className={classes.root}>
+    <main className={classes.content}>
+      <div className={classes.toolbarPlaceholder} />
+      <Typography>{textContent}</Typography>
+    </main>
+  </div>
+);
 
 BasicContent.propTypes = {
   classes: PropTypes.object.isRequired,
