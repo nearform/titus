@@ -5,9 +5,9 @@ import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import { theme } from '../theme/theme';
-import TopBar from './TopBar';
-import MenuList from './MenuList';
-import { mainMenuData, teamMenuData } from '../mock/menuData';
+import TopBar from './top-bar';
+import MenuList from './menu-list';
+import { mainMenuData, teamMenuData } from '../mock/menu-data';
 
 const styles = {
   root: {

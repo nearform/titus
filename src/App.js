@@ -1,13 +1,13 @@
 import React, { Component, Fragment } from 'react';
-import MainNav from './nav/MainNav';
-import BasicContent from './content/BasicContent';
+import MainNav from './nav/main-nav';
+import BasicContent from './content/basic-content';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { withStyles } from '@material-ui/core/styles';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import { theme } from './theme/theme';
-import { metaData } from './mock/appData';
-import { wizardData } from './mock/wizardData';
-import Wizard from './components/Wizard';
+import { metaData } from './mock/app-data';
+import { wizardData } from './mock/wizard-data';
+import Wizard from './components/wizard/wizard';
 
 const styles = {
   smallBottomMargin: {
@@ -42,7 +42,7 @@ class App extends Component {
               <BasicContent textContent={metaData.description} />
             ) : null}
             {sectionId === 'main-menu/steps' ? (
-              <Wizard data={wizardData} />
+              <Wizard wizardData={wizardData} />
             ) : null}
           </MainNav>
         </MuiThemeProvider>

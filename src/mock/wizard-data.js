@@ -33,6 +33,13 @@ export const wizardData = {
       id: 'step5',
       title: 'Destroy the Ring',
       description: 'Wait for Frodo'
+    },
+    {
+      id: 'step6',
+      title: 'Summary',
+      description: 'Details of the Adventure',
+      optional: false,
+      requiredMessage: 'Slide the button to bid farewell to the fellowship!'
     }
   ],
   finishedMessage: 'Congrats Gandalf!!! time to blow some smoke rings ô¿ô'

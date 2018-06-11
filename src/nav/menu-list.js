@@ -7,7 +7,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import DefaultIcon from '@material-ui/icons/Block';
 import ListItemText from '@material-ui/core/ListItemText';
 import Badge from '@material-ui/core/Badge';
-import { menuIcons } from '../assets/navIcons';
+import { menuIcons } from '../assets/nav-icons';
 import Tooltip from '@material-ui/core/Tooltip';
 
 const styles = {

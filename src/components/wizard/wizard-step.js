@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
 
 const styles = {
   root: {
@@ -10,13 +9,6 @@ const styles = {
   }
 };
 class WizardStep extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: ''
-    };
-  }
-
   stepSatisfyCheck(name) {
     const stepSatisfied = name && name.trim() !== '';
     this.props.onStepSatisfied(stepSatisfied);
@@ -25,21 +17,19 @@ class WizardStep extends React.Component {
   handleChange = e => {
     //user would create component with own logic for satisfying this step
     this.stepSatisfyCheck(e.target.value);
-    this.setState({ name: e.target.value });
+    const newData = { comment: e.target.value };
+    this.props.onDataChanged(newData);
   };
 
   render() {
-    const { classes, step } = this.props;
-    const { name } = this.state;
-    //this.stepSatisfyCheck(clone(name))
+    const { classes, info, data } = this.props;
     return (
       <div className={classes.root}>
-        <Typography variant="title">Component ID: {step.id}</Typography>
         <TextField
-          id="name"
+          id="comment"
           label="Comment"
-          required={step.optional ? false : true}
-          value={name}
+          required={info.optional ? false : true}
+          value={data.comment ? data.comment : ''}
           onChange={this.handleChange}
           margin="normal"
         />
