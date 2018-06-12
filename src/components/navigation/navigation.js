@@ -7,9 +7,10 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-
-import Main from '../main/main';
-import TopBar from './top-bar';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import MenuIcon from '@material-ui/icons/Menu';
 
 const styles = theme => ({
   root: {
@@ -19,6 +20,29 @@ const styles = theme => ({
     position: 'relative',
     display: 'flex',
     overflow: 'hidden'
+  },
+  appBar: {
+    position: 'absolute',
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen
+    })
+  },
+  appBarShift: {
+    marginLeft: theme.menuWidth,
+    width: `calc(100% - ${theme.menuWidth}px)`,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen
+    })
+  },
+  menuButton: {
+    marginLeft: 12,
+    marginRight: 36
+  },
+  hide: {
+    display: 'none'
   },
   drawerPaper: {
     position: 'relative',
@@ -46,6 +70,11 @@ const styles = theme => ({
     justifyContent: 'flex-end',
     padding: '0 8px',
     ...theme.mixins.toolbar
+  },
+  main: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.default,
+    padding: theme.spacing.unit * 3
   }
 });
 
@@ -62,19 +91,38 @@ class Navigation extends Component {
     menuOpen: false
   };
 
-  handleMenuToggle = () => this.setState({ menuOpen: !this.state.menuOpen });
+  handleMenuOpen = () => this.setState({ menuOpen: true });
+  handleMenuClose = () => this.setState({ menuOpen: false });
 
   render() {
+    const { handleMenuOpen, handleMenuClose } = this;
     const { classes, title, main, items, theme } = this.props;
     const { menuOpen } = this.state;
 
     return (
       <div className={classes.root}>
-        <TopBar
-          title={title}
-          onMenuToggle={this.handleMenuToggle}
-          menuOpen={menuOpen}
-        />
+        <AppBar
+          color="primary"
+          className={classNames(classes.appBar, {
+            [classes.appBarShift]: menuOpen
+          })}
+        >
+          <Toolbar disableGutters={!menuOpen}>
+            <IconButton
+              color="inherit"
+              aria-label="Open Menu"
+              onClick={handleMenuOpen}
+              className={classNames(classes.menuButton, {
+                [classes.hide]: menuOpen
+              })}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="title" color="inherit" noWrap>
+              {title}
+            </Typography>
+          </Toolbar>
+        </AppBar>
         <Drawer
           color="primary"
           variant="permanent"
@@ -85,7 +133,7 @@ class Navigation extends Component {
           }}
           open={menuOpen}
           /* any click in the drawer will propogate and close it */
-          onClick={this.handleMenuToggle}
+          onClick={handleMenuClose}
         >
           <div className={classes.toolbar}>
             <IconButton>
@@ -99,7 +147,10 @@ class Navigation extends Component {
           <Divider />
           {items({ menuOpen })}
         </Drawer>
-        <Main>{main({ menuOpen })}</Main>
+        <main className={classes.main}>
+          <div className={classes.toolbar} />
+          {main({ menuOpen })}
+        </main>
       </div>
     );
   }
