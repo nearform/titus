@@ -4,11 +4,12 @@ import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 import Main from '../main/main';
 import TopBar from './top-bar';
-// import MenuList from './menu-list';
-// import { mainMenuData, teamMenuData } from '../mock/menu-data';
 
 const styles = theme => ({
   root: {
@@ -39,7 +40,10 @@ const styles = theme => ({
       width: theme.spacing.unit * 9
     }
   },
-  toolbarPlaceholder: {
+  toolbar: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
     padding: '0 8px',
     ...theme.mixins.toolbar
   }
@@ -49,6 +53,7 @@ class Navigation extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
     classes: PropTypes.object.isRequired,
+    theme: PropTypes.object.isRequired,
     items: PropTypes.func,
     main: PropTypes.func.isRequired
   };
@@ -60,7 +65,7 @@ class Navigation extends Component {
   handleMenuToggle = () => this.setState({ menuOpen: !this.state.menuOpen });
 
   render() {
-    const { classes, title, main, items } = this.props;
+    const { classes, title, main, items, theme } = this.props;
     const { menuOpen } = this.state;
 
     return (
@@ -79,21 +84,20 @@ class Navigation extends Component {
             })
           }}
           open={menuOpen}
+          /* any click in the drawer will propogate and close it */
+          onClick={this.handleMenuToggle}
         >
-          <div className={classes.toolbarPlaceholder} />
+          <div className={classes.toolbar}>
+            <IconButton>
+              {theme.direction === 'rtl' ? (
+                <ChevronRightIcon />
+              ) : (
+                <ChevronLeftIcon />
+              )}
+            </IconButton>
+          </div>
           <Divider />
           {items({ menuOpen })}
-          {/* <MenuList
-            menuData={mainMenuData}
-            menuOpen={menuOpen}
-            onItemClicked={handleMenuItemClicked}
-          />
-          <Divider />
-          <MenuList
-            menuData={teamMenuData}
-            menuOpen={menuOpen}
-            onItemClicked={handleMenuItemClicked}
-          /> */}
         </Drawer>
         <Main>{main({ menuOpen })}</Main>
       </div>

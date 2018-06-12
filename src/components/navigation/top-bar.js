@@ -7,11 +7,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 const styles = theme => ({
-  root: {},
   appBar: {
     position: 'absolute',
     zIndex: theme.zIndex.drawer + 1,
@@ -47,7 +44,6 @@ const styles = theme => ({
 class TopBar extends Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
-    theme: PropTypes.object.isRequired,
     title: PropTypes.string,
     menuOpen: PropTypes.bool
   };
@@ -55,49 +51,31 @@ class TopBar extends Component {
   handleMenuToggle = ({ target: { value } }) => this.props.onMenuToggle(value);
 
   render() {
-    const { classes, menuOpen, title, theme } = this.props;
+    const { classes, menuOpen, title } = this.props;
 
     return (
-      <div className={classes.root}>
-        <AppBar
-          color="primary"
-          className={classNames(
-            classes.appBar,
-            menuOpen && classes.appBarShift
-          )}
-        >
-          <Toolbar disableGutters={!menuOpen}>
-            <IconButton
-              color="inherit"
-              aria-label="Open Menu"
-              onClick={this.handleMenuToggle}
-              className={classNames(classes.menuButton, {
-                [classes.hide]: menuOpen
-              })}
-            >
-              <MenuIcon />
-            </IconButton>
-
-            <IconButton
-              color="inherit"
-              aria-label="Close Menu"
-              onClick={this.handleMenuToggle}
-              className={classNames({
-                [classes.hide]: !menuOpen
-              })}
-            >
-              {theme.direction === 'rtl' ? (
-                <ChevronRightIcon />
-              ) : (
-                <ChevronLeftIcon />
-              )}
-            </IconButton>
-            <Typography variant="title" color="inherit" noWrap>
-              {title}
-            </Typography>
-          </Toolbar>
-        </AppBar>
-      </div>
+      <AppBar
+        color="primary"
+        className={classNames(classes.appBar, {
+          [classes.appBarShift]: menuOpen
+        })}
+      >
+        <Toolbar disableGutters={!menuOpen}>
+          <IconButton
+            color="inherit"
+            aria-label="Open Menu"
+            onClick={this.handleMenuToggle}
+            className={classNames(classes.menuButton, {
+              [classes.hide]: menuOpen
+            })}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="title" color="inherit" noWrap>
+            {title}
+          </Typography>
+        </Toolbar>
+      </AppBar>
     );
   }
 }
