@@ -4,9 +4,9 @@ import { Router } from '@reach/router';
 
 import Dashboard from './containers/dashboard/dashboard';
 
-const Routes = ({ menuOpen }) => (
+const Routes = () => (
   <Router>
-    <Dashboard path="dashboard" />
+    <Dashboard path="/" />
   </Router>
 );
 

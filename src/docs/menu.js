@@ -10,7 +10,7 @@ import PlaylistAddCheck from '@material-ui/icons/PlaylistAddCheck';
 
 import ListItemLink from '../components/list-item-link/list-item-link';
 
-const Menu = ({ menuOpen }) => (
+const Menu = () => (
   <List>
     <ListItemLink to={'/docs'}>
       <ListItemIcon>
