@@ -1,18 +1,22 @@
 import React, { Fragment } from 'react';
-import MainNav from './nav/main-nav';
-import BasicContent from './content/basic-content';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import { theme } from './theme/theme';
-import { metaData } from './mock/app-data';
+
+import Navigation from '../components/navigation/navigation';
+
+import Menu from './menu';
+import Routes from './routes';
+
+const meta = {
+  appName: 'Titus Docs and Examples'
+};
 
 const App = () => (
   <Fragment>
     <CssBaseline />
     <MuiThemeProvider theme={theme}>
-      <MainNav appName={metaData.name}>
-        <BasicContent textContent={metaData.description} />
-      </MainNav>
+      <Navigation title={meta.appName} items={Menu} main={Routes} />
     </MuiThemeProvider>
   </Fragment>
 );

@@ -9,9 +9,8 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import { theme } from '../theme/theme';
 
-const styles = {
+const styles = theme => ({
   root: {},
   appBar: {
     position: 'absolute',
@@ -35,26 +34,28 @@ const styles = {
   },
   hide: {
     display: 'none'
-  },
-  toolbar: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: '0 8px',
-    ...theme.mixins.toolbar
   }
-};
+  // toolbar: {
+  //   display: 'flex',
+  //   alignItems: 'center',
+  //   justifyContent: 'flex-end',
+  //   padding: '0 8px',
+  //   ...theme.mixins.toolbar
+  // }
+});
 
 class TopBar extends Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
-    theme: PropTypes.object.isRequired
+    theme: PropTypes.object.isRequired,
+    title: PropTypes.string,
+    menuOpen: PropTypes.bool
   };
 
   handleMenuToggle = ({ target: { value } }) => this.props.onMenuToggle(value);
 
   render() {
-    const { classes, menuOpen, appName, currentSection } = this.props;
+    const { classes, menuOpen, title, theme } = this.props;
 
     return (
       <div className={classes.root}>
@@ -92,8 +93,7 @@ class TopBar extends Component {
               )}
             </IconButton>
             <Typography variant="title" color="inherit" noWrap>
-              {appName}
-              {currentSection ? ' - ' + currentSection : null}
+              {title}
             </Typography>
           </Toolbar>
         </AppBar>
