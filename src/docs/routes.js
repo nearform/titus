@@ -1,19 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Router } from '@reach/router';
+import React from 'react'
+import { Router } from '@reach/router'
 
-import Dashboard from './containers/dashboard/dashboard';
-import Wizard from './containers/wizard/wizard';
+import Dashboard from './containers/dashboard/dashboard'
+import Wizard from './containers/wizard/wizard'
 
 const Routes = () => (
   <Router>
-    <Dashboard path="/" />
-    <Wizard path="wizard/*" />
+    <Dashboard path='/' />
+    <Wizard path='wizard/*' />
   </Router>
-);
+)
 
 Routes.propTypes = {
-  menuOpen: PropTypes.bool
-};
+}
 
-export default Routes;
+export default Routes

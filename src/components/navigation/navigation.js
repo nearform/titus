@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import MenuIcon from '@material-ui/icons/Menu';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
+import { withStyles } from '@material-ui/core/styles'
+import Drawer from '@material-ui/core/Drawer'
+import Divider from '@material-ui/core/Divider'
+import IconButton from '@material-ui/core/IconButton'
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
+import ChevronRightIcon from '@material-ui/icons/ChevronRight'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import MenuIcon from '@material-ui/icons/Menu'
 
 const styles = theme => ({
   root: {
@@ -76,7 +76,7 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit * 3
   }
-});
+})
 
 class Navigation extends Component {
   static propTypes = {
@@ -94,23 +94,23 @@ class Navigation extends Component {
   handleMenuOpen = () => this.setState({ menuOpen: true });
   handleMenuClose = () => this.setState({ menuOpen: false });
 
-  render() {
-    const { handleMenuOpen, handleMenuClose } = this;
-    const { classes, title, main, items, theme } = this.props;
-    const { menuOpen } = this.state;
+  render () {
+    const { handleMenuOpen, handleMenuClose } = this
+    const { classes, title, main, items, theme } = this.props
+    const { menuOpen } = this.state
 
     return (
       <div className={classes.root}>
         <AppBar
-          color="primary"
+          color='primary'
           className={classNames(classes.appBar, {
             [classes.appBarShift]: menuOpen
           })}
         >
           <Toolbar disableGutters={!menuOpen}>
             <IconButton
-              color="inherit"
-              aria-label="Open Menu"
+              color='inherit'
+              aria-label='Open Menu'
               onClick={handleMenuOpen}
               className={classNames(classes.menuButton, {
                 [classes.hide]: menuOpen
@@ -118,14 +118,14 @@ class Navigation extends Component {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="title" color="inherit" noWrap>
+            <Typography variant='title' color='inherit' noWrap>
               {title}
             </Typography>
           </Toolbar>
         </AppBar>
         <Drawer
-          color="primary"
-          variant="permanent"
+          color='primary'
+          variant='permanent'
           classes={{
             paper: classNames(classes.drawerPaper, {
               [classes.drawerPaperClose]: !menuOpen
@@ -152,8 +152,8 @@ class Navigation extends Component {
           {main({ menuOpen })}
         </main>
       </div>
-    );
+    )
   }
 }
 
-export default withStyles(styles, { withTheme: true })(Navigation);
+export default withStyles(styles, { withTheme: true })(Navigation)
