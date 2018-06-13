@@ -1,5 +1,5 @@
-import React from 'react';
+import React from 'react'
 
-const Dashboard = () => <div>I'm a Dashboard</div>;
+const Dashboard = () => <div>I'm a Dashboard</div>
 
-export default Dashboard;
+export default Dashboard

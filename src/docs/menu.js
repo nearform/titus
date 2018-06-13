@@ -1,14 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
 
-import List from '@material-ui/core/List';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+import List from '@material-ui/core/List'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
 
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import PlaylistAddCheck from '@material-ui/icons/PlaylistAddCheck';
+import DashboardIcon from '@material-ui/icons/Dashboard'
+import PlaylistAddCheck from '@material-ui/icons/PlaylistAddCheck'
 
-import ListItemLink from '../components/list-item-link/list-item-link';
+import ListItemLink from '../components/list-item-link/list-item-link'
 
 const Menu = () => (
   <List>
@@ -16,19 +15,18 @@ const Menu = () => (
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
-      <ListItemText primary="Dashboard" />
+      <ListItemText primary='Dashboard' />
     </ListItemLink>
     <ListItemLink to={'/docs/wizard'}>
       <ListItemIcon>
         <PlaylistAddCheck />
       </ListItemIcon>
-      <ListItemText primary="Wizard" />
+      <ListItemText primary='Wizard' />
     </ListItemLink>
   </List>
-);
+)
 
 Menu.propTypes = {
-  menuOpen: PropTypes.bool
-};
+}
 
-export default Menu;
+export default Menu

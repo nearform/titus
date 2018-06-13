@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Avatar from '@material-ui/core/Avatar';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import DefaultIcon from '@material-ui/icons/Block';
-import ListItemText from '@material-ui/core/ListItemText';
-import Badge from '@material-ui/core/Badge';
-import { menuIcons } from '../assets/navIcons';
-import Tooltip from '@material-ui/core/Tooltip';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { withStyles } from '@material-ui/core/styles'
+import Avatar from '@material-ui/core/Avatar'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import DefaultIcon from '@material-ui/icons/Block'
+import ListItemText from '@material-ui/core/ListItemText'
+import Badge from '@material-ui/core/Badge'
+import { menuIcons } from '../assets/navIcons'
+import Tooltip from '@material-ui/core/Tooltip'
 
 const styles = {
   root: {},
@@ -17,17 +17,19 @@ const styles = {
     height: 32,
     fontSize: 16
   }
-};
+}
 
 const getInitials = name => {
-  var initials = name.match(/\b\w/g) || [];
-  return ((initials.shift() || '') + (initials.pop() || '')).toUpperCase();
-};
+  var initials = name.match(/\b\w/g) || []
+  return ((initials.shift() || '') + (initials.pop() || '')).toUpperCase()
+}
 
 class MenuList extends Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
-    theme: PropTypes.object.isRequired
+    onItemClicked: PropTypes.func,
+    menuData: PropTypes.object,
+    menuOpen: PropTypes.bool
   };
 
   state = {
@@ -35,25 +37,25 @@ class MenuList extends Component {
   };
 
   handleItemClicked = menuItemId => {
-    this.props.onItemClicked(menuItemId);
-    this.setState({ lastClickedId: menuItemId });
+    this.props.onItemClicked(menuItemId)
+    this.setState({ lastClickedId: menuItemId })
   };
 
   customIcon = ({ id, name }) => {
-    const Icon = menuIcons[id];
+    const Icon = menuIcons[id]
     if (this.props.menuData.useAvatars) {
       return (
         <Avatar className={this.props.classes.smallAvatar}>
           {Icon ? <Icon /> : getInitials(name)}
         </Avatar>
-      );
+      )
     }
-    return Icon ? <Icon /> : <DefaultIcon />;
+    return Icon ? <Icon /> : <DefaultIcon />
   };
 
-  render() {
-    const { customIcon } = this;
-    const { classes, menuOpen, menuData } = this.props;
+  render () {
+    const { customIcon } = this
+    const { classes, menuOpen, menuData } = this.props
 
     return (
       <div className={classes.root}>
@@ -64,10 +66,10 @@ class MenuList extends Component {
             onClick={() => this.handleItemClicked(id)}
             selected={this.state.lastClickedId === id}
           >
-            <Tooltip title={menuOpen ? '' : description} placement="bottom-end">
+            <Tooltip title={menuOpen ? '' : description} placement='bottom-end'>
               <ListItemIcon aria-label={name}>
                 {notifications > 0 ? (
-                  <Badge badgeContent={notifications} color="secondary">
+                  <Badge badgeContent={notifications} color='secondary'>
                     {customIcon({ id, name })}
                   </Badge>
                 ) : (
@@ -79,8 +81,8 @@ class MenuList extends Component {
           </ListItem>
         ))}
       </div>
-    );
+    )
   }
 }
 
-export default withStyles(styles, { withTheme: true })(MenuList);
+export default withStyles(styles, { withTheme: true })(MenuList)

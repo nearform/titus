@@ -35,7 +35,7 @@ export const mainMenuData = {
       description: 'Documents'
     }
   ]
-};
+}
 
 export const teamMenuData = {
   id: 'team-menu',
@@ -66,4 +66,4 @@ export const teamMenuData = {
       notifications: 1
     }
   ]
-};
+}

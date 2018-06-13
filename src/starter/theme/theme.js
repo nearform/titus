@@ -1,4 +1,4 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles'
 
 export const theme = createMuiTheme({
   palette: {
@@ -6,4 +6,4 @@ export const theme = createMuiTheme({
     type: 'light'
   },
   menuWidth: 300 // custom, maybe a better place for this...
-});
+})

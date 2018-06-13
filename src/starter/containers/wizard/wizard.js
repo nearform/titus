@@ -1,5 +1,5 @@
-import React from 'react';
+import React from 'react'
 
-const Wizard = () => <div>This is where the wizard will go</div>;
+const Wizard = () => <div>This is where the wizard will go</div>
 
-export default Wizard;
+export default Wizard
