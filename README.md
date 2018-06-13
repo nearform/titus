@@ -13,6 +13,7 @@ Welcome to project Titus, an advanced opinionated starter shell stack
 - GraphQL
 - Graphing
 - Wizard
+- Table (implementing Jimmy's work)
 - nearform audit trail service
 - nearform react table
 - nearform comments service
