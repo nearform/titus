@@ -13,8 +13,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "lint": "eslint src/**.js --fix-dry-run",
-    "lint:fix": "eslint src/**.js --fix",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
     "commit-check": "pretty-quick --staged"
   },
   "devDependencies": {
