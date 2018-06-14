@@ -15,7 +15,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    height: '100%',
+    height: '100vh',
     zIndex: 1,
     position: 'relative',
     display: 'flex',
@@ -71,10 +71,17 @@ const styles = theme => ({
     padding: '0 8px',
     ...theme.mixins.toolbar
   },
-  main: {
+  content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
-    padding: theme.spacing.unit * 3
+    height: '100vh',
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  main: {
+    overflowY: 'auto',
+    padding: theme.spacing.unit * 3,
+    flex: 1
   }
 })
 
@@ -147,10 +154,12 @@ class Navigation extends Component {
           <Divider />
           {items({ menuOpen })}
         </Drawer>
-        <main className={classes.main}>
+        <div className={classes.content}>
           <div className={classes.toolbar} />
-          {main({ menuOpen })}
-        </main>
+          <main className={classes.main}>
+            {main({ menuOpen })}
+          </main>
+        </div>
       </div>
     )
   }
