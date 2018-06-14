@@ -2,14 +2,17 @@
 
 Welcome to project Titus, an advanced opinionated starter shell stack
 
-- Bootstrapped with Create React App
+This starter shell includes:
+
 - [Material-UI](https://material-ui.com/)
-- [Reach Router](https://github.com/reach/router)
+- [Reach Router](https://reach.tech/router)
 - [Storybook](https://storybook.js.org/)
+- [Redux](https://redux.js.org/)
+  - [Redux Thunk](https://github.com/reduxjs/redux-thunk)
+  - [Reselect](https://github.com/reduxjs/reselect)
 
 ##### TODO
 
-- Redux
 - GraphQL
 - Graphing
 - Wizard
