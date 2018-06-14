@@ -13,7 +13,6 @@ This starter shell includes:
 
 ##### TODO
 
-- Storybook
 - GraphQL
 - Graphing
 - Wizard
