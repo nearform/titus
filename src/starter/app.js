@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { MuiThemeProvider } from '@material-ui/core/styles'
 import { Provider } from 'react-redux'
@@ -18,10 +18,12 @@ const meta = {
 
 const App = () => (
   <Provider store={store}>
-    <CssBaseline />
-    <MuiThemeProvider theme={theme}>
-      <Navigation title={meta.appName} items={Menu} main={Routes} />
-    </MuiThemeProvider>
+    <Fragment>
+      <CssBaseline />
+      <MuiThemeProvider theme={theme}>
+        <Navigation title={meta.appName} items={Menu} main={Routes} />
+      </MuiThemeProvider>
+    </Fragment>
   </Provider>
 )
 
