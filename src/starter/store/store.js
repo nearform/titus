@@ -5,7 +5,7 @@ import rootReducer from './reducers'
 
 const devtools = window.devToolsExtension || (() => (noop) => noop)
 
-export const configureStore = () => {
+const configureStore = () => {
   const middlewares = [
     thunk
   ]
