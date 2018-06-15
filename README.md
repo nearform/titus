@@ -10,11 +10,11 @@ This starter shell includes:
 - [Redux](https://redux.js.org/)
   - [Redux Thunk](https://github.com/reduxjs/redux-thunk)
   - [Reselect](https://github.com/reduxjs/reselect)
+- [Victory](https://formidable.com/open-source/victory/docs/)
 
 ##### TODO
 
 - GraphQL
-- Graphing
 - Wizard
 - Table (implementing Jimmy's work)
 - nearform audit trail service
