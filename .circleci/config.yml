@@ -1,15 +1,21 @@
+defaults: &defaults
+  docker:
+    - image: circleci/node:10.1.0-browsers
+
 version: 2
 jobs:
   install:
-    docker:
-      - image: circleci/node:10.1.0-browsers
+    <<: *defaults
     steps:
       - checkout
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
+          name: update npm
+          command: npm install -g npm
+      - run:
           name: install
-          command: npm install
+          command: npm ci
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
@@ -18,27 +24,34 @@ jobs:
           root: .
           paths:
             - .
-  build:
-    docker:
-      - image: circleci/node:10.1.0-browsers
+  lint:
+    <<: *defaults
     steps:
       - attach_workspace:
           at: .
-      - run: npm run build
+      - run: npm run lint
   test:
-    docker:
-      - image: circleci/node:10.1.0-browsers
+    <<: *defaults
     environment:
       CI: true
     steps:
       - attach_workspace:
           at: .
       - run: npm test
+  build:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run: npm run build
 workflows:
   version: 2
   build_and_test:
     jobs:
       - install
+      - lint:
+          requires:
+              - install
       - test:
           requires:
               - install
