@@ -5,7 +5,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 
 import DashboardIcon from '@material-ui/icons/Dashboard'
-import PlaylistAddCheck from '@material-ui/icons/PlaylistAddCheck'
+import WizardIcon from '@material-ui/icons/PlaylistAddCheck'
+import TablesIcon from '@material-ui/icons/GridOn'
 
 import ListItemLink from '../components/list-item-link/list-item-link'
 
@@ -19,14 +20,19 @@ const Menu = () => (
     </ListItemLink>
     <ListItemLink to={'/docs/wizard'}>
       <ListItemIcon>
-        <PlaylistAddCheck />
+        <WizardIcon />
       </ListItemIcon>
       <ListItemText primary='Wizard' />
+    </ListItemLink>
+    <ListItemLink to={'/docs/tables'}>
+      <ListItemIcon>
+        <TablesIcon />
+      </ListItemIcon>
+      <ListItemText primary='Tables' />
     </ListItemLink>
   </List>
 )
 
-Menu.propTypes = {
-}
+Menu.propTypes = {}
 
 export default Menu
