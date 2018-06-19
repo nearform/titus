@@ -1,21 +1,29 @@
 import React from 'react'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Switch from '@material-ui/core/Switch'
-import { Table } from './nf-table'
-import { customTableProp } from './render-props/custom/custom'
+import { Table } from 'react-nf-table'
+import CustomTableProp from './render-props/custom/custom'
 import MaterialUiTableProp from './render-props/material/material'
 import { columns, rows } from './mock/dessert-nutrients'
 
 class TitusTables extends React.Component {
   state = {
-    material: false
+    material: false,
+    data: rows
   };
 
   handleChange = event => {
     this.setState({ material: event.target.checked })
   };
 
+  handleDelete = selected => {
+    // this would probably call back to db,
+    // modify the state data object and re-render should occur
+    alert(selected)
+  };
+
   render () {
+    const { data } = this.state
     return (
       <div>
         <FormControlLabel
@@ -35,8 +43,13 @@ class TitusTables extends React.Component {
             columns={columns}
             pageSize={5}
             pageSizeOptions={[5, 10, 20, 50]}
-            data={rows}
-            render={config => <MaterialUiTableProp data={config} />}
+            data={data}
+            render={obj => (
+              <MaterialUiTableProp
+                data={obj}
+                onDelete={selected => this.handleDelete(selected)}
+              />
+            )}
           />
         </div>
 
@@ -45,8 +58,13 @@ class TitusTables extends React.Component {
             columns={columns}
             pageSize={5}
             pageSizeOptions={[5, 10, 20, 50]}
-            data={rows}
-            render={obj => customTableProp(obj)}
+            data={data}
+            render={obj => (
+              <CustomTableProp
+                data={obj}
+                onDelete={selected => this.handleDelete(selected)}
+              />
+            )}
           />
         </div>
       </div>

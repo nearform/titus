@@ -1,5 +1,5 @@
 import React from 'react'
-import { TableHeaderRow, TableHeader } from '../../nf-table'
+import { TableHeaderRow, TableHeader } from 'react-nf-table'
 import PropTypes from 'prop-types'
 
 import DeleteIcon from './baseline-delete-24px.svg'
@@ -20,7 +20,7 @@ function HorizontalDiv ({ children }) {
 }
 
 HorizontalDiv.propTypes = {
-  children: PropTypes.element
+  children: PropTypes.any
 }
 
 function HeaderComponent ({ onClick, isSorting, children }) {
@@ -84,7 +84,7 @@ function HeaderComponent ({ onClick, isSorting, children }) {
 HeaderComponent.propTypes = {
   onClick: PropTypes.func,
   isSorting: PropTypes.object,
-  children: PropTypes.element
+  children: PropTypes.any
 }
 
 class PageSizeChooser extends React.Component {
@@ -206,8 +206,8 @@ function TableBody ({ component, children }) {
 }
 
 TableBody.propTypes = {
-  component: PropTypes.element,
-  children: PropTypes.element
+  component: PropTypes.any,
+  children: PropTypes.any
 }
 
 function TableRow (props) {
@@ -223,10 +223,10 @@ function TableRow (props) {
 }
 
 TableRow.propTypes = {
-  component: PropTypes.element,
-  children: PropTypes.element,
+  component: PropTypes.any,
+  children: PropTypes.any,
   style: PropTypes.object,
-  className: PropTypes.object
+  className: PropTypes.string
 }
 
 function TableData ({ component, children, style, className }) {
@@ -234,212 +234,228 @@ function TableData ({ component, children, style, className }) {
 }
 
 TableData.propTypes = {
-  component: PropTypes.element,
-  children: PropTypes.element,
+  component: PropTypes.any,
+  children: PropTypes.any,
   style: PropTypes.object,
   className: PropTypes.object
 }
+class CustomTableProp extends React.Component {
+  handleDelete = () => {
+    this.props.onDelete(this.props.data.selecting)
+  };
 
-export const customTableProp = data => {
-  const {
-    rows,
-    columns,
-    handleRowSelect,
-    selecting,
-    pageSize,
-    pageSizeOptions,
-    total,
-    currentPage,
-    hasNextPage,
-    hasPrevPage,
-    handlePrevPage,
-    handleNextPage,
-    handlePageSizeChange
-  } = data
-  return (
-    <React.Fragment>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'baseline',
-          color: selecting.length > 0 ? '#673ab7' : 'rgba(0, 0, 0, 0.87)',
-          background: selecting.length > 0 ? '#e8eaf6' : '#fff',
-          margin: 0,
-          padding: '1em 1em 0.5em 1em'
-        }}
-      >
-        <h2 style={{ color: '#000' }}>Custom Table</h2>
+  render () {
+    const {
+      rows,
+      columns,
+      handleRowSelect,
+      selecting,
+      pageSize,
+      pageSizeOptions,
+      total,
+      currentPage,
+      hasNextPage,
+      hasPrevPage,
+      handlePrevPage,
+      handleNextPage,
+      handlePageSizeChange
+    } = this.props.data
+
+    return (
+      <React.Fragment>
         <div
           style={{
             display: 'flex',
             justifyContent: 'space-between',
-            alignItems: 'center'
+            alignItems: 'baseline',
+            color: selecting.length > 0 ? '#673ab7' : 'rgba(0, 0, 0, 0.87)',
+            background: selecting.length > 0 ? '#e8eaf6' : '#fff',
+            margin: 0,
+            padding: '1em 1em 0.5em 1em'
           }}
         >
-          {selecting.length > 0 && (
-            <React.Fragment>
-              <p style={{ fontSize: '0.875rem', margin: '0 2em' }}>
-                <span>Number of rows selected: </span>
-                <span style={{ fontWeight: 'bold' }}>
-                  {selecting[0] === 'all' ? rows.length : selecting.length}
-                </span>
-              </p>
-              <div
-                style={{
-                  position: 'relative',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center'
-                }}
-              >
-                <button
-                  type='button'
-                  className='ripple-button'
-                  onClick={e => {
-                    console.log('caught delete click')
+          <h2 style={{ color: '#000' }}>Custom Table</h2>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center'
+            }}
+          >
+            {selecting.length > 0 && (
+              <React.Fragment>
+                <p style={{ fontSize: '0.875rem', margin: '0 2em' }}>
+                  <span>Number of rows selected: </span>
+                  <span style={{ fontWeight: 'bold' }}>
+                    {selecting[0] === 'all' ? rows.length : selecting.length}
+                  </span>
+                </p>
+                <div
+                  style={{
+                    position: 'relative',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center'
                   }}
                 >
-                  <img src={DeleteIcon} alt='delete-button' />
-                </button>
-                <span className='tooltip'>Delete Rows</span>
-              </div>
-            </React.Fragment>
-          )}
-        </div>
-      </div>
-      <div>
-        <table
-          style={{
-            width: '100%',
-            background: '#fff',
-            borderSpacing: 0,
-            borderCollapse: 'collapse'
-          }}
-        >
-          <TableHeaderRow component={HorizontalDiv}>
-            <HeaderComponent
-              onClick={e => {
-                handleRowSelect('all')
-              }}
-              style={{ cursor: 'pointer' }}
-            >
-              <CheckBox checked={selecting[0] === 'all'} />
-            </HeaderComponent>
-
-            {columns.map(
-              ({ accessor, sortable, label }, index) =>
-                accessor ? (
-                  <TableHeader
-                    key={index}
-                    sortable={sortable}
-                    accessor={accessor}
-                    component={HeaderComponent}
+                  <button
+                    type='button'
+                    className='ripple-button'
+                    onClick={this.handleDelete}
                   >
-                    {label}
-                  </TableHeader>
-                ) : null
+                    <img src={DeleteIcon} alt='delete-button' />
+                  </button>
+                  <span className='tooltip'>Delete Rows</span>
+                </div>
+              </React.Fragment>
             )}
-          </TableHeaderRow>
-          <TableBody component='tbody' style={{ display: 'table-row-group' }}>
-            {rows.map(({ rowKey, rowData, selected }, index) => (
-              <TableRow
-                component='tr'
-                className='hover-tr'
-                key={rowKey}
-                style={{
-                  color: 'inherit',
-                  height: '3em',
-                  display: 'table-row',
-                  outline: 'none',
-                  verticalAlign: 'middle',
-                  backgroundColor: selected ? '#E8EAF6' : ''
-                }}
+          </div>
+        </div>
+        <div>
+          <table
+            style={{
+              width: '100%',
+              background: '#fff',
+              borderSpacing: 0,
+              borderCollapse: 'collapse'
+            }}
+          >
+            <TableHeaderRow component={HorizontalDiv}>
+              <HeaderComponent
                 onClick={e => {
-                  handleRowSelect(rowKey)
+                  handleRowSelect('all')
                 }}
+                style={{ cursor: 'pointer' }}
               >
-                {rowData.map(({ accessor, data, key }) => (
-                  <TableData
-                    component='td'
-                    key={key}
-                    style={{
-                      color: 'rgba(0, 0, 0, 0.87)',
-                      fontSize: '0.8rem',
-                      fontWeight: 400,
-                      display: 'table-cell',
-                      padding: '1em',
-                      textAlign: 'center',
-                      borderBottom: '1px solid rgba(224, 224, 224, 1)',
-                      verticalAlign: 'inherit'
-                    }}
-                  >
-                    {accessor ? data : <CheckBox checked={selected} />}
-                  </TableData>
-                ))}
-              </TableRow>
-            ))}
-          </TableBody>
-        </table>
-        <footer
-          style={{
-            background: '#fff',
-            display: 'flex',
-            justifyContent: 'flex-end',
-            alignItems: 'center',
-            fontSize: '0.75rem',
-            color: '#0000008a',
-            padding: '2em 1em'
-          }}
-        >
-          <span style={{ margin: '0 2em' }}>Rows per page:</span>
-          <PageSizeChooser
-            pageSize={pageSize}
-            pageSizeOptions={pageSizeOptions}
-            handlePageSizeChange={handlePageSizeChange}
-          />
+                <CheckBox checked={selecting[0] === 'all'} />
+              </HeaderComponent>
 
-          <span style={{ margin: '0 2em' }}>
-            {currentPage * pageSize - pageSize + 1}-
-            {currentPage * pageSize > total
-              ? total
-              : currentPage * pageSize} of {total}
-          </span>
-          <button
+              {columns.map(
+                ({ accessor, sortable, label }, index) =>
+                  accessor ? (
+                    <TableHeader
+                      key={index}
+                      sortable={sortable}
+                      accessor={accessor}
+                      component={HeaderComponent}
+                    >
+                      {label}
+                    </TableHeader>
+                  ) : null
+              )}
+            </TableHeaderRow>
+            <TableBody component='tbody' style={{ display: 'table-row-group' }}>
+              {rows.map(({ rowKey, rowData, selected }, index) => (
+                <TableRow
+                  component='tr'
+                  className='hover-tr'
+                  key={rowKey}
+                  style={{
+                    color: 'inherit',
+                    height: '3em',
+                    display: 'table-row',
+                    outline: 'none',
+                    verticalAlign: 'middle',
+                    backgroundColor: selected ? '#E8EAF6' : ''
+                  }}
+                  onClick={e => {
+                    handleRowSelect(rowKey)
+                  }}
+                >
+                  {rowData.map(({ accessor, data, key }) => (
+                    <TableData
+                      component='td'
+                      key={key}
+                      style={{
+                        color: 'rgba(0, 0, 0, 0.87)',
+                        fontSize: '0.8rem',
+                        fontWeight: 400,
+                        display: 'table-cell',
+                        padding: '1em',
+                        textAlign: 'center',
+                        borderBottom: '1px solid rgba(224, 224, 224, 1)',
+                        verticalAlign: 'inherit'
+                      }}
+                    >
+                      {accessor ? data : <CheckBox checked={selected} />}
+                    </TableData>
+                  ))}
+                </TableRow>
+              ))}
+            </TableBody>
+          </table>
+          <footer
             style={{
-              margin: '0 2em',
-              opacity: `${hasPrevPage ? '1' : '0.25'}`,
-              cursor: `${hasPrevPage ? 'pointer' : 'not-allowed'}`,
-              border: 'none',
-              background: 'inherit',
-              borderRadius: 'initial',
-              padding: 'initial',
-              outline: 'none'
+              background: '#fff',
+              display: 'flex',
+              justifyContent: 'flex-end',
+              alignItems: 'center',
+              fontSize: '0.75rem',
+              color: '#0000008a',
+              padding: '2em 1em'
             }}
-            onClick={e => handlePrevPage(e)}
           >
-            <img src={BackArrow} alt='back-arrow' style={{ width: '1.5em' }} />
-          </button>
-          <button
-            style={{
-              opacity: `${hasNextPage ? '1' : '0.25'}`,
-              cursor: `${hasNextPage ? 'pointer' : 'not-allowed'}`,
-              border: 'none',
-              background: 'inherit',
-              borderRadius: 'initial',
-              padding: 'initial',
-              outline: 'none'
-            }}
-            onClick={e => handleNextPage(e)}
-          >
-            <img
-              src={ForwardArrow}
-              alt='forward-arrow'
-              style={{ width: '1.5em' }}
+            <span style={{ margin: '0 2em' }}>Rows per page:</span>
+            <PageSizeChooser
+              pageSize={pageSize}
+              pageSizeOptions={pageSizeOptions}
+              handlePageSizeChange={handlePageSizeChange}
             />
-          </button>
-        </footer>
-      </div>
-    </React.Fragment>
-  )
+
+            <span style={{ margin: '0 2em' }}>
+              {currentPage * pageSize - pageSize + 1}-
+              {currentPage * pageSize > total
+                ? total
+                : currentPage * pageSize}{' '}
+              of {total}
+            </span>
+            <button
+              style={{
+                margin: '0 2em',
+                opacity: `${hasPrevPage ? '1' : '0.25'}`,
+                cursor: `${hasPrevPage ? 'pointer' : 'not-allowed'}`,
+                border: 'none',
+                background: 'inherit',
+                borderRadius: 'initial',
+                padding: 'initial',
+                outline: 'none'
+              }}
+              onClick={e => handlePrevPage(e)}
+            >
+              <img
+                src={BackArrow}
+                alt='back-arrow'
+                style={{ width: '1.5em' }}
+              />
+            </button>
+            <button
+              style={{
+                opacity: `${hasNextPage ? '1' : '0.25'}`,
+                cursor: `${hasNextPage ? 'pointer' : 'not-allowed'}`,
+                border: 'none',
+                background: 'inherit',
+                borderRadius: 'initial',
+                padding: 'initial',
+                outline: 'none'
+              }}
+              onClick={e => handleNextPage(e)}
+            >
+              <img
+                src={ForwardArrow}
+                alt='forward-arrow'
+                style={{ width: '1.5em' }}
+              />
+            </button>
+          </footer>
+        </div>
+      </React.Fragment>
+    )
+  }
 }
+
+CustomTableProp.propTypes = {
+  data: PropTypes.object.isRequired,
+  onDelete: PropTypes.func
+}
+
+export default CustomTableProp
