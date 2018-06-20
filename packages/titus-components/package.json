@@ -1,31 +1,34 @@
 {
   "name": "titus-components",
   "version": "1.0.0",
-  "private": true,
-  "main": "src/index.js",
-  "module": "dist/index.js",
-  "dependencies": {
-    "react": "^16.4.0",
-    "react-scripts": "1.1.4"
-  },
+  "description": "titus-components React component",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "files": [
+    "css",
+    "es",
+    "lib",
+    "umd"
+  ],
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
+    "build": "nwb build-react-component",
+    "clean": "nwb clean-module && nwb clean-demo",
+    "start": "nwb serve-react-demo",
+    "test": "nwb test-react",
+    "test:coverage": "nwb test-react --coverage",
+    "test:watch": "nwb test-react --server",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
-    "commit-check": "pretty-quick --staged",
-    "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "postinstall": "npm run build"
+  },
+  "dependencies": {
+    "@material-ui/core": "^1.1.0",
+    "@material-ui/icons": "^1.1.0"
+  },
+  "peerDependencies": {
+    "react": "16.x"
   },
   "devDependencies": {
-    "@material-ui/core": "^1.1.0",
-    "@material-ui/icons": "^1.1.0",
-    "@storybook/addon-actions": "^3.4.7",
-    "@storybook/addon-links": "^3.4.7",
-    "@storybook/addons": "^3.4.7",
-    "@storybook/react": "^3.4.7",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
     "babel-runtime": "^6.26.0",
@@ -39,8 +42,15 @@
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-react": "^7.9.1",
     "eslint-plugin-standard": "^3.1.0",
-    "husky": "^0.14.3",
-    "prettier": "1.13.2",
-    "pretty-quick": "^1.6.0"
-  }
+    "nwb": "0.21.x",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
+  },
+  "author": "",
+  "homepage": "",
+  "license": "MIT",
+  "repository": "",
+  "keywords": [
+    "react-component"
+  ]
 }

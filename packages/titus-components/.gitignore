@@ -7,7 +7,8 @@
 /coverage
 
 # production
-/build
+/es
+/lib
 
 # storybook
 /storybook-static

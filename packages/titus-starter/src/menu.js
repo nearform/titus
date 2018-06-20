@@ -8,7 +8,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard'
 
 const Menu = () => (
   <List>
-    <ListItemLink to={'/app'}>
+    <ListItemLink to={'/'}>
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>

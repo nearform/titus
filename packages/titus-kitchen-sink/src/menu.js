@@ -11,19 +11,19 @@ import InsertChart from '@material-ui/icons/InsertChart'
 
 const Menu = () => (
   <List>
-    <ListItemLink to={'/docs'}>
+    <ListItemLink to={'/'}>
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
       <ListItemText primary='Dashboard' />
     </ListItemLink>
-    <ListItemLink to={'/docs/wizard'}>
+    <ListItemLink to={'/wizard'}>
       <ListItemIcon>
         <PlaylistAddCheck />
       </ListItemIcon>
       <ListItemText primary='Wizard' />
     </ListItemLink>
-    <ListItemLink to={'/docs/visualisations'}>
+    <ListItemLink to={'/visualisations'}>
       <ListItemIcon>
         <InsertChart />
       </ListItemIcon>
