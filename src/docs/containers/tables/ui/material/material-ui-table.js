@@ -17,11 +17,10 @@ import IconButton from '@material-ui/core/IconButton'
 import Tooltip from '@material-ui/core/Tooltip'
 import DeleteIcon from '@material-ui/icons/Delete'
 import { lighten } from '@material-ui/core/styles/colorManipulator'
-import { MuiThemeProvider, withStyles } from '@material-ui/core/styles'
-import { theme } from '../../../../theme/theme'
+import { withStyles } from '@material-ui/core/styles'
 
-function TableCellSort ({ onClick, isSorting, children }) {
-  return (
+const HeaderCell = ({ onClick, isSorting, children }) =>
+(
     <TableCell
       padding='checkbox'
       sortDirection={!isSorting || isSorting.asc ? 'asc' : 'desc'}
@@ -45,13 +44,16 @@ function TableCellSort ({ onClick, isSorting, children }) {
         </TableSortLabel>
       </Tooltip>
     </TableCell>
-  )
-}
+)
 
-TableCellSort.propTypes = {
+
+HeaderCell.propTypes = {
   onClick: PropTypes.func,
   isSorting: PropTypes.object,
-  children: PropTypes.any
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element
+  ])
 }
 
 const toolbarStyles = theme => ({
@@ -85,19 +87,13 @@ const toolbarStyles = theme => ({
 })
 
 class TableToolbar extends React.Component {
-  handleDelete = () => {
-    this.props.onDelete()
-  };
+  handleDelete = () => { this.props.onDelete() }
 
   render () {
     const { numSelected, classes, title } = this.props
-
     return (
       <Toolbar
-        className={classNames(
-          classes.root,
-          numSelected > 0 ? classes.highlight : null
-        )}
+        className={classNames({ [classes.highlight]: numSelected > 0 })}
       >
         <div className={classes.title}>
           <Typography
@@ -109,11 +105,11 @@ class TableToolbar extends React.Component {
         </div>
         <div className={classes.spacer} />
         <div className={classes.rightControls}>
-          {numSelected > 0 ? (
+          {numSelected > 0 && (
             <div className={classes.rightItems}>
               <div className={classes.numSelected}>
                 <Typography variant='body1' color='primary'>
-                  <b>{numSelected}</b> selected
+                  <strong>{numSelected}</strong> selected
                 </Typography>
               </div>
               <div className={classes.actions}>
@@ -130,7 +126,7 @@ class TableToolbar extends React.Component {
                 </Tooltip>
               </div>
             </div>
-          ) : null}
+          )}
         </div>
       </Toolbar>
     )
@@ -146,31 +142,25 @@ TableToolbar.propTypes = {
 
 const TableToolbarStyled = withStyles(toolbarStyles)(TableToolbar)
 
+const HeaderRow  = ({ children }) => (
+  <TableHead>
+    <TableRow>{children}</TableRow>
+  </TableHead>
+)
+
+HeaderRow.propTypes = {
+  children: PropTypes.node
+}
+
 const tableStyles = theme => ({
   root: {}
 })
 
-function HeaderRowComponents ({ children }) {
-  return (
-    <TableHead>
-      <TableRow>{children}</TableRow>
-    </TableHead>
-  )
-}
-
-HeaderRowComponents.propTypes = {
-  children: PropTypes.any
-}
-
-class MaterialUiTableProp extends React.Component {
-  handleDelete = () => {
-    this.props.onDelete(this.props.data.selecting)
-  };
+class MaterialTable extends React.Component {
+  handleDelete = () => { this.props.onDelete(this.props.selecting) }
 
   render () {
-    const { data, classes } = this.props
-
-    const {
+    const { 
       columns,
       rows,
       handleRowSelect,
@@ -179,96 +169,93 @@ class MaterialUiTableProp extends React.Component {
       total,
       currentPage,
       handlePageChangeBlur,
-      handlePageSizeChange
-    } = data
+      handlePageSizeChange, 
+      classes 
+    } = this.props
 
     return (
-      <React.Fragment>
-        <MuiThemeProvider theme={theme}>
-          <Paper className={classes.root}>
-            <TableToolbarStyled
-              title={'Material UI Table'}
-              onDelete={this.handleDelete}
-              numSelected={
-                selecting[0] === 'all' ? rows.length : selecting.length
-              }
-            />
-            <Table>
-              <TableHeaderRow component={HeaderRowComponents}>
-                <TableCell padding='checkbox'>
-                  <Checkbox
-                    color='primary'
-                    onClick={e => {
-                      handleRowSelect('all')
-                    }}
-                    checked={selecting[0] === 'all'}
-                  />
-                </TableCell>
+      <Paper className={classes.root}>
+        <TableToolbarStyled
+          title={'Material UI Table'}
+          onDelete={this.handleDelete}
+          numSelected={
+            selecting[0] === 'all' ? rows.length : selecting.length
+          }
+        />
+        <Table>
+          <TableHeaderRow component={HeaderRow}>
+            <HeaderCell padding='checkbox'>
+              <Checkbox
+                color='primary'
+                onClick={e => {
+                  handleRowSelect('all')
+                }}
+                checked={selecting[0] === 'all'}
+              />
+            </HeaderCell>
 
-                {columns.map(
-                  ({ accessor, sortable, label }, index) =>
-                    accessor ? (
-                      <TableHeader
-                        key={index}
-                        sortable={sortable}
-                        accessor={accessor}
-                        component={TableCellSort}
-                      >
-                        {label}
-                      </TableHeader>
-                    ) : null
-                )}
-              </TableHeaderRow>
-
-              <TableBody>
-                {rows.map(({ rowKey, rowData, selected }, index) => (
-                  <TableRow
-                    hover
-                    onClick={e => {
-                      handleRowSelect(rowKey)
-                    }}
-                    role='checkbox'
-                    aria-checked={selected}
-                    tabIndex={-1}
-                    key={rowKey}
-                    selected={selected}
+            {columns.map(
+              ({ accessor, sortable, label }, index) =>
+                accessor && (
+                  <TableHeader
+                    key={index}
+                    sortable={sortable}
+                    accessor={accessor}
+                    component={HeaderCell}
                   >
-                    {rowData.map(({ accessor, data, key }) => (
-                      <TableCell padding='checkbox' key={key}>
-                        {accessor ? (
-                          data
-                        ) : (
-                          <Checkbox color='primary' checked={selected} />
-                        )}
-                      </TableCell>
-                    ))}
-                  </TableRow>
+                    {label}
+                  </TableHeader>
+                )
+            )}
+          </TableHeaderRow>
+
+          <TableBody>
+            {rows.map(({ rowKey, rowData, selected }, index) => (
+              <TableRow
+                hover
+                onClick={e => {
+                  handleRowSelect(rowKey)
+                }}
+                role='checkbox'
+                aria-checked={selected}
+                tabIndex={-1}
+                key={rowKey}
+                selected={selected}
+              >
+                {rowData.map(({ accessor, data, key }) => (
+                  <TableCell padding='checkbox' key={key}>
+                    {accessor ? (
+                      data
+                    ) : (
+                      <Checkbox color='primary' checked={selected} />
+                    )}
+                  </TableCell>
                 ))}
-              </TableBody>
-            </Table>
-            <TablePagination
-              component='div'
-              count={total}
-              rowsPerPage={pageSize}
-              page={currentPage - 1}
-              backIconButtonProps={{
-                'aria-label': 'Previous Page'
-              }}
-              nextIconButtonProps={{
-                'aria-label': 'Next Page'
-              }}
-              onChangePage={(e, page) =>
-                this.handlePageChangeInterceptor({
-                  e,
-                  page,
-                  handlePageChangeBlur
-                })
-              }
-              onChangeRowsPerPage={e => handlePageSizeChange(e)}
-            />
-          </Paper>
-        </MuiThemeProvider>
-      </React.Fragment>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+        <TablePagination
+          component='div'
+          count={total}
+          rowsPerPage={pageSize}
+          page={currentPage - 1}
+          backIconButtonProps={{
+            'aria-label': 'Previous Page'
+          }}
+          nextIconButtonProps={{
+            'aria-label': 'Next Page'
+          }}
+          onChangePage={(e, page) =>
+            this.handlePageChangeInterceptor({
+              e,
+              page,
+              handlePageChangeBlur
+            })
+          }
+          onChangeRowsPerPage={e => handlePageSizeChange(e)}
+        />
+      </Paper>
     )
   }
 
@@ -280,13 +267,21 @@ class MaterialUiTableProp extends React.Component {
       e.target.value = page + 1 // material ui is 0 offset so adjust for nf-table
       handlePageChangeBlur(e)
     }
-  };
+  }
 }
 
-MaterialUiTableProp.propTypes = {
-  classes: PropTypes.object.isRequired,
-  data: PropTypes.object.isRequired,
-  onDelete: PropTypes.func
+MaterialTable.propTypes = {
+  classes: PropTypes.object,
+  onDelete: PropTypes.func,
+  columns: PropTypes.array,
+  rows: PropTypes.array,
+  handleRowSelect: PropTypes.func,
+  selecting: PropTypes.array,
+  pageSize: PropTypes.number,
+  total: PropTypes.number,
+  currentPage: PropTypes.number,
+  handlePageChangeBlur: PropTypes.func,
+  handlePageSizeChange: PropTypes.func
 }
 
-export default withStyles(tableStyles)(MaterialUiTableProp)
+export default withStyles(tableStyles)(MaterialTable)

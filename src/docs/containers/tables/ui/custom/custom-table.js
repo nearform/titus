@@ -11,20 +11,18 @@ import DropDown from './baseline-arrow_drop_down-24px.svg'
 
 import './custom.css'
 
-function HorizontalDiv ({ children }) {
-  return (
-    <thead style={{ display: 'table-header-group' }}>
-      <tr>{children}</tr>
-    </thead>
-  )
+const HeaderRow = ({ children }) => (
+  <thead style={{ display: 'table-header-group' }}>
+    <tr>{children}</tr>
+  </thead>
+)
+
+HeaderRow.propTypes = {
+  children: PropTypes.node
 }
 
-HorizontalDiv.propTypes = {
-  children: PropTypes.any
-}
-
-function HeaderComponent ({ onClick, isSorting, children }) {
-  return (
+const HeaderCell = ({ onClick, isSorting, children }) =>
+  (
     <th
       onClick={onClick}
       style={{
@@ -51,7 +49,7 @@ function HeaderComponent ({ onClick, isSorting, children }) {
             alignItems: 'center'
           }}
         >
-          {isSorting ? (
+          {isSorting && (
             isSorting.asc ? (
               <img
                 style={{
@@ -73,29 +71,28 @@ function HeaderComponent ({ onClick, isSorting, children }) {
                 alt='up-arrow'
               />
             )
-          ) : null}
+          )}
           {children}
         </div>
       </div>
     </th>
   )
-}
 
-HeaderComponent.propTypes = {
+HeaderCell.propTypes = {
   onClick: PropTypes.func,
   isSorting: PropTypes.object,
-  children: PropTypes.any
+  children: PropTypes.node
 }
 
 class PageSizeChooser extends React.Component {
   state = {
     open: false,
     pageSizeOptions: this.props.pageSizeOptions
-  };
+  }
 
   static defaultProps = {
     pageSizeOptions: []
-  };
+  }
 
   render () {
     const { open, pageSizeOptions } = this.state
@@ -179,35 +176,33 @@ PageSizeChooser.propTypes = {
   handlePageSizeChange: PropTypes.func
 }
 
-function CheckBox ({ checked }) {
-  return (
-    <React.Fragment>
-      <input
-        type='checkbox'
-        style={{
-          position: 'absolute',
-          opacity: 0,
-          pointerEvents: 'none'
-        }}
-        onChange={() => ({})}
-        checked={checked ? 'checked' : ''}
-      />
-      <span />
-    </React.Fragment>
-  )
-}
+const CheckBox = ({ checked }) => (
+  <React.Fragment>
+    <input
+      type='checkbox'
+      style={{
+        position: 'absolute',
+        opacity: 0,
+        pointerEvents: 'none'
+      }}
+      onChange={() => ({})}
+      checked={checked ? 'checked' : ''}
+    />
+    <span />
+  </React.Fragment>
+)
 
 CheckBox.propTypes = {
   checked: PropTypes.bool
 }
 
-function TableBody ({ component, children }) {
-  return React.createElement(component, { children })
-}
+const TableBody = ({ component, children }) => (
+  React.createElement(component, { children })
+)
 
 TableBody.propTypes = {
-  component: PropTypes.any,
-  children: PropTypes.any
+  component: PropTypes.string,
+  children: PropTypes.array
 }
 
 function TableRow (props) {
@@ -223,26 +218,24 @@ function TableRow (props) {
 }
 
 TableRow.propTypes = {
-  component: PropTypes.any,
-  children: PropTypes.any,
+  component: PropTypes.string,
+  children: PropTypes.array,
   style: PropTypes.object,
   className: PropTypes.string
 }
 
-function TableData ({ component, children, style, className }) {
-  return React.createElement(component, { children, style, className })
-}
+const TableData  = ({ component, children, style, className }) => (
+  React.createElement(component, { children, style, className })
+)
 
 TableData.propTypes = {
-  component: PropTypes.any,
-  children: PropTypes.any,
+  component: PropTypes.string,
+  children: PropTypes.node,
   style: PropTypes.object,
   className: PropTypes.object
 }
-class CustomTableProp extends React.Component {
-  handleDelete = () => {
-    this.props.onDelete(this.props.data.selecting)
-  };
+class CustomTable extends React.Component {
+  handleDelete = () => { this.props.onDelete(this.props.selecting) }
 
   render () {
     const {
@@ -259,7 +252,7 @@ class CustomTableProp extends React.Component {
       handlePrevPage,
       handleNextPage,
       handlePageSizeChange
-    } = this.props.data
+    } = this.props
 
     return (
       <React.Fragment>
@@ -320,28 +313,28 @@ class CustomTableProp extends React.Component {
               borderCollapse: 'collapse'
             }}
           >
-            <TableHeaderRow component={HorizontalDiv}>
-              <HeaderComponent
+            <TableHeaderRow component={HeaderRow}>
+              <HeaderCell
                 onClick={e => {
                   handleRowSelect('all')
                 }}
                 style={{ cursor: 'pointer' }}
               >
                 <CheckBox checked={selecting[0] === 'all'} />
-              </HeaderComponent>
+              </HeaderCell>
 
               {columns.map(
                 ({ accessor, sortable, label }, index) =>
-                  accessor ? (
+                  accessor && (
                     <TableHeader
                       key={index}
                       sortable={sortable}
                       accessor={accessor}
-                      component={HeaderComponent}
+                      component={HeaderCell}
                     >
                       {label}
                     </TableHeader>
-                  ) : null
+                  )
               )}
             </TableHeaderRow>
             <TableBody component='tbody' style={{ display: 'table-row-group' }}>
@@ -453,9 +446,21 @@ class CustomTableProp extends React.Component {
   }
 }
 
-CustomTableProp.propTypes = {
-  data: PropTypes.object.isRequired,
-  onDelete: PropTypes.func
+CustomTable.propTypes = {
+  onDelete: PropTypes.func,
+  columns: PropTypes.array,
+  rows: PropTypes.array,
+  handleRowSelect: PropTypes.func,
+  selecting: PropTypes.array,
+  pageSize: PropTypes.number,
+  total: PropTypes.number,
+  currentPage: PropTypes.number,
+  handlePageChangeBlur: PropTypes.func,
+  hasNextPage: PropTypes.bool,
+  hasPrevPage: PropTypes.bool,
+  handlePrevPage: PropTypes.func,
+  handleNextPage: PropTypes.func,
+  handlePageSizeChange: PropTypes.func
 }
 
-export default CustomTableProp
+export default CustomTable

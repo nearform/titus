@@ -30,16 +30,16 @@ class MenuList extends Component {
     onItemClicked: PropTypes.func,
     menuData: PropTypes.object,
     menuOpen: PropTypes.bool
-  };
+  }
 
   state = {
     lastClickedId: null
-  };
+  }
 
   handleItemClicked = menuItemId => {
     this.props.onItemClicked(menuItemId)
     this.setState({ lastClickedId: menuItemId })
-  };
+  }
 
   customIcon = ({ id, name }) => {
     const Icon = menuIcons[id]
@@ -51,7 +51,7 @@ class MenuList extends Component {
       )
     }
     return Icon ? <Icon /> : <DefaultIcon />
-  };
+  }
 
   render () {
     const { customIcon } = this
