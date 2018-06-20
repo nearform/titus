@@ -232,28 +232,29 @@ class MaterialTable extends React.Component {
                 ))}
               </TableRow>
             ))}
+            <TableRow>
+              <TablePagination
+                count={total}
+                rowsPerPage={pageSize}
+                page={currentPage - 1}
+                backIconButtonProps={{
+                  'aria-label': 'Previous Page'
+                }}
+                nextIconButtonProps={{
+                  'aria-label': 'Next Page'
+                }}
+                onChangePage={(e, page) =>
+                  this.handlePageChangeInterceptor({
+                    e,
+                    page,
+                    handlePageChangeBlur
+                  })
+                }
+                onChangeRowsPerPage={e => handlePageSizeChange(e)}
+              />
+            </TableRow>
           </TableBody>
         </Table>
-        <TablePagination
-          component='div'
-          count={total}
-          rowsPerPage={pageSize}
-          page={currentPage - 1}
-          backIconButtonProps={{
-            'aria-label': 'Previous Page'
-          }}
-          nextIconButtonProps={{
-            'aria-label': 'Next Page'
-          }}
-          onChangePage={(e, page) =>
-            this.handlePageChangeInterceptor({
-              e,
-              page,
-              handlePageChangeBlur
-            })
-          }
-          onChangeRowsPerPage={e => handlePageSizeChange(e)}
-        />
       </Paper>
     )
   }
