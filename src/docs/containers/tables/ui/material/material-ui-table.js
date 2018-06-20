@@ -20,7 +20,7 @@ import { lighten } from '@material-ui/core/styles/colorManipulator'
 import { withStyles } from '@material-ui/core/styles'
 
 const HeaderCell = ({ onClick, isSorting, children }) =>
-(
+  (
     <TableCell
       padding='checkbox'
       sortDirection={!isSorting || isSorting.asc ? 'asc' : 'desc'}
@@ -44,8 +44,7 @@ const HeaderCell = ({ onClick, isSorting, children }) =>
         </TableSortLabel>
       </Tooltip>
     </TableCell>
-)
-
+  )
 
 HeaderCell.propTypes = {
   onClick: PropTypes.func,
@@ -142,7 +141,7 @@ TableToolbar.propTypes = {
 
 const TableToolbarStyled = withStyles(toolbarStyles)(TableToolbar)
 
-const HeaderRow  = ({ children }) => (
+const HeaderRow = ({ children }) => (
   <TableHead>
     <TableRow>{children}</TableRow>
   </TableHead>
@@ -160,7 +159,7 @@ class MaterialTable extends React.Component {
   handleDelete = () => { this.props.onDelete(this.props.selecting) }
 
   render () {
-    const { 
+    const {
       columns,
       rows,
       handleRowSelect,
@@ -169,8 +168,8 @@ class MaterialTable extends React.Component {
       total,
       currentPage,
       handlePageChangeBlur,
-      handlePageSizeChange, 
-      classes 
+      handlePageSizeChange,
+      classes
     } = this.props
 
     return (

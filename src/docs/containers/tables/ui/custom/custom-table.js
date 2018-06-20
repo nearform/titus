@@ -224,7 +224,7 @@ TableRow.propTypes = {
   className: PropTypes.string
 }
 
-const TableData  = ({ component, children, style, className }) => (
+const TableData = ({ component, children, style, className }) => (
   React.createElement(component, { children, style, className })
 )
 
@@ -455,7 +455,7 @@ CustomTable.propTypes = {
   pageSize: PropTypes.number,
   total: PropTypes.number,
   currentPage: PropTypes.number,
-  handlePageChangeBlur: PropTypes.func,
+  pageSizeOptions: PropTypes.array,
   hasNextPage: PropTypes.bool,
   hasPrevPage: PropTypes.bool,
   handlePrevPage: PropTypes.func,
