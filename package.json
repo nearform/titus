@@ -9,6 +9,8 @@
     "reinstall": "npm run clean:all && npm i",
     "lint": "lerna run lint",
     "lint:fix": "lerna run lint:fix",
+    "build:all": "lerna run build",
+    "start:kitchen-sink": "lerna exec --scope titus-kitchen-sink npm start",
     "commit-check": "npm run lint"
   },
   "devDependencies": {

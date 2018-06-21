@@ -49,10 +49,11 @@ Some commands have been added to the root package for convenience
 
 | Command            | Description                                                    |
 | ------------------ | -------------------------------------------------------------- |
+| build:all          | rebuilds all sub-packages                                      |
 | clean              | cleans all sub-package dependencies                            |
 | clean:all          | cleans all root & sub-package dependencies                     |
-| reinstall          | cleans all root & sub-package dependencies and reinstalls them |
-| start:kitchen-sink | starts the kitchen sink app on http://localhost:3000/          |
+| commit-check       | performs pre-commit checks for contributors                    |
 | lint               | performs lint check across sub-packages                        |
 | lint:fix           | fixes lint issues across sub-packages                          |
-| commit-check       | performs pre-commit checks for contributors                    |
+| reinstall          | cleans all root & sub-package dependencies and reinstalls them |
+| start:kitchen-sink | starts the kitchen sink app on http://localhost:3000/          |
