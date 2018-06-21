@@ -2,10 +2,9 @@ import React, { Fragment } from 'react'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { MuiThemeProvider } from '@material-ui/core/styles'
 import { Provider } from 'react-redux'
+import { Navigation } from 'titus-components'
 
 import { theme } from './theme/theme'
-
-import Navigation from '../components/navigation/navigation'
 
 import Menu from './menu'
 import Routes from './routes'
@@ -13,7 +12,7 @@ import Routes from './routes'
 import { store } from './store/store'
 
 const meta = {
-  appName: 'Titus Docs and Examples'
+  appName: 'Titus Starter Shell'
 }
 
 const App = () => (

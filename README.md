@@ -1,8 +1,16 @@
 # Titus
 
-Welcome to project Titus, an advanced opinionated starter shell stack
+Welcome to project Titus, an advanced opinionated starter shell stack. This repo includes the following packages:
 
-This starter shell includes:
+- titus-starter - The starter shell
+- titus-components - A collection of pre-built components
+- titus-kitchen-sink - An implementation of the starter shell with examples and documentation
+
+## Framework
+
+The project is very much a work in progress. Below is a list of what is included and what is on the roadmap.
+
+The project currently includes:
 
 - [Material-UI](https://material-ui.com/)
 - [Reach Router](https://reach.tech/router)
@@ -12,7 +20,7 @@ This starter shell includes:
   - [Reselect](https://github.com/reduxjs/reselect)
 - [Victory](https://formidable.com/open-source/victory/docs/)
 
-##### TODO
+### TODO
 
 - GraphQL
 - Wizard
@@ -23,29 +31,22 @@ This starter shell includes:
 - nearform authorization (udaru)
 - CI
 
-### Installation
+## Installation
+
+### Lerna
+
+The monorepo is setup using lerna, so you'll first need to install it as a global dependency
 
 ```
-npm install
+npm install --global lerna
+or
+yarn global add lerna
 ```
 
-### Running locally
+### Bootstrap
+
+To install dependencies for all packages, and link any cross-dependencies, we need to bootstrap them.
 
 ```
-npm start
+lerna bootstrap
 ```
-
-Open a browser and then navigate to...
-
-- `localhost:3000/app` for the starter shell
-- `localhost:3000/docs` for the documentation and examples
-
-### Storybook
-
-```
-npm run storybook
-```
-
-Open a browser and then navigate to...
-
-- `localhost:9009`

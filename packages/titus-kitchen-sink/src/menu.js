@@ -1,4 +1,5 @@
 import React from 'react'
+import { ListItemLink } from 'titus-components'
 
 import List from '@material-ui/core/List'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
@@ -8,23 +9,21 @@ import DashboardIcon from '@material-ui/icons/Dashboard'
 import PlaylistAddCheck from '@material-ui/icons/PlaylistAddCheck'
 import InsertChart from '@material-ui/icons/InsertChart'
 
-import ListItemLink from '../components/list-item-link/list-item-link'
-
 const Menu = () => (
   <List>
-    <ListItemLink to={'/docs'}>
+    <ListItemLink to={'/'}>
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
       <ListItemText primary='Dashboard' />
     </ListItemLink>
-    <ListItemLink to={'/docs/wizard'}>
+    <ListItemLink to={'/wizard'}>
       <ListItemIcon>
         <PlaylistAddCheck />
       </ListItemIcon>
       <ListItemText primary='Wizard' />
     </ListItemLink>
-    <ListItemLink to={'/docs/visualisations'}>
+    <ListItemLink to={'/visualisations'}>
       <ListItemIcon>
         <InsertChart />
       </ListItemIcon>

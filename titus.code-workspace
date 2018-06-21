@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "packages/titus-components"
+		},
+		{
+			"path": "packages/titus-kitchen-sink"
+		},
+		{
+			"path": "packages/titus-starter"
+		}
+	],
+	"settings": {}
+}
