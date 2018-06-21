@@ -8,6 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 import DashboardIcon from '@material-ui/icons/Dashboard'
 import PlaylistAddCheck from '@material-ui/icons/PlaylistAddCheck'
 import InsertChart from '@material-ui/icons/InsertChart'
+import TablesIcon from '@material-ui/icons/GridOn'
 
 const Menu = () => (
   <List>
@@ -28,6 +29,12 @@ const Menu = () => (
         <InsertChart />
       </ListItemIcon>
       <ListItemText primary='Visualisations' />
+    </ListItemLink>
+    <ListItemLink to={'/tables'}>
+      <ListItemIcon>
+        <TablesIcon />
+      </ListItemIcon>
+      <ListItemText primary='Tables' />
     </ListItemLink>
   </List>
 )

@@ -1,11 +1,17 @@
 {
-	"name": "titus",
+  "name": "titus",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "postinstall": "lerna clean --yes && lerna bootstrap"
+    "clean": "lerna clean --yes",
+    "clean:all": "npm run clean && rm -rf node_modules",
+    "postinstall": "npm run clean && lerna bootstrap",
+    "reinstall": "npm run clean:all && npm i",
+    "lint": "lerna run lint",
+    "lint:fix": "lerna run lint:fix",
+    "commit-check": "npm run lint"
   },
-	"devDependencies": {
-		"lerna": "^2.11.0"
-	}
+  "devDependencies": {
+    "lerna": "^2.11.0"
+  }
 }

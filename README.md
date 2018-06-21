@@ -33,20 +33,26 @@ The project currently includes:
 
 ## Installation
 
-### Lerna
-
-The monorepo is setup using lerna, so you'll first need to install it as a global dependency
+Install dependencies for all packages using
 
 ```
-npm install --global lerna
-or
-yarn global add lerna
+npm install
 ```
 
-### Bootstrap
+This will install root package dependencies, including lerna, which will then install all sub package dependencies and link cross-dependencies.
 
-To install dependencies for all packages, and link any cross-dependencies, we need to bootstrap them.
+React sub-packages automatically run their respective build step as part of this process.
 
-```
-lerna bootstrap
-```
+## Convenience Scripts
+
+Some commands have been added to the root package for convenience
+
+| Command            | Description                                                    |
+| ------------------ | -------------------------------------------------------------- |
+| clean              | cleans all sub-package dependencies                            |
+| clean:all          | cleans all root & sub-package dependencies                     |
+| reinstall          | cleans all root & sub-package dependencies and reinstalls them |
+| start:kitchen-sink | starts the kitchen sink app on http://localhost:3000/          |
+| lint               | performs lint check across sub-packages                        |
+| lint:fix           | fixes lint issues across sub-packages                          |
+| commit-check       | performs pre-commit checks for contributors                    |

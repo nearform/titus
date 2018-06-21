@@ -92,14 +92,14 @@ class Navigation extends Component {
     theme: PropTypes.object.isRequired,
     items: PropTypes.func,
     main: PropTypes.func.isRequired
-  };
+  }
 
   state = {
     menuOpen: false
-  };
+  }
 
-  handleMenuOpen = () => this.setState({ menuOpen: true });
-  handleMenuClose = () => this.setState({ menuOpen: false });
+  handleMenuOpen = () => this.setState({ menuOpen: true })
+  handleMenuClose = () => this.setState({ menuOpen: false })
 
   render () {
     const { handleMenuOpen, handleMenuClose } = this
@@ -156,9 +156,7 @@ class Navigation extends Component {
         </Drawer>
         <div className={classes.content}>
           <div className={classes.toolbar} />
-          <main className={classes.main}>
-            {main({ menuOpen })}
-          </main>
+          <main className={classes.main}>{main({ menuOpen })}</main>
         </div>
       </div>
     )
