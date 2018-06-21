@@ -1,4 +1,10 @@
 {
+	"name": "titus",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "postinstall": "lerna clean --yes && lerna bootstrap"
+  },
 	"devDependencies": {
 		"lerna": "^2.11.0"
 	}
