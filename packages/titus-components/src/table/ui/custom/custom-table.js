@@ -21,62 +21,60 @@ HeaderRow.propTypes = {
   children: PropTypes.node
 }
 
-const HeaderCell = ({ onClick, isSorting, children }) =>
-  (
-    <th
-      onClick={onClick}
+const HeaderCell = ({ onClick, isSorting, children }) => (
+  <th
+    onClick={onClick}
+    style={{
+      userSelect: 'none',
+      color: `${isSorting ? '#000' : 'rgba(0, 0, 0, 0.54)'}`,
+      fontWeight: 500,
+      fontSize: '0.75rem',
+      display: 'table-cell',
+      borderBottom: '1px solid rgba(224, 224, 224, 1)',
+      padding: '2em 0.25em 1em'
+    }}
+  >
+    <div
       style={{
-        userSelect: 'none',
-        color: `${isSorting ? '#000' : 'rgba(0, 0, 0, 0.54)'}`,
-        fontWeight: 500,
-        fontSize: '0.75rem',
-        display: 'table-cell',
-        borderBottom: '1px solid rgba(224, 224, 224, 1)',
-        padding: '2em 0.25em 1em'
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center'
       }}
     >
       <div
         style={{
+          position: 'relative',
           display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'center'
+          alignItems: 'center'
         }}
       >
-        <div
-          style={{
-            position: 'relative',
-            display: 'flex',
-            alignItems: 'center'
-          }}
-        >
-          {isSorting && (
-            isSorting.asc ? (
-              <img
-                style={{
-                  position: 'absolute',
-                  left: '-2em',
-                  width: '1.5em'
-                }}
-                src={DownArrow}
-                alt='down-arrow'
-              />
-            ) : (
-              <img
-                style={{
-                  position: 'absolute',
-                  left: '-2em',
-                  width: '1.5em'
-                }}
-                src={UpArrow}
-                alt='up-arrow'
-              />
-            )
-          )}
-          {children}
-        </div>
+        {isSorting &&
+          (isSorting.asc ? (
+            <img
+              style={{
+                position: 'absolute',
+                left: '-2em',
+                width: '1.5em'
+              }}
+              src={DownArrow}
+              alt='down-arrow'
+            />
+          ) : (
+            <img
+              style={{
+                position: 'absolute',
+                left: '-2em',
+                width: '1.5em'
+              }}
+              src={UpArrow}
+              alt='up-arrow'
+            />
+          ))}
+        {children}
       </div>
-    </th>
-  )
+    </div>
+  </th>
+)
 
 HeaderCell.propTypes = {
   onClick: PropTypes.func,
@@ -196,9 +194,8 @@ CheckBox.propTypes = {
   checked: PropTypes.bool
 }
 
-const TableBody = ({ component, children }) => (
+const TableBody = ({ component, children }) =>
   React.createElement(component, { children })
-)
 
 TableBody.propTypes = {
   component: PropTypes.string,
@@ -224,9 +221,8 @@ TableRow.propTypes = {
   className: PropTypes.string
 }
 
-const TableData = ({ component, children, style, className }) => (
+const TableData = ({ component, children, style, className }) =>
   React.createElement(component, { children, style, className })
-)
 
 TableData.propTypes = {
   component: PropTypes.string,
@@ -237,6 +233,7 @@ TableData.propTypes = {
 
 class CustomTable extends React.Component {
   static propTypes = {
+    title: PropTypes.string,
     onDelete: PropTypes.func,
     columns: PropTypes.array,
     rows: PropTypes.array,
@@ -253,10 +250,13 @@ class CustomTable extends React.Component {
     handlePageSizeChange: PropTypes.func
   }
 
-  handleDelete = () => { this.props.onDelete(this.props.selecting) }
+  handleDelete = () => {
+    this.props.onDelete(this.props.selecting)
+  }
 
   render () {
     const {
+      title,
       rows,
       columns,
       handleRowSelect,
@@ -285,7 +285,7 @@ class CustomTable extends React.Component {
             padding: '1em 1em 0.5em 1em'
           }}
         >
-          <h2 style={{ color: '#000' }}>Custom Table</h2>
+          <h2 style={{ color: '#000' }}>{title}</h2>
           <div
             style={{
               display: 'flex',

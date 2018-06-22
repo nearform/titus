@@ -1,158 +1,77 @@
 import React from 'react'
 import { TableHeaderRow, TableHeader } from 'react-nf-table'
-import classNames from 'classnames'
 import PropTypes from 'prop-types'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
-import TableHead from '@material-ui/core/TableHead'
 import TablePagination from '@material-ui/core/TablePagination'
-import TableRow from '@material-ui/core/TableRow'
-import TableSortLabel from '@material-ui/core/TableSortLabel'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper'
 import Checkbox from '@material-ui/core/Checkbox'
-import IconButton from '@material-ui/core/IconButton'
+import TableSortLabel from '@material-ui/core/TableSortLabel'
 import Tooltip from '@material-ui/core/Tooltip'
-import DeleteIcon from '@material-ui/icons/Delete'
-import { lighten } from '@material-ui/core/styles/colorManipulator'
 import { withStyles } from '@material-ui/core/styles'
+import TableToolbar from './table-toolbar'
 
-const HeaderCell = ({ onClick, isSorting, children }) => (
-  <TableCell
-    padding='checkbox'
-    sortDirection={!isSorting || isSorting.asc ? 'asc' : 'desc'}
-  >
-    <Tooltip
-      title={
-        isSorting
-          ? !isSorting || isSorting.asc
-            ? 'Sorted Ascending'
-            : 'Sorted Descending'
-          : ''
-      }
-      enterDelay={300}
-    >
-      <TableSortLabel
-        active={isSorting}
-        direction={!isSorting || isSorting.asc ? 'asc' : 'desc'}
-        onClick={onClick}
-      >
-        {children}
-      </TableSortLabel>
-    </Tooltip>
-  </TableCell>
-)
-
-HeaderCell.propTypes = {
-  onClick: PropTypes.func,
-  isSorting: PropTypes.object,
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
-}
-
-const toolbarStyles = theme => ({
-  root: {
-    paddingRight: theme.spacing.unit
-  },
-  highlight: {
-    backgroundColor: lighten(theme.palette.primary.light, 0.85)
-  },
-  spacer: {
-    flex: '1 1 100%'
-  },
-  title: {
-    flex: '0 0 auto'
-  },
-  rightControls: {
-    flex: '0 0 auto'
-  },
-  rightItems: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flexEnd'
-  },
-  actions: {
-    flex: '0 0 auto'
-  },
-  numSelected: {
-    flex: '1 1 auto',
-    paddingRight: theme.spacing.unit * 3
-  }
-})
-
-class TableToolbar extends React.Component {
+class HeaderRow extends React.Component {
   static propTypes = {
-    classes: PropTypes.object.isRequired,
-    numSelected: PropTypes.number.isRequired,
-    title: PropTypes.string,
-    onDelete: PropTypes.func
-  }
-
-  handleDelete = () => {
-    this.props.onDelete()
+    children: PropTypes.node
   }
 
   render () {
-    const { numSelected, classes, title } = this.props
     return (
-      <Toolbar className={classNames({ [classes.highlight]: numSelected > 0 })}>
-        <div className={classes.title}>
-          <Typography
-            variant='title'
-            color={numSelected > 0 ? 'primary' : 'inherit'}
-          >
-            {title}
-          </Typography>
-        </div>
-        <div className={classes.spacer} />
-        <div className={classes.rightControls}>
-          {numSelected > 0 && (
-            <div className={classes.rightItems}>
-              <div className={classes.numSelected}>
-                <Typography variant='body1' color='primary'>
-                  <strong>{numSelected}</strong> selected
-                </Typography>
-              </div>
-              <div className={classes.actions}>
-                <Tooltip title='Delete'>
-                  <IconButton
-                    variant='fab'
-                    aria-label='Delete'
-                    color='primary'
-                    className={classes.button}
-                    onClick={this.handleDelete}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </Tooltip>
-              </div>
-            </div>
-          )}
-        </div>
-      </Toolbar>
+      <TableHead>
+        <TableRow>{this.props.children}</TableRow>
+      </TableHead>
     )
   }
 }
 
-const TableToolbarStyled = withStyles(toolbarStyles)(TableToolbar)
+class HeaderCell extends React.Component {
+  static propTypes = {
+    onClick: PropTypes.func,
+    isSorting: PropTypes.object,
+    children: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
+  }
 
-const HeaderRow = ({ children }) => (
-  <TableHead>
-    <TableRow>{children}</TableRow>
-  </TableHead>
-)
+  render () {
+    const { onClick, isSorting, children } = this.props
 
-HeaderRow.propTypes = {
-  children: PropTypes.node
+    return (
+      <TableCell
+        padding='checkbox'
+        sortDirection={!isSorting || isSorting.asc ? 'asc' : 'desc'}
+      >
+        <Tooltip
+          title={
+            isSorting
+              ? !isSorting || isSorting.asc
+                ? 'Sorted Ascending'
+                : 'Sorted Descending'
+              : ''
+          }
+          enterDelay={300}
+        >
+          <TableSortLabel
+            active={isSorting}
+            direction={!isSorting || isSorting.asc ? 'asc' : 'desc'}
+            onClick={onClick}
+          >
+            {children}
+          </TableSortLabel>
+        </Tooltip>
+      </TableCell>
+    )
+  }
 }
 
 const tableStyles = theme => ({
   root: {}
 })
-
-class MaterialTable extends React.Component {
+class MaterialUiTable extends React.Component {
   static propTypes = {
+    title: PropTypes.string,
     classes: PropTypes.object,
     onDelete: PropTypes.func,
     columns: PropTypes.array,
@@ -172,6 +91,7 @@ class MaterialTable extends React.Component {
 
   render () {
     const {
+      title,
       columns,
       rows,
       handleRowSelect,
@@ -186,8 +106,8 @@ class MaterialTable extends React.Component {
 
     return (
       <Paper className={classes.root}>
-        <TableToolbarStyled
-          title={'Material UI Table'}
+        <TableToolbar
+          title={title}
           onDelete={this.handleDelete}
           numSelected={selecting[0] === 'all' ? rows.length : selecting.length}
         />
@@ -280,4 +200,4 @@ class MaterialTable extends React.Component {
   }
 }
 
-export default withStyles(tableStyles)(MaterialTable)
+export default withStyles(tableStyles)(MaterialUiTable)

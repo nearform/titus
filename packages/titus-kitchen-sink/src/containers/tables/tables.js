@@ -49,7 +49,12 @@ class Tables extends React.Component {
         />
 
         <div className={classNames({ [classes.hide]: !materialUi })}>
-          <Table columns={columns} rows={rows} onDelete={this.handleDelete} />
+          <Table
+            title='Material Table'
+            columns={columns}
+            rows={rows}
+            onDelete={this.handleDelete}
+          />
         </div>
 
         <div className={classNames({ [classes.hide]: materialUi })}>
@@ -57,6 +62,7 @@ class Tables extends React.Component {
             columns={columns}
             rows={rows}
             ui='custom'
+            title='Custom Table'
             onDelete={this.handleDelete}
           />
         </div>

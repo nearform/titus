@@ -7,6 +7,7 @@ import MaterialUiTable from './ui/material/material-ui-table'
 class Table extends React.Component {
   static propTypes = {
     onDelete: PropTypes.func,
+    title: PropTypes.string,
     rows: PropTypes.array,
     columns: PropTypes.array,
     ui: PropTypes.oneOf(['material', 'custom']),
@@ -29,19 +30,21 @@ class Table extends React.Component {
     }
   }
 
-  renderMaterialUiTable = obj => {
-    return (<MaterialUiTable
-      {...obj}
-      onDelete={(selected) => this.handleDelete(selected)}
-    />)
-  }
+  renderMaterialUiTable = props => (
+    <MaterialUiTable
+      {...props}
+      title={this.props.title}
+      onDelete={this.handleDelete}
+    />
+  )
 
-  renderCustomTable = obj => {
-    return (<CustomTable
-      {...obj}
-      onDelete={(selected) => this.handleDelete(selected)}
-    />)
-  }
+  renderCustomTable = props => (
+    <CustomTable
+      {...props}
+      title={this.props.title}
+      onDelete={this.handleDelete}
+    />
+  )
 
   render () {
     const { rows, columns, ui, pageSize, pageSizeOptions } = this.props
@@ -49,23 +52,17 @@ class Table extends React.Component {
     // runtime conditional statement would not work on render prop itself, so rendering
     // different table if this prop changes
     return (
-      (!ui || ui !== 'custom') ? (
-        <NfTable
-          columns={columns}
-          pageSize={pageSize}
-          pageSizeOptions={pageSizeOptions}
-          data={rows}
-          render={(obj) => this.renderMaterialUiTable(obj)}
-        />
-      ) : (
-        <NfTable
-          columns={columns}
-          pageSize={pageSize}
-          pageSizeOptions={pageSizeOptions}
-          data={rows}
-          render={(obj) => this.renderCustomTable(obj)}
-        />
-      )
+      <NfTable
+        columns={columns}
+        pageSize={pageSize}
+        pageSizeOptions={pageSizeOptions}
+        data={rows}
+        render={
+          !ui || ui !== 'custom'
+            ? this.renderMaterialUiTable
+            : this.renderCustomTable
+        }
+      />
     )
   }
 }
