@@ -1,11 +1,12 @@
 {
-	"name": "titus",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "postinstall": "lerna clean --yes && lerna bootstrap"
-  },
-	"devDependencies": {
-		"lerna": "^2.11.0"
-	}
+ "name": "titus",
+ "version": "1.0.0",
+ "private": true,
+ "scripts": {
+  "precommit": "lerna run lint:fix && lerna run test"
+ },
+ "devDependencies": {
+  "husky": "^0.14.3",
+  "lerna": "^2.11.0"
+ }
 }

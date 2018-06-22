@@ -14,7 +14,7 @@
     "build": "nwb build-react-component",
     "clean": "nwb clean-module && nwb clean-demo",
     "start": "nwb serve-react-demo",
-    "test": "nwb test-react",
+    "test": "echo 'Needs updating to jest'",
     "test:coverage": "nwb test-react --coverage",
     "test:watch": "nwb test-react --server",
     "lint": "eslint src",
@@ -23,7 +23,8 @@
   },
   "dependencies": {
     "@material-ui/core": "^1.1.0",
-    "@material-ui/icons": "^1.1.0"
+    "@material-ui/icons": "^1.1.0",
+    "@reach/router": "^1.1.1"
   },
   "peerDependencies": {
     "react": "16.x"
