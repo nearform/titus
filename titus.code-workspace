@@ -11,6 +11,9 @@
 		},
 		{
 			"path": "packages/titus-starter"
+		},
+		{
+			"path": "packages/titus-cli"
 		}
 	],
 	"settings": {}
