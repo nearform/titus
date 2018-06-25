@@ -10,10 +10,10 @@ jobs:
       - checkout
       - run:
           name: install
-          command: npm ci
+          command: npm install
       - run:
           name: bootstrap
-          command: lerna bootstrap --ci
+          command: lerna bootstrap
       - persist_to_workspace:
           root: .
           paths:
