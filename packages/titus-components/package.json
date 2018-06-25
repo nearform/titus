@@ -24,7 +24,7 @@
   "dependencies": {
     "@material-ui/core": "^1.1.0",
     "@material-ui/icons": "^1.1.0",
-    "react-nf-table": "nearform/react-nf-table.git#nwb-src-export"
+    "react-nf-table": "nearform/react-nf-table.git#nwb-src-export",
     "@reach/router": "^1.1.1"
   },
   "peerDependencies": {
