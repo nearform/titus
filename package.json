@@ -3,7 +3,7 @@
  "version": "1.0.0",
  "private": true,
  "scripts": {
-	 "boostrap": "lerna boostrap",
+	 "bootstrap": "lerna bootstrap",
 	 "precommit": "lerna run lint:fix",
 	 "prepush": "lerna run test"
  },

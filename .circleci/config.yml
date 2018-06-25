@@ -13,7 +13,7 @@ jobs:
           command: npm install
       - run:
           name: bootstrap
-          command: npm run boostrap
+          command: npm run bootstrap
       - persist_to_workspace:
           root: .
           paths:
