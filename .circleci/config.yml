@@ -23,19 +23,19 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-      - run: lerna run lint
+      - run: npm run lint:all
   test:
     <<: *defaults
     steps:
       - attach_workspace:
           at: .
-      - run: lerna run test
+      - run: npm run test:all
   build:
     <<: *defaults
     steps:
       - attach_workspace:
           at: .
-      - run: lerna run build
+      - run: npm run build:all
 workflows:
   version: 2
   build_and_test:
