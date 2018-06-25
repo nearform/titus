@@ -1,198 +1,16 @@
 import React from 'react'
-import { TableHeaderRow, TableHeader } from 'react-nf-table'
 import PropTypes from 'prop-types'
+import { TableHeaderRow, TableHeader } from 'react-nf-table'
+import HeaderRow from './header-row'
+import SortingHeaderCell from './sorting-header-cell'
+import PageSizeChooser from './page-size-chooser'
+import CheckBox from './checkbox'
 
 import DeleteIcon from './baseline-delete-24px.svg'
-import UpArrow from './baseline-arrow_upward-24px.svg'
-import DownArrow from './baseline-arrow_downward-24px.svg'
 import ForwardArrow from './baseline-arrow_forward_ios-24px.svg'
 import BackArrow from './baseline-arrow_back_ios-24px.svg'
-import DropDown from './baseline-arrow_drop_down-24px.svg'
 
 import './custom.css'
-
-const HeaderRow = ({ children }) => (
-  <thead style={{ display: 'table-header-group' }}>
-    <tr>{children}</tr>
-  </thead>
-)
-
-HeaderRow.propTypes = {
-  children: PropTypes.node
-}
-
-const HeaderCell = ({ onClick, isSorting, children }) => (
-  <th
-    onClick={onClick}
-    style={{
-      userSelect: 'none',
-      color: `${isSorting ? '#000' : 'rgba(0, 0, 0, 0.54)'}`,
-      fontWeight: 500,
-      fontSize: '0.75rem',
-      display: 'table-cell',
-      borderBottom: '1px solid rgba(224, 224, 224, 1)',
-      padding: '2em 0.25em 1em'
-    }}
-  >
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center'
-      }}
-    >
-      <div
-        style={{
-          position: 'relative',
-          display: 'flex',
-          alignItems: 'center'
-        }}
-      >
-        {isSorting &&
-          (isSorting.asc ? (
-            <img
-              style={{
-                position: 'absolute',
-                left: '-2em',
-                width: '1.5em'
-              }}
-              src={DownArrow}
-              alt='down-arrow'
-            />
-          ) : (
-            <img
-              style={{
-                position: 'absolute',
-                left: '-2em',
-                width: '1.5em'
-              }}
-              src={UpArrow}
-              alt='up-arrow'
-            />
-          ))}
-        {children}
-      </div>
-    </div>
-  </th>
-)
-
-HeaderCell.propTypes = {
-  onClick: PropTypes.func,
-  isSorting: PropTypes.object,
-  children: PropTypes.node
-}
-
-class PageSizeChooser extends React.Component {
-  static propTypes = {
-    pageSizeOptions: PropTypes.array,
-    pageSize: PropTypes.number,
-    handlePageSizeChange: PropTypes.func
-  }
-
-  static defaultProps = {
-    pageSizeOptions: []
-  }
-
-  state = {
-    open: false,
-    pageSizeOptions: this.props.pageSizeOptions
-  }
-
-  render () {
-    const { open, pageSizeOptions } = this.state
-    const { pageSize, handlePageSizeChange } = this.props
-
-    return (
-      <div
-        style={{ position: 'relative', outline: 'none' }}
-        tabIndex={open ? '0' : '-1'}
-        onBlur={e => this.setState(state => ({ open: false }))}
-      >
-        <div
-          style={{
-            display: 'flex',
-            opacity: `${open ? '1' : '0'}`,
-            visibility: `${open ? 'visible' : 'hidden'}`,
-            animiation: 'fadeIn 200ms',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            position: 'absolute',
-            borderTop: '1px solid rgba(0, 0, 0, 0.1)',
-            borderBottom: '1px solid transparent',
-            top: `-${pageSizeOptions.length * 2 + 1}rem`,
-            left: '-2rem',
-            minWidth: '7rem',
-            background: '#fff',
-            zIndex: 2,
-            borderRadius: '0.5em',
-            padding: 'calc(0.5rem - 1px) 0px',
-            boxShadow:
-              ' 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
-            transition:
-              'opacity 300ms cubic-bezier(0.600, -0.030, 0.340, 0.895)'
-          }}
-        >
-          <ul
-            style={{
-              listStyle: 'none',
-              padding: 0,
-              margin: 0
-            }}
-          >
-            {pageSizeOptions.map(option => (
-              <li key={option} className='menu-li'>
-                <button
-                  value={option}
-                  className={`${pageSize === option ? 'selected' : ''}`}
-                  onMouseDown={e =>
-                    this.setState(
-                      state => ({ open: false }),
-                      handlePageSizeChange(e)
-                    )
-                  }
-                >
-                  {option}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <button
-          onClick={e => this.setState(state => ({ open: true }))}
-          className='menu-dropdown'
-          type='button'
-        >
-          <span style={{ padding: '0 0 0 0.75em', lineHeight: '24px' }}>
-            {pageSize}
-          </span>
-
-          <img src={DropDown} alt='drop-down' />
-        </button>
-      </div>
-    )
-  }
-}
-
-const CheckBox = ({ checked }) => (
-  <React.Fragment>
-    <input
-      type='checkbox'
-      style={{
-        position: 'absolute',
-        opacity: 0,
-        pointerEvents: 'none'
-      }}
-      onChange={() => ({})}
-      checked={checked ? 'checked' : ''}
-    />
-    <span />
-  </React.Fragment>
-)
-
-CheckBox.propTypes = {
-  checked: PropTypes.bool
-}
 
 const TableBody = ({ component, children }) =>
   React.createElement(component, { children })
@@ -251,7 +69,32 @@ class CustomTable extends React.Component {
   }
 
   handleDelete = () => {
-    this.props.onDelete(this.props.selecting)
+    const { onDelete, rows } = this.props
+    onDelete(
+      rows.filter(row => {
+        return row.selected
+      })
+    )
+  }
+
+  handleSelectAllRows = () => {
+    this.props.handleRowSelect('all')
+  }
+
+  handleRowSelect = rowKey => {
+    this.props.handleRowSelect(rowKey)
+  }
+
+  handleNextPage = e => {
+    this.props.handleNextPage(e)
+  }
+
+  handlePrevPage = e => {
+    this.props.handlePrevPage(e)
+  }
+
+  handlePageSizeChange = e => {
+    e && this.props.handlePageSizeChange(e)
   }
 
   render () {
@@ -259,17 +102,13 @@ class CustomTable extends React.Component {
       title,
       rows,
       columns,
-      handleRowSelect,
       selecting,
       pageSize,
       pageSizeOptions,
       total,
       currentPage,
       hasNextPage,
-      hasPrevPage,
-      handlePrevPage,
-      handleNextPage,
-      handlePageSizeChange
+      hasPrevPage
     } = this.props
 
     return (
@@ -332,14 +171,12 @@ class CustomTable extends React.Component {
             }}
           >
             <TableHeaderRow component={HeaderRow}>
-              <HeaderCell
-                onClick={e => {
-                  handleRowSelect('all')
-                }}
+              <th
                 style={{ cursor: 'pointer' }}
+                onClick={this.handleSelectAllRows}
               >
                 <CheckBox checked={selecting[0] === 'all'} />
-              </HeaderCell>
+              </th>
 
               {columns.map(
                 ({ accessor, sortable, label }, index) =>
@@ -348,7 +185,7 @@ class CustomTable extends React.Component {
                       key={index}
                       sortable={sortable}
                       accessor={accessor}
-                      component={HeaderCell}
+                      component={SortingHeaderCell}
                     >
                       {label}
                     </TableHeader>
@@ -361,6 +198,9 @@ class CustomTable extends React.Component {
                   component='tr'
                   className='hover-tr'
                   key={rowKey}
+                  onClick={e => {
+                    this.handleRowSelect(rowKey)
+                  }}
                   style={{
                     color: 'inherit',
                     height: '3em',
@@ -368,9 +208,6 @@ class CustomTable extends React.Component {
                     outline: 'none',
                     verticalAlign: 'middle',
                     backgroundColor: selected ? '#E8EAF6' : ''
-                  }}
-                  onClick={e => {
-                    handleRowSelect(rowKey)
                   }}
                 >
                   {rowData.map(({ accessor, data, key }) => (
@@ -410,7 +247,7 @@ class CustomTable extends React.Component {
             <PageSizeChooser
               pageSize={pageSize}
               pageSizeOptions={pageSizeOptions}
-              handlePageSizeChange={handlePageSizeChange}
+              handlePageSizeChange={this.handlePageSizeChange}
             />
 
             <span style={{ margin: '0 2em' }}>
@@ -431,7 +268,7 @@ class CustomTable extends React.Component {
                 padding: 'initial',
                 outline: 'none'
               }}
-              onClick={e => handlePrevPage(e)}
+              onClick={this.handlePrevPage}
             >
               <img
                 src={BackArrow}
@@ -449,7 +286,7 @@ class CustomTable extends React.Component {
                 padding: 'initial',
                 outline: 'none'
               }}
-              onClick={e => handleNextPage(e)}
+              onClick={this.handleNextPage}
             >
               <img
                 src={ForwardArrow}

@@ -3,11 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "clean": "lerna clean --yes rm -rf node_modules",
     "postinstall": "lerna bootstrap",
     "build:components": "lerna exec --scope titus-components npm run build",
-    "start:kitchen-sink": "lerna exec --scope titus-kitchen-sink npm start",
-    "commit-check": "lerna run lint"
+    "start:kitchen-sink": "lerna exec --scope titus-kitchen-sink npm start"
   },
   "devDependencies": {
     "lerna": "^2.11.0"

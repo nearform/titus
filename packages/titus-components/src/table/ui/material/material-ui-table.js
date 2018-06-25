@@ -1,7 +1,10 @@
 import React from 'react'
-import { TableHeaderRow, TableHeader } from 'react-nf-table'
+import {
+  TableHeaderRow as NfTableHeaderRow,
+  TableHeader as NfTableHeader
+} from 'react-nf-table'
 import PropTypes from 'prop-types'
-import TableHead from '@material-ui/core/TableHead'
+import { withStyles } from '@material-ui/core/styles'
 import TableRow from '@material-ui/core/TableRow'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
@@ -9,62 +12,9 @@ import TableCell from '@material-ui/core/TableCell'
 import TablePagination from '@material-ui/core/TablePagination'
 import Paper from '@material-ui/core/Paper'
 import Checkbox from '@material-ui/core/Checkbox'
-import TableSortLabel from '@material-ui/core/TableSortLabel'
-import Tooltip from '@material-ui/core/Tooltip'
-import { withStyles } from '@material-ui/core/styles'
 import TableToolbar from './table-toolbar'
-
-class HeaderRow extends React.Component {
-  static propTypes = {
-    children: PropTypes.node
-  }
-
-  render () {
-    return (
-      <TableHead>
-        <TableRow>{this.props.children}</TableRow>
-      </TableHead>
-    )
-  }
-}
-
-class HeaderCell extends React.Component {
-  static propTypes = {
-    onClick: PropTypes.func,
-    isSorting: PropTypes.object,
-    children: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
-  }
-
-  render () {
-    const { onClick, isSorting, children } = this.props
-
-    return (
-      <TableCell
-        padding='checkbox'
-        sortDirection={!isSorting || isSorting.asc ? 'asc' : 'desc'}
-      >
-        <Tooltip
-          title={
-            isSorting
-              ? !isSorting || isSorting.asc
-                ? 'Sorted Ascending'
-                : 'Sorted Descending'
-              : ''
-          }
-          enterDelay={300}
-        >
-          <TableSortLabel
-            active={isSorting}
-            direction={!isSorting || isSorting.asc ? 'asc' : 'desc'}
-            onClick={onClick}
-          >
-            {children}
-          </TableSortLabel>
-        </Tooltip>
-      </TableCell>
-    )
-  }
-}
+import HeaderRow from './header-row'
+import SortingHeaderCell from './sorting-header-cell'
 
 const tableStyles = theme => ({
   root: {}
@@ -86,7 +36,27 @@ class MaterialUiTable extends React.Component {
   }
 
   handleDelete = () => {
-    this.props.onDelete(this.props.selecting)
+    const { onDelete, rows } = this.props
+    onDelete(
+      rows.filter(row => {
+        return row.selected
+      })
+    )
+  }
+
+  handleRowSelect = e => {
+    this.props.handleRowSelect(e.target.value)
+  }
+
+  handleChangePage = (e, page) => {
+    if (e) {
+      e.target.value = page + 1 // material ui is 0 offset so adjust for nf-table
+      this.props.handlePageChangeBlur(e)
+    }
+  }
+
+  handleChangeRowsPerPage = e => {
+    this.props.handlePageSizeChange(e)
   }
 
   render () {
@@ -94,13 +64,10 @@ class MaterialUiTable extends React.Component {
       title,
       columns,
       rows,
-      handleRowSelect,
       selecting,
       pageSize,
       total,
       currentPage,
-      handlePageChangeBlur,
-      handlePageSizeChange,
       classes
     } = this.props
 
@@ -112,39 +79,37 @@ class MaterialUiTable extends React.Component {
           numSelected={selecting[0] === 'all' ? rows.length : selecting.length}
         />
         <Table>
-          <TableHeaderRow component={HeaderRow}>
-            <HeaderCell padding='checkbox'>
-              <Checkbox
-                color='primary'
-                onClick={e => {
-                  handleRowSelect('all')
-                }}
-                checked={selecting[0] === 'all'}
-              />
-            </HeaderCell>
+          <NfTableHeaderRow component={HeaderRow}>
+            <NfTableHeader>
+              <TableCell padding='checkbox'>
+                <Checkbox
+                  color='primary'
+                  value='all'
+                  onClick={this.handleRowSelect}
+                  checked={selecting[0] === 'all'}
+                />
+              </TableCell>
+            </NfTableHeader>
 
             {columns.map(
               ({ accessor, sortable, label }, index) =>
                 accessor && (
-                  <TableHeader
+                  <NfTableHeader
                     key={index}
                     sortable={sortable}
                     accessor={accessor}
-                    component={HeaderCell}
+                    component={SortingHeaderCell}
                   >
                     {label}
-                  </TableHeader>
+                  </NfTableHeader>
                 )
             )}
-          </TableHeaderRow>
+          </NfTableHeaderRow>
 
           <TableBody>
             {rows.map(({ rowKey, rowData, selected }, index) => (
               <TableRow
                 hover
-                onClick={e => {
-                  handleRowSelect(rowKey)
-                }}
                 role='checkbox'
                 aria-checked={selected}
                 tabIndex={-1}
@@ -156,7 +121,12 @@ class MaterialUiTable extends React.Component {
                     {accessor ? (
                       data
                     ) : (
-                      <Checkbox color='primary' checked={selected} />
+                      <Checkbox
+                        color='primary'
+                        value={rowKey}
+                        checked={selected}
+                        onClick={this.handleRowSelect}
+                      />
                     )}
                   </TableCell>
                 ))}
@@ -173,30 +143,14 @@ class MaterialUiTable extends React.Component {
                 nextIconButtonProps={{
                   'aria-label': 'Next Page'
                 }}
-                onChangePage={(e, page) =>
-                  this.handlePageChangeInterceptor({
-                    e,
-                    page,
-                    handlePageChangeBlur
-                  })
-                }
-                onChangeRowsPerPage={e => handlePageSizeChange(e)}
+                onChangePage={this.handleChangePage}
+                onChangeRowsPerPage={this.handleChangeRowsPerPage}
               />
             </TableRow>
           </TableBody>
         </Table>
       </Paper>
     )
-  }
-
-  handlePageChangeInterceptor = obj => {
-    // had to proxy here because the handlePage change in nf-table takes event
-    // and the event from the component has no value, so we gotta fake it
-    const { e, page, handlePageChangeBlur } = obj
-    if (e) {
-      e.target.value = page + 1 // material ui is 0 offset so adjust for nf-table
-      handlePageChangeBlur(e)
-    }
   }
 }
 

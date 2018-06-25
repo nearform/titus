@@ -1,7 +1,7 @@
 :root {
   /* font-family: Helvetica, Arial, sans-serif; */
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   box-sizing: border-box;
 
   --white: #fff;
@@ -130,7 +130,7 @@
   outline-color: var(--main-outline-color);
 }
 
-input[type='number'] {
+input[type="number"] {
   text-align: center;
   border-radius: 0.25em;
   border-style: solid;
@@ -188,7 +188,7 @@ button.menu-dropdown:focus:not(:disabled) {
   color: #0000008a;
 }
 
-[type='checkbox'] ~ span {
+[type="checkbox"] ~ span {
   position: relative;
   cursor: pointer;
   display: inline-block;
@@ -198,12 +198,12 @@ button.menu-dropdown:focus:not(:disabled) {
   user-select: none;
 }
 
-[type='checkbox'] ~ span:before {
+[type="checkbox"] ~ span:before {
   border: 2px solid #5a5a5a;
   border-radius: 1px;
   margin-top: 3px;
 
-  content: '';
+  content: "";
   position: absolute;
   transition: border 0.25s, background-color 0.25s, width 0.2s 0.1s,
     height 0.2s 0.1s, top 0.2s 0.1s, left 0.2s 0.1s;
@@ -221,13 +221,13 @@ button.menu-dropdown:focus:not(:disabled) {
   transform-origin: 100% 100%;
 }
 
-[type='checkbox'] ~ span:after {
+[type="checkbox"] ~ span:after {
   height: 20px;
   width: 20px;
   background-color: transparent;
   border: 2px solid #5a5a5a;
   top: 0px;
-  content: '';
+  content: "";
   left: 0;
   position: absolute;
   transition: border 0.25s, background-color 0.25s, width 0.2s 0.1s,
@@ -235,7 +235,7 @@ button.menu-dropdown:focus:not(:disabled) {
   z-index: 1;
 }
 
-[type='checkbox']:checked ~ span:before {
+[type="checkbox"]:checked ~ span:before {
   background: inherit;
   top: 0;
   left: 1px;
@@ -249,7 +249,7 @@ button.menu-dropdown:focus:not(:disabled) {
   transform-origin: 100% 100%;
 }
 
-[type='checkbox']:checked ~ span:after {
+[type="checkbox"]:checked ~ span:after {
   top: 0;
   width: 20px;
   height: 20px;
@@ -310,7 +310,7 @@ tr {
 }
 
 .ripple-button:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;

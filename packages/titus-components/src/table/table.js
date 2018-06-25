@@ -58,7 +58,7 @@ class Table extends React.Component {
         pageSizeOptions={pageSizeOptions}
         data={rows}
         render={
-          !ui || ui !== 'custom'
+          ui === 'material'
             ? this.renderMaterialUiTable
             : this.renderCustomTable
         }

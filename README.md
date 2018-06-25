@@ -41,19 +41,20 @@ npm install
 
 This will install root package dependencies, including lerna, which will then install all sub package dependencies and link cross-dependencies.
 
-React sub-packages automatically run their respective build step as part of this process.
+Alternatively, if you have lerna installed globally, run
+
+```
+lerna boostrap
+```
+
+Individual sub-packages are built during the bootstrap process
 
 ## Convenience Scripts
 
-Some commands have been added to the root package for convenience
+Some commands have been added to the root package for convenience.
 
-| Command            | Description                                                    |
-| ------------------ | -------------------------------------------------------------- |
-| build:all          | rebuilds all sub-packages                                      |
-| clean              | cleans all sub-package dependencies                            |
-| clean:all          | cleans all root & sub-package dependencies                     |
-| commit-check       | performs pre-commit checks for contributors                    |
-| lint               | performs lint check across sub-packages                        |
-| lint:fix           | fixes lint issues across sub-packages                          |
-| reinstall          | cleans all root & sub-package dependencies and reinstalls them |
-| start:kitchen-sink | starts the kitchen sink app on http://localhost:3000/          |
+| Command            | Description                         |
+| ------------------ | ----------------------------------- |
+| postinstall        | runs 'lerna bootstrap' post install |
+| build:component    | build the components project        |
+| start:kitchen-sink | starts the kitchen sink app         |

@@ -28,7 +28,7 @@ class Tables extends React.Component {
   }
 
   handleDelete = selected => {
-    alert(selected)
+    alert(selected.map(itemToDelete => itemToDelete.rowData[1].data))
   }
 
   render () {
