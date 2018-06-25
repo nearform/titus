@@ -1,13 +1,13 @@
 {
-  "name": "titus",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "postinstall": "lerna bootstrap",
-    "build:components": "lerna exec --scope titus-components npm run build",
-    "start:kitchen-sink": "lerna exec --scope titus-kitchen-sink npm start"
-  },
-  "devDependencies": {
-    "lerna": "^2.11.0"
-  }
+ "name": "titus",
+ "version": "1.0.0",
+ "private": true,
+ "scripts": {
+  "precommit": "lerna run lint:fix",
+  "prepush": "lerna run test"
+ },
+ "devDependencies": {
+  "husky": "^0.14.3",
+  "lerna": "^2.11.0",
+ }
 }
