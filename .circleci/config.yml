@@ -10,6 +10,9 @@ jobs:
       - checkout
       - run:
           name: install
+          command: npm ci
+      - run:
+          name: bootstrap
           command: lerna bootstrap --ci
       - persist_to_workspace:
           root: .
@@ -23,8 +26,6 @@ jobs:
       - run: lerna run lint
   test:
     <<: *defaults
-    environment:
-      CI: true
     steps:
       - attach_workspace:
           at: .
