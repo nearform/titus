@@ -13,7 +13,7 @@ jobs:
           command: npm install
       - run:
           name: bootstrap
-          command: lerna bootstrap
+          command: npm run boostrap
       - persist_to_workspace:
           root: .
           paths:

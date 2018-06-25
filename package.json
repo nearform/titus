@@ -3,11 +3,12 @@
  "version": "1.0.0",
  "private": true,
  "scripts": {
-  "precommit": "lerna run lint:fix",
-  "prepush": "lerna run test"
+	 "boostrap": "lerna boostrap",
+	 "precommit": "lerna run lint:fix",
+	 "prepush": "lerna run test"
  },
  "devDependencies": {
-  "husky": "^0.14.3",
-  "lerna": "^2.11.0"
+	 "husky": "^0.14.3",
+	 "lerna": "^2.11.0"
  }
 }
