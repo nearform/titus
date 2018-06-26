@@ -20,7 +20,7 @@ const SortingHeaderCell = ({ onClick, isSorting, children }) => (
       enterDelay={300}
     >
       <TableSortLabel
-        active={isSorting && true}
+        active={Boolean(isSorting)}
         direction={isSorting && !isSorting.asc ? 'desc' : 'asc'}
         onClick={onClick}
       >
