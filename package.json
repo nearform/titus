@@ -4,7 +4,6 @@
  "private": true,
  "scripts": {
    "bootstrap": "lerna bootstrap",
-   "build:all": "lerna run build",
    "lint:all": "lerna run lint",
    "test:all": "lerna run test",
    "precommit": "lerna run lint:fix",
