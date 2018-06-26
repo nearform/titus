@@ -24,11 +24,11 @@
   "dependencies": {
     "@material-ui/core": "^1.1.0",
     "@material-ui/icons": "^1.1.0",
-    "react-nf-table": "nearform/react-nf-table.git#nwb-src-export",
-    "@reach/router": "^1.1.1"
+    "react-nf-table": "nearform/react-nf-table.git#nwb-src-export"
   },
   "peerDependencies": {
-    "react": "16.x"
+    "react": "16.x",
+    "@reach/router": "^1.1.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
