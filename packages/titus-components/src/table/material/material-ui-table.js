@@ -49,20 +49,26 @@ class MaterialUiTable extends React.Component {
 
   render () {
     const {
-      title,
-      columns,
-      rows,
-      selecting,
-      pageSize,
-      total,
-      currentPage
-    } = this.props
+      handleDelete,
+      handleRowSelect,
+      handleChangePage,
+      props: {
+        title,
+        columns,
+        rows,
+        selecting,
+        pageSize,
+        total,
+        currentPage,
+        handlePageSizeChange
+      }
+    } = this
 
     return (
       <Paper>
         <TableToolbar
           title={title}
-          onDelete={this.handleDelete}
+          onDelete={handleDelete}
           numSelected={selecting[0] === 'all' ? total : selecting.length}
         />
         <Table>
@@ -72,7 +78,7 @@ class MaterialUiTable extends React.Component {
                 <Checkbox
                   color='primary'
                   value='all'
-                  onClick={this.handleRowSelect}
+                  onClick={handleRowSelect}
                   checked={selecting[0] === 'all'}
                 />
               </TableCell>
@@ -112,7 +118,7 @@ class MaterialUiTable extends React.Component {
                         color='primary'
                         value={rowKey}
                         checked={selected}
-                        onClick={this.handleRowSelect}
+                        onClick={handleRowSelect}
                       />
                     )}
                   </TableCell>
@@ -130,8 +136,8 @@ class MaterialUiTable extends React.Component {
                 nextIconButtonProps={{
                   'aria-label': 'Next Page'
                 }}
-                onChangePage={this.handleChangePage}
-                onChangeRowsPerPage={this.props.handlePageSizeChange}
+                onChangePage={handleChangePage}
+                onChangeRowsPerPage={handlePageSizeChange}
               />
             </TableRow>
           </TableBody>
