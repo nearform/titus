@@ -45,7 +45,7 @@ This will install root package dependencies, including lerna, which will then in
 Alternatively, if you have lerna installed globally, run
 
 ```
-lerna boostrap
+lerna bootstrap
 ```
 
 Individual sub-packages are built during the bootstrap process
