@@ -9,6 +9,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard'
 import PlaylistAddCheck from '@material-ui/icons/PlaylistAddCheck'
 import InsertChart from '@material-ui/icons/InsertChart'
 import TablesIcon from '@material-ui/icons/GridOn'
+import AutocompleteIcon from '@material-ui/icons/Input'
 
 const Menu = () => (
   <List>
@@ -36,10 +37,15 @@ const Menu = () => (
       </ListItemIcon>
       <ListItemText primary='Tables' />
     </ListItemLink>
+    <ListItemLink to={'/autocomplete'}>
+      <ListItemIcon>
+        <AutocompleteIcon />
+      </ListItemIcon>
+      <ListItemText primary='Autocomplete' />
+    </ListItemLink>
   </List>
 )
 
-Menu.propTypes = {
-}
+Menu.propTypes = {}
 
 export default Menu
