@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "build": "nwb build-react-component --no-demo --copy-files",
-    "build:watch": "nodemon -w src -x 'nwb build-react-component --no-demo --copy-files'",
+    "build:watch": "nodemon -w src -x 'npm run build'",
     "clean": "nwb clean-module && nwb clean-demo",
     "start": "nwb serve-react-demo",
     "test:nwb": "nwb test-react",
