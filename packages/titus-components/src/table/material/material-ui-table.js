@@ -72,7 +72,7 @@ class MaterialUiTable extends React.Component {
         />
         <Table>
           <NfTableHeaderRow component={HeaderRow}>
-            <NfTableHeader>
+            {[<NfTableHeader key='select-all'>
               <TableCell padding='checkbox'>
                 <Checkbox
                   color='primary'
@@ -81,21 +81,23 @@ class MaterialUiTable extends React.Component {
                   checked={selecting[0] === 'all'}
                 />
               </TableCell>
-            </NfTableHeader>
+            </NfTableHeader>,
+            ...columns.reduce(
+              (acc, curr, index) => {
+                const { accessor, sortable, label } = curr
+                if (accessor) {
+                  acc.push(
+                    <NfTableHeader
+                      key={index}
+                      sortable={sortable}
+                      accessor={accessor}
+                      component={SortingHeaderCell}>{label}</NfTableHeader>
+                  )
+                }
+                return acc
+              }, [])
+            ]}
 
-            {columns.map(
-              ({ accessor, sortable, label }, index) =>
-                accessor && (
-                  <NfTableHeader
-                    key={index}
-                    sortable={sortable}
-                    accessor={accessor}
-                    component={SortingHeaderCell}
-                  >
-                    {label}
-                  </NfTableHeader>
-                )
-            )}
           </NfTableHeaderRow>
 
           <TableBody>
