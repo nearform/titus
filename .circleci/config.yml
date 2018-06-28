@@ -10,7 +10,10 @@ jobs:
       - checkout
       - run:
           name: install
-          command: npm ci
+          command: npm install
+      - run:
+          name: bootstrap
+          command: npm run bootstrap
       - persist_to_workspace:
           root: .
           paths:
@@ -20,21 +23,13 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-      - run: npm run lint
+      - run: npm run lint:all
   test:
     <<: *defaults
-    environment:
-      CI: true
     steps:
       - attach_workspace:
           at: .
-      - run: npm test
-  build:
-    <<: *defaults
-    steps:
-      - attach_workspace:
-          at: .
-      - run: npm run build
+      - run: npm run test:all
 workflows:
   version: 2
   build_and_test:
@@ -44,8 +39,5 @@ workflows:
           requires:
               - install
       - test:
-          requires:
-              - install
-      - build:
           requires:
               - install

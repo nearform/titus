@@ -16,13 +16,9 @@ import TableToolbar from './table-toolbar'
 import HeaderRow from './header-row'
 import SortingHeaderCell from './sorting-header-cell'
 
-const tableStyles = theme => ({
-  root: {}
-})
 class MaterialUiTable extends React.Component {
   static propTypes = {
     title: PropTypes.string,
-    classes: PropTypes.object,
     onDelete: PropTypes.func,
     columns: PropTypes.array,
     rows: PropTypes.array,
@@ -37,73 +33,72 @@ class MaterialUiTable extends React.Component {
 
   handleDelete = () => {
     const { onDelete, rows } = this.props
-    onDelete(
-      rows.filter(row => {
-        return row.selected
-      })
-    )
+    onDelete(rows.filter(({ selected }) => selected))
   }
 
-  handleRowSelect = e => {
-    this.props.handleRowSelect(e.target.value)
+  handleRowSelect = event => {
+    this.props.handleRowSelect(event.target.value)
   }
 
-  handleChangePage = (e, page) => {
-    if (e) {
-      e.target.value = page + 1 // material ui is 0 offset so adjust for nf-table
-      this.props.handlePageChangeBlur(e)
+  handleChangePage = (event, page) => {
+    if (event) {
+      event.target.value = page + 1 // material ui is 0 offset so adjust for nf-table
+      this.props.handlePageChangeBlur(event)
     }
-  }
-
-  handleChangeRowsPerPage = e => {
-    this.props.handlePageSizeChange(e)
   }
 
   render () {
     const {
-      title,
-      columns,
-      rows,
-      selecting,
-      pageSize,
-      total,
-      currentPage,
-      classes
-    } = this.props
+      handleDelete,
+      handleRowSelect,
+      handleChangePage,
+      props: {
+        title,
+        columns,
+        rows,
+        selecting,
+        pageSize,
+        total,
+        currentPage,
+        handlePageSizeChange
+      }
+    } = this
 
     return (
-      <Paper className={classes.root}>
+      <Paper>
         <TableToolbar
           title={title}
-          onDelete={this.handleDelete}
-          numSelected={selecting[0] === 'all' ? rows.length : selecting.length}
+          onDelete={handleDelete}
+          numSelected={selecting[0] === 'all' ? total : selecting.length}
         />
         <Table>
           <NfTableHeaderRow component={HeaderRow}>
-            <NfTableHeader>
+            {[<NfTableHeader key='select-all'>
               <TableCell padding='checkbox'>
                 <Checkbox
                   color='primary'
                   value='all'
-                  onClick={this.handleRowSelect}
+                  onClick={handleRowSelect}
                   checked={selecting[0] === 'all'}
                 />
               </TableCell>
-            </NfTableHeader>
+            </NfTableHeader>,
+            ...columns.reduce(
+              (acc, curr, index) => {
+                const { accessor, sortable, label } = curr
+                if (accessor) {
+                  acc.push(
+                    <NfTableHeader
+                      key={index}
+                      sortable={sortable}
+                      accessor={accessor}
+                      component={SortingHeaderCell}>{label}</NfTableHeader>
+                  )
+                }
+                return acc
+              }, [])
+            ]}
 
-            {columns.map(
-              ({ accessor, sortable, label }, index) =>
-                accessor && (
-                  <NfTableHeader
-                    key={index}
-                    sortable={sortable}
-                    accessor={accessor}
-                    component={SortingHeaderCell}
-                  >
-                    {label}
-                  </NfTableHeader>
-                )
-            )}
           </NfTableHeaderRow>
 
           <TableBody>
@@ -125,7 +120,7 @@ class MaterialUiTable extends React.Component {
                         color='primary'
                         value={rowKey}
                         checked={selected}
-                        onClick={this.handleRowSelect}
+                        onClick={handleRowSelect}
                       />
                     )}
                   </TableCell>
@@ -143,8 +138,8 @@ class MaterialUiTable extends React.Component {
                 nextIconButtonProps={{
                   'aria-label': 'Next Page'
                 }}
-                onChangePage={this.handleChangePage}
-                onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                onChangePage={handleChangePage}
+                onChangeRowsPerPage={handlePageSizeChange}
               />
             </TableRow>
           </TableBody>
@@ -154,4 +149,4 @@ class MaterialUiTable extends React.Component {
   }
 }
 
-export default withStyles(tableStyles)(MaterialUiTable)
+export default MaterialUiTable
