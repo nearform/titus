@@ -114,13 +114,7 @@ class AutocompleteDemo extends React.Component {
 }
 
 AutocompleteDemo.propTypes = {
-  classes: PropTypes.object,
-  data: PropTypes.array,
-  placeholder: PropTypes.string,
-  id: PropTypes.string,
-  onChange: PropTypes.func,
-  maxResults: PropTypes.number,
-  filterType: PropTypes.string
+  classes: PropTypes.object
 }
 
 export default withStyles(styles)(AutocompleteDemo)
