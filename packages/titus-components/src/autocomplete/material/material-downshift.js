@@ -6,14 +6,14 @@ import Paper from '@material-ui/core/Paper'
 import MenuItem from '@material-ui/core/MenuItem'
 import { InputAdornment } from '@material-ui/core'
 
-const Input = ({ InputProps, classes, ref, ...other }) => (
+const Input = ({ inputProps, classes, ref, ...other }) => (
   <TextField
     InputProps={{
       inputRef: ref,
       classes: {
         root: classes.inputRoot
       },
-      ...InputProps
+      ...inputProps
     }}
     {...other}
   />
@@ -86,12 +86,12 @@ const MaterialDownshift = ({
       {Input({
         fullWidth: true,
         classes,
-        InputProps: getInputProps({
+        inputProps: getInputProps({
           placeholder: placeholder,
           id: id
         })
       })}
-      {isOpen ? (
+      {isOpen && (
         <Paper className={classes.paper} square>
           {getSuggestions(inputValue).map((suggestion, index) =>
             Suggestion({
@@ -106,7 +106,7 @@ const MaterialDownshift = ({
             })
           )}
         </Paper>
-      ) : null}
+      )} 
     </div>
   </div>
 )

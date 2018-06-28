@@ -40,7 +40,7 @@ class Autocomplete extends React.Component {
 
     const a = inputValue.toLowerCase()
 
-    return (filterType === 'contains'
+    return (filterType.toLowerCase() === 'contains'
       ? data.filter(b => b.value.toLowerCase().indexOf(a) > -1)
       : data.filter(b => b.value.toLowerCase().startsWith(a))
     )
