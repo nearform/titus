@@ -15,7 +15,6 @@ class Autocomplete extends React.Component {
     onGetSuggestions: PropTypes.func
   }
 
-  handleChange = item => this.props.onChange(item)
   itemToString = item => (item ? item.value : '')
 
   renderMaterial = props => (
@@ -30,15 +29,12 @@ class Autocomplete extends React.Component {
   )
 
   getSuggestions = inputValue => {
-    const { data, filterType, maxResults, onGetSuggestions } = this.props
     if (!inputValue) return []
-    const max = maxResults || 5
+    const { data, filterType, maxResults = 5, onGetSuggestions } = this.props
 
     if (filterType) {
-      if (
-        ['startswith', 'contains', ''].indexOf(filterType.toLowerCase()) < 0
-      ) {
-        return onGetSuggestions(inputValue, filterType, max)
+      if (!['startswith', 'contains', ''].includes(filterType.toLowerCase())) {
+        return onGetSuggestions(inputValue, filterType, maxResults)
       }
     }
 
@@ -49,12 +45,15 @@ class Autocomplete extends React.Component {
       : data.filter(b => b.value.toLowerCase().startsWith(a))
     )
       .sort((a, b) => a.value.length - b.value.length)
-      .splice(0, max)
+      .splice(0, maxResults)
   }
 
   render () {
     return (
-      <Downshift onChange={this.handleChange} itemToString={this.itemToString}>
+      <Downshift
+        onChange={this.props.onChange}
+        itemToString={this.itemToString}
+      >
         {this.renderMaterial}
       </Downshift>
     )
