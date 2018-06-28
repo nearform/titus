@@ -2,7 +2,7 @@ import React from 'react'
 import {
   TableHeaderRow as NfTableHeaderRow,
   TableHeader as NfTableHeader
-} from 'react-nf-table'
+} from '@nearform/react-table'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import TableRow from '@material-ui/core/TableRow'
