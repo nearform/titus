@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Table as NfTable } from 'react-nf-table'
+import { Table as NfTable } from '@nearform/react-table'
 import MaterialUiTable from './material/material-ui-table'
 
 class Table extends React.Component {

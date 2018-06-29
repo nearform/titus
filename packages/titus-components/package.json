@@ -1,7 +1,7 @@
 {
   "name": "titus-components",
   "version": "1.0.0",
-  "description": "titus-components React component",
+  "description": "A library of React components for Titus",
   "main": "lib/index.js",
   "module": "es/index.js",
   "files": [
@@ -20,14 +20,14 @@
     "test:watch": "nwb test-react --server",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
-    "postinstall": "npm run build"
+    "prepublish": "npm run build"
   },
   "dependencies": {
     "@material-ui/core": "^1.1.0",
     "@material-ui/icons": "^1.1.0",
+    "@nearform/react-table": "^1.0.1",
     "downshift": "^2.0.10",
-    "nodemon": "^1.17.5",
-    "react-nf-table": "nearform/react-nf-table.git#nwb-src-export"
+    "nodemon": "^1.17.5"
   },
   "peerDependencies": {
     "@reach/router": "^1.1.1",
@@ -51,11 +51,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1"
   },
-  "author": "",
-  "homepage": "",
-  "license": "MIT",
-  "repository": "",
-  "keywords": [
-    "react-component"
-  ]
+  "license": "Apache-2.0",
+  "repository": "nearform/titus",
+  "keywords": []
 }
