@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Dashboard /> displays a basic dashboard 1`] = `
+<div>
+  <div>
+    I'm a Dashboard
+  </div>
+</div>
+`;
