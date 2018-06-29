@@ -20,17 +20,16 @@ The project currently includes:
   - [Redux Thunk](https://github.com/reduxjs/redux-thunk)
   - [Reselect](https://github.com/reduxjs/reselect)
 - [Victory](https://formidable.com/open-source/victory/docs/)
+- [CircleCI](https://circleci.com/)
+- [@nearform/react-table](https://github.com/nearform/react-table)
 
 ### TODO
 
 - GraphQL
-- Wizard
-- Table (implementing Jimmy's work)
 - nearform audit trail service
-- nearform react table
 - nearform comments service
 - nearform authorization (udaru)
-- CI
+
 
 ## Installation
 
