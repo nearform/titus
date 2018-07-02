@@ -1,9 +1,19 @@
 import React from 'react'
-import { Query } from 'react-apollo'
-import gql from 'graphql-tag'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import { withStyles } from '@material-ui/core/styles'
 import { Table } from 'titus-components'
+import { loadFood, deleteFood } from '../../store/api/api-actions'
 
 const columns = [
+  {
+    accessor: 'id',
+    label: 'id',
+    sortable: false,
+    filterable: false,
+    hidden: true
+  },
   {
     accessor: 'name',
     label: 'Name',
@@ -18,42 +28,54 @@ const columns = [
   }
 ]
 
+const styles = theme => ({
+  progress: {
+    margin: theme.spacing.unit * 2
+  },
+  progressWrapper: {
+    margin: 'auto 50%',
+    paddingBottom: theme.spacing.unit * 3
+  }
+})
+
 class Api extends React.Component {
+  componentDidMount () {
+    this.props.loadFood()
+  }
+
+  static propTypes = {
+    loading: PropTypes.bool.isRequired,
+    error: PropTypes.any,
+    food: PropTypes.array,
+    loadFood: PropTypes.func.isRequired,
+    deleteFood: PropTypes.func.isRequired,
+    classes: PropTypes.object.isRequired
+  }
+
   render () {
-    return (
-      <Query
-        query={gql`
-          query {
-            allFood {
-              id
-              name
-              foodGroup {
-                id
-                name
-              }
-            }
-          }
-        `}
-        fetchPolicy='cache-and-network'
-      >
-        {({ loading, error, data }) => {
-          if (loading) return <p>Loading.  Pretend there's a nice spinner here...</p>
-          if (error) return <p>Error :(</p>
-          const normalisedData = data.allFood.map(d => {
-            return {
-              name: d.name,
-              foodGroup: d.foodGroup.name
-            }
-          })
-          return <Table
-            title='API CRUD Example'
-            columns={columns}
-            rows={normalisedData}
-          />
-        }}
-      </Query>
-    )
+    const { error, loading, food, classes } = this.props
+    if (loading || !food) return <div className={classes.progressWrapper}><CircularProgress className={classes.progress} /></div>
+    if (error) return <div><p>Error :(</p><p>{error}</p></div>
+    return <Table
+      title='API CRUD Example'
+      columns={columns}
+      rows={food}
+      onDelete={(rows) => {
+        const ids = rows.map(row => row.rowData.find(r => r.accessor === 'id').data)
+        this.props.deleteFood(ids)
+      }}
+    />
   }
 }
 
-export default Api
+const mapStateToProps = ({ api: { food, loading } }) => ({
+  food,
+  loading
+})
+
+const mapDispatchToProps = {
+  loadFood,
+  deleteFood
+}
+
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(Api))

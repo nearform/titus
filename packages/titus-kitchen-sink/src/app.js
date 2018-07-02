@@ -17,7 +17,7 @@ const meta = {
   appName: 'Titus Docs and Examples'
 }
 
-const apolloClient = new ApolloClient({
+export const apolloClient = new ApolloClient({
   uri: 'http://localhost:5000/graphql'
 })
 

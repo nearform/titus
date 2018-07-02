@@ -27,12 +27,17 @@ class MaterialUiTable extends React.Component {
     total: PropTypes.number,
     currentPage: PropTypes.number,
     handlePageChangeBlur: PropTypes.func,
-    handlePageSizeChange: PropTypes.func
+    handlePageSizeChange: PropTypes.func,
+    handleDeleteRow: PropTypes.func
   }
 
   handleDelete = () => {
-    const { onDelete, rows } = this.props
-    onDelete(rows.filter(({ selected }) => selected))
+    const { onDelete, rows, handleDeleteRow } = this.props
+    const toDelete = rows.filter(({ selected }) => selected)
+    onDelete(toDelete)
+    for (var row of toDelete) {
+      handleDeleteRow(row.rowKey)
+    }
   }
 
   handleRowSelect = event => {
@@ -62,7 +67,6 @@ class MaterialUiTable extends React.Component {
         handlePageSizeChange
       }
     } = this
-
     return (
       <Paper>
         <TableToolbar
@@ -84,14 +88,16 @@ class MaterialUiTable extends React.Component {
             </NfTableHeader>,
             ...columns.reduce(
               (acc, curr, index) => {
-                const { accessor, sortable, label } = curr
+                const { accessor, sortable, label, hidden } = curr
                 if (accessor) {
                   acc.push(
                     <NfTableHeader
                       key={index}
                       sortable={sortable}
                       accessor={accessor}
-                      component={SortingHeaderCell}>{label}</NfTableHeader>
+                      component={SortingHeaderCell}>{label}
+                      hidden={hidden}
+                    </NfTableHeader>
                   )
                 }
                 return acc
@@ -110,8 +116,11 @@ class MaterialUiTable extends React.Component {
                 key={rowKey}
                 selected={selected}
               >
-                {rowData.map(({ accessor, data, key }) => (
-                  <TableCell padding='checkbox' key={key}>
+                {rowData.map(({ accessor, data, key }) => {
+                  if (accessor && !!columns.find(x => x.accessor === accessor).hidden) {
+                    return
+                  }
+                  return <TableCell padding='checkbox' key={key}>
                     {accessor ? (
                       data
                     ) : (
@@ -123,7 +132,7 @@ class MaterialUiTable extends React.Component {
                       />
                     )}
                   </TableCell>
-                ))}
+                })}
               </TableRow>
             ))}
             <TableRow>
