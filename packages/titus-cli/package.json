@@ -5,7 +5,11 @@
     "titus": "titus-cli.js"
   },
   "dependencies": {
-    "commander": "^2.15.1"
+    "chalk": "^2.4.1",
+    "commander": "^2.15.1",
+    "fs-extra": "^6.0.1",
+    "ora": "^2.1.0",
+    "simple-git": "^1.96.0"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
