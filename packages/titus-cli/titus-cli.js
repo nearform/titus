@@ -24,27 +24,27 @@ program
 
     try {
       spinner = ora(
-        `Setting up the Titus starter application in ${chalk.blue(projectDir)}`
+        `Setting up the Titus starter application in ${chalk.cyan.bold(projectDir)}`
       ).start()
 
       await git.clone(REPO_URL, `${projectDir}/.tmp`)
       await fs.copy(`${projectDir}/.tmp/packages/titus-starter`, `${projectDir}`)
       await fs.remove(`${projectDir}/.tmp`)
 
-      spinner.succeed(chalk.green(`Setup complete! \n`))
+      spinner.succeed(chalk.green.bold(`Setup complete! \n`))
 
       console.log(dedent`
         Move to your newly created project by running:
 
-          ${chalk.blue(`cd ${projectDir}`)}
+          ${chalk.cyan.bold(`cd ${projectDir}`)}
 
         Install the project dependencies:
 
-          ${chalk.blue('npm install')}
+          ${chalk.cyan.bold('npm install')}
 
         Start the development server by running:
 
-          ${chalk.blue('npm start')}
+          ${chalk.cyan.bold('npm start')}
 
         Feedback is welcome at https://github.com/nearform/titus/issues
       `)
