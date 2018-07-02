@@ -2,10 +2,11 @@
 
 Welcome to project Titus, an advanced opinionated starter shell stack. This repo includes the following packages:
 
-- titus-starter - The starter shell
+- titus-starter - The clientside starter shell
 - titus-components - A collection of pre-built components
 - titus-kitchen-sink - An implementation of the starter shell with examples and documentation
 - titus-cli - A command line interface to perform common tasks (eg cloning starter shell)
+- titus-backend - The serverside starter shell
 
 ## Framework
 
