@@ -17,7 +17,7 @@ program
 program
   .command('starter')
   .description('Clone the starter shell')
-  .arguments('<project-projectDirectory>')
+  .arguments('<project-directory>')
   .action(async (projectDir) => {
     let spinner
 
