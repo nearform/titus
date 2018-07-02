@@ -2,13 +2,31 @@
 
 ## Installation
 
+```
+npm install -g @nearform/titus-cli
+```
+
+## Usage
+
+```
+titus starter <project-name>
+```
+
+Example
+
+```
+titus starter my-project
+```
+
+This pulls the latest version of titus starter shell from GitHub and copies it to a new subfolder of the current directory called `my-project/`
+
+## Development
+
 Install the dependencies using either npm or yarn
 
 ```
-npm/yarn install
+npm install
 ```
-
-## Developing
 
 To use the local version of the cli in the command line we need to link it to our global packages and add the bin to our PATH.
 
