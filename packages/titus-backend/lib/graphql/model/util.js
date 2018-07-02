@@ -11,6 +11,13 @@ const formatRows = rows => {
   })
 }
 
+const sortByIdArray = (rows, ids) => {
+  return ids.map(id => {
+    return rows.find(r => r.id === id)
+  })
+}
+
 module.exports = {
-  formatRows
+  formatRows,
+  sortByIdArray
 }

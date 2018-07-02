@@ -2,10 +2,10 @@
 
 const query = `
 type Query {
-  person(id: ID): Person
-  allPeople: [Person]
-  race(id: ID): Race
-  allRaces: [Race]
+  food(id: ID): Food
+  allFood(offset: Int, limit: Int): [Food]
+  foodGroup(id: ID): FoodGroup
+  allFoodGroups: [FoodGroup]
 }
 `
 

@@ -15,9 +15,9 @@ const helloRandom = () => ({
     'pgPlugin': { transactional: true }
   }},
   handler: async (request, h) => {
-    const res = await request.pg.query('select * from person')
+    const res = await request.pg.query('select * from food')
     const idx = Math.floor(Math.random() * res.rows.length)
-    const name = res.rows[idx].first_name
+    const name = res.rows[idx].name
     return `Hello, ${name}!`
   }
 })
