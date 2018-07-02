@@ -2,6 +2,7 @@
 'use strict'
 
 const program = require('commander')
+const dedent = require('dedent')
 const fs = require('fs-extra')
 const chalk = require('chalk')
 const ora = require('ora')
@@ -23,28 +24,33 @@ program
 
     try {
       spinner = ora(
-        `Setting up the Titus starter application in ${chalk.red(projectDir)}`
+        `Setting up the Titus starter application in ${chalk.blue(projectDir)}`
       ).start()
 
       await git.clone(REPO_URL, `${projectDir}/.tmp`)
       await fs.copy(`${projectDir}/.tmp/packages/titus-starter`, `${projectDir}`)
       await fs.remove(`${projectDir}/.tmp`)
 
-      spinner.succeed(chalk.green(`Setup complete!`))
-      console.log()
-      console.log('Move to your newly created project by running:')
-      console.log()
-      console.log(`  ${chalk.red(`cd ${projectDir}`)}`)
-      console.log()
-      console.log('Start the development server by running:')
-      console.log()
-      console.log(`  ${chalk.red('npm start')}`)
-      console.log()
-      console.log('Feedback is welcome at https://github.com/nearform/titus/issues')
+      spinner.succeed(chalk.green(`Setup complete! \n`))
+
+      console.log(dedent`
+        Move to your newly created project by running:
+
+          ${chalk.blue(`cd ${projectDir}`)}
+
+        Install the project dependencies:
+
+          ${chalk.blue('npm install')}
+
+        Start the development server by running:
+
+          ${chalk.blue('npm start')}
+
+        Feedback is welcome at https://github.com/nearform/titus/issues
+      `)
     } catch (error) {
       spinner.fail(error)
-      console.log()
-      console.log('If this issue persists please raise an issue at https://github.com/nearform/titus/issues')
+      console.log('\n If this issue persists please raise an issue at https://github.com/nearform/titus/issues')
     }
   })
 
