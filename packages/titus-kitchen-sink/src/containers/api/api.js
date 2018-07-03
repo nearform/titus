@@ -5,7 +5,7 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
-import { Table } from 'titus-components'
+import { Table } from '@nearform/titus-components'
 import { loadFood, deleteFood } from '../../store/api/api-actions'
 
 const columns = [
