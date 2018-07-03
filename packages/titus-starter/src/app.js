@@ -9,6 +9,9 @@ import { theme } from './theme/theme'
 import Menu from './menu'
 import Routes from './routes'
 
+import Auth from './lib/auth'
+import Login from './containers/login/login.js'
+
 import { store } from './store/store'
 
 const meta = {
@@ -20,7 +23,9 @@ const App = () => (
     <Fragment>
       <CssBaseline />
       <MuiThemeProvider theme={theme}>
-        <Navigation title={meta.appName} items={Menu} main={Routes} />
+        <Auth loginComponent={Login}>
+          <Navigation title={meta.appName} items={Menu} main={Routes} />
+        </Auth>
       </MuiThemeProvider>
     </Fragment>
   </Provider>
