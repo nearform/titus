@@ -2,8 +2,9 @@
 
 const mutation = `
 type Mutation {
-  createPerson(person: PersonInput): Person
-  createRace(name: String): Race
+  createFood(food: FoodInput): Food
+  deleteFoods(ids: [String]!): DeleteResult
+  createFoodGroup(name: String): FoodGroup
 }
 `
 

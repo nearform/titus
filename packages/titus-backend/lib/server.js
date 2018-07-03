@@ -5,7 +5,8 @@ const pino = require('hapi-pino')
 const graphqlHapi = require('apollo-server-hapi').graphqlHapi
 const graphiqlHapi = require('apollo-server-hapi').graphiqlHapi
 const config = require('../config/config')
-const grapqlSchema = require('./graphql')()
+const grapqlSchema = require('./graphql').schema
+const loaders = require('./graphql').loaders
 const pgPlugin = require('./pg-plugin')
 const routes = require('./routes')
 
@@ -21,12 +22,20 @@ const init = async () => {
       plugin: graphqlHapi,
       options: {
         path: '/graphql',
+        route: {
+          cors: true,
+          plugins: {
+            'pgPlugin': { transactional: true }
+          }
+        },
         graphqlOptions: req => ({
           endpointURL: '/graphql',
           schema: grapqlSchema,
           context: {
-            pg: req.pg
+            pg: req.pg,
+            loaders: loaders(req.pg)
           },
+
           formatError: err => {
             req.app.gqlError = err
             return err

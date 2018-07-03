@@ -1,10 +1,12 @@
 'use strict'
 
-const person = require('./person')
-const race = require('./race')
+const food = require('./food')
+const foodGroup = require('./foodGroup')
 const query = require('./query')
 const mutation = require('./mutation')
+const scalars = require('./scalars')
+const results = require('./results')
 
-const schema = [...query, ...mutation, ...person, ...race]
+const schema = [].concat(query, mutation, food, foodGroup, scalars, results)
 
 module.exports = schema

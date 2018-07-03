@@ -1,5 +1,6 @@
 'use strict'
-const person = require('./person')
-const race = require('./race')
+const food = require('./food')
+const foodGroup = require('./foodGroup')
+const scalars = require('./scalars')
 
-module.exports = [person, race]
+module.exports = [food, foodGroup, scalars]

@@ -1,6 +1,6 @@
 'use strict'
 
-const schema = require('../../lib/graphql')()
+const schema = require('../../lib/graphql').schema
 const graphql = require('graphql')
 
 test('schema is valid', async () => {
