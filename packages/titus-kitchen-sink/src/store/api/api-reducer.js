@@ -2,20 +2,12 @@ import * as constants from './api-constants'
 
 const initialState = {
   food: null,
-  loading: false
+  loading: false,
+  error: null
 }
 
 export default (state = initialState, { type, data }) => {
   switch (type) {
-    case constants.DELETE_FOOD:
-      return {
-        ...state
-      }
-    case constants.DELETED_FOOD:
-      return {
-        ...state,
-        food: state.food.filter(f => data.ids.indexOf(f.id) === -1)
-      }
     case constants.LOAD_FOOD:
       return {
         ...state,
@@ -26,6 +18,12 @@ export default (state = initialState, { type, data }) => {
         ...state,
         food: data.food,
         loading: false
+      }
+    case constants.LOADING_FOOD_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: data
       }
     default:
       return state

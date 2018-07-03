@@ -27,17 +27,13 @@ class MaterialUiTable extends React.Component {
     total: PropTypes.number,
     currentPage: PropTypes.number,
     handlePageChangeBlur: PropTypes.func,
-    handlePageSizeChange: PropTypes.func,
-    handleDeleteRow: PropTypes.func
+    handlePageSizeChange: PropTypes.func
   }
 
   handleDelete = () => {
-    const { onDelete, rows, handleDeleteRow } = this.props
+    const { onDelete, rows } = this.props
     const toDelete = rows.filter(({ selected }) => selected)
     onDelete(toDelete)
-    for (var row of toDelete) {
-      handleDeleteRow(row.rowKey)
-    }
   }
 
   handleRowSelect = event => {

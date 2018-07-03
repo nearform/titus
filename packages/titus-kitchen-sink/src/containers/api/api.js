@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { withStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
+
 import { Table } from 'titus-components'
 import { loadFood, deleteFood } from '../../store/api/api-actions'
 
@@ -54,8 +56,8 @@ class Api extends React.Component {
 
   render () {
     const { error, loading, food, classes } = this.props
+    if (error) return <Typography color='error' >{error}</Typography>
     if (loading || !food) return <div className={classes.progressWrapper}><CircularProgress className={classes.progress} /></div>
-    if (error) return <div><p>Error :(</p><p>{error}</p></div>
     return <Table
       title='API CRUD Example'
       columns={columns}
@@ -68,9 +70,10 @@ class Api extends React.Component {
   }
 }
 
-const mapStateToProps = ({ api: { food, loading } }) => ({
+const mapStateToProps = ({ api: { food, loading, error } }) => ({
   food,
-  loading
+  loading,
+  error
 })
 
 const mapDispatchToProps = {

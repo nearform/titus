@@ -1,26 +1,27 @@
-import gql from 'graphql-tag'
 import * as constants from './api-constants'
 import { apolloClient } from '../../app'
+import * as queries from '../../queries/food'
 
 export const deleteFood = ids => async dispatch => {
   try {
     dispatch({type: constants.DELETE_FOOD})
     const res = await apolloClient.mutate({
-      mutation: gql`
-        mutation deleteFoods($ids: [String]!) {
-          deleteFoods(ids: $ids) {
-            ids
-            count
-            typeName
-          }
-        }
-      `,
-      variables: { ids }
+      mutation: queries.deleteFood,
+      variables: { ids },
+      update: (store, { data: { deleteFoods: { ids } } }) => {
+        // Read the data from our cache for this query.
+        const data = store.readQuery({ query: queries.loadAllFood })
+        // Add our comment from the mutation to the end.
+        data.allFood = data.allFood.filter(f => ids.indexOf(f.id) === -1)
+        // Write our data back to the cache.
+        store.writeQuery({ query: queries.loadAllFood, data })
+      }
     })
-    return dispatch({
+    dispatch({
       type: constants.DELETED_FOOD,
       data: { ids, count: res.data.count }
     })
+    dispatch(loadFood())
   } catch (err) {
     dispatch({
       type: constants.DELETE_FOOD_ERROR,
@@ -29,23 +30,11 @@ export const deleteFood = ids => async dispatch => {
   }
 }
 
-export const loadFood = ids => async dispatch => {
+export const loadFood = () => async dispatch => {
   try {
     dispatch({type: constants.LOAD_FOOD})
     const res = await apolloClient.query({
-      query: gql`
-      query {
-        allFood {
-          id
-          name
-          foodGroup {
-            id
-            name
-          }
-        }
-      }
-    `,
-      variables: { ids }
+      query: queries.loadAllFood
     })
     const food = res.data.allFood.map(d => {
       return {
@@ -59,9 +48,10 @@ export const loadFood = ids => async dispatch => {
       data: { food }
     })
   } catch (err) {
+    console.error(err)
     dispatch({
       type: constants.LOADING_FOOD_ERROR,
-      data: err
+      data: 'There was a problem loading the data.'
     })
   }
 }
