@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListItemLink } from 'titus-components'
+import { ListItemLink } from '@nearform/titus-components'
 
 import List from '@material-ui/core/List'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
