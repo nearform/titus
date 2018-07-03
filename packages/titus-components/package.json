@@ -1,5 +1,5 @@
 {
-  "name": "titus-components",
+  "name": "@nearform/titus-components",
   "version": "1.0.0",
   "description": "A library of React components for Titus",
   "main": "lib/index.js",

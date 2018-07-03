@@ -3,20 +3,26 @@
 ## Installation
 
 ```
-npm/yarn install
+npm install --S @nearform/titus-components
+```
+
+## Developing
+
+```
+npm install
 ```
 
 ## Build
 
 ```
-npm/yarn run build
+npm run build
 ```
 
 ## Lint
 
 ```
-npm/yarn run lint
+npm run lint
 
 # To use eslint autofix
-npm/yarn run lint:fix
+npm run lint:fix
 ```

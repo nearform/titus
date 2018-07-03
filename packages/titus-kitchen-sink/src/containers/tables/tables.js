@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table } from 'titus-components'
+import { Table } from '@nearform/titus-components'
 import { columns, rows } from './mock/dessert-nutrients'
 
 const handleDelete = selected => {

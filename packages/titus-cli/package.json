@@ -1,5 +1,5 @@
 {
-  "name": "titus-cli",
+  "name": "@nearform/titus-cli",
   "version": "1.0.0",
   "bin": {
     "titus": "titus-cli.js"
@@ -24,5 +24,7 @@
   "scripts": {
     "lint": "eslint *.js",
     "lint:fix": "eslint *.js --fix"
-  }
+  },
+  "license": "Apache-2.0",
+  "repository": "nearform/titus"
 }
