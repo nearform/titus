@@ -12,9 +12,15 @@ const formatRows = rows => {
 }
 
 const sortByIdArray = (rows, ids) => {
-  return ids.map(id => {
-    return rows.find(r => r.id === id)
-  })
+  const dict = arrayToDict(rows)
+  return ids.map(id => dict[id])
+}
+
+const arrayToDict = (arr = []) => {
+  return arr.reduce((dict, obj = {}) => {
+    dict[obj.id] = obj
+    return dict
+  }, {})
 }
 
 module.exports = {
