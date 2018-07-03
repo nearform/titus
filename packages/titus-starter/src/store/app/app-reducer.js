@@ -6,7 +6,6 @@ const initialState = {
 
 export default (state = initialState, { type, data }) => {
 
-  console.log(type,data)
   switch (type) {
     case constants.UPDATE_APP_CONFIG:
       return {
