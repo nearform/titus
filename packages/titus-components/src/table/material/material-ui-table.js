@@ -91,8 +91,9 @@ class MaterialUiTable extends React.Component {
                       key={index}
                       sortable={sortable}
                       accessor={accessor}
-                      component={SortingHeaderCell}>{label}
-                      hidden={hidden}
+                      component={SortingHeaderCell}
+                      hidden={hidden}>
+                      {label}
                     </NfTableHeader>
                   )
                 }
