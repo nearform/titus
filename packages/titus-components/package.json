@@ -26,7 +26,7 @@
     "@material-ui/core": "^1.1.0",
     "@material-ui/icons": "^1.1.0",
     "downshift": "^2.0.10",
-    "nodemon": "^1.17.5"
+    "nodemon": "^1.17.5",
     "@nearform/react-table": "^1.0.6"
   },
   "peerDependencies": {
