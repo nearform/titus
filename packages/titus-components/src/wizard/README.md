@@ -6,20 +6,20 @@ Users can subscribe to the `onFinish` event, at which point, all of the data and
 
 ## Components
 
-It is made up of a few key components:
+It is made up of the following key components:
 
 - `<Wizard>` The main component, which renders a HeadlessWizard Component and the render prop UI (MaterialWizard).
 - `<HeadlessWizard>` This is the central functionality resides and the main function is to wire up the Wizard and WizardSteps events, data etc.
 - `<MaterialWizard>` Our implentation of the Wizard's UI using MaterialUi render prop
 - `<WizardStep>` A simple component that renders user forms (passed in as a render prop). It is dynamically wired up to receive events and data from HeadlessWizard and to pass through events to the Wizard from the users forms.
 
-# Demo
+## Demo
 
 In titus-kitchen-sink there is a demo of how to use the Wizard component. It shows a simple Wizard with 6 WizardSteps that render 2 sample render props.
 
-This shows how to set up the Wizard and WizardSteps and wire up the events such as handleSatisfied and handleDataChanged for user driven forms.
+This demonstrates how to set up the Wizard and WizardSteps and wire up the events such as handleSatisfied and handleDataChanged for user driven forms.
 
-# Configuration
+## Configuration
 
 The `<Wizard>` component takes the following props:
 
@@ -50,7 +50,7 @@ Each `<WizardStep>` component should:
 ```html
 <Wizard
     onFinish={event-handler}
-    title='Wizard Eaxmple'
+    title='Wizard Example'
     finishedMessage='Finished'
     defaultRequiredMessage='Please enter data'
     >
