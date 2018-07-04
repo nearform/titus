@@ -4,8 +4,8 @@ import Tooltip from '@material-ui/core/Tooltip'
 import TableSortLabel from '@material-ui/core/TableSortLabel'
 import TableCell from '@material-ui/core/TableCell'
 
-const SortingHeaderCell = ({ onClick, isSorting, children }) => (
-  <TableCell
+const SortingHeaderCell = ({ onClick, isSorting, children, hidden }) => (
+  !hidden && <TableCell
     padding='checkbox'
     sortDirection={isSorting && !isSorting.asc ? 'desc' : 'asc'}
   >

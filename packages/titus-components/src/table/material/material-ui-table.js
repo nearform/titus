@@ -32,7 +32,8 @@ class MaterialUiTable extends React.Component {
 
   handleDelete = () => {
     const { onDelete, rows } = this.props
-    onDelete(rows.filter(({ selected }) => selected))
+    const toDelete = rows.filter(({ selected }) => selected)
+    onDelete(toDelete)
   }
 
   handleRowSelect = event => {
@@ -62,7 +63,6 @@ class MaterialUiTable extends React.Component {
         handlePageSizeChange
       }
     } = this
-
     return (
       <Paper>
         <TableToolbar
@@ -84,14 +84,17 @@ class MaterialUiTable extends React.Component {
             </NfTableHeader>,
             ...columns.reduce(
               (acc, curr, index) => {
-                const { accessor, sortable, label } = curr
+                const { accessor, sortable, label, hidden } = curr
                 if (accessor) {
                   acc.push(
                     <NfTableHeader
                       key={index}
                       sortable={sortable}
                       accessor={accessor}
-                      component={SortingHeaderCell}>{label}</NfTableHeader>
+                      component={SortingHeaderCell}
+                      hidden={hidden}>
+                      {label}
+                    </NfTableHeader>
                   )
                 }
                 return acc
@@ -110,8 +113,11 @@ class MaterialUiTable extends React.Component {
                 key={rowKey}
                 selected={selected}
               >
-                {rowData.map(({ accessor, data, key }) => (
-                  <TableCell padding='checkbox' key={key}>
+                {rowData.map(({ accessor, data, key }) => {
+                  if (accessor && !!columns.find(x => x.accessor === accessor).hidden) {
+                    return
+                  }
+                  return <TableCell padding='checkbox' key={key}>
                     {accessor ? (
                       data
                     ) : (
@@ -123,7 +129,7 @@ class MaterialUiTable extends React.Component {
                       />
                     )}
                   </TableCell>
-                ))}
+                })}
               </TableRow>
             ))}
             <TableRow>

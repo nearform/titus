@@ -1,0 +1,7 @@
+export const DELETE_FOOD = 'DELETE_FOOD'
+export const DELETED_FOOD = 'DELETED_FOOD'
+export const DELETE_FOOD_ERROR = 'DELETE_FOOD_ERROR'
+
+export const LOAD_FOOD = 'LOAD_FOOD'
+export const LOADED_FOOD = 'LOADED_FOOD'
+export const LOADING_FOOD_ERROR = 'LOADING_FOOD_ERROR'

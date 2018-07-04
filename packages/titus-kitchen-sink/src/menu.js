@@ -10,6 +10,7 @@ import PlaylistAddCheck from '@material-ui/icons/PlaylistAddCheck'
 import InsertChart from '@material-ui/icons/InsertChart'
 import TablesIcon from '@material-ui/icons/GridOn'
 import AutocompleteIcon from '@material-ui/icons/Input'
+import ApiIcon from '@material-ui/icons/CloudQueue'
 
 const Menu = () => (
   <List>
@@ -42,6 +43,12 @@ const Menu = () => (
         <AutocompleteIcon />
       </ListItemIcon>
       <ListItemText primary='Autocomplete' />
+    </ListItemLink>
+    <ListItemLink to={'/api'}>
+      <ListItemIcon>
+        <ApiIcon />
+      </ListItemIcon>
+      <ListItemText primary='API' />
     </ListItemLink>
   </List>
 )
