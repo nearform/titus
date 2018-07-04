@@ -11,8 +11,8 @@ export const deleteFood = ids => async dispatch => {
       update: (store, { data: { deleteFoods: { ids } } }) => {
         // Read the data from our cache for this query.
         const data = store.readQuery({ query: queries.loadAllFood })
-        // Add our comment from the mutation to the end.
-        data.allFood = data.allFood.filter(f => ids.indexOf(f.id) === -1)
+        // Filter out the row we just deleted
+        data.allFood = data.allFood.filter(({ id }) => !ids.includes(id))
         // Write our data back to the cache.
         store.writeQuery({ query: queries.loadAllFood, data })
       }
@@ -33,16 +33,11 @@ export const deleteFood = ids => async dispatch => {
 export const loadFood = () => async dispatch => {
   try {
     dispatch({type: constants.LOAD_FOOD})
-    const res = await apolloClient.query({
+    const { data: { allFood } } = await apolloClient.query({
       query: queries.loadAllFood
     })
-    const food = res.data.allFood.map(d => {
-      return {
-        id: d.id,
-        name: d.name,
-        foodGroup: d.foodGroup.name
-      }
-    })
+    const food = allFood
+      .map(({ id, name, foodGroup: { name: foodGroup } }) => ({ id, name, foodGroup }))
     return dispatch({
       type: constants.LOADED_FOOD,
       data: { food }

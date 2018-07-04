@@ -54,18 +54,31 @@ class Api extends React.Component {
     classes: PropTypes.object.isRequired
   }
 
+  onDelete = (rows) => {
+    const ids = rows.map(row => row.rowData.find(r => r.accessor === 'id').data)
+    this.props.deleteFood(ids)
+  }
+
   render () {
     const { error, loading, food, classes } = this.props
-    if (error) return <Typography color='error' >{error}</Typography>
-    if (loading || !food) return <div className={classes.progressWrapper}><CircularProgress className={classes.progress} /></div>
+
+    if (error) {
+      return <Typography color='error' >{error}</Typography>
+    }
+
+    if (loading || !food) {
+      return (
+        <div className={classes.progressWrapper}>
+          <CircularProgress className={classes.progress} />
+        </div>
+      )
+    }
+
     return <Table
       title='API CRUD Example'
       columns={columns}
       rows={food}
-      onDelete={(rows) => {
-        const ids = rows.map(row => row.rowData.find(r => r.accessor === 'id').data)
-        this.props.deleteFood(ids)
-      }}
+      onDelete={this.onDelete}
     />
   }
 }
