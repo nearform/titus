@@ -1,13 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 
-const styles = {
-  root: {
-    width: '100%'
-  }
-}
 class SimpleStep extends React.Component {
   stepSatisfyCheck = name => {
     const { handleSatisfied, stepIndex } = this.props
@@ -23,9 +17,9 @@ class SimpleStep extends React.Component {
   }
 
   render () {
-    const { classes, required, data } = this.props
+    const { required, data } = this.props
     return (
-      <div className={classes.root}>
+      <React.Fragment>
         <TextField
           id='comment'
           label='Comment'
@@ -34,13 +28,12 @@ class SimpleStep extends React.Component {
           onChange={this.handleChange}
           margin='normal'
         />
-      </div>
+      </React.Fragment>
     )
   }
 }
 
 SimpleStep.propTypes = {
-  classes: PropTypes.object.isRequired,
   stepIndex: PropTypes.number,
   handleSatisfied: PropTypes.func,
   handleDataChanged: PropTypes.func,
@@ -48,4 +41,4 @@ SimpleStep.propTypes = {
   data: PropTypes.object
 }
 
-export default withStyles(styles)(SimpleStep)
+export default SimpleStep

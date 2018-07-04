@@ -17,16 +17,14 @@ class HeadlessWizard extends React.Component {
   }
 
   handleSatisfied = (stepIndex, stepSatisfied) => {
-    this.setState(prevState => {
-      const { stepsSatisfied } = prevState
+    this.setState(({ stepsSatisfied }) => {
       stepsSatisfied[stepIndex] = stepSatisfied
       return { stepsSatisfied: stepsSatisfied }
     })
   }
 
   handleDataChanged = (stepIndex, stepData) => {
-    this.setState(prevState => {
-      const { steps, stepsData, stepsInfo } = prevState
+    this.setState(({ steps, stepsData, stepsInfo }) => {
       stepsData[stepIndex] = stepData
 
       // reset the data prop on the wizard step object
@@ -47,17 +45,18 @@ class HeadlessWizard extends React.Component {
     })
   }
 
-  wireEventsAndAddProps (steps, stepsInfo, stepsData) {
-    return React.Children.map(steps, (step, index) => {
-      return React.cloneElement(step, {
-        stepIndex: index,
+  wireEventsAndAddProps = (steps, stepsInfo, stepsData) => {
+    const { handleDataChanged, handleSatisfied } = this
+    return React.Children.map(steps, (step, stepIndex) =>
+      React.cloneElement(step, {
+        stepIndex,
+        stepsInfo,
+        stepsData,
         data: {},
-        stepsInfo: stepsInfo,
-        stepsData: stepsData,
-        handleDataChanged: this.handleDataChanged,
-        handleSatisfied: this.handleSatisfied
+        handleDataChanged,
+        handleSatisfied
       })
-    })
+    )
   }
 
   getInitialState () {
@@ -137,19 +136,17 @@ class HeadlessWizard extends React.Component {
 
       return {
         stepIndex: newStepIndex,
-        requiredMessage: requiredMessage,
-        finished: finished
+        requiredMessage,
+        finished
       }
     })
   }
 
   back = () => {
-    this.setState(prevState => {
-      return {
-        stepIndex: prevState.stepIndex - 1,
-        requiredMessage: ''
-      }
-    })
+    this.setState(({ stepIndex }) => ({
+      stepIndex: stepIndex - 1,
+      requiredMessage: ''
+    }))
   }
 
   reset = () => {
@@ -176,31 +173,27 @@ class HeadlessWizard extends React.Component {
       reset
     } = this
 
-    return (
-      <div>
-        {children({
-          props: {
-            title,
-            finishedMessage
-          },
-          state: {
-            steps,
-            numSteps,
-            stepIndex,
-            stepsData,
-            stepsSatisfied,
-            stepsInfo,
-            requiredMessage,
-            finished
-          },
-          events: {
-            next,
-            back,
-            reset
-          }
-        })}
-      </div>
-    )
+    return children({
+      props: {
+        title,
+        finishedMessage
+      },
+      state: {
+        steps,
+        numSteps,
+        stepIndex,
+        stepsData,
+        stepsSatisfied,
+        stepsInfo,
+        requiredMessage,
+        finished
+      },
+      events: {
+        next,
+        back,
+        reset
+      }
+    })
   }
 }
 

@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Switch from '@material-ui/core/Switch'
 import Divider from '@material-ui/core/Divider'
@@ -9,24 +8,19 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
-const styles = {
-  root: {
-    width: '100%'
-  }
-}
 class WizardSummaryStep extends React.Component {
-  handleChange = e => {
+  handleChange = event => {
     const { handleDataChanged, handleSatisfied, stepIndex } = this.props
-    const stepData = { confirmed: e.target.checked }
+    const stepData = { confirmed: event.checked }
     handleDataChanged(stepIndex, stepData)
     handleSatisfied(stepIndex, stepData.confirmed)
   }
 
   render () {
-    const { classes, stepsData, stepsInfo, data } = this.props
+    const { stepsData, stepsInfo, data } = this.props
 
     return (
-      <div className={classes.root}>
+      <React.Fragment>
         {stepsInfo.slice(0, stepsInfo.length - 1).map((stepInfo, index) => {
           return (
             <div key={index}>
@@ -58,13 +52,12 @@ class WizardSummaryStep extends React.Component {
           onChange={this.handleChange}
           value='stepSatisfied'
         />
-      </div>
+      </React.Fragment>
     )
   }
 }
 
 WizardSummaryStep.propTypes = {
-  classes: PropTypes.object.isRequired,
   stepIndex: PropTypes.number,
   handleSatisfied: PropTypes.func,
   handleDataChanged: PropTypes.func,
@@ -73,4 +66,4 @@ WizardSummaryStep.propTypes = {
   stepsInfo: PropTypes.array
 }
 
-export default withStyles(styles)(WizardSummaryStep)
+export default WizardSummaryStep
