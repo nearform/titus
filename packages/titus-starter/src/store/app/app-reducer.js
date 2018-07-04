@@ -22,10 +22,8 @@ export default (state = initialState, { type, data }) => {
       }
 
     case constants.LOG_OUT:
-      return {
-        ...state,
-        user: undefined
-      }
+      // LOG_OUT is handled in ../reducers.js
+      break
 
     default:
       return state
