@@ -19,7 +19,7 @@ class SimpleStep extends React.Component {
     const { handleDataChanged, stepIndex } = this.props
     this.stepSatisfyCheck(e.target.value)
     const stepData = { comment: e.target.value }
-    handleDataChanged(stepIndex, stepData) 
+    handleDataChanged(stepIndex, stepData)
   }
 
   render () {
