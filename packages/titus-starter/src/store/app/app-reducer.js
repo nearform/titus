@@ -5,7 +5,6 @@ const initialState = {
 }
 
 export default (state = initialState, { type, data }) => {
-
   switch (type) {
     case constants.UPDATE_APP_CONFIG:
       return {
@@ -19,13 +18,13 @@ export default (state = initialState, { type, data }) => {
     case constants.LOG_IN:
       return {
         ...state,
-        user:data
+        user: data
       }
-    
+
     case constants.LOG_OUT:
       return {
         ...state,
-        user:undefined
+        user: undefined
       }
 
     default:

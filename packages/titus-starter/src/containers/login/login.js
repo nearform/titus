@@ -8,4 +8,4 @@ const mapDispatchToProps = (dispatch) => ({
   onSubmit: (data) => dispatch(logIn(data))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

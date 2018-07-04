@@ -6,7 +6,7 @@ import Dashboard from './containers/dashboard/dashboard'
 const Routes = () => (
   <Router>
     <Dashboard path='/' />
-  </Router>  
+  </Router>
 )
 
 Routes.propTypes = {
