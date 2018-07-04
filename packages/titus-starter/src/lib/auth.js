@@ -5,8 +5,8 @@ import { connect } from 'react-redux'
 const Auth = ({ user, loginComponent: Login, children }) => user === undefined ? <Login /> : children
 
 Auth.propTypes = {
-  user: PropTypes.string,
-  loginComponent: PropTypes.object.isRequired,
+  user: PropTypes.object,
+  loginComponent: PropTypes.func.isRequired,
   children: PropTypes.object.isRequired
 }
 
