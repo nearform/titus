@@ -36,10 +36,9 @@ module.exports = async (input, { hapi, react }) => {
     spinner.succeed('Cache cleared')
 
     console.log(dedent`
+      \nMove to your newly created project by running:
 
-      Move to your newly created project by running:
-
-        ${chalk.cyan.bold(`cd ${projectDir}`)}
+        ${react && chalk.cyan.bold(`cd ${projectDir}-app`)}${react && hapi && ` or `}${hapi && chalk.cyan.bold(`cd ${projectDir}-api`)}
 
       Install the project dependencies:
 
