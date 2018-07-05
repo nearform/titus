@@ -91,7 +91,8 @@ class Navigation extends Component {
     classes: PropTypes.object.isRequired,
     theme: PropTypes.object.isRequired,
     items: PropTypes.func,
-    main: PropTypes.func.isRequired
+    main: PropTypes.func.isRequired,
+    customComponent: PropTypes.func
   }
 
   state = {
@@ -103,7 +104,7 @@ class Navigation extends Component {
 
   render () {
     const { handleMenuOpen, handleMenuClose } = this
-    const { classes, title, main, items, theme } = this.props
+    const { classes, title, main, items, theme, customComponent: CustomComponent } = this.props
     const { menuOpen } = this.state
 
     return (
@@ -128,6 +129,9 @@ class Navigation extends Component {
             <Typography variant='title' color='inherit' noWrap>
               {title}
             </Typography>
+
+            {CustomComponent && <CustomComponent />}
+
           </Toolbar>
         </AppBar>
         <Drawer
