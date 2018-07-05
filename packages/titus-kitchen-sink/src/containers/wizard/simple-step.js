@@ -24,7 +24,7 @@ class SimpleStep extends React.Component {
           id='comment'
           label='Comment'
           required={required}
-          value={data && data.comment ? data.comment : ''}
+          value={data.comment ? data.comment : ''}
           onChange={this.handleChange}
           margin='normal'
         />

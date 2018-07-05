@@ -11,7 +11,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 class WizardSummaryStep extends React.Component {
   handleChange = event => {
     const { handleDataChanged, handleSatisfied, stepIndex } = this.props
-    const stepData = { confirmed: event.checked }
+    const stepData = { confirmed: event.target.checked }
     handleDataChanged(stepIndex, stepData)
     handleSatisfied(stepIndex, stepData.confirmed)
   }
@@ -21,7 +21,7 @@ class WizardSummaryStep extends React.Component {
 
     return (
       <React.Fragment>
-        {stepsInfo.slice(0, stepsInfo.length - 1).map((stepInfo, index) => {
+        {stepsInfo.slice(0, -1).map((stepInfo, index) => {
           return (
             <div key={index}>
               <ExpansionPanel key={stepInfo.id}>
