@@ -173,7 +173,7 @@ class HeadlessWizard extends React.Component {
       reset
     } = this
 
-    return children({
+    return React.createElement(children, {
       props: {
         title,
         finishedMessage

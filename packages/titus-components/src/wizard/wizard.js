@@ -17,7 +17,7 @@ const Wizard = ({
     steps={children}
     onFinish={onFinish}
   >
-    {props => <MaterialWizard {...props} />}
+    {MaterialWizard}
   </HeadlessWizard>
 )
 
