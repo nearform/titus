@@ -31,14 +31,14 @@ module.exports = async (input, { hapi, react }) => {
       spinner.succeed(`Api setup in ${chalk.cyan.bold(`${projectDir}-api`)}`)
     }
 
-    spinner.render().start('Clearing temporary cache')
+    spinner.render().start('Clearing temporary files')
     await fs.remove(`${tmpDir}`)
-    spinner.succeed('Cache cleared')
+    spinner.succeed('Temporary files cleared')
 
     console.log(dedent`
       \nMove to your newly created project by running:
 
-        ${react && chalk.cyan.bold(`cd ${projectDir}-app`)}${react && hapi && ` or `}${hapi && chalk.cyan.bold(`cd ${projectDir}-api`)}
+        ${react ? chalk.cyan.bold(`cd ${projectDir}-app`) : ''}${react && hapi ? ` or ` : ''}${hapi ? chalk.cyan.bold(`cd ${projectDir}-api`) : ''}
 
       Install the project dependencies:
 
