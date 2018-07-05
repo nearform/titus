@@ -3,6 +3,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import { MuiThemeProvider } from '@material-ui/core/styles'
 import { Provider } from 'react-redux'
 import { Navigation } from '@nearform/titus-components'
+import UserProfile from './containers/user-profile/user-profile-container'
 
 import { theme } from './theme/theme'
 
@@ -24,7 +25,7 @@ const App = () => (
       <CssBaseline />
       <MuiThemeProvider theme={theme}>
         <Auth loginComponent={Login}>
-          <Navigation title={meta.appName} items={Menu} main={Routes} />
+          <Navigation title={meta.appName} items={Menu} main={Routes} customComponent={UserProfile} />
         </Auth>
       </MuiThemeProvider>
     </Fragment>
