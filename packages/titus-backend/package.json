@@ -15,13 +15,15 @@
     "docker:dev:exec": "docker-compose -f docker/docker-compose-dev.yml exec api",
     "docker:dev:migrate": "docker-compose -f docker/docker-compose-dev.yml exec api npm run migrate",
     "docker:dev:seed": "docker-compose -f docker/docker-compose-dev.yml exec api npm run dev:seed",
-    "dev:start": "nodemon -L .",
+    "dev:start": "nodemon -P 5000 -L .",
     "dev:cleandb": "rm -rf pgdata",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@nearform/sql": "^1.0.1",
+    "@nearform/trail-core": "^1.0.1",
+    "@nearform/trail-hapi-plugin": "^1.0.1",
     "apollo-server-hapi": "^1.3.6",
     "camelcase": "^5.0.0",
     "dataloader": "^1.4.0",
