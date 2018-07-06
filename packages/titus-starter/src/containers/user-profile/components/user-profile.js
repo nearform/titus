@@ -44,55 +44,52 @@ class UserProfile extends PureComponent {
   }
 
   state = {
-    anchorEl: null
+    open: false
   }
 
   constructor (props) {
     super(props)
-    this.clickHandler = this.clickHandler.bind(this)
+    this.anchorEl = React.createRef()
   }
 
-  clickHandler (e) {
-    if (this.state.anchorEl) {
-      this.setState({anchorEl: null})
-    } else {
-      this.setState({ anchorEl: e.currentTarget })
-    }
+  clickHandler () {
+    this.setState({ open: !this.state.open })
   }
 
   render () {
     const { className, classes, user, onLogOut } = this.props
-    const { anchorEl } = this.state
+    const { open } = this.state
 
     return (
-      <Button className={classNames(className, classes.root)} onClick={this.clickHandler} title={user.username}>
-        <div className={classes.content}>
-          {
-            user.avatar
-              ? <Avatar alt={user.username} src={user.avatar} className={classes.avatar} />
-              : <FaceIcon className={classes.avatar} />
-          }
-        </div>
-        <Popover
-          open={Boolean(anchorEl)}
-          anchorEl={anchorEl}
-          onClose={this.handleClose}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center'
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'center'
-          }}
-        >
-          <div className={classes.profileContent}>
-            <p>Some custom content about <span className={classes.userName} >{user.username}</span></p>
-            <Button onClick={onLogOut}>Logout</Button>
+      <div ref={this.anchorEl} className={classNames(className, classes.root)}>
+        <Button onClick={() => { this.clickHandler() }} title={user.username}>
+          <div className={classes.content}>
+            {
+              user.avatar
+                ? <Avatar alt={user.username} src={user.avatar} className={classes.avatar} />
+                : <FaceIcon className={classes.avatar} />
+            }
           </div>
-        </Popover>
-
-      </Button >
+          <Popover
+            open={open}
+            anchorEl={this.anchorEl.current}
+            onClose={this.handleClose}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center'
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'center'
+            }}
+          >
+            <div className={classes.profileContent}>
+              <p>Some custom content about <span className={classes.userName} >{user.username}</span></p>
+              <Button onClick={onLogOut}>Logout</Button>
+            </div>
+          </Popover>
+        </Button >
+      </div>
     )
   }
 }

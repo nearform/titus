@@ -25,7 +25,7 @@ const App = () => (
       <CssBaseline />
       <MuiThemeProvider theme={theme}>
         <Auth loginComponent={Login}>
-          <Navigation title={meta.appName} items={Menu} main={Routes} customComponent={UserProfile} />
+          <Navigation title={meta.appName} items={Menu} main={Routes} headerRight={UserProfile} />
         </Auth>
       </MuiThemeProvider>
     </Fragment>
