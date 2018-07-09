@@ -11,7 +11,7 @@ import classNames from 'classnames'
 
 const styles = theme => ({
   root: {
-    margin: '0 12px 0 auto'
+    margin: '0 12px 0'
   },
 
   content: {
@@ -47,12 +47,9 @@ class UserProfile extends PureComponent {
     open: false
   }
 
-  constructor (props) {
-    super(props)
-    this.anchorEl = React.createRef()
-  }
+  anchorEl = React.createRef()
 
-  clickHandler () {
+  clickHandler = () => {
     this.setState({ open: !this.state.open })
   }
 
@@ -62,7 +59,7 @@ class UserProfile extends PureComponent {
 
     return (
       <div ref={this.anchorEl} className={classNames(className, classes.root)}>
-        <Button onClick={() => { this.clickHandler() }} title={user.username}>
+        <Button onClick={this.clickHandler} title={user.username}>
           <div className={classes.content}>
             {
               user.avatar
