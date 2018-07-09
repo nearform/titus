@@ -20,6 +20,9 @@ const resolvers = {
       const id = await food.create(context.pg, args)
       return food.getById(context.pg, { id })
     },
+    async updateFood (root, args, context) {
+      return food.update(context.pg, args)
+    },
     async deleteFoods (root, args, context) {
       return food.deleteFoods(context.pg, args)
     }
