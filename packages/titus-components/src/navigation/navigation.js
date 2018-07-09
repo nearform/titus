@@ -82,6 +82,10 @@ const styles = theme => ({
     overflowY: 'auto',
     padding: theme.spacing.unit * 3,
     flex: 1
+  },
+
+  headerRight: {
+    marginLeft: 'auto'
   }
 })
 
@@ -91,7 +95,7 @@ class Navigation extends Component {
     classes: PropTypes.object.isRequired,
     theme: PropTypes.object.isRequired,
     items: PropTypes.func,
-    main: PropTypes.func.isRequired,
+    main: PropTypes.func.isRequired.bind,
     headerRight: PropTypes.func
   }
 
@@ -130,7 +134,7 @@ class Navigation extends Component {
               {title}
             </Typography>
 
-            {HeaderRight && <HeaderRight />}
+            { HeaderRight && <HeaderRight className={classes.headerRight} />}
           </Toolbar>
         </AppBar>
         <Drawer
