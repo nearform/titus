@@ -82,6 +82,10 @@ const styles = theme => ({
     overflowY: 'auto',
     padding: theme.spacing.unit * 3,
     flex: 1
+  },
+
+  headerRight: {
+    marginLeft: 'auto'
   }
 })
 
@@ -91,7 +95,8 @@ class Navigation extends Component {
     classes: PropTypes.object.isRequired,
     theme: PropTypes.object.isRequired,
     items: PropTypes.func,
-    main: PropTypes.func.isRequired
+    main: PropTypes.func.isRequired.bind,
+    headerRight: PropTypes.func
   }
 
   state = {
@@ -103,7 +108,7 @@ class Navigation extends Component {
 
   render () {
     const { handleMenuOpen, handleMenuClose } = this
-    const { classes, title, main, items, theme } = this.props
+    const { classes, title, main, items, theme, headerRight: HeaderRight } = this.props
     const { menuOpen } = this.state
 
     return (
@@ -128,6 +133,8 @@ class Navigation extends Component {
             <Typography variant='title' color='inherit' noWrap>
               {title}
             </Typography>
+
+            { HeaderRight && <HeaderRight className={classes.headerRight} />}
           </Toolbar>
         </AppBar>
         <Drawer
