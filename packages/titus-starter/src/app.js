@@ -11,6 +11,7 @@ import Menu from './menu'
 import Routes from './routes'
 
 import Auth from './lib/auth'
+import authProvider from './lib/auth-provider'
 import Login from './containers/login/login.js'
 
 import { store } from './store/store'
@@ -24,7 +25,7 @@ const App = () => (
     <Fragment>
       <CssBaseline />
       <MuiThemeProvider theme={theme}>
-        <Auth loginComponent={Login}>
+        <Auth loginComponent={<Login authProvider={authProvider} />}>
           <Navigation title={meta.appName} items={Menu} main={Routes} headerRight={UserProfile} />
         </Auth>
       </MuiThemeProvider>

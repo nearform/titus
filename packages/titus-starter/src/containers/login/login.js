@@ -5,7 +5,11 @@ import { logIn } from '../../store/app/app-actions'
 const mapStateToProps = () => ({})
 
 const mapDispatchToProps = (dispatch) => ({
-  onSubmit: (data) => dispatch(logIn(data))
+  onSubmit: (data) => {
+    console.log(this.props)
+
+    dispatch(logIn(data))
+  }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

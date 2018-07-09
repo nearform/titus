@@ -16,8 +16,7 @@ export default (state = initialState, { type, data }) => {
       }
 
     case constants.LOG_IN:
-      // authenticate the user somehow...
-
+      // This is where you'd implement the user authentication logic
       return {
         ...state,
         user: data
