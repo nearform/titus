@@ -153,7 +153,7 @@ class MaterialUiTable extends Component {
                 }
                 return acc
               }, {})
-              const editedData = this.state.rowChanges[row.id]
+              const isRowEditing = !!this.state.rowChanges[row.id]
 
               return (
                 <TableRow
@@ -173,8 +173,8 @@ class MaterialUiTable extends Component {
                     />
                   </TableCell>
                   <TableCell padding='checkbox' key={`${rowKey}-name`}>
-                    {!editedData && row.name}
-                    {!!editedData && (
+                    {!isRowEditing && row.name}
+                    {isRowEditing && (
                       <TextField
                         fullWidth
                         defaultValue={row.name}
@@ -183,11 +183,11 @@ class MaterialUiTable extends Component {
                     )}
                   </TableCell>
                   <TableCell padding='checkbox' key={`${rowKey}-foodGroup`}>
-                    {!editedData && row.foodGroup}
-                    {!!editedData && (
+                    {!isRowEditing && row.foodGroup}
+                    {isRowEditing && (
                       <Select
                         autoWidth
-                        value={editedData.foodGroupId}
+                        value={this.state.rowChanges[row.id].foodGroupId}
                         onChange={this.handleEdit(row.id, 'foodGroupId')}
                       >
                         {foodGroups.map(o => (
@@ -198,7 +198,7 @@ class MaterialUiTable extends Component {
                       </Select>
                     )}
                   </TableCell>
-                  {!this.state.rowChanges[row.id] && (
+                  {!isRowEditing && (
                     <Fragment>
                       <TableCell padding='checkbox'>
                         <Button onClick={this.onEditClick(rowData)}>
@@ -208,7 +208,7 @@ class MaterialUiTable extends Component {
                       <TableCell />
                     </Fragment>
                   )}
-                  {!!this.state.rowChanges[row.id] && (
+                  {isRowEditing && (
                     <Fragment>
                       <TableCell padding='checkbox'>
                         <Button onClick={this.cancelEdit(row.id)}>
@@ -216,7 +216,7 @@ class MaterialUiTable extends Component {
                         </Button>
                       </TableCell>
                       <TableCell padding='checkbox'>
-                        <Button onClick={this.handleUpdate(editedData)}>
+                        <Button onClick={this.handleUpdate(this.state.rowChanges[row.id])}>
                           <SaveIcon />
                         </Button>
                       </TableCell>
