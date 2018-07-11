@@ -11,19 +11,28 @@ import classNames from 'classnames'
 
 const styles = theme => ({
   root: {
-    margin: '0 12px 0'
+    margin: '0 12px 0',
+    display: 'inline-block'
   },
 
   content: {
-    color: 'white',
     textTransform: 'initial',
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    position: 'relative'
+  },
+
+  dummyImage: {
+    width: '40px',
+    height: '40px'
   },
 
   avatar: {
     width: '40px',
-    height: '40px'
+    height: '40px',
+    position: 'absolute',
+    top: 0,
+    left: 0
   },
 
   profileContent: {
@@ -31,7 +40,8 @@ const styles = theme => ({
   },
 
   userName: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    color: '#369'
   }
 })
 
@@ -40,7 +50,7 @@ class UserProfile extends PureComponent {
     user: PropTypes.object.isRequired,
     className: PropTypes.string,
     classes: PropTypes.object,
-    onLogOut: PropTypes.func.isRequired
+    onLogOut: PropTypes.func
   }
 
   state = {
@@ -59,15 +69,14 @@ class UserProfile extends PureComponent {
 
     return (
       <div ref={this.anchorEl} className={classNames(className, classes.root)}>
-        <Button onClick={this.clickHandler} title={user.username}>
+        <Button onClick={this.clickHandler} title={user.username} color='inherit'>
           <div className={classes.content}>
-            {
-              user.avatar
-                ? <Avatar alt={user.username} src={user.avatar} className={classes.avatar} />
-                : <FaceIcon className={classes.avatar} />
-            }
+            {/* the FaceIcon is the fallback, should the avatar image not be available or defined */}
+            <FaceIcon className={classes.dummyImage} />
+            <Avatar alt={user.username} src={user.avatar} className={classes.avatar} />
           </div>
           <Popover
+            className='userProfilePopOver'
             open={open}
             anchorEl={this.anchorEl.current}
             onClose={this.handleClose}
@@ -81,7 +90,9 @@ class UserProfile extends PureComponent {
             }}
           >
             <div className={classes.profileContent}>
-              <p>Some custom content about <span className={classes.userName} >{user.username}</span></p>
+              <p>Hello <span className={classes.userName} >{user.username}</span>!</p>
+              <p>City: {user.city}</p>
+              <p>Dob: {user.dob}</p>
               <Button onClick={onLogOut}>Logout</Button>
             </div>
           </Popover>
