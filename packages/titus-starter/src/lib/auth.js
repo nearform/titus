@@ -1,8 +1,7 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-const Auth = ({ user, loginComponent: Login, children }) => user === undefined ? Login : children
+const Auth = ({ user, loginComponent, children }) => user === undefined ? loginComponent : children
 
 Auth.propTypes = {
   user: PropTypes.object,

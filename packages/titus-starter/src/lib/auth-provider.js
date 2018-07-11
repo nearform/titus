@@ -1,12 +1,16 @@
+
 export default {
   login: ({username, password}) => {
-    // This is where you'd implement the user authentication logic
+    // This is where you'd implement the user authentication logic, it must return a Promise.
 
-    // this example will just return a dummy user object
-    return {
-      username,
-      dob: '01/01/1980, 00:00:00',
-      avatar: 'https://source.unsplash.com/400x400/?avatar'
-    }
+    // This example will just return a dummy user object, showing a random avatar image
+    return new Promise((resolve, reject) => {
+      resolve({
+        username,
+        dob: '05/05/1974, 00:00:00',
+        city: 'London',
+        avatar: `https://api.adorable.io/avatars/100/${username}@adorable.png`
+      })
+    })
   }
 }
