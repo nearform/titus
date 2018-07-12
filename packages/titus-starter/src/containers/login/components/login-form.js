@@ -44,8 +44,8 @@ class Login extends PureComponent {
       <div className={classNames(classes.wrapper, className)}>
         <form className={classNames(classes.form)} onSubmit={this.handleSubmit}>
           <Typography variant='title' gutterBottom>Login:</Typography>
-          <TextField id='username' name='username' label='User name' margin='normal' />
-          <TextField id='password' name='password' label='Password' type='password' margin='normal' />
+          <TextField required id='username' name='username' label='User name' margin='normal' />
+          <TextField required id='password' name='password' label='Password' type='password' margin='normal' />
           <Button variant='contained' color='primary' type='submit'>Login</Button>
         </form>
       </div>
