@@ -1,9 +1,22 @@
 # Titus CLI
 
+A command line application to work with Titus
+
+## Features
+
+* `starter` command to initialise a new Titus application.
+* The ability to choose between a Titus application for the backend, frontend or both.
+
 ## Installation
 
 ```
 npm install -g @nearform/titus-cli
+```
+
+If you'd prefer not to install the package globally you can use [`npx`](https://www.npmjs.com/package/npx) which comes bundled with npm 5.2.0 or later. You can use it like so:
+
+```
+npx @nearform/titus-cli starter <project-name>
 ```
 
 ## Usage
@@ -22,13 +35,13 @@ This pulls the latest version of titus starter shell from GitHub and copies it t
 
 ## Development
 
-Install the dependencies using either npm or yarn
+Install the dependencies using either npm or yarn:
 
 ```
 npm install
 ```
 
-To use the local version of the cli in the command line we need to link it to our global packages and add the bin to our PATH.
+To use the local version of the cli in the command line we need to link it to our global packages and add the bin to our PATH:
 
 ```
 npm link

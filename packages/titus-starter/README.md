@@ -1,5 +1,7 @@
 # Titus Starter Shell
 
+A frontend starter shell ready to be built upon.
+
 ## Installation
 
 ```

@@ -1,56 +1,56 @@
 # Titus
 
-Welcome to project Titus, an advanced opinionated starter shell stack. This repo includes the following packages:
+Titus is an end-to-end JavaScript stack created for modern web application development.
 
-- titus-starter - The clientside starter shell
-- titus-components - A collection of pre-built components
-- titus-kitchen-sink - An implementation of the starter shell with examples and documentation
-- titus-cli - A command line interface to perform common tasks (eg cloning starter shell)
-- titus-backend - The serverside starter shell
+This repository is a [monorepo](https://lernajs.io/) containing distinct parts of the Titus stack. Packages include:
 
-## Framework
+- [titus-starter](https://github.com/nearform/titus/tree/master/packages/titus-starter) - A client-side starter shell based off of [create-react-app](https://github.com/facebook/create-react-app) with the addition of [Storybook](https://storybook.js.org/), [Material-UI](https://material-ui.com/), [Reach Router](https://reach.tech/router), [Redux](https://redux.js.org/) and more.
+- [titus-components](https://github.com/nearform/titus/tree/master/packages/titus-components) - A collection of React components ready to drop in to your application.
+- [titus-kitchen-sink](https://github.com/nearform/titus/tree/master/packages/titus-kitchen-sink) - An implementation of the starter shell with detailed examples and documentation.
+- [titus-cli](https://github.com/nearform/titus/tree/master/packages/titus-cli) - A command line interface (CLI) to perform common tasks such as installing the starter shells.
+- [titus-backend](https://github.com/nearform/titus/tree/master/packages/titus-backend) - A server-side starter shell complete with [Hapi](https://hapijs.com/), [PostgreSQL](https://www.postgresql.org/), [Docker](https://www.docker.com/), [GraphQL](https://graphql.org/) and more.
 
-The project is very much a work in progress. Below is a list of what is included and what is on the roadmap.
+## Ethos & Goals
 
-The project currently includes:
+The aim of Titus is to give projects a faster 'time to first feature' by providing a core set of technologies, frameworks and techniques which aid in modern web application development.
 
-- [Material-UI](https://material-ui.com/)
-- [Reach Router](https://reach.tech/router)
-- [Storybook](https://storybook.js.org/)
-- [Redux](https://redux.js.org/)
-  - [Redux Thunk](https://github.com/reduxjs/redux-thunk)
-  - [Reselect](https://github.com/reduxjs/reselect)
-- [Victory](https://formidable.com/open-source/victory/docs/)
-- [CircleCI](https://circleci.com/)
-- [@nearform/react-table](https://github.com/nearform/react-table)
+## Getting Started
 
-### TODO
+The quickest way to get started with Titus is to use the CLI to create a starter frontend and backend application.
 
-- GraphQL
-- nearform audit trail service
-- nearform comments service
-- nearform authorization (udaru)
+You can do this by running:
 
+```
+npx @nearform/titus-cli starter <project-name>
+```
 
-## Installation
+This command will generate frontend and backend starter applications.
 
-Install dependencies for all packages using
+For further information on the Titus CLI either run `npx @nearform/titus-cli --help` or take a look at the [titus-cli readme](https://github.com/nearform/titus/blob/master/packages/titus-cli/README.md).
+
+## Development
+
+Want to contribute to Titus? Before submitting a pull request it's worth [creating an issue](https://github.com/nearform/titus/issues) to discuss what you'd like to add or amend. This will help make sure you're not spending time and energy proposing a feature which doesn't align with the goals of the project.
+
+### Installation
+
+Install dependencies for all packages using:
 
 ```
 npm install
 ```
 
-This will install root package dependencies, including lerna, which will then install all sub package dependencies and link cross-dependencies.
+This will install root package dependencies, including Lerna, which will then install all sub package dependencies and link cross-dependencies.
 
-Alternatively, if you have lerna installed globally, run
+Alternatively, if you have Lerna installed globally, run:
 
 ```
 lerna bootstrap
 ```
 
-Individual sub-packages are built during the bootstrap process
+Individual sub-packages are built during the bootstrap process.
 
-## Convenience Scripts
+### Convenience Scripts
 
 Some commands have been added to the root package for convenience.
 
