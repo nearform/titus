@@ -1,12 +1,14 @@
 # Titus Kitchen Sink
 
+A reference Titus application providing a variety of examples.
+
 ## Installation
 
 ```
 npm install
 ```
 
-## Running locally
+## Running Locally
 
 ```
 npm start

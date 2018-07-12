@@ -1,5 +1,12 @@
 # Titus CLI
 
+A command line application to work with Titus
+
+## Features
+
+* `starter` command to initialise a new Titus application.
+* The ability to choose between a Titus application for the backend, frontend or both.
+
 ## Installation
 
 ```
