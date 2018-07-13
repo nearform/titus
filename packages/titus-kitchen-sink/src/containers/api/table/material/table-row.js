@@ -73,17 +73,17 @@ class TableRow extends Component {
               onClick={handleRowSelect}
             />
           </TableCell>
-          <TableCell padding='checkbox' key={`${rowKey}-name`}>
+          <TableCell aria-label='Food Name' padding='checkbox' key={`${rowKey}-name`}>
             { isEditing
               ? <TextField
                 fullWidth
-                defaultValue={row.name}
+                value={this.state.pendingChanges.name}
                 onChange={this.handleEdit('name')}
               />
               : row.name
             }
           </TableCell>
-          <TableCell padding='checkbox' key={`${rowKey}-foodGroup`}>
+          <TableCell aria-label='Food Group' padding='checkbox' key={`${rowKey}-foodGroup`}>
             {isEditing
               ? <Select
                 autoWidth
@@ -102,19 +102,19 @@ class TableRow extends Component {
           { isEditing
             ? <Fragment>
               <TableCell padding='checkbox'>
-                <Button onClick={this.cancelEdit}>
+                <Button aria-label='Cancel' onClick={this.cancelEdit}>
                   <ResetIcon />
                 </Button>
               </TableCell>
               <TableCell padding='checkbox'>
-                <Button onClick={this.saveChanges(pendingChanges)}>
+                <Button aria-label='Save' onClick={this.saveChanges(pendingChanges)}>
                   <SaveIcon />
                 </Button>
               </TableCell>
             </Fragment>
             : <Fragment>
               <TableCell padding='checkbox'>
-                <Button onClick={this.onEditClick(row)}>
+                <Button aria-label='Edit' onClick={this.onEditClick(row)}>
                   <EditIcon />
                 </Button>
               </TableCell>
