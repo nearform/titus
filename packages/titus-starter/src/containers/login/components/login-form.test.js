@@ -10,7 +10,7 @@ describe('Login form', () => {
     expect(Login).toBeDefined()
   })
 
-  it('Validation: doesn\'t submit if unsername || password are empty', () => {
+  it('Validation: doesn\'t submit if username or password are empty', () => {
     const mockFn = jest.fn()
     const { container } = render(<Login onSubmit={mockFn} />)
 

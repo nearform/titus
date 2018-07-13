@@ -32,10 +32,14 @@ class Login extends PureComponent {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    this.props.onSubmit({
-      username: event.target.username.value,
-      password: event.target.password.value
-    })
+    const { username, password } = event.target.elements
+
+    if (username.value && password.value) {
+      this.props.onSubmit({
+        username: username.value,
+        password: password.value
+      })
+    }
   }
   render () {
     let { classes, className } = this.props
