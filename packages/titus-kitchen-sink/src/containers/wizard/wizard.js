@@ -1,5 +1,5 @@
 import React from 'react'
-import { Wizard } from 'titus-components'
+import { Wizard } from '@nearform/titus-components'
 import SimpleStep from './simple-step'
 import SummaryStep from './summary-step'
 
