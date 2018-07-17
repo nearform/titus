@@ -15,8 +15,7 @@ storiesOf('UserProfile', module)
     const userObj = {
       username: 'John',
       city: 'New York',
-      Dob: '02/03/1980 00:00:00',
-      avatar: 'https://api.adorable.io/avatars/100/alessio@adorable.png'
+      Dob: '02/03/1980 00:00:00'
     }
     return (<User user={{...userObj}} />)
   })

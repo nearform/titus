@@ -8,8 +8,7 @@ export default {
       resolve({
         username,
         dob: '05/05/1974, 00:00:00',
-        city: 'London',
-        avatar: `https://api.adorable.io/avatars/100/${username}@adorable.png`
+        city: 'London'
       })
     })
   }

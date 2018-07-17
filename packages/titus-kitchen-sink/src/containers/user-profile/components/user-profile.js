@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react'
 import FaceIcon from '@material-ui/icons/Face'
 import PropTypes from 'prop-types'
 import Button from '@material-ui/core/Button'
-import Avatar from '@material-ui/core/Avatar'
 
 import Popover from '@material-ui/core/Popover'
 
@@ -25,14 +24,6 @@ const styles = theme => ({
   dummyImage: {
     width: '40px',
     height: '40px'
-  },
-
-  avatar: {
-    width: '40px',
-    height: '40px',
-    position: 'absolute',
-    top: 0,
-    left: 0
   },
 
   profileContent: {
@@ -71,9 +62,7 @@ class UserProfile extends PureComponent {
       <div ref={this.anchorEl} className={classNames(className, classes.root)}>
         <Button onClick={this.clickHandler} title={user.username} color='inherit'>
           <div className={classes.content}>
-            {/* the FaceIcon is the fallback, should the avatar image not be available or defined */}
             <FaceIcon className={classes.dummyImage} />
-            <Avatar alt={user.username} src={user.avatar} className={classes.avatar} />
           </div>
           <Popover
             className='userProfilePopOver'
