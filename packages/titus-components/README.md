@@ -1,12 +1,22 @@
 # Titus Components
 
+Shareable components ready to be dropped in to any React application.
+
+## Features
+
+* Autocomplete
+* List item link
+* Navigation
+* Table
+* Wizard
+
 ## Installation
 
 ```
 npm install --S @nearform/titus-components
 ```
 
-## Developing
+## Development
 
 ```
 npm install

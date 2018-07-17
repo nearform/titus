@@ -2,7 +2,7 @@
 
 A starter Hapi and PostgreSQL setup running in Docker.
 
-## Currently implemented for local dev
+## Features
 
 * Docker compose config to start database and Hapi
 * Uses host filesystem, so no need to restart containers on code change
@@ -43,7 +43,15 @@ A starter Hapi and PostgreSQL setup running in Docker.
 
 `test` - run tests using Jest
 
-## Adminer
+### Adminer
 
 This provides a web ui for the postgres db on http://localhost:8080
 You can log in with: `titus` as user, password and database.
+
+### Trail
+
+Audit trails are available using [nearForm's Trail service](https://github.com/nearform/trail).
+
+You can navigate to http://localhost:5000/hello in your browser to add an audit trail item to the database.
+
+To view audit trail items navigate to http://localhost:5000/trails?from=<date-from>&to=<date-to>, where `<date-from>` and `<date-to>` are ISO 8601 formatted dates, e.g. http://localhost:5000/trails?from=2017-07-06T12%3A34%3A56.123&to=2018-07-06T12%3A34%3A56.123

@@ -4,10 +4,11 @@ const hapi = require('hapi')
 const pino = require('hapi-pino')
 const graphqlHapi = require('apollo-server-hapi').graphqlHapi
 const graphiqlHapi = require('apollo-server-hapi').graphiqlHapi
-const config = require('../config/config')
+const config = require('../config/default')
 const grapqlSchema = require('./graphql').schema
 const loaders = require('./graphql').loaders
 const pgPlugin = require('./pg-plugin')
+const trailPlugin = require('@nearform/trail-hapi-plugin')
 const routes = require('./routes')
 
 const server = hapi.server(config.hapi)
@@ -61,6 +62,10 @@ const init = async () => {
     {
       plugin: pgPlugin,
       options: config.pg
+    },
+    {
+      plugin: trailPlugin,
+      options: config.db
     }
   ])
 
