@@ -60,8 +60,5 @@
     "pretty-quick": "^1.6.0",
     "react-testing-library": "^4.1.2",
     "redux-devtools": "^3.4.1"
-  },
-  "resolutions": {
-    "eslint-scope": "3.7.1"
   }
 }
