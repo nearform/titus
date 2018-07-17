@@ -1,12 +1,12 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
-import { Table } from '@nearform/titus-components'
-import { loadFood, deleteFood } from '../../store/api/api-actions'
+import Table from './table/table'
+import { loadFood, deleteFood, updateFood, loadFoodGroups } from '../../store/api/api-actions'
 
 const columns = [
   {
@@ -20,13 +20,27 @@ const columns = [
     accessor: 'name',
     label: 'Name',
     sortable: true,
-    filterable: true
+    filterable: true,
+    width: '50%'
   },
   {
     accessor: 'foodGroup',
     label: 'Food Group',
     sortable: true,
-    filterable: true
+    filterable: true,
+    width: '40%'
+  },
+  {
+    accessor: 'foodGroupId',
+    hidden: true
+  },
+  {
+    accessor: 'button1',
+    width: '5%'
+  },
+  {
+    accessor: 'button2',
+    width: '5%'
   }
 ]
 
@@ -37,20 +51,32 @@ const styles = theme => ({
   progressWrapper: {
     margin: 'auto 50%',
     paddingBottom: theme.spacing.unit * 3
+  },
+  citation: {
+    '& span:first-of-type': {
+      marginTop: theme.spacing.unit * 3
+    }
   }
 })
 
 class Api extends React.Component {
   componentDidMount () {
     this.props.loadFood()
+    if (!this.props.foodGroups) {
+      this.props.loadFoodGroups()
+    }
   }
 
   static propTypes = {
-    loading: PropTypes.bool.isRequired,
+    loadingFood: PropTypes.bool.isRequired,
+    loadingFoodGroups: PropTypes.bool.isRequired,
     error: PropTypes.any,
     food: PropTypes.array,
     loadFood: PropTypes.func.isRequired,
     deleteFood: PropTypes.func.isRequired,
+    updateFood: PropTypes.func.isRequired,
+    foodGroups: PropTypes.array,
+    loadFoodGroups: PropTypes.func.isRequired,
     classes: PropTypes.object.isRequired
   }
 
@@ -60,13 +86,13 @@ class Api extends React.Component {
   }
 
   render () {
-    const { error, loading, food, classes } = this.props
+    const { error, loadingFood, loadingFoodGroups, food, foodGroups, classes } = this.props
 
     if (error) {
       return <Typography color='error' >{error}</Typography>
     }
 
-    if (loading || !food) {
+    if (loadingFood || loadingFoodGroups || !food || !foodGroups) {
       return (
         <div className={classes.progressWrapper}>
           <CircularProgress className={classes.progress} />
@@ -74,24 +100,36 @@ class Api extends React.Component {
       )
     }
 
-    return <Table
-      title='API CRUD Example'
-      columns={columns}
-      rows={food}
-      onDelete={this.onDelete}
-    />
+    return <Fragment>
+      <Table
+        title='API CRUD Example'
+        columns={columns}
+        food={food}
+        foodGroups={foodGroups}
+        onDelete={this.onDelete}
+        onUpdate={this.props.updateFood}
+      />
+      <div className={classes.citation}>
+        <Typography variant='caption'>Nutritional information provided by:</Typography>
+        <Typography variant='caption'>US Department of Agriculture, Agricultural Research Service, Nutrient Data Laboratory. USDA National Nutrient Database for Standard Reference, Release 28. Version Current: September 2015. Internet: <a href='http://www.ars.usda.gov/ba/bhnrc/ndl'>http://www.ars.usda.gov/ba/bhnrc/ndl</a></Typography>
+      </div>
+    </Fragment>
   }
 }
 
-const mapStateToProps = ({ api: { food, loading, error } }) => ({
+const mapStateToProps = ({ api: { food, loadingFood, foodGroups, loadingFoodGroups, error } }) => ({
   food,
-  loading,
+  loadingFood,
+  foodGroups,
+  loadingFoodGroups,
   error
 })
 
 const mapDispatchToProps = {
   loadFood,
-  deleteFood
+  deleteFood,
+  updateFood,
+  loadFoodGroups
 }
 
 export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(Api))

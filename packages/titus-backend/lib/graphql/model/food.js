@@ -33,15 +33,24 @@ const create = async (pg, { food }) => {
   return res.rows[0].id
 }
 
+const update = async (pg, { food }) => {
+  const res = await pg.query(SQL`UPDATE food
+  SET name = ${food.name}, food_group_id = ${food.foodGroupId}, modified = now()
+  WHERE id = ${food.id}`)
+  const updated = await getById(pg, food)
+  return { id: food.id, typeName: 'Food', operation: 'update', count: res.rowCount, updated }
+}
+
 const deleteFoods = async (pg, { ids }) => {
   const res = await pg.query(SQL`
     DELETE FROM food WHERE id = ANY(${[ids]}::text[])`)
-  return { ids, typeName: 'Food', count: res.rowCount }
+  return { ids, typeName: 'Food', operation: 'delete', count: res.rowCount }
 }
 
 module.exports = {
   getById,
   getAll,
   create,
+  update,
   deleteFoods
 }

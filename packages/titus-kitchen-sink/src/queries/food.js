@@ -19,6 +19,26 @@ export const deleteFood = gql`
       ids
       count
       typeName
+      operation
     }
   }
+`
+
+export const updateFood = gql`
+mutation updateFood ($food: FoodInput!) {
+  updateFood (food: $food){
+    id
+    typeName
+    count
+    operation
+    updated {
+      id
+      name
+      foodGroup {
+        id
+        name
+      }
+    }
+  }
+}
 `
