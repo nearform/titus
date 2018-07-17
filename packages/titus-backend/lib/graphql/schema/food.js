@@ -12,6 +12,7 @@ type Food {
 
 const foodInput = `
 input FoodInput {
+    id: ID
     name: String!
     foodGroup: String
     foodGroupId: String

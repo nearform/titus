@@ -19,7 +19,7 @@ const getByIds = async (pg, ids) => {
 
 const getAll = async pg => {
   const res = await pg.query(SQL`
-      SELECT id, name, created, modified FROM food_group`)
+      SELECT id, name, created, modified FROM food_group ORDER BY name ASC`)
   return formatRows(res.rows)
 }
 
