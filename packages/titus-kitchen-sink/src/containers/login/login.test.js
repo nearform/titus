@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, fireEvent, cleanup } from 'react-testing-library'
-import Login from './login-form'
+import { Login } from './login'
 
 // automatically unmount and cleanup DOM after the test is finished.
 afterEach(cleanup)
@@ -12,7 +12,7 @@ describe('Login form', () => {
 
   it('Validation: doesn\'t submit if username or password are empty', () => {
     const mockFn = jest.fn()
-    const { container } = render(<Login onSubmit={mockFn} />)
+    const { container } = render(<Login submitLogin={mockFn} />)
 
     const form = container.querySelector('form')
     const btn = form.querySelector('button')
@@ -23,16 +23,16 @@ describe('Login form', () => {
     expect(mockFn).toHaveBeenCalledTimes(0)
   })
 
-  it('Validation: onSubmit fn gets executed when clicking Login and the username/password are not empty', () => {
+  it('Validation: submitLogin fn gets executed when clicking Login and the username/password are not empty', () => {
     const mockFn = jest.fn()
-    const { container } = render(<Login onSubmit={mockFn} />)
+    const { container } = render(<Login submitLogin={mockFn} />)
 
     const form = container.querySelector('form')
     const btn = form.querySelector('button')
 
     // setting some value for username and password
     form.querySelectorAll('input').forEach(input => {
-      input.value = 'dummy text'
+      input.value = 'hunter2'
     })
 
     // clicking on Login button
