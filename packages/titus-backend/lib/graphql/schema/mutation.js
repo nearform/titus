@@ -2,7 +2,7 @@
 
 const mutation = `
 type Mutation {
-  createFood(food: FoodInput): Food
+  createFood(food: FoodInput): UpdateFoodResult
   updateFood(food: FoodInput): UpdateFoodResult
   deleteFoods(ids: [String]!): DeleteResult
   createFoodGroup(name: String): FoodGroup

@@ -2,6 +2,38 @@ import * as constants from './api-constants'
 import { apolloClient } from '../../app'
 import * as queries from '../../queries'
 
+export const createFood = ({ id, name, foodGroupId }) => async dispatch => {
+  try {
+    dispatch({type: constants.CREATE_FOOD})
+    const res = await apolloClient.mutate({
+      mutation: queries.createFood,
+      variables: { food: { id, name, foodGroupId } },
+      update: (store, { data: { createFood: { updated } } }) => {
+        // Read the data from our cache for this query.
+        const data = store.readQuery({ query: queries.loadAllFood })
+        // Replace the row we just updated
+        data.allFood = [
+          ...data.allFood,
+          updated
+        ]
+        // Write our data back to the cache.
+        store.writeQuery({ query: queries.loadAllFood, data })
+      }
+    })
+    dispatch({
+      type: constants.CREATED_FOOD,
+      data: { id, count: res.data.count }
+    })
+    dispatch(loadFood())
+  } catch (err) {
+    console.error(err)
+    dispatch({
+      type: constants.CREATE_FOOD_ERROR,
+      data: err
+    })
+  }
+}
+
 export const deleteFood = ids => async dispatch => {
   try {
     dispatch({type: constants.DELETE_FOOD})

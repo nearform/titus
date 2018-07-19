@@ -24,13 +24,20 @@ const create = async (pg, { food }) => {
   const sql = food.foodGroupId
     ? SQL`INSERT INTO food (name, food_group_id)
     VALUES (${food.name}, ${food.foodGroupId})
-    RETURNING id`
+    RETURNING id, name, food_group_id`
     : SQL`INSERT INTO food (name, food_group_id)
     VALUES (${food.name},
        (SELECT id FROM food_group WHERE name = ${food.foodGroup}))
-      RETURNING id`
+      RETURNING id, name, food_group_id`
   const res = await pg.query(sql)
-  return res.rows[0].id
+  const updated = formatRows(res.rows)[0]
+  return {
+    id: updated.id,
+    typeName: 'Food',
+    operation: 'create',
+    count: res.rowCount,
+    updated
+  }
 }
 
 const update = async (pg, { food }) => {
