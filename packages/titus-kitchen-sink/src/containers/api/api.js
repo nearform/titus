@@ -6,7 +6,7 @@ import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
 import Table from './table/table'
-import { loadFood, deleteFood, updateFood, loadFoodGroups } from '../../store/api/api-actions'
+import { loadFood, deleteFood, updateFood, createFood, loadFoodGroups } from '../../store/api/api-actions'
 
 const columns = [
   {
@@ -72,15 +72,16 @@ class Api extends React.Component {
     loadingFoodGroups: PropTypes.bool.isRequired,
     error: PropTypes.any,
     food: PropTypes.array,
+    createFood: PropTypes.func.isRequired,
     loadFood: PropTypes.func.isRequired,
-    deleteFood: PropTypes.func.isRequired,
     updateFood: PropTypes.func.isRequired,
+    deleteFood: PropTypes.func.isRequired,
     foodGroups: PropTypes.array,
     loadFoodGroups: PropTypes.func.isRequired,
     classes: PropTypes.object.isRequired
   }
 
-  onDelete = (rows) => {
+  deleteAllSelected = (rows) => {
     const ids = rows.map(row => row.rowData.find(r => r.accessor === 'id').data)
     this.props.deleteFood(ids)
   }
@@ -106,8 +107,9 @@ class Api extends React.Component {
         columns={columns}
         food={food}
         foodGroups={foodGroups}
-        onDelete={this.onDelete}
+        onCreate={this.props.createFood}
         onUpdate={this.props.updateFood}
+        onDelete={this.deleteAllSelected}
       />
       <div className={classes.citation}>
         <Typography variant='caption'>Nutritional information provided by:</Typography>
@@ -126,9 +128,10 @@ const mapStateToProps = ({ api: { food, loadingFood, foodGroups, loadingFoodGrou
 })
 
 const mapDispatchToProps = {
+  createFood,
   loadFood,
-  deleteFood,
   updateFood,
+  deleteFood,
   loadFoodGroups
 }
 

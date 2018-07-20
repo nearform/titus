@@ -17,8 +17,7 @@ const resolvers = {
   },
   Mutation: {
     async createFood (root, args, context) {
-      const id = await food.create(context.pg, args)
-      return food.getById(context.pg, { id })
+      return food.create(context.pg, args)
     },
     async updateFood (root, args, context) {
       return food.update(context.pg, args)

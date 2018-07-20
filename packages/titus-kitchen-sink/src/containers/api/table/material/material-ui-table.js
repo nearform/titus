@@ -8,22 +8,36 @@ import Paper from '@material-ui/core/Paper'
 import TableToolbar from './table-toolbar'
 import Header from './header'
 import Row from './table-row'
+import NewFoodForm from './new-food-form'
 
 class MaterialUiTable extends Component {
   static propTypes = {
-    title: PropTypes.string,
-    onDelete: PropTypes.func,
-    onUpdate: PropTypes.func,
-    columns: PropTypes.array,
-    rows: PropTypes.array,
-    foodGroups: PropTypes.array,
-    handleRowSelect: PropTypes.func,
+    title: PropTypes.string.isRequired,
+    onDelete: PropTypes.func.isRequired,
+    onUpdate: PropTypes.func.isRequired,
+    onCreate: PropTypes.func.isRequired,
+    columns: PropTypes.array.isRequired,
+    rows: PropTypes.array.isRequired,
+    foodGroups: PropTypes.array.isRequired,
+    handleRowSelect: PropTypes.func.isRequired,
     selecting: PropTypes.array,
-    pageSize: PropTypes.number,
-    total: PropTypes.number,
-    currentPage: PropTypes.number,
+    pageSize: PropTypes.number.isRequired,
+    total: PropTypes.number.isRequired,
+    currentPage: PropTypes.number.isRequired,
     handlePageChangeBlur: PropTypes.func,
     handlePageSizeChange: PropTypes.func
+  }
+
+  state = {
+    adding: false
+  }
+
+  onAddClick = () => {
+    this.setState({ adding: true })
+  }
+
+  onCancelAdd = () => {
+    this.setState({ adding: false })
   }
 
   handleDelete = () => {
@@ -57,7 +71,8 @@ class MaterialUiTable extends Component {
         total,
         currentPage,
         handlePageSizeChange,
-        foodGroups
+        foodGroups,
+        onCreate
       }
     } = this
     return (
@@ -65,8 +80,10 @@ class MaterialUiTable extends Component {
         <TableToolbar
           title={title}
           onDelete={handleDelete}
+          onAddClick={this.onAddClick}
           numSelected={selecting[0] === 'all' ? total : selecting.length}
         />
+        <NewFoodForm foodGroups={foodGroups} visible={this.state.adding} onCancelAdd={this.onCancelAdd} onSubmit={onCreate} />
         <Table>
           <Header
             columns={columns}

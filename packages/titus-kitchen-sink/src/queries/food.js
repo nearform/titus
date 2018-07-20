@@ -42,3 +42,21 @@ mutation updateFood ($food: FoodInput!) {
   }
 }
 `
+export const createFood = gql`
+mutation createFood ($food: FoodInput!) {
+  createFood (food: $food){
+    id
+    typeName
+    count
+    operation
+    updated {
+      id
+      name
+      foodGroup {
+        id
+        name
+      }
+    }
+  }
+}
+`

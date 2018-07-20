@@ -5,6 +5,8 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import Tooltip from '@material-ui/core/Tooltip'
+import Button from '@material-ui/core/Button'
+import AddIcon from '@material-ui/icons/Add'
 import DeleteIcon from '@material-ui/icons/Delete'
 import { lighten } from '@material-ui/core/styles/colorManipulator'
 import { withStyles } from '@material-ui/core/styles'
@@ -39,7 +41,7 @@ const styles = theme => ({
   }
 })
 
-const TableToolbar = ({ numSelected, classes, title, onDelete }) => (
+const TableToolbar = ({ numSelected, classes, title, onDelete, onAddClick }) => (
   <Toolbar className={classNames({ [classes.highlight]: numSelected > 0 })}>
     <div className={classes.title}>
       <Typography
@@ -51,6 +53,21 @@ const TableToolbar = ({ numSelected, classes, title, onDelete }) => (
     </div>
     <div className={classes.spacer} />
     <div className={classes.rightControls}>
+      { !numSelected &&
+        <div className={classes.actions}>
+          <Tooltip title='Add New Food Item'>
+            <Button
+              mini
+              variant='fab'
+              aria-label='Add New Food Item'
+              color='primary'
+              onClick={onAddClick}
+            >
+              <AddIcon />
+            </Button>
+          </Tooltip>
+        </div>
+      }
       {numSelected > 0 && (
         <div className={classes.rightItems}>
           <div className={classes.numSelected}>
@@ -80,8 +97,9 @@ const TableToolbar = ({ numSelected, classes, title, onDelete }) => (
 TableToolbar.propTypes = {
   classes: PropTypes.object.isRequired,
   numSelected: PropTypes.number.isRequired,
-  title: PropTypes.string,
-  onDelete: PropTypes.func
+  title: PropTypes.string.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onAddClick: PropTypes.func.isRequired
 }
 
 export default withStyles(styles)(TableToolbar)
