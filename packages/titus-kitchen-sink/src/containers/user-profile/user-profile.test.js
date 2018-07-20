@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, fireEvent, cleanup, waitForElement } from 'react-testing-library'
-import UserProfile from './user-profile'
+import { UserProfile } from './user-profile'
 import 'jest-dom/extend-expect'
 
 // automatically unmount and cleanup DOM after the test is finished.

@@ -5,7 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import { MuiThemeProvider } from '@material-ui/core/styles'
 import { Provider } from 'react-redux'
 import { Navigation } from '@nearform/titus-components'
-import UserProfile from './containers/user-profile/user-profile-container'
+import UserProfile from './containers/user-profile/user-profile'
 
 import { theme } from './theme/theme'
 

@@ -1,12 +1,15 @@
+import { connect } from 'react-redux'
+import { logOut } from '../../store/app/app-actions'
 import React, { PureComponent } from 'react'
 import FaceIcon from '@material-ui/icons/Face'
 import PropTypes from 'prop-types'
 import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
+import classNames from 'classnames'
 
 import Popover from '@material-ui/core/Popover'
 
 import { withStyles } from '@material-ui/core/styles'
-import classNames from 'classnames'
 
 const styles = theme => ({
   root: {
@@ -28,20 +31,19 @@ const styles = theme => ({
 
   profileContent: {
     padding: '12px'
-  },
-
-  userName: {
-    fontWeight: 'bold',
-    color: '#369'
   }
 })
 
-class UserProfile extends PureComponent {
+export class UserProfile extends PureComponent {
   static propTypes = {
     user: PropTypes.object.isRequired,
-    className: PropTypes.string,
     classes: PropTypes.object,
-    onLogOut: PropTypes.func
+    className: PropTypes.string,
+    logOut: PropTypes.func
+  }
+
+  static defaultProps = {
+    classes: {}
   }
 
   state = {
@@ -55,7 +57,7 @@ class UserProfile extends PureComponent {
   }
 
   render () {
-    const { className, classes, user, onLogOut } = this.props
+    const { classes, user, logOut, className } = this.props
     const { open } = this.state
 
     return (
@@ -79,10 +81,8 @@ class UserProfile extends PureComponent {
             }}
           >
             <div className={classes.profileContent}>
-              <p>Hello <span className={classes.userName} >{user.username}</span>!</p>
-              <p>City: {user.city}</p>
-              <p>Dob: {user.dob}</p>
-              <Button onClick={onLogOut}>Logout</Button>
+              <Typography variant='subheading' align='center' gutterBottom>{user.username}</Typography>
+              <Button onClick={logOut}>Logout</Button>
             </div>
           </Popover>
         </Button >
@@ -91,4 +91,12 @@ class UserProfile extends PureComponent {
   }
 }
 
-export default withStyles(styles, { withTheme: true })(UserProfile)
+const mapStateToProps = ({ app: { user } }) => ({
+  user
+})
+
+const mapDispatchToProps = {
+  logOut
+}
+
+export default withStyles(styles, { withTheme: true })(connect(mapStateToProps, mapDispatchToProps)(UserProfile))

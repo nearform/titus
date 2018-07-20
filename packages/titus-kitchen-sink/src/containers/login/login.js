@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import classNames from 'classnames'
 import { Formik } from 'formik'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
@@ -63,8 +62,8 @@ export const Login = ({ classes, submitLogin }) => (
       handleSubmit,
       isSubmitting
     }) => (
-      <div className={classes && classes.wrapper ? classNames(classes.wrapper) : null}>
-        <form className={classes && classes.form ? classNames(classes.form) : null} onSubmit={handleSubmit}>
+      <div className={classes.wrapper}>
+        <form className={classes.form} onSubmit={handleSubmit}>
           <Typography variant='title' gutterBottom>Login:</Typography>
           <Typography variant='subheading'>
             Note: Any username followed by a password with at least four characters containing at least one letter or number will work.
@@ -126,6 +125,10 @@ export const Login = ({ classes, submitLogin }) => (
 Login.propTypes = {
   classes: PropTypes.object,
   submitLogin: PropTypes.func
+}
+
+Login.defaultProps = {
+  classes: {}
 }
 
 const mapDispatchToProps = {

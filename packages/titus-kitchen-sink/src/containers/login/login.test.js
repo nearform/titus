@@ -10,7 +10,7 @@ describe('Login form', () => {
     expect(Login).toBeDefined()
   })
 
-  it('Validation: doesn\'t submit if username or password are empty', () => {
+  it('Validation: doesn\'t submit if username or password are empty', async () => {
     const mockFn = jest.fn()
     const { container } = render(<Login submitLogin={mockFn} />)
 
@@ -20,7 +20,9 @@ describe('Login form', () => {
     // clicking on Login button
     fireEvent.click(btn)
 
-    expect(mockFn).toHaveBeenCalledTimes(0)
+    await wait(() => {
+      expect(mockFn).toHaveBeenCalledTimes(0)
+    })
   })
 
   it('Validation: submitLogin fn gets executed when clicking Login and the username/password are not empty', async () => {
