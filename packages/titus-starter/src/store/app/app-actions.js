@@ -1,8 +1,6 @@
 import * as constants from './app-constants'
 
 export const updateAppConfig = (data) => ({ type: constants.UPDATE_APP_CONFIG, data })
-export const logIn = (data) => ({ type: constants.LOG_IN, data })
-export const logOut = (data) => ({ type: constants.LOG_OUT, data })
 
 /*
 An async example

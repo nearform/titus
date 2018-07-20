@@ -32,10 +32,14 @@ class Login extends PureComponent {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    this.props.onSubmit({
-      username: event.target.username.value,
-      password: event.target.password.value
-    })
+    const { username, password } = event.target.elements
+
+    if (username.value && password.value) {
+      this.props.onSubmit({
+        username: username.value,
+        password: password.value
+      })
+    }
   }
   render () {
     let { classes, className } = this.props
@@ -44,8 +48,11 @@ class Login extends PureComponent {
       <div className={classNames(classes.wrapper, className)}>
         <form className={classNames(classes.form)} onSubmit={this.handleSubmit}>
           <Typography variant='title' gutterBottom>Login:</Typography>
-          <TextField required id='username' label='User name' margin='normal' />
-          <TextField required id='password' label='Password' type='password' margin='normal' />
+          <Typography variant='subheading'>
+            Note: You can enter any value into the fields below.
+          </Typography>
+          <TextField required id='username' name='username' label='User name' margin='normal' />
+          <TextField required id='password' name='password' label='Password' type='password' margin='normal' />
           <Button variant='contained' color='primary' type='submit'>Login</Button>
         </form>
       </div>
