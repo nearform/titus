@@ -14,6 +14,16 @@ export default (state = initialState, { type, data }) => {
           ...data
         }
       }
+
+    case constants.LOG_IN:
+      return {
+        ...state,
+        user: data
+      }
+
+    case constants.LOG_OUT:
+      return initialState
+
     default:
       return state
   }
