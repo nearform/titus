@@ -16,6 +16,7 @@
     "docker:dev:migrate": "docker-compose -f docker/docker-compose-dev.yml exec api npm run migrate",
     "docker:dev:seed": "docker-compose -f docker/docker-compose-dev.yml exec api npm run dev:seed",
     "dev:start": "nodemon --ignore pgdata/ -P 5000 -L .",
+    "start": "npm run docker:dev:start",
     "dev:cleandb": "rm -rf pgdata",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
