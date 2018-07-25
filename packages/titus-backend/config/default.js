@@ -1,19 +1,30 @@
+const {
+  API_HOST,
+  API_PORT,
+  PGHOST,
+  PGPORT,
+  POSTGRES_USER,
+  POSTGRES_PASSWORD,
+  POSTGRES_DB,
+  NODE_ENV
+} = process.env
+
 module.exports = {
   hapi: {
-    host: null,
-    port: 5000
+    host: API_HOST || null,
+    port: API_PORT || 5000
   },
   logger: {
     pino: {
-      prettyPrint: process.env.NODE_ENV !== 'production'
+      prettyPrint: NODE_ENV !== 'production'
     }
   },
   db: {
-    host: null,
-    port: 5432,
-    database: 'titus',
-    username: 'titus',
-    password: 'titus',
+    host: PGHOST || null,
+    port: PGPORT || 5432,
+    database: POSTGRES_DB || 'titus',
+    username: POSTGRES_USER || 'titus',
+    password: POSTGRES_PASSWORD || 'titus',
     poolSize: 10,
     idleTimeoutMillis: 30000
   }
