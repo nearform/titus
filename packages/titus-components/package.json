@@ -11,13 +11,14 @@
     "umd"
   ],
   "scripts": {
-    "build": "nwb build-react-component --no-demo --copy-files",
-    "build:watch": "nodemon -w src -x 'npm run build'",
-    "clean": "nwb clean-module && nwb clean-demo",
-    "start": "nwb serve-react-demo",
-    "test:nwb": "nwb test-react",
-    "test:coverage": "nwb test-react --coverage",
-    "test:watch": "nwb test-react --server",
+    "build:es5": "babel -d lib src",
+    "build:es6": "babel --no-babelrc --presets=react --plugins=transform-class-properties,transform-object-rest-spread -d es src",
+    "build": "npm run build:es5 && npm run build:es6",
+    "build:watch:es5": "babel -d lib --watch src",
+    "build:watch:es6": "babel --watch  --no-babelrc --presets=react --plugins=transform-class-properties,transform-object-rest-spread -d es src",
+    "clean": "rm -rf lib & rm -rf es",
+    "test": "node test/start.js",
+    "test:watch": "WATCH=true node test/start.js",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
     "prepublish": "npm run build"
@@ -25,9 +26,9 @@
   "dependencies": {
     "@material-ui/core": "^1.1.0",
     "@material-ui/icons": "^1.1.0",
+    "@nearform/react-table": "^1.0.6",
     "downshift": "^2.0.10",
-    "nodemon": "^1.17.5",
-    "@nearform/react-table": "^1.0.6"
+    "nodemon": "^1.17.5"
   },
   "peerDependencies": {
     "@reach/router": "^1.1.1",
@@ -36,7 +37,13 @@
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
     "babel-runtime": "^6.26.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^4.19.1",
     "eslint-config-standard": "^11.0.0",
     "eslint-config-standard-react": "^6.0.0",
@@ -47,7 +54,7 @@
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-react": "^7.9.1",
     "eslint-plugin-standard": "^3.1.0",
-    "nwb": "0.21.x",
+    "jest": "^23.4.1",
     "react": "^16.4.1",
     "react-dom": "^16.4.1"
   },
