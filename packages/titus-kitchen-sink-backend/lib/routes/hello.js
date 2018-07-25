@@ -14,8 +14,6 @@ const helloGeneric = () => ({
       what: 'open',
       subject: 'hello'
     })
-    await trailManager.close()
-
     return `Hello!`
   }
 })

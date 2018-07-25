@@ -5,10 +5,13 @@ Titus is an end-to-end JavaScript stack created for modern web application devel
 This repository is a [monorepo](https://lernajs.io/) containing distinct parts of the Titus stack. Packages include:
 
 - [titus-starter](https://github.com/nearform/titus/tree/master/packages/titus-starter) - A client-side starter shell based off of [create-react-app](https://github.com/facebook/create-react-app) with the addition of [Storybook](https://storybook.js.org/), [Material-UI](https://material-ui.com/), [Reach Router](https://reach.tech/router), [Redux](https://redux.js.org/) and more.
+- [titus-starter-backend](https://github.com/nearform/titus/tree/master/packages/titus-starter-backend) - A server-side starter shell complete with [Hapi](https://hapijs.com/), [PostgreSQL](https://www.postgresql.org/), [Docker](https://www.docker.com/), [GraphQL](https://graphql.org/) and more.
 - [titus-components](https://github.com/nearform/titus/tree/master/packages/titus-components) - A collection of React components ready to drop in to your application.
 - [titus-kitchen-sink](https://github.com/nearform/titus/tree/master/packages/titus-kitchen-sink) - An implementation of the starter shell with detailed examples and documentation.
+- [titus-kitchen-sink-backend](https://github.com/nearform/titus/tree/master/packages/titus-kitchen-sink-backend) - An implementation of the back-end starter shell.
 - [titus-cli](https://github.com/nearform/titus/tree/master/packages/titus-cli) - A command line interface (CLI) to perform common tasks such as installing the starter shells.
-- [titus-backend](https://github.com/nearform/titus/tree/master/packages/titus-backend) - A server-side starter shell complete with [Hapi](https://hapijs.com/), [PostgreSQL](https://www.postgresql.org/), [Docker](https://www.docker.com/), [GraphQL](https://graphql.org/) and more.
+
+
 
 ## Ethos & Goals
 
