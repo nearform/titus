@@ -1,6 +1,7 @@
 FROM nearform/alpine3-s2i-nodejs
 
-WORKDIR /titus
+ARG PROJECT_NAME
+WORKDIR /$PROJECT_NAME
 USER root
 
 # Postgresql client is needed to poll db from cli

@@ -11,9 +11,9 @@ module.exports = {
   db: {
     host: null,
     port: 5432,
-    database: 'titus',
-    username: 'titus',
-    password: 'titus',
+    database: process.env.PGDATABASE,
+    username: process.env.PGUSER,
+    password: process.env.PGPASSWORD,
     poolSize: 10,
     idleTimeoutMillis: 30000
   }

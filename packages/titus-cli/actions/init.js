@@ -27,7 +27,18 @@ module.exports = async (input, { hapi, react }) => {
 
     if (hapi) {
       spinner.render().start(`Setting up api in ${chalk.cyan.bold(`${projectDir}-api`)}`)
-      await fs.copy(`${tmpDir}/packages/titus-backend`, `${projectDir}-api`)
+      await fs.copy(`${tmpDir}/packages/titus-starter-backend`, `${projectDir}-api`)
+      const packageJson = await fs.readFile(`${projectDir}-api/package.json`, 'utf8')
+      const newPackageJson = packageJson
+        .replace(/titus-starter-backend/, `${projectDir}-api`)
+        .replace(/titus/g, projectDir)
+      await fs.writeFile(`${projectDir}-api/package.json`, newPackageJson)
+
+      const envFile = await fs.readFile(`${projectDir}-api/docker/dev.env`, 'utf8')
+      const newEnvFile = envFile
+        .replace(/titus/g, projectDir)
+      await fs.writeFile(`${projectDir}-api/docker/dev.env`, newEnvFile)
+
       spinner.succeed(`Api setup in ${chalk.cyan.bold(`${projectDir}-api`)}`)
     }
 
