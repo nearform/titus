@@ -50,29 +50,29 @@ const init = async () => {
     {
       plugin: trailPlugin,
       options: config.db
-  }
-])
+    }
+  ])
 
   // UI for testing graphql queries - disabled in production
   if (process.env.NODE_ENV !== 'production') {
     await server.register([
-    {
-      plugin: graphiqlHapi,
-      options: {
-        path: '/graphiql',
-        route: {
-          auth: false
-        },
-        graphiqlOptions: req => {
-          return {
-            endpointURL: '/graphql',
-            schema: grapqlSchema
+      {
+        plugin: graphiqlHapi,
+        options: {
+          path: '/graphiql',
+          route: {
+            auth: false
+          },
+          graphiqlOptions: req => {
+            return {
+              endpointURL: '/graphql',
+              schema: grapqlSchema
+            }
           }
         }
       }
-    }
-  ])
-}
+    ])
+  }
 
   await server.start()
   server.logger().info(`Server running at: ${server.info.uri}`)

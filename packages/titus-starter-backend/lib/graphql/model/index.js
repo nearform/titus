@@ -1,6 +1,6 @@
 'use strict'
 
-const loaders= (pg) => {
+const loaders = (pg) => {
   return {
     // Put data loaders here
     // See https://github.com/facebook/dataloader
