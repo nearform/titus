@@ -124,9 +124,9 @@ const MaterialWizard = ({
 
 MaterialWizard.propTypes = {
   classes: PropTypes.object,
-  props: PropTypes.object,
-  events: PropTypes.object,
-  state: PropTypes.object
+  props: PropTypes.object.isRequired,
+  events: PropTypes.object.isRequired,
+  state: PropTypes.object.isRequired
 }
 
 export default withStyles(styles)(MaterialWizard)
