@@ -11,6 +11,11 @@ const pgPlugin = require('./pg-plugin')
 const trailPlugin = require('@nearform/trail-hapi-plugin')
 const routes = require('./routes')
 
+const Inert = require('inert')
+const Vision = require('vision')
+const HapiSwagger = require('hapi-swagger')
+const Pack = require('../package')
+
 const server = hapi.server(config.hapi)
 
 const init = async () => {
@@ -66,8 +71,38 @@ const init = async () => {
     {
       plugin: trailPlugin,
       options: config.db
+    },
+    {
+      plugin: require('@nearform/commentami-backend-hapi-plugin'),
+      options: {
+        pg: config.db,
+        routes: {
+          cors: true
+        },
+        multines: {
+          type: 'redis',
+          host: 'redis',
+          port: 6379
+        }
+      }
     }
   ])
+
+  if (process.env.NODE_ENV === 'development') {
+    await server.register([
+      Inert,
+      Vision,
+      {
+        plugin: HapiSwagger,
+        options: {
+          info: {
+            title: 'Test API Documentation',
+            version: Pack.version
+          }
+        }
+      }
+    ])
+  }
 
   await server.start()
   server.logger().info(`Server running at: ${server.info.uri}`)
