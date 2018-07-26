@@ -74,7 +74,17 @@ const init = async () => {
     },
     {
       plugin: require('@nearform/commentami-backend-hapi-plugin'),
-      options: { pg: config.db }
+      options: {
+        pg: config.db,
+        routes: {
+          cors: true
+        },
+        multines: {
+          type: 'redis',
+          host: 'redis',
+          port: 6379
+        }
+      }
     }
   ])
 
