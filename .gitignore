@@ -5,6 +5,7 @@
 
 # misc
 .DS_Store
+.idea
 
 npm-debug.log*
 yarn-debug.log*
