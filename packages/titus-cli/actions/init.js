@@ -17,11 +17,17 @@ module.exports = async (input, { hapi, react }) => {
   try {
     spinner.start('Pulling files from GitHub')
     await git.clone(REPO_URL, tmpDir)
+    await git.cwd(tmpDir)
+    await git.checkout('split-backend')
     spinner.succeed('Pulled files from GitHub')
 
     if (react) {
       spinner.render().start(`Setting up app in ${chalk.cyan.bold(`${projectDir}-app`)}`)
       await fs.copy(`${tmpDir}/packages/titus-starter`, `${projectDir}-app`)
+      const packageJson = await fs.readFile(`${projectDir}-app/package.json`, 'utf8')
+      const newPackageJson = packageJson
+        .replace(/titus-starter/, `${projectDir}-app`)
+      await fs.writeFile(`${projectDir}-app/package.json`, newPackageJson)
       spinner.succeed(`App setup in ${chalk.cyan.bold(`${projectDir}-app`)}`)
     }
 
