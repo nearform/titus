@@ -17,9 +17,14 @@ module.exports = {
     server.ext({
       type: 'onPreHandler',
       method: async (request, h) => {
+        if (!request.route.settings.plugins[pluginName]) {
+          return h.continue
+        }
+
+        server.logger().debug('Getting database connection')
         request.pg = await pool.connect()
         if (isTransactional(request)) {
-          server.logger().info('BEGIN TRANSACTION')
+          server.logger().debug('Begin transaction')
           await request.pg.query('BEGIN')
         }
         return h.continue
@@ -34,10 +39,11 @@ module.exports = {
           (request.response.source && request.response.source.error))
 
           const action = error ? 'ROLLBACK' : 'COMMIT'
-          server.logger().info(action)
+          server.logger().debug(action)
           try { request.pg.query(action) } catch (e) { server.logger().error(e) }
         }
 
+        server.logger().debug('Returning database connection.')
         try { request.pg.release() } catch (e) { server.logger().error(e) }
       }
     })

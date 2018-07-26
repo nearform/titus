@@ -5,7 +5,8 @@ module.exports = {
   },
   logger: {
     pino: {
-      prettyPrint: process.env.NODE_ENV !== 'production'
+      prettyPrint: process.env.NODE_ENV !== 'production',
+      level: 'debug'
     }
   },
   db: {
