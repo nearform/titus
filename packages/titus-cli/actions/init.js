@@ -17,8 +17,6 @@ module.exports = async (input, { hapi, react }) => {
   try {
     spinner.start('Pulling files from GitHub')
     await git.clone(REPO_URL, tmpDir)
-    await git.cwd(tmpDir)
-    await git.checkout('split-backend')
     spinner.succeed('Pulled files from GitHub')
 
     if (react) {
