@@ -36,27 +36,11 @@ const init = async () => {
             pg: req.pg,
             loaders: loaders(req.pg)
           },
-
           formatError: err => {
             req.app.gqlError = err
             return err
           }
         })
-      }
-    },
-    {
-      plugin: graphiqlHapi,
-      options: {
-        path: '/graphiql',
-        route: {
-          auth: false
-        },
-        graphiqlOptions: req => {
-          return {
-            endpointURL: '/graphql',
-            schema: grapqlSchema
-          }
-        }
       }
     },
     {
@@ -68,6 +52,27 @@ const init = async () => {
       options: config.db
     }
   ])
+
+  // UI for testing graphql queries - disabled in production
+  if (process.env.NODE_ENV === 'development') {
+    await server.register([
+      {
+        plugin: graphiqlHapi,
+        options: {
+          path: '/graphiql',
+          route: {
+            auth: false
+          },
+          graphiqlOptions: req => {
+            return {
+              endpointURL: '/graphql',
+              schema: grapqlSchema
+            }
+          }
+        }
+      }
+    ])
+  }
 
   await server.start()
   server.logger().info(`Server running at: ${server.info.uri}`)

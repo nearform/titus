@@ -54,7 +54,7 @@ const init = async () => {
   ])
 
   // UI for testing graphql queries - disabled in production
-  if (process.env.NODE_ENV !== 'production') {
+  if (process.env.NODE_ENV === 'development') {
     await server.register([
       {
         plugin: graphiqlHapi,
