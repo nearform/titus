@@ -94,7 +94,7 @@ class Navigation extends Component {
     title: PropTypes.string.isRequired,
     classes: PropTypes.object.isRequired,
     theme: PropTypes.object.isRequired,
-    items: PropTypes.func,
+    items: PropTypes.func.isRequired,
     main: PropTypes.func.isRequired,
     headerRight: PropTypes.func
   }
