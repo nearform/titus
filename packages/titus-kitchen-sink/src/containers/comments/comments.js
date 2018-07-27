@@ -1,16 +1,15 @@
 // import React, { Fragment } from 'react'
 import React from 'react'
+import { withStyles } from '@material-ui/core/styles'
 import {
   Reference,
   SidebarsController
 } from '@nearform/commentami-react-components/dist/ui'
-
 import {
   Resource,
   WebsocketService,
   buildWebsocketClient
 } from '@nearform/commentami-react-components'
-
 import { Sidebar } from './components/sidebar'
 
 // import PropTypes from 'prop-types'
@@ -21,6 +20,21 @@ import { Sidebar } from './components/sidebar'
 
 // import Table from './table/table'
 // import { loadFood, deleteFood, updateFood, createFood, loadFoodGroups } from '../../store/api/api-actions'
+
+const styles = theme => ({
+  referenceActive: {
+    backgroundColor: '#ffffb3'
+  },
+  reference: {
+    position: 'relative',
+    '& .nf-commentami-marker': {
+      position: 'absolute',
+      top: '6px',
+      left: '-24px'
+    }
+  }
+})
+
 
 class Comments extends React.Component {
   constructor(props) {
@@ -69,13 +83,13 @@ class Comments extends React.Component {
     return (
       <SidebarsController>
         <Resource resource="titus-demo-comments" service={this.state.service}>
-          <Reference reference="reference-1">
+          <Reference reference="reference-1" className={this.props.classes.reference} activeClassName={this.props.classes.referenceActive}>
             <h1>Commentable title of commentable sections</h1>
           </Reference>
-          <Reference reference="reference-2">
+          <Reference reference="reference-2" className={this.props.classes.reference} activeClassName={this.props.classes.referenceActive}>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in justo id lorem venenatis facilisis. Morbi dictum euismod ipsum et convallis. Cras diam dui, maximus eu posuere et, pulvinar ac lorem. In hac habitasse platea dictumst. Phasellus venenatis eget sem vitae auctor.</p>
           </Reference>
-          <Reference reference="reference-3">
+          <Reference reference="reference-3" className={this.props.classes.reference} activeClassName={this.props.classes.referenceActive}>
             <p>A bit more of text that is commentable</p>
           </Reference>
           <Sidebar />
@@ -131,4 +145,4 @@ class Comments extends React.Component {
 // }
 
 // export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(Api))
-export default Comments
+export default withStyles(styles)(Comments)

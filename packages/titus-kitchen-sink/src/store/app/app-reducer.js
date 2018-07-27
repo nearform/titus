@@ -1,7 +1,8 @@
 import * as constants from './app-constants'
 
 const initialState = {
-  config: {}
+  config: {},
+  user: { username: 'filippo' }
 }
 
 export default (state = initialState, { type, data }) => {
