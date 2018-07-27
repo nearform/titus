@@ -38,7 +38,7 @@ const Suggestion = ({
     component='div'
     style={{
       fontWeight:
-        selectedItem && selectedItem.value === suggestion.value ? 500 : 400
+      /* istanbul ignore next */ selectedItem && selectedItem.value === suggestion.value ? 500 : 400
     }}
   >
     {suggestion.value}

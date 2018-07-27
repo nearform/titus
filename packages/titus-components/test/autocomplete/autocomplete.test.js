@@ -53,16 +53,16 @@ describe('Navigation', () => {
 
     test('With value in data field and filterType == contains', () => {
       const wrapper = mount(
-        <Autocomplete
-          filterType='contains'
-          data={sampleData}
-        />
+        <Autocomplete filterType='contains' data={sampleData} />
       )
       const spy = jest.spyOn(wrapper.instance(), 'getSuggestions')
       const input = wrapper.find('input')
       input.simulate('change', { target: { value: 'Ab' } })
 
-      expect(spy).toHaveReturnedWith([{ key: 1, value: 'Abcd' }, { key: 3, value: 'zAbcd' }])
+      expect(spy).toHaveReturnedWith([
+        { key: 1, value: 'Abcd' },
+        { key: 3, value: 'zAbcd' }
+      ])
     })
 
     test('With suggestion callback', () => {
@@ -75,13 +75,30 @@ describe('Navigation', () => {
         />
       )
 
-      mockSuggestion.mockReturnValueOnce([{ key: 1, value: 'AbcdSugg' }, { key: 3, value: 'zAbcdSugg' }])
+      mockSuggestion.mockReturnValueOnce([
+        { key: 1, value: 'AbcdSugg' },
+        { key: 3, value: 'zAbcdSugg' }
+      ])
       const spy = jest.spyOn(wrapper.instance(), 'getSuggestions')
       const input = wrapper.find('input')
       input.simulate('change', { target: { value: 'Ab' } })
 
       expect(mockSuggestion).toHaveBeenCalledWith('Ab', 'suggestion', 5)
-      expect(spy).toHaveReturnedWith([{ key: 1, value: 'AbcdSugg' }, { key: 3, value: 'zAbcdSugg' }])
+      expect(spy).toHaveReturnedWith([
+        { key: 1, value: 'AbcdSugg' },
+        { key: 3, value: 'zAbcdSugg' }
+      ])
+    })
+  })
+
+  describe('methods', () => {
+    test('itemToString', () => {
+      const wrapper = mount(
+        <Autocomplete filterType='suggestion' data={sampleData} />
+      )
+
+      expect(wrapper.instance().itemToString({ value: 'foo' })).toBe('foo')
+      expect(wrapper.instance().itemToString()).toBe('')
     })
   })
 })

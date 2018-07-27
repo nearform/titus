@@ -3,6 +3,7 @@ import { Link } from '@reach/router'
 
 import ListItem from '@material-ui/core/ListItem'
 
+/* istanbul ignore next */
 // for some reason ListItem won't accept a class as the component prop
 const LinkAsFn = props => <Link {...props} />
 
