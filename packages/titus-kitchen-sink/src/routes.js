@@ -7,6 +7,7 @@ import Visualisations from './containers/visualisations/visualisations'
 import Tables from './containers/tables/tables'
 import AutocompleteDemo from './containers/autocomplete/autocomplete-demo'
 import Api from './containers/api/api'
+import Comments from './containers/comments/comments'
 
 const Routes = () => (
   <Router>
@@ -16,6 +17,7 @@ const Routes = () => (
     <Tables path='tables/*' />
     <AutocompleteDemo path='autocomplete/*' />
     <Api path='api/*' />
+    <Comments path='comments/*' />
   </Router>
 )
 
