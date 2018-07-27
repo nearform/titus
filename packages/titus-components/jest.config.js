@@ -8,5 +8,7 @@ module.exports = {
   setupTestFrameworkScriptFile: './test/config.js',
   transform: {
     '^.+\\.js$': '<rootDir>/test/jest.transform.js'
-  }
+  },
+  testEnvironment: 'jest-environment-jsdom-global',
+  testURL: 'http://localhost/'
 }
