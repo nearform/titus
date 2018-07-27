@@ -114,7 +114,7 @@ class MaterialUiTable extends React.Component {
                 selected={selected}
               >
                 {rowData.map(({ accessor, data, key }) => {
-                  if (accessor && !!columns.find(x => x.accessor === accessor).hidden) {
+                  if (accessor && !!(columns.find(x => x.accessor === accessor) || {}).hidden) {
                     return
                   }
                   return <TableCell padding='checkbox' key={key}>
