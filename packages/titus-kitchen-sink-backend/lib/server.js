@@ -50,12 +50,37 @@ const init = async () => {
     {
       plugin: trailPlugin,
       options: config.db
+    },
+    {
+      plugin: require('@nearform/commentami-backend-hapi-plugin'),
+      options: {
+        pg: config.db,
+        routes: {
+          cors: true
+        },
+        multines: {
+          type: 'redis',
+          host: 'redis',
+          port: 6379
+        }
+      }
     }
   ])
 
-  // UI for testing graphql queries - disabled in production
   if (process.env.NODE_ENV === 'development') {
     await server.register([
+      require('inert'),
+      require('vision'),
+      {
+        plugin: require('hapi-swagger'),
+        options: {
+          info: {
+            title: 'Test API Documentation',
+            version: require('../package').version
+          }
+        }
+      },
+      // UI for testing graphql queries - disabled in production
       {
         plugin: graphiqlHapi,
         options: {

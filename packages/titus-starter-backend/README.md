@@ -14,6 +14,16 @@ A starter Hapi and PostgreSQL setup running in Docker.
 * Sample test setup using Jest
 * Linting using eslint/Standard
 
+## Integrations
+
+### Commentami
+
+[`Commentami`](https://github.com/nearform/commentami) is a commenting system that can be integrated in your backend (and frontend).
+
+`Commentami` comes with a `@nearform/commentami-backend-hapi-plugin` that will let you include its functionalities (storing comments and mentions, sending notifications, etc.) in a Hapi (>17) server.
+
+To see an example on how you can integrate it, you can have a look at [`titus-kitchen-sink-backend`](https://github.com/nearform/titus/tree/master/packages/titus-kitchen-sink-backend)
+
 ## Developing
 
 ### Docker

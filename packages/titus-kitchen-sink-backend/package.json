@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "migrate": "node ./tools/migrate build",
+    "migrate": "node ./tools/migrate build && npx commentami-core-db-migrate",
     "dev:seed": "node ./tools/migrate seed_dev",
     "docker:dev:start": "docker-compose -f docker/docker-compose-dev.yml up -d --build",
     "docker:dev:stop": "docker-compose -f docker/docker-compose-dev.yml down",
@@ -22,6 +22,7 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
+    "@nearform/commentami-backend-hapi-plugin": "^1.0.5",
     "@nearform/sql": "^1.0.1",
     "@nearform/trail-core": "^1.0.1",
     "@nearform/trail-hapi-plugin": "^1.0.1",
@@ -47,8 +48,11 @@
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
+    "hapi-swagger": "^9.1.1",
+    "inert": "^5.1.0",
     "jest": "^23.1.0",
-    "nodemon": "^1.17.5"
+    "nodemon": "^1.17.5",
+    "vision": "^5.3.3"
   },
   "jest": {
     "verbose": true,
