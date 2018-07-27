@@ -11,11 +11,6 @@ const pgPlugin = require('./pg-plugin')
 const trailPlugin = require('@nearform/trail-hapi-plugin')
 const routes = require('./routes')
 
-const Inert = require('inert')
-const Vision = require('vision')
-const HapiSwagger = require('hapi-swagger')
-const Pack = require('../package')
-
 const server = hapi.server(config.hapi)
 
 const init = async () => {
@@ -74,14 +69,14 @@ const init = async () => {
 
   if (process.env.NODE_ENV === 'development') {
     await server.register([
-      Inert,
-      Vision,
+      require('inert'),
+      require('vision'),
       {
-        plugin: HapiSwagger,
+        plugin: require('hapi-swagger'),
         options: {
           info: {
             title: 'Test API Documentation',
-            version: Pack.version
+            version: require('../package').version
           }
         }
       },
