@@ -14,6 +14,10 @@ A starter Hapi and PostgreSQL setup running in Docker.
 * Sample test setup using Jest
 * Linting using eslint/Standard
 
+## API documentation
+
+Setting the `NODE_ENV` to `development`, you will be able to access the API `swagger` documentation at [http://localhost:5000/documentation](http://localhost:5000/documentation)
+
 ## Developing
 
 ### Docker
