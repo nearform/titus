@@ -30,7 +30,7 @@ class Autocomplete extends React.Component {
 
   getSuggestions = inputValue => {
     if (!inputValue) return []
-    const { data, filterType, maxResults = 5, onGetSuggestions } = this.props
+    const { data = [], filterType, maxResults = 5, onGetSuggestions } = this.props
 
     if (filterType) {
       if (!['startswith', 'contains', ''].includes(filterType.toLowerCase())) {
@@ -40,7 +40,7 @@ class Autocomplete extends React.Component {
 
     const a = inputValue.toLowerCase()
 
-    return (filterType.toLowerCase() === 'contains'
+    return ((filterType && filterType.toLowerCase() === 'contains')
       ? data.filter(b => b.value.toLowerCase().indexOf(a) > -1)
       : data.filter(b => b.value.toLowerCase().startsWith(a))
     )
