@@ -108,7 +108,14 @@ class Navigation extends Component {
 
   render () {
     const { handleMenuOpen, handleMenuClose } = this
-    const { classes, title, main, items, theme, headerRight: HeaderRight } = this.props
+    const {
+      classes,
+      title,
+      main,
+      items,
+      theme,
+      headerRight: HeaderRight
+    } = this.props
     const { menuOpen } = this.state
 
     return (
@@ -118,6 +125,7 @@ class Navigation extends Component {
           className={classNames(classes.appBar, {
             [classes.appBarShift]: menuOpen
           })}
+          data-testid='app-bar'
         >
           <Toolbar disableGutters={!menuOpen}>
             <IconButton
@@ -134,7 +142,7 @@ class Navigation extends Component {
               {title}
             </Typography>
 
-            { HeaderRight && <HeaderRight className={classes.headerRight} />}
+            {HeaderRight && <HeaderRight className={classes.headerRight} />}
           </Toolbar>
         </AppBar>
         <Drawer
@@ -148,13 +156,14 @@ class Navigation extends Component {
           open={menuOpen}
           /* any click in the drawer will propogate and close it */
           onClick={handleMenuClose}
+          data-testid='app-bar-drawer'
         >
           <div className={classes.toolbar}>
             <IconButton>
               {theme.direction === 'rtl' ? (
-                <ChevronRightIcon />
+                <ChevronRightIcon data-testid='app-bar-drawer-icon-right'/>
               ) : (
-                <ChevronLeftIcon />
+                <ChevronLeftIcon data-testid='app-bar-drawer-icon-left'/>
               )}
             </IconButton>
           </div>

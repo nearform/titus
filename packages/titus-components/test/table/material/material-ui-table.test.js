@@ -1,111 +1,117 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { render, fireEvent } from 'react-testing-library'
 import cloneDeep from 'lodash/cloneDeep'
-import Checkbox from '@material-ui/core/Checkbox'
 import MaterialUiTable from '../../../src/table/material/material-ui-table'
-import { columns, rowsWithRowData} from '../__mock__/data'
-
-import {
-  TableHeaderRow as NfTableHeaderRow,
-  TableHeader as NfTableHeader
-} from '@nearform/react-table'
-
-import TableToolbar from '../../../src/table/material/table-toolbar'
+import { columns, rowsWithRowData } from '../__mock__/data'
 
 describe('Table Material MaterialUiTable', () => {
   describe('rendering', () => {
-    test('The numSelected is partial', () => {
-      const wrapper = shallow(<MaterialUiTable
-        selecting={['some']}
-        columns={columns}
-        rows={rowsWithRowData}
-        total={2}
-        pageSize={2}
-      />)
+    test('The numSelected is empty', () => {
+      const { container } = render(
+        <MaterialUiTable
+          selecting={['']}
+          columns={columns}
+          rows={rowsWithRowData}
+          total={2}
+          pageSize={2}
+        />
+      )
 
-      expect(wrapper.find(TableToolbar).prop('numSelected')).toBe(1)
+      let total = 0
+      container.querySelectorAll('thead tr th span').forEach(item => {
+        total += (item.getAttribute('class') || '').includes('MuiCheckbox-checked')
+          ? 1
+          : 0
+      })
+      expect(total).toBe(0)
     })
 
-    test('The numSelected is partial', () => {
-      const wrapper = shallow(<MaterialUiTable
-        selecting={['all']}
-        columns={columns}
-        rows={rowsWithRowData}
-        total={2}
-        pageSize={2}
-      />)
+    test('The numSelected is "all"', () => {
+      const { container } = render(
+        <MaterialUiTable
+          selecting={['all']}
+          columns={columns}
+          rows={rowsWithRowData}
+          total={2}
+          pageSize={2}
+        />
+      )
 
-      expect(wrapper.find(TableToolbar).prop('numSelected')).toBe(2)
+      let total = 0
+      container.querySelectorAll('thead tr th span').forEach(item => {
+        total += (item.getAttribute('class') || '').includes('MuiCheckbox-checked')
+          ? 1
+          : 0
+      })
+      expect(total).toBe(1)
     })
 
     test('Add only the headers with accessor defined', () => {
       const newColumns = cloneDeep(columns)
       delete newColumns[1].accessor
-      const wrapper = shallow(<MaterialUiTable
-        selecting={['all']}
-        columns={newColumns}
-        rows={rowsWithRowData}
-        total={2}
-        pageSize={2}
-      />)
+      const { container } = render(
+        <MaterialUiTable
+          selecting={['all']}
+          columns={newColumns}
+          rows={rowsWithRowData}
+          total={2}
+          pageSize={2}
+        />
+      )
+      const columnsInTable = container.querySelectorAll('thead th')
 
-      expect(wrapper.find(NfTableHeader).at(1).prop('accessor')).toBe('name')
-      expect(wrapper.find(NfTableHeader).at(2).prop('accessor')).toBe('fat')
-      expect(wrapper.find(NfTableHeader).at(3).prop('accessor')).toBe('carbs')
-      expect(wrapper.find(NfTableHeader).at(4).prop('accessor')).toBe('protein')
-      expect(wrapper.find(Checkbox).at(1).prop('value')).toBe('key-1')
-      expect(wrapper.find(Checkbox).at(2).prop('value')).toBe('key-2')
-      expect(wrapper.find(Checkbox).at(3).prop('value')).toBe('key-3')
+      expect(columnsInTable[1].textContent).toBe(columns[0].label)
+      expect(columnsInTable[2].textContent).toBe(columns[2].label)
+      expect(columnsInTable[3].textContent).toBe(columns[4].label)
     })
   })
 
   describe('Actions', () => {
     test('handle delete', () => {
+      const newRowData = cloneDeep(rowsWithRowData)
       const mockOnDelete = jest.fn()
-      const wrapper = shallow(<MaterialUiTable
-        selecting={['all']}
-        columns={columns}
-        rows={rowsWithRowData}
-        total={2}
-        pageSize={2}
-        onDelete={mockOnDelete}
-      />)
+      const mockRowSelect = (id) => {
+        const itemFound = newRowData.find(item => item.rowKey === id)
+        itemFound.selected = !itemFound.selected
+      }
+      const { container } = render(
+        <MaterialUiTable
+          selecting={['all']}
+          columns={columns}
+          rows={newRowData}
+          total={2}
+          pageSize={2}
+          onDelete={mockOnDelete}
+          handleRowSelect={mockRowSelect}
+        />
+      )
+      const checkBox = container.querySelector('input[value="key-1"]')
+      const deleteButton = container.querySelector('button[aria-label="Delete"]')
 
-      wrapper.instance().handleDelete()
-      expect(mockOnDelete).toHaveBeenCalledWith([rowsWithRowData[2]])
-    })
-    test('handle row select', () => {
-      const mockRowSelect = jest.fn()
-      const wrapper = shallow(<MaterialUiTable
-        selecting={['all']}
-        columns={columns}
-        rows={rowsWithRowData}
-        total={2}
-        pageSize={2}
-        handleRowSelect={mockRowSelect}
-      />)
+      fireEvent.click(checkBox)
+      fireEvent.click(deleteButton)
 
-      wrapper.instance().handleRowSelect({target: {value: 'key-1'}})
-      expect(mockRowSelect).toHaveBeenCalledWith('key-1')
+      expect(mockOnDelete.mock.calls[0][0][0].selected).toBeTruthy()
     })
 
     test('handle change page', () => {
       const mockChangePage = jest.fn()
-      const wrapper = shallow(<MaterialUiTable
-        selecting={['all']}
-        columns={columns}
-        rows={rowsWithRowData}
-        total={2}
-        pageSize={2}
-        handlePageChangeBlur={mockChangePage}
-      />)
+      const { container } = render(
+        <MaterialUiTable
+          selecting={['all']}
+          columns={columns}
+          rows={rowsWithRowData}
+          total={2}
+          pageSize={2}
+          currentPage={0}
+          handlePageChangeBlur={mockChangePage}
+        />
+      )
 
-      wrapper.instance().handleChangePage({target: {value: 1}}, 2)
-      expect(mockChangePage).toHaveBeenCalledWith({target: {value: 3}})
+      const nextPageButton = container.querySelector('button[aria-label="Next Page"]')
 
-      mockChangePage.mockClear()
-      wrapper.instance().handleChangePage()
-      expect(mockChangePage).not.toHaveBeenCalled()
+      fireEvent.click(nextPageButton)
+      expect(mockChangePage).toHaveBeenCalled()
     })
   })
 })

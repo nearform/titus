@@ -1,5 +1,5 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render, fireEvent } from 'react-testing-library'
 
 import MaterialWizard from '../../../src/wizard/material/material-wizard'
 
@@ -31,45 +31,33 @@ describe('Material Wizard', () => {
     }
   })
 
+  it('should be defined', () => {
+    expect(MaterialWizard).toBeDefined()
+  })
+
   describe('rendering', () => {
     test('With required props it should render correctly', () => {
-      const wrapper = mount(
+      const { container, getByTestId } = render(
         <MaterialWizard props={props} events={events} state={state} />
       )
-      expect(
-        wrapper
-          .find('h1')
-          .first()
-          .text()
-      ).toBe('Wizard Title')
 
-      expect(
-        wrapper
-          .find('h1')
-          .at(1)
-          .text()
-      ).toBe('Step 1 Description')
+      expect(getByTestId('wizard-title').textContent).toBe('Wizard Title')
+      expect(getByTestId('wizard-description').textContent).toBe('Step 1 Description')
 
-      expect(wrapper.find('h2').text()).toBe('Wizard Finished Message')
-      expect(wrapper.find('#mock-step-1').length).toBe(1)
-      expect(wrapper.find('#mock-step-2').length).toBe(1)
-      expect(wrapper.find('div > div div p').text()).toBe('Required')
-      expect(
-        wrapper
-          .find('button')
-          .at(0)
-          .text()
-      ).toBe('Back')
-      expect(
-        wrapper
-          .find('button')
-          .at(1)
-          .text()
-      ).toBe('Next')
+      expect(container.querySelector('h2').textContent).toBe(
+        'Wizard Finished Message'
+      )
+      expect(container.querySelector('#mock-step-1')).not.toBeNull()
+      expect(container.querySelector('#mock-step-2')).not.toBeNull()
+      expect(container.querySelector('div > div div p').textContent).toBe(
+        'Required'
+      )
+      expect(getByTestId('wizard-control-bar-back').textContent).toBe('Back')
+      expect(getByTestId('wizard-control-bar-next').textContent).toBe('Next')
     })
 
     test('The last tab', () => {
-      const wrapper = mount(
+      const { getByTestId } = render(
         <MaterialWizard
           props={props}
           events={events}
@@ -77,30 +65,13 @@ describe('Material Wizard', () => {
         />
       )
 
-      expect(
-        wrapper
-          .find('h1')
-          .at(1)
-          .text()
-      ).toBe('Step 2 Description')
-
-      expect(
-        wrapper
-          .find('button')
-          .at(0)
-          .text()
-      ).toBe('Back')
-
-      expect(
-        wrapper
-          .find('button')
-          .at(1)
-          .text()
-      ).toBe('Finish')
+      expect(getByTestId('wizard-description').textContent).toBe('Step 2 Description')
+      expect(getByTestId('wizard-control-bar-back').textContent).toBe('Back')
+      expect(getByTestId('wizard-control-bar-next').textContent).toBe('Finish')
     })
 
     test('If the current step is equal the number of steps', () => {
-      const wrapper = mount(
+      const { getByTestId } = render(
         <MaterialWizard
           props={props}
           events={events}
@@ -108,42 +79,34 @@ describe('Material Wizard', () => {
         />
       )
 
-      expect(wrapper.find('button').text()).toBe('Reset')
+      expect(getByTestId('wizard-control-bar-reset').textContent).toBe('Reset')
     })
 
     test('If the current step is bigger than the number of steps', () => {
-      const wrapper = mount(
+      const { getByTestId } = render(
         <MaterialWizard
           props={props}
           events={events}
           state={Object.assign({}, state, { stepIndex: 3 })}
         />
       )
-      expect(
-        wrapper
-          .find('h1')
-          .at(1)
-          .text()
-      ).toBe('')
+      expect(getByTestId('wizard-description').textContent).toBe('')
     })
   })
 
   describe('Events', () => {
     test('Next', () => {
-      const wrapper = mount(
+      const { getByTestId } = render(
         <MaterialWizard props={props} events={events} state={state} />
       )
 
-      wrapper
-        .find('button')
-        .at(1)
-        .simulate('click')
+      fireEvent.click(getByTestId('wizard-control-bar-next'))
 
       expect(events.next).toHaveBeenCalled()
     })
 
     test('Back', () => {
-      const wrapper = mount(
+      const { getByTestId } = render(
         <MaterialWizard
           props={props}
           events={events}
@@ -151,29 +114,23 @@ describe('Material Wizard', () => {
         />
       )
 
-      wrapper
-        .find('button')
-        .at(0)
-        .simulate('click')
+      fireEvent.click(getByTestId('wizard-control-bar-back'))
 
       expect(events.back).toHaveBeenCalled()
     })
 
     test('Back on the first step should not be called', () => {
-      const wrapper = mount(
+      const { getByTestId } = render(
         <MaterialWizard props={props} events={events} state={state} />
       )
 
-      wrapper
-        .find('button')
-        .at(0)
-        .simulate('click')
+      fireEvent.click(getByTestId('wizard-control-bar-back'))
 
       expect(events.back).not.toHaveBeenCalled()
     })
 
     test('Back on a finished wizard should not be called', () => {
-      const wrapper = mount(
+      const { getByTestId } = render(
         <MaterialWizard
           props={props}
           events={events}
@@ -181,16 +138,13 @@ describe('Material Wizard', () => {
         />
       )
 
-      wrapper
-        .find('button')
-        .at(0)
-        .simulate('click')
+      fireEvent.click(getByTestId('wizard-control-bar-back'))
 
       expect(events.back).not.toHaveBeenCalled()
     })
 
     test('Reset', () => {
-      const wrapper = mount(
+      const { getByTestId } = render(
         <MaterialWizard
           props={props}
           events={events}
@@ -198,10 +152,7 @@ describe('Material Wizard', () => {
         />
       )
 
-      wrapper
-        .find('button')
-        .at(0)
-        .simulate('click')
+      fireEvent.click(getByTestId('wizard-control-bar-reset'))
 
       expect(events.reset).toHaveBeenCalled()
     })

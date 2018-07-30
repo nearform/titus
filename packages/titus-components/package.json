@@ -15,8 +15,8 @@
     "build:watch": "nodemon -w src -x 'npm run build'",
     "clean": "nwb clean-module && nwb clean-demo",
     "start": "nwb serve-react-demo",
-    "test": "node test/start.js",
-    "test:watch": "WATCH=true node test/start.js",
+    "test": "jest --coverage --runInBand",
+    "test:watch": "npm run test -- --watch ",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
     "prepublish": "npm run build"
@@ -59,7 +59,8 @@
     "lodash": "^4.17.10",
     "nwb": "0.21.x",
     "react": "^16.4.1",
-    "react-dom": "^16.4.1"
+    "react-dom": "^16.4.1",
+    "react-testing-library": "^4.0.2"
   },
   "license": "Apache-2.0",
   "repository": "nearform/titus",

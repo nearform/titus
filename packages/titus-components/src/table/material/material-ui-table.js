@@ -41,6 +41,7 @@ class MaterialUiTable extends React.Component {
   }
 
   handleChangePage = (event, page) => {
+    // FIXME Is this check required?
     if (event) {
       event.target.value = page + 1 // material ui is 0 offset so adjust for nf-table
       this.props.handlePageChangeBlur(event)
@@ -72,18 +73,18 @@ class MaterialUiTable extends React.Component {
         />
         <Table>
           <NfTableHeaderRow component={HeaderRow}>
-            {[<NfTableHeader key='select-all'>
-              <TableCell padding='checkbox'>
-                <Checkbox
-                  color='primary'
-                  value='all'
-                  onClick={handleRowSelect}
-                  checked={selecting[0] === 'all'}
-                />
-              </TableCell>
-            </NfTableHeader>,
-            ...columns.reduce(
-              (acc, curr, index) => {
+            {[
+              <NfTableHeader key='select-all'>
+                <TableCell padding='checkbox'>
+                  <Checkbox
+                    color='primary'
+                    value='all'
+                    onClick={handleRowSelect}
+                    checked={selecting[0] === 'all'}
+                  />
+                </TableCell>
+              </NfTableHeader>,
+              ...columns.reduce((acc, curr, index) => {
                 const { accessor, sortable, label, hidden } = curr
                 if (accessor) {
                   acc.push(
@@ -92,7 +93,8 @@ class MaterialUiTable extends React.Component {
                       sortable={sortable}
                       accessor={accessor}
                       component={SortingHeaderCell}
-                      hidden={hidden}>
+                      hidden={hidden}
+                    >
                       {label}
                     </NfTableHeader>
                   )
@@ -100,7 +102,6 @@ class MaterialUiTable extends React.Component {
                 return acc
               }, [])
             ]}
-
           </NfTableHeaderRow>
 
           <TableBody>
@@ -114,21 +115,26 @@ class MaterialUiTable extends React.Component {
                 selected={selected}
               >
                 {rowData.map(({ accessor, data, key }) => {
-                  if (accessor && !!(columns.find(x => x.accessor === accessor) || {}).hidden) {
+                  if (
+                    accessor &&
+                    !!(columns.find(x => x.accessor === accessor) || {}).hidden
+                  ) {
                     return
                   }
-                  return <TableCell padding='checkbox' key={key}>
-                    {accessor ? (
-                      data
-                    ) : (
-                      <Checkbox
-                        color='primary'
-                        value={rowKey}
-                        checked={selected}
-                        onClick={handleRowSelect}
-                      />
-                    )}
-                  </TableCell>
+                  return (
+                    <TableCell padding='checkbox' key={key}>
+                      {accessor ? (
+                        data
+                      ) : (
+                        <Checkbox
+                          color='primary'
+                          value={rowKey}
+                          checked={selected}
+                          onClick={handleRowSelect}
+                        />
+                      )}
+                    </TableCell>
+                  )
                 })}
               </TableRow>
             ))}

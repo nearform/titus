@@ -1,5 +1,9 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import {
+  render,
+  fireEvent
+} from 'react-testing-library'
+
 import { createMuiTheme } from '@material-ui/core/styles'
 import { MuiThemeProvider } from '@material-ui/core'
 
@@ -21,23 +25,28 @@ const HeaderRight = ({ className }) => (
 )
 
 describe('Navigation', () => {
+  it('should be defined', () => {
+    expect(Navigation).toBeDefined()
+  })
+
   describe('rendering', () => {
     test('With required props it should render correctly', () => {
-      const wrapper = mount(
+      const { container, getByTestId } = render(
         <Navigation items={Items} main={Main} title='Test title' />
       )
 
-      expect(wrapper.find('#mock-main').length).toBe(1)
-      expect(wrapper.find('#mock-items').length).toBe(1)
-      expect(wrapper.find('#mock-items-menuopen').length).toBe(0)
-      expect(wrapper.find('#mock-main-menuopen').length).toBe(0)
-      expect(wrapper.find('h2').text()).toBe('Test title')
-
-      expect(wrapper.find('Drawer').props().open).toBeFalsy()
+      expect(container.querySelector('#mock-main')).not.toBeNull()
+      expect(container.querySelector('#mock-items')).not.toBeNull()
+      expect(container.querySelector('#mock-items-menuopen')).toBeNull()
+      expect(container.querySelector('#mock-main-menuopen')).toBeNull()
+      expect(container.querySelector('h2').textContent).toBe('Test title')
+      expect(
+        getByTestId('app-bar-drawer').firstChild.getAttribute('class')
+      ).toContain('drawerPaperClose')
     })
 
     test('If headerRight is passed it should be rendered', () => {
-      const wrapper = mount(
+      const { container } = render(
         <Navigation
           items={Items}
           main={Main}
@@ -46,16 +55,16 @@ describe('Navigation', () => {
         />
       )
 
-      expect(wrapper.find('#mock-header-right').length).toBe(1)
-      expect(wrapper.find('#mock-header-right').props().className).toContain(
-        'headerRight'
-      )
+      expect(container.querySelector('#mock-header-right')).not.toBeNull()
+      expect(
+        container.querySelector('#mock-header-right').getAttribute('class')
+      ).toContain('headerRight')
     })
   })
 
   describe('OpenClose Drawer', () => {
     test('Click the iconbutton should open the Drawer', () => {
-      const wrapper = mount(
+      const { container, getByTestId } = render(
         <Navigation
           items={Items}
           main={Main}
@@ -63,20 +72,21 @@ describe('Navigation', () => {
           headerRight={HeaderRight}
         />
       )
-      expect(wrapper.find('AppBar').props().className).not.toContain(
-        'appBarShift'
-      )
+      expect(
+        getByTestId('app-bar-drawer').firstChild.getAttribute('class')
+      ).toContain('drawerPaperClose')
 
-      wrapper.find('button[aria-label="Open Menu"]').simulate('click')
-      wrapper.update()
-      expect(wrapper.find('AppBar').props().className).toContain('appBarShift')
-      expect(wrapper.find('#mock-items-menuopen').length).toBe(1)
-      expect(wrapper.find('#mock-main-menuopen').length).toBe(1)
-      expect(wrapper.find('Drawer').props().open).toBeTruthy()
+      fireEvent.click(container.querySelector('button[aria-label="Open Menu"]'))
+
+      expect(container.querySelector('#mock-items-menuopen')).not.toBeNull()
+      expect(container.querySelector('#mock-main-menuopen')).not.toBeNull()
+      expect(
+        getByTestId('app-bar-drawer').firstChild.getAttribute('class')
+      ).not.toContain('drawerPaperClose')
     })
 
     test('Click on the Drawer when the menu is open should close the Drawer', () => {
-      const wrapper = mount(
+      const { container, getByTestId } = render(
         <Navigation
           items={Items}
           main={Main}
@@ -84,21 +94,22 @@ describe('Navigation', () => {
           headerRight={HeaderRight}
         />
       )
-      expect(wrapper.find('AppBar').props().className).not.toContain(
+
+      fireEvent.click(container.querySelector('button[aria-label="Open Menu"]'))
+
+      expect(
+        getByTestId('app-bar-drawer').firstChild.getAttribute('class')
+      ).not.toContain('drawerPaperClose')
+
+      fireEvent.click(getByTestId('app-bar-drawer'))
+
+      expect(getByTestId('app-bar').getAttribute('class')).not.toContain(
         'appBarShift'
       )
-
-      wrapper.find('button[aria-label="Open Menu"]').simulate('click')
-      wrapper.update()
-      expect(wrapper.find('Drawer').props().open).toBeTruthy()
-
-      wrapper.find('Drawer').simulate('click')
-      wrapper.update()
-      expect(wrapper.find('Drawer').props().open).toBeFalsy()
     })
 
     test('The icon is chevronRight if the theme has rtl direction', () => {
-      const wrapper = mount(
+      const { getByTestId } = render(
         <MuiThemeProvider theme={muiTheme}>
           <Navigation
             items={Items}
@@ -109,13 +120,12 @@ describe('Navigation', () => {
         </MuiThemeProvider>
       )
 
-      expect(wrapper.find('Drawer IconButton path').props().d).toBe(
-        'M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z'
-      )
+      expect(getByTestId('app-bar-drawer-icon-right')).not.toBeNull()
+      expect(() => getByTestId('app-bar-drawer-icon-left')).toThrow()
     })
 
     test('The icon is chevronLeft if the theme has !rtl direction', () => {
-      const wrapper = mount(
+      const { getByTestId } = render(
         <Navigation
           items={Items}
           main={Main}
@@ -124,9 +134,8 @@ describe('Navigation', () => {
         />
       )
 
-      expect(wrapper.find('Drawer IconButton path').props().d).toBe(
-        'M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z'
-      )
+      expect(getByTestId('app-bar-drawer-icon-left')).not.toBeNull()
+      expect(() => getByTestId('app-bar-drawer-icon-right')).toThrow()
     })
   })
 })

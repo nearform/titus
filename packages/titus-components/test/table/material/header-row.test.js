@@ -1,13 +1,21 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render } from 'react-testing-library'
+
 import HeaderRow from '../../../src/table/material/header-row'
 
 describe('Table Material HeaderRow', () => {
   describe('rendering', () => {
     test('Check the default rendering', () => {
-      const wrapper = mount(<table><HeaderRow><td><div id='mock-header'/></td></HeaderRow></table>)
-      expect(wrapper.find('div#mock-header').length).toBe(1)
+      const { container } = render(
+        <table>
+          <HeaderRow>
+            <td>
+              <div id='mock-header' />
+            </td>
+          </HeaderRow>
+        </table>
+      )
+      expect(container.querySelector('div#mock-header')).not.toBeNull()
     })
-
   })
 })

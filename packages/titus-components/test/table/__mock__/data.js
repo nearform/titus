@@ -188,6 +188,6 @@ export const rowsWithRowData = [
         key: 'unknown'
       }
     ],
-    selected: true
+    selected: false
   }
 ]

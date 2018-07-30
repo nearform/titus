@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { mount } from 'enzyme'
+import { render } from 'react-testing-library'
 
 import Wizard from '../../src/wizard/wizard'
 
@@ -57,7 +57,7 @@ describe('Wizard', () => {
   })
 
   test('Default initialization', () => {
-    const wrapper = mount(
+    const { getByTestId } = render(
       <Wizard
         title='Wizard Title'
         finishedMessage='Finished Message'
@@ -67,18 +67,7 @@ describe('Wizard', () => {
       </Wizard>
     )
 
-    expect(
-      wrapper
-        .find('h1')
-        .first()
-        .text()
-    ).toBe('Wizard Title')
-
-    expect(
-      wrapper
-        .find('h1')
-        .at(1)
-        .text()
-    ).toBe('Description 1')
+    expect(getByTestId('wizard-title').textContent).toBe('Wizard Title')
+    expect(getByTestId('wizard-description').textContent).toBe('Description 1')
   })
 })

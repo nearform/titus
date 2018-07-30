@@ -1,12 +1,12 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render, fireEvent } from 'react-testing-library'
 import Table from '@material-ui/core/Table'
 import SortingHeaderCell from '../../../src/table/material/sorting-header-cell'
 
 describe('Table Material SortingHeaderCell', () => {
   describe('rendering', () => {
     test('Check the default rendering', () => {
-      const wrapper = mount(
+      const { container } = render(
         <Table>
           <tbody>
             <tr>
@@ -17,11 +17,11 @@ describe('Table Material SortingHeaderCell', () => {
           </tbody>
         </Table>
       )
-      expect(wrapper.find('div#mock-header').length).toBe(1)
-      expect(wrapper.find('tr td').prop('aria-sort')).toBe('ascending')
+      expect(container.querySelector('div#mock-header')).not.toBeNull()
+      expect(container.querySelector('tr td').getAttribute('aria-sort')).toBe('ascending')
     })
     test('The sorting is ascending', () => {
-      const wrapper = mount(
+      const { container } = render(
         <Table>
           <tbody>
             <tr>
@@ -32,12 +32,12 @@ describe('Table Material SortingHeaderCell', () => {
           </tbody>
         </Table>
       )
-      expect(wrapper.find('div#mock-header').length).toBe(1)
-      expect(wrapper.find('tr td').prop('aria-sort')).toBe('ascending')
+      expect(container.querySelector('div#mock-header')).not.toBeNull()
+      expect(container.querySelector('tr td').getAttribute('aria-sort')).toBe('ascending')
     })
 
     test('The sorting is descending', () => {
-      const wrapper = mount(
+      const { container } = render(
         <Table>
           <tbody>
             <tr>
@@ -48,15 +48,15 @@ describe('Table Material SortingHeaderCell', () => {
           </tbody>
         </Table>
       )
-      expect(wrapper.find('div#mock-header').length).toBe(1)
-      expect(wrapper.find('tr td').prop('aria-sort')).toBe('descending')
+      expect(container.querySelector('div#mock-header')).not.toBeNull()
+      expect(container.querySelector('tr td').getAttribute('aria-sort')).toBe('descending')
     })
   })
 
   describe('actions', () => {
     test('click the sort button', () => {
       const mockOnClick = jest.fn()
-      const wrapper = mount(
+      const { container } = render(
         <Table>
           <tbody>
             <tr>
@@ -67,7 +67,8 @@ describe('Table Material SortingHeaderCell', () => {
           </tbody>
         </Table>
       )
-      wrapper.find('TableSortLabel').simulate('click')
+
+      fireEvent.click(container.querySelector('span[role="button"]'))
       expect(mockOnClick).toHaveBeenCalled()
     })
   })
