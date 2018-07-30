@@ -1,8 +1,10 @@
 import * as constants from './app-constants'
 
 const initialState = {
-  config: {},
-  user: { username: 'filippo' }
+  config: {}
+  // Uncomment to avoid login at each refresh
+  // ,
+  // user: { username: 'test' }
 }
 
 export default (state = initialState, { type, data }) => {

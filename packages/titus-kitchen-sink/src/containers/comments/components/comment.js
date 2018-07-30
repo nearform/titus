@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Delete from '@material-ui/icons/Delete'
 import { withStyles } from '@material-ui/core/styles'
 
@@ -8,7 +9,7 @@ const styles = theme => ({
     '& > p': {
       margin: '8px 0'
     },
-    marginBottom: '16px',
+    marginBottom: '16px'
   },
   commentHeader: {
     display: 'flex',
@@ -33,19 +34,19 @@ const styles = theme => ({
 })
 
 class Comment extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.boundHandleRemove = this.handleRemove.bind(this)
   }
 
-  handleRemove(ev) {
+  handleRemove (ev) {
     ev.preventDefault()
 
     return this.props.removeComment(this.props.comment)
   }
 
-  renderAuthor(author) {
+  renderAuthor (author) {
     if (author && author.username) {
       return <h5>{author.username} said</h5>
     }
@@ -53,7 +54,7 @@ class Comment extends React.Component {
     return <h5>Author should be here...</h5>
   }
 
-  renderCommentContent(comment) {
+  renderCommentContent (comment) {
     if (!comment.mentions || comment.mentions.length === 0) {
       return <p>{this.props.comment.content}</p>
     }
@@ -75,7 +76,13 @@ class Comment extends React.Component {
     return <p dangerouslySetInnerHTML={{ __html: body.trim() }} />
   }
 
-  render() {
+  static propTypes = {
+    removeComment: PropTypes.func.isRequired,
+    comment: PropTypes.object.isRequired,
+    classes: PropTypes.object
+  }
+
+  render () {
     return (
       <article className={this.props.classes.comment}>
         <header className={this.props.classes.commentHeader}>

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { createPortal } from 'react-dom'
 import { withResource } from '@nearform/commentami-react-components'
@@ -8,7 +9,6 @@ import Close from '@material-ui/icons/Close'
 import Comment from './comment'
 
 const styles = theme => {
-  console.log('theme.palette', theme.palette)
   return ({
     sidebarContainer: {
       position: 'absolute',
@@ -44,22 +44,29 @@ const styles = theme => {
     }
   })
 }
+
 export const Sidebar = withStyles(styles)(withSidebars(
   withResource(
     class extends React.Component {
-      constructor(props) {
+      constructor (props) {
         super(props)
 
         this.boundHandleClose = this.handleClose.bind(this)
       }
 
-      handleClose(ev) {
+      handleClose (ev) {
         ev.preventDefault()
 
         this.props.controller.updateActive()
       }
 
-      render() {
+      static propTypes = {
+        commentami: PropTypes.object.isRequired,
+        controller: PropTypes.object.isRequired,
+        classes: PropTypes.object
+      }
+
+      render () {
         const {
           controller,
           commentami: { resource }
