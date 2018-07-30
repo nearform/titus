@@ -10,6 +10,7 @@ const loaders = require('./graphql').loaders
 const pgPlugin = require('./pg-plugin')
 const trailPlugin = require('@nearform/trail-hapi-plugin')
 const routes = require('./routes')
+const auth0 = require('./auth0')
 
 const server = hapi.server(config.hapi)
 
@@ -18,6 +19,9 @@ const init = async () => {
     {
       plugin: pino,
       options: config.logger.pino || {}
+    },
+    {
+      plugin: auth0
     },
     {
       plugin: graphqlHapi,

@@ -8,7 +8,7 @@ import Tables from './containers/tables/tables'
 import AutocompleteDemo from './containers/autocomplete/autocomplete-demo'
 import Api from './containers/api/api'
 import Comments from './containers/comments/comments'
-import Auth0Login from './containers/auth0/auth0'
+import Auth0Login from './containers/auth0/login'
 import Auth0Callback from './containers/auth0/callback'
 
 const Routes = () => (
