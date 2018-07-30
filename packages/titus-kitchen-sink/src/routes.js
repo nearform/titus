@@ -8,6 +8,8 @@ import Tables from './containers/tables/tables'
 import AutocompleteDemo from './containers/autocomplete/autocomplete-demo'
 import Api from './containers/api/api'
 import Comments from './containers/comments/comments'
+import Auth0Login from './containers/auth0/auth0'
+import Auth0Callback from './containers/auth0/callback'
 
 const Routes = () => (
   <Router>
@@ -18,6 +20,8 @@ const Routes = () => (
     <AutocompleteDemo path='autocomplete/*' />
     <Api path='api/*' />
     <Comments path='comments/*' />
+    <Auth0Login path='auth0/login' />
+    <Auth0Callback path='/auth0/callback' />
   </Router>
 )
 

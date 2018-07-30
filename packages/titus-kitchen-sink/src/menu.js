@@ -12,6 +12,7 @@ import TablesIcon from '@material-ui/icons/GridOn'
 import AutocompleteIcon from '@material-ui/icons/Input'
 import ApiIcon from '@material-ui/icons/CloudQueue'
 import CommentIcon from '@material-ui/icons/Comment'
+import LockIcon from '@material-ui/icons/Lock'
 
 const Menu = () => (
   <List>
@@ -56,6 +57,12 @@ const Menu = () => (
         <CommentIcon />
       </ListItemIcon>
       <ListItemText primary='COMMENTS' />
+    </ListItemLink>
+    <ListItemLink to={'/auth0/login'}>
+      <ListItemIcon>
+        <LockIcon />
+      </ListItemIcon>
+      <ListItemText primary='Auth0 login' />
     </ListItemLink>
   </List>
 )
