@@ -21,7 +21,8 @@ const init = async () => {
       options: config.logger.pino || {}
     },
     {
-      plugin: auth0
+      plugin: auth0,
+      options: config.auth0
     },
     {
       plugin: graphqlHapi,

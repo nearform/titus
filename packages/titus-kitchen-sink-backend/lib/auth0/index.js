@@ -18,15 +18,10 @@ module.exports = {
       'jwt',
       {
         complete: true,
-        key: jwksRsa.hapiJwt2Key({
-          cache: true,
-          rateLimit: true,
-          jwksRequestsPerMinute: 5,
-          jwksUri: `https://p16.eu.auth0.com/.well-known/jwks.json`
-        }),
+        key: jwksRsa.hapiJwt2Key(options.key),
         verifyOptions: {
-          audience: 'http://localhost:5000',
-          issuer: `https://p16.eu.auth0.com/`,
+          audience: options.audience,
+          issuer: `${options.domain}/`,
           algorithms: ['RS256']
         },
         validate
@@ -36,9 +31,9 @@ module.exports = {
     server.route({
       method: 'POST',
       path: '/login',
-      handler: function(req, h) {
+      handler: function (req, h) {
         /**
-         * To do this, you nned to make sure you configure your auth0 tenant properly.
+         * To do this, you need to make sure you configure your auth0 tenant correctly.
          *
          * - add the "Password" grant to your app
          *   (app "Settings" tab -> advance settings at the bottom -> "Grant Types" -> tick "Password")
@@ -51,20 +46,20 @@ module.exports = {
          */
         const { username, password } = req.payload
 
-        var options = {
+        var r = {
           method: 'POST',
-          url: 'https://p16.eu.auth0.com/oauth/token',
+          url: `${options.domain}/oauth/token`,
           headers: { 'content-type': 'application/json' },
           data: {
             grant_type: 'password',
             username,
             password,
-            client_id: '678g01xXZy32XNizNfFB3czLVubRA41E',
-            client_secret: '21oRbSrsNhEzj9NyW1ypxIRq2GPtl58-y46aTReZZlbMJLu3J50Mr1rTTVE7WFqd'
+            client_id: options.clientId,
+            client_secret: options.clientSecret
           }
         }
 
-        return axios(options)
+        return axios(r)
           .then(response => {
             console.log('response.data', response.data)
             return response.data
@@ -74,7 +69,7 @@ module.exports = {
       options: {
         cors: true,
         auth: false,
-        tags: ['api', 'login'],
+        tags: ['api', 'login']
       }
     })
   }
