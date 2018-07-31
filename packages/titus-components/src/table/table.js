@@ -10,7 +10,7 @@ class Table extends React.Component {
     rows: PropTypes.array,
     columns: PropTypes.array,
     pageSize: PropTypes.number,
-    pageSizeOptions: PropTypes.array
+    pageSizeOptions: PropTypes.arrayOf(PropTypes.number)
   }
 
   static defaultProps = {

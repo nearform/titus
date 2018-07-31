@@ -15,22 +15,31 @@ class Autocomplete extends React.Component {
     onGetSuggestions: PropTypes.func
   }
 
+  // FIXME Is it possible to have a null Item?
+  // The items requires a "key" attribute as well, and if a null valus is passed Downshift thrown an error
   itemToString = item => (item ? item.value : '')
 
-  renderMaterial = props => (
-    <div>
-      <MaterialDownshift
-        {...props}
-        getSuggestions={this.getSuggestions}
-        placeholder={this.props.placeholder}
-        id={this.props.id}
-      />
-    </div>
-  )
+  renderMaterial = props => {
+    return (
+      <div>
+        <MaterialDownshift
+          {...props}
+          getSuggestions={this.getSuggestions}
+          placeholder={this.props.placeholder}
+          id={this.props.id}
+        />
+      </div>
+    )
+  }
 
   getSuggestions = inputValue => {
     if (!inputValue) return []
-    const { data, filterType, maxResults = 5, onGetSuggestions } = this.props
+    const {
+      data = [],
+      filterType,
+      maxResults = 5,
+      onGetSuggestions
+    } = this.props
 
     if (filterType) {
       if (!['startswith', 'contains', ''].includes(filterType.toLowerCase())) {
@@ -40,7 +49,7 @@ class Autocomplete extends React.Component {
 
     const a = inputValue.toLowerCase()
 
-    return (filterType.toLowerCase() === 'contains'
+    return (filterType && filterType.toLowerCase() === 'contains'
       ? data.filter(b => b.value.toLowerCase().indexOf(a) > -1)
       : data.filter(b => b.value.toLowerCase().startsWith(a))
     )
