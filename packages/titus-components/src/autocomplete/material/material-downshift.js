@@ -38,7 +38,7 @@ const Suggestion = ({
     component='div'
     style={{
       fontWeight:
-      /* istanbul ignore next */ selectedItem && selectedItem.value === suggestion.value ? 500 : 400
+        selectedItem && selectedItem.value === suggestion.value ? 500 : 400
     }}
   >
     {suggestion.value}
@@ -49,7 +49,7 @@ Suggestion.propTypes = {
   highlightedIndex: PropTypes.number,
   index: PropTypes.number,
   itemProps: PropTypes.object,
-  selectedItem: PropTypes.string,
+  selectedItem: PropTypes.object,
   suggestion: PropTypes.shape({ value: PropTypes.string }).isRequired
 }
 

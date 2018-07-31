@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from '@reach/router'
-
 import ListItem from '@material-ui/core/ListItem'
 
 /* istanbul ignore next */

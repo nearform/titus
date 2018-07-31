@@ -1,6 +1,5 @@
 import React from 'react'
-import { mount } from 'enzyme'
-import { createMuiTheme } from '@material-ui/core/styles'
+import { render, fireEvent } from 'react-testing-library'
 
 import Autocomplete from '../../src/autocomplete/autocomplete'
 
@@ -11,66 +10,89 @@ const sampleData = [
 ]
 
 describe('Navigation', () => {
+  it('should be defined', () => {
+    expect(Autocomplete).toBeDefined()
+  })
+
   describe('rendering', () => {
     test('Default rendering', () => {
-      const wrapper = mount(<Autocomplete />)
-      expect(wrapper.find('input').props().className).toContain(
+      const { container } = render(<Autocomplete />)
+      expect(container.querySelector('input').getAttribute('class')).toContain(
         'MuiInput-input'
       )
     })
   })
 
   describe('Autocomplete actions', () => {
-    test('No data or suggest funcion set', () => {
-      const wrapper = mount(<Autocomplete />)
-      const spy = jest.spyOn(wrapper.instance(), 'getSuggestions')
+    test('With no data', () => {
+      const { container } = render(<Autocomplete />)
 
-      const input = wrapper.find('input')
-      input.simulate('change', { target: { value: 'Ab' } })
-
-      expect(spy).toHaveReturnedWith([])
+      const input = container.querySelector('input')
+      input.value = 'Ab'
+      fireEvent.change(input)
+      const options = container.querySelectorAll('div[role="option"]')
+      expect(options.length).toBe(0)
     })
 
-    test('No input value set', () => {
-      const wrapper = mount(<Autocomplete />)
-      const input = wrapper.find('input')
-      input.simulate('change', { target: { value: 'Ab' } })
+    test('With no input value', () => {
+      const { container } = render(<Autocomplete data={sampleData} />)
 
-      const spy = jest.spyOn(wrapper.instance(), 'getSuggestions')
-
-      input.simulate('change', { target: { value: '' } })
-      expect(spy).toHaveReturnedWith([])
+      const input = container.querySelector('input')
+      input.value = 'Ab'
+      fireEvent.change(input)
+      input.value = ''
+      fireEvent.change(input)
+      const options = container.querySelectorAll('div[role="option"]')
+      expect(options.length).toBe(0)
     })
 
-    test('With value in data field', () => {
-      const wrapper = mount(<Autocomplete data={sampleData} />)
-      const spy = jest.spyOn(wrapper.instance(), 'getSuggestions')
-      const input = wrapper.find('input')
-      input.simulate('change', { target: { value: 'Ab' } })
+    test('No filterType set', () => {
+      const { container } = render(<Autocomplete data={sampleData} />)
 
-      expect(spy).toHaveReturnedWith([{ key: 1, value: 'Abcd' }])
+      const input = container.querySelector('input')
+      input.value = 'Ab'
+      fireEvent.change(input)
+      const options = container.querySelectorAll('div[role="option"]')
+
+      expect(options.length).toBe(1)
+      expect(options[0].textContent).toBe('Abcd')
     })
 
-    test('With value in data field and filterType == contains', () => {
-      const wrapper = mount(
-        <Autocomplete filterType='contains' data={sampleData} />
+    test('With filtertype startswith', () => {
+      const { container } = render(
+        <Autocomplete data={sampleData} filterType='startswith' />
       )
-      const spy = jest.spyOn(wrapper.instance(), 'getSuggestions')
-      const input = wrapper.find('input')
-      input.simulate('change', { target: { value: 'Ab' } })
 
-      expect(spy).toHaveReturnedWith([
-        { key: 1, value: 'Abcd' },
-        { key: 3, value: 'zAbcd' }
-      ])
+      const input = container.querySelector('input')
+      input.value = 'Ab'
+      fireEvent.change(input)
+      const options = container.querySelectorAll('div[role="option"]')
+
+      expect(options.length).toBe(1)
+      expect(options[0].textContent).toBe('Abcd')
+    })
+
+    test('With contains', () => {
+      const { container } = render(
+        <Autocomplete data={sampleData} filterType='contains' />
+      )
+
+      const input = container.querySelector('input')
+      input.value = 'Ab'
+      fireEvent.change(input)
+      const options = container.querySelectorAll('div[role="option"]')
+
+      expect(options.length).toBe(2)
+      expect(options[0].textContent).toBe('Abcd')
+      expect(options[1].textContent).toBe('zAbcd')
     })
 
     test('With suggestion callback', () => {
       const mockSuggestion = jest.fn()
-      const wrapper = mount(
+      const { container } = render(
         <Autocomplete
-          filterType='suggestion'
           data={sampleData}
+          filterType='custom'
           onGetSuggestions={mockSuggestion}
         />
       )
@@ -79,26 +101,45 @@ describe('Navigation', () => {
         { key: 1, value: 'AbcdSugg' },
         { key: 3, value: 'zAbcdSugg' }
       ])
-      const spy = jest.spyOn(wrapper.instance(), 'getSuggestions')
-      const input = wrapper.find('input')
-      input.simulate('change', { target: { value: 'Ab' } })
 
-      expect(mockSuggestion).toHaveBeenCalledWith('Ab', 'suggestion', 5)
-      expect(spy).toHaveReturnedWith([
-        { key: 1, value: 'AbcdSugg' },
-        { key: 3, value: 'zAbcdSugg' }
-      ])
+      const input = container.querySelector('input')
+      input.value = 'Ab'
+      fireEvent.change(input)
+      const options = container.querySelectorAll('div[role="option"]')
+
+      expect(options.length).toBe(2)
+      expect(options[0].textContent).toBe('AbcdSugg')
+      expect(options[1].textContent).toBe('zAbcdSugg')
     })
-  })
 
-  describe('methods', () => {
-    test('itemToString', () => {
-      const wrapper = mount(
-        <Autocomplete filterType='suggestion' data={sampleData} />
+    test('With selected item', () => {
+      const { container } = render(
+        <Autocomplete
+          data={sampleData}
+          filterType='contains'
+          selectedItem={{ value: 'Abcd' }}
+        />
       )
 
-      expect(wrapper.instance().itemToString({ value: 'foo' })).toBe('foo')
-      expect(wrapper.instance().itemToString()).toBe('')
+      // Set the first query search string
+      const input = container.querySelector('input')
+      input.value = 'Ab'
+      fireEvent.change(input)
+
+      let options = container.querySelectorAll('div[role="option"]')
+      expect(options[0].getAttribute('style')).toContain('font-weight: 400;')
+      expect(options[1].getAttribute('style')).toContain('font-weight: 400;')
+
+      // Select the second item
+      fireEvent.click(options[1])
+
+      // Do the search again
+      input.value = 'Abc'
+      fireEvent.change(input)
+
+      options = container.querySelectorAll('div[role="option"]')
+      expect(options[0].getAttribute('style')).toContain('font-weight: 400;')
+      expect(options[1].getAttribute('style')).toContain('font-weight: 500;')
     })
   })
 })

@@ -1,15 +1,17 @@
 import React from 'react'
-import { shallow } from 'enzyme'
-import ListItemLink from '../../src/list-item-link/list-item-link'
-import ListItem from '@material-ui/core/ListItem'
+import { render } from 'react-testing-library'
 
 describe('ListItemLink', () => {
   describe('rendering', () => {
     test('Default rendering', () => {
-      const wrapper = shallow(<ListItemLink />)
+      jest.mock('@reach/router', () => ({
+        Link: () => <div data-testid='custom-link' />
+      }))
+      const ListItemLink = require('../../src/list-item-link/list-item-link')
+        .default
+      const { getByTestId } = render(<ListItemLink />)
 
-      expect(wrapper.find(ListItem).length).toBe(1)
-      expect(wrapper.find(ListItem).props().button).toBeTruthy()
+      expect(getByTestId('custom-link')).not.toBeNull()
     })
   })
 })
