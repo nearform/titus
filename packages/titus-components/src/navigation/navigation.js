@@ -161,9 +161,9 @@ class Navigation extends Component {
           <div className={classes.toolbar}>
             <IconButton>
               {theme.direction === 'rtl' ? (
-                <ChevronRightIcon data-testid='app-bar-drawer-icon-right'/>
+                <ChevronRightIcon data-testid='app-bar-drawer-icon-right' />
               ) : (
-                <ChevronLeftIcon data-testid='app-bar-drawer-icon-left'/>
+                <ChevronLeftIcon data-testid='app-bar-drawer-icon-left' />
               )}
             </IconButton>
           </div>
