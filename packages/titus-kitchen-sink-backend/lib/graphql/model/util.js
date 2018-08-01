@@ -23,7 +23,25 @@ const arrayToDict = (arr = []) => {
   }, {})
 }
 
+const toTsQuery = query => {
+  let tsQuery = query.trim()
+
+  if (tsQuery !== '') {
+    tsQuery =
+      "'" +
+      tsQuery
+        .replace(/ +/g, ' ')
+        .replace(/\\/g, '\\\\')
+        .replace(/'/g, "''")
+        .split(' ')
+        .join("':* & '") +
+      "':*"
+  }
+  return tsQuery
+}
+
 module.exports = {
   formatRows,
-  sortByIdArray
+  sortByIdArray,
+  toTsQuery
 }
