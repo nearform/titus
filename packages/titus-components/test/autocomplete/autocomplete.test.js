@@ -88,19 +88,23 @@ describe('Navigation', () => {
     })
 
     test('With suggestion callback', () => {
-      const mockSuggestion = jest.fn()
+      let loading = true
+      const mockHandleInputChange = jest.fn(() => {
+        loading = false
+      })
+      const items = [
+        { key: 1, value: 'AbcdSugg' },
+        { key: 3, value: 'zAbcdSugg' }
+      ]
       const { container } = render(
         <Autocomplete
           data={sampleData}
           filterType='custom'
-          onGetSuggestions={mockSuggestion}
+          onInputChange={mockHandleInputChange}
+          loading={loading ? 'true' : undefined}
+          items={items}
         />
       )
-
-      mockSuggestion.mockReturnValueOnce([
-        { key: 1, value: 'AbcdSugg' },
-        { key: 3, value: 'zAbcdSugg' }
-      ])
 
       const input = container.querySelector('input')
       input.value = 'Ab'
