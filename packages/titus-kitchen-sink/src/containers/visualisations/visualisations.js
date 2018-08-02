@@ -6,6 +6,7 @@ import { Typography } from '@material-ui/core'
 import Area from './area'
 import Bar from './bar'
 import Candlestick from './candlestick'
+import TreeGraph from './tree-graph'
 
 const Visualisations = () => (
   <div>
@@ -24,6 +25,11 @@ const Visualisations = () => (
       <Grid item xs={12} sm={6} md={4} lg={3}>
         <Paper>
           <Candlestick />
+        </Paper>
+      </Grid>
+      <Grid item xs={12} sm={12} md={12} lg={12}>
+        <Paper>
+          <TreeGraph />
         </Paper>
       </Grid>
     </Grid>
