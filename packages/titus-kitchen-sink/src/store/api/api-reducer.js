@@ -5,6 +5,8 @@ const initialState = {
   foodGroups: null,
   loadingFood: false,
   loadingFoodGroups: false,
+  dietTypes: null,
+  dietTypesError: null,
   error: null
 }
 
@@ -43,6 +45,25 @@ export default (state = initialState, { type, data }) => {
         ...state,
         loadingFoodGroups: false,
         error: data
+      }
+    case constants.LOAD_DIET_TYPES:
+      return {
+        ...state,
+        loadingDietTypes: true
+      }
+    case constants.LOADED_DIET_TYPES:
+      return {
+        ...state,
+        dietTypes: data.dietTypes,
+        loadingDietTypes: false,
+        dietTypesError: null
+      }
+    case constants.LOADING_DIET_TYPES_ERROR:
+      return {
+        ...state,
+        dietTypes: null,
+        loadingDietTypes: false,
+        dietTypesError: data
       }
     default:
       return state

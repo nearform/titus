@@ -23,7 +23,14 @@ const meta = {
 }
 
 export const apolloClient = new ApolloClient({
-  uri: 'http://localhost:5000/graphql'
+  uri: 'http://localhost:5000/graphql',
+  request: async (operation) => {
+    operation.setContext({
+      headers: {
+        authorization: window.localStorage.getItem('titus-user')
+      }
+    })
+  }
 })
 
 const App = () => (

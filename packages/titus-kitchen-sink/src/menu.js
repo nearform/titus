@@ -11,6 +11,7 @@ import InsertChart from '@material-ui/icons/InsertChart'
 import TablesIcon from '@material-ui/icons/GridOn'
 import AutocompleteIcon from '@material-ui/icons/Input'
 import ApiIcon from '@material-ui/icons/CloudQueue'
+import AuthIcon from '@material-ui/icons/LockOpen'
 
 const Menu = () => (
   <List>
@@ -49,6 +50,12 @@ const Menu = () => (
         <ApiIcon />
       </ListItemIcon>
       <ListItemText primary='API' />
+    </ListItemLink>
+    <ListItemLink to={'/authorization'}>
+      <ListItemIcon>
+        <AuthIcon />
+      </ListItemIcon>
+      <ListItemText primary='Authorization' />
     </ListItemLink>
   </List>
 )

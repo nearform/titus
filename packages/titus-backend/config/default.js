@@ -13,6 +13,8 @@ module.exports = {
     port: 5432,
     database: 'titus',
     username: 'titus',
+    // NOTE: Required for udaru, which uses 'user' rather than 'username'
+    user: 'titus',
     password: 'titus',
     poolSize: 10,
     idleTimeoutMillis: 30000

@@ -7,6 +7,14 @@ const trailManager = new TrailManager()
 const helloGeneric = () => ({
   method: 'GET',
   path: '/hello',
+  config: {
+    plugins: {
+      auth: {
+        action: '*',
+        resource: '*'
+      }
+    }
+  },
   handler: async (request, h) => {
     await trailManager.insert({
       when: new Date(),
@@ -24,7 +32,11 @@ const helloRandom = () => ({
   method: 'GET',
   path: '/hello/random',
   config: { plugins: {
-    'pgPlugin': { transactional: true }
+    'pgPlugin': { transactional: true },
+    auth: {
+      action: '*',
+      resource: '*'
+    }
   }},
   handler: async (request, h) => {
     const res = await request.pg.query('select * from food')
