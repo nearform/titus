@@ -24,7 +24,7 @@ const init = async () => {
       options: {
         path: '/graphql',
         route: {
-          auth: false,
+          cors: true,
           plugins: {
             'pgPlugin': { transactional: true }
           }
