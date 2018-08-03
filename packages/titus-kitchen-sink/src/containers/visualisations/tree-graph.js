@@ -1,12 +1,15 @@
 import React, {Fragment} from 'react'
 import { Group } from '@vx/group'
 import { Cluster } from '@vx/hierarchy'
-import { LinkVertical } from '@vx/shape'
+import { LinkVerticalStep } from '@vx/shape'
 import { LinearGradient } from '@vx/gradient'
 import { Text } from '@vx/text'
 import { hierarchy } from 'd3-hierarchy'
 import uuid from 'uuid'
 import generateName from 'sillyname'
+import RefreshIcon from '@material-ui/icons/Refresh'
+import Button from '@material-ui/core/Button'
+import Tooltip from '@material-ui/core/Tooltip'
 
 // Generate a nice random tree of silly names. If your name appears here, I apologise.
 const generateTree = ({ depth = 4, maxChildren = 2, prev }) => {
@@ -34,10 +37,16 @@ class TreeGraph extends React.Component {
     this.containerRef = React.createRef()
   }
 
+  regenerate = () => {
+    this.setState({
+      data: generateTree({})
+    })
+  }
+
   // Render a link between two nodes
   link = ({ link }) => {
     return (
-      <LinkVertical
+      <LinkVerticalStep
         data={link}
         stroke='#374469'
         strokeWidth='2'
@@ -184,15 +193,25 @@ class TreeGraph extends React.Component {
         paddingLeft: padding.left,
         paddingRight: padding.right,
         width: this.state.width,
-        height: this.state.height
+        height: this.state.height,
+        position: 'relative'
       }}>
         {this.state.data &&
-            this.chart({
-              width: this.state.width - padding.left - padding.right,
-              height: this.state.height - padding.top - padding.bottom,
-              padding,
-              data
-            })}
+        <Fragment>
+          <Tooltip title={'Regenerate data'} enterDelay={500} leaveDelay={200}>
+            <Button aria-label='Refresh' onClick={this.regenerate} style={{'position': 'absolute'}}>
+              <RefreshIcon />
+            </Button>
+          </Tooltip>
+          {this.chart({
+            width: this.state.width - padding.left - padding.right,
+            height: this.state.height - padding.top - padding.bottom,
+            padding,
+            data
+          })}
+        </Fragment>
+        }
+
       </div>
 
     )
