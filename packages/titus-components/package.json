@@ -58,8 +58,7 @@
     "nwb": "0.21.x",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-testing-library": "^4.0.2",
-    "@reach/router": "^1.1.1"
+    "react-testing-library": "^4.0.2"
   },
   "license": "Apache-2.0",
   "repository": "nearform/titus",
