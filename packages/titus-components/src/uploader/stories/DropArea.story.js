@@ -1,6 +1,5 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { action } from '@storybook/addon-actions'
 
 import DropArea from '../material/DropArea'
 import GridList from '@material-ui/core/GridList'
