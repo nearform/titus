@@ -1,21 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const sufixes = ['Bits', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+const sufixes = ['Bits', 'KB', 'MB', 'GB', 'TB']
 
-const formatBits = (bits, hideUnity) => {
+const formatBits = (bits) => {
   const i = Math.floor(Math.log(bits) / Math.log(1024))
   return (
     (!bits && '0') ||
-    (bits / Math.pow(1024, i)).toFixed(2) + (hideUnity ? '' : ` ${sufixes[i]}`)
+    (bits / Math.pow(1024, i)).toFixed(2) + ` ${sufixes[i]}`
   )
 }
 
-const FileSize = ({ bits, hideUnity }) => <span>{formatBits(bits, hideUnity)}</span>
+const FileSize = ({ bits }) => <span>{formatBits(bits)}</span>
 
 FileSize.propTypes = {
-  bits: PropTypes.number,
-  hideUnity: PropTypes.bool
+  bits: PropTypes.number
 }
 
 export default FileSize

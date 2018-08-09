@@ -12,7 +12,6 @@ const UploadStatus = props =>
       Uploaded:{' '}
       <FileSize
         bits={Math.floor(props.size / 100 * props.progress)}
-        hideUnity
       />{' '}
       / <FileSize bits={props.size} />
     </span>
