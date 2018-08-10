@@ -30,37 +30,41 @@ const getUploaderTitle = maxItems =>
 const getUploaderText = (maxItems, currentItems) =>
   maxItems > 1 ? `Uploaded ${currentItems} of ${maxItems}` : ''
 
-const UploaderContainerBase = props => (
-  <div>
-    <GridList cellHeight={180} className={props.classes.gridList}>
-      {props.fileUploader.files.map(file => {
-        return (
+const UploaderContainerBase = props => {
+  return (
+    <div>
+      <GridList cellHeight={180} className={props.classes.gridList}>
+        {props.fileUploader.files.map(file => {
+          return (
+            <Spacer key={file.id}>
+              <UploadDisplayCard
+                fileUploader={props.fileUploader}
+                file={file}
+                DisplayCardComponent={DisplayCard}
+              />
+            </Spacer>
+          )
+        })}
+        {props.fileUploader.files.length < props.maxItems && (
           <Spacer>
-            <UploadDisplayCard
+            <DropAreaCard
               fileUploader={props.fileUploader}
-              file={file}
-              DisplayCardComponent={DisplayCard}
+              title={getUploaderTitle(
+                props.maxItems,
+                props.fileUploader.files.length
+              )}
+              text={getUploaderText(
+                props.maxItems,
+                props.fileUploader.files.length
+              )}
+              DropAreaComponent={DropArea}
             />
           </Spacer>
-        )
-      })}
-      {props.fileUploader.files.length < props.maxItems && (<Spacer>
-        <DropAreaCard
-          fileUploader={props.fileUploader}
-          title={getUploaderTitle(
-            props.maxItems,
-            props.fileUploader.files.length
-          )}
-          text={getUploaderText(
-            props.maxItems,
-            props.fileUploader.files.length
-          )}
-          DropAreaComponent={DropArea}
-        />
-      </Spacer>)}
-    </GridList>
-  </div>
-)
+        )}
+      </GridList>
+    </div>
+  )
+}
 
 UploaderContainerBase.propTypes = {
   classes: PropTypes.object,

@@ -20,8 +20,8 @@ class UploadCard extends Component {
       .catch(this.props.fileUploader.logger)
   }
 
-  handleClick (files) {
-    this.inputFile.current && this.inputFile.current.click()
+  handleClick () {
+    this.inputFile.current.click()
   }
 
   handleFilesUpdate (files) {

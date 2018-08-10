@@ -14,6 +14,7 @@ class Uploader extends React.Component {
       files: [],
       maxItems: this.props.maxItems,
       addFiles: this.handleAddFile.bind(this),
+      removeFile: this.handleRemovefile.bind(this),
       service: this.props.service,
       dragOnUploadError: null,
       logger: this.props.logger || console,
@@ -33,6 +34,12 @@ class Uploader extends React.Component {
 
   handleUploadError (err, file) {
     this.props.onUploadError && this.props.onUploadError(err, file)
+  }
+
+  handleRemovefile (fileId) {
+    this.setState({
+      files: this.state.files.filter(file => file.id !== fileId)
+    })
   }
 
   handleAddFile (files) {

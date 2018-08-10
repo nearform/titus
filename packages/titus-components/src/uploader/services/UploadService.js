@@ -5,8 +5,6 @@ import S3ManagedUpload from 'aws-sdk/lib/s3/managed_upload.js'
 
 let pendingAbortUploads = {}
 
-let uploadCallbacks = {}
-
 const partSize = parseInt(process.env.REACT_APP_S3_PART_SIZE, 10) || 5242880
 const queueSize = parseInt(process.env.REACT_APP_S3_QUEUE_SIZE, 10) || 4
 
@@ -59,10 +57,6 @@ class AWSS3ManagedUpload {
   }
 }
 
-function registerUploadChange (id, handleProgressUpdate) {
-  uploadCallbacks[id] = handleProgressUpdate
-}
-
 const fileOnProgress = (onProgress, file) => (
   progress,
   uploadId,
@@ -77,15 +71,6 @@ const fileOnProgress = (onProgress, file) => (
       isMultipart,
       Object.assign({}, extra, { fileName: file.name })
     )
-
-    const uploadCallbackFunc = uploadCallbacks[uploadId]
-    if (typeof uploadCallbackFunc === 'function') {
-      uploadCallbackFunc(percent, uploadId, isMultipart, {
-        uploadId: extra.uploadId,
-        partNumber: extra.partNumber,
-        fileName: extra.fileName
-      })
-    }
   }
 }
 
@@ -118,10 +103,6 @@ class UploadService {
   clear () {
     pendingAbortUploads = {}
     return this
-  }
-
-  onUploadFileChange (file, callback) {
-    registerUploadChange(file.id, callback)
   }
 
   startUpload (file, onProgress, onError) {

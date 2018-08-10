@@ -51,11 +51,20 @@ storiesOf('UploadDisplayCard', module).add('default', () => (
     </Cell>
     <Cell>
       <DisplayCard
-
         name='Some very very long url name'
         size={12345678}
         uploadProgress={100}
         onAbortUpload={action('Cancel upload')}
+        done
+      />
+    </Cell>
+    <Cell>
+      <DisplayCard
+        mediaImage='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Wikipedia-logo-en-big.png/734px-Wikipedia-logo-en-big.png'
+        name='A failed upload'
+        size={12345678}
+        error='The upload failed'
+        onRemove={action('Remove')}
       />
     </Cell>
   </GridList>

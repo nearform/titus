@@ -20,18 +20,23 @@ const readFileThumbnailData = file =>
 class UploadDisplayCard extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { checkedG: true }
-    this.handleUploadChange = this.handleUploadChange.bind(this)
+    this.state = { error: null, done: false }
   }
 
   componentDidMount () {
-    if (this.props && this.props.file && this.props.file) {
+    if (this.props && this.props.file) {
       const onUploadError = (e, err) => {
         this.props.fileUploader.onUploadError(e, this.props.file)
+        this.setState({error: e.message})
       }
 
       const onUploadDone = e => {
         this.props.fileUploader.onUploadDone(this.props.file)
+        this.setState({ done: true })
+      }
+
+      const onProgress = (percent, uploadId, isMultipart, multipartParams) => {
+        this.setState({ uploadProgress: percent, isMultipart, multipartParams })
       }
 
       readFileThumbnailData(this.props.file)
@@ -40,13 +45,16 @@ class UploadDisplayCard extends React.Component {
         })
         .catch(onUploadError)
 
-      this.props.fileUploader.service
-        .startUpload(this.props.file, this.reportProgress, onUploadError)
-        .then(onUploadDone)
-        .catch(e => {
-          if (e.code === 'RequestAbortedError') return
-          this.props.fileUploader.logger.error(e.message)
-        })
+      const startUpload = this.props.fileUploader.service.startUpload(
+        this.props.file,
+        onProgress,
+        onUploadError
+      )
+
+      startUpload.then(onUploadDone).catch(e => {
+        if (e.code === 'RequestAbortedError') return
+        this.props.fileUploader.logger.error(e.message)
+      })
 
       this.abortUpload = this.props.fileUploader.service.abortUpload.bind(
         this,
@@ -56,35 +64,26 @@ class UploadDisplayCard extends React.Component {
     }
   }
 
-  reportProgress = (percent, uploadId, isMultipart, extraParams) => {
-    this.setState({
-      progress: {
-        uploadId,
-        percent,
-        isMultipart,
-        fileName: extraParams.fileName
-      }
-    })
-  }
-
-  handleUploadChange = (progress, file, isMultipart, multipartParams) => {
-    this.setState({ uploadProgress: progress, isMultipart, multipartParams })
+  handleRemove = () => {
+    this.props.fileUploader.removeFile(this.props.file.id)
   }
 
   render () {
-    const { title, file, fileUploader, DisplayCardComponent } = this.props
+    const { title, file, DisplayCardComponent } = this.props
     const { uploadProgress, mediaImage } = this.state
-
-    fileUploader.service.onUploadFileChange(file, this.handleUploadChange)
 
     return (
       <DisplayCardComponent
         uploadProgress={uploadProgress}
         title={title}
+        id={file.id}
         name={file.name}
         mediaImage={mediaImage}
         size={file.orig.size}
         onAbortUpload={this.abortUpload}
+        error={this.state.error}
+        done={this.state.done}
+        onRemove={this.handleRemove}
       />
     )
   }

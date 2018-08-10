@@ -24,6 +24,11 @@ describe('uploader/material/atoms/UploadStatus', () => {
 
   test('With 100 progress and 25000 size', () => {
     const { container } = render(<UploadStatus progress={100} size={25000}/>)
+    expect(container.textContent).toBe('Uploaded: 24.41 KB / 24.41 KB')
+  })
+
+  test('With 100 progress and 25000 size', () => {
+    const { container } = render(<UploadStatus progress={100} size={25000} done/>)
     expect(container.textContent).toBe('Size: 24.41 KB, Upload Complete')
   })
 
