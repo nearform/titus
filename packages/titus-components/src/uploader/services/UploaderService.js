@@ -5,8 +5,8 @@ import S3ManagedUpload from 'aws-sdk/lib/s3/managed_upload.js'
 
 let pendingAbortUploads = {}
 
-const partSize = parseInt(process.env.REACT_APP_S3_PART_SIZE, 10) || 5242880
-const queueSize = parseInt(process.env.REACT_APP_S3_QUEUE_SIZE, 10) || 4
+const partSize = parseInt(process.env.REACT_APP_S3_UPLOADER_PART_SIZE, 10) || 5242880
+const queueSize = parseInt(process.env.REACT_APP_S3_UPLOADER_QUEUE_SIZE, 10) || 4
 
 class AWSS3ManagedUpload {
   constructor (id, bucket, params, tags) {
