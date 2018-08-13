@@ -24,9 +24,10 @@
   "dependencies": {
     "@material-ui/core": "^1.1.0",
     "@material-ui/icons": "^1.1.0",
+    "@nearform/commentami-react-components": "^1.0.4",
+    "@nearform/react-table": "^1.0.6",
     "downshift": "^2.0.10",
-    "nodemon": "^1.17.5",
-    "@nearform/react-table": "^1.0.6"
+    "nodemon": "^1.17.5"
   },
   "peerDependencies": {
     "@reach/router": "^1.1.1",
