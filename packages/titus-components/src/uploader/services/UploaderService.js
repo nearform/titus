@@ -80,7 +80,7 @@ const fileOnError = onError => (err, file) => {
   }
 }
 
-class UploadService {
+class UploaderService {
   constructor (options) {
     this.bucket = options.bucket
     this.getParams = options.getParams || this.getDefaultParams
@@ -130,4 +130,4 @@ class UploadService {
   }
 }
 
-export default UploadService
+export default UploaderService

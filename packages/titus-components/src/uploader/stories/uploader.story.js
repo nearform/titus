@@ -3,12 +3,20 @@ import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
 import Uploader from '../uploader'
-import UploadService from '../services/UploadService'
+import UploaderService from '../services/UploaderService'
 
 const awsConfig = {
-  accessKeyId: 'AKIAIUXKFC2ZUYCGZS6A',
-  secretAccessKey: '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',
-  region: 'eu-west-1'
+  accessKeyId: 'ignored',
+  secretAccessKey: 'ignored',
+  region: 'ignored',
+  computeChecksums: false,
+  sslEnabled: false,
+  s3ForcePathStyle: true,
+  s3: {
+    endpoint: 'http://localhost:4569',
+    s3BucketEndpoint: false,
+    computeChecksums: false
+  }
 }
 
 function getParams (file) {
@@ -29,7 +37,7 @@ storiesOf('Uploader', module)
   .add('default (1 file)', () => (
     <Uploader
       service={
-        new UploadService({
+        new UploaderService({
           awsConfig,
           bucket: 'titus-uploader-471234098732409871234',
           getParams,
@@ -44,7 +52,7 @@ storiesOf('Uploader', module)
     <Uploader
       maxItems={5}
       service={
-        new UploadService({
+        new UploaderService({
           awsConfig,
           bucket: 'titus-uploader-471234098732409871234',
           getParams,
