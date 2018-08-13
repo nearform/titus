@@ -12,6 +12,7 @@ import TablesIcon from '@material-ui/icons/GridOn'
 import AutocompleteIcon from '@material-ui/icons/Input'
 import ApiIcon from '@material-ui/icons/CloudQueue'
 import CommentIcon from '@material-ui/icons/Comment'
+import CloudUploadIcon from '@material-ui/icons/CloudUpload'
 
 const Menu = () => (
   <List>
@@ -56,6 +57,12 @@ const Menu = () => (
         <CommentIcon />
       </ListItemIcon>
       <ListItemText primary='COMMENTS' />
+    </ListItemLink>
+    <ListItemLink to={'/uploader'}>
+      <ListItemIcon>
+        <CloudUploadIcon />
+      </ListItemIcon>
+      <ListItemText primary='Uploader' />
     </ListItemLink>
   </List>
 )

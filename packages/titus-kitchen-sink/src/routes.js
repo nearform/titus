@@ -8,6 +8,7 @@ import Tables from './containers/tables/tables'
 import AutocompleteDemo from './containers/autocomplete/autocomplete-demo'
 import Api from './containers/api/api'
 import Comments from './containers/comments/comments'
+import Uploader from './containers/uploader/uploader'
 
 const Routes = () => (
   <Router>
@@ -18,6 +19,7 @@ const Routes = () => (
     <AutocompleteDemo path='autocomplete/*' />
     <Api path='api/*' />
     <Comments path='comments/*' />
+    <Uploader path='uploader/*' />
   </Router>
 )
 
