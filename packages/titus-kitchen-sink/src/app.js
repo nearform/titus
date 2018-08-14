@@ -23,7 +23,7 @@ const meta = {
 }
 
 export const apolloClient = new ApolloClient({
-  uri: 'http://localhost:5000/graphql'
+  uri: process.env.REACT_APP_GRAPHQL_ENDPOINT
 })
 
 const App = () => (

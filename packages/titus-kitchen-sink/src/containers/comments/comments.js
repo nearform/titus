@@ -37,7 +37,7 @@ class Comments extends React.Component {
   }
 
   async componentDidMount () {
-    const client = buildWebsocketClient('ws://localhost:5000')
+    const client = buildWebsocketClient(process.env.REACT_APP_COMMENTS_ENDPOINT)
     await client.connect(/* if you need authentication: { auth: ... } */)
 
     this.setState({
