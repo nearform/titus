@@ -38,6 +38,12 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - run:
+          name: Build the production frontend bundle
+          command: |
+            set -e
+            cd packages/titus-kitchen-sink
+            npm run build
+      - run:
           name: Build the frontend Docker containers
           command: |
             set -e
