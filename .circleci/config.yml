@@ -30,9 +30,58 @@ jobs:
       - attach_workspace:
           at: .
       - run: npm run test:all
+  build-push-containers:
+    <<: *defaults
+    environment:
+      DOCKER_REPO: "711655675495.dkr.ecr.us-east-1.amazonaws.com"
+    steps:
+      - attach_workspace:
+          at: .
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Install AWS CLI
+          command: |
+            sudo apt-get -y install python-dev
+            curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+            unzip awscli-bundle.zip
+            sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+      - run:
+          name: Build the production frontend bundle
+          command: |
+            set -e
+            cd packages/titus-kitchen-sink
+            npm run build
+      - run:
+          name: Build the frontend Docker containers
+          command: |
+            set -e
+            cd packages/titus-kitchen-sink
+            docker build -t ${DOCKER_REPO}/titus-kitchen-sink-frontend:latest -f docker/Dockerfile .
+      - run:
+          name: Build the backend Docker containers
+          command: |
+            set -e
+            cd packages/titus-kitchen-sink-backend/docker
+            docker-compose -f docker-compose-dev.yml build
+            docker tag docker_api:latest ${DOCKER_REPO}/titus-kitchen-sink-backend:latest
+            docker tag docker_postgres:latest ${DOCKER_REPO}/titus-kitchen-sink-db:latest
+      - run:
+          name: Push the Docker containers to the registry
+          command: |
+            set -e
+            # Login the AWS ECR registry
+            eval $(aws ecr get-login --no-include-email --region us-east-1)
+            # Push the frontend container
+            echo -e "Pushing the frontend container\n"
+            docker push ${DOCKER_REPO}/titus-kitchen-sink-frontend:latest
+            # Push the backend containers
+            echo -e "Pushing the backend containers\n"
+            docker push ${DOCKER_REPO}/titus-kitchen-sink-backend:latest
+            docker push ${DOCKER_REPO}/titus-kitchen-sink-db:latest
 workflows:
   version: 2
-  build_and_test:
+  test_and_build:
     jobs:
       - install
       - lint:
@@ -40,4 +89,7 @@ workflows:
               - install
       - test:
           requires:
-              - install
+              - lint
+      - build-push-containers:
+          requires:
+              - test
