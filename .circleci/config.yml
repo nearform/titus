@@ -59,7 +59,7 @@ jobs:
             cd packages/titus-kitchen-sink
             docker build -t ${DOCKER_REPO}/titus-kitchen-sink-frontend:latest -f docker/Dockerfile .
       - run:
-          name: Build the frontend Docker containers
+          name: Build the backend Docker containers
           command: |
             set -e
             cd packages/titus-kitchen-sink-backend/docker
