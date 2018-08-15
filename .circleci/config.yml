@@ -40,7 +40,7 @@ jobs:
           command: |
             set -e
             cd packages/titus-kitchen-sink
-            build -t titus-kitchen-sink-frontend:latest -f docker/Dockerfile .
+            docker build -t titus-kitchen-sink-frontend:latest -f docker/Dockerfile .
       - run:
           name: Build the frontend Docker containers
           command: |
