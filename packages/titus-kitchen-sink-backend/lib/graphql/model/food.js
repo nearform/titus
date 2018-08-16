@@ -5,40 +5,22 @@ const toTsQuery = require('./util').toTsQuery
 const SQL = require('@nearform/sql')
 
 const search = async (pg, { needle, type }) => {
-  let sql = SQL`SELECT id, name, food_group_id, created, modified FROM food`
-
-  switch (type) {
-    case 'startsWith':
-      sql.append(
-        SQL` WHERE name ILIKE(${needle + '%'}) ORDER BY LENGTH(name), name`
-      )
-      break
-    case 'endsWith':
-      sql.append(
-        SQL` WHERE name ILIKE(${'%' + needle}) ORDER BY LENGTH(name), name`
-      )
-      break
-    case 'fullText':
-      // normally full text combines multiple fields, probably need to rank also
-      sql.append(
-        SQL` WHERE to_tsvector(name) @@ to_tsquery(${toTsQuery(needle)})`
-      )
-      break
-    case 'similarity':
-      // requires trigrams extension, basically a fuzzy search, not really useful for long phrases
-      // just serves as an example here
-      sql.append(SQL` WHERE similarity(name, ${needle}) > 0.5`)
-      break
-    default:
-      // contains
-      sql.append(
-        SQL` WHERE name ILIKE(${'%' +
-          needle +
-          '%'}) ORDER BY LENGTH(name), name`
-      )
-      break
+  const whereClause = {
+    startsWith: SQL` WHERE name ILIKE(${needle +
+      '%'}) ORDER BY LENGTH(name), name`,
+    endsWith: SQL` WHERE name ILIKE(${'%' +
+      needle}) ORDER BY LENGTH(name), name`,
+    fullText: SQL` WHERE to_tsvector(name) @@ to_tsquery(${toTsQuery(needle)})`,
+    similarity: SQL` WHERE to_tsvector(name) @@ to_tsquery(${toTsQuery(
+      needle
+    )})`
   }
+  const defaultClause = SQL` WHERE name ILIKE(${'%' +
+    needle +
+    '%'}) ORDER BY LENGTH(name), name`
 
+  const sql = SQL`SELECT id, name, food_group_id, created, modified FROM food`
+  sql.append(whereClause[type] || defaultClause)
   const res = await pg.query(sql)
   return formatRows(res.rows)
 }
