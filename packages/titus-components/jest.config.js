@@ -2,7 +2,7 @@
 
 module.exports = {
   collectCoverageFrom: ['src/**/*.js'],
-  coveragePathIgnorePatterns: ['node_modules'],
+  coveragePathIgnorePatterns: ['node_modules', 'src/uploader/stories'],
   coverageReporters: ['text', 'html'],
   testMatch: ['**/*.test.js'],
   clearMocks: true,

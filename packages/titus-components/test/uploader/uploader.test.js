@@ -100,11 +100,13 @@ describe('uploader/uploader', () => {
     let resolvePromise
     let rejectPromise
     let reportProgressCb
+    let uploadDoneCb
     let fileUploaded
 
-    const startUploadMock = (file, reportProgress, onUploadError) => {
+    const startUploadMock = (file, reportProgress, onUploadError, onUploadDone) => {
       fileUploaded = file
       reportProgressCb = reportProgress
+      uploadDoneCb = onUploadDone
       const returnpromise = new Promise((resolve, reject) => {
         resolvePromise = resolve
         rejectPromise = reject
@@ -159,7 +161,9 @@ describe('uploader/uploader', () => {
           'li[class*="DisplayCard-tile-"] div[class^="MuiGridListTileBar-subtitle"] span span'
         ).textContent === '6.00 Bits'
     )
+
     reportProgressCb(100, fileUploaded.id, false, {})
+    uploadDoneCb()
     await wait(
       () =>
         container.querySelector(

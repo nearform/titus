@@ -27,7 +27,7 @@ class UploadDisplayCard extends React.Component {
     if (this.props && this.props.file) {
       const onUploadError = (e, err) => {
         this.props.fileUploader.onUploadError(e, this.props.file)
-        this.setState({error: e.message})
+        this.setState({ error: e.message })
       }
 
       const onUploadDone = e => {
@@ -35,8 +35,8 @@ class UploadDisplayCard extends React.Component {
         this.setState({ done: true })
       }
 
-      const onProgress = (percent, uploadId, isMultipart, multipartParams) => {
-        this.setState({ uploadProgress: percent, isMultipart, multipartParams })
+      const onProgress = (percent, uploadId, isMultipart) => {
+        this.setState({ uploadProgress: percent, isMultipart })
       }
 
       readFileThumbnailData(this.props.file)
@@ -45,16 +45,12 @@ class UploadDisplayCard extends React.Component {
         })
         .catch(onUploadError)
 
-      const startUpload = this.props.fileUploader.service.startUpload(
+      this.props.fileUploader.service.startUpload(
         this.props.file,
         onProgress,
-        onUploadError
+        onUploadError,
+        onUploadDone
       )
-
-      startUpload.then(onUploadDone).catch(e => {
-        if (e.code === 'RequestAbortedError') return
-        this.props.fileUploader.logger.error(e.message)
-      })
 
       this.abortUpload = this.props.fileUploader.service.abortUpload.bind(
         this,
@@ -66,6 +62,12 @@ class UploadDisplayCard extends React.Component {
 
   handleRemove = () => {
     this.props.fileUploader.removeFile(this.props.file.id)
+  }
+
+  componentWillUnmount () {
+    if (!this.state.done && this.abortUpload) {
+      this.abortUpload()
+    }
   }
 
   render () {

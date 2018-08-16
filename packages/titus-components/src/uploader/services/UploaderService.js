@@ -5,8 +5,10 @@ import S3ManagedUpload from 'aws-sdk/lib/s3/managed_upload.js'
 
 let pendingAbortUploads = {}
 
-const partSize = parseInt(process.env.REACT_APP_S3_UPLOADER_PART_SIZE, 10) || 5242880
-const queueSize = parseInt(process.env.REACT_APP_S3_UPLOADER_QUEUE_SIZE, 10) || 4
+const partSize =
+  parseInt(process.env.REACT_APP_S3_UPLOADER_PART_SIZE, 10) || 5242880
+const queueSize =
+  parseInt(process.env.REACT_APP_S3_UPLOADER_QUEUE_SIZE, 10) || 4
 
 class AWSS3ManagedUpload {
   constructor (id, bucket, params, tags) {
@@ -16,67 +18,38 @@ class AWSS3ManagedUpload {
       params: Object.assign({}, { Bucket: bucket }, params)
     }
 
-    // FIXME Adding tags returns an "access denied error", investigate S3 policies to allow it
-    // tags && (uploadParams.tags = tags)
+    tags && (uploadParams.tags = tags)
 
     this.s3Upload = new S3ManagedUpload(uploadParams)
     this.file = params.Body
     this.uploadId = id
-    this.uploadFile = this.uploadFile.bind(this)
-    this.abortUpload = this.abortUpload.bind(this)
   }
 
-  uploadFile (onProgress, cb) {
-    return new Promise((resolve, reject) => {
-      return this.s3Upload
-        .on('httpUploadProgress', progress => {
-          let isMultipart = progress && progress.part > 1
-          if (!isMultipart) {
-            isMultipart = progress.total > partSize
-          }
+  uploadFile (onProgress, onError, onUploadDone) {
+    return this.s3Upload
+      .on('httpUploadProgress', progress => {
+        let isMultipart = progress && progress.part > 1
+        if (!isMultipart) {
+          isMultipart = progress.total > partSize
+        }
 
-          onProgress(progress, this.uploadId, isMultipart, {
-            uploadId: this.uploadId,
-            partNumber: progress.part,
-            fileName: this.file.name
-          })
-        })
-        .send(err => {
-          if (err) {
-            cb(err, this.file)
-            reject(err)
-          } else {
-            resolve(this.file)
-          }
-        })
-    })
+        onProgress(
+          Math.round(progress.loaded / progress.total * 100),
+          this.uploadId,
+          isMultipart
+        )
+      })
+      .send(err => {
+        if (err) {
+          onError(err, this.file)
+        } else {
+          onUploadDone(this.file)
+        }
+      })
   }
 
   abortUpload () {
     return this.s3Upload.abort()
-  }
-}
-
-const fileOnProgress = (onProgress, file) => (
-  progress,
-  uploadId,
-  isMultipart,
-  extra
-) => {
-  if (typeof onProgress === 'function') {
-    const percent = Math.round(progress.loaded / progress.total * 100)
-    onProgress(
-      percent,
-      uploadId,
-      isMultipart,
-      Object.assign({}, extra, { fileName: file.name })
-    )
-  }
-}
-
-const fileOnError = onError => (err, file) => {
-  if (typeof onError === 'function') {
-    onError(err, file)
   }
 }
 
@@ -105,18 +78,17 @@ class UploaderService {
     return this
   }
 
-  startUpload (file, onProgress, onError) {
+  startUpload (file, onProgress, onError, onUploadDone) {
     const upload = new AWSS3ManagedUpload(
       file.id,
       this.bucket,
       this.getParams(file),
       this.getTags ? this.getTags(file) : null
     )
-    pendingAbortUploads[upload.uploadId] = upload.abortUpload
-    return upload.uploadFile(
-      fileOnProgress(onProgress, file.orig),
-      fileOnError(onError)
-    )
+
+    pendingAbortUploads[upload.uploadId] = upload.abortUpload.bind(upload)
+
+    upload.uploadFile(onProgress, onError, onUploadDone)
   }
 
   abortUpload (file, cb) {
