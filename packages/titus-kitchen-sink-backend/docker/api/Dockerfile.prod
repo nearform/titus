@@ -1,0 +1,15 @@
+FROM nearform/alpine3-s2i-nodejs
+
+WORKDIR /titus
+USER root
+
+# Copy the server code
+COPY config /titus/config
+COPY index.js /titus/index.js
+COPY lib /titus/lib
+COPY node_modules /titus/node_modules
+COPY package.json /titus/package.json
+COPY tools /titus/tools
+
+# Start the server
+CMD ["npm", "run", "dev:start"]
