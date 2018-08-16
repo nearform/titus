@@ -29,7 +29,6 @@ export const apolloClient = new ApolloClient({
 
 const generateClassName = createGenerateClassName()
 
-
 const App = () => (
   <ApolloProvider client={apolloClient}>
     <Provider store={store}>
