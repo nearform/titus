@@ -2,6 +2,9 @@ import * as constants from './app-constants'
 
 const initialState = {
   config: {}
+  // Uncomment to avoid login at each refresh
+  // ,
+  // user: { username: 'test' }
 }
 
 export default (state = initialState, { type, data }) => {

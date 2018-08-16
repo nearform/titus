@@ -12,6 +12,7 @@ import TablesIcon from '@material-ui/icons/GridOn'
 import AutocompleteIcon from '@material-ui/icons/Input'
 import ApiIcon from '@material-ui/icons/CloudQueue'
 import SearchIcon from '@material-ui/icons/FindInPage'
+import CommentIcon from '@material-ui/icons/Comment'
 
 const Menu = () => (
   <List>
@@ -56,6 +57,12 @@ const Menu = () => (
         <SearchIcon />
       </ListItemIcon>
       <ListItemText primary='Search' />
+    </ListItemLink>
+    <ListItemLink to={'/comments'}>
+      <ListItemIcon>
+        <CommentIcon />
+      </ListItemIcon>
+      <ListItemText primary='COMMENTS' />
     </ListItemLink>
   </List>
 )
