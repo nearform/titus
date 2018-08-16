@@ -8,6 +8,12 @@ type DeleteResult {
     count: Int!
   }
 `
+const keywordSearchResult = `
+type KeywordSearchResult {
+    word: String!
+    score: Float
+  }
+`
 
 const updateFoodResult = `
 type UpdateFoodResult {
@@ -19,4 +25,4 @@ type UpdateFoodResult {
   }
 `
 
-module.exports = [deleteResult, updateFoodResult]
+module.exports = [deleteResult, updateFoodResult, keywordSearchResult]

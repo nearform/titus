@@ -4,24 +4,26 @@ import { withStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Paper from '@material-ui/core/Paper'
 import MenuItem from '@material-ui/core/MenuItem'
+import LinearProgress from '@material-ui/core/LinearProgress'
 
 const Input = ({ inputProps, classes, ref, ...other }) => (
-  <TextField
-    InputProps={{
-      inputRef: ref,
-      classes: {
-        root: classes.inputRoot
-      },
-      ...inputProps
-    }}
-    {...other}
-  />
+  <div className={classes.inputRoot}>
+    <TextField
+      InputProps={{
+        inputRef: ref,
+        ...inputProps
+      }}
+      {...other}
+    />
+    {other.loading && <LinearProgress />}
+  </div>
 )
 
 Input.propTypes = {
   classes: PropTypes.object.isRequired,
   inputProps: PropTypes.any,
-  ref: PropTypes.any
+  ref: PropTypes.any,
+  loading: PropTypes.any
 }
 
 const Suggestion = ({
@@ -49,14 +51,13 @@ Suggestion.propTypes = {
   highlightedIndex: PropTypes.number,
   index: PropTypes.number,
   itemProps: PropTypes.object,
-  selectedItem: PropTypes.object,
+  selectedItem: PropTypes.string,
   suggestion: PropTypes.shape({ value: PropTypes.string }).isRequired
 }
 
 const styles = theme => ({
   root: {
-    flexGrow: 1,
-    height: 250
+    flexGrow: 1
   },
   container: {
     flexGrow: 1,
@@ -70,6 +71,7 @@ const styles = theme => ({
     right: 0
   },
   inputRoot: {
+    position: 'relative',
     flexWrap: 'wrap'
   }
 })
@@ -80,25 +82,29 @@ const MaterialDownshift = ({
   isOpen,
   selectedItem,
   highlightedIndex,
-  getSuggestions,
-  inputValue,
   classes,
   placeholder,
-  id
+  id,
+  items,
+  onInputChange,
+  loading
 }) => (
   <div className={classes.root}>
     <div className={classes.container}>
       {Input({
         fullWidth: true,
+        loading: loading,
         classes,
         inputProps: getInputProps({
+          onChange: onInputChange,
           placeholder: placeholder,
           id: id
         })
       })}
-      {isOpen && (
+      {isOpen &&
+        items && (
         <Paper className={classes.paper} square>
-          {getSuggestions(inputValue).map((suggestion, index) =>
+          {items.map((suggestion, index) =>
             Suggestion({
               suggestion,
               index,
@@ -123,10 +129,11 @@ MaterialDownshift.propTypes = {
   isOpen: PropTypes.bool,
   selectedItem: PropTypes.object,
   highlightedIndex: PropTypes.number,
-  getSuggestions: PropTypes.func,
-  inputValue: PropTypes.string,
   placeholder: PropTypes.string,
-  id: PropTypes.string
+  id: PropTypes.string,
+  loading: PropTypes.any,
+  onInputChange: PropTypes.func,
+  items: PropTypes.array
 }
 
 export default withStyles(styles)(MaterialDownshift)
