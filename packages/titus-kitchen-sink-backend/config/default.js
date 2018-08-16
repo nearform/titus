@@ -8,7 +8,9 @@ const {
   POSTGRES_USER,
   POSTGRES_PASSWORD,
   POSTGRES_DB,
-  NODE_ENV
+  NODE_ENV,
+  REDIS_HOST,
+  REDIS_PORT
 } = process.env
 
 module.exports = {
@@ -21,6 +23,10 @@ module.exports = {
       prettyPrint: NODE_ENV !== 'production',
       level: 'debug'
     }
+  },
+  redis: {
+    host: REDIS_HOST || 'redis',
+    port: REDIS_PORT || 6379
   },
   db: {
     host: PGHOST || null,
