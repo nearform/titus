@@ -11,8 +11,10 @@ import InsertChart from '@material-ui/icons/InsertChart'
 import TablesIcon from '@material-ui/icons/GridOn'
 import AutocompleteIcon from '@material-ui/icons/Input'
 import ApiIcon from '@material-ui/icons/CloudQueue'
+import SearchIcon from '@material-ui/icons/FindInPage'
 import CommentIcon from '@material-ui/icons/Comment'
 import CloudUploadIcon from '@material-ui/icons/CloudUpload'
+import AuthIcon from '@material-ui/icons/LockOpen'
 
 const Menu = () => (
   <List>
@@ -52,6 +54,12 @@ const Menu = () => (
       </ListItemIcon>
       <ListItemText primary='API' />
     </ListItemLink>
+    <ListItemLink to={'/search'}>
+      <ListItemIcon>
+        <SearchIcon />
+      </ListItemIcon>
+      <ListItemText primary='Search' />
+    </ListItemLink>
     <ListItemLink to={'/comments'}>
       <ListItemIcon>
         <CommentIcon />
@@ -63,6 +71,12 @@ const Menu = () => (
         <CloudUploadIcon />
       </ListItemIcon>
       <ListItemText primary='Uploader' />
+    </ListItemLink>
+    <ListItemLink to={'/authorization'}>
+      <ListItemIcon>
+        <AuthIcon />
+      </ListItemIcon>
+      <ListItemText primary='Authorization' />
     </ListItemLink>
   </List>
 )

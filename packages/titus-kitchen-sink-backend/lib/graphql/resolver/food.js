@@ -8,6 +8,12 @@ const resolvers = {
     },
     allFood (root, args, context) {
       return food.getAll(context.pg, args)
+    },
+    search (root, args, context) {
+      return food.search(context.pg, args)
+    },
+    keywordSearch (root, args, context) {
+      return food.keywordSearch(context.pg, args)
     }
   },
   Food: {

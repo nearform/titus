@@ -6,64 +6,84 @@ import MaterialDownshift from './material/material-downshift'
 class Autocomplete extends React.Component {
   static propTypes = {
     data: PropTypes.array,
+    onInputChange: PropTypes.func,
     onChange: PropTypes.func,
     inputValue: PropTypes.string,
     placeholder: PropTypes.string,
     id: PropTypes.string,
     filterType: PropTypes.string,
     maxResults: PropTypes.number,
-    onGetSuggestions: PropTypes.func
+    loading: PropTypes.any,
+    items: PropTypes.array
   }
 
-  // FIXME Is it possible to have a null Item?
-  // The items requires a "key" attribute as well, and if a null valus is passed Downshift thrown an error
-  itemToString = item => (item ? item.value : '')
+  constructor (props) {
+    super(props)
+    // if all data is passed in, we're managing this state internally
+    // ourselves to suggested listitems
+    this.state = { internalItems: null }
+  }
 
   renderMaterial = props => {
+    const {
+      props: { placeholder, id, items, loading, onInputChange },
+      state: { internalItems },
+      handleInputChange
+    } = this
+
     return (
       <div>
         <MaterialDownshift
           {...props}
-          getSuggestions={this.getSuggestions}
-          placeholder={this.props.placeholder}
-          id={this.props.id}
+          items={onInputChange ? items : internalItems}
+          loading={loading ? 'true' : undefined}
+          placeholder={placeholder}
+          id={id}
+          onInputChange={handleInputChange}
         />
       </div>
     )
   }
 
-  getSuggestions = inputValue => {
-    if (!inputValue) return []
+  handleInputChange = ({ target: { value } }) => {
     const {
-      data = [],
-      filterType,
+      data,
+      filterType = 'startsWith',
       maxResults = 5,
-      onGetSuggestions
+      onInputChange
     } = this.props
 
-    if (filterType) {
-      if (!['startswith', 'contains', ''].includes(filterType.toLowerCase())) {
-        return onGetSuggestions(inputValue, filterType, maxResults)
-      }
+    if (onInputChange) {
+      // suggestions handled by container
+      onInputChange({ value, filterType, maxResults })
+    } else {
+      let newItems = null
+      this.setState({ internalItems: newItems })
+      if (!value || !data) return
+      const a = value.toLowerCase()
+
+      newItems = (filterType.toLowerCase() === 'contains'
+        ? data.filter(b => b.value.toLowerCase().indexOf(a) > -1)
+        : data.filter(b => b.value.toLowerCase().startsWith(a))
+      )
+        .sort((a, b) => a.value.length - b.value.length)
+        .splice(0, maxResults)
+      this.setState({ internalItems: newItems })
     }
-
-    const a = inputValue.toLowerCase()
-
-    return (filterType && filterType.toLowerCase() === 'contains'
-      ? data.filter(b => b.value.toLowerCase().indexOf(a) > -1)
-      : data.filter(b => b.value.toLowerCase().startsWith(a))
-    )
-      .sort((a, b) => a.value.length - b.value.length)
-      .splice(0, maxResults)
   }
 
+  itemToString = item => (item ? item.value : '')
+
   render () {
+    const {
+      props: { onChange },
+      renderMaterial,
+      itemToString
+    } = this
+
     return (
-      <Downshift
-        onChange={this.props.onChange}
-        itemToString={this.itemToString}
-      >
-        {this.renderMaterial}
+      <Downshift onChange={onChange} itemToString={itemToString}>
+        {renderMaterial}
       </Downshift>
     )
   }

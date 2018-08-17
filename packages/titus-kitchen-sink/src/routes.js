@@ -7,8 +7,11 @@ import Visualisations from './containers/visualisations/visualisations'
 import Tables from './containers/tables/tables'
 import AutocompleteDemo from './containers/autocomplete/autocomplete-demo'
 import Api from './containers/api/api'
+
+import Search from './containers/search/search'
 import Comments from './containers/comments/comments'
 import Uploader from './containers/uploader/uploader'
+import Authorization from './containers/authorization/authorization'
 
 const Routes = () => (
   <Router>
@@ -18,8 +21,10 @@ const Routes = () => (
     <Tables path='tables/*' />
     <AutocompleteDemo path='autocomplete/*' />
     <Api path='api/*' />
+    <Search path='search/*' />
     <Comments path='comments/*' />
     <Uploader path='uploader/*' />
+    <Authorization path='authorization/*' />
   </Router>
 )
 

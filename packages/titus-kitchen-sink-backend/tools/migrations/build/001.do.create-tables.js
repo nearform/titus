@@ -19,6 +19,15 @@ module.exports.generateSql = function () {
           food_group_id char(36) NOT NULL references food_group(id),
           PRIMARY KEY (id)
       );
+      CREATE TABLE diet_type
+      (
+          id char(36) NOT NULL DEFAULT gen_random_uuid(),
+          created timestamp NOT NULL DEFAULT now(),
+          modified timestamp,
+          name text NOT NULL,
+          visible boolean,
+          PRIMARY KEY (id)
+      );
       CREATE TABLE trails
       (
           id            BIGSERIAL PRIMARY KEY,

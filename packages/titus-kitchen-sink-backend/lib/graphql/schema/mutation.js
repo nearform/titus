@@ -6,6 +6,8 @@ type Mutation {
   updateFood(food: FoodInput): UpdateFoodResult
   deleteFoods(ids: [String]!): DeleteResult
   createFoodGroup(name: String): FoodGroup
+  deleteDietType(id: String): ModifiedResult
+  toggleDietTypeVisibility(id: String): ModifiedResult
 }
 `
 
