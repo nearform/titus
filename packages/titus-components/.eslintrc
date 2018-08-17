@@ -7,5 +7,10 @@
     "browser": true,
     "jest": true,
     "mocha": true
+  },
+  "settings": {
+    "react": {
+      "version": "16.4"
+    }
   }
 }

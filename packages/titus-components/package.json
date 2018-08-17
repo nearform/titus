@@ -15,25 +15,31 @@
     "build:watch": "nodemon -w src -x 'npm run build'",
     "clean": "nwb clean-module && nwb clean-demo",
     "start": "nwb serve-react-demo",
-    "test": "jest --coverage",
-    "test:watch": "npm run test -- --watch ",
+    "test": "jest --coverage --runInBand",
+    "test:watch": "npm run test -- --watch --runInBand",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "storybook": "start-storybook -p 6006 -c .storybook"
   },
   "dependencies": {
     "@material-ui/core": "^1.1.0",
     "@material-ui/icons": "^1.1.0",
     "@nearform/commentami-react-components": "^1.0.4",
     "@nearform/react-table": "^1.0.6",
+    "aws-sdk": "^2.286.2",
     "downshift": "^2.0.10",
-    "nodemon": "^1.17.5"
+    "nodemon": "^1.17.5",
+    "react-dnd": "^5.0.0",
+    "react-dnd-html5-backend-filedrop": "^1.0.0"
   },
   "peerDependencies": {
     "@reach/router": "^1.1.1",
     "react": "16.x"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^3.4.8",
+    "@storybook/react": "^3.3.15",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -58,6 +64,7 @@
     "lodash": "^4.17.10",
     "nwb": "0.21.x",
     "react": "^16.4.1",
+    "react-dnd-test-backend": "^5.0.1",
     "react-dom": "^16.4.1",
     "react-testing-library": "^4.0.2"
   },

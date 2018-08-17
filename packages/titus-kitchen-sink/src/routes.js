@@ -10,6 +10,7 @@ import Api from './containers/api/api'
 
 import Search from './containers/search/search'
 import Comments from './containers/comments/comments'
+import Uploader from './containers/uploader/uploader'
 import Authorization from './containers/authorization/authorization'
 
 const Routes = () => (
@@ -22,6 +23,7 @@ const Routes = () => (
     <Api path='api/*' />
     <Search path='search/*' />
     <Comments path='comments/*' />
+    <Uploader path='uploader/*' />
     <Authorization path='authorization/*' />
   </Router>
 )

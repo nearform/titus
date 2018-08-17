@@ -13,6 +13,7 @@ import AutocompleteIcon from '@material-ui/icons/Input'
 import ApiIcon from '@material-ui/icons/CloudQueue'
 import SearchIcon from '@material-ui/icons/FindInPage'
 import CommentIcon from '@material-ui/icons/Comment'
+import CloudUploadIcon from '@material-ui/icons/CloudUpload'
 import AuthIcon from '@material-ui/icons/LockOpen'
 
 const Menu = () => (
@@ -64,6 +65,12 @@ const Menu = () => (
         <CommentIcon />
       </ListItemIcon>
       <ListItemText primary='COMMENTS' />
+    </ListItemLink>
+    <ListItemLink to={'/uploader'}>
+      <ListItemIcon>
+        <CloudUploadIcon />
+      </ListItemIcon>
+      <ListItemText primary='Uploader' />
     </ListItemLink>
     <ListItemLink to={'/authorization'}>
       <ListItemIcon>
