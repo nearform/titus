@@ -5,14 +5,20 @@ metadata:
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:us-east-1:711655675495:certificate/9ee3a25a-5872-4283-b0e2-01468e5a11bf
     service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
   labels:
     app: frontend
 spec:
   type: LoadBalancer
   ports:
-  - port: 443
-    targetPort: 80
+  - name: http
     protocol: TCP
+    port: 80
+    targetPort: 80
+  - name: https
+    protocol: TCP
+    port: 443
+    targetPort: 80
   selector:
     app: frontend
 ---
