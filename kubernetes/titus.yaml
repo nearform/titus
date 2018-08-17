@@ -1,0 +1,170 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: titus-frontend
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:us-east-1:711655675495:certificate/9ee3a25a-5872-4283-b0e2-01468e5a11bf
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+  labels:
+    app: frontend
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 443
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: frontend
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: titus-frontend
+spec:
+  selector:
+    matchLabels:
+      app: frontend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: titus-frontend
+        image: 711655675495.dkr.ecr.us-east-1.amazonaws.com/titus-kitchen-sink-frontend:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: titus-backend
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:us-east-1:711655675495:certificate/9ee3a25a-5872-4283-b0e2-01468e5a11bf
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+  labels:
+    app: backend
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 443
+    targetPort: 5000
+    protocol: TCP
+  selector:
+    app: backend
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: titus-backend
+spec:
+  selector:
+    matchLabels:
+      app: backend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: titus-backend
+        image: 711655675495.dkr.ecr.us-east-1.amazonaws.com/titus-kitchen-sink-backend:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+        env:
+        - name: PGHOST
+          value: "titus-db"
+        - name: PGPORT
+          value: "5432"
+        - name: POSTGRES_USER
+          value: "titus"
+        - name: POSTGRES_PASSWORD
+          value: "titus"
+        - name: POSTGRES_DB
+          value: "titus"
+        - name: NF_COMMENTS_PGHOST
+          value: "titus-db"
+        - name: NF_COMMENTS_PGUSER
+          value: "titus"
+        - name: NF_COMMENTS_PASSWORD
+          value: "titus"
+        - name: NF_COMMENTS_DATABASE
+          value: "titus"
+        - name: REDIS_HOST
+          value: "titus-redis"
+        - name: REDIS_PORT
+          value: "6379"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: titus-redis
+  labels:
+    app: redis
+spec:
+  ports:
+  - port: 6379
+    targetPort: 6379
+    protocol: TCP
+  selector:
+    app: redis
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: titus-redis
+spec:
+  selector:
+    matchLabels:
+      app: redis
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: titus-redis
+        image: redis:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 6379
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: titus-db
+  labels:
+    app: db
+spec:
+  ports:
+  - port: 5432
+    targetPort: 5432
+    protocol: TCP
+  selector:
+    app: db
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: titus-db
+spec:
+  selector:
+    matchLabels:
+      app: db
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - name: titus-db
+        image: 711655675495.dkr.ecr.us-east-1.amazonaws.com/titus-kitchen-sink-db:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5432
