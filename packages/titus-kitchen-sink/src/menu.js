@@ -11,6 +11,7 @@ import InsertChart from '@material-ui/icons/InsertChart'
 import TablesIcon from '@material-ui/icons/GridOn'
 import AutocompleteIcon from '@material-ui/icons/Input'
 import ApiIcon from '@material-ui/icons/CloudQueue'
+import SearchIcon from '@material-ui/icons/FindInPage'
 import CommentIcon from '@material-ui/icons/Comment'
 import AuthIcon from '@material-ui/icons/LockOpen'
 
@@ -51,6 +52,12 @@ const Menu = () => (
         <ApiIcon />
       </ListItemIcon>
       <ListItemText primary='API' />
+    </ListItemLink>
+    <ListItemLink to={'/search'}>
+      <ListItemIcon>
+        <SearchIcon />
+      </ListItemIcon>
+      <ListItemText primary='Search' />
     </ListItemLink>
     <ListItemLink to={'/comments'}>
       <ListItemIcon>

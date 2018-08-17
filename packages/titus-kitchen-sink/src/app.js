@@ -1,8 +1,9 @@
 import React, { Fragment } from 'react'
+import JssProvider from 'react-jss/lib/JssProvider'
+import { createGenerateClassName, MuiThemeProvider } from '@material-ui/core/styles'
 import { ApolloProvider } from 'react-apollo'
 import ApolloClient from 'apollo-boost'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import { MuiThemeProvider } from '@material-ui/core/styles'
 import { Provider } from 'react-redux'
 import { Navigation } from '@nearform/titus-components'
 import UserProfile from './containers/user-profile/user-profile'
@@ -23,7 +24,7 @@ const meta = {
 }
 
 export const apolloClient = new ApolloClient({
-  uri: 'http://localhost:5000/graphql',
+  uri: process.env.REACT_APP_GRAPHQL_ENDPOINT,
   request: async (operation) => {
     operation.setContext({
       headers: {
@@ -33,16 +34,29 @@ export const apolloClient = new ApolloClient({
   }
 })
 
+const generateClassName = createGenerateClassName()
+
 const App = () => (
   <ApolloProvider client={apolloClient}>
     <Provider store={store}>
       <Fragment>
         <CssBaseline />
-        <MuiThemeProvider theme={theme}>
-          <Auth loginComponent={<Login authProvider={authProvider} />}>
-            <Navigation title={meta.appName} items={Menu} main={Routes} headerRight={UserProfile} />
-          </Auth>
-        </MuiThemeProvider>
+        {/*
+        JssProvider is required to fix classname conflict on production build,
+        this is a known issue:  https://github.com/mui-org/material-ui/issues/8223
+        */}
+        <JssProvider generateClassName={generateClassName}>
+          <MuiThemeProvider theme={theme}>
+            <Auth loginComponent={<Login authProvider={authProvider} />}>
+              <Navigation
+                title={meta.appName}
+                items={Menu}
+                main={Routes}
+                headerRight={UserProfile}
+              />
+            </Auth>
+          </MuiThemeProvider>
+        </JssProvider>
       </Fragment>
     </Provider>
   </ApolloProvider>

@@ -4,7 +4,7 @@ const error = () => ({
   method: 'GET',
   path: '/error/{name}',
   config: { plugins: {
-    'pgPlugin': { transactional: true },
+    pgPlugin: { transactional: true },
     auth: {
       action: '*',
       resource: '*'
