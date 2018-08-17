@@ -134,3 +134,89 @@ export const loadFoodGroups = () => async dispatch => {
     })
   }
 }
+
+export const loadDietTypes = () => async dispatch => {
+  try {
+    dispatch({type: constants.LOAD_DIET_TYPES})
+    const { data: { allDietTypes } } = await apolloClient.query({
+      query: queries.loadAllDietTypes
+    })
+    return dispatch({
+      type: constants.LOADED_DIET_TYPES,
+      data: { dietTypes: allDietTypes }
+    })
+  } catch (err) {
+    console.error(err)
+    dispatch({
+      type: constants.LOADING_DIET_TYPES_ERROR,
+      data: 'There was a problem loading the diet type data.'
+    })
+  }
+}
+
+export const deleteDietType = id => async dispatch => {
+  try {
+    dispatch({type: constants.DELETE_DIET_TYPE})
+    const res = await apolloClient.mutate({
+      mutation: queries.deleteDietType,
+      variables: { id },
+      update: (store, { data: { deleteDietType: { id } } }) => {
+        // Read the data from our cache for this query.
+        const data = store.readQuery({ query: queries.loadAllDietTypes })
+        // Filter out the row we just deleted
+        data.allDietTypes = data.allDietTypes.filter(({id: identifier}) => identifier !== id)
+        // Write our data back to the cache.
+        store.writeQuery({ query: queries.loadAllDietTypes, data })
+      }
+    })
+    dispatch({
+      type: constants.DELETED_DIET_TYPE,
+      data: { id, count: res.data.count }
+    })
+    dispatch(loadDietTypes())
+  } catch (err) {
+    console.error(err)
+    dispatch({
+      type: constants.DELETE_DIET_TYPE_ERROR,
+      data: err
+    })
+  }
+}
+
+export const toggleDietTypeVisibility = id => async dispatch => {
+  try {
+    dispatch({type: constants.TOGGLE_DIET_TYPE_VISIBILITY})
+    const res = await apolloClient.mutate({
+      mutation: queries.toggleDietTypeVisibility,
+      variables: { id },
+      update: (store, { data: { toggleDietTypeVisibility: { id } } }) => {
+        // Read the data from our cache for this query.
+        const data = store.readQuery({ query: queries.loadAllDietTypes })
+        // Toggle the visibility on the item we passed in
+        data.allDietTypes = data.allDietTypes.map((dietType) => {
+          if (dietType.id === id) {
+            return {
+              ...dietType,
+              visible: !dietType.visible
+            }
+          }
+
+          return dietType
+        })
+        // Write our data back to the cache.
+        store.writeQuery({ query: queries.loadAllDietTypes, data })
+      }
+    })
+    dispatch({
+      type: constants.TOGGLED_DIET_TYPE_VISIBILITY,
+      data: { id, count: res.data.count }
+    })
+    dispatch(loadDietTypes())
+  } catch (err) {
+    console.error(err)
+    dispatch({
+      type: constants.TOGGLE_DIET_TYPE_VISIBILITY_ERROR,
+      data: err
+    })
+  }
+}

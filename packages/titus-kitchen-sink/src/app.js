@@ -24,7 +24,14 @@ const meta = {
 }
 
 export const apolloClient = new ApolloClient({
-  uri: process.env.REACT_APP_GRAPHQL_ENDPOINT
+  uri: process.env.REACT_APP_GRAPHQL_ENDPOINT,
+  request: async (operation) => {
+    operation.setContext({
+      headers: {
+        authorization: window.localStorage.getItem('titus-user')
+      }
+    })
+  }
 })
 
 const generateClassName = createGenerateClassName()

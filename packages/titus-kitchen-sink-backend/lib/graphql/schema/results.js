@@ -15,6 +15,15 @@ type KeywordSearchResult {
   }
 `
 
+const modifiedResult = `
+type ModifiedResult {
+    typeName: String!
+    id: ID!
+    name: String!
+    operation: String!
+  }
+`
+
 const updateFoodResult = `
 type UpdateFoodResult {
     typeName: String!
@@ -25,4 +34,4 @@ type UpdateFoodResult {
   }
 `
 
-module.exports = [deleteResult, updateFoodResult, keywordSearchResult]
+module.exports = [deleteResult, modifiedResult, updateFoodResult, keywordSearchResult]

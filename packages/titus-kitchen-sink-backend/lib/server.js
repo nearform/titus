@@ -9,6 +9,7 @@ const grapqlSchema = require('./graphql').schema
 const loaders = require('./graphql').loaders
 const pgPlugin = require('./pg-plugin')
 const trailPlugin = require('@nearform/trail-hapi-plugin')
+const UdaruPlugin = require('@nearform/udaru-hapi-plugin')
 const routes = require('./routes')
 
 const server = hapi.server(config.hapi)
@@ -25,6 +26,7 @@ const init = async () => {
         path: '/graphql',
         route: {
           cors: true,
+          auth: false,
           plugins: {
             'pgPlugin': { transactional: true }
           }
@@ -33,6 +35,7 @@ const init = async () => {
           endpointURL: '/graphql',
           schema: grapqlSchema,
           context: {
+            user: req.headers.authorization,
             pg: req.pg,
             loaders: loaders(req.pg)
           },
@@ -62,6 +65,14 @@ const init = async () => {
           type: 'redis',
           host: config.redis.host,
           port: config.redis.port
+        }
+      }
+    },
+    {
+      plugin: UdaruPlugin,
+      options: {
+        config: {
+          pgdb: config.db
         }
       }
     }

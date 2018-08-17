@@ -8,6 +8,7 @@ type Query {
   allFood(offset: Int, limit: Int): [Food]
   foodGroup(id: ID): FoodGroup
   allFoodGroups: [FoodGroup]
+  allDietTypes: [DietType]
 }
 `
 

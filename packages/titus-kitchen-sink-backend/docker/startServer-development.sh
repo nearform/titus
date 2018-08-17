@@ -10,5 +10,6 @@ done
 >&2 echo "Postgres is up - starting server..."
 
 npm run migrate
+npm run dev:seed:udaru
 npm run dev:seed
 npm run dev:start

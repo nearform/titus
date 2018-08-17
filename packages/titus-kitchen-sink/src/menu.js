@@ -13,6 +13,7 @@ import AutocompleteIcon from '@material-ui/icons/Input'
 import ApiIcon from '@material-ui/icons/CloudQueue'
 import SearchIcon from '@material-ui/icons/FindInPage'
 import CommentIcon from '@material-ui/icons/Comment'
+import AuthIcon from '@material-ui/icons/LockOpen'
 
 const Menu = () => (
   <List>
@@ -63,6 +64,12 @@ const Menu = () => (
         <CommentIcon />
       </ListItemIcon>
       <ListItemText primary='COMMENTS' />
+    </ListItemLink>
+    <ListItemLink to={'/authorization'}>
+      <ListItemIcon>
+        <AuthIcon />
+      </ListItemIcon>
+      <ListItemText primary='Authorization' />
     </ListItemLink>
   </List>
 )
