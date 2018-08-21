@@ -3,9 +3,10 @@ kind: Service
 metadata:
   name: titus-frontend
   annotations:
-    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:us-east-1:711655675495:certificate/9ee3a25a-5872-4283-b0e2-01468e5a11bf
-    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
     service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:us-east-1:711655675495:certificate/9ee3a25a-5872-4283-b0e2-01468e5a11bf
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: tcp
+    service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
   labels:
     app: frontend
 spec:
@@ -47,15 +48,11 @@ apiVersion: v1
 kind: Service
 metadata:
   name: titus-backend
-  annotations:
-    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:us-east-1:711655675495:certificate/9ee3a25a-5872-4283-b0e2-01468e5a11bf
-    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
   labels:
     app: backend
 spec:
-  type: LoadBalancer
   ports:
-  - port: 443
+  - port: 80
     targetPort: 5000
     protocol: TCP
   selector:
