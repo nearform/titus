@@ -81,16 +81,16 @@ workflows:
   test_and_build:
     jobs:
       - install
-      #- lint:
-      #    requires:
-      #        - install
+      - lint:
+          requires:
+              - install
       #- test:
       #    requires:
       #        - lint
       - build-push-containers:
           requires:
               #- test
-              - install
-          #filters:
-          #  branches:
-          #    only: master
+              - lint
+          filters:
+            branches:
+              only: master
