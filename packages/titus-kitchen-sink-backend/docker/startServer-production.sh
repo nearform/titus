@@ -1,4 +1,6 @@
 #!/bin/bash
+export PGHOST=$PGHOST
+export PGPORT=$PGPORT
 export PGUSER=$POSTGRES_USER
 export PGPASSWORD=$POSTGRES_PASSWORD
 export PGDATABASE=$POSTGRES_DB
@@ -11,6 +13,6 @@ done
 >&2 echo "Postgres is up - starting server..."
 
 npm run migrate
-npm run dev:seed:udaru
-npm run dev:seed
-npm run dev:start
+npm run prod:seed:udaru
+npm run prod:seed
+npm run prod:start
