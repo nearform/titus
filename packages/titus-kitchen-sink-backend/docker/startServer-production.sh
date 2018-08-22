@@ -15,4 +15,4 @@ done
 npm run migrate
 npm run prod:seed:udaru
 npm run prod:seed
-npm run prod:start
+npm run dev:start
