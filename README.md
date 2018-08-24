@@ -62,3 +62,7 @@ Some commands have been added to the root package for convenience.
 | postinstall        | runs 'lerna bootstrap' post install |
 | build:component    | build the components project        |
 | start:kitchen-sink | starts the kitchen sink app         |
+
+### Infrastructure documentation
+
+Info about how the Titus demo app (kitchen-sink) is deployed can be found here: https://github.com/nearform/titus/blob/master/kubernetes/README.md
