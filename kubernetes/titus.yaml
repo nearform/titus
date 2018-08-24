@@ -3,9 +3,10 @@ kind: Service
 metadata:
   name: titus-frontend
   annotations:
-    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:us-east-1:711655675495:certificate/9ee3a25a-5872-4283-b0e2-01468e5a11bf
-    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
     service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:us-east-1:711655675495:certificate/9ee3a25a-5872-4283-b0e2-01468e5a11bf
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: tcp
+    service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
   labels:
     app: frontend
 spec:
@@ -47,15 +48,11 @@ apiVersion: v1
 kind: Service
 metadata:
   name: titus-backend
-  annotations:
-    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:us-east-1:711655675495:certificate/9ee3a25a-5872-4283-b0e2-01468e5a11bf
-    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
   labels:
     app: backend
 spec:
-  type: LoadBalancer
   ports:
-  - port: 443
+  - port: 80
     targetPort: 5000
     protocol: TCP
   selector:
@@ -156,26 +153,27 @@ spec:
   selector:
     app: db
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: batch/v1beta1
+kind: CronJob
 metadata:
   name: titus-db
 spec:
-  selector:
-    matchLabels:
-      app: db
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: db
+  schedule: "15 14 * * *"
+  jobTemplate:
     spec:
-      containers:
-      - name: titus-db
-        image: 711655675495.dkr.ecr.us-east-1.amazonaws.com/titus-kitchen-sink-db:latest
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 5432
+      activeDeadlineSeconds: 86400
+      template:
+        metadata:
+          labels:
+            app: db
+        spec:
+          containers:
+          - name: titus-db
+            image: 711655675495.dkr.ecr.us-east-1.amazonaws.com/titus-kitchen-sink-db:latest
+            imagePullPolicy: Always
+            ports:
+            - containerPort: 5432
+          restartPolicy: OnFailure
 ---
 apiVersion: v1
 kind: Service
@@ -183,31 +181,38 @@ metadata:
   name: titus-s3
   labels:
     app: fake-s3
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:us-east-1:711655675495:certificate/9ee3a25a-5872-4283-b0e2-01468e5a11bf
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
 spec:
+  type: LoadBalancer
   ports:
-  - port: 4569
-    targetPort: 4569
+  - name: http
     protocol: TCP
+    port: 443
+    targetPort: 4569
   selector:
     app: fake-s3
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: batch/v1beta1
+kind: CronJob
 metadata:
   name: titus-s3
 spec:
-  selector:
-    matchLabels:
-      app: fake-s3
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: fake-s3
+  schedule: "15 14 * * *"
+  jobTemplate:
     spec:
-      containers:
-      - name: fake-s3
-        image: mrister/fake-s3
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 4569
+      activeDeadlineSeconds: 86400
+      template:
+        metadata:
+          labels:
+            app: fake-s3
+        spec:
+          containers:
+          - name: fake-s3
+            image: mrister/fake-s3
+            imagePullPolicy: Always
+            ports:
+            - containerPort: 4569
+          restartPolicy: OnFailure
