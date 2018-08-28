@@ -7,8 +7,7 @@ const initAction = require('./actions/init')
 
 const { version } = require('./package.json')
 
-program
-  .version(version, '-v, --version')
+program.version(version, '-v, --version')
 
 program
   .command('init')

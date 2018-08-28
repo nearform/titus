@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "lint:all": "lerna run lint",
+    "lint:all": "lerna run --parallel lint",
     "test:all": "lerna run test",
-    "precommit": "lerna run lint:fix",
+    "precommit": "lerna run --parallel format ; lerna run --parallel lint:fix",
     "prepush": "lerna run test",
     "postinstall": "lerna bootstrap"
   },

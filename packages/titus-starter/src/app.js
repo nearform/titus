@@ -1,6 +1,9 @@
 import React, { Fragment } from 'react'
 import JssProvider from 'react-jss/lib/JssProvider'
-import { createGenerateClassName, MuiThemeProvider } from '@material-ui/core/styles'
+import {
+  createGenerateClassName,
+  MuiThemeProvider
+} from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { Provider } from 'react-redux'
 import { Navigation } from '@nearform/titus-components'

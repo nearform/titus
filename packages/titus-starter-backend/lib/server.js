@@ -26,7 +26,7 @@ const init = async () => {
         route: {
           cors: true,
           plugins: {
-            'pgPlugin': { transactional: true }
+            pgPlugin: { transactional: true }
           }
         },
         graphqlOptions: req => ({

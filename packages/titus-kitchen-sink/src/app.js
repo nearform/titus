@@ -1,6 +1,9 @@
 import React, { Fragment } from 'react'
 import JssProvider from 'react-jss/lib/JssProvider'
-import { createGenerateClassName, MuiThemeProvider } from '@material-ui/core/styles'
+import {
+  createGenerateClassName,
+  MuiThemeProvider
+} from '@material-ui/core/styles'
 import { ApolloProvider } from 'react-apollo'
 import ApolloClient from 'apollo-boost'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -25,7 +28,7 @@ const meta = {
 
 export const apolloClient = new ApolloClient({
   uri: process.env.REACT_APP_GRAPHQL_ENDPOINT,
-  request: async (operation) => {
+  request: async operation => {
     operation.setContext({
       headers: {
         authorization: window.localStorage.getItem('titus-user')

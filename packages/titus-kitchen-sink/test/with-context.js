@@ -2,13 +2,13 @@ import React from 'react'
 
 import createReactClass from 'create-react-class'
 
-function withContext (context, contextTypes, children) {
+function withContext(context, contextTypes, children) {
   const wrapperWithContext = createReactClass({
     childContextTypes: contextTypes,
-    getChildContext () {
+    getChildContext() {
       return context
     },
-    render () {
+    render() {
       return children
     }
   })

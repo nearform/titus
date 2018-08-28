@@ -9,7 +9,6 @@ const Routes = () => (
   </Router>
 )
 
-Routes.propTypes = {
-}
+Routes.propTypes = {}
 
 export default Routes

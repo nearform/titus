@@ -19,7 +19,8 @@
     "start": "npm run docker:dev:start",
     "dev:cleandb": "rm -rf pgdata",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write *.js **/*.js"
   },
   "dependencies": {
     "@nearform/sql": "^1.0.1",

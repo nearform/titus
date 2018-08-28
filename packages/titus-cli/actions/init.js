@@ -20,27 +20,44 @@ module.exports = async (input, { hapi, react }) => {
     spinner.succeed('Pulled files from GitHub')
 
     if (react) {
-      spinner.render().start(`Setting up app in ${chalk.cyan.bold(`${projectDir}-app`)}`)
+      spinner
+        .render()
+        .start(`Setting up app in ${chalk.cyan.bold(`${projectDir}-app`)}`)
       await fs.copy(`${tmpDir}/packages/titus-starter`, `${projectDir}-app`)
-      const packageJson = await fs.readFile(`${projectDir}-app/package.json`, 'utf8')
-      const newPackageJson = packageJson
-        .replace(/titus-starter/, `${projectDir}-app`)
+      const packageJson = await fs.readFile(
+        `${projectDir}-app/package.json`,
+        'utf8'
+      )
+      const newPackageJson = packageJson.replace(
+        /titus-starter/,
+        `${projectDir}-app`
+      )
       await fs.writeFile(`${projectDir}-app/package.json`, newPackageJson)
       spinner.succeed(`App setup in ${chalk.cyan.bold(`${projectDir}-app`)}`)
     }
 
     if (hapi) {
-      spinner.render().start(`Setting up api in ${chalk.cyan.bold(`${projectDir}-api`)}`)
-      await fs.copy(`${tmpDir}/packages/titus-starter-backend`, `${projectDir}-api`)
-      const packageJson = await fs.readFile(`${projectDir}-api/package.json`, 'utf8')
+      spinner
+        .render()
+        .start(`Setting up api in ${chalk.cyan.bold(`${projectDir}-api`)}`)
+      await fs.copy(
+        `${tmpDir}/packages/titus-starter-backend`,
+        `${projectDir}-api`
+      )
+      const packageJson = await fs.readFile(
+        `${projectDir}-api/package.json`,
+        'utf8'
+      )
       const newPackageJson = packageJson
         .replace(/titus-starter-backend/, `${projectDir}-api`)
         .replace(/titus/g, projectDir)
       await fs.writeFile(`${projectDir}-api/package.json`, newPackageJson)
 
-      const envFile = await fs.readFile(`${projectDir}-api/docker/dev.env`, 'utf8')
-      const newEnvFile = envFile
-        .replace(/titus/g, projectDir)
+      const envFile = await fs.readFile(
+        `${projectDir}-api/docker/dev.env`,
+        'utf8'
+      )
+      const newEnvFile = envFile.replace(/titus/g, projectDir)
       await fs.writeFile(`${projectDir}-api/docker/dev.env`, newEnvFile)
 
       spinner.succeed(`Api setup in ${chalk.cyan.bold(`${projectDir}-api`)}`)
@@ -53,7 +70,9 @@ module.exports = async (input, { hapi, react }) => {
     console.log(dedent`
       \nMove to your newly created project by running:
 
-        ${react ? chalk.cyan.bold(`cd ${projectDir}-app`) : ''}${react && hapi ? ` or ` : ''}${hapi ? chalk.cyan.bold(`cd ${projectDir}-api`) : ''}
+        ${react ? chalk.cyan.bold(`cd ${projectDir}-app`) : ''}${
+      react && hapi ? ` or ` : ''
+    }${hapi ? chalk.cyan.bold(`cd ${projectDir}-api`) : ''}
 
       Install the project dependencies:
 
@@ -67,6 +86,8 @@ module.exports = async (input, { hapi, react }) => {
     `)
   } catch (error) {
     spinner.fail(error)
-    console.log('\n If this issue persists please raise an issue at https://github.com/nearform/titus/issues')
+    console.log(
+      '\n If this issue persists please raise an issue at https://github.com/nearform/titus/issues'
+    )
   }
 }
