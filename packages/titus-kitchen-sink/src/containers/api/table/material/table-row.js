@@ -27,8 +27,10 @@ class TableRow extends Component {
   }
 
   onEditClick = row => () => {
-    // Copy normalised data to component state, where it will be edited from
-    this.setState({ pendingChanges: row, isEditing: true })
+    this.setState({
+      pendingChanges: row,
+      isEditing: true
+    })
   }
 
   handleEdit = accessor => e => {
@@ -41,20 +43,41 @@ class TableRow extends Component {
     })
   }
 
-  cancelEdit = () => {
-    this.setState({
-      pendingChanges: {},
-      isEditing: false
-    })
+  handleSelectEdit = e => {
+    const foodGroupId = e.target.value
+    const { name: foodGroup } = this.props.foodGroups.find(
+      ({ id }) => foodGroupId === id
+    )
+
+    this.setState(state => ({
+      pendingChanges: {
+        ...state.pendingChanges,
+        foodGroupId,
+        foodGroup
+      }
+    }))
   }
 
-  saveChanges = data => () => {
-    this.props.handleUpdate(data)
+  resetEdit = cb => {
+    this.setState(
+      {
+        pendingChanges: {},
+        isEditing: false
+      },
+      () => (typeof cb === 'function' ? cb() : null)
+    )
+  }
+
+  saveChanges = e => {
+    const { pendingChanges } = this.state
+
+    this.resetEdit(() => this.props.handleUpdate(pendingChanges))
   }
 
   render () {
     const { selected, rowKey, handleRowSelect, row, foodGroups } = this.props
-    const { isEditing, pendingChanges } = this.state
+    const { isEditing } = this.state
+
     return (
       <Fragment>
         <MuiTableRow
@@ -73,46 +96,59 @@ class TableRow extends Component {
               onClick={handleRowSelect}
             />
           </TableCell>
-          <TableCell aria-label='Food Name' padding='checkbox' key={`${rowKey}-name`}>
-            { isEditing
-              ? <TextField
+          <TableCell
+            aria-label='Food Name'
+            padding='checkbox'
+            key={`${rowKey}-name`}
+          >
+            {isEditing ? (
+              <TextField
                 fullWidth
                 value={this.state.pendingChanges.name}
                 onChange={this.handleEdit('name')}
               />
-              : row.name
-            }
+            ) : (
+              row.name
+            )}
           </TableCell>
-          <TableCell aria-label='Food Group' padding='checkbox' key={`${rowKey}-foodGroup`}>
-            {isEditing
-              ? <Select
+          <TableCell
+            aria-label='Food Group'
+            padding='checkbox'
+            key={`${rowKey}-foodGroup`}
+          >
+            {isEditing ? (
+              <Select
                 autoWidth
                 value={this.state.pendingChanges.foodGroupId}
-                onChange={this.handleEdit('foodGroupId')}
+                onChange={this.handleSelectEdit}
               >
-                {foodGroups.map(o => (
-                  <MenuItem key={o.id} value={o.id}>
-                    {o.name}
-                  </MenuItem>
-                ))}
+                {foodGroups.map(o => {
+                  return (
+                    <MenuItem key={o.id} value={o.id}>
+                      {o.name}
+                    </MenuItem>
+                  )
+                })}
               </Select>
-              : row.foodGroup
-            }
+            ) : (
+              row.foodGroup
+            )}
           </TableCell>
-          { isEditing
-            ? <Fragment>
+          {isEditing ? (
+            <Fragment>
               <TableCell padding='checkbox'>
-                <Button aria-label='Cancel' onClick={this.cancelEdit}>
+                <Button aria-label='Cancel' onClick={this.resetEdit}>
                   <ResetIcon />
                 </Button>
               </TableCell>
               <TableCell padding='checkbox'>
-                <Button aria-label='Save' onClick={this.saveChanges(pendingChanges)}>
+                <Button aria-label='Save' onClick={this.saveChanges}>
                   <SaveIcon />
                 </Button>
               </TableCell>
             </Fragment>
-            : <Fragment>
+          ) : (
+            <Fragment>
               <TableCell padding='checkbox'>
                 <Button aria-label='Edit' onClick={this.onEditClick(row)}>
                   <EditIcon />
@@ -120,7 +156,7 @@ class TableRow extends Component {
               </TableCell>
               <TableCell />
             </Fragment>
-          }
+          )}
         </MuiTableRow>
       </Fragment>
     )

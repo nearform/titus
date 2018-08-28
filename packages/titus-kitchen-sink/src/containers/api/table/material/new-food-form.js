@@ -31,19 +31,21 @@ class NewFoodForm extends Component {
     classes: PropTypes.object.isRequired
   }
 
-  defaultState = {
-    newRow: { name: '', foodGroupId: '__' },
+  state = {
+    newRow: {
+      name: '',
+      foodGroupId: '__'
+    },
     errors: []
   }
 
-  state = { ...this.defaultState }
-
   validations = {
-    'name': value => value.trim() === '' ? 'Name must not be empty' : null,
-    'foodGroupId': value => value === '__' ? 'Food Group must be selected' : null
+    name: value => (value.trim() === '' ? 'Name must not be empty' : null),
+    foodGroupId: value =>
+      value === '__' ? 'Food Group must be selected' : null
   }
 
-  handleAddUpdate = (accessor) => e => {
+  handleAddUpdate = accessor => e => {
     this.setState({
       newRow: {
         ...this.state.newRow,
@@ -61,16 +63,36 @@ class NewFoodForm extends Component {
       name: this.validations.name(this.state.newRow.name),
       foodGroupId: this.validations.foodGroupId(this.state.newRow.foodGroupId)
     }
-    this.setState({ errors }, () => {
-      if (!Object.keys(this.state.errors).find(e => this.state.errors[e])) {
-        this.props.onSubmit(this.state.newRow)
-      }
-    })
+
+    if (Object.values(errors).filter(i => i).length) {
+      return this.setState({ errors })
+    }
+
+    const { newRow } = this.state
+
+    return this.setState(
+      {
+        newRow: {
+          name: '',
+          foodGroupId: '__'
+        },
+        errors: []
+      },
+      () => this.props.onSubmit(newRow)
+    )
   }
 
   onCancel = () => {
-    this.setState({ ...this.defaultState })
-    this.props.onCancelAdd()
+    this.setState(
+      {
+        newRow: {
+          name: '',
+          foodGroupId: '__'
+        },
+        errors: []
+      },
+      this.props.onCancelAdd
+    )
   }
 
   render () {
@@ -97,7 +119,12 @@ class NewFoodForm extends Component {
             />
           </FormControl>
           <FormControl required className={classes.formControl}>
-            <InputLabel error={!!this.state.errors.foodGroupId} htmlFor='food-group-input'>Food Group</InputLabel>
+            <InputLabel
+              error={!!this.state.errors.foodGroupId}
+              htmlFor='food-group-input'
+            >
+              Food Group
+            </InputLabel>
             <Select
               autoWidth
               displayEmpty
@@ -117,7 +144,9 @@ class NewFoodForm extends Component {
                 ))
               ]}
             </Select>
-            <FormHelperText error={!!this.state.errors.foodGroupId} >{this.state.errors.foodGroupId}</FormHelperText>
+            <FormHelperText error={!!this.state.errors.foodGroupId}>
+              {this.state.errors.foodGroupId}
+            </FormHelperText>
           </FormControl>
         </div>
         <DialogActions>
