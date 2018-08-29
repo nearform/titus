@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@nearform/commentami-react-components": "^1.0.5",
-    "@nearform/react-table": "^1.0.6",
+    "@nearform/react-table": "^1.1.0",
     "@nearform/titus-components": "^1.0.0",
     "@reach/router": "^1.1.1",
     "@vx/gradient": "0.0.165",
