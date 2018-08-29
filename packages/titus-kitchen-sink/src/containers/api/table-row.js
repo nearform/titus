@@ -1,15 +1,19 @@
 import React, { Fragment, Component } from 'react'
 import PropTypes from 'prop-types'
-import TableCell from '@material-ui/core/TableCell'
-import TextField from '@material-ui/core/TextField'
-import Select from '@material-ui/core/Select'
-import Button from '@material-ui/core/Button'
-import MenuItem from '@material-ui/core/MenuItem'
-import Checkbox from '@material-ui/core/Checkbox'
-import EditIcon from '@material-ui/icons/Edit'
-import ResetIcon from '@material-ui/icons/Clear'
-import SaveIcon from '@material-ui/icons/Check'
-import MuiTableRow from '@material-ui/core/TableRow'
+import {
+  TableCell,
+  TextField,
+  Select,
+  Button,
+  MenuItem,
+  Checkbox,
+  TableRow as MuiTableRow
+} from '@material-ui/core'
+import {
+  Edit as EditIcon,
+  Clear as ResetIcon,
+  Check as SaveIcon
+} from '@material-ui/icons'
 
 class TableRow extends Component {
   static propTypes = {

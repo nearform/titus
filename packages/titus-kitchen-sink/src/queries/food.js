@@ -18,19 +18,6 @@ export const loadFoodData = gql`
   }
 `
 
-export const loadAllFood = gql`
-  query {
-    allFood {
-      id
-      name
-      foodGroup {
-        id
-        name
-      }
-    }
-  }
-`
-
 export const deleteFood = gql`
   mutation deleteFoods($ids: [String]!) {
     deleteFoods(ids: $ids) {

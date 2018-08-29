@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import TextField from '@material-ui/core/TextField'
-import Select from '@material-ui/core/Select'
-import MenuItem from '@material-ui/core/MenuItem'
-import FormHelperText from '@material-ui/core/FormHelperText'
-import InputLabel from '@material-ui/core/InputLabel'
-import Button from '@material-ui/core/Button'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import FormControl from '@material-ui/core/FormControl'
-import DialogTitle from '@material-ui/core/DialogTitle'
 import { withStyles } from '@material-ui/core/styles'
+import {
+  TextField,
+  Select,
+  MenuItem,
+  FormHelperText,
+  InputLabel,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogTitle,
+  FormControl
+} from '@material-ui/core'
 
 const styles = theme => ({
   formControl: {

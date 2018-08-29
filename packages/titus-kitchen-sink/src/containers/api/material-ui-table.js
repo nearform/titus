@@ -1,21 +1,18 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import TableRow from '@material-ui/core/TableRow'
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TablePagination from '@material-ui/core/TablePagination'
-import Paper from '@material-ui/core/Paper'
-import TableToolbar from './table-toolbar'
-import Header from './header'
-import Row from './table-row'
-import NewFoodForm from './new-food-form'
 import { Mutation, Query } from 'react-apollo'
 import {
-  createFood,
-  updateFood,
-  loadFoodData,
-  deleteFood
-} from '../../../../queries'
+  Table,
+  TableBody,
+  TableRow,
+  TablePagination,
+  Paper
+} from '@material-ui/core'
+import Header from './header'
+import TableToolbar from './table-toolbar'
+import Row from './table-row'
+import NewFoodForm from './new-food-form'
+import { createFood, updateFood, loadFoodData } from '../../queries'
 
 class MaterialUiTable extends Component {
   static propTypes = {
@@ -70,51 +67,15 @@ class MaterialUiTable extends Component {
     return (
       <Query query={loadFoodData}>
         {({ data: { foodGroups }, loading }) => {
-          return !loading ? (
+          return (
             <Paper>
-              <Mutation
-                mutation={deleteFood}
-                update={(cache, { data: { deleteFoods } }) => {
-                  const { ids } = deleteFoods
-                  const data = cache.readQuery({ query: loadFoodData })
+              <TableToolbar
+                title={title}
+                rows={rows}
+                onAddClick={this.onAddClick}
+                numSelected={selecting[0] === 'all' ? total : selecting.length}
+              />
 
-                  data.allFood = data.allFood.filter(
-                    ({ id }) => !ids.includes(id)
-                  )
-                  cache.writeQuery({ query: loadFoodData, data })
-                }}
-              >
-                {deleteFood => (
-                  <TableToolbar
-                    title={title}
-                    onDelete={e => {
-                      const ids = rows
-                        .filter(({ selected }) => selected)
-                        .map(
-                          row => row.rowData.find(r => r.accessor === 'id').data
-                        )
-
-                      deleteFood({
-                        variables: { ids },
-                        optimisticResponse: {
-                          __typename: 'Mutation',
-                          deleteFoods: {
-                            __typename: 'DeleteResult',
-                            ids,
-                            typeName: 'Food',
-                            count: ids.length,
-                            operation: 'delete'
-                          }
-                        }
-                      })
-                    }}
-                    onAddClick={this.onAddClick}
-                    numSelected={
-                      selecting[0] === 'all' ? total : selecting.length
-                    }
-                  />
-                )}
-              </Mutation>
               <Mutation
                 mutation={createFood}
                 update={(cache, { data: { createFood } }) => {
@@ -160,8 +121,6 @@ class MaterialUiTable extends Component {
                               }
                             }
                           }
-                        }).catch(error => {
-                          console.log('error fetching', error)
                         })
                       )
                     }}
@@ -241,7 +200,7 @@ class MaterialUiTable extends Component {
                 </TableBody>
               </Table>
             </Paper>
-          ) : null
+          )
         }}
       </Query>
     )

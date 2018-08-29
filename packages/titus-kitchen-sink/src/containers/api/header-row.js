@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import TableHead from '@material-ui/core/TableHead'
-import TableRow from '@material-ui/core/TableRow'
+import { TableHead, TableRow } from '@material-ui/core'
 
 const HeaderRow = ({ children }) => (
   <TableHead>

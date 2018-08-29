@@ -12,8 +12,8 @@ import {
 } from '@material-ui/core'
 import { Visibility, VisibilityOff } from '@material-ui/icons'
 import { loadAllDietTypes } from '../../queries'
-import { DeleteButton } from './DeleteButton'
-import { ToggleButton } from './ToggleButton'
+import { DeleteButton } from './delete-button'
+import { ToggleButton } from './toggle-button'
 
 const styles = theme => ({
   progress: {

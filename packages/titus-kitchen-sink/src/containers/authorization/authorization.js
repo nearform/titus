@@ -9,7 +9,7 @@ import {
   FormControl,
   Paper
 } from '@material-ui/core'
-import { DietaryTypes } from './DietaryTypes'
+import { DietaryTypes } from './dietary-restrictions'
 
 const styles = theme => ({
   root: {
