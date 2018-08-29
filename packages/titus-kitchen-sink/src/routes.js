@@ -11,7 +11,7 @@ import Api from './containers/api/api'
 import Search from './containers/search/search'
 import Comments from './containers/comments/comments'
 import Uploader from './containers/uploader/uploader'
-import Authorization from './containers/authorization/authorization'
+import Authorization from './containers/authorization/Authorization'
 
 const Routes = () => (
   <Router>
