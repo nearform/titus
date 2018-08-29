@@ -1,11 +1,9 @@
 import { combineReducers } from 'redux'
 
 import app from './app/app-reducer'
-import search from './search/search-reducer'
 
 const appReducer = combineReducers({
-  app,
-  search
+  app
   // add other reducers here
 })
 

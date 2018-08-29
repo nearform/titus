@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
-export const search = gql`
-  query search($needle: String!, $type: String) {
+export const recordSearch = gql`
+  query recordSearch($needle: String!, $type: String) {
     search(needle: $needle, type: $type) {
       id
       name

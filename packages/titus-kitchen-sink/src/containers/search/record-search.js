@@ -1,15 +1,16 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import Typography from '@material-ui/core/Typography'
+import { Query } from 'react-apollo'
 import { withStyles } from '@material-ui/core/styles'
-import FormControl from '@material-ui/core/FormControl'
-import FormHelperText from '@material-ui/core/FormHelperText'
-import Select from '@material-ui/core/Select'
-import MenuItem from '@material-ui/core/MenuItem'
+import {
+  Typography,
+  FormControl,
+  FormHelperText,
+  Select,
+  MenuItem
+} from '@material-ui/core'
 import { Autocomplete } from '@nearform/titus-components'
-
-import { search } from '../../store/search/search-actions'
+import { recordSearch } from '../../queries'
 
 const styles = theme => ({
   verticalMargin: {
@@ -19,25 +20,18 @@ const styles = theme => ({
 
 class RecordSearch extends React.Component {
   static propTypes = {
-    classes: PropTypes.object,
-    search: PropTypes.func,
-    searching: PropTypes.bool,
-    error: PropTypes.bool,
-    items: PropTypes.array
+    classes: PropTypes.object
   }
 
-  constructor (props) {
-    super(props)
-    this.state = {
-      timerId: null,
-      inputChanged: false,
-      searchType: 'startsWith'
-    }
+  state = {
+    timerId: null,
+    inputChanged: false,
+    inputValue: '',
+    searchType: 'startsWith'
   }
 
-  handleFilterChange = event => {
+  handleFilterChange = event =>
     this.setState({ searchType: event.target.value })
-  }
 
   handleChange = item => {
     alert('You selected: ' + item.value + ' (' + item.key + ')')
@@ -45,22 +39,25 @@ class RecordSearch extends React.Component {
 
   handleInputChange = ({ value }) => {
     this.setState({ inputChanged: true })
-    clearTimeout(this.state.timerId) // cancel previous timer, we only want one request after the delay
+    // cancel previous timer, we only want one request after the delay
+    clearTimeout(this.state.timerId)
+
     this.setState({
-      timerId: setTimeout(() => {
-        this.setState({ inputChanged: false })
-        this.props.search(value, this.state.searchType)
-      }, 500) // give user a chance to type before we call
+      // give user a chance to type before we call
+      timerId: setTimeout(
+        () =>
+          this.setState({
+            inputChanged: false,
+            inputValue: value
+          }),
+        500
+      )
     })
   }
 
   render () {
-    const { classes, error, searching, items } = this.props
-    const { inputChanged, searchType } = this.state
-
-    if (error) {
-      return <Typography color='error'>{error}</Typography>
-    }
+    const { classes } = this.props
+    const { searchType, inputChanged, inputValue } = this.state
 
     const searchTypes = [
       'startsWith',
@@ -91,35 +88,46 @@ class RecordSearch extends React.Component {
           <FormHelperText>Change search type</FormHelperText>
         </FormControl>
         <FormControl>
-          <Autocomplete
-            placeholder={'Search food database: '}
-            id='titus-autocomplete'
-            onChange={this.handleChange}
-            onInputChange={this.handleInputChange}
-            maxResults={10}
-            searchType={searchType}
-            items={inputChanged ? null : items}
-            loading={inputChanged || searching ? 'true' : undefined}
-          />
+          <Query
+            skip={inputValue === '' || inputChanged}
+            query={recordSearch}
+            variables={{
+              needle: inputValue,
+              type: searchType
+            }}
+          >
+            {({ loading, error, data, refetch }) => {
+              if (error) {
+                return <Typography color='error'>{error}</Typography>
+              }
+
+              return (
+                <Autocomplete
+                  placeholder={'Search food database: '}
+                  id='titus-autocomplete'
+                  onChange={this.handleChange}
+                  onInputChange={this.handleInputChange}
+                  maxResults={10}
+                  searchType={searchType}
+                  items={
+                    inputValue !== '' && data.search
+                      ? data.search
+                        .map(({ id, name }) => ({
+                          key: id,
+                          value: name
+                        }))
+                        .slice(0, 10)
+                      : null
+                  }
+                  loading={inputValue !== '' && loading}
+                />
+              )
+            }}
+          </Query>
         </FormControl>
       </Fragment>
     )
   }
 }
 
-const mapStateToProps = ({ search: { error, items, searching } }) => ({
-  error,
-  items,
-  searching
-})
-
-const mapDispatchToProps = {
-  search
-}
-
-export default withStyles(styles)(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(RecordSearch)
-)
+export default withStyles(styles)(RecordSearch)
