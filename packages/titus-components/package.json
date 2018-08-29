@@ -20,7 +20,8 @@
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
     "prepublish": "npm run build",
-    "storybook": "start-storybook -p 6006 -c .storybook"
+    "storybook": "start-storybook -p 6006 -c .storybook",
+    "format": "prettier --write *.js **/*.js"
   },
   "dependencies": {
     "@material-ui/core": "^1.1.0",
@@ -63,6 +64,7 @@
     "jest-environment-jsdom-global": "^1.1.0",
     "lodash": "^4.17.10",
     "nwb": "0.21.x",
+    "prettier": "^1.14.2",
     "react": "^16.4.1",
     "react-dnd-test-backend": "^5.0.1",
     "react-dom": "^16.4.1",

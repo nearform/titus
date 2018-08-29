@@ -40,7 +40,8 @@
     "lint:fix": "eslint src --fix",
     "commit-check": "pretty-quick --staged",
     "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "format": "prettier --write *.js **/*.js"
   },
   "devDependencies": {
     "@material-ui/core": "^1.1.0",

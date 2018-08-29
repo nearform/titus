@@ -17,7 +17,6 @@ const Menu = () => (
   </List>
 )
 
-Menu.propTypes = {
-}
+Menu.propTypes = {}
 
 export default Menu
