@@ -44,6 +44,26 @@ const styles = theme => ({
   }
 })
 
+const handleDelete = ({ deleteFood, rows }) => e => {
+  const ids = rows
+    .filter(({ selected }) => selected)
+    .map(row => row.rowData.find(r => r.accessor === 'id').data)
+
+  return deleteFood({
+    variables: { ids },
+    optimisticResponse: {
+      __typename: 'Mutation',
+      deleteFoods: {
+        __typename: 'DeleteResult',
+        ids,
+        typeName: 'Food',
+        count: ids.length,
+        operation: 'delete'
+      }
+    }
+  })
+}
+
 const TableToolbar = ({ numSelected, classes, title, rows, onAddClick }) => (
   <Mutation
     mutation={deleteFood}
@@ -96,27 +116,7 @@ const TableToolbar = ({ numSelected, classes, title, rows, onAddClick }) => (
                     aria-label='Delete'
                     color='primary'
                     className={classes.button}
-                    onClick={e => {
-                      const ids = rows
-                        .filter(({ selected }) => selected)
-                        .map(
-                          row => row.rowData.find(r => r.accessor === 'id').data
-                        )
-
-                      deleteFood({
-                        variables: { ids },
-                        optimisticResponse: {
-                          __typename: 'Mutation',
-                          deleteFoods: {
-                            __typename: 'DeleteResult',
-                            ids,
-                            typeName: 'Food',
-                            count: ids.length,
-                            operation: 'delete'
-                          }
-                        }
-                      })
-                    }}
+                    onClick={handleDelete({ deleteFood, rows })}
                   >
                     <DeleteIcon />
                   </IconButton>

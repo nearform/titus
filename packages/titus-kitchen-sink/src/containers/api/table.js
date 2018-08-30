@@ -6,6 +6,21 @@ import { Table as NfTable } from '@nearform/react-table'
 import MaterialUiTable from './material-ui-table'
 import { loadFoodData } from '../../queries'
 
+const styles = theme => ({
+  progress: {
+    margin: theme.spacing.unit * 2
+  },
+  progressWrapper: {
+    margin: 'auto 50%',
+    paddingBottom: theme.spacing.unit * 3
+  },
+  citation: {
+    '& span:first-of-type': {
+      marginTop: theme.spacing.unit * 3
+    }
+  }
+})
+
 const columns = [
   {
     accessor: 'id',
@@ -93,10 +108,9 @@ class Table extends React.Component {
                 pageSizeOptions={pageSizeOptions}
                 data={food}
                 sorting={[{ id: 'name', asc: true }]}
-                render={props => {
-                  return <MaterialUiTable {...props} title={title} />
-                }}
+                render={props => <MaterialUiTable {...props} title={title} />}
               />
+
               <div className={classes.citation}>
                 <Typography variant='caption'>
                   Nutritional information provided by:
@@ -119,17 +133,4 @@ class Table extends React.Component {
   }
 }
 
-export default withStyles(theme => ({
-  progress: {
-    margin: theme.spacing.unit * 2
-  },
-  progressWrapper: {
-    margin: 'auto 50%',
-    paddingBottom: theme.spacing.unit * 3
-  },
-  citation: {
-    '& span:first-of-type': {
-      marginTop: theme.spacing.unit * 3
-    }
-  }
-}))(Table)
+export default withStyles(styles)(Table)
