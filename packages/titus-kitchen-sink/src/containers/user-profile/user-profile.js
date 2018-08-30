@@ -1,15 +1,9 @@
-import { connect } from 'react-redux'
-import { logOut } from '../../store/app/app-actions'
-import React, { PureComponent } from 'react'
-import FaceIcon from '@material-ui/icons/Face'
+import React from 'react'
 import PropTypes from 'prop-types'
-import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography'
 import classNames from 'classnames'
-
-import Popover from '@material-ui/core/Popover'
-
-import { withStyles } from '@material-ui/core/styles'
+import { Button, Typography, Popover, withStyles } from '@material-ui/core'
+import { Face as FaceIcon } from '@material-ui/icons'
+import { AuthContext } from '../../lib/auth'
 
 const styles = theme => ({
   root: {
@@ -34,12 +28,10 @@ const styles = theme => ({
   }
 })
 
-export class UserProfile extends PureComponent {
+export class UserProfile extends React.Component {
   static propTypes = {
-    user: PropTypes.object.isRequired,
     classes: PropTypes.object,
-    className: PropTypes.string,
-    logOut: PropTypes.func
+    className: PropTypes.string
   }
 
   static defaultProps = {
@@ -57,46 +49,51 @@ export class UserProfile extends PureComponent {
   }
 
   render () {
-    const { classes, user, logOut, className } = this.props
+    const { classes, className } = this.props
     const { open } = this.state
 
     return (
-      <div ref={this.anchorEl} className={classNames(className, classes.root)}>
-        <Button onClick={this.clickHandler} title={user.username} color='inherit'>
-          <div className={classes.content}>
-            <FaceIcon className={classes.dummyImage} />
-          </div>
-          <Popover
-            className='userProfilePopOver'
-            open={open}
-            anchorEl={this.anchorEl.current}
-            onClose={this.handleClose}
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'center'
-            }}
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'center'
-            }}
+      <AuthContext.Consumer>
+        {({ user, logout }) => (
+          <div
+            ref={this.anchorEl}
+            className={classNames(className, classes.root)}
           >
-            <div className={classes.profileContent}>
-              <Typography variant='subheading' align='center' gutterBottom>{user.username}</Typography>
-              <Button onClick={logOut}>Logout</Button>
-            </div>
-          </Popover>
-        </Button >
-      </div>
+            <Button
+              onClick={this.clickHandler}
+              title={user.username}
+              color='inherit'
+            >
+              <div className={classes.content}>
+                <FaceIcon className={classes.dummyImage} />
+              </div>
+              <Popover
+                className='userProfilePopOver'
+                open={open}
+                anchorEl={this.anchorEl.current}
+                onClose={this.handleClose}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'center'
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'center'
+                }}
+              >
+                <div className={classes.profileContent}>
+                  <Typography variant='subheading' align='center' gutterBottom>
+                    {user.username}
+                  </Typography>
+                  <Button onClick={logout}>Logout</Button>
+                </div>
+              </Popover>
+            </Button>
+          </div>
+        )}
+      </AuthContext.Consumer>
     )
   }
 }
 
-const mapStateToProps = ({ app: { user } }) => ({
-  user
-})
-
-const mapDispatchToProps = {
-  logOut
-}
-
-export default withStyles(styles, { withTheme: true })(connect(mapStateToProps, mapDispatchToProps)(UserProfile))
+export default withStyles(styles, { withTheme: true })(UserProfile)
