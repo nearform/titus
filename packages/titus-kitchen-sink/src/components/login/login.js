@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { Formik } from 'formik'
 import { Button, TextField, Typography } from '@material-ui/core'
-import { AuthContext } from '../authentication/auth'
+import { AuthConsumer } from '../authentication/authentication-context'
 
 const styles = theme => ({
   wrapper: {
@@ -22,7 +22,7 @@ const styles = theme => ({
 })
 
 export const Login = ({ classes, submitLogin }) => (
-  <AuthContext.Consumer>
+  <AuthConsumer>
     {({ login }) => (
       <Formik
         initialValues={{
@@ -116,7 +116,7 @@ export const Login = ({ classes, submitLogin }) => (
         )}
       />
     )}
-  </AuthContext.Consumer>
+  </AuthConsumer>
 )
 
 Login.propTypes = {

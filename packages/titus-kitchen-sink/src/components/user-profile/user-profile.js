@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { Button, Typography, Popover, withStyles } from '@material-ui/core'
 import { Face as FaceIcon } from '@material-ui/icons'
-import { AuthContext } from '../authentication/auth'
+import { AuthConsumer } from '../authentication/authentication-context'
 
 const styles = theme => ({
   root: {
@@ -53,7 +53,7 @@ export class UserProfile extends React.Component {
     const { open } = this.state
 
     return (
-      <AuthContext.Consumer>
+      <AuthConsumer>
         {({ user, logout }) => (
           <div
             ref={this.anchorEl}
@@ -91,7 +91,7 @@ export class UserProfile extends React.Component {
             </Button>
           </div>
         )}
-      </AuthContext.Consumer>
+      </AuthConsumer>
     )
   }
 }
