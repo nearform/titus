@@ -14,7 +14,7 @@ import {
   FormControl
 } from '@material-ui/core'
 import { Mutation, Query } from 'react-apollo'
-import { createFood, loadFoodData } from '../../queries'
+import { loadFoodData, createFood } from './gql-queries'
 
 const styles = theme => ({
   formControl: {

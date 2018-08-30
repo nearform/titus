@@ -9,7 +9,7 @@ import {
   MenuItem
 } from '@material-ui/core'
 import { Clear as ResetIcon, Check as SaveIcon } from '@material-ui/icons'
-import { updateFood, loadFoodData } from '../../queries'
+import { updateFood, loadFoodData } from './gql-queries'
 
 class TableRowEdit extends React.Component {
   static propTypes = {
@@ -24,7 +24,7 @@ class TableRowEdit extends React.Component {
   }
 
   handleEdit = e => {
-    const errors = e.target.value ? { name: 'Name must not be empty' } : {}
+    const errors = !e.target.value ? { name: 'Name must not be empty' } : {}
     return this.setState({
       pendingChanges: {
         ...this.state.pendingChanges,

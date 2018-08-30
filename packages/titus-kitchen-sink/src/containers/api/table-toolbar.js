@@ -12,7 +12,7 @@ import {
   Button
 } from '@material-ui/core'
 import { Add as AddIcon, Delete as DeleteIcon } from '@material-ui/icons'
-import { deleteFood, loadFoodData } from '../../queries'
+import { loadFoodData, deleteFood } from './gql-queries'
 
 const styles = theme => ({
   root: {
