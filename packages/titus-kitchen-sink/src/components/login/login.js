@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { Formik } from 'formik'
 import { Button, TextField, Typography } from '@material-ui/core'
-import { AuthContext } from '../../lib/auth'
+import { AuthContext } from '../authentication/auth'
 
 const styles = theme => ({
   wrapper: {

@@ -9,13 +9,13 @@ import ApolloClient from 'apollo-boost'
 import CssBaseline from '@material-ui/core/CssBaseline'
 
 import { Navigation } from '@nearform/titus-components'
-import UserProfile from './containers/user-profile/user-profile'
+import UserProfile from './components/user-profile/user-profile'
 
 import { theme } from './theme/theme'
 import Menu from './menu'
 import Routes from './routes'
-import Auth from './lib/auth'
-import Login from './containers/login/login.js'
+import Auth from './components/authentication/auth'
+import Login from './components/login/login.js'
 
 const meta = {
   appName: 'Titus Docs and Examples'

@@ -1,17 +1,17 @@
 import React from 'react'
 import { Router } from '@reach/router'
 
-import Dashboard from './containers/dashboard/dashboard'
-import Wizard from './containers/wizard/wizard'
-import Visualisations from './containers/visualisations/visualisations'
-import Tables from './containers/tables/tables'
-import AutocompleteDemo from './containers/autocomplete/autocomplete-demo'
-import Api from './containers/api/table'
+import Dashboard from './components/dashboard/dashboard'
+import Wizard from './components/wizard/wizard'
+import Visualisations from './components/visualisations/visualisations'
+import Tables from './components/tables/tables'
+import AutocompleteDemo from './components/autocomplete/autocomplete-demo'
+import Api from './components/api/table'
 
-import Search from './containers/search/search'
-import Comments from './containers/comments/comments'
-import Uploader from './containers/uploader/uploader'
-import Authorization from './containers/authorization/authorization'
+import Search from './components/search/search'
+import Comments from './components/comments/comments'
+import Uploader from './components/uploader/uploader'
+import Authorization from './components/authorization/authorization'
 
 const Routes = () => (
   <Router>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { Button, Typography, Popover, withStyles } from '@material-ui/core'
 import { Face as FaceIcon } from '@material-ui/icons'
-import { AuthContext } from '../../lib/auth'
+import { AuthContext } from '../authentication/auth'
 
 const styles = theme => ({
   root: {
