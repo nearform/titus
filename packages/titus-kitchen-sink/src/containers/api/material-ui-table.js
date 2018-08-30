@@ -1,24 +1,22 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import TableRow from '@material-ui/core/TableRow'
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TablePagination from '@material-ui/core/TablePagination'
-import Paper from '@material-ui/core/Paper'
-import TableToolbar from './table-toolbar'
+import {
+  Table,
+  TableBody,
+  TableRow as MaterialTableRow,
+  TablePagination,
+  Paper
+} from '@material-ui/core'
 import Header from './header'
-import Row from './table-row'
+import TableToolbar from './table-toolbar'
+import TableRow from './table-row'
 import NewFoodForm from './new-food-form'
 
 class MaterialUiTable extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
-    onDelete: PropTypes.func.isRequired,
-    onUpdate: PropTypes.func.isRequired,
-    onCreate: PropTypes.func.isRequired,
     columns: PropTypes.array.isRequired,
     rows: PropTypes.array.isRequired,
-    foodGroups: PropTypes.array.isRequired,
     handleRowSelect: PropTypes.func.isRequired,
     selecting: PropTypes.array,
     pageSize: PropTypes.number.isRequired,
@@ -29,21 +27,16 @@ class MaterialUiTable extends Component {
   }
 
   state = {
-    adding: false
+    adding: false,
+    selected: []
   }
 
   onAddClick = () => {
     this.setState({ adding: true })
   }
 
-  onCancelAdd = () => {
+  resetAdding = () => {
     this.setState({ adding: false })
-  }
-
-  handleDelete = () => {
-    const { onDelete, rows } = this.props
-    const toDelete = rows.filter(({ selected }) => selected)
-    onDelete(toDelete)
   }
 
   handleRowSelect = event => {
@@ -59,35 +52,31 @@ class MaterialUiTable extends Component {
 
   render () {
     const {
-      handleDelete,
-      handleRowSelect,
-      handleChangePage,
-      props: {
-        title,
-        columns,
-        rows,
-        selecting,
-        pageSize,
-        total,
-        currentPage,
-        handlePageSizeChange,
-        foodGroups,
-        onCreate
-      }
-    } = this
+      title,
+      columns,
+      rows,
+      selecting,
+      pageSize,
+      total,
+      currentPage,
+      handlePageSizeChange
+    } = this.props
+
     return (
       <Paper>
         <TableToolbar
           title={title}
-          onDelete={handleDelete}
+          rows={rows}
           onAddClick={this.onAddClick}
           numSelected={selecting[0] === 'all' ? total : selecting.length}
         />
-        <NewFoodForm foodGroups={foodGroups} visible={this.state.adding} onCancelAdd={this.onCancelAdd} onSubmit={onCreate} />
+
+        <NewFoodForm visible={this.state.adding} onClose={this.resetAdding} />
+
         <Table>
           <Header
             columns={columns}
-            handleRowSelect={handleRowSelect}
+            handleRowSelect={this.handleRowSelect}
             selecting={selecting}
           />
           <TableBody>
@@ -98,19 +87,18 @@ class MaterialUiTable extends Component {
                 }
                 return acc
               }, {})
+
               return (
-                <Row
+                <TableRow
                   key={rowKey}
                   selected={selected}
                   rowKey={rowKey}
                   row={row}
-                  foodGroups={foodGroups}
-                  handleRowSelect={handleRowSelect}
-                  handleUpdate={this.props.onUpdate}
+                  handleRowSelect={this.handleRowSelect}
                 />
               )
             })}
-            <TableRow>
+            <MaterialTableRow>
               <TablePagination
                 count={total}
                 rowsPerPage={pageSize}
@@ -121,10 +109,10 @@ class MaterialUiTable extends Component {
                 nextIconButtonProps={{
                   'aria-label': 'Next Page'
                 }}
-                onChangePage={handleChangePage}
+                onChangePage={this.handleChangePage}
                 onChangeRowsPerPage={handlePageSizeChange}
               />
-            </TableRow>
+            </MaterialTableRow>
           </TableBody>
         </Table>
       </Paper>

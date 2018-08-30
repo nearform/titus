@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import TableCell from '@material-ui/core/TableCell'
-import Checkbox from '@material-ui/core/Checkbox'
+import { TableCell, Checkbox } from '@material-ui/core'
 import {
   TableHeaderRow as NfTableHeaderRow,
   TableHeader as NfTableHeader

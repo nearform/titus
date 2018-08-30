@@ -6,7 +6,7 @@ import Wizard from './containers/wizard/wizard'
 import Visualisations from './containers/visualisations/visualisations'
 import Tables from './containers/tables/tables'
 import AutocompleteDemo from './containers/autocomplete/autocomplete-demo'
-import Api from './containers/api/api'
+import Api from './containers/api/table'
 
 import Search from './containers/search/search'
 import Comments from './containers/comments/comments'

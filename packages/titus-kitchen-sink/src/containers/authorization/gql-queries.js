@@ -1,10 +1,10 @@
 import gql from 'graphql-tag'
 
 export const loadAllDietTypes = gql`
-  query {
+  query loadDietTypes {
     allDietTypes {
       id
-      name,
+      name
       visible
     }
   }
@@ -12,7 +12,7 @@ export const loadAllDietTypes = gql`
 
 export const deleteDietType = gql`
   mutation deleteDietType($id: String) {
-    deleteDietType (id: $id){
+    deleteDietType(id: $id) {
       id
     }
   }
@@ -20,7 +20,7 @@ export const deleteDietType = gql`
 
 export const toggleDietTypeVisibility = gql`
   mutation toggleDietTypeVisibility($id: String) {
-    toggleDietTypeVisibility (id: $id){
+    toggleDietTypeVisibility(id: $id) {
       id
     }
   }

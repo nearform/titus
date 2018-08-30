@@ -1,10 +1,7 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Switch from '@material-ui/core/Switch'
-import Paper from '@material-ui/core/Paper'
+import { Typography, FormControlLabel, Switch, Paper } from '@material-ui/core'
 import RecordSearch from './record-search'
 import KeywordSearch from './keyword-search'
 
@@ -26,11 +23,8 @@ class Search extends React.Component {
     classes: PropTypes.object
   }
 
-  constructor (props) {
-    super(props)
-    this.state = {
-      keywordSearch: false
-    }
+  state = {
+    keywordSearch: false
   }
 
   handleChangeSearchType = () => {
