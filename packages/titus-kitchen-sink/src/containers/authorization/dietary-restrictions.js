@@ -11,7 +11,7 @@ import {
   ListItemSecondaryAction
 } from '@material-ui/core'
 import { Visibility, VisibilityOff } from '@material-ui/icons'
-import { loadAllDietTypes } from '../../queries'
+import { loadAllDietTypes } from './gql-queries'
 import { DeleteButton } from './delete-button'
 import { ToggleButton } from './toggle-button'
 
