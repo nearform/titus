@@ -1,30 +1,83 @@
 import React from 'react'
+import Loadable from 'react-loadable'
 import { Router } from '@reach/router'
+import Loading from './loading'
 
-import Dashboard from './components/dashboard/dashboard'
-import Wizard from './components/wizard/wizard'
-import Visualisations from './components/visualisations/visualisations'
-import Tables from './components/tables/tables'
-import AutocompleteDemo from './components/autocomplete/autocomplete-demo'
-import Api from './components/api/table'
+const AsyncDashboard = Loadable({
+  loader: () => import('./components/dashboard/dashboard'),
+  loading: Loading,
+  delay: 300,
+  timeout: 10000
+})
 
-import Search from './components/search/search'
-import Comments from './components/comments/comments'
-import Uploader from './components/uploader/uploader'
-import Authorization from './components/authorization/authorization'
+const AsyncWizard = Loadable({
+  loader: () => import('./components/wizard/wizard'),
+  loading: Loading,
+  delay: 300,
+  timeout: 10000
+})
+
+const AsyncVisualisations = Loadable({
+  loader: () => import('./components/visualisations/visualisations'),
+  loading: Loading,
+  delay: 300,
+  timeout: 10000
+})
+const AsyncTables = Loadable({
+  loader: () => import('./components/tables/tables'),
+  loading: Loading,
+  delay: 300,
+  timeout: 10000
+})
+const AsyncAutocompleteDemo = Loadable({
+  loader: () => import('./components/autocomplete/autocomplete-demo'),
+  loading: Loading,
+  delay: 300,
+  timeout: 10000
+})
+const AsyncApi = Loadable({
+  loader: () => import('./components/api/table'),
+  loading: Loading,
+  delay: 300,
+  timeout: 10000
+})
+const AsyncSearch = Loadable({
+  loader: () => import('./components/search/search'),
+  loading: Loading,
+  delay: 300,
+  timeout: 10000
+})
+const AsyncComments = Loadable({
+  loader: () => import('./components/comments/comments'),
+  loading: Loading,
+  delay: 300,
+  timeout: 10000
+})
+const AsyncUploader = Loadable({
+  loader: () => import('./components/uploader/uploader'),
+  loading: Loading,
+  delay: 300,
+  timeout: 10000
+})
+const AsyncAuthorization = Loadable({
+  loader: () => import('./components/authorization/authorization'),
+  loading: Loading,
+  delay: 300,
+  timeout: 10000
+})
 
 const Routes = () => (
   <Router>
-    <Dashboard path='/' />
-    <Wizard path='wizard/*' />
-    <Visualisations path='visualisations/*' />
-    <Tables path='tables/*' />
-    <AutocompleteDemo path='autocomplete/*' />
-    <Api path='api/*' />
-    <Search path='search/*' />
-    <Comments path='comments/*' />
-    <Uploader path='uploader/*' />
-    <Authorization path='authorization/*' />
+    <AsyncDashboard path='/' />
+    <AsyncWizard path='wizard/*' />
+    <AsyncVisualisations path='visualisations/*' />
+    <AsyncTables path='tables/*' />
+    <AsyncAutocompleteDemo path='autocomplete/*' />
+    <AsyncApi path='api/*' />
+    <AsyncSearch path='search/*' />
+    <AsyncComments path='comments/*' />
+    <AsyncUploader path='uploader/*' />
+    <AsyncAuthorization path='authorization/*' />
   </Router>
 )
 

@@ -1,25 +1,31 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import JssProvider from 'react-jss/lib/JssProvider'
+import Loadable from 'react-loadable'
+import ApolloClient from 'apollo-boost'
 import {
   createGenerateClassName,
-  MuiThemeProvider
-} from '@material-ui/core/styles'
+  MuiThemeProvider,
+  CssBaseline
+} from '@material-ui/core'
 import { ApolloProvider } from 'react-apollo'
-import ApolloClient from 'apollo-boost'
-import CssBaseline from '@material-ui/core/CssBaseline'
-
-import { Navigation } from '@nearform/titus-components'
-import UserProfile from './components/user-profile/user-profile'
 
 import { theme } from './theme/theme'
-import Menu from './menu'
-import Routes from './routes'
 import Auth from './components/authentication/auth'
-import Login from './components/login/login.js'
+import Loading from './loading'
 
-const meta = {
-  appName: 'Titus Docs and Examples'
-}
+const AsyncLayout = Loadable({
+  loader: () => import('./layout'),
+  loading: Loading,
+  delay: 300,
+  timeout: 10000
+})
+
+const AsyncLogin = Loadable({
+  loader: () => import('./components/login/login'),
+  loading: Loading,
+  delay: 300,
+  timeout: 10000
+})
 
 export const apolloClient = new ApolloClient({
   uri: process.env.REACT_APP_GRAPHQL_ENDPOINT,
@@ -36,7 +42,7 @@ const generateClassName = createGenerateClassName()
 
 const App = () => (
   <ApolloProvider client={apolloClient}>
-    <Fragment>
+    <React.Fragment>
       <CssBaseline />
       {/*
         JssProvider is required to fix classname conflict on production build,
@@ -46,22 +52,12 @@ const App = () => (
         <MuiThemeProvider theme={theme}>
           <Auth>
             {isAuthenticated =>
-              isAuthenticated ? (
-                <Navigation
-                  title={meta.appName}
-                  items={<Menu />}
-                  headerRight={UserProfile}
-                >
-                  <Routes />
-                </Navigation>
-              ) : (
-                <Login />
-              )
+              isAuthenticated ? <AsyncLayout /> : <AsyncLogin />
             }
           </Auth>
         </MuiThemeProvider>
       </JssProvider>
-    </Fragment>
+    </React.Fragment>
   </ApolloProvider>
 )
 
