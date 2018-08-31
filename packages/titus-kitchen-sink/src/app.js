@@ -53,10 +53,11 @@ const App = () => (
             <Auth loginComponent={<Login authProvider={authProvider} />}>
               <Navigation
                 title={meta.appName}
-                items={Menu}
-                main={Routes}
+                items={<Menu />}
                 headerRight={UserProfile}
-              />
+              >
+                <Routes />
+              </Navigation>
             </Auth>
           </MuiThemeProvider>
         </JssProvider>
