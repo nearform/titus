@@ -1,5 +1,7 @@
-import React, { Component } from 'react'
+import * as Yup from 'yup'
+import React from 'react'
 import PropTypes from 'prop-types'
+import { Formik, Form } from 'formik'
 import { withStyles } from '@material-ui/core/styles'
 import {
   TextField,
@@ -11,7 +13,8 @@ import {
   Dialog,
   DialogActions,
   DialogTitle,
-  FormControl
+  FormControl,
+  FormGroup
 } from '@material-ui/core'
 import { Mutation, Query } from 'react-apollo'
 import { loadFoodData, createFood } from './gql-queries'
@@ -22,199 +25,177 @@ const styles = theme => ({
     flex: 1
   },
   formContainer: {
-    display: 'flex'
+    display: 'flex',
+    alignItems: 'center'
   }
 })
 
-class NewFoodForm extends Component {
-  static propTypes = {
-    visible: PropTypes.bool,
-    onClose: PropTypes.func.isRequired,
-    classes: PropTypes.object.isRequired
-  }
+const schema = Yup.object().shape({
+  name: Yup.string().required('Name must not be empty.'),
+  foodGroupId: Yup.string().required('Food Group must be selected.')
+})
 
-  state = {
-    newRow: {
-      name: '',
-      foodGroupId: '__'
-    },
-    errors: []
-  }
+const NewFoodForm = ({ classes, onClose }) => (
+  <Query query={loadFoodData}>
+    {({ data: { foodGroups = [] } }) => (
+      <Mutation
+        mutation={createFood}
+        update={(cache, { data: { createFood } }) => {
+          const { updated } = createFood
+          const data = cache.readQuery({ query: loadFoodData })
 
-  validations = {
-    name: value => (value.trim() === '' ? 'Name must not be empty' : null),
-    foodGroupId: value =>
-      value === '__' ? 'Food Group must be selected' : null
-  }
-
-  handleAddUpdate = accessor => e => {
-    this.setState({
-      newRow: {
-        ...this.state.newRow,
-        [accessor]: e.target.value
-      },
-      errors: {
-        ...this.state.errors,
-        [accessor]: this.validations[accessor](e.target.value)
-      }
-    })
-  }
-
-  onSubmit = ({ createFood, foodGroups }) => () => {
-    const errors = {
-      name: this.validations.name(this.state.newRow.name),
-      foodGroupId: this.validations.foodGroupId(this.state.newRow.foodGroupId)
-    }
-
-    if (Object.values(errors).filter(i => i).length) {
-      return this.setState({ errors })
-    }
-
-    const { newRow: food } = this.state
-
-    this.setState(
-      {
-        newRow: {
-          name: '',
-          foodGroupId: '__'
-        },
-        errors: []
-      },
-      () => this.props.onClose()
-    )
-
-    food.foodGroup = foodGroups.find(({ id }) => id === food.foodGroupId).name
-
-    const id = new Date().getTime()
-
-    return createFood({
-      variables: { food },
-      optimisticResponse: {
-        __typename: 'Mutation',
-        createFood: {
-          __typename: 'UpdateFoodResult',
-          id,
-          typeName: 'Food',
-          count: 1,
-          operation: 'create',
-          updated: {
-            __typename: 'Food',
-            id,
-            name: food.name,
-            foodGroup: {
-              __typename: 'FoodGroup',
-              id: food.foodGroupId,
-              name: food.foodGroup
-            }
-          }
-        }
-      }
-    })
-  }
-
-  onCancel = () => {
-    this.setState(
-      {
-        newRow: {
-          name: '',
-          foodGroupId: '__'
-        },
-        errors: []
-      },
-      this.props.onClose
-    )
-  }
-
-  render () {
-    const { classes, visible } = this.props
-    return (
-      <Query query={loadFoodData}>
-        {({ data: { foodGroups = [] } }) => (
-          <Mutation
-            mutation={createFood}
-            update={(cache, { data: { createFood } }) => {
-              const { updated } = createFood
-              const data = cache.readQuery({ query: loadFoodData })
-
-              data.allFood = [...data.allFood, updated]
-              cache.writeQuery({ query: loadFoodData, data })
+          data.allFood = [...data.allFood, updated]
+          cache.writeQuery({ query: loadFoodData, data })
+        }}
+      >
+        {createFood => (
+          <Formik
+            initialValues={{
+              name: '',
+              foodGroupId: ''
             }}
-          >
-            {createFood => (
+            validationSchema={schema}
+            onSubmit={(values, { setSubmitting, setErrors }) => {
+              const id = new Date().getTime()
+              const food = values
+
+              food.foodGroup = foodGroups.find(
+                ({ id }) => id === food.foodGroupId
+              ).name
+
+              createFood({
+                variables: { food },
+                optimisticResponse: {
+                  __typename: 'Mutation',
+                  createFood: {
+                    __typename: 'UpdateFoodResult',
+                    id,
+                    typeName: 'Food',
+                    count: 1,
+                    operation: 'create',
+                    updated: {
+                      __typename: 'Food',
+                      id,
+                      name: food.name,
+                      foodGroup: {
+                        __typename: 'FoodGroup',
+                        id: food.foodGroupId,
+                        name: food.foodGroup
+                      }
+                    }
+                  }
+                }
+              })
+
+              return onClose()
+            }}
+            render={({
+              values,
+              errors,
+              touched,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              isSubmitting
+            }) => (
               <Dialog
                 fullWidth
-                open={visible}
-                onClose={this.handleClose}
+                open
+                onClose={onClose}
                 aria-labelledby='form-dialog-title'
               >
-                <DialogTitle id='form-dialog-title'>
-                  Add New Food Item
-                </DialogTitle>
-                <div className={classes.formContainer}>
-                  <FormControl className={classes.formControl}>
-                    <TextField
-                      required
-                      autoFocus
-                      margin='dense'
-                      label='Name'
-                      value={visible ? this.state.newRow.name : ''}
-                      error={!!this.state.errors.name}
-                      helperText={this.state.errors.name}
-                      onChange={this.handleAddUpdate('name')}
-                    />
-                  </FormControl>
-                  <FormControl required className={classes.formControl}>
-                    <InputLabel
-                      error={!!this.state.errors.foodGroupId}
-                      htmlFor='food-group-input'
+                <Form noValidate>
+                  <DialogTitle id='form-dialog-title'>
+                    Add New Food Item
+                  </DialogTitle>
+                  <div>
+                    <FormGroup row>
+                      <FormControl
+                        className={classes.formControl}
+                        margin='dense'
+                      >
+                        <TextField
+                          required
+                          autoFocus
+                          label='Name'
+                          name='name'
+                          value={values.name}
+                          error={Boolean(touched.name && errors.name)}
+                          helperText={touched.name && errors.name}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                        />
+                      </FormControl>
+                      <FormControl
+                        required
+                        className={classes.formControl}
+                        margin='dense'
+                      >
+                        <InputLabel
+                          error={Boolean(
+                            touched.foodGroupId && errors.foodGroupId
+                          )}
+                          htmlFor='food-group-input'
+                        >
+                          Food Group
+                        </InputLabel>
+                        <Select
+                          margin='dense'
+                          autoWidth
+                          displayEmpty
+                          label='Food Group'
+                          name='foodGroupId'
+                          inputProps={{
+                            id: 'food-group-input'
+                          }}
+                          value={values.foodGroupId}
+                          error={Boolean(
+                            touched.foodGroupId && errors.foodGroupId
+                          )}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                        >
+                          {foodGroups.map(o => (
+                            <MenuItem key={o.id} value={o.id}>
+                              {o.name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                        <FormHelperText
+                          error={Boolean(
+                            touched.foodGroupId && errors.foodGroupId
+                          )}
+                        >
+                          {touched.foodGroupId && errors.foodGroupId}
+                        </FormHelperText>
+                      </FormControl>
+                    </FormGroup>
+                  </div>
+                  <DialogActions>
+                    <Button
+                      variant='outlined'
+                      onClick={onClose}
+                      color='primary'
                     >
-                      Food Group
-                    </InputLabel>
-                    <Select
-                      autoWidth
-                      displayEmpty
-                      label='Food Group'
-                      inputProps={{
-                        id: 'food-group-input'
-                      }}
-                      value={this.state.newRow.foodGroupId}
-                      error={!!this.state.errors.foodGroupId}
-                      onChange={this.handleAddUpdate('foodGroupId')}
-                    >
-                      {foodGroups.map(o => (
-                        <MenuItem key={o.id} value={o.id}>
-                          {o.name}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                    <FormHelperText error={!!this.state.errors.foodGroupId}>
-                      {this.state.errors.foodGroupId}
-                    </FormHelperText>
-                  </FormControl>
-                </div>
-                <DialogActions>
-                  <Button
-                    variant='outlined'
-                    onClick={this.onCancel}
-                    color='primary'
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    variant='contained'
-                    onClick={this.onSubmit({ createFood, foodGroups })}
-                    color='primary'
-                  >
-                    Save
-                  </Button>
-                </DialogActions>
+                      Cancel
+                    </Button>
+                    <Button type='submit' variant='contained' color='primary'>
+                      Save
+                    </Button>
+                  </DialogActions>
+                </Form>
               </Dialog>
             )}
-          </Mutation>
+          />
         )}
-      </Query>
-    )
-  }
+      </Mutation>
+    )}
+  </Query>
+)
+
+NewFoodForm.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired
 }
 
 export default withStyles(styles)(NewFoodForm)

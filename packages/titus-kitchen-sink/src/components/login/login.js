@@ -1,3 +1,4 @@
+import * as yup from 'yup'
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
@@ -21,6 +22,17 @@ const styles = theme => ({
   }
 })
 
+const schema = yup.object().shape({
+  username: yup.string().required('Username is required.'),
+  password: yup
+    .string()
+    .matches(
+      /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/i,
+      'Password must be at least 4 characters long and contain at least one letter and one number.'
+    )
+    .required('Password is required.')
+})
+
 export const Login = ({ classes, submitLogin }) => (
   <AuthConsumer>
     {({ login }) => (
@@ -29,22 +41,7 @@ export const Login = ({ classes, submitLogin }) => (
           username: '',
           password: ''
         }}
-        validate={values => {
-          let errors = {}
-
-          if (!values.username) {
-            errors.username = 'Username is required.'
-          }
-
-          if (
-            !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/i.test(values.password)
-          ) {
-            errors.password =
-              'Password must be at least 4 characters long and contain at least one letter and one number.'
-          }
-
-          return errors
-        }}
+        validationSchema={schema}
         onSubmit={(values, { setSubmitting, setErrors }) => {
           const { username, password } = values
 

@@ -14,6 +14,7 @@ const styles = theme => ({
 
 const Loading = ({ error, timedOut, retry, pastDelay, classes }) => {
   if (error) {
+    console.error(error)
     return (
       <div>
         Error! <button onClick={retry}>Retry</button>

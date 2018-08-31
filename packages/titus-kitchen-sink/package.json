@@ -26,7 +26,8 @@
     "regenerator-runtime": "^0.12.1",
     "reselect": "^3.0.1",
     "sillyname": "^0.1.0",
-    "victory": "^0.27.0"
+    "victory": "^0.27.0",
+    "yup": "^0.26.3"
   },
   "scripts": {
     "start": "react-scripts start",

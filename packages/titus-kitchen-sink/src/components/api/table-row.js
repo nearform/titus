@@ -51,6 +51,7 @@ class TableRow extends React.Component {
             disabled={isEditing}
           />
         </TableCell>
+
         {isEditing ? (
           <TableRowEdit row={row} onDone={this.onDone} />
         ) : (
