@@ -1,8 +1,5 @@
 import React from 'react'
-import {
-  render,
-  fireEvent
-} from 'react-testing-library'
+import { render, fireEvent } from 'react-testing-library'
 
 import { createMuiTheme } from '@material-ui/core/styles'
 import { MuiThemeProvider } from '@material-ui/core'
@@ -14,14 +11,14 @@ const muiTheme = createMuiTheme({
 })
 
 const Items = ({ menuOpen }) => (
-  <div id='mock-items'>{menuOpen && <div id='mock-items-menuopen' />}</div>
+  <div id="mock-items">{menuOpen && <div id="mock-items-menuopen" />}</div>
 )
 const Main = ({ menuOpen }) => (
-  <div id='mock-main'>{menuOpen && <div id='mock-main-menuopen' />}</div>
+  <div id="mock-main">{menuOpen && <div id="mock-main-menuopen" />}</div>
 )
 
 const HeaderRight = ({ className }) => (
-  <div id='mock-header-right' className={className} />
+  <div id="mock-header-right" className={className} />
 )
 
 describe('Navigation', () => {
@@ -32,7 +29,7 @@ describe('Navigation', () => {
   describe('rendering', () => {
     test('With required props it should render correctly', () => {
       const { container, getByTestId } = render(
-        <Navigation items={Items} main={Main} title='Test title' />
+        <Navigation items={Items} main={Main} title="Test title" />
       )
 
       expect(container.querySelector('#mock-main')).not.toBeNull()
@@ -50,7 +47,7 @@ describe('Navigation', () => {
         <Navigation
           items={Items}
           main={Main}
-          title='Test title'
+          title="Test title"
           headerRight={HeaderRight}
         />
       )
@@ -68,7 +65,7 @@ describe('Navigation', () => {
         <Navigation
           items={Items}
           main={Main}
-          title='Test title'
+          title="Test title"
           headerRight={HeaderRight}
         />
       )
@@ -90,7 +87,7 @@ describe('Navigation', () => {
         <Navigation
           items={Items}
           main={Main}
-          title='Test title'
+          title="Test title"
           headerRight={HeaderRight}
         />
       )
@@ -114,7 +111,7 @@ describe('Navigation', () => {
           <Navigation
             items={Items}
             main={Main}
-            title='Test title'
+            title="Test title"
             headerRight={HeaderRight}
           />
         </MuiThemeProvider>
@@ -129,7 +126,7 @@ describe('Navigation', () => {
         <Navigation
           items={Items}
           main={Main}
-          title='Test title'
+          title="Test title"
           headerRight={HeaderRight}
         />
       )

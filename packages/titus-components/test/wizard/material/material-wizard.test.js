@@ -19,7 +19,7 @@ describe('Material Wizard', () => {
       reset: jest.fn()
     }
     state = {
-      steps: [<div id='mock-step-1' />, <div id='mock-step-2' />],
+      steps: [<div id="mock-step-1" />, <div id="mock-step-2" />],
       numSteps: 2,
       stepIndex: 0,
       stepsInfo: [
@@ -42,7 +42,9 @@ describe('Material Wizard', () => {
       )
 
       expect(getByTestId('wizard-title').textContent).toBe('Wizard Title')
-      expect(getByTestId('wizard-description').textContent).toBe('Step 1 Description')
+      expect(getByTestId('wizard-description').textContent).toBe(
+        'Step 1 Description'
+      )
 
       expect(container.querySelector('h2').textContent).toBe(
         'Wizard Finished Message'
@@ -65,7 +67,9 @@ describe('Material Wizard', () => {
         />
       )
 
-      expect(getByTestId('wizard-description').textContent).toBe('Step 2 Description')
+      expect(getByTestId('wizard-description').textContent).toBe(
+        'Step 2 Description'
+      )
       expect(getByTestId('wizard-control-bar-back').textContent).toBe('Back')
       expect(getByTestId('wizard-control-bar-next').textContent).toBe('Finish')
     })

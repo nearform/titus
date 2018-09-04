@@ -1,14 +1,19 @@
-const createService = (options = {})=>
+const createService = (options = {}) =>
   class UploadService {
-    onUploadFileChange (value) {
+    onUploadFileChange(value) {
       options.onUploadFileChange && options.onUploadFileChange(value)
     }
 
-    startUpload (file, reportProgress, onUploadError, onUploadDone) {
-      return options.startUpload(file, reportProgress, onUploadError, onUploadDone)
+    startUpload(file, reportProgress, onUploadError, onUploadDone) {
+      return options.startUpload(
+        file,
+        reportProgress,
+        onUploadError,
+        onUploadDone
+      )
     }
 
-    abortUpload (value) {
+    abortUpload(value) {
       return options.abortUpload ? options.abortUpload(value) : null
     }
   }

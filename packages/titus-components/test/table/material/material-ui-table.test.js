@@ -19,7 +19,9 @@ describe('Table Material MaterialUiTable', () => {
 
       let total = 0
       container.querySelectorAll('thead tr th span').forEach(item => {
-        total += (item.getAttribute('class') || '').includes('MuiCheckbox-checked')
+        total += (item.getAttribute('class') || '').includes(
+          'MuiCheckbox-checked'
+        )
           ? 1
           : 0
       })
@@ -39,7 +41,9 @@ describe('Table Material MaterialUiTable', () => {
 
       let total = 0
       container.querySelectorAll('thead tr th span').forEach(item => {
-        total += (item.getAttribute('class') || '').includes('MuiCheckbox-checked')
+        total += (item.getAttribute('class') || '').includes(
+          'MuiCheckbox-checked'
+        )
           ? 1
           : 0
       })
@@ -70,7 +74,7 @@ describe('Table Material MaterialUiTable', () => {
     test('handle delete', () => {
       const newRowData = cloneDeep(rowsWithRowData)
       const mockOnDelete = jest.fn()
-      const mockRowSelect = (id) => {
+      const mockRowSelect = id => {
         const itemFound = newRowData.find(item => item.rowKey === id)
         itemFound.selected = !itemFound.selected
       }
@@ -86,7 +90,9 @@ describe('Table Material MaterialUiTable', () => {
         />
       )
       const checkBox = container.querySelector('input[value="key-1"]')
-      const deleteButton = container.querySelector('button[aria-label="Delete"]')
+      const deleteButton = container.querySelector(
+        'button[aria-label="Delete"]'
+      )
 
       fireEvent.click(checkBox)
       fireEvent.click(deleteButton)
@@ -108,7 +114,9 @@ describe('Table Material MaterialUiTable', () => {
         />
       )
 
-      const nextPageButton = container.querySelector('button[aria-label="Next Page"]')
+      const nextPageButton = container.querySelector(
+        'button[aria-label="Next Page"]'
+      )
 
       fireEvent.click(nextPageButton)
       expect(mockChangePage).toHaveBeenCalled()

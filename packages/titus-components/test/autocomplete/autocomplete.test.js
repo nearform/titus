@@ -60,7 +60,7 @@ describe('Navigation', () => {
 
     test('With filtertype startswith', () => {
       const { container } = render(
-        <Autocomplete data={sampleData} filterType='startswith' />
+        <Autocomplete data={sampleData} filterType="startswith" />
       )
 
       const input = container.querySelector('input')
@@ -74,7 +74,7 @@ describe('Navigation', () => {
 
     test('With contains', () => {
       const { container } = render(
-        <Autocomplete data={sampleData} filterType='contains' />
+        <Autocomplete data={sampleData} filterType="contains" />
       )
 
       const input = container.querySelector('input')
@@ -99,7 +99,7 @@ describe('Navigation', () => {
       const { container } = render(
         <Autocomplete
           data={sampleData}
-          filterType='custom'
+          filterType="custom"
           onInputChange={mockHandleInputChange}
           loading={loading ? 'true' : undefined}
           items={items}
@@ -120,7 +120,7 @@ describe('Navigation', () => {
       const { container } = render(
         <Autocomplete
           data={sampleData}
-          filterType='contains'
+          filterType="contains"
           selectedItem={{ value: 'Abcd' }}
         />
       )

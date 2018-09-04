@@ -4,7 +4,7 @@ import { render } from 'react-testing-library'
 import Wizard from '../../src/wizard/wizard'
 
 class SampleCard extends Component {
-  render () {
+  render() {
     let { handleSatisfied, handleDataChanged, stepIndex, id } = this.props
     return (
       <div id={`card-${id}`}>
@@ -26,31 +26,31 @@ describe('Wizard', () => {
 
   beforeEach(() => {
     steps = [
-      <SampleCard id={1} key={1} title='Step 1' description='Description 1' />,
+      <SampleCard id={1} key={1} title="Step 1" description="Description 1" />,
       <SampleCard
         id={2}
         key={2}
-        title='Step 2'
-        description='Description 2'
+        title="Step 2"
+        description="Description 2"
         required
-        requiredMessage='Step 2 Required'
+        requiredMessage="Step 2 Required"
         stepsDataRequired
       />,
       <SampleCard
         id={3}
         key={3}
-        title='Step 3'
-        description='Description 3'
+        title="Step 3"
+        description="Description 3"
         required
         stepsDataRequired
       />,
       <SampleCard
         id={4}
         key={4}
-        title='Step 4'
-        description='Description 4'
+        title="Step 4"
+        description="Description 4"
         required
-        requiredMessage='Step 4 Required'
+        requiredMessage="Step 4 Required"
         stepsDataRequired
       />
     ]
@@ -59,9 +59,9 @@ describe('Wizard', () => {
   test('Default initialization', () => {
     const { getByTestId } = render(
       <Wizard
-        title='Wizard Title'
-        finishedMessage='Finished Message'
-        defaultRequiredMessage='Default Message'
+        title="Wizard Title"
+        finishedMessage="Finished Message"
+        defaultRequiredMessage="Default Message"
       >
         {steps.map(step => step)}
       </Wizard>

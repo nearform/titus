@@ -5,7 +5,7 @@ import MaterialWizard from '../../src/wizard/material/material-wizard'
 import HeadlessWizard from '../../src/wizard/headless-wizard'
 
 class SampleCard extends Component {
-  render () {
+  render() {
     let {
       handleSatisfied,
       handleDataChanged,
@@ -38,28 +38,28 @@ describe('Headless wizard', () => {
 
   beforeEach(() => {
     steps = [
-      <SampleCard id={1} title='Step 1' description='Description 1' />,
+      <SampleCard id={1} title="Step 1" description="Description 1" />,
       <SampleCard
         id={2}
-        title='Step 2'
-        description='Description 2'
+        title="Step 2"
+        description="Description 2"
         required
-        requiredMessage='Step 2 Required'
+        requiredMessage="Step 2 Required"
         stepsDataRequired
       />,
       <SampleCard
         id={3}
-        title='Step 3'
-        description='Description 3'
+        title="Step 3"
+        description="Description 3"
         required
         stepsDataRequired
       />,
       <SampleCard
         id={4}
-        title='Step 4'
-        description='Description 4'
+        title="Step 4"
+        description="Description 4"
         required
-        requiredMessage='Step 4 Required'
+        requiredMessage="Step 4 Required"
         stepsDataRequired
       />
     ]
@@ -74,7 +74,7 @@ describe('Headless wizard', () => {
       <HeadlessWizard
         steps={steps}
         children={MaterialWizard}
-        title='Wizard Title'
+        title="Wizard Title"
       />
     )
 
@@ -88,7 +88,7 @@ describe('Headless wizard', () => {
         <HeadlessWizard
           steps={steps}
           children={MaterialWizard}
-          title='Wizard Title'
+          title="Wizard Title"
         />
       )
       fireEvent.click(getByTestId('wizard-control-bar-next'))
@@ -103,7 +103,7 @@ describe('Headless wizard', () => {
         <HeadlessWizard
           steps={steps}
           children={MaterialWizard}
-          title='Wizard Title'
+          title="Wizard Title"
         />
       )
 
@@ -127,7 +127,7 @@ describe('Headless wizard', () => {
         <HeadlessWizard
           steps={steps}
           children={MaterialWizard}
-          title='Wizard Title'
+          title="Wizard Title"
         />
       )
 
@@ -149,7 +149,7 @@ describe('Headless wizard', () => {
         <HeadlessWizard
           steps={steps}
           children={MaterialWizard}
-          title='Wizard Title'
+          title="Wizard Title"
         />
       )
 
@@ -172,7 +172,7 @@ describe('Headless wizard', () => {
         <HeadlessWizard
           steps={steps}
           children={MaterialWizard}
-          title='Wizard Title'
+          title="Wizard Title"
         />
       )
 
@@ -193,7 +193,7 @@ describe('Headless wizard', () => {
         <HeadlessWizard
           steps={steps}
           children={MaterialWizard}
-          title='Wizard Title'
+          title="Wizard Title"
           onFinish={mockOnFinish}
         />
       )
@@ -215,7 +215,7 @@ describe('Headless wizard', () => {
         <HeadlessWizard
           steps={steps}
           children={MaterialWizard}
-          title='Wizard Title'
+          title="Wizard Title"
         />
       )
 
@@ -234,7 +234,7 @@ describe('Headless wizard', () => {
         <HeadlessWizard
           steps={steps}
           children={MaterialWizard}
-          title='Wizard Title'
+          title="Wizard Title"
         />
       )
 
@@ -259,7 +259,7 @@ describe('Headless wizard', () => {
         <HeadlessWizard
           steps={steps}
           children={MaterialWizard}
-          title='Wizard Title'
+          title="Wizard Title"
         />
       )
 
