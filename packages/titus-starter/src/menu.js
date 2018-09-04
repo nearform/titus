@@ -12,7 +12,7 @@ const Menu = () => (
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
-      <ListItemText primary='Dashboard' />
+      <ListItemText primary="Dashboard" />
     </ListItemLink>
   </List>
 )
