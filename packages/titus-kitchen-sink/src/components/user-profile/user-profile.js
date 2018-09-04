@@ -18,11 +18,6 @@ const styles = theme => ({
     position: 'relative'
   },
 
-  dummyImage: {
-    width: '40px',
-    height: '40px'
-  },
-
   profileContent: {
     padding: '12px'
   }
@@ -65,7 +60,7 @@ export class UserProfile extends React.Component {
               color='inherit'
             >
               <div className={classes.content}>
-                <FaceIcon className={classes.dummyImage} />
+                <FaceIcon />
               </div>
               <Popover
                 className='userProfilePopOver'
