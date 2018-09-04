@@ -8,7 +8,9 @@
     "test:all": "lerna run test",
     "precommit": "lerna run --parallel format ; lerna run --parallel lint:fix",
     "prepush": "lerna run test",
-    "postinstall": "lerna bootstrap"
+    "postinstall": "lerna bootstrap",
+    "start:kitchen-sink": "lerna run --scope titus-kitchen-sink* --stream start",
+    "stop:kitchen-sink": "lerna run --scope titus-kitchen-sink* --stream stop"
   },
   "devDependencies": {
     "husky": "^0.14.3",
