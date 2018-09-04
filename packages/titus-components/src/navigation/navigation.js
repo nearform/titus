@@ -94,8 +94,8 @@ class Navigation extends Component {
     title: PropTypes.string.isRequired,
     classes: PropTypes.object.isRequired,
     theme: PropTypes.object.isRequired,
-    items: PropTypes.func.isRequired,
-    main: PropTypes.func.isRequired,
+    items: PropTypes.node.isRequired,
+    children: PropTypes.node.isRequired,
     headerRight: PropTypes.func
   }
 
@@ -111,7 +111,7 @@ class Navigation extends Component {
     const {
       classes,
       title,
-      main,
+      children,
       items,
       theme,
       headerRight: HeaderRight
@@ -168,11 +168,11 @@ class Navigation extends Component {
             </IconButton>
           </div>
           <Divider />
-          {items({ menuOpen })}
+          {items}
         </Drawer>
         <div className={classes.content}>
           <div className={classes.toolbar} />
-          <main className={classes.main}>{main({ menuOpen })}</main>
+          <main className={classes.main}>{children}</main>
         </div>
       </div>
     )
