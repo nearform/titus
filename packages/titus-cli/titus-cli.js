@@ -17,6 +17,9 @@ program
   .arguments('<project>')
   .action(initAction)
 
+// unknown command passed then show help
+program.on('command:*', () => program.help())
+
 program.parse(process.argv)
 
 // no arguments passed then show help

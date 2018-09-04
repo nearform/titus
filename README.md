@@ -24,7 +24,7 @@ The quickest way to get started with Titus is to use the CLI to create a starter
 You can do this by running:
 
 ```
-npx @nearform/titus-cli starter <project-name>
+npx @nearform/titus-cli init <project-name>
 ```
 
 This command will generate frontend and backend starter applications.
