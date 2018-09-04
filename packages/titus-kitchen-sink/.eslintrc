@@ -1,15 +1,3 @@
 {
-  "parser": "babel-eslint",
-  "extends": ["standard", "standard-react"],
-  "plugins": ["prettier"],
-  "env": {
-    "es6": true,
-    "browser": true,
-    "jest": true
-  },
-  "settings": {
-    "react": {
-      "version": "16.4"
-    }
-  }
+  "extends": "react-app"
 }
