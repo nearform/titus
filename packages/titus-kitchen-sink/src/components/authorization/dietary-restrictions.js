@@ -41,7 +41,7 @@ const DietaryTypesQuery = ({ classes, userId }) => (
 
       if (error) {
         return (
-          <Typography variant='body1' color='error'>
+          <Typography variant="body1" color="error">
             Oops, There was a error fetching that data!
           </Typography>
         )

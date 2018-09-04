@@ -55,7 +55,7 @@ class KeywordSearch extends React.Component {
     })
   }
 
-  render () {
+  render() {
     const { classes } = this.props
     const { searchType, inputChanged, inputValue } = this.state
 
@@ -71,14 +71,14 @@ class KeywordSearch extends React.Component {
 
     return (
       <React.Fragment>
-        <Typography variant='headline' gutterBottom>
+        <Typography variant="headline" gutterBottom>
           Search Food Keywords
         </Typography>
         <FormControl className={classes.verticalMargin}>
           <Select
             value={searchType}
             onChange={this.handleFilterChange}
-            name='searchType'
+            name="searchType"
             displayEmpty
           >
             {searchTypes.map((searchType, index) => (
@@ -100,13 +100,13 @@ class KeywordSearch extends React.Component {
           >
             {({ loading, error, data, refetch }) => {
               if (error) {
-                return <Typography color='error'>{error}</Typography>
+                return <Typography color="error">{error}</Typography>
               }
 
               return (
                 <Autocomplete
                   placeholder={'Search food keywords: '}
-                  id='titus-autocomplete'
+                  id="titus-autocomplete"
                   onChange={this.handleChange}
                   onInputChange={this.handleInputChange}
                   maxResults={10}
@@ -114,12 +114,12 @@ class KeywordSearch extends React.Component {
                   items={
                     inputValue !== '' && data.keywordSearch
                       ? data.keywordSearch
-                        .map(({ word, score }, index) => ({
-                          key: `${index}-${word}`,
-                          value: word,
-                          score: score
-                        }))
-                        .slice(0, 10)
+                          .map(({ word, score }, index) => ({
+                            key: `${index}-${word}`,
+                            value: word,
+                            score: score
+                          }))
+                          .slice(0, 10)
                       : null
                   }
                   loading={inputValue !== '' && loading}

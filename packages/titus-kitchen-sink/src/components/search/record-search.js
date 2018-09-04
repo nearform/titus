@@ -55,7 +55,7 @@ class RecordSearch extends React.Component {
     })
   }
 
-  render () {
+  render() {
     const { classes } = this.props
     const { searchType, inputChanged, inputValue } = this.state
 
@@ -69,14 +69,14 @@ class RecordSearch extends React.Component {
 
     return (
       <Fragment>
-        <Typography variant='headline' gutterBottom>
+        <Typography variant="headline" gutterBottom>
           Search the Food Records
         </Typography>
         <FormControl className={classes.verticalMargin}>
           <Select
             value={searchType}
             onChange={this.handleFilterChange}
-            name='searchType'
+            name="searchType"
             displayEmpty
           >
             {searchTypes.map((searchType, index) => (
@@ -98,13 +98,13 @@ class RecordSearch extends React.Component {
           >
             {({ loading, error, data, refetch }) => {
               if (error) {
-                return <Typography color='error'>{error}</Typography>
+                return <Typography color="error">{error}</Typography>
               }
 
               return (
                 <Autocomplete
                   placeholder={'Search food database: '}
-                  id='titus-autocomplete'
+                  id="titus-autocomplete"
                   onChange={this.handleChange}
                   onInputChange={this.handleInputChange}
                   maxResults={10}
@@ -112,11 +112,11 @@ class RecordSearch extends React.Component {
                   items={
                     inputValue !== '' && data.search
                       ? data.search
-                        .map(({ id, name }) => ({
-                          key: id,
-                          value: name
-                        }))
-                        .slice(0, 10)
+                          .map(({ id, name }) => ({
+                            key: id,
+                            value: name
+                          }))
+                          .slice(0, 10)
                       : null
                   }
                   loading={inputValue !== '' && loading}

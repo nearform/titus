@@ -29,22 +29,22 @@ class TableRow extends React.Component {
     this.setState({ isEditing: false })
   }
 
-  render () {
+  render() {
     const { selected, rowKey, handleRowSelect, row } = this.props
     const { isEditing } = this.state
 
     return (
       <MaterialTableRow
         hover
-        role='checkbox'
+        role="checkbox"
         aria-checked={selected}
         tabIndex={-1}
         key={rowKey}
         selected={selected}
       >
-        <TableCell padding='checkbox' key={`${rowKey}-checkbox`}>
+        <TableCell padding="checkbox" key={`${rowKey}-checkbox`}>
           <Checkbox
-            color='primary'
+            color="primary"
             value={rowKey}
             checked={selected}
             onClick={handleRowSelect}
@@ -57,24 +57,24 @@ class TableRow extends React.Component {
         ) : (
           <React.Fragment>
             <TableCell
-              aria-label='Food Name'
-              padding='checkbox'
+              aria-label="Food Name"
+              padding="checkbox"
               key={`${rowKey}-name`}
             >
               {row.name}
             </TableCell>
             <TableCell
-              aria-label='Food Group'
-              padding='checkbox'
+              aria-label="Food Group"
+              padding="checkbox"
               key={`${rowKey}-foodGroup`}
             >
               {row.foodGroup}
             </TableCell>
 
-            <TableCell padding='checkbox'>
+            <TableCell padding="checkbox">
               <Button
                 disabled={selected}
-                aria-label='Edit'
+                aria-label="Edit"
                 onClick={this.onEditClick}
               >
                 <EditIcon />

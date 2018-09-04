@@ -1,23 +1,23 @@
 export class Authentication {
   authKey = 'titus-auth-key'
 
-  login ({ username, password }) {
+  login({ username, password }) {
     window.localStorage.setItem(this.authKey, username)
 
     return new Promise(resolve => resolve({ username }))
   }
 
-  logout () {
+  logout() {
     window.localStorage.removeItem(this.authKey)
 
     return new Promise(resolve => resolve(true))
   }
 
-  isAuthenticated () {
+  isAuthenticated() {
     return Boolean(window.localStorage.getItem(this.authKey))
   }
 
-  getUserData () {
+  getUserData() {
     return { username: window.localStorage.getItem(this.authKey) }
   }
 }

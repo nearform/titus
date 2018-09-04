@@ -22,7 +22,7 @@ if (s3Endpoint) {
   awsConfig.region = process.env.REACT_APP_S3_UPLOADER_REGION
 }
 
-function getParams (file) {
+function getParams(file) {
   return {
     Key: file.id,
     Body: file.orig,
@@ -32,7 +32,7 @@ function getParams (file) {
 }
 
 // TODO Tags are currently disabled due an access S3 policies issue
-function getTags (file) {
+function getTags(file) {
   return [{ Key: 'OriginalName', Value: file.name }]
 }
 

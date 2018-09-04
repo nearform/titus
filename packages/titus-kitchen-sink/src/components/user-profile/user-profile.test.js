@@ -1,5 +1,10 @@
 import React from 'react'
-import { render, fireEvent, cleanup, waitForElement } from 'react-testing-library'
+import {
+  render,
+  fireEvent,
+  cleanup,
+  waitForElement
+} from 'react-testing-library'
 import { UserProfile } from './user-profile'
 import 'jest-dom/extend-expect'
 
@@ -20,7 +25,9 @@ describe('User profile', () => {
 
     fireEvent.click(btn)
 
-    const popover = await waitForElement(() => document.querySelector('.userProfilePopOver'))
+    const popover = await waitForElement(() =>
+      document.querySelector('.userProfilePopOver')
+    )
     expect(popover).toBeDefined()
   })
 })

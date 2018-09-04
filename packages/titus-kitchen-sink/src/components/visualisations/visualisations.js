@@ -10,7 +10,9 @@ import TreeGraph from './tree-graph'
 
 const Visualisations = () => (
   <div>
-    <Typography variant='display2' gutterBottom>Visualisations</Typography>
+    <Typography variant="display2" gutterBottom>
+      Visualisations
+    </Typography>
     <Grid container spacing={24}>
       <Grid item xs={12} sm={6} md={4} lg={3}>
         <Paper>

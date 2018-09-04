@@ -43,7 +43,7 @@ export class UserProfile extends React.Component {
     this.setState({ open: !this.state.open })
   }
 
-  render () {
+  render() {
     const { classes, className } = this.props
     const { open } = this.state
 
@@ -57,13 +57,13 @@ export class UserProfile extends React.Component {
             <Button
               onClick={this.clickHandler}
               title={user.username}
-              color='inherit'
+              color="inherit"
             >
               <div className={classes.content}>
                 <FaceIcon />
               </div>
               <Popover
-                className='userProfilePopOver'
+                className="userProfilePopOver"
                 open={open}
                 anchorEl={this.anchorEl.current}
                 onClose={this.handleClose}
@@ -77,7 +77,7 @@ export class UserProfile extends React.Component {
                 }}
               >
                 <div className={classes.profileContent}>
-                  <Typography variant='subheading' align='center' gutterBottom>
+                  <Typography variant="subheading" align="center" gutterBottom>
                     {user.username}
                   </Typography>
                   <Button onClick={logout}>Logout</Button>

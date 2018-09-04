@@ -3,25 +3,37 @@ import PropTypes from 'prop-types'
 import TableRow from './table-row'
 import withContext from '../../../../../test/with-context'
 import 'jest-dom/extend-expect'
-import {render, fireEvent, cleanup, waitForElement, within} from 'react-testing-library'
+import {
+  render,
+  fireEvent,
+  cleanup,
+  waitForElement,
+  within
+} from 'react-testing-library'
 
 afterEach(cleanup)
 
 describe('<TableRow />', () => {
-  const Context = ({children}) => withContext({table: {}}, {table: PropTypes.any},
-    <table>
-      <tbody>{children}</tbody>
-    </table>
-  )
+  const Context = ({ children }) =>
+    withContext(
+      { table: {} },
+      { table: PropTypes.any },
+      <table>
+        <tbody>{children}</tbody>
+      </table>
+    )
   const rowData = {
     name: 'Rum',
     foodGroup: 'Pirate Beverages',
     foodGroupId: 'ME_GROG'
   }
-  const foodGroups = [ { id: 'ME_GRUB', name: 'Pirate Food' }, { id: 'ME_GROG', name: 'Pirate Beverages' } ]
+  const foodGroups = [
+    { id: 'ME_GRUB', name: 'Pirate Food' },
+    { id: 'ME_GROG', name: 'Pirate Beverages' }
+  ]
 
   it('renders a row correctly', () => {
-    const {queryByText, getByLabelText, queryByLabelText} = render(
+    const { queryByText, getByLabelText, queryByLabelText } = render(
       <Context>
         <TableRow row={rowData} />
       </Context>
@@ -112,7 +124,11 @@ describe('<TableRow />', () => {
     const mockSave = jest.fn()
     const { getByLabelText, getByText } = render(
       <Context>
-        <TableRow row={rowData} foodGroups={foodGroups} handleUpdate={mockSave} />
+        <TableRow
+          row={rowData}
+          foodGroups={foodGroups}
+          handleUpdate={mockSave}
+        />
       </Context>
     )
     const nameCell = getByLabelText('Food Name')

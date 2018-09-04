@@ -29,7 +29,7 @@ export class Authorization extends Component {
     classes: PropTypes.object.isRequired
   }
 
-  constructor () {
+  constructor() {
     super()
 
     // NOTE: This, or something similar to help identify a user, would usually
@@ -44,29 +44,29 @@ export class Authorization extends Component {
   changeUser = ({ target: { value: userId } }) =>
     this.setState({ userId }, () => localStorage.setItem('titus-user', userId))
 
-  render () {
+  render() {
     const { userId } = this.state
     const { classes } = this.props
 
     return (
       <Paper className={classes.root}>
-        <Typography variant='headline' gutterBottom>
+        <Typography variant="headline" gutterBottom>
           Authorization Demo
         </Typography>
         <FormControl className={classes.formControl}>
-          <InputLabel htmlFor='select-user'>Switch User</InputLabel>
+          <InputLabel htmlFor="select-user">Switch User</InputLabel>
           <Select
             value={userId}
             onChange={this.changeUser}
             inputProps={{ id: 'select-user' }}
           >
-            <MenuItem value='MrsAdmin'>Mrs Admin</MenuItem>
-            <MenuItem value='MissEditor'>Miss Editor</MenuItem>
-            <MenuItem value='MrUser'>Mr User</MenuItem>
+            <MenuItem value="MrsAdmin">Mrs Admin</MenuItem>
+            <MenuItem value="MissEditor">Miss Editor</MenuItem>
+            <MenuItem value="MrUser">Mr User</MenuItem>
           </Select>
         </FormControl>
         <div>
-          <Typography variant='headline' gutterBottom>
+          <Typography variant="headline" gutterBottom>
             Dietary Types
           </Typography>
         </div>

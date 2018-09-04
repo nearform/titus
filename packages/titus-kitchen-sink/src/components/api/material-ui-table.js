@@ -50,7 +50,7 @@ class MaterialUiTable extends Component {
     }
   }
 
-  render () {
+  render() {
     const {
       title,
       columns,

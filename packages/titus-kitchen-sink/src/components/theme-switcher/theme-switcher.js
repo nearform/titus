@@ -8,11 +8,19 @@ import { THEME } from '../../theme'
 
 const ThemeSwitcher = () => (
   <Query query={getThemeName}>
-    {({data: {themeName}, client}) => (
+    {({ data: { themeName }, client }) => (
       <IconButton
-        title='Switch color theme'
-        color='inherit'
-        onClick={() => client.writeData({ data: { themeName: themeName === THEME.default ? THEME.nearForm : THEME.default } })}>
+        title="Switch color theme"
+        color="inherit"
+        onClick={() =>
+          client.writeData({
+            data: {
+              themeName:
+                themeName === THEME.default ? THEME.nearForm : THEME.default
+            }
+          })
+        }
+      >
         <InvertColorsIcon />
       </IconButton>
     )}

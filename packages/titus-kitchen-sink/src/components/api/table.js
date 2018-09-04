@@ -72,7 +72,7 @@ class Table extends React.Component {
     columns
   }
 
-  render () {
+  render() {
     const { classes, title, columns, pageSize, pageSizeOptions } = this.props
 
     return (
@@ -87,7 +87,7 @@ class Table extends React.Component {
           }
           if (error) {
             return (
-              <Typography color='error'>
+              <Typography color="error">
                 Oops, there was an error making this request!
               </Typography>
             )
@@ -112,15 +112,15 @@ class Table extends React.Component {
               />
 
               <div className={classes.citation}>
-                <Typography variant='caption'>
+                <Typography variant="caption">
                   Nutritional information provided by:
                 </Typography>
-                <Typography variant='caption'>
+                <Typography variant="caption">
                   US Department of Agriculture, Agricultural Research Service,
                   Nutrient Data Laboratory. USDA National Nutrient Database for
                   Standard Reference, Release 28. Version Current: September
                   2015. Internet:{' '}
-                  <a href='http://www.ars.usda.gov/ba/bhnrc/ndl'>
+                  <a href="http://www.ars.usda.gov/ba/bhnrc/ndl">
                     http://www.ars.usda.gov/ba/bhnrc/ndl
                   </a>
                 </Typography>

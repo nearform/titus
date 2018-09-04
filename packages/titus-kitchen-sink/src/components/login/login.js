@@ -58,10 +58,10 @@ export const Login = ({ classes, submitLogin }) => (
         }) => (
           <div className={classes.wrapper}>
             <form className={classes.form} onSubmit={handleSubmit}>
-              <Typography variant='title' gutterBottom>
+              <Typography variant="title" gutterBottom>
                 Login:
               </Typography>
-              <Typography variant='subheading'>
+              <Typography variant="subheading">
                 Note: Any username followed by a password with at least four
                 characters containing at least one letter or number will work.
               </Typography>
@@ -71,40 +71,40 @@ export const Login = ({ classes, submitLogin }) => (
                 onBlur={handleBlur}
                 value={values.username}
                 required
-                id='username'
-                name='username'
-                label='Username'
-                margin='normal'
+                id="username"
+                name="username"
+                label="Username"
+                margin="normal"
               />
               {touched.username &&
                 errors.username && (
-                <Typography color='error' variant='subheading' gutterBottom>
-                  {errors.username}
-                </Typography>
-              )}
+                  <Typography color="error" variant="subheading" gutterBottom>
+                    {errors.username}
+                  </Typography>
+                )}
               <TextField
                 error={Boolean(touched.password && errors.password)}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.password}
                 required
-                id='password'
-                name='password'
-                label='Password'
-                type='password'
-                margin='normal'
+                id="password"
+                name="password"
+                label="Password"
+                type="password"
+                margin="normal"
               />
               {touched.password &&
                 errors.password && (
-                <Typography color='error' variant='subheading' gutterBottom>
-                  {errors.password}
-                </Typography>
-              )}
+                  <Typography color="error" variant="subheading" gutterBottom>
+                    {errors.password}
+                  </Typography>
+                )}
               <Button
                 disabled={isSubmitting}
-                variant='contained'
-                color='primary'
-                type='submit'
+                variant="contained"
+                color="primary"
+                type="submit"
               >
                 Login
               </Button>

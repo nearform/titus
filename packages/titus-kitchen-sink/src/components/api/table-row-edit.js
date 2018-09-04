@@ -76,15 +76,15 @@ const TableRowEdit = ({ rowKey, row, onDone }) => (
             }) => (
               <React.Fragment>
                 <TableCell
-                  aria-label='Food Name'
-                  padding='checkbox'
+                  aria-label="Food Name"
+                  padding="checkbox"
                   key={`${rowKey}-name`}
                 >
                   <TextField
                     fullWidth
                     required
                     label={!values.name ? 'Name' : ''}
-                    name='name'
+                    name="name"
                     value={values.name}
                     error={Boolean(errors.name)}
                     onChange={handleChange}
@@ -92,13 +92,13 @@ const TableRowEdit = ({ rowKey, row, onDone }) => (
                   />
                 </TableCell>
                 <TableCell
-                  aria-label='Food Group'
-                  padding='checkbox'
+                  aria-label="Food Group"
+                  padding="checkbox"
                   key={`${rowKey}-foodGroup`}
                 >
                   <Select
                     autoWidth
-                    name='foodGroupId'
+                    name="foodGroupId"
                     value={values.foodGroupId}
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -113,15 +113,15 @@ const TableRowEdit = ({ rowKey, row, onDone }) => (
                   </Select>
                 </TableCell>
 
-                <TableCell padding='checkbox'>
-                  <Button aria-label='Cancel' onClick={onDone}>
+                <TableCell padding="checkbox">
+                  <Button aria-label="Cancel" onClick={onDone}>
                     <ResetIcon />
                   </Button>
                 </TableCell>
-                <TableCell padding='checkbox'>
+                <TableCell padding="checkbox">
                   <Button
                     disabled={!isValid}
-                    aria-label='Save'
+                    aria-label="Save"
                     onClick={handleSubmit}
                   >
                     <SaveIcon />

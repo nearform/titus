@@ -33,61 +33,61 @@ const Menu = () => {
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
-        <ListItemText primary='Dashboard' />
+        <ListItemText primary="Dashboard" />
       </ListItemLink>
       <ListItemLink to={'/wizard'} getProps={isActiveRoute}>
         <ListItemIcon>
           <PlaylistAddCheck />
         </ListItemIcon>
-        <ListItemText primary='Wizard' />
+        <ListItemText primary="Wizard" />
       </ListItemLink>
       <ListItemLink to={'/visualisations'} getProps={isActiveRoute}>
         <ListItemIcon>
           <InsertChart />
         </ListItemIcon>
-        <ListItemText primary='Visualisations' />
+        <ListItemText primary="Visualisations" />
       </ListItemLink>
       <ListItemLink to={'/tables'} getProps={isActiveRoute}>
         <ListItemIcon>
           <TablesIcon />
         </ListItemIcon>
-        <ListItemText primary='Tables' />
+        <ListItemText primary="Tables" />
       </ListItemLink>
       <ListItemLink to={'/autocomplete'} getProps={isActiveRoute}>
         <ListItemIcon>
           <AutocompleteIcon />
         </ListItemIcon>
-        <ListItemText primary='Autocomplete' />
+        <ListItemText primary="Autocomplete" />
       </ListItemLink>
       <ListItemLink to={'/api'} getProps={isActiveRoute}>
         <ListItemIcon>
           <ApiIcon />
         </ListItemIcon>
-        <ListItemText primary='API' />
+        <ListItemText primary="API" />
       </ListItemLink>
       <ListItemLink to={'/search'} getProps={isActiveRoute}>
         <ListItemIcon>
           <SearchIcon />
         </ListItemIcon>
-        <ListItemText primary='Search' />
+        <ListItemText primary="Search" />
       </ListItemLink>
       <ListItemLink to={'/comments'} getProps={isActiveRoute}>
         <ListItemIcon>
           <CommentIcon />
         </ListItemIcon>
-        <ListItemText primary='COMMENTS' />
+        <ListItemText primary="COMMENTS" />
       </ListItemLink>
       <ListItemLink to={'/uploader'} getProps={isActiveRoute}>
         <ListItemIcon>
           <CloudUploadIcon />
         </ListItemIcon>
-        <ListItemText primary='Uploader' />
+        <ListItemText primary="Uploader" />
       </ListItemLink>
       <ListItemLink to={'/authorization'} getProps={isActiveRoute}>
         <ListItemIcon>
           <AuthIcon />
         </ListItemIcon>
-        <ListItemText primary='Authorization' />
+        <ListItemText primary="Authorization" />
       </ListItemLink>
     </List>
   )

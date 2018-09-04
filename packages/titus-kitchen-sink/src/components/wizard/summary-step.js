@@ -16,7 +16,7 @@ class WizardSummaryStep extends React.Component {
     handleSatisfied(stepIndex, stepData.confirmed)
   }
 
-  render () {
+  render() {
     const { stepsData, stepsInfo, data } = this.props
 
     return (
@@ -26,19 +26,19 @@ class WizardSummaryStep extends React.Component {
             <div key={index}>
               <ExpansionPanel key={stepInfo.id}>
                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                  <Typography variant='subheading' gutterBottom>
+                  <Typography variant="subheading" gutterBottom>
                     Step {index + 1} - {stepInfo.title}
                   </Typography>
                   <Typography
-                    variant='subheading'
-                    color='textSecondary'
+                    variant="subheading"
+                    color="textSecondary"
                     gutterBottom
                   >
                     : {stepInfo.description}
                   </Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
-                  <Typography variant='body1' gutterBottom>
+                  <Typography variant="body1" gutterBottom>
                     Step Data: {JSON.stringify(stepsData[index])}
                   </Typography>
                 </ExpansionPanelDetails>
@@ -50,7 +50,7 @@ class WizardSummaryStep extends React.Component {
         <Switch
           checked={data.confirmed}
           onChange={this.handleChange}
-          value='stepSatisfied'
+          value="stepSatisfied"
         />
       </React.Fragment>
     )

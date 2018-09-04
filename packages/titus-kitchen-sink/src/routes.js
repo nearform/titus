@@ -68,16 +68,16 @@ const AsyncAuthorization = Loadable({
 
 const Routes = () => (
   <Router>
-    <AsyncDashboard path='/' />
-    <AsyncWizard path='wizard/*' />
-    <AsyncVisualisations path='visualisations/*' />
-    <AsyncTables path='tables/*' />
-    <AsyncAutocompleteDemo path='autocomplete/*' />
-    <AsyncApi path='api/*' />
-    <AsyncSearch path='search/*' />
-    <AsyncComments path='comments/*' />
-    <AsyncUploader path='uploader/*' />
-    <AsyncAuthorization path='authorization/*' />
+    <AsyncDashboard path="/" />
+    <AsyncWizard path="wizard/*" />
+    <AsyncVisualisations path="visualisations/*" />
+    <AsyncTables path="tables/*" />
+    <AsyncAutocompleteDemo path="autocomplete/*" />
+    <AsyncApi path="api/*" />
+    <AsyncSearch path="search/*" />
+    <AsyncComments path="comments/*" />
+    <AsyncUploader path="uploader/*" />
+    <AsyncAuthorization path="authorization/*" />
   </Router>
 )
 

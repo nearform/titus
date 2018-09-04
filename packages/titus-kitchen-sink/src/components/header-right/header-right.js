@@ -3,7 +3,7 @@ import React from 'react'
 import UserProfile from '../user-profile/user-profile'
 import ThemeSwitcher from '../theme-switcher/theme-switcher'
 
-const HeaderRight = (props) => (
+const HeaderRight = props => (
   <div {...props}>
     <ThemeSwitcher />
     <UserProfile />

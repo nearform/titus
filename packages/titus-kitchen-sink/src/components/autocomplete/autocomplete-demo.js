@@ -79,22 +79,22 @@ class AutocompleteDemo extends React.Component {
     })
   }
 
-  render () {
+  render() {
     const { classes } = this.props
     const { filterType, loading, items } = this.state
     return (
       <div className={classes.root}>
-        <Typography variant='headline' gutterBottom>
+        <Typography variant="headline" gutterBottom>
           Autocomplete Demo
         </Typography>
-        <Typography variant='subheading' gutterBottom>
+        <Typography variant="subheading" gutterBottom>
           This autocomplete component is built on PayPal's downshift with a
           material-ui render prop.
         </Typography>
         <Paper
           className={classNames(classes.paperPadding, classes.verticalMargin)}
         >
-          <Typography variant='body1' paragraph>
+          <Typography variant="body1" paragraph>
             <strong>
               Select a search filter from the list below and then start typing a
               country name:
@@ -104,11 +104,11 @@ class AutocompleteDemo extends React.Component {
             <Select
               value={filterType}
               onChange={this.handleFilterChange}
-              name='filterType'
+              name="filterType"
               displayEmpty
             >
-              <MenuItem value='startswith'>startswith (default)</MenuItem>
-              <MenuItem value='contains'>contains</MenuItem>
+              <MenuItem value="startswith">startswith (default)</MenuItem>
+              <MenuItem value="contains">contains</MenuItem>
             </Select>
             <FormHelperText>Change an autocomplete filter type</FormHelperText>
           </FormControl>
@@ -116,7 +116,7 @@ class AutocompleteDemo extends React.Component {
           <FormControl>
             <Autocomplete
               placeholder={'Find a country using the filterType: ' + filterType}
-              id='titus-autocomplete'
+              id="titus-autocomplete"
               data={filterType !== 'levenshtein' ? countries : null}
               onChange={this.handleChange}
               maxResults={10}
@@ -126,7 +126,7 @@ class AutocompleteDemo extends React.Component {
         </Paper>
 
         <Paper className={classes.paperPadding}>
-          <Typography variant='body1' paragraph>
+          <Typography variant="body1" paragraph>
             <strong>
               This uses a custom search filter algorithm implemented in this
               container (in this case fast-levenshtein):
@@ -137,7 +137,7 @@ class AutocompleteDemo extends React.Component {
               placeholder={
                 'Find a country using custom algorithm (levenshtein)'
               }
-              id='titus-autocomplete'
+              id="titus-autocomplete"
               onChange={this.handleChange}
               onInputChange={this.handleGetSuggestions}
               maxResults={10}

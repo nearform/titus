@@ -1,5 +1,10 @@
 import React from 'react'
-import { VictoryAxis, VictoryCandlestick, VictoryChart, VictoryTheme } from 'victory'
+import {
+  VictoryAxis,
+  VictoryCandlestick,
+  VictoryChart,
+  VictoryTheme
+} from 'victory'
 
 const candlestickData = [
   { x: new Date(2016, 6, 1), open: 9, close: 30, high: 56, low: 7 },
@@ -18,7 +23,7 @@ const Candlestick = () => (
     domainPadding={{ x: 25 }}
     scale={{ x: 'time' }}
   >
-    <VictoryAxis tickFormat={(t) => `${t.getDate()}/${t.getMonth()}`} />
+    <VictoryAxis tickFormat={t => `${t.getDate()}/${t.getMonth()}`} />
     <VictoryAxis dependentAxis />
     <VictoryCandlestick
       candleColors={{ positive: '#5f5c5b', negative: '#c43a31' }}
