@@ -119,7 +119,7 @@ class MaterialUiTable extends React.Component {
                     accessor &&
                     !!(columns.find(x => x.accessor === accessor) || {}).hidden
                   ) {
-                    return
+                    return null
                   }
                   return (
                     <TableCell padding="checkbox" key={key}>

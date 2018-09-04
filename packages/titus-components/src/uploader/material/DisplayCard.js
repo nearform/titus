@@ -74,7 +74,12 @@ const DisplayCard = ({
     }`}
   >
     {mediaImage && (
-      <img className={classes.media} title={title || name} src={mediaImage} />
+      <img
+        className={classes.media}
+        title={title || name}
+        src={mediaImage}
+        alt="media"
+      />
     )}
     {!mediaImage && <NoPreview />}
     <StyledGridListTileBar
