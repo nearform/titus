@@ -51,8 +51,8 @@ const NoPreview = withStyles({
     alignItems: 'center'
   }
 })(({ classes }) => (
-  <div className={classes.root} data-testid='display-card-no-preview'>
-    <Typography variant='title'>No Preview Available</Typography>
+  <div className={classes.root} data-testid="display-card-no-preview">
+    <Typography variant="title">No Preview Available</Typography>
   </div>
 ))
 
@@ -95,8 +95,8 @@ const DisplayCard = ({
       }}
       {...(error
         ? {
-          actionIcon: <Delete onClick={onRemove} />
-        }
+            actionIcon: <Delete onClick={onRemove} />
+          }
         : {})}
     />
   </GridListTile>

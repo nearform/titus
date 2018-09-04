@@ -13,9 +13,9 @@ storiesOf('UploadDisplayCard', module).add('default', () => (
   <GridList cellHeight={180}>
     <Cell>
       <DisplayCard
-        mediaImage='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Wikipedia-logo-en-big.png/734px-Wikipedia-logo-en-big.png'
-        name='Some url name'
-        title='Set some title'
+        mediaImage="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Wikipedia-logo-en-big.png/734px-Wikipedia-logo-en-big.png"
+        name="Some url name"
+        title="Set some title"
         size={12345678}
         uploadProgress={1}
         onAbortUpload={action('Cancel upload')}
@@ -23,9 +23,9 @@ storiesOf('UploadDisplayCard', module).add('default', () => (
     </Cell>
     <Cell>
       <DisplayCard
-        mediaImage='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Wikipedia-logo-en-big.png/734px-Wikipedia-logo-en-big.png'
-        name='Some url name'
-        title='Set some title'
+        mediaImage="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Wikipedia-logo-en-big.png/734px-Wikipedia-logo-en-big.png"
+        name="Some url name"
+        title="Set some title"
         size={12345678}
         uploadProgress={20}
         onAbortUpload={action('Cancel upload')}
@@ -33,8 +33,8 @@ storiesOf('UploadDisplayCard', module).add('default', () => (
     </Cell>
     <Cell>
       <DisplayCard
-        mediaImage='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Wikipedia-logo-en-big.png/734px-Wikipedia-logo-en-big.png'
-        name='Some very very long url name'
+        mediaImage="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Wikipedia-logo-en-big.png/734px-Wikipedia-logo-en-big.png"
+        name="Some very very long url name"
         size={12345678}
         uploadProgress={60}
         onAbortUpload={action('Cancel upload')}
@@ -42,8 +42,8 @@ storiesOf('UploadDisplayCard', module).add('default', () => (
     </Cell>
     <Cell>
       <DisplayCard
-        mediaImage='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Wikipedia-logo-en-big.png/734px-Wikipedia-logo-en-big.png'
-        name='Some very very long url name'
+        mediaImage="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Wikipedia-logo-en-big.png/734px-Wikipedia-logo-en-big.png"
+        name="Some very very long url name"
         size={12345678}
         uploadProgress={100}
         onAbortUpload={action('Cancel upload')}
@@ -51,7 +51,7 @@ storiesOf('UploadDisplayCard', module).add('default', () => (
     </Cell>
     <Cell>
       <DisplayCard
-        name='Some very very long url name'
+        name="Some very very long url name"
         size={12345678}
         uploadProgress={100}
         onAbortUpload={action('Cancel upload')}
@@ -60,10 +60,10 @@ storiesOf('UploadDisplayCard', module).add('default', () => (
     </Cell>
     <Cell>
       <DisplayCard
-        mediaImage='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Wikipedia-logo-en-big.png/734px-Wikipedia-logo-en-big.png'
-        name='A failed upload'
+        mediaImage="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Wikipedia-logo-en-big.png/734px-Wikipedia-logo-en-big.png"
+        name="A failed upload"
         size={12345678}
-        error='The upload failed'
+        error="The upload failed"
         onRemove={action('Remove')}
       />
     </Cell>

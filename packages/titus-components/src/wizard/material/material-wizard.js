@@ -48,10 +48,14 @@ const MaterialWizard = ({
   <div className={classes.root}>
     <Paper className={classes.wizard}>
       <div className={classes.title}>
-        <Typography variant='display1' gutterBottom data-testid='wizard-title'>
+        <Typography variant="display1" gutterBottom data-testid="wizard-title">
           {title}
         </Typography>
-        <Typography variant='headline' gutterBottom data-testid='wizard-description'>
+        <Typography
+          variant="headline"
+          gutterBottom
+          data-testid="wizard-description"
+        >
           {stepIndex < numSteps ? stepsInfo[stepIndex].description : null}
         </Typography>
       </div>
@@ -68,8 +72,8 @@ const MaterialWizard = ({
           </div>
         ))}
         <Typography
-          variant='body1'
-          color='error'
+          variant="body1"
+          color="error"
           gutterBottom
           className={classNames({
             [classes.hide]: requiredMessage === ''
@@ -79,12 +83,12 @@ const MaterialWizard = ({
         </Typography>
 
         <Typography
-          variant='title'
+          variant="title"
           gutterBottom
           className={classNames({
             [classes.hide]: !finished
           })}
-          data-testid='wizard-finished-message'
+          data-testid="wizard-finished-message"
         >
           {finishedMessage}
         </Typography>
@@ -96,10 +100,12 @@ const MaterialWizard = ({
           </Step>
         ))}
       </Stepper>
-      <div className={classes.controls} data-testid='wizard-control-bar'>
+      <div className={classes.controls} data-testid="wizard-control-bar">
         {stepIndex === numSteps ? (
           <div>
-            <Button onClick={reset} data-testid='wizard-control-bar-reset'>Reset</Button>
+            <Button onClick={reset} data-testid="wizard-control-bar-reset">
+              Reset
+            </Button>
           </div>
         ) : (
           <div>
@@ -108,12 +114,17 @@ const MaterialWizard = ({
                 disabled={stepIndex === 0 || finished}
                 onClick={back}
                 className={classes.rightSpacing}
-                data-testid='wizard-control-bar-back'
+                data-testid="wizard-control-bar-back"
               >
                 Back
               </Button>
 
-              <Button variant='contained' color='primary' onClick={next} data-testid='wizard-control-bar-next'>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={next}
+                data-testid="wizard-control-bar-next"
+              >
                 {stepIndex < numSteps - 1 ? 'Next' : 'Finish'}
               </Button>
             </div>

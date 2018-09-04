@@ -8,7 +8,7 @@ const readFileThumbnailData = file =>
     const reader = new FileReader()
     reader.addEventListener(
       'load',
-      function () {
+      function() {
         return resolve(reader.result)
       },
       false
@@ -18,12 +18,12 @@ const readFileThumbnailData = file =>
   })
 
 class UploadDisplayCard extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = { error: null, done: false }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     if (this.props && this.props.file) {
       const onUploadError = (e, err) => {
         this.props.fileUploader.onUploadError(e, this.props.file)
@@ -64,13 +64,13 @@ class UploadDisplayCard extends React.Component {
     this.props.fileUploader.removeFile(this.props.file.id)
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     if (!this.state.done && this.abortUpload) {
       this.abortUpload()
     }
   }
 
-  render () {
+  render() {
     const { title, file, DisplayCardComponent } = this.props
     const { uploadProgress, mediaImage } = this.state
 

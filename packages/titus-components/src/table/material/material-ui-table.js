@@ -48,7 +48,7 @@ class MaterialUiTable extends React.Component {
     }
   }
 
-  render () {
+  render() {
     const {
       handleDelete,
       handleRowSelect,
@@ -74,11 +74,11 @@ class MaterialUiTable extends React.Component {
         <Table>
           <NfTableHeaderRow component={HeaderRow}>
             {[
-              <NfTableHeader key='select-all'>
-                <TableCell padding='checkbox'>
+              <NfTableHeader key="select-all">
+                <TableCell padding="checkbox">
                   <Checkbox
-                    color='primary'
-                    value='all'
+                    color="primary"
+                    value="all"
                     onClick={handleRowSelect}
                     checked={selecting[0] === 'all'}
                   />
@@ -108,7 +108,7 @@ class MaterialUiTable extends React.Component {
             {rows.map(({ rowKey, rowData, selected }, index) => (
               <TableRow
                 hover
-                role='checkbox'
+                role="checkbox"
                 aria-checked={selected}
                 tabIndex={-1}
                 key={rowKey}
@@ -122,12 +122,12 @@ class MaterialUiTable extends React.Component {
                     return
                   }
                   return (
-                    <TableCell padding='checkbox' key={key}>
+                    <TableCell padding="checkbox" key={key}>
                       {accessor ? (
                         data
                       ) : (
                         <Checkbox
-                          color='primary'
+                          color="primary"
                           value={rowKey}
                           checked={selected}
                           onClick={handleRowSelect}

@@ -7,7 +7,7 @@ import { FileUploaderContext } from './FileUploaderContext'
 import UploaderContainer from './material/UploaderContainer'
 
 class Uploader extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -24,25 +24,25 @@ class Uploader extends React.Component {
     }
   }
 
-  handleUploadCancel (file) {
+  handleUploadCancel(file) {
     this.state.logger.log('Cancel', file)
   }
 
-  handleUploadDone (file) {
+  handleUploadDone(file) {
     this.props.onUploadDone && this.props.onUploadDone(file)
   }
 
-  handleUploadError (err, file) {
+  handleUploadError(err, file) {
     this.props.onUploadError && this.props.onUploadError(err, file)
   }
 
-  handleRemovefile (fileId) {
+  handleRemovefile(fileId) {
     this.setState({
       files: this.state.files.filter(file => file.id !== fileId)
     })
   }
 
-  handleAddFile (files) {
+  handleAddFile(files) {
     if (files.find(file => file.isDirectory)) {
       this.setState({ dragOnUploadError: 'Directory are not allowed' })
       return
@@ -62,7 +62,7 @@ class Uploader extends React.Component {
     })
   }
 
-  render () {
+  render() {
     return (
       <FileUploaderContext.Provider value={this.state}>
         <DragDropContextProvider backend={HTML5Backend}>

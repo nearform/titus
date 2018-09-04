@@ -37,7 +37,7 @@ const Suggestion = ({
     {...itemProps}
     key={suggestion.key}
     selected={highlightedIndex === index}
-    component='div'
+    component="div"
     style={{
       fontWeight:
         selectedItem && selectedItem.value === suggestion.value ? 500 : 400
@@ -103,21 +103,21 @@ const MaterialDownshift = ({
       })}
       {isOpen &&
         items && (
-        <Paper className={classes.paper} square>
-          {items.map((suggestion, index) =>
-            Suggestion({
-              suggestion,
-              index,
-              itemProps: getItemProps({
-                key: suggestion.key,
-                item: suggestion
-              }),
-              highlightedIndex,
-              selectedItem
-            })
-          )}
-        </Paper>
-      )}
+          <Paper className={classes.paper} square>
+            {items.map((suggestion, index) =>
+              Suggestion({
+                suggestion,
+                index,
+                itemProps: getItemProps({
+                  key: suggestion.key,
+                  item: suggestion
+                }),
+                highlightedIndex,
+                selectedItem
+              })
+            )}
+          </Paper>
+        )}
     </div>
   </div>
 )
