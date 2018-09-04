@@ -1,5 +1,5 @@
 import React from 'react'
-import UserProfile from './components/user-profile/user-profile'
+import HeaderRight from './components/header-right/header-right'
 import { Navigation } from '@nearform/titus-components'
 import Menu from './menu'
 import Routes from './routes'
@@ -8,7 +8,7 @@ const meta = {
 }
 export const Layout = props => {
   return (
-    <Navigation title={meta.appName} items={<Menu />} headerRight={UserProfile}>
+    <Navigation title={meta.appName} items={<Menu />} headerRight={HeaderRight}>
       <Routes />
     </Navigation>
   )

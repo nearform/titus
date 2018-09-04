@@ -2,16 +2,12 @@ import React from 'react'
 import JssProvider from 'react-jss/lib/JssProvider'
 import Loadable from 'react-loadable'
 import ApolloClient from 'apollo-boost'
-import {
-  createGenerateClassName,
-  MuiThemeProvider,
-  CssBaseline
-} from '@material-ui/core'
+import {createGenerateClassName, CssBaseline} from '@material-ui/core'
 import { ApolloProvider } from 'react-apollo'
 
-import { theme } from './theme/theme'
 import Auth from './components/authentication/auth'
 import Loading from './loading'
+import { ThemeProvider, THEME } from './theme'
 
 const AsyncLayout = Loadable({
   loader: () => import('./layout'),
@@ -35,6 +31,11 @@ export const apolloClient = new ApolloClient({
         authorization: window.localStorage.getItem('titus-user')
       }
     })
+  },
+  clientState: {
+    defaults: {
+      themeName: THEME.default
+    }
   }
 })
 
@@ -49,13 +50,13 @@ const App = () => (
         this is a known issue:  https://github.com/mui-org/material-ui/issues/8223
         */}
       <JssProvider generateClassName={generateClassName}>
-        <MuiThemeProvider theme={theme}>
+        <ThemeProvider>
           <Auth>
             {isAuthenticated =>
               isAuthenticated ? <AsyncLayout /> : <AsyncLogin />
             }
           </Auth>
-        </MuiThemeProvider>
+        </ThemeProvider>
       </JssProvider>
     </React.Fragment>
   </ApolloProvider>
