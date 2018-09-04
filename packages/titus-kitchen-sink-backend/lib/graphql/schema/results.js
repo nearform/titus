@@ -34,4 +34,9 @@ type UpdateFoodResult {
   }
 `
 
-module.exports = [deleteResult, modifiedResult, updateFoodResult, keywordSearchResult]
+module.exports = [
+  deleteResult,
+  modifiedResult,
+  updateFoodResult,
+  keywordSearchResult
+]
