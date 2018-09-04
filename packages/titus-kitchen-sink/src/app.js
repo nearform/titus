@@ -6,8 +6,9 @@ import {createGenerateClassName, CssBaseline} from '@material-ui/core'
 import { ApolloProvider } from 'react-apollo'
 
 import Auth from './components/authentication/auth'
+import ThemeProvider from './components/theme-provider/theme-provider'
 import Loading from './loading'
-import { ThemeProvider, THEME } from './theme'
+import { THEME } from './theme'
 
 const AsyncLayout = Loadable({
   loader: () => import('./layout'),

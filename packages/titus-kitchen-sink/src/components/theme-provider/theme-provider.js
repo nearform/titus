@@ -3,8 +3,8 @@ import T from 'prop-types'
 import { Query } from 'react-apollo'
 import { MuiThemeProvider } from '@material-ui/core/styles'
 
-import { getThemeName } from '-!graphql-tag/loader!./queries.gql' // eslint-disable-line import/no-webpack-loader-syntax
-import { themes } from './theme'
+import { getThemeName } from '-!graphql-tag/loader!../../theme/queries.gql' // eslint-disable-line import/no-webpack-loader-syntax
+import { themes } from '../../theme'
 
 const ThemeProvider = ({children}) => (
   <Query query={getThemeName}>
