@@ -12,7 +12,7 @@ import {
   Button
 } from '@material-ui/core'
 import { Add as AddIcon, Delete as DeleteIcon } from '@material-ui/icons'
-import { loadFoodData, deleteFood } from './gql-queries'
+import { loadFoodData, deleteFood } from '-!graphql-tag/loader!./queries.gql' // eslint-disable-line import/no-webpack-loader-syntax
 
 const styles = theme => ({
   root: {

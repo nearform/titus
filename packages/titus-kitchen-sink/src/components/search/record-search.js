@@ -10,7 +10,7 @@ import {
   MenuItem
 } from '@material-ui/core'
 import { Autocomplete } from '@nearform/titus-components'
-import { recordSearch } from './gql-queries'
+import { recordSearch } from '-!graphql-tag/loader!./queries.gql' // eslint-disable-line import/no-webpack-loader-syntax
 
 const styles = theme => ({
   verticalMargin: {
