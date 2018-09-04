@@ -22,9 +22,11 @@ const helloGeneric = () => ({
 const helloRandom = () => ({
   method: 'GET',
   path: '/hello/random',
-  config: { plugins: {
-    'pgPlugin': { transactional: true }
-  }},
+  config: {
+    plugins: {
+      pgPlugin: { transactional: true }
+    }
+  },
   handler: async (request, h) => {
     const res = await request.pg.query('select * from food')
     const idx = Math.floor(Math.random() * res.rows.length)
@@ -33,6 +35,7 @@ const helloRandom = () => ({
   }
 })
 
-module.exports = (server, config) => (
-  [helloGeneric(server, config), helloRandom(server, config)]
-)
+module.exports = (server, config) => [
+  helloGeneric(server, config),
+  helloRandom(server, config)
+]
