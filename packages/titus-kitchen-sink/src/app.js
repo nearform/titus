@@ -1,30 +1,31 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import JssProvider from 'react-jss/lib/JssProvider'
+import Loadable from 'react-loadable'
+import ApolloClient from 'apollo-boost'
 import {
   createGenerateClassName,
-  MuiThemeProvider
-} from '@material-ui/core/styles'
+  MuiThemeProvider,
+  CssBaseline
+} from '@material-ui/core'
 import { ApolloProvider } from 'react-apollo'
-import ApolloClient from 'apollo-boost'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import { Provider } from 'react-redux'
-import { Navigation } from '@nearform/titus-components'
-import UserProfile from './containers/user-profile/user-profile'
 
 import { theme } from './theme/theme'
+import Auth from './components/authentication/auth'
+import Loading from './loading'
 
-import Menu from './menu'
-import Routes from './routes'
+const AsyncLayout = Loadable({
+  loader: () => import('./layout'),
+  loading: Loading,
+  delay: 300,
+  timeout: 10000
+})
 
-import Auth from './lib/auth'
-import authProvider from './lib/auth-provider'
-import Login from './containers/login/login.js'
-
-import { store } from './store/store'
-
-const meta = {
-  appName: 'Titus Docs and Examples'
-}
+const AsyncLogin = Loadable({
+  loader: () => import('./components/login/login'),
+  loading: Loading,
+  delay: 300,
+  timeout: 10000
+})
 
 export const apolloClient = new ApolloClient({
   uri: process.env.REACT_APP_GRAPHQL_ENDPOINT,
@@ -41,28 +42,22 @@ const generateClassName = createGenerateClassName()
 
 const App = () => (
   <ApolloProvider client={apolloClient}>
-    <Provider store={store}>
-      <Fragment>
-        <CssBaseline />
-        {/*
+    <React.Fragment>
+      <CssBaseline />
+      {/*
         JssProvider is required to fix classname conflict on production build,
         this is a known issue:  https://github.com/mui-org/material-ui/issues/8223
         */}
-        <JssProvider generateClassName={generateClassName}>
-          <MuiThemeProvider theme={theme}>
-            <Auth loginComponent={<Login authProvider={authProvider} />}>
-              <Navigation
-                title={meta.appName}
-                items={<Menu />}
-                headerRight={UserProfile}
-              >
-                <Routes />
-              </Navigation>
-            </Auth>
-          </MuiThemeProvider>
-        </JssProvider>
-      </Fragment>
-    </Provider>
+      <JssProvider generateClassName={generateClassName}>
+        <MuiThemeProvider theme={theme}>
+          <Auth>
+            {isAuthenticated =>
+              isAuthenticated ? <AsyncLayout /> : <AsyncLogin />
+            }
+          </Auth>
+        </MuiThemeProvider>
+      </JssProvider>
+    </React.Fragment>
   </ApolloProvider>
 )
 

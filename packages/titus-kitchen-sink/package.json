@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@nearform/commentami-react-components": "^1.0.5",
-    "@nearform/react-table": "^1.0.6",
+    "@nearform/react-table": "^1.1.0",
     "@nearform/titus-components": "^1.0.0",
     "@reach/router": "^1.1.1",
     "@vx/gradient": "0.0.165",
@@ -21,14 +21,13 @@
     "react": "^16.4.0",
     "react-apollo": "^2.1.6",
     "react-dom": "^16.4.0",
-    "react-redux": "^5.0.7",
+    "react-loadable": "^5.5.0",
     "react-scripts": "1.1.4",
-    "redux": "^4.0.0",
-    "redux-thunk": "^2.3.0",
     "regenerator-runtime": "^0.12.1",
     "reselect": "^3.0.1",
     "sillyname": "^0.1.0",
-    "victory": "^0.27.0"
+    "victory": "^0.27.0",
+    "yup": "^0.26.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -44,8 +43,8 @@
     "format": "prettier --write *.js **/*.js"
   },
   "devDependencies": {
-    "@material-ui/core": "^1.1.0",
-    "@material-ui/icons": "^1.1.0",
+    "@material-ui/core": "^3.0.1",
+    "@material-ui/icons": "^3.0.1",
     "@storybook/addon-actions": "^3.4.7",
     "@storybook/addon-links": "^3.4.7",
     "@storybook/addons": "^3.4.7",
@@ -67,9 +66,8 @@
     "formik": "^1.0.1",
     "husky": "^0.14.3",
     "jest-dom": "^1.8.1",
-    "prettier": "1.13.2",
+    "prettier": "1.14.2",
     "pretty-quick": "^1.6.0",
-    "react-testing-library": "^4.1.2",
-    "redux-devtools": "^3.4.1"
+    "react-testing-library": "^4.1.2"
   }
 }
