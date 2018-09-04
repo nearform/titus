@@ -6,7 +6,7 @@ import { Delete as DeleteIcon } from '@material-ui/icons'
 import {
   loadAllDietTypes,
   deleteDietType
-} from '-!graphql-tag/loader!./queries.gql' // eslint-disable-line import/no-webpack-loader-syntax
+} from './queries.graphql'
 
 export const DeleteButton = ({ id }) => (
   <Mutation mutation={deleteDietType}>

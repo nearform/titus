@@ -4,7 +4,7 @@ import { Query } from 'react-apollo'
 import { CircularProgress, Typography, withStyles } from '@material-ui/core'
 import { Table as NfTable } from '@nearform/react-table'
 import MaterialUiTable from './material-ui-table'
-import { loadFoodData } from '-!graphql-tag/loader!./queries.gql' // eslint-disable-line import/no-webpack-loader-syntax
+import { loadFoodData } from './queries.graphql'
 
 const styles = theme => ({
   progress: {

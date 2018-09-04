@@ -30,11 +30,11 @@
     "yup": "^0.26.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "cross-env CI=true react-scripts test --env=jsdom",
-    "test:watch": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "cross-env CI=true react-app-rewired test --env=jsdom",
+    "test:watch": "react-app-rewired test --env=jsdom",
+    "eject": "react-app-rewired eject",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
     "commit-check": "pretty-quick --staged",
@@ -64,6 +64,8 @@
     "jest-dom": "^1.8.1",
     "prettier": "1.14.2",
     "pretty-quick": "^1.6.0",
+    "react-app-rewire-graphql-tag": "^1.1.0",
+    "react-app-rewired": "^1.6.2",
     "react-testing-library": "^4.1.2"
   }
 }

@@ -11,7 +11,10 @@ import {
   MenuItem
 } from '@material-ui/core'
 import { Clear as ResetIcon, Check as SaveIcon } from '@material-ui/icons'
-import { updateFood, loadFoodData } from '-!graphql-tag/loader!./queries.gql' // eslint-disable-line import/no-webpack-loader-syntax
+import {
+  updateFood,
+  loadFoodData
+} from './queries.graphql'
 
 const schema = Yup.object().shape({
   name: Yup.string().required('Name must not be empty.'),

@@ -17,7 +17,7 @@ import {
   FormGroup
 } from '@material-ui/core'
 import { Mutation, Query } from 'react-apollo'
-import { loadFoodData, createFood } from '-!graphql-tag/loader!./queries.gql' // eslint-disable-line import/no-webpack-loader-syntax
+import { loadFoodData, createFood } from './queries.graphql'
 
 const styles = theme => ({
   formControl: {

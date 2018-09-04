@@ -5,7 +5,7 @@ import { IconButton } from '@material-ui/core'
 import {
   loadAllDietTypes,
   toggleDietTypeVisibility
-} from '-!graphql-tag/loader!./queries.gql' // eslint-disable-line import/no-webpack-loader-syntax
+} from './queries.graphql'
 
 export const ToggleButton = ({ id, children }) => (
   <Mutation mutation={toggleDietTypeVisibility}>

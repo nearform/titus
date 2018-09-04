@@ -11,7 +11,7 @@ import {
   ListItemSecondaryAction
 } from '@material-ui/core'
 import { Visibility, VisibilityOff } from '@material-ui/icons'
-import { loadAllDietTypes } from '-!graphql-tag/loader!./queries.gql' // eslint-disable-line import/no-webpack-loader-syntax
+import { loadAllDietTypes } from './queries.graphql'
 import { DeleteButton } from './delete-button'
 import { ToggleButton } from './toggle-button'
 
