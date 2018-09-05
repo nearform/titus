@@ -1,6 +1,10 @@
 import React from 'react'
 import { render, fireEvent, wait } from 'react-testing-library'
-import { renderIntoDocument, Simulate, scryRenderedDOMComponentsWithTag } from 'react-dom/test-utils'
+import {
+  renderIntoDocument,
+  Simulate,
+  scryRenderedDOMComponentsWithTag
+} from 'react-dom/test-utils'
 import TestBackend from 'react-dnd-test-backend'
 import createService from '../__mocks__/uploadService'
 import DropArea from '../../src/uploader/material/DropArea'
@@ -103,7 +107,12 @@ describe('uploader/uploader', () => {
     let uploadDoneCb
     let fileUploaded
 
-    const startUploadMock = (file, reportProgress, onUploadError, onUploadDone) => {
+    const startUploadMock = (
+      file,
+      reportProgress,
+      onUploadError,
+      onUploadDone
+    ) => {
       fileUploaded = file
       reportProgressCb = reportProgress
       uploadDoneCb = onUploadDone

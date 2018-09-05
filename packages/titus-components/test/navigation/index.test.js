@@ -1,8 +1,5 @@
 import React from 'react'
-import {
-  render,
-  fireEvent
-} from 'react-testing-library'
+import { render, fireEvent } from 'react-testing-library'
 
 import { createMuiTheme } from '@material-ui/core/styles'
 import { MuiThemeProvider } from '@material-ui/core'
@@ -14,14 +11,18 @@ const muiTheme = createMuiTheme({
 })
 
 const Items = ({ menuOpen }) => (
-  <div id='mock-items'>{menuOpen && <div id='mock-items-menuopen' />}</div>
+  <div id="mock-items">
+    <div id="mock-items-menuopen" />
+  </div>
 )
 const Main = ({ menuOpen }) => (
-  <div id='mock-main'>{menuOpen && <div id='mock-main-menuopen' />}</div>
+  <div id="mock-main">
+    <div id="mock-main-menuopen" />
+  </div>
 )
 
 const HeaderRight = ({ className }) => (
-  <div id='mock-header-right' className={className} />
+  <div id="mock-header-right" className={className} />
 )
 
 describe('Navigation', () => {
@@ -32,13 +33,13 @@ describe('Navigation', () => {
   describe('rendering', () => {
     test('With required props it should render correctly', () => {
       const { container, getByTestId } = render(
-        <Navigation items={Items} main={Main} title='Test title' />
+        <Navigation items={<Items />} title="Test title">
+          <Main />
+        </Navigation>
       )
 
       expect(container.querySelector('#mock-main')).not.toBeNull()
       expect(container.querySelector('#mock-items')).not.toBeNull()
-      expect(container.querySelector('#mock-items-menuopen')).toBeNull()
-      expect(container.querySelector('#mock-main-menuopen')).toBeNull()
       expect(container.querySelector('h2').textContent).toBe('Test title')
       expect(
         getByTestId('app-bar-drawer').firstChild.getAttribute('class')
@@ -48,11 +49,12 @@ describe('Navigation', () => {
     test('If headerRight is passed it should be rendered', () => {
       const { container } = render(
         <Navigation
-          items={Items}
-          main={Main}
-          title='Test title'
+          items={<Items />}
+          title="Test title"
           headerRight={HeaderRight}
-        />
+        >
+          <Main />
+        </Navigation>
       )
 
       expect(container.querySelector('#mock-header-right')).not.toBeNull()
@@ -66,11 +68,12 @@ describe('Navigation', () => {
     test('Click the iconbutton should open the Drawer', () => {
       const { container, getByTestId } = render(
         <Navigation
-          items={Items}
-          main={Main}
-          title='Test title'
+          items={<Items />}
+          title="Test title"
           headerRight={HeaderRight}
-        />
+        >
+          <Main />
+        </Navigation>
       )
       expect(
         getByTestId('app-bar-drawer').firstChild.getAttribute('class')
@@ -88,11 +91,12 @@ describe('Navigation', () => {
     test('Click on the Drawer when the menu is open should close the Drawer', () => {
       const { container, getByTestId } = render(
         <Navigation
-          items={Items}
-          main={Main}
-          title='Test title'
+          items={<Items />}
+          title="Test title"
           headerRight={HeaderRight}
-        />
+        >
+          <Main />
+        </Navigation>
       )
 
       fireEvent.click(container.querySelector('button[aria-label="Open Menu"]'))
@@ -112,11 +116,12 @@ describe('Navigation', () => {
       const { getByTestId } = render(
         <MuiThemeProvider theme={muiTheme}>
           <Navigation
-            items={Items}
-            main={Main}
-            title='Test title'
+            items={<Items />}
+            title="Test title"
             headerRight={HeaderRight}
-          />
+          >
+            <Main />
+          </Navigation>
         </MuiThemeProvider>
       )
 
@@ -127,11 +132,12 @@ describe('Navigation', () => {
     test('The icon is chevronLeft if the theme has !rtl direction', () => {
       const { getByTestId } = render(
         <Navigation
-          items={Items}
-          main={Main}
-          title='Test title'
+          items={<Items />}
+          title="Test title"
           headerRight={HeaderRight}
-        />
+        >
+          <Main />
+        </Navigation>
       )
 
       expect(getByTestId('app-bar-drawer-icon-left')).not.toBeNull()

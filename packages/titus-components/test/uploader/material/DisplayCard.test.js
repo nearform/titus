@@ -7,8 +7,8 @@ describe('uploader/material/DisplayCard', () => {
       <DisplayCard
         uploadProgress={80}
         size={3500}
-        title='Some title'
-        name='a file name'
+        title="Some title"
+        name="a file name"
       />
     )
 
@@ -35,8 +35,8 @@ describe('uploader/material/DisplayCard', () => {
       <DisplayCard
         uploadProgress={100}
         size={3500}
-        title='Some title'
-        name='a file name'
+        title="Some title"
+        name="a file name"
         done
       />
     )
@@ -51,7 +51,7 @@ describe('uploader/material/DisplayCard', () => {
   })
   test('Without title', () => {
     const { container } = render(
-      <DisplayCard uploadProgress={100} size={3500} name='a file name' />
+      <DisplayCard uploadProgress={100} size={3500} name="a file name" />
     )
 
     expect(
@@ -65,9 +65,9 @@ describe('uploader/material/DisplayCard', () => {
       <DisplayCard
         uploadProgress={100}
         size={3500}
-        name='a file name'
-        title='Some title'
-        mediaImage='http://someurl'
+        name="a file name"
+        title="Some title"
+        mediaImage="http://someurl"
       />
     )
 
@@ -88,8 +88,8 @@ describe('uploader/material/DisplayCard', () => {
       <DisplayCard
         uploadProgress={100}
         size={3500}
-        name='a file name'
-        mediaImage='http://someurl'
+        name="a file name"
+        mediaImage="http://someurl"
       />
     )
 

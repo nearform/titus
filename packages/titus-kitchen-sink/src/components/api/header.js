@@ -11,11 +11,11 @@ import SortingHeaderCell from './sorting-header-cell'
 const Header = ({ handleRowSelect, selecting, columns }) => (
   <NfTableHeaderRow component={HeaderRow}>
     {[
-      <NfTableHeader key='select-all'>
-        <TableCell padding='checkbox'>
+      <NfTableHeader key="select-all">
+        <TableCell padding="checkbox">
           <Checkbox
-            color='primary'
-            value='all'
+            color="primary"
+            value="all"
             onClick={handleRowSelect}
             checked={selecting[0] === 'all'}
           />

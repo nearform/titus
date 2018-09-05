@@ -11,7 +11,7 @@ class HeadlessWizard extends React.Component {
     finishedMessage: PropTypes.string
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = this.getInitialState()
   }
@@ -59,7 +59,7 @@ class HeadlessWizard extends React.Component {
     )
   }
 
-  getInitialState () {
+  getInitialState() {
     const { steps } = this.props // react WizardSteps components
 
     const stepsSatisfied = []
@@ -153,7 +153,7 @@ class HeadlessWizard extends React.Component {
     this.setState(this.getInitialState())
   }
 
-  render () {
+  render() {
     // children of headless-wizard is the default render prop ui for wizard
     // the actual wizard steps are passed in via steps prop and mutated and put into state on init
     const {

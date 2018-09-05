@@ -12,7 +12,7 @@ storiesOf('Drop Area Card', module)
   .add('default', () => (
     <GridList cellHeight={180}>
       <Cell>
-        <DropArea title='Upload' text='Drag here your file' />
+        <DropArea title="Upload" text="Drag here your file" />
       </Cell>
     </GridList>
   ))
@@ -20,9 +20,9 @@ storiesOf('Drop Area Card', module)
     <GridList cellHeight={180}>
       <Cell>
         <DropArea
-          title='Drag here your file to upload'
-          text='Max 5 files'
-          error='Too many files dropped'
+          title="Drag here your file to upload"
+          text="Max 5 files"
+          error="Too many files dropped"
         />
       </Cell>
     </GridList>

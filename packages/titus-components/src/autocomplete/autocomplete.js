@@ -17,7 +17,7 @@ class Autocomplete extends React.Component {
     items: PropTypes.array
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
     // if all data is passed in, we're managing this state internally
     // ourselves to suggested listitems
@@ -74,7 +74,7 @@ class Autocomplete extends React.Component {
 
   itemToString = item => (item ? item.value : '')
 
-  render () {
+  render() {
     const {
       props: { onChange },
       renderMaterial,

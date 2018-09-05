@@ -11,7 +11,7 @@ describe('uploader/services/UploaderService', () => {
     let httpUploadProgressCb
     let sendCb
     class S3ManagedUpload {
-      on (string, callback) {
+      on(string, callback) {
         httpUploadProgressCb = callback
         return {
           send: sendCallback => {
@@ -19,7 +19,7 @@ describe('uploader/services/UploaderService', () => {
           }
         }
       }
-      abort () {
+      abort() {
         return mockAbort()
       }
     }

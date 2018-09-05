@@ -12,7 +12,10 @@ import {
   Button
 } from '@material-ui/core'
 import { Add as AddIcon, Delete as DeleteIcon } from '@material-ui/icons'
-import { loadFoodData, deleteFood } from '-!graphql-tag/loader!./queries.gql' // eslint-disable-line import/no-webpack-loader-syntax
+import {
+  loadFoodData,
+  deleteFood
+} from './queries.graphql'
 
 const styles = theme => ({
   root: {
@@ -79,7 +82,7 @@ const TableToolbar = ({ numSelected, classes, title, rows, onAddClick }) => (
       <Toolbar className={classNames({ [classes.highlight]: numSelected > 0 })}>
         <div className={classes.title}>
           <Typography
-            variant='title'
+            variant="title"
             color={numSelected > 0 ? 'primary' : 'inherit'}
           >
             {title}
@@ -89,12 +92,12 @@ const TableToolbar = ({ numSelected, classes, title, rows, onAddClick }) => (
         <div className={classes.rightControls}>
           {!numSelected && (
             <div className={classes.actions}>
-              <Tooltip title='Add New Food Item'>
+              <Tooltip title="Add New Food Item">
                 <Button
                   mini
-                  variant='fab'
-                  aria-label='Add New Food Item'
-                  color='primary'
+                  variant="fab"
+                  aria-label="Add New Food Item"
+                  color="primary"
                   onClick={onAddClick}
                 >
                   <AddIcon />
@@ -105,16 +108,16 @@ const TableToolbar = ({ numSelected, classes, title, rows, onAddClick }) => (
           {numSelected > 0 && (
             <div className={classes.rightItems}>
               <div className={classes.numSelected}>
-                <Typography variant='body1' color='primary'>
+                <Typography variant="body1" color="primary">
                   <strong>{numSelected}</strong> selected
                 </Typography>
               </div>
               <div className={classes.actions}>
-                <Tooltip title='Delete'>
+                <Tooltip title="Delete">
                   <IconButton
-                    variant='fab'
-                    aria-label='Delete'
-                    color='primary'
+                    variant="fab"
+                    aria-label="Delete"
+                    color="primary"
                     className={classes.button}
                     onClick={handleDelete({ deleteFood, rows })}
                   >

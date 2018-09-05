@@ -10,7 +10,7 @@ describe('Table Material HeaderRow', () => {
         <table>
           <HeaderRow>
             <td>
-              <div id='mock-header' />
+              <div id="mock-header" />
             </td>
           </HeaderRow>
         </table>

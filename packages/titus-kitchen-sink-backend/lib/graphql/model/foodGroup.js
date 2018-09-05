@@ -13,7 +13,9 @@ const getById = async (pg, { id }) => {
 
 const getByIds = async (pg, ids) => {
   const res = await pg.query(SQL`
-  SELECT id, name, created, modified FROM food_group WHERE id = ANY(${[ids]}::text[])`)
+  SELECT id, name, created, modified FROM food_group WHERE id = ANY(${[
+    ids
+  ]}::text[])`)
   return sortByIdArray(formatRows(res.rows), ids)
 }
 
@@ -29,8 +31,8 @@ const create = async (pg, { name }) => {
   return { name, id: res.rows[0].id }
 }
 
-const dataloaders = (pg) => ({
-  getById: new DataLoader((ids) => {
+const dataloaders = pg => ({
+  getById: new DataLoader(ids => {
     return getByIds(pg, ids)
   })
 })

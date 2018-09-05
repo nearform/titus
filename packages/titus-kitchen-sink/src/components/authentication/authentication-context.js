@@ -44,7 +44,7 @@ export class AuthProvider extends React.Component {
     }
   }
 
-  render () {
+  render() {
     const { children } = this.props
 
     return (

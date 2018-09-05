@@ -11,7 +11,7 @@ const queueSize =
   parseInt(process.env.REACT_APP_S3_UPLOADER_QUEUE_SIZE, 10) || 4
 
 class AWSS3ManagedUpload {
-  constructor (id, bucket, params, tags) {
+  constructor(id, bucket, params, tags) {
     const uploadParams = {
       partSize,
       queueSize,
@@ -25,7 +25,7 @@ class AWSS3ManagedUpload {
     this.uploadId = id
   }
 
-  uploadFile (onProgress, onError, onUploadDone) {
+  uploadFile(onProgress, onError, onUploadDone) {
     return this.s3Upload
       .on('httpUploadProgress', progress => {
         let isMultipart = progress && progress.part > 1
@@ -34,7 +34,7 @@ class AWSS3ManagedUpload {
         }
 
         onProgress(
-          Math.round(progress.loaded / progress.total * 100),
+          Math.round((progress.loaded / progress.total) * 100),
           this.uploadId,
           isMultipart
         )
@@ -48,13 +48,13 @@ class AWSS3ManagedUpload {
       })
   }
 
-  abortUpload () {
+  abortUpload() {
     return this.s3Upload.abort()
   }
 }
 
 class UploaderService {
-  constructor (options) {
+  constructor(options) {
     this.bucket = options.bucket
     this.getParams = options.getParams || this.getDefaultParams
     this.getTags = options.getTags
@@ -65,7 +65,7 @@ class UploaderService {
     }
   }
 
-  getDefaultParams (file) {
+  getDefaultParams(file) {
     return {
       Key: file.name,
       Body: file.orig,
@@ -73,12 +73,12 @@ class UploaderService {
     }
   }
 
-  clear () {
+  clear() {
     pendingAbortUploads = {}
     return this
   }
 
-  startUpload (file, onProgress, onError, onUploadDone) {
+  startUpload(file, onProgress, onError, onUploadDone) {
     const upload = new AWSS3ManagedUpload(
       file.id,
       this.bucket,
@@ -91,7 +91,7 @@ class UploaderService {
     upload.uploadFile(onProgress, onError, onUploadDone)
   }
 
-  abortUpload (file, cb) {
+  abortUpload(file, cb) {
     try {
       const abortFunc = pendingAbortUploads[file.id]
       if (typeof abortFunc === 'function') abortFunc()

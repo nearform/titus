@@ -1,6 +1,9 @@
 import * as constants from './app-constants'
 
-export const updateAppConfig = (data) => ({ type: constants.UPDATE_APP_CONFIG, data })
+export const updateAppConfig = data => ({
+  type: constants.UPDATE_APP_CONFIG,
+  data
+})
 
 /*
 An async example

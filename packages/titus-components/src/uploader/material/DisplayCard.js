@@ -51,8 +51,8 @@ const NoPreview = withStyles({
     alignItems: 'center'
   }
 })(({ classes }) => (
-  <div className={classes.root} data-testid='display-card-no-preview'>
-    <Typography variant='title'>No Preview Available</Typography>
+  <div className={classes.root} data-testid="display-card-no-preview">
+    <Typography variant="title">No Preview Available</Typography>
   </div>
 ))
 
@@ -74,7 +74,12 @@ const DisplayCard = ({
     }`}
   >
     {mediaImage && (
-      <img className={classes.media} title={title || name} src={mediaImage} />
+      <img
+        className={classes.media}
+        title={title || name}
+        src={mediaImage}
+        alt="media"
+      />
     )}
     {!mediaImage && <NoPreview />}
     <StyledGridListTileBar
@@ -95,8 +100,8 @@ const DisplayCard = ({
       }}
       {...(error
         ? {
-          actionIcon: <Delete onClick={onRemove} />
-        }
+            actionIcon: <Delete onClick={onRemove} />
+          }
         : {})}
     />
   </GridListTile>

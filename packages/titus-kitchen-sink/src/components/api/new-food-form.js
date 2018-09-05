@@ -17,7 +17,7 @@ import {
   FormGroup
 } from '@material-ui/core'
 import { Mutation, Query } from 'react-apollo'
-import { loadFoodData, createFood } from '-!graphql-tag/loader!./queries.gql' // eslint-disable-line import/no-webpack-loader-syntax
+import { loadFoodData, createFood } from './queries.graphql'
 
 const styles = theme => ({
   formControl: {
@@ -102,23 +102,23 @@ const NewFoodForm = ({ classes, onClose }) => (
                 fullWidth
                 open
                 onClose={onClose}
-                aria-labelledby='form-dialog-title'
+                aria-labelledby="form-dialog-title"
               >
                 <Form noValidate>
-                  <DialogTitle id='form-dialog-title'>
+                  <DialogTitle id="form-dialog-title">
                     Add New Food Item
                   </DialogTitle>
                   <div>
                     <FormGroup row>
                       <FormControl
                         className={classes.formControl}
-                        margin='dense'
+                        margin="dense"
                       >
                         <TextField
                           required
                           autoFocus
-                          label='Name'
-                          name='name'
+                          label="Name"
+                          name="name"
                           value={values.name}
                           error={Boolean(touched.name && errors.name)}
                           helperText={touched.name && errors.name}
@@ -129,22 +129,22 @@ const NewFoodForm = ({ classes, onClose }) => (
                       <FormControl
                         required
                         className={classes.formControl}
-                        margin='dense'
+                        margin="dense"
                       >
                         <InputLabel
                           error={Boolean(
                             touched.foodGroupId && errors.foodGroupId
                           )}
-                          htmlFor='food-group-input'
+                          htmlFor="food-group-input"
                         >
                           Food Group
                         </InputLabel>
                         <Select
-                          margin='dense'
+                          margin="dense"
                           autoWidth
                           displayEmpty
-                          label='Food Group'
-                          name='foodGroupId'
+                          label="Food Group"
+                          name="foodGroupId"
                           inputProps={{
                             id: 'food-group-input'
                           }}
@@ -173,13 +173,13 @@ const NewFoodForm = ({ classes, onClose }) => (
                   </div>
                   <DialogActions>
                     <Button
-                      variant='outlined'
+                      variant="outlined"
                       onClick={onClose}
-                      color='primary'
+                      color="primary"
                     >
                       Cancel
                     </Button>
-                    <Button type='submit' variant='contained' color='primary'>
+                    <Button type="submit" variant="contained" color="primary">
                       Save
                     </Button>
                   </DialogActions>

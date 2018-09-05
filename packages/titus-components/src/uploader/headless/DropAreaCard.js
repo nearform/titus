@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { withFileUploader } from '../FileUploaderContext'
 import withDropTarget, { getFilesFromFileDataTransfer } from './withDropTarget'
 class UploadCard extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.inputFile = React.createRef()
     this.handleFilesUpdate = this.handleFilesUpdate.bind(this)
@@ -12,7 +12,7 @@ class UploadCard extends Component {
     this.handleClick = this.handleClick.bind(this)
   }
 
-  handleSelectFile (event) {
+  handleSelectFile(event) {
     getFilesFromFileDataTransfer(event.target, true)
       .then(files => {
         this.handleFilesUpdate(files)
@@ -20,15 +20,15 @@ class UploadCard extends Component {
       .catch(this.props.fileUploader.logger)
   }
 
-  handleClick () {
+  handleClick() {
     this.inputFile.current.click()
   }
 
-  handleFilesUpdate (files) {
+  handleFilesUpdate(files) {
     this.props.fileUploader.addFiles(files)
   }
 
-  render () {
+  render() {
     const {
       title,
       text,
@@ -47,10 +47,10 @@ class UploadCard extends Component {
         <div style={{ display: 'none' }}>
           <input
             ref={this.inputFile}
-            type='file'
-            id='uploadfile'
+            type="file"
+            id="uploadfile"
             onChange={this.handleSelectFile}
-            multiple={(fileUploader.maxItems - fileUploader.files.length) > 1}
+            multiple={fileUploader.maxItems - fileUploader.files.length > 1}
           />
         </div>
       </div>

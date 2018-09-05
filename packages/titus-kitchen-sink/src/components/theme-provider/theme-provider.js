@@ -2,16 +2,13 @@ import React from 'react'
 import T from 'prop-types'
 import { Query } from 'react-apollo'
 import { MuiThemeProvider } from '@material-ui/core/styles'
-
-import { getThemeName } from '-!graphql-tag/loader!../../theme/queries.gql' // eslint-disable-line import/no-webpack-loader-syntax
+import { getThemeName } from '../../theme/queries.graphql'
 import { themes } from '../../theme'
 
-const ThemeProvider = ({children}) => (
+const ThemeProvider = ({ children }) => (
   <Query query={getThemeName}>
-    {({data: {themeName}}) => (
-      <MuiThemeProvider theme={themes[themeName]}>
-        {children}
-      </MuiThemeProvider>
+    {({ data: { themeName } }) => (
+      <MuiThemeProvider theme={themes[themeName]}>{children}</MuiThemeProvider>
     )}
   </Query>
 )

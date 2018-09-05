@@ -34,19 +34,19 @@ const styles = theme => ({
 })
 
 class Comment extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.boundHandleRemove = this.handleRemove.bind(this)
   }
 
-  handleRemove (ev) {
+  handleRemove(ev) {
     ev.preventDefault()
 
     return this.props.removeComment(this.props.comment)
   }
 
-  renderAuthor (author) {
+  renderAuthor(author) {
     if (author && author.username) {
       return <h5>{author.username} said</h5>
     }
@@ -54,7 +54,7 @@ class Comment extends React.Component {
     return <h5>Author should be here...</h5>
   }
 
-  renderCommentContent (comment) {
+  renderCommentContent(comment) {
     if (!comment.mentions || comment.mentions.length === 0) {
       return <p>{this.props.comment.content}</p>
     }
@@ -68,7 +68,10 @@ class Comment extends React.Component {
       }
 
       if (typeof mention === 'object') {
-        let re = new RegExp('^@' + mention.username + '|\\s@' + mention.username, 'g')
+        let re = new RegExp(
+          '^@' + mention.username + '|\\s@' + mention.username,
+          'g'
+        )
         body = body.replace(re, ` <b>@${mention.username}</b>`)
       }
     })
@@ -82,12 +85,15 @@ class Comment extends React.Component {
     classes: PropTypes.object
   }
 
-  render () {
+  render() {
     return (
       <article className={this.props.classes.comment}>
         <header className={this.props.classes.commentHeader}>
           {this.renderAuthor(this.props.comment.author)}
-          <button onClick={this.boundHandleRemove} className={this.props.classes.commentRemoveButton} >
+          <button
+            onClick={this.boundHandleRemove}
+            className={this.props.classes.commentRemoveButton}
+          >
             <Delete />
           </button>
         </header>

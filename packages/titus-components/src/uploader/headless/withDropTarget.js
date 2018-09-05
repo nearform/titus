@@ -6,10 +6,12 @@ import { v4 } from 'uuid'
 const getAsEntry = item =>
   item.getAsEntry
     ? item.getAsEntry()
-    : item.webkitGetAsEntry ? item.webkitGetAsEntry() : null
+    : item.webkitGetAsEntry
+      ? item.webkitGetAsEntry()
+      : null
 
 class UploadFileDescriptor {
-  constructor (file, idSuffix, isDirectory) {
+  constructor(file, idSuffix, isDirectory) {
     this.id = `file-${idSuffix}-${v4()}`
     this.name = file.name
     this.type = file.type
@@ -31,7 +33,13 @@ export const getFilesFromFileDataTransfer = (dataTransfer, forceFileType) => {
 
     for (let i = 0; i < dataTransfer.files.length; i++) {
       const dtItem = dataTransfer.files[i]
-      promises.push(new UploadFileDescriptor(dtItem, i, forceFileType ? false : getAsEntry(dataTransfer.items[i]).isDirectory))
+      promises.push(
+        new UploadFileDescriptor(
+          dtItem,
+          i,
+          forceFileType ? false : getAsEntry(dataTransfer.items[i]).isDirectory
+        )
+      )
     }
 
     return Promise.all(promises).then(files => [].concat(...files))
@@ -39,7 +47,7 @@ export const getFilesFromFileDataTransfer = (dataTransfer, forceFileType) => {
 }
 
 const uploadTarget = {
-  drop (props, monitor, component) {
+  drop(props, monitor, component) {
     if (monitor.didDrop()) {
       return
     }
@@ -53,12 +61,12 @@ const uploadTarget = {
 
     return { moved: true }
   },
-  canDrop () {
+  canDrop() {
     return true
   }
 }
 
-function collect (connect, monitor) {
+function collect(connect, monitor) {
   return {
     // Call this function inside render()
     // to let React DnD handle the drag events:

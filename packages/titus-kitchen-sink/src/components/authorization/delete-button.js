@@ -3,13 +3,16 @@ import PropTypes from 'prop-types'
 import { Mutation } from 'react-apollo'
 import { IconButton } from '@material-ui/core'
 import { Delete as DeleteIcon } from '@material-ui/icons'
-import { loadAllDietTypes, deleteDietType } from '-!graphql-tag/loader!./queries.gql' // eslint-disable-line import/no-webpack-loader-syntax
+import {
+  loadAllDietTypes,
+  deleteDietType
+} from './queries.graphql'
 
 export const DeleteButton = ({ id }) => (
   <Mutation mutation={deleteDietType}>
     {deleteDietType => (
       <IconButton
-        aria-label='Delete'
+        aria-label="Delete"
         onClick={e =>
           deleteDietType({
             variables: { id },

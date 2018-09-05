@@ -20,7 +20,7 @@ describe('uploader/material/DropArea', () => {
 
   test('With title and text', () => {
     const { container } = render(
-      <DropArea title='Another title' text='Another text' />
+      <DropArea title="Another title" text="Another text" />
     )
 
     expect(
@@ -36,7 +36,7 @@ describe('uploader/material/DropArea', () => {
 
   test('With error', () => {
     const { container } = render(
-      <DropArea title='Another title' text='Another text' error='Some error' />
+      <DropArea title="Another title" text="Another text" error="Some error" />
     )
 
     expect(

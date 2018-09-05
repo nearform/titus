@@ -11,14 +11,16 @@ describe('Table Material SortingHeaderCell', () => {
           <tbody>
             <tr>
               <SortingHeaderCell>
-                <div id='mock-header' />
+                <div id="mock-header" />
               </SortingHeaderCell>
             </tr>
           </tbody>
         </Table>
       )
       expect(container.querySelector('div#mock-header')).not.toBeNull()
-      expect(container.querySelector('tr td').getAttribute('aria-sort')).toBe('ascending')
+      expect(container.querySelector('tr td').getAttribute('aria-sort')).toBe(
+        'ascending'
+      )
     })
     test('The sorting is ascending', () => {
       const { container } = render(
@@ -26,14 +28,16 @@ describe('Table Material SortingHeaderCell', () => {
           <tbody>
             <tr>
               <SortingHeaderCell isSorting={{ asc: true }}>
-                <div id='mock-header' />
+                <div id="mock-header" />
               </SortingHeaderCell>
             </tr>
           </tbody>
         </Table>
       )
       expect(container.querySelector('div#mock-header')).not.toBeNull()
-      expect(container.querySelector('tr td').getAttribute('aria-sort')).toBe('ascending')
+      expect(container.querySelector('tr td').getAttribute('aria-sort')).toBe(
+        'ascending'
+      )
     })
 
     test('The sorting is descending', () => {
@@ -42,14 +46,16 @@ describe('Table Material SortingHeaderCell', () => {
           <tbody>
             <tr>
               <SortingHeaderCell isSorting={{ desc: true }}>
-                <div id='mock-header' />
+                <div id="mock-header" />
               </SortingHeaderCell>
             </tr>
           </tbody>
         </Table>
       )
       expect(container.querySelector('div#mock-header')).not.toBeNull()
-      expect(container.querySelector('tr td').getAttribute('aria-sort')).toBe('descending')
+      expect(container.querySelector('tr td').getAttribute('aria-sort')).toBe(
+        'descending'
+      )
     })
   })
 
@@ -60,8 +66,11 @@ describe('Table Material SortingHeaderCell', () => {
         <Table>
           <tbody>
             <tr>
-              <SortingHeaderCell isSorting={{ desc: true }} onClick={mockOnClick}>
-                <div id='mock-header' />
+              <SortingHeaderCell
+                isSorting={{ desc: true }}
+                onClick={mockOnClick}
+              >
+                <div id="mock-header" />
               </SortingHeaderCell>
             </tr>
           </tbody>

@@ -3,17 +3,12 @@ import thunk from 'redux-thunk'
 
 import rootReducer from './reducers'
 
-const devtools = window.devToolsExtension || (() => (noop) => noop)
+const devtools = window.devToolsExtension || (() => noop => noop)
 
 const configureStore = () => {
-  const middlewares = [
-    thunk
-  ]
+  const middlewares = [thunk]
 
-  const enhancers = [
-    applyMiddleware(...middlewares),
-    devtools()
-  ]
+  const enhancers = [applyMiddleware(...middlewares), devtools()]
 
   return createStore(rootReducer, compose(...enhancers))
 }

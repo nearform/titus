@@ -3,7 +3,7 @@
 const foodGroup = require('./foodGroup')
 
 module.exports = {
-  loaders: (pg) => {
+  loaders: pg => {
     return {
       foodGroup: foodGroup.dataloaders(pg)
     }

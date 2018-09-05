@@ -8,7 +8,7 @@ const handleDelete = selected => {
 
 const Tables = () => (
   <Table
-    title='Material UI Table'
+    title="Material UI Table"
     columns={columns}
     rows={rows}
     onDelete={handleDelete}

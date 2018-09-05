@@ -31,7 +31,7 @@ class Search extends React.Component {
     this.setState(({ keywordSearch }) => ({ keywordSearch: !keywordSearch }))
   }
 
-  render () {
+  render() {
     const {
       props: { classes },
       state: { keywordSearch },
@@ -52,15 +52,15 @@ class Search extends React.Component {
           {keywordSearch ? <KeywordSearch /> : <RecordSearch />}
         </Paper>
         <div className={classes.citation}>
-          <Typography variant='caption'>
+          <Typography variant="caption">
             Nutritional information provided by:
           </Typography>
-          <Typography variant='caption'>
+          <Typography variant="caption">
             US Department of Agriculture, Agricultural Research Service,
             Nutrient Data Laboratory. USDA National Nutrient Database for
             Standard Reference, Release 28. Version Current: September 2015.
             Internet:{' '}
-            <a href='http://www.ars.usda.gov/ba/bhnrc/ndl'>
+            <a href="http://www.ars.usda.gov/ba/bhnrc/ndl">
               http://www.ars.usda.gov/ba/bhnrc/ndl
             </a>
           </Typography>

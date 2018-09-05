@@ -29,7 +29,7 @@ class Table extends React.Component {
     />
   )
 
-  render () {
+  render() {
     const { rows, columns, pageSize, pageSizeOptions } = this.props
 
     return (

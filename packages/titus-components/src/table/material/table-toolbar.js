@@ -43,7 +43,7 @@ const TableToolbar = ({ numSelected, classes, title, onDelete }) => (
   <Toolbar className={classNames({ [classes.highlight]: numSelected > 0 })}>
     <div className={classes.title}>
       <Typography
-        variant='title'
+        variant="title"
         color={numSelected > 0 ? 'primary' : 'inherit'}
       >
         {title}
@@ -54,16 +54,16 @@ const TableToolbar = ({ numSelected, classes, title, onDelete }) => (
       {numSelected > 0 && (
         <div className={classes.rightItems}>
           <div className={classes.numSelected}>
-            <Typography variant='body1' color='primary'>
+            <Typography variant="body1" color="primary">
               <strong>{numSelected}</strong> selected
             </Typography>
           </div>
           <div className={classes.actions}>
-            <Tooltip title='Delete'>
+            <Tooltip title="Delete">
               <IconButton
-                variant='fab'
-                aria-label='Delete'
-                color='primary'
+                variant="fab"
+                aria-label="Delete"
+                color="primary"
                 className={classes.button}
                 onClick={onDelete}
               >

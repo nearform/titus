@@ -4,31 +4,32 @@ import Tooltip from '@material-ui/core/Tooltip'
 import TableSortLabel from '@material-ui/core/TableSortLabel'
 import TableCell from '@material-ui/core/TableCell'
 
-const SortingHeaderCell = ({ onClick, isSorting, children, hidden }) => (
-  !hidden && <TableCell
-    padding='checkbox'
-    sortDirection={isSorting && !isSorting.asc ? 'desc' : 'asc'}
-  >
-    <Tooltip
-      title={
-        isSorting
-          ? isSorting.asc
-            ? 'Sorted Ascending'
-            : 'Sorted Descending'
-          : ''
-      }
-      enterDelay={300}
+const SortingHeaderCell = ({ onClick, isSorting, children, hidden }) =>
+  !hidden && (
+    <TableCell
+      padding="checkbox"
+      sortDirection={isSorting && !isSorting.asc ? 'desc' : 'asc'}
     >
-      <TableSortLabel
-        active={Boolean(isSorting)}
-        direction={isSorting && !isSorting.asc ? 'desc' : 'asc'}
-        onClick={onClick}
+      <Tooltip
+        title={
+          isSorting
+            ? isSorting.asc
+              ? 'Sorted Ascending'
+              : 'Sorted Descending'
+            : ''
+        }
+        enterDelay={300}
       >
-        {children}
-      </TableSortLabel>
-    </Tooltip>
-  </TableCell>
-)
+        <TableSortLabel
+          active={Boolean(isSorting)}
+          direction={isSorting && !isSorting.asc ? 'desc' : 'asc'}
+          onClick={onClick}
+        >
+          {children}
+        </TableSortLabel>
+      </Tooltip>
+    </TableCell>
+  )
 
 SortingHeaderCell.propTypes = {
   onClick: PropTypes.func,

@@ -106,7 +106,7 @@ class Navigation extends Component {
   handleMenuOpen = () => this.setState({ menuOpen: true })
   handleMenuClose = () => this.setState({ menuOpen: false })
 
-  render () {
+  render() {
     const { handleMenuOpen, handleMenuClose } = this
     const {
       classes,
@@ -121,16 +121,16 @@ class Navigation extends Component {
     return (
       <div className={classes.root}>
         <AppBar
-          color='primary'
+          color="primary"
           className={classNames(classes.appBar, {
             [classes.appBarShift]: menuOpen
           })}
-          data-testid='app-bar'
+          data-testid="app-bar"
         >
           <Toolbar disableGutters={!menuOpen}>
             <IconButton
-              color='inherit'
-              aria-label='Open Menu'
+              color="inherit"
+              aria-label="Open Menu"
               onClick={handleMenuOpen}
               className={classNames(classes.menuButton, {
                 [classes.hide]: menuOpen
@@ -138,7 +138,7 @@ class Navigation extends Component {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant='title' color='inherit' noWrap>
+            <Typography variant="title" color="inherit" noWrap>
               {title}
             </Typography>
 
@@ -146,8 +146,8 @@ class Navigation extends Component {
           </Toolbar>
         </AppBar>
         <Drawer
-          color='primary'
-          variant='permanent'
+          color="primary"
+          variant="permanent"
           classes={{
             paper: classNames(classes.drawerPaper, {
               [classes.drawerPaperClose]: !menuOpen
@@ -156,14 +156,14 @@ class Navigation extends Component {
           open={menuOpen}
           /* any click in the drawer will propogate and close it */
           onClick={handleMenuClose}
-          data-testid='app-bar-drawer'
+          data-testid="app-bar-drawer"
         >
           <div className={classes.toolbar}>
             <IconButton>
               {theme.direction === 'rtl' ? (
-                <ChevronRightIcon data-testid='app-bar-drawer-icon-right' />
+                <ChevronRightIcon data-testid="app-bar-drawer-icon-right" />
               ) : (
-                <ChevronLeftIcon data-testid='app-bar-drawer-icon-left' />
+                <ChevronLeftIcon data-testid="app-bar-drawer-icon-left" />
               )}
             </IconButton>
           </div>

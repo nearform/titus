@@ -3,7 +3,7 @@
 const formatRows = require('./util').formatRows
 const SQL = require('@nearform/sql')
 
-const getAll = async (pg) => {
+const getAll = async pg => {
   const res = await pg.query(SQL`
     SELECT
       id,

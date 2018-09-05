@@ -2,13 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Mutation } from 'react-apollo'
 import { IconButton } from '@material-ui/core'
-import { loadAllDietTypes, toggleDietTypeVisibility } from '-!graphql-tag/loader!./queries.gql' // eslint-disable-line import/no-webpack-loader-syntax
+import {
+  loadAllDietTypes,
+  toggleDietTypeVisibility
+} from './queries.graphql'
 
 export const ToggleButton = ({ id, children }) => (
   <Mutation mutation={toggleDietTypeVisibility}>
     {toggleDietTypeVisibility => (
       <IconButton
-        aria-label='Visibility Toggle'
+        aria-label="Visibility Toggle"
         onClick={e =>
           toggleDietTypeVisibility({
             variables: { id },
@@ -28,9 +31,9 @@ export const ToggleButton = ({ id, children }) => (
                 dietType =>
                   dietType.id === id
                     ? {
-                      ...dietType,
-                      visible: !dietType.visible
-                    }
+                        ...dietType,
+                        visible: !dietType.visible
+                      }
                     : dietType
               )
 

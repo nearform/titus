@@ -2,7 +2,7 @@ import React from 'react'
 import JssProvider from 'react-jss/lib/JssProvider'
 import Loadable from 'react-loadable'
 import ApolloClient from 'apollo-boost'
-import {createGenerateClassName, CssBaseline} from '@material-ui/core'
+import { createGenerateClassName, CssBaseline } from '@material-ui/core'
 import { ApolloProvider } from 'react-apollo'
 
 import Auth from './components/authentication/auth'

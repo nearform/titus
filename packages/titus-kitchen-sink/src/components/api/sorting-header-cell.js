@@ -5,7 +5,7 @@ import { Tooltip, TableSortLabel, TableCell } from '@material-ui/core'
 const SortingHeaderCell = ({ onClick, isSorting, children, hidden, width }) =>
   !hidden && (
     <TableCell
-      padding='checkbox'
+      padding="checkbox"
       style={{ width }}
       sortDirection={isSorting && !isSorting.asc ? 'desc' : 'asc'}
     >

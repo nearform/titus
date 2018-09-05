@@ -42,17 +42,22 @@ const barStyle = {
 }
 const StylesGridListTileBar = withStyles(barStyle)(GridListTileBar)
 
-const DropAreaBase = ({classes, text, error, title}) => {
+const DropAreaBase = ({ classes, text, error, title }) => {
   return (
     <GridListTile className={classes.tile}>
-      <img className={classes.media} title='Upload' src={uploadImage} />
+      <img
+        className={classes.media}
+        title="Upload"
+        src={uploadImage}
+        alt="uploaded"
+      />
       <StylesGridListTileBar
         className={classes.bar}
         title={title}
         subtitle={
           <div>
             <div>{text}</div>
-            { error && <div className={classes.error}>{error}</div>}
+            {error && <div className={classes.error}>{error}</div>}
           </div>
         }
       />

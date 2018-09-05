@@ -19,7 +19,7 @@ const awsConfig = {
   }
 }
 
-function getParams (file) {
+function getParams(file) {
   return {
     Key: file.id,
     Body: file.orig,
@@ -29,7 +29,7 @@ function getParams (file) {
 }
 
 // TODO Tags are currently disabled due an access S3 policies issue
-function getTags (file) {
+function getTags(file) {
   return [{ Key: 'OriginalName', Value: file.name }]
 }
 
