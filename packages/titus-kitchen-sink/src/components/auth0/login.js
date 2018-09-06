@@ -1,32 +1,34 @@
 import React from 'react'
 import { auth0 } from './Auth0'
 import { navigate } from '@reach/router'
-import {
-  Button,
-  Paper,
-  Grid,
-  TextField,
-  withStyles,
-  Typography
-} from '@material-ui/core'
+import { Button, Paper, Grid, withStyles, Typography } from '@material-ui/core'
 import LockIcon from '@material-ui/icons/Lock'
+import { LoginForm } from '../login/login'
+import * as yup from 'yup'
 
 const styles = theme => ({
   root: {
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2
   },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit
-  },
   button: {
     marginTop: theme.spacing.unit * 2,
     marginBottom: theme.spacing.unit * 2
   },
+  container: {
+    padding: theme.spacing.unit * 2
+  },
   rightIcon: {
     marginLeft: theme.spacing.unit
+  },
+  formRoot: {
+    padding: theme.spacing.unit * 5
   }
+})
+
+const schema = yup.object().shape({
+  username: yup.string().required('Username is required.'),
+  password: yup.string().required('Password is required.')
 })
 
 class Auth0Login extends React.Component {
@@ -34,52 +36,42 @@ class Auth0Login extends React.Component {
     auth0
   }
 
-  state = {
-    username: '',
-    password: ''
+  authorize() {
+    this.props.auth0.authorize()
   }
 
-  handleUsername = event => {
-    this.setState({ username: event.target.value })
-  }
-
-  handlePassword = event => {
-    this.setState({ password: event.target.value })
-  }
-
-  redirect() {
-    auth0.authorize()
-  }
-
-  backendLogin = e => {
-    e.preventDefault()
-    if (!this.state.username || !this.state.password) {
-      return
-    }
-
-    window
-      .fetch(`http://localhost:5000/login`, {
-        method: 'POST',
-        body: JSON.stringify({
-          username: this.state.username,
-          password: this.state.password
-        })
-      })
+  backendLogin = ({ username, password }) => {
+    return fetch('/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    })
       .then(response => {
-        console.log('response', response)
-        localStorage.setItem('authentication', response)
+        if (!response.ok) {
+          throw Error(response.statusText)
+        }
+        return response
       })
-      .catch(err => console.err(err))
-      .then(
-        this.setState({
-          username: '',
-          password: ''
-        })
-      )
+      .then(response => response.json())
+      .then(authResult => {
+        if (authResult && authResult.access_token && authResult.id_token) {
+          localStorage.setItem('access_token', authResult.access_token)
+          localStorage.setItem('id_token', authResult.id_token)
+          localStorage.setItem(
+            'expires_at',
+            authResult.expires_in * 1000 + new Date().getTime()
+          )
+          navigate('/auth0/login')
+        }
+      })
+      .catch(err => {
+        console.error(err)
+      })
   }
 
   render() {
     const { classes } = this.props
+
     return (
       <Grid container spacing={24} className={classes.root}>
         <Grid item xs={12}>
@@ -90,17 +82,8 @@ class Auth0Login extends React.Component {
               justify="space-around"
               alignItems="center"
               spacing={24}
+              className={classes.container}
             >
-              <Button
-                className={classes.button}
-                variant="contained"
-                color="secondary"
-                disabled={this.props.auth0.isAuthenticated}
-                onClick={() => this.redirect()}
-              >
-                Login Through Auth0
-                <LockIcon className={classes.rightIcon} />
-              </Button>
               {this.props.auth0.isAuthenticated ? (
                 <React.Fragment>
                   <Typography variant="title" color="inherit" noWrap>
@@ -121,55 +104,31 @@ class Auth0Login extends React.Component {
                   </Button>
                 </React.Fragment>
               ) : (
-                ''
+                <Button
+                  className={classes.button}
+                  variant="contained"
+                  color="secondary"
+                  disabled={this.props.auth0.isAuthenticated}
+                  onClick={() => this.authorize()}
+                >
+                  Login Through Auth0
+                  <LockIcon className={classes.rightIcon} />
+                </Button>
               )}
             </Grid>
           </Paper>
         </Grid>
         <Grid item xs={12}>
           <Paper>
-            <form
-              noValidate
-              onSubmit={this.backendLogin}
-              style={{
-                padding: '16px'
-              }}
-            >
-              <Grid
-                container
-                direction="column"
-                justify="center"
-                alignItems="stretch"
-              >
-                <TextField
-                  id="username"
-                  label="Username"
-                  className={classes.textField}
-                  value={this.state.username}
-                  onChange={this.handleUsername}
-                  margin="normal"
-                  required
+            {!this.props.auth0.isAuthenticated ? (
+              <div className={classes.formRoot}>
+                <LoginForm
+                  login={this.backendLogin}
+                  schema={schema}
+                  header={`Login Through API Endpoint:`}
                 />
-                <TextField
-                  id="password"
-                  label="Password"
-                  type="password"
-                  className={classes.textField}
-                  value={this.state.password}
-                  onChange={this.handlePassword}
-                  margin="normal"
-                  required
-                />
-                <Button
-                  variant="contained"
-                  color="primary"
-                  type="submit"
-                  className={classes.button}
-                >
-                  Login via backend
-                </Button>
-              </Grid>
-            </form>
+              </div>
+            ) : null}
           </Paper>
         </Grid>
       </Grid>

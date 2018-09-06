@@ -68,5 +68,6 @@
     "react-app-rewire-graphql-tag": "^1.1.0",
     "react-app-rewired": "^1.6.2",
     "react-testing-library": "^4.1.2"
-  }
+  },
+  "proxy": "http://localhost:5000"
 }

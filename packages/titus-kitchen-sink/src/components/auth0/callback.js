@@ -23,7 +23,6 @@ class Auth0Callback extends React.Component {
   render() {
     return (
       <div>
-        <div>Callback!</div>
         {this.state.err && (
           <div>Error: {JSON.stringify(this.state.err, null, 2)}</div>
         )}
