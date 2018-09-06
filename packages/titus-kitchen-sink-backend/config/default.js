@@ -59,7 +59,8 @@ module.exports = {
       cache: !!AUTH0_KEY_CACHE,
       rateLimit: !!AUTH0_KEY_RATE_LIMIT,
       jwksRequestsPerMinute: AUTH0_KEY_JWKS_RPM || 5,
-      jwksUri: AUTH0_KEY_JWKS_URI || `https://${AUTH0_DOMAIN}/.well-known/jwks.json`
+      jwksUri:
+        AUTH0_KEY_JWKS_URI || `https://${AUTH0_DOMAIN}/.well-known/jwks.json`
     }
   }
 }

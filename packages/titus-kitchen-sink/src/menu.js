@@ -1,20 +1,19 @@
 import React from 'react'
 import { ListItemLink } from '@nearform/titus-components'
-
-import List from '@material-ui/core/List'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
-
-import DashboardIcon from '@material-ui/icons/Dashboard'
-import PlaylistAddCheck from '@material-ui/icons/PlaylistAddCheck'
-import InsertChart from '@material-ui/icons/InsertChart'
-import TablesIcon from '@material-ui/icons/GridOn'
-import AutocompleteIcon from '@material-ui/icons/Input'
-import ApiIcon from '@material-ui/icons/CloudQueue'
-import SearchIcon from '@material-ui/icons/FindInPage'
-import CommentIcon from '@material-ui/icons/Comment'
-import CloudUploadIcon from '@material-ui/icons/CloudUpload'
-import AuthIcon from '@material-ui/icons/LockOpen'
+import { List, ListItemIcon, ListItemText } from '@material-ui/core'
+import {
+  Dashboard as DashboardIcon,
+  PlaylistAddCheck,
+  InsertChart,
+  GridOn as TablesIcon,
+  Input as AutocompleteIcon,
+  CloudQueue as ApiIcon,
+  FindInPage as SearchIcon,
+  Comment as CommentIcon,
+  CloudUpload as CloudUploadIcon,
+  LockOpen as AuthIcon,
+  AccountCircle as AccountCircleIcon
+} from '@material-ui/icons'
 
 const styles = {
   active: {
@@ -88,6 +87,12 @@ const Menu = () => {
           <AuthIcon />
         </ListItemIcon>
         <ListItemText primary="Authorization" />
+      </ListItemLink>
+      <ListItemLink to={'/auth0/login'} getProps={isActiveRoute}>
+        <ListItemIcon>
+          <AccountCircleIcon />
+        </ListItemIcon>
+        <ListItemText primary="Auth0" />
       </ListItemLink>
     </List>
   )

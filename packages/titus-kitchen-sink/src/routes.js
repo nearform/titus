@@ -65,6 +65,18 @@ const AsyncAuthorization = Loadable({
   delay: 300,
   timeout: 10000
 })
+const AsyncAuth0Login = Loadable({
+  loader: () => import('./components/auth0/login'),
+  loading: Loading,
+  delay: 300,
+  timeout: 10000
+})
+const AsyncAuth0Callback = Loadable({
+  loader: () => import('./components/auth0/callback'),
+  loading: Loading,
+  delay: 300,
+  timeout: 10000
+})
 
 const Routes = () => (
   <Router>
@@ -78,6 +90,8 @@ const Routes = () => (
     <AsyncComments path="comments/*" />
     <AsyncUploader path="uploader/*" />
     <AsyncAuthorization path="authorization/*" />
+    <AsyncAuth0Login path="auth0/login" />
+    <AsyncAuth0Callback path="auth0/callback" />
   </Router>
 )
 
