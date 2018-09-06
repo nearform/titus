@@ -58,8 +58,9 @@ export const LoginFormUnstyled = ({
       validationSchema={schema}
       onSubmit={(values, { setSubmitting, setErrors }) => {
         const { username, password } = values
+        setSubmitting(false)
 
-        return login({ username, password }).then(() => setSubmitting(false))
+        return login({ username, password })
       }}
       render={({
         values,
