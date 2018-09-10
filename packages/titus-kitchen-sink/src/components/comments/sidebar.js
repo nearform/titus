@@ -23,10 +23,10 @@ const styles = theme => {
       width: '40vw'
     },
     item: {
-      padding: '1em 2em 0 2em'
+      padding: '0 2em'
     },
     close: {
-      padding: '1em 2em'
+      padding: '1em 2em 0 2em'
     }
   }
 }
@@ -61,7 +61,7 @@ class Sidebar extends React.Component {
             justify="flex-end"
             className={classes.close}
           >
-            <Tooltip title="Hide Sidebar" placement="left">
+            <Tooltip title="Close Sidebar" placement="left">
               <IconButton
                 className={classes.button}
                 aria-label="Delete"

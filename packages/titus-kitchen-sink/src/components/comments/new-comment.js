@@ -6,11 +6,15 @@ import {
   TextField,
   FormControl,
   Button,
-  withStyles
+  withStyles,
+  FormHelperText
 } from '@material-ui/core'
 const styles = theme => ({
   resetButton: {
     margin: '1em 0'
+  },
+  form: {
+    marginBottom: '0.5em'
   }
 })
 const schema = yup.object().shape({
@@ -18,7 +22,7 @@ const schema = yup.object().shape({
 })
 
 const NewComment = props => {
-  const { title, classes, onSubmit } = props
+  const { classes, onSubmit } = props
 
   return (
     <Formik
@@ -50,8 +54,10 @@ const NewComment = props => {
       }) => {
         return (
           <form onSubmit={handleSubmit}>
-            <FormControl fullWidth>
-              {title && <h2>{title}</h2>}
+            <Typography variant="caption" align="center">
+              New Comment
+            </Typography>
+            <FormControl fullWidth margin="none" className={classes.form}>
               <TextField
                 name="comment"
                 value={values.comment}
@@ -67,9 +73,7 @@ const NewComment = props => {
 
               {touched.comment &&
                 errors.comment && (
-                  <Typography color="error" variant="subheading" gutterBottom>
-                    {errors.comment}
-                  </Typography>
+                  <FormHelperText error>{errors.comment}</FormHelperText>
                 )}
             </FormControl>
             <FormControl fullWidth>
