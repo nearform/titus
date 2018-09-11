@@ -12,7 +12,7 @@ class Auth0Callback extends React.Component {
   componentDidMount() {
     auth0.parseHash(err => {
       if (err) {
-        console.error(err)
+        this.setState({ err })
       }
 
       navigate('/auth0/login')

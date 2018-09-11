@@ -40,33 +40,29 @@ class Auth0Login extends React.Component {
     this.props.auth0.authorize()
   }
 
-  backendLogin = ({ username, password }) => {
-    return fetch('/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password })
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw Error(response.statusText)
-        }
-        return response
+  backendLogin = async ({ username, password }) => {
+    try {
+      const response = await fetch('/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
       })
-      .then(response => response.json())
-      .then(authResult => {
-        if (authResult && authResult.access_token && authResult.id_token) {
-          localStorage.setItem('access_token', authResult.access_token)
-          localStorage.setItem('id_token', authResult.id_token)
-          localStorage.setItem(
-            'expires_at',
-            authResult.expires_in * 1000 + new Date().getTime()
-          )
-          navigate('/auth0/login')
-        }
-      })
-      .catch(err => {
-        console.error(err)
-      })
+      if (!response.ok) {
+        throw Error(response.statusText)
+      }
+      const authResult = await response.json()
+      if (authResult && authResult.access_token && authResult.id_token) {
+        localStorage.setItem('access_token', authResult.access_token)
+        localStorage.setItem('id_token', authResult.id_token)
+        localStorage.setItem(
+          'expires_at',
+          authResult.expires_in * 1000 + new Date().getTime()
+        )
+        navigate('/auth0/login')
+      }
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   render() {

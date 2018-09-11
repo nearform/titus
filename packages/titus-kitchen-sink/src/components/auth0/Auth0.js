@@ -11,7 +11,7 @@ class Auth0 {
     this.webAuth = new WebAuth({
       domain: REACT_APP_AUTH0_DOMAIN,
       clientID: REACT_APP_AUTH0_CLIENT_ID,
-      redirectUri: 'http://localhost:3000/auth0/callback',
+      redirectUri: `${window.location.origin}/auth0/callback`,
       audience: REACT_APP_AUTH0_AUDIENCE,
       responseType: 'token id_token',
       scope: 'openid'
