@@ -8,15 +8,13 @@ const config = require('../config/default')
 const grapqlSchema = require('./graphql').schema
 const loaders = require('./graphql').loaders
 const pgPlugin = require('./pg-plugin')
+const commentamiPlugin = require('./commentami')
 const trailPlugin = require('@nearform/trail-hapi-plugin')
 const UdaruPlugin = require('@nearform/udaru-hapi-plugin')
 const routes = require('./routes')
-const validate = require('./validate')
 const server = hapi.server(config.hapi)
 
 const init = async () => {
-  await server.register(require('hapi-auth-basic'))
-  server.auth.strategy('simple', 'basic', { validate })
   await server.register([
     {
       plugin: pino,
@@ -57,27 +55,7 @@ const init = async () => {
       options: config.db
     },
     {
-      plugin: require('@nearform/commentami-backend-hapi-plugin'),
-      options: {
-        pg: config.db,
-        nes: {
-          auth: {
-            route: 'simple'
-          }
-        },
-        routes: {
-          cors: true,
-          auth: 'simple',
-          getUserFromRequest: async (request, payload) => {
-            return request.auth.credentials
-          }
-        },
-        multines: {
-          type: 'redis',
-          host: config.redis.host,
-          port: config.redis.port
-        }
-      }
+      plugin: commentamiPlugin
     },
     {
       plugin: UdaruPlugin,
