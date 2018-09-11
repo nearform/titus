@@ -19,6 +19,12 @@ const styles = theme => ({
   avatar: {
     backgroundColor: colors.red[500]
   },
+  johnAvatar: {
+    backgroundColor: colors.blue[500]
+  },
+  janeAvatar: {
+    backgroundColor: colors.deepPurple[500]
+  },
   comment: {
     borderBottom: '1px solid black',
     '& > p': {
@@ -49,17 +55,26 @@ const styles = theme => ({
 })
 
 const Comment = ({ comment, classes, removeComment }) => {
+  const username = (comment.author && comment.author.username) || ''
+  const firstLetter = username.toUpperCase().slice(0, 1) || 'T'
+
+  const AvatarIcon = username.toLowerCase().includes('john') ? (
+    <Avatar aria-label="User Icon" className={classes.johnAvatar}>
+      {firstLetter}
+    </Avatar>
+  ) : username.toLowerCase().includes('jane') ? (
+    <Avatar aria-label="User Icon" className={classes.janeAvatar}>
+      {firstLetter}
+    </Avatar>
+  ) : (
+    <Avatar aria-label="User Icon" className={classes.avatar}>
+      {firstLetter}
+    </Avatar>
+  )
   return (
     <Card className={classes.card}>
       <CardHeader
-        avatar={
-          <Avatar aria-label="Recipe" className={classes.avatar}>
-            {(comment.author &&
-              comment.author.username &&
-              comment.author.username.toUpperCase().slice(0, 1)) ||
-              'T'}
-          </Avatar>
-        }
+        avatar={AvatarIcon}
         action={
           <IconButton
             onClick={e => {
@@ -71,14 +86,11 @@ const Comment = ({ comment, classes, removeComment }) => {
             <DeleteIcon />
           </IconButton>
         }
-        title={
-          comment.author &&
-          comment.author.username
-            .toLowerCase()
-            .split(' ')
-            .map(s => s.charAt(0).toUpperCase() + s.substring(1))
-            .join(' ')
-        }
+        title={username
+          .toLowerCase()
+          .split(' ')
+          .map(s => s.charAt(0).toUpperCase() + s.substring(1))
+          .join(' ')}
         subheader=""
       />
       <CardContent>

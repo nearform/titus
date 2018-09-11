@@ -13,8 +13,23 @@ import {
   buildWebsocketClient
 } from '@nearform/commentami-react-components'
 import Sidebar from './sidebar'
-import { Typography, Paper, Divider, colors } from '@material-ui/core'
+import { Typography, Paper, Divider, colors, Grid } from '@material-ui/core'
+import UserChooser from './user-chooser'
 
+const data = {
+  'John Smith': {
+    username: 'john',
+    password: 'john'
+  },
+  'Jane Doe': {
+    username: 'jane',
+    password: 'jane'
+  },
+  'Titus User': {
+    username: 'titus',
+    password: 'titus'
+  }
+}
 const styles = theme => ({
   root: {
     ...theme.mixins.gutters(),
@@ -67,29 +82,48 @@ const styles = theme => ({
   boldText: {
     color: colors.deepOrange[500],
     fontWeight: 'bold'
+  },
+  chooseContainer: {
+    marginBottom: theme.spacing.unit * 6
   }
 })
 
 class Comments extends React.Component {
-  constructor(props) {
-    super(props)
+  static propTypes = {
+    classes: PropTypes.object
+  }
 
-    this.state = {
-      client: null,
-      service: null
-    }
+  static defaultProps = {
+    users: ['John Smith', 'Jane Doe', 'Titus User']
+  }
+
+  state = {
+    client: null,
+    service: null,
+    user: this.props.users && this.props.users[0]
   }
 
   async componentDidMount() {
+    this.connect()
+  }
+
+  async componentWillUnmount() {
+    this.disconnect()
+  }
+
+  connect = async () => {
     const client = buildWebsocketClient(process.env.REACT_APP_COMMENTS_ENDPOINT)
 
     try {
+      const { user } = this.state
+      const { username, password } = data[user]
+
       await client.connect({
         auth: {
           headers: {
-            authorization: `Basic ${Buffer.from(`john:john`).toString(
-              'base64'
-            )}`
+            authorization: `Basic ${Buffer.from(
+              `${username}:${password}`
+            ).toString('base64')}`
           }
         }
       })
@@ -103,25 +137,37 @@ class Comments extends React.Component {
     })
   }
 
-  async componentWillUnmount() {
+  disconnect = async () => {
     if (this.state.client) {
       await this.state.client.disconnect()
     }
   }
 
-  static propTypes = {
-    classes: PropTypes.object
+  handleUserChange = async user => {
+    this.setState({ user }, () => this.disconnect().then(this.connect))
   }
 
   render() {
     const { service } = this.state
-    const { classes } = this.props
+    const { users, classes } = this.props
 
     return (
       <DeepLinkController>
         <SidebarsController>
           <Resource resource="titus-demo-comments" service={service}>
             <Paper elevation={1} className={classes.root}>
+              <Grid
+                container
+                justify="flex-end"
+                alignItems="baseline"
+                className={classes.chooseContainer}
+              >
+                <Typography gutterBottom color="textSecondary">
+                  Change The User:
+                </Typography>
+                <UserChooser values={users} onChange={this.handleUserChange} />
+              </Grid>
+
               <Reference
                 reference="reference-1"
                 className={classes.headerReference}

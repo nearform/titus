@@ -2,12 +2,24 @@ const users = {
   john: {
     id: 1,
     username: 'john',
+    name: 'John Smith'
+  },
+  jane: {
+    id: 2,
+    username: 'jane',
     name: 'John Doe'
+  },
+  titus: {
+    id: 3,
+    username: 'titus',
+    name: 'Titus User'
   }
 }
 
 const passwords = {
-  john: 'john'
+  john: 'john',
+  jane: 'jane',
+  titus: 'titus'
 }
 
 const validate = async (request, username, password, h) => {
