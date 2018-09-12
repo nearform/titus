@@ -82,7 +82,7 @@ const Menu = () => {
         </ListItemIcon>
         <ListItemText primary="Uploader" />
       </ListItemLink>
-      <ListItemLink to={'/authorization'} getProps={isActiveRoute}>
+      <ListItemLink to={'/auth'} getProps={isActiveRoute}>
         <ListItemIcon>
           <AuthIcon />
         </ListItemIcon>

@@ -89,7 +89,7 @@ const Routes = () => (
     <AsyncSearch path="search/*" />
     <AsyncComments path="comments/*" />
     <AsyncUploader path="uploader/*" />
-    <AsyncAuthorization path="authorization/*" />
+    <AsyncAuthorization path="auth/*" />
     <AsyncAuth0Login path="auth0/login" />
     <AsyncAuth0Callback path="auth0/callback" />
   </Router>
