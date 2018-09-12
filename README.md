@@ -1,10 +1,14 @@
 # Titus
 
+[![CircleCI](https://circleci.com/gh/nearform/titus.svg?style=svg&circle-token=ffb218c0396d2d09567299ee18ad345ef414e7d3)](https://circleci.com/gh/nearform/titus)
+[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
+
+
 Titus is an end-to-end JavaScript stack created for modern web application development.
 
 This repository is a [monorepo](https://lernajs.io/) containing distinct parts of the Titus stack. Packages include:
 
-- [titus-starter](https://github.com/nearform/titus/tree/master/packages/titus-starter) - A client-side starter shell based off of [create-react-app](https://github.com/facebook/create-react-app) with the addition of [Storybook](https://storybook.js.org/), [Material-UI](https://material-ui.com/), [Reach Router](https://reach.tech/router), [Redux](https://redux.js.org/) and more.
+- [titus-starter](https://github.com/nearform/titus/tree/master/packages/titus-starter) - A client-side starter shell based off of [create-react-app](https://github.com/facebook/create-react-app) with the addition of [Storybook](https://storybook.js.org/), [Material-UI](https://material-ui.com/), [Reach Router](https://reach.tech/router), [Apollo](https://www.apollographql.com/) and more.
 - [titus-starter-backend](https://github.com/nearform/titus/tree/master/packages/titus-starter-backend) - A server-side starter shell complete with [Hapi](https://hapijs.com/), [PostgreSQL](https://www.postgresql.org/), [Docker](https://www.docker.com/), [GraphQL](https://graphql.org/) and more.
 - [titus-components](https://github.com/nearform/titus/tree/master/packages/titus-components) - A collection of React components ready to drop in to your application.
 - [titus-kitchen-sink](https://github.com/nearform/titus/tree/master/packages/titus-kitchen-sink) - An implementation of the starter shell with detailed examples and documentation.
@@ -66,4 +70,4 @@ Some commands have been added to the root package for convenience.
 
 ### Infrastructure documentation
 
-Info about how the Titus demo app (kitchen-sink) is deployed can be found here: https://github.com/nearform/titus/blob/master/kubernetes/README.md
+Info about how the Titus demo app (kitchen-sink) is deployed can be found [here](https://github.com/nearform/titus/blob/master/kubernetes/README.md).
