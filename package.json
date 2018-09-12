@@ -10,7 +10,8 @@
     "prepush": "lerna run test",
     "postinstall": "lerna bootstrap",
     "start:kitchen-sink": "lerna run --scope titus-kitchen-sink* --stream start",
-    "stop:kitchen-sink": "lerna run --scope titus-kitchen-sink* --stream stop"
+    "stop:kitchen-sink": "lerna run --scope titus-kitchen-sink* --stream stop",
+    "lighthouse": "lerna run lighthouse"
   },
   "devDependencies": {
     "husky": "^0.14.3",
