@@ -90,11 +90,7 @@ class Auth0Login extends React.Component {
                     variant="contained"
                     color="secondary"
                     disabled={!this.props.auth0.isAuthenticated}
-                    onClick={() =>
-                      this.props.auth0.removeSession(() => {
-                        navigate('/auth0/login')
-                      })
-                    }
+                    onClick={() => this.props.auth0.logout()}
                   >
                     Log Out
                   </Button>

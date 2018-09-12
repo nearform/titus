@@ -48,11 +48,15 @@ class Auth0 {
     cb()
   }
 
-  removeSession(cb) {
+  logout() {
     localStorage.removeItem('access_token')
     localStorage.removeItem('id_token')
     localStorage.removeItem('expires_at')
-    cb()
+
+    this.webAuth.logout({
+      returnTo: `${window.location.origin}/auth0/login`,
+      clientID: REACT_APP_AUTH0_CLIENT_ID
+    })
   }
 
   get isAuthenticated() {
