@@ -8,10 +8,10 @@ const config = require('../config/default')
 const grapqlSchema = require('./graphql').schema
 const loaders = require('./graphql').loaders
 const pgPlugin = require('./pg-plugin')
+const commentamiPlugin = require('./commentami')
 const trailPlugin = require('@nearform/trail-hapi-plugin')
 const UdaruPlugin = require('@nearform/udaru-hapi-plugin')
 const routes = require('./routes')
-
 const server = hapi.server(config.hapi)
 
 const init = async () => {
@@ -55,18 +55,7 @@ const init = async () => {
       options: config.db
     },
     {
-      plugin: require('@nearform/commentami-backend-hapi-plugin'),
-      options: {
-        pg: config.db,
-        routes: {
-          cors: true
-        },
-        multines: {
-          type: 'redis',
-          host: config.redis.host,
-          port: config.redis.port
-        }
-      }
+      plugin: commentamiPlugin
     },
     {
       plugin: UdaruPlugin,
