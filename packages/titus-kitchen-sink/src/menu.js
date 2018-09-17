@@ -17,6 +17,7 @@ import CommentIcon from '@material-ui/icons/Comment'
 import CloudUploadIcon from '@material-ui/icons/CloudUpload'
 import AuthIcon from '@material-ui/icons/Lock'
 import InvertColorsIcon from '@material-ui/icons/InvertColors'
+import LanguageIcon from '@material-ui/icons/Language'
 
 const styles = {
   active: {
@@ -102,6 +103,12 @@ const Menu = () => {
           <InvertColorsIcon />
         </ListItemIcon>
         <ListItemText primary="Theming" />
+      </ListItemLink>
+      <ListItemLink to={'/translations'} getProps={isActiveRoute}>
+        <ListItemIcon>
+          <LanguageIcon />
+        </ListItemIcon>
+        <ListItemText primary="Translations" />
       </ListItemLink>
     </List>
   )
