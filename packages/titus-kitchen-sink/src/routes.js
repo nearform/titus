@@ -41,6 +41,12 @@ const AsyncApi = Loadable({
   delay: 300,
   timeout: 10000
 })
+const AsyncTemporal = Loadable({
+  loader: () => import('./components/temporal'),
+  loading: Loading,
+  delay: 300,
+  timeout: 10000
+})
 const AsyncSearch = Loadable({
   loader: () => import('./components/search/search'),
   loading: Loading,
@@ -74,6 +80,7 @@ const Routes = () => (
     <AsyncTables path="tables/*" />
     <AsyncAutocompleteDemo path="autocomplete/*" />
     <AsyncApi path="api/*" />
+    <AsyncTemporal path="temporal/*" />
     <AsyncSearch path="search/*" />
     <AsyncComments path="comments/*" />
     <AsyncUploader path="uploader/*" />

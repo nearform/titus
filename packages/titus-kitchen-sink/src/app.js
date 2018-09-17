@@ -1,7 +1,7 @@
 import React from 'react'
 import JssProvider from 'react-jss/lib/JssProvider'
 import Loadable from 'react-loadable'
-import ApolloClient from 'apollo-boost'
+import ApolloClient, { InMemoryCache } from 'apollo-boost'
 import { createGenerateClassName, CssBaseline } from '@material-ui/core'
 import { ApolloProvider } from 'react-apollo'
 
@@ -26,6 +26,9 @@ const AsyncLogin = Loadable({
 
 export const apolloClient = new ApolloClient({
   uri: process.env.REACT_APP_GRAPHQL_ENDPOINT,
+  cache: new InMemoryCache({
+    dataIdFromObject: o => o.id ? `${o.__typename}-${o.id}`: null,
+  }),
   request: async operation => {
     operation.setContext({
       headers: {
