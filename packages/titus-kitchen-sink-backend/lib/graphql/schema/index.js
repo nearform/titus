@@ -1,6 +1,7 @@
 'use strict'
 
 const food = require('./food')
+const foodHistory = require('./foodHistory')
 const foodGroup = require('./foodGroup')
 const dietType = require('./dietType')
 const query = require('./query')
@@ -12,6 +13,7 @@ const schema = [].concat(
   query,
   mutation,
   food,
+  foodHistory,
   foodGroup,
   dietType,
   scalars,

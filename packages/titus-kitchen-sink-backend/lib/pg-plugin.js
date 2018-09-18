@@ -1,6 +1,8 @@
 'use strict'
 
 const PgPool = require('pg-pool')
+const pg = require('pg')
+require('pg-range').install(pg)
 
 const pluginName = 'pgPlugin'
 
@@ -23,6 +25,7 @@ module.exports = {
 
         server.logger().debug('Getting database connection')
         request.pg = await pool.connect()
+
         if (isTransactional(request)) {
           server.logger().debug('Begin transaction')
           await request.pg.query('BEGIN')

@@ -11,6 +11,7 @@ import InsertChart from '@material-ui/icons/InsertChart'
 import TablesIcon from '@material-ui/icons/GridOn'
 import AutocompleteIcon from '@material-ui/icons/Input'
 import ApiIcon from '@material-ui/icons/CloudQueue'
+import TemporalIcon from '@material-ui/icons/Timeline'
 import SearchIcon from '@material-ui/icons/FindInPage'
 import CommentIcon from '@material-ui/icons/Comment'
 import CloudUploadIcon from '@material-ui/icons/CloudUpload'
@@ -65,6 +66,12 @@ const Menu = () => {
           <ApiIcon />
         </ListItemIcon>
         <ListItemText primary="API" />
+      </ListItemLink>
+      <ListItemLink to={'/temporal'} getProps={isActiveRoute}>
+        <ListItemIcon>
+          <TemporalIcon />
+        </ListItemIcon>
+        <ListItemText primary="Temporal" />
       </ListItemLink>
       <ListItemLink to={'/search'} getProps={isActiveRoute}>
         <ListItemIcon>
