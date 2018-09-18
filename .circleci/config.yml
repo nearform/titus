@@ -1,6 +1,6 @@
 defaults: &defaults
   docker:
-    - image: circleci/node:10
+    - image: circleci/node:10-browsers
 
 version: 2
 jobs:
@@ -18,6 +18,22 @@ jobs:
           root: .
           paths:
             - .
+  build:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Build the production frontend bundle
+          command: |
+            set -e
+            cd packages/titus-kitchen-sink
+            mv .env.prod .env
+            npm run build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
   lint:
     <<: *defaults
     steps:
@@ -30,7 +46,16 @@ jobs:
       - attach_workspace:
           at: .
       - run: npm run test:all
-  build-push-containers:
+  lighthouse:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run: npm run lighthouse
+      - store_artifacts:
+          path: packages/titus-kitchen-sink/lighthouse-report.html
+          destination: titus-kitchen-sink-lighthouse-report.html
+  push-containers:
     <<: *defaults
     environment:
       DOCKER_REPO: "711655675495.dkr.ecr.us-east-1.amazonaws.com"
@@ -46,13 +71,6 @@ jobs:
             curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
             unzip awscli-bundle.zip
             sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
-      - run:
-          name: Build the production frontend bundle
-          command: |
-            set -e
-            cd packages/titus-kitchen-sink
-            mv .env.prod .env
-            npm run build
       - run:
           name: Build the frontend Docker containers
           command: |
@@ -83,16 +101,24 @@ workflows:
   test_and_build:
     jobs:
       - install
+      - build:
+          requires:
+            - install
       - lint:
           requires:
-              - install
+            - install
       #- test:
       #    requires:
       #        - lint
-      - build-push-containers:
+      - lighthouse:
           requires:
-              #- test
-              - lint
+            - build
+      - push-containers:
+          requires:
+            - build
+            #- test
+            - lint
+            - lighthouse
           #filters:
           #  branches:
           #    only: master
