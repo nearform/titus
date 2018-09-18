@@ -1,0 +1,14 @@
+# Titus
+
+The **Titus** project showcases coding practices, tools and styles we use at [NearForm](https://nearform.com).
+
+It contains a solid foundation for bootstrapping new projects, without writing the same boilerplate code again and again.
+
+It's clearly an opinionanted approach for starting a new application, but it's flexible enough to be tuned to match personal preferences.
+
+It's different from application generators like [create-react-app](https://....) (in fact, it builds on top of it), because the purpose of Titus is to showcase how we do things and provide code examples that can easily be reused, rather than a barebones application skeleton. 
+
+Therefore, while Titus can be used to create a new application, you can just as easily start with create-react-app and include the parts of Titus that you find useful. 
+
+On the other hand it's even easier to start with the Titus [sample application](kitchen-sink.md) and remove the parts that you don't need.
+

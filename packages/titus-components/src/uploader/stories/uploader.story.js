@@ -1,6 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
+import { withKnobs, number } from '@storybook/addon-knobs/react'
 
 import Uploader from '../uploader'
 import UploaderService from '../services/UploaderService'
@@ -34,23 +35,10 @@ function getTags(file) {
 }
 
 storiesOf('Uploader', module)
-  .add('default (1 file)', () => (
+  .addDecorator(withKnobs)
+  .add('default', () => (
     <Uploader
-      service={
-        new UploaderService({
-          awsConfig,
-          bucket: 'titus-uploader-471234098732409871234',
-          getParams,
-          getTags
-        })
-      }
-      onUploadDone={action('OnUploadDone')}
-      onUploadError={action('OnUploadError')}
-    />
-  ))
-  .add('5 files', () => (
-    <Uploader
-      maxItems={5}
+      maxItems={number('Max items', 1)}
       service={
         new UploaderService({
           awsConfig,
