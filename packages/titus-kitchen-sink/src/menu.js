@@ -15,6 +15,7 @@ import SearchIcon from '@material-ui/icons/FindInPage'
 import CommentIcon from '@material-ui/icons/Comment'
 import CloudUploadIcon from '@material-ui/icons/CloudUpload'
 import AuthIcon from '@material-ui/icons/LockOpen'
+import InvertColorsIcon from '@material-ui/icons/InvertColors'
 
 const styles = {
   active: {
@@ -88,6 +89,12 @@ const Menu = () => {
           <AuthIcon />
         </ListItemIcon>
         <ListItemText primary="Authorization" />
+      </ListItemLink>
+      <ListItemLink to={'/theming'} getProps={isActiveRoute}>
+        <ListItemIcon>
+          <InvertColorsIcon />
+        </ListItemIcon>
+        <ListItemText primary="Theming" />
       </ListItemLink>
     </List>
   )
