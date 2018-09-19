@@ -27,7 +27,7 @@ const AsyncLogin = Loadable({
 export const apolloClient = new ApolloClient({
   uri: process.env.REACT_APP_GRAPHQL_ENDPOINT,
   cache: new InMemoryCache({
-    dataIdFromObject: o => o.id ? `${o.__typename}-${o.id}`: null,
+    dataIdFromObject: o => (o.id ? `${o.__typename}-${o.id}` : null)
   }),
   request: async operation => {
     operation.setContext({
