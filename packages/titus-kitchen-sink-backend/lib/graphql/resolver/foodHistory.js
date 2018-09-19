@@ -1,5 +1,5 @@
 'use strict'
-const foodHistory = require('../model/foodHistory')
+const foodHistory = require('../../model/foodHistory')
 
 const resolvers = {
   Query: {

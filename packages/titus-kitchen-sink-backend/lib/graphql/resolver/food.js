@@ -1,5 +1,5 @@
 'use strict'
-const food = require('../model/food')
+const food = require('../../model/food')
 
 const resolvers = {
   Query: {
