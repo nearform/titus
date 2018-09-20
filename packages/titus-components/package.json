@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "build": "nwb build-react-component --no-demo --copy-files",
-    "build:watch": "nodemon -w src -x 'npm run build'",
+    "build:watch": "nodemon -e js,ts -w src -x 'npm run build'",
     "clean": "nwb clean-module && nwb clean-demo",
     "start": "nwb serve-react-demo",
     "test": "jest --coverage --runInBand",
@@ -41,6 +41,7 @@
   "devDependencies": {
     "@storybook/addon-actions": "^3.4.8",
     "@storybook/react": "^3.3.15",
+    "@types/reach__router": "^1.0.1",
     "babel-core": "^6.26.3",
     "babel-eslint": "^7.2.3",
     "babel-plugin-transform-class-properties": "^6.24.1",
