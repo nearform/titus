@@ -28,6 +28,7 @@
     "@material-ui/icons": "^1.1.0",
     "@nearform/commentami-react-components": "^1.0.4",
     "@nearform/react-table": "^1.0.6",
+    "@types/reach__router": "^1.0.1",
     "aws-sdk": "^2.286.2",
     "downshift": "^2.0.10",
     "nodemon": "^1.17.5",
@@ -41,7 +42,6 @@
   "devDependencies": {
     "@storybook/addon-actions": "^3.4.8",
     "@storybook/react": "^3.3.15",
-    "@types/reach__router": "^1.0.1",
     "babel-core": "^6.26.3",
     "babel-eslint": "^7.2.3",
     "babel-plugin-transform-class-properties": "^6.24.1",
