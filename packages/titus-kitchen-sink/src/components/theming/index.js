@@ -22,7 +22,7 @@ const Dashboard = ({ classes }) => (
       Theming Demo
     </Typography>
     <Typography paragraph>
-      This is a dashboard showing the theme we use at NearForm. Use the theme switcher button above to swith theme.
+      This is a dashboard showing the theme we use at NearForm. Use the theme switcher button above to switch theme.
     </Typography>
     <Typography variant="title" className={classes.blue} paragraph>
       This text will appear <code>NearForm blue</code> when using the NearForm theme
