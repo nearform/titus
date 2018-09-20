@@ -18,5 +18,5 @@ export interface AutocompleteProps {
   onChange?: (item: DataItem) => void;
 }
 
-declare class Autocomplete extends React.Component<AutocompleteProps, any> { }
+declare class Autocomplete extends React.Component<AutocompleteProps> { }
 export Autocomplete
