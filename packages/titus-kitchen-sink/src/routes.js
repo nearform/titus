@@ -77,6 +77,12 @@ const AsyncTheming = Loadable({
   delay: 300,
   timeout: 10000
 })
+const AsyncTranslations = Loadable({
+  loader: () => import('./components/translations'),
+  loading: Loading,
+  delay: 300,
+  timeout: 10000
+})
 
 const Routes = () => (
   <Router>
@@ -92,6 +98,7 @@ const Routes = () => (
     <AsyncUploader path="uploader/*" />
     <AsyncAuthorization path="auth/*" />
     <AsyncTheming path="theming/*" />
+    <AsyncTranslations path="translations/*" />
   </Router>
 )
 
