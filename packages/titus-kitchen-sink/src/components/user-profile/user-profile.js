@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { Button, Typography, Popover, withStyles } from '@material-ui/core'
 import { Face as FaceIcon } from '@material-ui/icons'
+
 import { AuthConsumer } from '../authentication/authentication-context'
 
-const styles = theme => ({
+const styles = {
   root: {
     margin: '0 12px 0',
     display: 'inline-block'
@@ -21,7 +22,7 @@ const styles = theme => ({
   profileContent: {
     padding: '12px'
   }
-})
+}
 
 export class UserProfile extends React.Component {
   static propTypes = {
@@ -40,7 +41,7 @@ export class UserProfile extends React.Component {
   anchorEl = React.createRef()
 
   clickHandler = () => {
-    this.setState({ open: !this.state.open })
+    this.setState(({ open }) => ({ open: !open }))
   }
 
   render() {
@@ -91,4 +92,4 @@ export class UserProfile extends React.Component {
   }
 }
 
-export default withStyles(styles, { withTheme: true })(UserProfile)
+export default withStyles(styles)(UserProfile)

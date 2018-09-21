@@ -6,13 +6,12 @@ import { Formik } from 'formik'
 import { Button, TextField, Typography } from '@material-ui/core'
 import { AuthConsumer } from '../authentication/authentication-context'
 
-const styles = theme => ({
+const styles = {
   wrapper: {
     alignItems: 'center',
     display: 'flex',
     height: '100vh'
   },
-
   form: {
     display: 'flex',
     flexDirection: 'column',
@@ -20,7 +19,7 @@ const styles = theme => ({
     maxWidth: '300px',
     width: '100%'
   }
-})
+}
 
 const schema = yup.object().shape({
   username: yup.string().required('Username is required.'),
@@ -33,7 +32,7 @@ const schema = yup.object().shape({
     .required('Password is required.')
 })
 
-export const Login = ({ classes, submitLogin }) => (
+export const Login = ({ classes }) => (
   <AuthConsumer>
     {({ login }) => (
       <Formik
@@ -42,9 +41,7 @@ export const Login = ({ classes, submitLogin }) => (
           password: ''
         }}
         validationSchema={schema}
-        onSubmit={(values, { setSubmitting, setErrors }) => {
-          const { username, password } = values
-
+        onSubmit={({ username, password }) => {
           login({ username, password })
         }}
         render={({
@@ -118,7 +115,6 @@ export const Login = ({ classes, submitLogin }) => (
 
 Login.propTypes = {
   classes: PropTypes.object,
-  submitLogin: PropTypes.func
 }
 
 Login.defaultProps = {
