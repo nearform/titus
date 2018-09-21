@@ -16,5 +16,3 @@ yarn.lock
 
 lerna-debug.log
 lighthouse-report.html
-
-packages/typescript-start
