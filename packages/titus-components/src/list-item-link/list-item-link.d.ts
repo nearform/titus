@@ -7,4 +7,5 @@ type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 export interface ListItemLinkProps
   extends Omit<ListItemProps, 'button' | 'component'> {}
 
-export const ListItemLink: React.SFC<ListItemLinkProps & LinkProps<{}>>
+declare const ListItemLink: React.SFC<ListItemLinkProps & LinkProps<{}>>
+export default ListItemLink

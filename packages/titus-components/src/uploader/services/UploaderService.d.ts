@@ -1,11 +1,11 @@
 export interface UploaderServiceOptions {
-  awsConfig?: object;
-  bucket: string;
-  getParams?: (file: object) => object;
-  getTags?: (file: object) => Array<{ Key: string, Value: string }>;
+  awsConfig?: object
+  bucket: string
+  getParams?: (file: object) => object
+  getTags?: (file: object) => Array<{ Key: string; Value: string }>
 }
 
 declare class UploaderService {
-  constructor(options: UploaderServiceOptions);
+  constructor(options: UploaderServiceOptions)
 }
-export UploaderService
+export default UploaderService

@@ -9,4 +9,4 @@ export interface UploaderProps {
 }
 
 declare class Uploader extends React.Component<UploaderProps> {}
-export Uploader
+export default Uploader
