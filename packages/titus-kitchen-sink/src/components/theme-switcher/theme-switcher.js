@@ -9,13 +9,12 @@ const ThemeSwitcher = () => (
   <Query query={getThemeName}>
     {({ data: { themeName }, client }) => (
       <IconButton
-        title="Switch color theme"
+        title={`Switch to ${themeName === THEME.default ? THEME.nearform : THEME.default} theme`}
         color="inherit"
         onClick={() =>
           client.writeData({
             data: {
-              themeName:
-                themeName === THEME.default ? THEME.nearForm : THEME.default
+              themeName: themeName === THEME.default ? THEME.nearform : THEME.default
             }
           })
         }

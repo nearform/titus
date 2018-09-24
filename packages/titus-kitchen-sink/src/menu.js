@@ -1,19 +1,23 @@
 import React from 'react'
 import { ListItemLink } from '@nearform/titus-components'
-import { List, ListItemIcon, ListItemText } from '@material-ui/core'
-import {
-  Dashboard as DashboardIcon,
-  PlaylistAddCheck,
-  InsertChart,
-  GridOn as TablesIcon,
-  Input as AutocompleteIcon,
-  CloudQueue as ApiIcon,
-  FindInPage as SearchIcon,
-  Comment as CommentIcon,
-  CloudUpload as CloudUploadIcon,
-  LockOpen as AuthIcon,
-  AccountCircle as AccountCircleIcon
-} from '@material-ui/icons'
+
+import List from '@material-ui/core/List'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+import AccountCircleIcon from '@material-ui/icons/AccountCircle'
+import DashboardIcon from '@material-ui/icons/Dashboard'
+import PlaylistAddCheck from '@material-ui/icons/PlaylistAddCheck'
+import InsertChart from '@material-ui/icons/InsertChart'
+import TablesIcon from '@material-ui/icons/GridOn'
+import AutocompleteIcon from '@material-ui/icons/Input'
+import ApiIcon from '@material-ui/icons/CloudQueue'
+import TemporalIcon from '@material-ui/icons/Timeline'
+import SearchIcon from '@material-ui/icons/Search'
+import CommentIcon from '@material-ui/icons/Comment'
+import CloudUploadIcon from '@material-ui/icons/CloudUpload'
+import AuthIcon from '@material-ui/icons/Lock'
+import InvertColorsIcon from '@material-ui/icons/InvertColors'
+import LanguageIcon from '@material-ui/icons/Language'
 
 const styles = {
   active: {
@@ -28,31 +32,39 @@ const isActiveRoute = ({ isCurrent }) => {
 const Menu = () => {
   return (
     <List>
-      <ListItemLink to={'/'} getProps={isActiveRoute}>
+      <ListItemLink to={'/'} title="Dashboard" getProps={isActiveRoute}>
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
         <ListItemText primary="Dashboard" />
       </ListItemLink>
-      <ListItemLink to={'/wizard'} getProps={isActiveRoute}>
+      <ListItemLink to={'/wizard'} title="Wizard" getProps={isActiveRoute}>
         <ListItemIcon>
           <PlaylistAddCheck />
         </ListItemIcon>
         <ListItemText primary="Wizard" />
       </ListItemLink>
-      <ListItemLink to={'/visualisations'} getProps={isActiveRoute}>
+      <ListItemLink
+        to={'/visualisations'}
+        titus="Visualisations"
+        getProps={isActiveRoute}
+      >
         <ListItemIcon>
           <InsertChart />
         </ListItemIcon>
         <ListItemText primary="Visualisations" />
       </ListItemLink>
-      <ListItemLink to={'/tables'} getProps={isActiveRoute}>
+      <ListItemLink to={'/tables'} title="Tables" getProps={isActiveRoute}>
         <ListItemIcon>
           <TablesIcon />
         </ListItemIcon>
         <ListItemText primary="Tables" />
       </ListItemLink>
-      <ListItemLink to={'/autocomplete'} getProps={isActiveRoute}>
+      <ListItemLink
+        to={'/autocomplete'}
+        title="Autocomplete"
+        getProps={isActiveRoute}
+      >
         <ListItemIcon>
           <AutocompleteIcon />
         </ListItemIcon>
@@ -64,25 +76,31 @@ const Menu = () => {
         </ListItemIcon>
         <ListItemText primary="API" />
       </ListItemLink>
-      <ListItemLink to={'/search'} getProps={isActiveRoute}>
+      <ListItemLink to={'/temporal'} title="Temporal" getProps={isActiveRoute}>
+        <ListItemIcon>
+          <TemporalIcon />
+        </ListItemIcon>
+        <ListItemText primary="Temporal" />
+      </ListItemLink>
+      <ListItemLink to={'/search'} title="Search" getProps={isActiveRoute}>
         <ListItemIcon>
           <SearchIcon />
         </ListItemIcon>
         <ListItemText primary="Search" />
       </ListItemLink>
-      <ListItemLink to={'/comments'} getProps={isActiveRoute}>
+      <ListItemLink to={'/comments'} title="Comments" getProps={isActiveRoute}>
         <ListItemIcon>
           <CommentIcon />
         </ListItemIcon>
-        <ListItemText primary="COMMENTS" />
+        <ListItemText primary="Comments" />
       </ListItemLink>
-      <ListItemLink to={'/uploader'} getProps={isActiveRoute}>
+      <ListItemLink to={'/uploader'} title="Uploader" getProps={isActiveRoute}>
         <ListItemIcon>
           <CloudUploadIcon />
         </ListItemIcon>
         <ListItemText primary="Uploader" />
       </ListItemLink>
-      <ListItemLink to={'/auth'} getProps={isActiveRoute}>
+      <ListItemLink to={'/auth'} title="Authorization" getProps={isActiveRoute}>
         <ListItemIcon>
           <AuthIcon />
         </ListItemIcon>
@@ -93,6 +111,18 @@ const Menu = () => {
           <AccountCircleIcon />
         </ListItemIcon>
         <ListItemText primary="Auth0" />
+      </ListItemLink>
+      <ListItemLink to={'/theming'} title="Theming" getProps={isActiveRoute}>
+        <ListItemIcon>
+          <InvertColorsIcon />
+        </ListItemIcon>
+        <ListItemText primary="Theming" />
+      </ListItemLink>
+      <ListItemLink to={'/translations'} getProps={isActiveRoute}>
+        <ListItemIcon>
+          <LanguageIcon />
+        </ListItemIcon>
+        <ListItemText primary="Translations" />
       </ListItemLink>
     </List>
   )

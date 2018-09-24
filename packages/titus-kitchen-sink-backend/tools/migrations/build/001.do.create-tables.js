@@ -19,6 +19,14 @@ module.exports.generateSql = function () {
           food_group_id char(36) NOT NULL references food_group(id),
           PRIMARY KEY (id)
       );
+      ALTER TABLE food
+        ADD COLUMN sys_period tstzrange NOT NULL DEFAULT tstzrange(current_timestamp, null);
+      CREATE TABLE food_history (LIKE food);
+      CREATE TRIGGER food_versioning_trigger
+        BEFORE INSERT OR UPDATE OR DELETE ON food
+        FOR EACH ROW EXECUTE PROCEDURE versioning(
+        'sys_period', 'food_history', true
+        );
       CREATE TABLE diet_type
       (
           id char(36) NOT NULL DEFAULT gen_random_uuid(),
