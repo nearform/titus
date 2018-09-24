@@ -14,7 +14,7 @@ It is made up of the following key components:
 
 ## Demo
 
-In titus-kitchen-sink there is a demo of how to use the Wizard component. It shows a simple Wizard with 6 WizardSteps that rendering 2 sample components `<SimpleStep>` and `<SummaryStep>`, both of which supply props to the wizard and are dynamically wired up by the Wizard with data and events. In a real application, each step would most likely have its own component that conform to the Wizard implementation.
+In titus-frontend there is a demo of how to use the Wizard component. It shows a simple Wizard with 6 WizardSteps that rendering 2 sample components `<SimpleStep>` and `<SummaryStep>`, both of which supply props to the wizard and are dynamically wired up by the Wizard with data and events. In a real application, each step would most likely have its own component that conform to the Wizard implementation.
 
 This demonstrates how to set up the Wizard with steps and wires up the events such as handleSatisfied and handleDataChanged.
 

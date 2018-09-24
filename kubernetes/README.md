@@ -6,8 +6,8 @@ called `kitchen sink` based on the [Titus framework](https://github.com/nearform
 This demo app has two components, a `frontend` React app and (backend) `api`
 based on Node.js that is called by the frontend for certain functions.
 
-The code for the `frontend` can be found in [packages/titus-kitchen-sink](https://github.com/nearform/titus/tree/master/packages/titus-kitchen-sink)
-and the code for the `api` can be found in [packages/titus-kitchen-sink-backend](https://github.com/nearform/titus/tree/master/packages/titus-starter-backend).
+The code for the `frontend` can be found in [packages/titus-frontend](https://github.com/nearform/titus/tree/master/packages/titus-frontend)
+and the code for the `api` can be found in [packages/titus-backend](https://github.com/nearform/titus/tree/master/packages/titus-backend).
 
 ## CI
 
@@ -20,8 +20,8 @@ in the `frontend` container. It will also package the API code in the `backend` 
 After it is done building them it will push them to private ECR (ECS) registries under
 the nearForm AWS account:
 
-https://console.aws.amazon.com/ecs/home?region=us-east-1#/repositories/titus-kitchen-sink-frontend
-https://console.aws.amazon.com/ecs/home?region=us-east-1#/repositories/titus-kitchen-sink-backend
+https://console.aws.amazon.com/ecs/home?region=us-east-1#/repositories/titus-frontend-frontend
+https://console.aws.amazon.com/ecs/home?region=us-east-1#/repositories/titus-backend
 
 ## Database and data
 
@@ -31,7 +31,7 @@ the API, we have chosen to host the database in a container as well, in the Kube
 This container has been manually built, populated with demo data and pushed to a
 private ECR (ECS) registry:
 
-https://console.aws.amazon.com/ecs/home?region=us-east-1#/repositories/titus-kitchen-sink-db
+https://console.aws.amazon.com/ecs/home?region=us-east-1#/repositories/titus-frontend-db
 
 ## Application hosting
 

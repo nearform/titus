@@ -27,7 +27,7 @@ jobs:
           name: Build the production frontend bundle
           command: |
             set -e
-            cd packages/titus-kitchen-sink
+            cd packages/titus-frontend
             mv .env.prod .env
             npm run build
       - persist_to_workspace:
@@ -53,8 +53,8 @@ jobs:
           at: .
       - run: npm run lighthouse
       - store_artifacts:
-          path: packages/titus-kitchen-sink/lighthouse-report.html
-          destination: titus-kitchen-sink-lighthouse-report.html
+          path: packages/titus-frontend/lighthouse-report.html
+          destination: titus-frontend-lighthouse-report.html
   push-containers:
     <<: *defaults
     environment:
@@ -75,15 +75,15 @@ jobs:
           name: Build the frontend Docker containers
           command: |
             set -e
-            cd packages/titus-kitchen-sink
-            docker build -t ${DOCKER_REPO}/titus-kitchen-sink-frontend:latest -f docker/Dockerfile .
+            cd packages/titus-frontend
+            docker build -t ${DOCKER_REPO}/titus-frontend-frontend:latest -f docker/Dockerfile .
       - run:
           name: Build the backend Docker containers
           command: |
             set -e
-            cd packages/titus-kitchen-sink-backend/
+            cd packages/titus-backend/
             mv config/prod.js config/default.js
-            docker build -t ${DOCKER_REPO}/titus-kitchen-sink-backend:latest -f docker/api/Dockerfile.prod .
+            docker build -t ${DOCKER_REPO}/titus-backend:latest -f docker/api/Dockerfile.prod .
       - run:
           name: Push the Docker containers to the registry
           command: |
@@ -92,10 +92,10 @@ jobs:
             eval $(aws ecr get-login --no-include-email --region us-east-1)
             # Push the frontend container
             echo -e "Pushing the frontend container\n"
-            docker push ${DOCKER_REPO}/titus-kitchen-sink-frontend:latest
+            docker push ${DOCKER_REPO}/titus-frontend-frontend:latest
             # Push the backend container
             echo -e "Pushing the backend container\n"
-            docker push ${DOCKER_REPO}/titus-kitchen-sink-backend:latest
+            docker push ${DOCKER_REPO}/titus-backend:latest
 workflows:
   version: 2
   test_and_build:

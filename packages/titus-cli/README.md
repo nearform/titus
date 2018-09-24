@@ -5,6 +5,7 @@ A command line application to work with Titus
 ## Features
 
 * `init` command to initialise a new Titus application.
+* `clean` command to cleanup a failed attempt to initialise a new Titus application (e.g. due to a network/git issue)
 * The ability to choose between a Titus application for the backend, frontend or both.
 
 ## Installation

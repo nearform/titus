@@ -39,7 +39,7 @@ spec:
     spec:
       containers:
       - name: titus-frontend
-        image: 711655675495.dkr.ecr.us-east-1.amazonaws.com/titus-kitchen-sink-frontend:latest
+        image: 711655675495.dkr.ecr.us-east-1.amazonaws.com/titus-frontend-frontend:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -74,7 +74,7 @@ spec:
     spec:
       containers:
       - name: titus-backend
-        image: 711655675495.dkr.ecr.us-east-1.amazonaws.com/titus-kitchen-sink-backend:latest
+        image: 711655675495.dkr.ecr.us-east-1.amazonaws.com/titus-backend:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
@@ -169,7 +169,7 @@ spec:
         spec:
           containers:
           - name: titus-db
-            image: 711655675495.dkr.ecr.us-east-1.amazonaws.com/titus-kitchen-sink-db:latest
+            image: 711655675495.dkr.ecr.us-east-1.amazonaws.com/titus-frontend-db:latest
             imagePullPolicy: Always
             ports:
             - containerPort: 5432
