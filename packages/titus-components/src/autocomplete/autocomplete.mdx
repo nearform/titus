@@ -1,0 +1,29 @@
+---
+name: Autocomplete
+route: /autocomplete
+---
+
+import { Playground, PropsTable } from 'docz'
+import Autocomplete from './autocomplete'
+import { countries } from './stories/countries'
+
+# Autocomplete
+
+The Autocomplete component provides typical autocompletion features using Material-UI and [downshift](https://github.com/paypal/downshift).
+
+It supports synchronous and asynchronous loading of list items.
+
+## Properties
+
+<PropsTable of={Autocomplete} />
+
+## Basic usage
+
+This section shows how to use the Autocomplete component.
+
+<Playground>
+  <Autocomplete
+    placeholder="I am a placeholder"
+    data={countries}
+  />
+</Playground>

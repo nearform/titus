@@ -13,6 +13,9 @@
 # storybook
 /storybook-static
 
+# docz
+.docz
+
 # misc
 .DS_Store
 .env.local

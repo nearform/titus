@@ -5,6 +5,7 @@ import MaterialDownshift from './material/material-downshift'
 
 class Autocomplete extends React.Component {
   static propTypes = {
+    /** Some description */
     data: PropTypes.array,
     onInputChange: PropTypes.func,
     onChange: PropTypes.func,
