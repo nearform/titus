@@ -26,10 +26,6 @@
   --sidebar-nav-link-border-color--active: var(--blue);
 }
 
-.app-name-link img {
-  width: 100px;
-}
-
 .github-corner svg {
   color: var(--supersplit);
 }
