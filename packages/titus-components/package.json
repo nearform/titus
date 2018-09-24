@@ -72,6 +72,8 @@
     "react-dnd-test-backend": "^5.0.1",
     "react-dom": "^16.5.2",
     "react-testing-library": "^4.0.2",
+    "remark-bookmarks": "^1.0.0",
+    "remark-external-links": "^3.0.0",
     "webpack": "^4.19.1"
   },
   "license": "Apache-2.0",

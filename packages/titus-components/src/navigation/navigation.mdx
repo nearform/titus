@@ -1,0 +1,40 @@
+---
+name: Navigation
+route: /navigation
+---
+
+import { Playground, PropsTable } from 'docz'
+import Navigation, { Navigation as NavigationBase } from './navigation'
+import { DrawerItems, HeaderRight, NavigationContent } from './stories/navigation.story'
+
+# Navigation
+
+The Navigation component provides a typical page layout with a header, a left side drawer and a main content area, all built on top of [Material UI] lower-level components.
+
+## Properties
+
+<PropsTable of={NavigationBase} />
+
+## Typings Definitions
+
+```ts
+import { StyledComponentProps } from '@material-ui/core/styles'
+
+export interface NavigationProps extends StyledComponentProps {
+  title: string
+  items: React.ReactNode
+  children: React.ReactNode
+  headerRight?: React.ReactNode
+}
+```
+
+## Usage
+
+<Playground>
+  <Navigation
+    title="Sample navigation"
+    items={<DrawerItems />}
+    headerRight={HeaderRight}>
+    <NavigationContent />
+  </Navigation>
+</Playground>

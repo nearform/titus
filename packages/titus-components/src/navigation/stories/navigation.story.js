@@ -9,42 +9,37 @@ import Dashboard from '@material-ui/icons/Dashboard'
 
 import Navigation from '../navigation'
 
-function DrawerItems () {
+export function DrawerItems() {
   return (
     <List>
       <ListItem>
         <ListItemIcon>
           <Dashboard />
         </ListItemIcon>
-        <ListItemText>
-          navigation link
-        </ListItemText>
+        <ListItemText>navigation link</ListItemText>
       </ListItem>
     </List>
   )
 }
 
-function HeaderRight (props) {
+export function HeaderRight(props) {
   return (
-    <div {...props} style={{marginRight: 10}}>
+    <div {...props} style={{ marginRight: 10 }}>
       <Face />
     </div>
   )
 }
 
-function NavigationContent () {
-  return (
-    <div>navigation content</div>
-  )
+export function NavigationContent() {
+  return <div>navigation content</div>
 }
 
-storiesOf('Navigation', module)
-  .add('default', () => (
-    <Navigation
-      title="Sample navigation"
-      items={<DrawerItems />}
-      headerRight={HeaderRight}
-    >
-      <NavigationContent />
-    </Navigation>
-  ))
+storiesOf('Navigation', module).add('default', () => (
+  <Navigation
+    title="Sample navigation"
+    items={<DrawerItems />}
+    headerRight={HeaderRight}
+  >
+    <NavigationContent />
+  </Navigation>
+))

@@ -6,7 +6,13 @@ import TextField from '@material-ui/core/TextField'
 
 import Wizard from '../wizard'
 
-function SimpleStep ({handleSatisfied, stepIndex, handleDataChanged, required, data: { value } }) {
+export function SimpleStep({
+  handleSatisfied,
+  stepIndex,
+  handleDataChanged,
+  required,
+  data: { value }
+}) {
   const formRef = React.createRef()
 
   const onChange = ({ target: { value } }) => {
@@ -26,18 +32,18 @@ function SimpleStep ({handleSatisfied, stepIndex, handleDataChanged, required, d
   )
 }
 
-function FinalStep ({ stepsData, stepsInfo }) {
+export function FinalStep({ stepsData, stepsInfo }) {
   return (
     <ul>
       {stepsInfo.slice(0, -1).map(({ title, description }, index) => (
         <li key={index}>
-          {index + 1}.  {title} - {description}: <code>{JSON.stringify(stepsData[index])}</code>
+          {index + 1}. {title} - {description}:{' '}
+          <code>{JSON.stringify(stepsData[index])}</code>
         </li>
       ))}
     </ul>
   )
 }
-
 
 const stories = storiesOf('Wizard', module)
 
@@ -48,7 +54,10 @@ stories.add('default', () => (
     onFinish={action('wizard finish')}
     title={text('Wizard Title', 'Wizard Story')}
     finishedMessage={text('Wizard finished message', 'Wizard complete')}
-    defaultRequiredMessage={text('Default required message', 'A default required message')}
+    defaultRequiredMessage={text(
+      'Default required message',
+      'A default required message'
+    )}
   >
     <SimpleStep
       id="step1"

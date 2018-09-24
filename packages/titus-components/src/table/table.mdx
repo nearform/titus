@@ -1,0 +1,42 @@
+---
+name: Table
+route: /table
+---
+
+import { Playground, PropsTable } from 'docz'
+import Table from './table'
+import { columns, rows } from './stories/dessert-nutrients'
+
+# Table
+
+The Table component provides an easy to use table built on top of the [@nearform/react-table] component, along with the [Material UI] Table component.
+
+## Properties
+
+<PropsTable of={Table} />
+
+For the shape of `rows` and `columns` properties, see [@nearform/react-table].
+
+## Typings Definitions
+
+```ts
+export interface TableProps {
+  title?: string
+  rows?: Array<object>
+  columns?: Array<object>
+  pageSize?: number
+  pageSizeOptions?: Array<number>
+  onDelete?: (selected: object) => void
+}
+```
+
+## Usage
+
+<Playground>
+  <Table
+    title="Dessert nutrients"
+    columns={columns}
+    rows={rows}
+    onDelete={console.log}
+  />
+</Playground>

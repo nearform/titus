@@ -1,0 +1,42 @@
+---
+name: Uploader
+route: /uploader
+menu: Uploader
+---
+
+import { Playground, PropsTable } from 'docz'
+import Uploader, { Uploader as UploaderBase } from './uploader'
+import { service } from './stories/uploader.story'
+
+# Uploader
+
+The Uploader component provides and easy to use way to upload files to a backend by pulling together the [react-dnd] library and [Material UI] components.
+
+In order to use this component, you must first initialize an [UploaderService](/uploader-service).
+
+## Properties
+
+<PropsTable of={UploaderBase} />
+
+## Typings definitions
+
+```ts
+export interface UploaderProps {
+  maxItems?: number
+  service?: object
+  logger?: object
+  onUploadDone?: (file: object) => void
+  onUploadError?: (error: any, file: object) => void
+}
+```
+
+## Usage
+
+<Playground>
+  <Uploader
+    maxItems={1}
+    service={service}
+    onUploadDone={console.log}
+    onUploadError={console.log}
+  />
+</Playground>

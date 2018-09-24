@@ -6,7 +6,7 @@ import { FileUploaderContext } from './FileUploaderContext'
 
 import UploaderContainer from './material/UploaderContainer'
 
-class Uploader extends React.Component {
+export class Uploader extends React.Component {
   constructor(props) {
     super(props)
 
