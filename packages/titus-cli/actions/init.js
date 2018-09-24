@@ -5,11 +5,11 @@ const kebabCase = require('lodash.kebabcase')
 const ora = require('ora')
 const git = require('simple-git/promise')()
 
-const REPO_URL = 'git@github.com:nearform/titus.git'
+const REPO_URL =
+  process.env.TITUS_REPO_URL || 'git@github.com:nearform/titus.git'
 
-module.exports = async (input, { hapi, react }) => {
-  const projectDir = kebabCase(input)
-
+module.exports = async (input, { backend, frontend }) => {
+  const projectDir = kebabCase(input) // require('path').join(process.cwd(), kebabCase(input))
   const spinner = ora()
 
   const tmpDir = `.${projectDir}-tmp`
@@ -19,48 +19,54 @@ module.exports = async (input, { hapi, react }) => {
     await git.clone(REPO_URL, tmpDir)
     spinner.succeed('Pulled files from GitHub')
 
-    if (react) {
+    if (frontend) {
       spinner
         .render()
-        .start(`Setting up app in ${chalk.cyan.bold(`${projectDir}-app`)}`)
-      await fs.copy(`${tmpDir}/packages/titus-starter`, `${projectDir}-app`)
+        .start(`Setting up app in ${chalk.cyan.bold(`${projectDir}-frontend`)}`)
+      await fs.copy(
+        `${tmpDir}/packages/titus-frontend`,
+        `${projectDir}-frontend`
+      )
       const packageJson = await fs.readFile(
-        `${projectDir}-app/package.json`,
+        `${projectDir}-frontend/package.json`,
         'utf8'
       )
       const newPackageJson = packageJson.replace(
-        /titus-starter/,
-        `${projectDir}-app`
+        /titus-frontend/,
+        `${projectDir}-frontend`
       )
-      await fs.writeFile(`${projectDir}-app/package.json`, newPackageJson)
-      spinner.succeed(`App setup in ${chalk.cyan.bold(`${projectDir}-app`)}`)
+      await fs.writeFile(`${projectDir}-frontend/package.json`, newPackageJson)
+      spinner.succeed(
+        `App setup in ${chalk.cyan.bold(`${projectDir}-frontend`)}`
+      )
     }
 
-    if (hapi) {
+    if (backend) {
       spinner
         .render()
-        .start(`Setting up api in ${chalk.cyan.bold(`${projectDir}-api`)}`)
-      await fs.copy(
-        `${tmpDir}/packages/titus-starter-backend`,
-        `${projectDir}-api`
-      )
+        .start(
+          `Setting up backend in ${chalk.cyan.bold(`${projectDir}-backend`)}`
+        )
+      await fs.copy(`${tmpDir}/packages/titus-backend`, `${projectDir}-backend`)
       const packageJson = await fs.readFile(
-        `${projectDir}-api/package.json`,
+        `${projectDir}-backend/package.json`,
         'utf8'
       )
       const newPackageJson = packageJson
-        .replace(/titus-starter-backend/, `${projectDir}-api`)
+        .replace(/titus-backend/, `${projectDir}-backend`)
         .replace(/titus/g, projectDir)
-      await fs.writeFile(`${projectDir}-api/package.json`, newPackageJson)
+      await fs.writeFile(`${projectDir}-backend/package.json`, newPackageJson)
 
       const envFile = await fs.readFile(
-        `${projectDir}-api/docker/dev.env`,
+        `${projectDir}-backend/docker/dev.env`,
         'utf8'
       )
       const newEnvFile = envFile.replace(/titus/g, projectDir)
-      await fs.writeFile(`${projectDir}-api/docker/dev.env`, newEnvFile)
+      await fs.writeFile(`${projectDir}-backend/docker/dev.env`, newEnvFile)
 
-      spinner.succeed(`Api setup in ${chalk.cyan.bold(`${projectDir}-api`)}`)
+      spinner.succeed(
+        `Backend setup in ${chalk.cyan.bold(`${projectDir}-backend`)}`
+      )
     }
 
     spinner.render().start('Clearing temporary files')
@@ -70,9 +76,9 @@ module.exports = async (input, { hapi, react }) => {
     console.log(dedent`
       \nMove to your newly created project by running:
 
-        ${react ? chalk.cyan.bold(`cd ${projectDir}-app`) : ''}${
-      react && hapi ? ` or ` : ''
-    }${hapi ? chalk.cyan.bold(`cd ${projectDir}-api`) : ''}
+        ${frontend ? chalk.cyan.bold(`cd ${projectDir}-frontend`) : ''}${
+      frontend && backend ? ` or ` : ''
+    }${backend ? chalk.cyan.bold(`cd ${projectDir}-backend`) : ''}
 
       Install the project dependencies:
 

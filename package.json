@@ -9,8 +9,8 @@
     "precommit": "lerna run --parallel format ; lerna run --parallel lint:fix",
     "prepush": "lerna run test",
     "postinstall": "lerna bootstrap",
-    "start:kitchen-sink": "lerna run --scope titus-kitchen-sink* --stream start",
-    "stop:kitchen-sink": "lerna run --scope titus-kitchen-sink* --stream stop",
+    "start:kitchen-sink": "lerna run --scope titus-frontend* --stream start",
+    "stop:kitchen-sink": "lerna run --scope titus-frontend* --stream stop",
     "lighthouse": "lerna run lighthouse"
   },
   "devDependencies": {
