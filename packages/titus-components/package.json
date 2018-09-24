@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "build": "nwb build-react-component --no-demo --copy-files",
-    "build:watch": "nodemon -w src -x 'npm run build'",
+    "build:watch": "nodemon -e js,ts -w src -x 'npm run build'",
     "clean": "nwb clean-module && nwb clean-demo",
     "start": "nwb serve-react-demo",
     "test": "jest --coverage --runInBand",
@@ -28,6 +28,7 @@
     "@material-ui/icons": "^1.1.0",
     "@nearform/commentami-react-components": "^1.0.4",
     "@nearform/react-table": "^1.0.6",
+    "@types/reach__router": "^1.0.1",
     "aws-sdk": "^2.286.2",
     "downshift": "^2.0.10",
     "nodemon": "^1.17.5",
