@@ -17,16 +17,18 @@ export class AuthProvider extends React.Component {
   }
 
   login = ({ username, password }) => {
-    this.props.authentication.login({ username, password }).then(user => {
-      this.setState({
-        isAuthenticated: this.props.authentication.isAuthenticated(),
-        user
+    return this.props.authentication
+      .login({ username, password })
+      .then(user => {
+        this.setState({
+          isAuthenticated: this.props.authentication.isAuthenticated(),
+          user
+        })
       })
-    })
   }
 
   logout = () => {
-    this.props.authentication.logout().then(result => {
+    return this.props.authentication.logout().then(result => {
       result &&
         this.setState({
           isAuthenticated: this.props.authentication.isAuthenticated(),

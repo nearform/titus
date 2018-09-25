@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, fireEvent, cleanup, wait } from 'react-testing-library'
 
-import { Login } from './login'
+import Login from './login'
 import { AuthContext } from '../authentication/authentication-context'
 
 // automatically unmount and cleanup DOM after the test is finished.

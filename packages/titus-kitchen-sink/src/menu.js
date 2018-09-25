@@ -4,7 +4,7 @@ import { ListItemLink } from '@nearform/titus-components'
 import List from '@material-ui/core/List'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
-
+import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import DashboardIcon from '@material-ui/icons/Dashboard'
 import PlaylistAddCheck from '@material-ui/icons/PlaylistAddCheck'
 import InsertChart from '@material-ui/icons/InsertChart'
@@ -44,7 +44,11 @@ const Menu = () => {
         </ListItemIcon>
         <ListItemText primary="Wizard" />
       </ListItemLink>
-      <ListItemLink to={'/visualisations'} titus="Visualisations" getProps={isActiveRoute}>
+      <ListItemLink
+        to={'/visualisations'}
+        titus="Visualisations"
+        getProps={isActiveRoute}
+      >
         <ListItemIcon>
           <InsertChart />
         </ListItemIcon>
@@ -56,7 +60,11 @@ const Menu = () => {
         </ListItemIcon>
         <ListItemText primary="Tables" />
       </ListItemLink>
-      <ListItemLink to={'/autocomplete'} title="Autocomplete" getProps={isActiveRoute}>
+      <ListItemLink
+        to={'/autocomplete'}
+        title="Autocomplete"
+        getProps={isActiveRoute}
+      >
         <ListItemIcon>
           <AutocompleteIcon />
         </ListItemIcon>
@@ -97,6 +105,12 @@ const Menu = () => {
           <AuthIcon />
         </ListItemIcon>
         <ListItemText primary="Authorization" />
+      </ListItemLink>
+      <ListItemLink to={'/auth0/login'} getProps={isActiveRoute}>
+        <ListItemIcon>
+          <AccountCircleIcon />
+        </ListItemIcon>
+        <ListItemText primary="Auth0" />
       </ListItemLink>
       <ListItemLink to={'/theming'} title="Theming" getProps={isActiveRoute}>
         <ListItemIcon>
