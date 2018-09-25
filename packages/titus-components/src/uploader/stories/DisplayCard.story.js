@@ -9,7 +9,7 @@ const Cell = ({ children }) => (
   <div style={{ marginBottom: '10px', marginRight: '10px' }}>{children}</div>
 )
 
-storiesOf('UploadDisplayCard', module).add('default', () => (
+storiesOf('Uploader/DisplayCard', module).add('default', () => (
   <GridList cellHeight={180}>
     <Cell>
       <DisplayCard

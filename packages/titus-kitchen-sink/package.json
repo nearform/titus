@@ -57,6 +57,7 @@
     "@storybook/react": "^3.4.7",
     "babel-core": "^6.26.3",
     "babel-eslint": "^7.2.3",
+    "babel-plugin-import-graphql": "^2.6.2",
     "babel-runtime": "^6.26.0",
     "create-react-class": "^15.6.3",
     "eslint": "^4.1.1",
