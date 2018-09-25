@@ -50,9 +50,12 @@ export const linkStyle = ({ colors }) => css`
     color: ${colors.sidebarText};
   }
 
-  &:hover,
+  &:hover {
+    color: ${colors.linkHover};
+  }
+
   &.active {
-    color: ${colors.primary};
+    color: ${colors.link};
     font-weight: 600;
   }
 `

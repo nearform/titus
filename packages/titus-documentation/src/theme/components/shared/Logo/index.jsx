@@ -39,7 +39,7 @@ const LogoText = styled('h1')`
   font-size: 24px;
   font-weight: 600;
   letter-spacing: -0.015em;
-  color: ${p => p.theme.docz.colors.text};
+  color: ${p => p.theme.docz.colors.midnightBlue};
 `
 
 export const Logo = ({ showBg }) => (

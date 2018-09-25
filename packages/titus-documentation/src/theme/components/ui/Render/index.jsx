@@ -49,7 +49,7 @@ const PlaygroundWrapper = styled('div')`
   flex: 1;
   border-radius: 4px 4px 0 0;
   border: 1px solid ${p => p.theme.docz.colors.border};
-  background: ${p => p.theme.docz.colors.background};
+  background: ${p => p.theme.docz.colors.playgroundBg};
   min-height: ${whenFullscreen('198px', 'auto')};
   ${p => p.theme.docz.mq(p.theme.docz.styles.playground)};
 `

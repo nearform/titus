@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "test": "exit 0",
-    "copy": "cp public/{favicon.png,logo-white.svg} ../../docz/static/img",
+    "copy": "cp public/{favicon.png,logo.svg} ../../docz/static/img",
     "docz:dev": "docz dev",
     "docz:build": "docz build && npm run copy",
     "lint": "eslint src",

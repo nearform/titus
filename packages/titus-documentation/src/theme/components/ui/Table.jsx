@@ -15,7 +15,7 @@ const TableStyled = styled('table')`
   padding: 0;
   table-layout: auto;
   box-shadow: 0 0 0 1px ${p => p.theme.docz.colors.border};
-  background-color: transparent;
+  background-color: ${p => p.theme.docz.colors.tableBg};
   border-spacing: 0;
   border-collapse: collapse;
   border-style: hidden;

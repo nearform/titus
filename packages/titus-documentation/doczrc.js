@@ -48,46 +48,36 @@ export default {
   // base: '/titus/',
   hashRouter: true,
   repository: 'https://github.com/nearform/titus',
+  indexHtml: 'src/index.html',
   htmlContext: {
     favicon: '/static/img/favicon.png'
   },
-  theme: 'src/theme/index',
-  // theme: 'dist/src/theme/index',
-  modifyBundlerConfig: config => {
-    config.resolve.alias = Object.assign({}, config.resolve.alias, {
-      '@fonts': `${PUBLIC}/fonts`,
-      '@images': `${PUBLIC}/images`,
-      '@components': `${SRC}/theme/components`,
-      '@styles': `${SRC}/theme/styles`
-    })
-
-    return config
+  // theme: 'src/theme/index',
+  themeConfig: {
+    logo: {
+      src: '/static/img/logo.svg'
+    },
+    colors: {
+      primary: nearformTheme.colors.blue,
+      text: nearformTheme.colors.sand4,
+      link: nearformTheme.colors.blue,
+      background: nearformTheme.colors.sand1,
+      sidebarBg: '#f7f7f7',
+      sidebarText: nearformTheme.colors.sand4
+    },
+    styles: {
+      h1: {
+        color: nearformTheme.colors.midnightBlue
+      },
+      h2: {
+        color: nearformTheme.colors.supersplit
+      },
+      h3: {
+        color: nearformTheme.colors.brunchPink
+      },
+      h4: {
+        color: nearformTheme.colors.bubblegum
+      }
+    }
   }
-  // themeConfig: {
-  //   logo: {
-  //     src: '/static/img/logo.svg'
-  //   },
-  //   colors: {
-  //     primary: nearformTheme.colors.midnightBlue,
-  //     text: nearformTheme.colors.sand4,
-  //     link: nearformTheme.colors.blue,
-  //     background: nearformTheme.colors.sand1,
-  //     sidebarBg: '#f7f7f7',
-  //     sidebarText: nearformTheme.colors.sand4
-  //   },
-  //   styles: {
-  //     h1: {
-  //       color: nearformTheme.colors.midnightBlue
-  //     },
-  //     h2: {
-  //       color: nearformTheme.colors.supersplit
-  //     },
-  //     h3: {
-  //       color: nearformTheme.colors.brunchPink
-  //     },
-  //     h4: {
-  //       color: nearformTheme.colors.bubblegum
-  //     }
-  //   }
-  // }
 }

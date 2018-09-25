@@ -1,3 +1,5 @@
+import * as colors from './colors'
+
 export const styles = {
   body: {
     fontFamily: "'Source Sans Pro', Helvetica, sans-serif",
@@ -12,23 +14,27 @@ export const styles = {
     margin: ['30px 0 20px', '60px 0 20px', '40px 0'],
     fontSize: [36, 42, 48],
     fontWeight: 100,
-    letterSpacing: '-0.02em'
+    letterSpacing: '-0.02em',
+    color: colors.midnightBlue
   },
   h2: {
     margin: ['20px 0 20px', '35px 0 20px'],
     lineHeight: ['1.2em', '1.5em'],
     fontSize: 28,
     fontWeight: 600,
-    letterSpacing: '-0.02em'
+    letterSpacing: '-0.02em',
+    color: colors.supersplit
   },
   h3: {
     margin: '25px 0 10px',
     fontSize: [22, 24],
-    fontWeight: 400
+    fontWeight: 400,
+    color: colors.brunchPink
   },
   h4: {
     fontSize: 20,
-    fontWeight: 400
+    fontWeight: 400,
+    color: colors.bubblegum
   },
   h5: {
     fontSize: 18,

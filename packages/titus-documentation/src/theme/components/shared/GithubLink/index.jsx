@@ -34,8 +34,8 @@ const Link = styled('a')`
 
 const Svg = styled('svg')`
   z-index: 99;
-  fill: ${p => p.theme.docz.colors.primary};
-  color: ${p => p.theme.docz.colors.background};
+  fill: ${p => p.theme.docz.colors.link};
+  color: ${p => p.theme.docz.colors.linkHover};
   position: absolute;
   top: 0;
   border: 0;
