@@ -19,16 +19,14 @@ class SimpleStep extends React.Component {
   render() {
     const { required, data } = this.props
     return (
-      <React.Fragment>
-        <TextField
-          id="comment"
-          label="Comment"
-          required={required}
-          value={data.comment ? data.comment : ''}
-          onChange={this.handleChange}
-          margin="normal"
-        />
-      </React.Fragment>
+      <TextField
+        id="comment"
+        label="Comment"
+        required={required}
+        value={data.comment ? data.comment : ''}
+        onChange={this.handleChange}
+        margin="normal"
+      />
     )
   }
 }

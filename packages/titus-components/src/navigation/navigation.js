@@ -89,7 +89,7 @@ const styles = theme => ({
   }
 })
 
-class Navigation extends Component {
+export class Navigation extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
     classes: PropTypes.object.isRequired,

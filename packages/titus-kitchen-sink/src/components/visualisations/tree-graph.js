@@ -11,28 +11,33 @@ import RefreshIcon from '@material-ui/icons/Refresh'
 import Button from '@material-ui/core/Button'
 import Tooltip from '@material-ui/core/Tooltip'
 
-// Generate a nice random tree of silly names. If your name appears here, I apologise.
 const generateTree = ({ depth = 4, maxChildren = 2, prev }) => {
   if (depth === 0) {
     return
   }
+
   const newNode = {
     id: uuid.v4(),
     name: generateName(),
     children: [],
     _children: []
   }
+  
   if (prev) prev.children.push(newNode)
+  
   const noOfChildren = Math.floor(Math.random() * maxChildren + 1)
+  
   for (let i = 0; i < noOfChildren; ++i) {
     generateTree({ depth: depth - 1, maxChildren, prev: newNode })
   }
+  
   return newNode
 }
 
 class TreeGraph extends React.Component {
   constructor(props) {
     super(props)
+
     this.state = {}
     this.containerRef = React.createRef()
   }
@@ -63,6 +68,7 @@ class TreeGraph extends React.Component {
     // Hidden childen are saved in data._children prop of the node
     const containsChildren =
       node.data.children.length > 0 || node.data._children.length > 0
+
     return (
       <Group top={node.y} left={node.x}>
         {node.depth === 0 && (
@@ -189,6 +195,7 @@ class TreeGraph extends React.Component {
     let updateHeight = updateWidth * 0.4
     this.setState({ width: updateWidth, height: updateHeight })
   }
+
   render() {
     const padding = {
       top: 20,
@@ -198,6 +205,7 @@ class TreeGraph extends React.Component {
     }
 
     const data = hierarchy(this.state.data || [])
+    
     return (
       <div
         ref={this.containerRef}

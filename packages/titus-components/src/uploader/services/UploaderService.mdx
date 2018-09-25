@@ -1,0 +1,59 @@
+---
+name: UploaderService
+menu: titus-components
+route: /titus-components/uploader-service
+---
+
+# UploaderService
+
+UploaderService handles uploading files into [AWS](https://aws.amazon.com/).
+
+## Typings Definitions
+
+```ts
+export interface UploaderServiceOptions {
+  awsConfig?: object
+  bucket: string
+  getParams?: (file: object) => object
+  getTags?: (file: object) => Array<{ Key: string; Value: string }>
+}
+```
+
+## Example
+
+```js
+const awsConfig = {
+  accessKeyId: '',
+  secretAccessKey: '',
+  region: '',
+  computeChecksums: false,
+  sslEnabled: false,
+  s3ForcePathStyle: true,
+  s3: {
+    endpoint: '',
+    s3BucketEndpoint: false,
+    computeChecksums: false
+  }
+}
+
+function getParams(file) {
+  return {
+    Key: file.id,
+    Body: file.orig,
+    ContentType: file.type,
+    Metadata: { 'original-name': file.name }
+  }
+}
+
+// TODO Tags are currently disabled due an access S3 policies issue
+function getTags(file) {
+  return [{ Key: 'OriginalName', Value: file.name }]
+}
+
+const service = new UploaderService({
+  awsConfig,
+  bucket: 'name-of-your-bucket',
+  getParams,
+  getTags
+})
+```

@@ -57,6 +57,10 @@ lerna bootstrap
 
 Individual sub-packages are built during the bootstrap process.
 
+### kitchen-sink sample application
+
+This repository includes a sample application showcasing the features availabe in Titus and third party libraries. The documentation can be found [here](https://nearform.github.io/titus).
+
 ### Convenience Scripts
 
 Some commands have been added to the root package for convenience.
