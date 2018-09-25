@@ -20,6 +20,21 @@ const bookmarks = {
   Storybook: 'https://storybook.js.org/'
 }
 
+const nearformTheme = {
+  colors: {
+    blue: '#2165e5',
+    midnightBlue: '#194cac',
+    sand4: '#6d6d68',
+    sand3: '#908a8a',
+    sand2: '#a8a4a3',
+    sand1: '#f4f4f2',
+    supersplit: '#fd775e',
+    brunchPink: '#fd7a9e',
+    bubblegum: '#f9c3c0'
+  }
+}
+
+const PUBLIC = path.resolve(__dirname, 'public')
 const SRC = path.resolve(__dirname, 'src')
 const PACKAGES = path.resolve(__dirname, '../')
 const ROOT = path.resolve(__dirname, '../../')
@@ -29,17 +44,50 @@ export default {
   mdPlugins: [externalLinks.default, [remarkBookmarks, { bookmarks }]],
   src: PACKAGES,
   files: `{*/src/*.mdx,*/src/**/*.mdx}`,
-  dest: `../../docs`,
-  base: '/titus/',
+  dest: `../../docz`,
+  // base: '/titus/',
   hashRouter: true,
+  repository: 'https://github.com/nearform/titus',
+  htmlContext: {
+    favicon: '/static/img/favicon.png'
+  },
+  theme: 'src/theme/index',
+  // theme: 'dist/src/theme/index',
   modifyBundlerConfig: config => {
     config.resolve.alias = Object.assign({}, config.resolve.alias, {
-      // '@fonts': `${PUBLIC}/fonts`,
-      // '@images': `${PUBLIC}/images`,
-      // '@components': `${ROOT}/packages/titus-components/es`,
+      '@fonts': `${PUBLIC}/fonts`,
+      '@images': `${PUBLIC}/images`,
+      '@components': `${SRC}/theme/components`,
       '@styles': `${SRC}/theme/styles`
     })
 
     return config
   }
+  // themeConfig: {
+  //   logo: {
+  //     src: '/static/img/logo.svg'
+  //   },
+  //   colors: {
+  //     primary: nearformTheme.colors.midnightBlue,
+  //     text: nearformTheme.colors.sand4,
+  //     link: nearformTheme.colors.blue,
+  //     background: nearformTheme.colors.sand1,
+  //     sidebarBg: '#f7f7f7',
+  //     sidebarText: nearformTheme.colors.sand4
+  //   },
+  //   styles: {
+  //     h1: {
+  //       color: nearformTheme.colors.midnightBlue
+  //     },
+  //     h2: {
+  //       color: nearformTheme.colors.supersplit
+  //     },
+  //     h3: {
+  //       color: nearformTheme.colors.brunchPink
+  //     },
+  //     h4: {
+  //       color: nearformTheme.colors.bubblegum
+  //     }
+  //   }
+  // }
 }
