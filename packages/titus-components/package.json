@@ -11,7 +11,7 @@
     "umd"
   ],
   "scripts": {
-    "build": "nwb build-react-component --no-demo",
+    "build": "nwb build-react-component --no-demo --copy-files",
     "build:watch": "nodemon -e js,ts -w src -x 'npm run build'",
     "clean": "nwb clean-module && nwb clean-demo",
     "start": "nwb serve-react-demo",
@@ -22,9 +22,7 @@
     "prepublish": "npm run build",
     "storybook": "start-storybook -p 6006 -c .storybook",
     "build:storybook:docs": "build-storybook -c .storybook -o ../../docs/components-storybook",
-    "format": "prettier --write *.js **/*.js",
-    "docz:dev": "docz dev",
-    "docz:build": "docz build"
+    "format": "prettier --write *.js **/*.js"
   },
   "dependencies": {
     "@material-ui/core": "^3.1.0",
@@ -54,7 +52,6 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "babel-runtime": "^6.26.0",
-    "docz": "^0.11.2",
     "eslint": "^4.1.1",
     "eslint-config-react-app": "^2.1.0",
     "eslint-plugin-flowtype": "^2.50.1",
@@ -72,8 +69,6 @@
     "react-dnd-test-backend": "^5.0.1",
     "react-dom": "^16.5.2",
     "react-testing-library": "^4.0.2",
-    "remark-bookmarks": "^1.0.0",
-    "remark-external-links": "^3.0.0",
     "webpack": "^4.19.1"
   },
   "license": "Apache-2.0",

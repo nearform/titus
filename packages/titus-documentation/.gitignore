@@ -7,11 +7,13 @@
 /coverage
 
 # production
-/es
-/lib
+/build
 
 # storybook
 /storybook-static
+
+#docz
+.docz
 
 # misc
 .DS_Store

@@ -1,0 +1,16 @@
+{
+  "name": "titus-documentation",
+  "version": "1.0.0",
+  "description": "Documentation for titus monorepo",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docz:dev": "docz dev",
+    "docz:build": "docz build"
+  },
+  "devDependencies": {
+    "docz": "^0.11.2",
+    "remark-bookmarks": "^1.0.0",
+    "remark-external-links": "^3.0.0"
+  }
+}
