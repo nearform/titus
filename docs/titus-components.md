@@ -8,7 +8,7 @@ It supports synchronous and asynchronous loading of list items.
 
 ## Navigation
 
-The Navigation component provides a typical page layout with a header, a left side drawer and a main content area, all built on top of Material-IU lower-level components.
+The Navigation component provides a typical page layout with a header, a left side drawer and a main content area, all built on top of Material-UI lower-level components.
 
 ## Table
 

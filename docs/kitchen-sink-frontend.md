@@ -49,11 +49,11 @@ This section shows how to use the `Autocomplete` component found in the [titus-c
 
 ## API
 
-This section showcases a more advanced exampe use of the table components and other Material-UI components. It provides a full-featured CRUD frontend over an `Apollo` server via [react-apollo](https://github.com/apollographql/react-apollo).
+This section showcases a more advanced example use of the table components and other Material-UI components. It provides a full-featured CRUD frontend over an `Apollo` server via [react-apollo](https://github.com/apollographql/react-apollo).
 
 ## Search
 
-This section shows a more advantage example use of the `Autocomplete` component found in the [titus-components](titus-components.md) package, building on top of it to implement live search over an `Apollo` server via [react-apollo](https://github.com/apollographql/react-apollo).
+This section shows a more advanced example use of the `Autocomplete` component found in the [titus-components](titus-components.md) package, building on top of it to implement live search over an `Apollo` server via [react-apollo](https://github.com/apollographql/react-apollo).
 
 ## Comments
 
