@@ -9,11 +9,13 @@ type FoodHistory {
     sysPeriod: Range!,
     foodGroup: FoodGroup!
   }
+`
 
+const range = `
 type Range {
   begin: Date!,
   end: Date!
 }
 `
 
-module.exports = [foodHistory]
+module.exports = [foodHistory, range]
