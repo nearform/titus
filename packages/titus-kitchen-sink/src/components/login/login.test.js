@@ -1,6 +1,8 @@
 import React from 'react'
 import { render, fireEvent, cleanup, wait } from 'react-testing-library'
+
 import { Login } from './login'
+import { AuthContext } from '../authentication/authentication-context'
 
 // automatically unmount and cleanup DOM after the test is finished.
 afterEach(cleanup)
@@ -26,8 +28,12 @@ describe('Login form', () => {
   })
 
   it('Validation: submitLogin fn gets executed when clicking Login and the username/password are not empty', async () => {
-    const mockFn = jest.fn()
-    const { container } = render(<Login submitLogin={mockFn} />)
+    const login = jest.fn()
+    const { container } = render(
+      <AuthContext.Provider value={{ login }}>
+        <Login />
+      </AuthContext.Provider>
+    )
 
     const form = container.querySelector('form')
     const btn = form.querySelector('button')
@@ -42,7 +48,7 @@ describe('Login form', () => {
     fireEvent.click(btn)
 
     await wait(() => {
-      expect(mockFn).toHaveBeenCalledTimes(1)
+      expect(login).toHaveBeenCalledTimes(1)
     })
   })
 })
