@@ -68,8 +68,7 @@
     "react": "^16.5.2",
     "react-dnd-test-backend": "^5.0.1",
     "react-dom": "^16.5.2",
-    "react-testing-library": "^4.0.2",
-    "webpack": "^4.19.1"
+    "react-testing-library": "^4.0.2"
   },
   "license": "Apache-2.0",
   "repository": "nearform/titus",
