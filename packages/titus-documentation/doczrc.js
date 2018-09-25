@@ -30,6 +30,7 @@ export default {
   src: PACKAGES,
   files: `{*/src/*.mdx,*/src/**/*.mdx}`,
   dest: `../../docs`,
+  base: '/titus/',
   hashRouter: true,
   modifyBundlerConfig: config => {
     config.resolve.alias = Object.assign({}, config.resolve.alias, {
