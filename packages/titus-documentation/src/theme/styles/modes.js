@@ -21,7 +21,7 @@ export const light = {
   preBg: colors.grayExtraLight,
   blockquoteBg: colors.grayExtraLight,
   blockquoteBorder: colors.grayLight,
-  blockquoteColor: colors.gray,
+  blockquoteColor: colors.gray
 }
 
 export const dark = {
@@ -44,5 +44,5 @@ export const dark = {
   preBg: colors.grayDark,
   blockquoteBg: colors.grayDark,
   blockquoteBorder: colors.gray,
-  blockquoteColor: colors.gray,
+  blockquoteColor: colors.gray
 }
