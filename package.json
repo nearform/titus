@@ -11,11 +11,9 @@
     "postinstall": "lerna bootstrap",
     "start:kitchen-sink": "lerna run --scope titus-kitchen-sink* --stream start",
     "stop:kitchen-sink": "lerna run --scope titus-kitchen-sink* --stream stop",
-    "lighthouse": "lerna run lighthouse",
-    "docsify": "docsify serve docs --port 3001"
+    "lighthouse": "lerna run lighthouse"
   },
   "devDependencies": {
-    "docsify-cli": "^4.2.1",
     "husky": "^0.14.3",
     "lerna": "^2.11.0"
   }
