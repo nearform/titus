@@ -9,12 +9,7 @@ const findByFoodId = async (pg, { id }) => {
   return {
     data: history.map(({ sysPeriod, ...rest }) => ({
       ...rest,
-      sysPeriod: sysPeriod
-        .toString()
-        .slice(1)
-        .slice(0, -1)
-        .split(',')
-        .map(s => new Date(s))
+      sysPeriod: [new Date(sysPeriod.begin), new Date(sysPeriod.end)]
     }))
   }
 }
