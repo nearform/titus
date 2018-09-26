@@ -34,28 +34,25 @@ const nearformTheme = {
   }
 }
 
-const PUBLIC = path.resolve(__dirname, 'public')
-const SRC = path.resolve(__dirname, 'src')
 const PACKAGES = path.resolve(__dirname, '../')
-const ROOT = path.resolve(__dirname, '../../')
+const base = '/titus'
 
 export default {
   description: 'This is the official documentation of @nearform/titus monorepo',
   mdPlugins: [externalLinks.default, [remarkBookmarks, { bookmarks }]],
   src: PACKAGES,
   files: `{*/src/*.mdx,*/src/**/*.mdx}`,
-  dest: `../../docz`,
-  // base: '/titus/',
+  dest: `../../docs`,
+  base: `${base}/`,
   hashRouter: true,
   repository: 'https://github.com/nearform/titus',
   indexHtml: 'src/index.html',
   htmlContext: {
-    favicon: '/static/img/favicon.png'
+    favicon: `${base}/static/img/favicon.png`
   },
-  // theme: 'src/theme/index',
   themeConfig: {
     logo: {
-      src: '/static/img/logo.svg'
+      src: `${base}/static/img/logo.svg`
     },
     colors: {
       primary: nearformTheme.colors.blue,

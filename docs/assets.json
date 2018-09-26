@@ -1,0 +1,18 @@
+{
+  "vendors.js": "/titus/static/js/vendors.75cfe226.js",
+  "app.js": "/titus/static/js/app.c1f781d9.js",
+  "titus-documentation-src-index.js": "/titus/static/js/titus-documentation-src-index.8f6d3c24.js",
+  "titus-components-src-autocomplete-autocomplete.js": "/titus/static/js/titus-components-src-autocomplete-autocomplete.e5c29742.js",
+  "titus-components-src-navigation-navigation.js": "/titus/static/js/titus-components-src-navigation-navigation.70188f80.js",
+  "titus-components-src-table-table.js": "/titus/static/js/titus-components-src-table-table.3fb64acf.js",
+  "titus-components-src-uploader-uploader.js": "/titus/static/js/titus-components-src-uploader-uploader.a33fd283.js",
+  "titus-components-src-wizard-wizard.js": "/titus/static/js/titus-components-src-wizard-wizard.4b90274d.js",
+  "titus-components-src-uploader-services-uploader-service.js": "/titus/static/js/titus-components-src-uploader-services-uploader-service.43223fdc.js",
+  "titus-documentation-src-pages-kitchen-sink-index.js": "/titus/static/js/titus-documentation-src-pages-kitchen-sink-index.15efd8a7.js",
+  "titus-documentation-src-pages-kitchen-sink-kitchen-sink-backend.js": "/titus/static/js/titus-documentation-src-pages-kitchen-sink-kitchen-sink-backend.fc7880ac.js",
+  "titus-documentation-src-pages-kitchen-sink-kitchen-sink-frontend.js": "/titus/static/js/titus-documentation-src-pages-kitchen-sink-kitchen-sink-frontend.8e4d9fa2.js",
+  "titus-documentation-src-pages-titus-components-index.js": "/titus/static/js/titus-documentation-src-pages-titus-components-index.bd206d7c.js",
+  "runtime~app.js": "/titus/static/js/runtime~app.ed85515e40bbd9b16fcf.js",
+  "static/img/baseline-cloud_upload-24px.svg": "/titus/static/img/baseline-cloud_upload-24px.0c8a0359.svg",
+  "index.html": "/titus/index.html"
+}

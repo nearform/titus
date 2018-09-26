@@ -1,6 +1,0 @@
-- [Overview](overview.md)
-- [kitchen-sink](kitchen-sink.md)
-  - [kitchen-sink-frontend](kitchen-sink-frontend.md)
-  - [kitchen-sink-backend](kitchen-sink-backend.md)
-- [titus-components](titus-components.md)
-  - [storybook](components-storybook.md)
