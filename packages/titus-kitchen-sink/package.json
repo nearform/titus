@@ -14,13 +14,18 @@
     "@vx/text": "0.0.165",
     "apollo-boost": "^0.1.10",
     "apollo-link": "^1.2.2",
+    "auth0-js": "^9.7.3",
     "cross-env": "^5.2.0",
     "fast-levenshtein": "^2.0.6",
     "graphql": "^0.13.2",
     "graphql-tag": "^2.9.2",
+    "i18next": "^11.9.0",
+    "i18next-browser-languagedetector": "^2.2.3",
+    "i18next-xhr-backend": "^1.5.1",
     "react": "^16.5.0",
     "react-apollo": "^2.1.6",
     "react-dom": "^16.5.0",
+    "react-i18next": "^7.12.0",
     "react-loadable": "^5.5.0",
     "react-scripts": "1.1.4",
     "regenerator-runtime": "^0.12.1",
@@ -52,6 +57,7 @@
     "@storybook/react": "^3.4.7",
     "babel-core": "^6.26.3",
     "babel-eslint": "^7.2.3",
+    "babel-plugin-import-graphql": "^2.6.2",
     "babel-runtime": "^6.26.0",
     "create-react-class": "^15.6.3",
     "eslint": "^4.1.1",
@@ -73,5 +79,6 @@
     "react-testing-library": "^4.1.2",
     "serve": "^10.0.0",
     "vision": "^5.4.0"
-  }
+  },
+  "proxy": "http://localhost:5000"
 }

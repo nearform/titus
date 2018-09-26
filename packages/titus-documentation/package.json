@@ -1,0 +1,20 @@
+{
+  "name": "titus-documentation",
+  "version": "1.0.0",
+  "description": "Documentation for titus monorepo",
+  "private": true,
+  "scripts": {
+    "test": "exit 0",
+    "lint": "exit 0",
+    "lint:fix": "exit 0",
+    "format": "exit 0",
+    "copy": "cp public/favicon.png public/logo.svg ../../docs/static/img",
+    "docz:dev": "docz dev",
+    "docz:build": "docz build && npm run copy"
+  },
+  "devDependencies": {
+    "docz": "^0.11.2",
+    "remark-bookmarks": "^1.0.0",
+    "remark-external-links": "^2.0.0"
+  }
+}

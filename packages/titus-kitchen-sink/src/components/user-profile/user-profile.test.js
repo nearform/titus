@@ -5,8 +5,10 @@ import {
   cleanup,
   waitForElement
 } from 'react-testing-library'
-import { UserProfile } from './user-profile'
 import 'jest-dom/extend-expect'
+
+import { UserProfile } from './user-profile'
+import { AuthContext } from '../authentication/authentication-context'
 
 // automatically unmount and cleanup DOM after the test is finished.
 afterEach(cleanup)
@@ -20,7 +22,12 @@ describe('User profile', () => {
     const user = {
       username: 'John'
     }
-    const { container } = render(<UserProfile user={user} />)
+    const { container } = render(
+      <AuthContext.Provider value={{ user }}>
+        <UserProfile />
+      </AuthContext.Provider>
+    )
+
     const btn = container.firstChild.querySelector('*>button')
 
     fireEvent.click(btn)

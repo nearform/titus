@@ -71,8 +71,29 @@ const AsyncAuthorization = Loadable({
   delay: 300,
   timeout: 10000
 })
+const AsyncAuth0Login = Loadable({
+  loader: () => import('./components/auth0/login'),
+  loading: Loading,
+  delay: 300,
+  timeout: 10000
+})
+
+const AsyncAuth0Callback = Loadable({
+  loader: () => import('./components/auth0/callback'),
+  loading: Loading,
+  delay: 300,
+  timeout: 10000
+})
+
 const AsyncTheming = Loadable({
   loader: () => import('./components/theming'),
+  loading: Loading,
+  delay: 300,
+  timeout: 10000
+})
+
+const AsyncTranslations = Loadable({
+  loader: () => import('./components/translations'),
   loading: Loading,
   delay: 300,
   timeout: 10000
@@ -91,7 +112,10 @@ const Routes = () => (
     <AsyncComments path="comments/*" />
     <AsyncUploader path="uploader/*" />
     <AsyncAuthorization path="auth/*" />
+    <AsyncAuth0Login path="auth0/login" />
+    <AsyncAuth0Callback path="auth0/callback" />
     <AsyncTheming path="theming/*" />
+    <AsyncTranslations path="translations/*" />
   </Router>
 )
 

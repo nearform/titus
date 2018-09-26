@@ -30,7 +30,7 @@ const TableRowEdit = ({ rowKey, row, onDone }) => (
             initialValues={{ name: row.name, foodGroupId: row.foodGroupId }}
             isInitialValid={() => Boolean(row.name && row.foodGroupId)}
             validationSchema={schema}
-            onSubmit={(values, { setSubmitting, setErrors }) => {
+            onSubmit={(values) => {
               const food = values
               if (
                 food.name === row.name &&

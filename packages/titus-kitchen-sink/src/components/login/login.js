@@ -1,18 +1,11 @@
 import * as yup from 'yup'
 import React from 'react'
-import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { Formik } from 'formik'
 import { Button, TextField, Typography } from '@material-ui/core'
 import { AuthConsumer } from '../authentication/authentication-context'
 
 const styles = theme => ({
-  wrapper: {
-    alignItems: 'center',
-    display: 'flex',
-    height: '100vh'
-  },
-
   form: {
     display: 'flex',
     flexDirection: 'column',
@@ -33,96 +26,114 @@ const schema = yup.object().shape({
     .required('Password is required.')
 })
 
-export const Login = ({ classes, submitLogin }) => (
+export const Login = ({ classes }) => (
   <AuthConsumer>
     {({ login }) => (
-      <Formik
-        initialValues={{
-          username: '',
-          password: ''
-        }}
-        validationSchema={schema}
-        onSubmit={(values, { setSubmitting, setErrors }) => {
-          const { username, password } = values
-
-          login({ username, password })
-        }}
-        render={({
-          values,
-          errors,
-          touched,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          isSubmitting
-        }) => (
-          <div className={classes.wrapper}>
-            <form className={classes.form} onSubmit={handleSubmit}>
-              <Typography variant="title" gutterBottom>
-                Login:
-              </Typography>
-              <Typography variant="subheading">
-                Note: Any username followed by a password with at least four
-                characters containing at least one letter or number will work.
-              </Typography>
-              <TextField
-                error={Boolean(touched.username && errors.username)}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.username}
-                required
-                id="username"
-                name="username"
-                label="Username"
-                margin="normal"
-              />
-              {touched.username &&
-                errors.username && (
-                  <Typography color="error" variant="subheading" gutterBottom>
-                    {errors.username}
-                  </Typography>
-                )}
-              <TextField
-                error={Boolean(touched.password && errors.password)}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.password}
-                required
-                id="password"
-                name="password"
-                label="Password"
-                type="password"
-                margin="normal"
-              />
-              {touched.password &&
-                errors.password && (
-                  <Typography color="error" variant="subheading" gutterBottom>
-                    {errors.password}
-                  </Typography>
-                )}
-              <Button
-                disabled={isSubmitting}
-                variant="contained"
-                color="primary"
-                type="submit"
-              >
-                Login
-              </Button>
-            </form>
-          </div>
-        )}
-      />
+      <div className={classes.root}>
+        <LoginForm
+          login={login}
+          schema={schema}
+          header={`Login:`}
+          subheader={`Note: Any username followed by a password with at least four
+              characters containing at least one letter or number will work.`}
+        />
+      </div>
     )}
   </AuthConsumer>
 )
 
-Login.propTypes = {
-  classes: PropTypes.object,
-  submitLogin: PropTypes.func
+export const LoginFormUnstyled = ({
+  login,
+  classes,
+  schema,
+  header,
+  subheader
+}) => {
+  return (
+    <Formik
+      initialValues={{
+        username: '',
+        password: ''
+      }}
+      validationSchema={schema}
+      onSubmit={(values, { setSubmitting, setErrors }) => {
+        const { username, password } = values
+        setSubmitting(false)
+
+        return login({ username, password })
+      }}
+      render={({
+        values,
+        errors,
+        touched,
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        isSubmitting
+      }) => (
+        <form noValidate className={classes.form} onSubmit={handleSubmit}>
+          <Typography variant="title" gutterBottom>
+            {header}
+          </Typography>
+          <Typography variant="subheading">{subheader}</Typography>
+          <TextField
+            error={Boolean(touched.username && errors.username)}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.username}
+            required
+            id="username"
+            name="username"
+            label="Username"
+            margin="normal"
+          />
+          {touched.username &&
+            errors.username && (
+              <Typography color="error" variant="subheading" gutterBottom>
+                {errors.username}
+              </Typography>
+            )}
+          <TextField
+            error={Boolean(touched.password && errors.password)}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.password}
+            required
+            id="password"
+            name="password"
+            label="Password"
+            type="password"
+            margin="normal"
+          />
+          {touched.password &&
+            errors.password && (
+              <Typography color="error" variant="subheading" gutterBottom>
+                {errors.password}
+              </Typography>
+            )}
+          <Button
+            disabled={isSubmitting}
+            variant="contained"
+            color="primary"
+            type="submit"
+          >
+            Login
+          </Button>
+        </form>
+      )}
+    />
+  )
 }
 
-Login.defaultProps = {
-  classes: {}
-}
+export const LoginForm = withStyles(styles, { withTheme: true })(
+  LoginFormUnstyled
+)
 
-export default withStyles(styles, { withTheme: true })(Login)
+export default withStyles(theme => ({
+  root: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100vh'
+  }
+}))(Login)

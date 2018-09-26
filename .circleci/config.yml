@@ -107,16 +107,16 @@ workflows:
       - lint:
           requires:
             - install
-      #- test:
-      #    requires:
-      #        - lint
+      - test:
+          requires:
+            - lint
       - lighthouse:
           requires:
             - build
       - push-containers:
           requires:
             - build
-            #- test
+            - test
             - lint
             - lighthouse
           #filters:

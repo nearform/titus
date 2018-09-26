@@ -8,9 +8,6 @@ class WizardDemo extends React.Component {
     console.log('Wizard Finished: ', data)
   }
 
-  renderSimpleStep = props => <SimpleStep {...props} />
-  renderSummaryStep = props => <SummaryStep {...props} />
-
   render() {
     return (
       <Wizard
