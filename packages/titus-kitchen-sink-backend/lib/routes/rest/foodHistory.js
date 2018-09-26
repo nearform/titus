@@ -3,7 +3,7 @@
 const TrailManager = require('@nearform/trail-core').TrailsManager
 
 const foodHistory = require('../../rest/foodHistory')
-const {id} = require('./schemas')
+const { id } = require('./schemas')
 
 const trailManager = new TrailManager()
 
@@ -15,7 +15,7 @@ const findByFoodId = () => ({
   config: {
     auth: false,
     tags: ['api'],
-    validate: {params: {id}},
+    validate: { params: { id } },
     plugins: {
       pgPlugin: { transactional: true },
       auth: {
@@ -35,6 +35,4 @@ const findByFoodId = () => ({
   }
 })
 
-module.exports = (server, config) => [
-  findByFoodId(server, config)
-]
+module.exports = (server, config) => [findByFoodId(server, config)]

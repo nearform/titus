@@ -3,7 +3,7 @@
 const TrailManager = require('@nearform/trail-core').TrailsManager
 
 const foodGroup = require('../../rest/foodGroup')
-const {id, idList, swaggerIdList, foodGroupWithoutId} = require('./schemas')
+const { id, idList, swaggerIdList, foodGroupWithoutId } = require('./schemas')
 
 const trailManager = new TrailManager()
 
@@ -38,7 +38,7 @@ const getById = () => ({
   path: '/foodgroup/{id}',
   config: {
     tags: ['api'],
-    validate: {params: {id}},
+    validate: { params: { id } },
     plugins: {
       pgPlugin: { transactional: true },
       auth: {
@@ -63,10 +63,10 @@ const getByIds = () => ({
   path: '/foodgroup/list/{ids}',
   config: {
     tags: ['api'],
-    validate: {params: idList},
+    validate: { params: idList },
     plugins: {
       'hapi-swagger': {
-        validate: {params: {ids: swaggerIdList}}
+        validate: { params: { ids: swaggerIdList } }
       },
       pgPlugin: { transactional: true },
       auth: {
@@ -91,7 +91,7 @@ const create = () => ({
   path: '/foodgroup',
   config: {
     tags: ['api'],
-    validate: {payload: foodGroupWithoutId},
+    validate: { payload: foodGroupWithoutId },
     plugins: {
       pgPlugin: { transactional: true },
       auth: {

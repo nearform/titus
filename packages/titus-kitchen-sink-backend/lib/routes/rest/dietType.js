@@ -3,7 +3,7 @@
 const TrailManager = require('@nearform/trail-core').TrailsManager
 
 const dietType = require('../../rest/dietType')
-const {id} = require('./schemas')
+const { id } = require('./schemas')
 
 const trailManager = new TrailManager()
 
@@ -38,7 +38,7 @@ const deleteDietType = () => ({
   path: '/diet/type/{id}',
   config: {
     tags: ['api'],
-    validate: {params: {id}},
+    validate: { params: { id } },
     plugins: {
       pgPlugin: { transactional: true },
       auth: {
@@ -63,7 +63,7 @@ const toggleDietTypeVisibility = () => ({
   path: '/diet/type/visibility/{id}',
   config: {
     tags: ['api'],
-    validate: {params: {id}},
+    validate: { params: { id } },
     plugins: {
       pgPlugin: { transactional: true },
       auth: {

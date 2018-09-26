@@ -3,7 +3,17 @@
 const TrailManager = require('@nearform/trail-core').TrailsManager
 
 const food = require('../../rest/food')
-const {id, idList, swaggerIdList, offset, limit, keywordType, type, needle, foodWithFoodGroupId} = require('./schemas')
+const {
+  id,
+  idList,
+  swaggerIdList,
+  offset,
+  limit,
+  keywordType,
+  type,
+  needle,
+  foodWithFoodGroupId
+} = require('./schemas')
 
 const trailManager = new TrailManager()
 
@@ -16,7 +26,7 @@ const getAll = () => ({
     auth: false,
     tags: ['api'],
     validate: {
-      query: {offset, limit}
+      query: { offset, limit }
     },
     plugins: {
       pgPlugin: { transactional: true },
@@ -43,7 +53,7 @@ const getById = () => ({
   config: {
     auth: false,
     tags: ['api'],
-    validate: {params: {id}},
+    validate: { params: { id } },
     plugins: {
       pgPlugin: { transactional: true },
       auth: {
@@ -69,7 +79,7 @@ const search = () => ({
   config: {
     auth: false,
     tags: ['api'],
-    validate: {params: {needle, type}},
+    validate: { params: { needle, type } },
     plugins: {
       pgPlugin: { transactional: true },
       auth: {
@@ -95,7 +105,7 @@ const keyword = () => ({
   config: {
     auth: false,
     tags: ['api'],
-    validate: {params: {needle, keywordType}},
+    validate: { params: { needle, keywordType } },
     plugins: {
       pgPlugin: { transactional: true },
       auth: {
@@ -120,7 +130,7 @@ const create = () => ({
   path: '/food',
   config: {
     tags: ['api'],
-    validate: {payload: foodWithFoodGroupId},
+    validate: { payload: foodWithFoodGroupId },
     plugins: {
       pgPlugin: { transactional: true },
       auth: {
@@ -136,7 +146,7 @@ const create = () => ({
       what: 'create',
       subject
     })
-    return food.create(request.pg, {food: request.payload})
+    return food.create(request.pg, { food: request.payload })
   }
 })
 
@@ -145,7 +155,7 @@ const update = () => ({
   path: '/food',
   config: {
     tags: ['api'],
-    validate: {payload: foodWithFoodGroupId},
+    validate: { payload: foodWithFoodGroupId },
     plugins: {
       pgPlugin: { transactional: true },
       auth: {
@@ -161,7 +171,7 @@ const update = () => ({
       what: 'update',
       subject
     })
-    return food.update(request.pg, {food: request.payload})
+    return food.update(request.pg, { food: request.payload })
   }
 })
 
@@ -170,10 +180,10 @@ const deleteFoods = () => ({
   path: '/food/{ids}',
   config: {
     tags: ['api'],
-    validate: {params: idList},
+    validate: { params: idList },
     plugins: {
       'hapi-swagger': {
-        validate: {params: {ids: swaggerIdList}}
+        validate: { params: { ids: swaggerIdList } }
       },
       pgPlugin: { transactional: true },
       auth: {

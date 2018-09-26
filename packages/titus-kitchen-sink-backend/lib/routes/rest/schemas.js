@@ -1,14 +1,28 @@
 const joi = require('joi')
 
-const id = joi.string().guid().required()
-const offset = joi.number().integer().default(0)
-const limit = joi.number().integer().default(50)
+const id = joi
+  .string()
+  .guid()
+  .required()
+const offset = joi
+  .number()
+  .integer()
+  .default(0)
+const limit = joi
+  .number()
+  .integer()
+  .default(50)
 
-const swaggerIdList = joi.string().label('ids').trim().regex(/^[0-9a-zA-Z-]+\s*(,\s*[0-9a-zA-Z-]*)*$/).required()
+const swaggerIdList = joi
+  .string()
+  .label('ids')
+  .trim()
+  .regex(/^[0-9a-zA-Z-]+\s*(,\s*[0-9a-zA-Z-]*)*$/)
+  .required()
 
-const idList = async ({ids}) => {
+const idList = async ({ ids }) => {
   joi.assert(ids, swaggerIdList)
-  return Promise.resolve({ids: ids.split(',').map(s => s.trim())})
+  return Promise.resolve({ ids: ids.split(',').map(s => s.trim()) })
 }
 
 const foodGroup = joi.object().keys({
@@ -43,9 +57,22 @@ const foodWithoutId = joi.object().keys({
 
 const needle = joi.string().required()
 
-const type = joi.string().allow('startsWith', 'endsWith', 'fullText', 'similarity')
+const type = joi
+  .string()
+  .allow('startsWith', 'endsWith', 'fullText', 'similarity')
 
-const keywordType = joi.string().allow('startsWith', 'endsWith', 'contains', 'levenshtein', 'soundex', 'metaphone', 'similarity').required()
+const keywordType = joi
+  .string()
+  .allow(
+    'startsWith',
+    'endsWith',
+    'contains',
+    'levenshtein',
+    'soundex',
+    'metaphone',
+    'similarity'
+  )
+  .required()
 
 module.exports = {
   id,
