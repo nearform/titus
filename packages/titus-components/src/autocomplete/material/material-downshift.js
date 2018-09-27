@@ -6,7 +6,7 @@ import Paper from '@material-ui/core/Paper'
 import MenuItem from '@material-ui/core/MenuItem'
 import LinearProgress from '@material-ui/core/LinearProgress'
 
-const Input = ({ inputProps, classes, ref, ...other }) => (
+const Input = ({ inputProps, classes, ref, loading, ...other }) => (
   <div className={classes.inputRoot}>
     <TextField
       InputProps={{
@@ -15,7 +15,7 @@ const Input = ({ inputProps, classes, ref, ...other }) => (
       }}
       {...other}
     />
-    {other.loading && <LinearProgress />}
+    {loading && <LinearProgress />}
   </div>
 )
 
@@ -23,7 +23,7 @@ Input.propTypes = {
   classes: PropTypes.object.isRequired,
   inputProps: PropTypes.any,
   ref: PropTypes.any,
-  loading: PropTypes.any
+  loading: PropTypes.bool
 }
 
 const Suggestion = ({
@@ -93,7 +93,7 @@ const MaterialDownshift = ({
     <div className={classes.container}>
       {Input({
         fullWidth: true,
-        loading: loading,
+        loading,
         classes,
         inputProps: getInputProps({
           onChange: onInputChange,
@@ -131,7 +131,7 @@ MaterialDownshift.propTypes = {
   highlightedIndex: PropTypes.number,
   placeholder: PropTypes.string,
   id: PropTypes.string,
-  loading: PropTypes.any,
+  loading: PropTypes.bool,
   onInputChange: PropTypes.func,
   items: PropTypes.array
 }

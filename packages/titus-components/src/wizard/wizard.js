@@ -22,10 +22,15 @@ const Wizard = ({
 )
 
 Wizard.propTypes = {
+  /** The main title of the wizard. */
   title: PropTypes.string,
+  /** The message displayed when the wizard is complete. */
   finishedMessage: PropTypes.string,
+  /** The default message displayed when trying to proceed further from a component that requires a value, and none was provided. */
   defaultRequiredMessage: PropTypes.string,
+  /** The wizard steps. */
   children: PropTypes.arrayOf(PropTypes.element).isRequired,
+  /** Callback function invoked when the wizard is complete. */
   onFinish: PropTypes.func
 }
 

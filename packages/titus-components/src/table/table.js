@@ -5,11 +5,17 @@ import MaterialUiTable from './material/material-ui-table'
 
 class Table extends React.Component {
   static propTypes = {
+    /** The callback function invoked when deleting items from the table. */
     onDelete: PropTypes.func,
+    /** The title of the table. */
     title: PropTypes.string,
+    /** The rows of data to display in the table. */
     rows: PropTypes.array,
+    /** The definition of the table columns. */
     columns: PropTypes.array,
+    /** The max number of rows to display in a table page. */
     pageSize: PropTypes.number,
+    /** The possible values of page size to choose between. */
     pageSizeOptions: PropTypes.arrayOf(PropTypes.number)
   }
 
@@ -17,9 +23,6 @@ class Table extends React.Component {
     pageSize: 5,
     pageSizeOptions: [5, 10, 20, 50]
   }
-
-  // TODO: other events as necessary
-  // e.g. request for more data on pagination, row edited etc.
 
   renderMaterialUiTable = props => (
     <MaterialUiTable

@@ -58,9 +58,9 @@ describe('Navigation', () => {
       expect(options[0].textContent).toBe('Abcd')
     })
 
-    test('With filtertype startswith', () => {
+    test('With filtertype startsWith', () => {
       const { container } = render(
-        <Autocomplete data={sampleData} filterType="startswith" />
+        <Autocomplete data={sampleData} filterType="startsWith" />
       )
 
       const input = container.querySelector('input')
@@ -101,7 +101,7 @@ describe('Navigation', () => {
           data={sampleData}
           filterType="custom"
           onInputChange={mockHandleInputChange}
-          loading={loading ? 'true' : undefined}
+          loading={loading}
           items={items}
         />
       )

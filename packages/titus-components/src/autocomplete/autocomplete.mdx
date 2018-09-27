@@ -26,16 +26,21 @@ type DataItem = {
   key: string
 }
 
+type InputChangeItem = {
+  value: string
+  filterType?: string
+  maxResults?: number
+}
+
 export interface AutocompleteProps {
   data?: Array<DataItem>
-  inputValue?: string
   placeholder?: string
   id?: string
-  filterType?: string
+  filterType?: 'contains' | 'startsWith'
   maxResults?: number
   loading?: any
   items?: Array<DataItem>
-  onInputChange?: (e: any) => void
+  onInputChange?: (item: InputChangeItem) => void
   onChange?: (item: DataItem) => void
 }
 ```
