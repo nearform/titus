@@ -8,6 +8,8 @@ const helloGeneric = () => ({
   method: 'GET',
   path: '/hello',
   config: {
+    auth: false,
+    tags: ['api'],
     plugins: {
       auth: {
         action: '*',
@@ -30,6 +32,8 @@ const helloRandom = () => ({
   method: 'GET',
   path: '/hello/random',
   config: {
+    auth: false,
+    tags: ['api'],
     plugins: {
       pgPlugin: { transactional: true },
       auth: {

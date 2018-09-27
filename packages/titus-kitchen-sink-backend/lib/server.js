@@ -2,10 +2,11 @@
 
 const hapi = require('hapi')
 const pino = require('hapi-pino')
+const HapiSwagger = require('hapi-swagger')
 const graphqlHapi = require('apollo-server-hapi').graphqlHapi
 const graphiqlHapi = require('apollo-server-hapi').graphiqlHapi
 const config = require('../config/default')
-const grapqlSchema = require('./graphql').schema
+const graphqlSchema = require('./graphql').schema
 const loaders = require('./graphql').loaders
 const pgPlugin = require('./pg-plugin')
 const commentamiPlugin = require('./commentami')
@@ -39,7 +40,7 @@ const init = async () => {
         },
         graphqlOptions: req => ({
           endpointURL: '/graphql',
-          schema: grapqlSchema,
+          schema: graphqlSchema,
           context: {
             user: req.headers.authorization,
             pg: req.pg,
@@ -78,13 +79,8 @@ const init = async () => {
       require('inert'),
       require('vision'),
       {
-        plugin: require('hapi-swagger'),
-        options: {
-          info: {
-            title: 'Test API Documentation',
-            version: require('../package').version
-          }
-        }
+        plugin: HapiSwagger,
+        options: config.swagger || {}
       },
       // UI for testing graphql queries - disabled in production
       {
@@ -97,7 +93,7 @@ const init = async () => {
           graphiqlOptions: req => {
             return {
               endpointURL: '/graphql',
-              schema: grapqlSchema
+              schema: graphqlSchema
             }
           }
         }

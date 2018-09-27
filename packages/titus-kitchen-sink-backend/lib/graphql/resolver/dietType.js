@@ -1,6 +1,6 @@
 'use strict'
 const fetch = require('node-fetch')
-const dietType = require('../model/dietType')
+const dietType = require('../../model/dietType')
 const config = require('../../../config/default')
 
 async function checkStatus (response) {

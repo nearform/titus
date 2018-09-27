@@ -1,5 +1,5 @@
 'use strict'
-const foodGroup = require('../model/foodGroup')
+const foodGroup = require('../../model/foodGroup')
 
 const resolvers = {
   Query: {
