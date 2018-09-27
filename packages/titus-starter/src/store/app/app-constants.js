@@ -1,1 +1,0 @@
-export const UPDATE_APP_CONFIG = 'UPDATE_APP_CONFIG'

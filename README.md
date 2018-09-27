@@ -8,32 +8,13 @@ Titus is an end-to-end JavaScript stack created for modern web application devel
 
 This repository is a [monorepo](https://lernajs.io/) containing distinct parts of the Titus stack. Packages include:
 
-- [titus-starter](https://github.com/nearform/titus/tree/master/packages/titus-starter) - A client-side starter shell based off of [create-react-app](https://github.com/facebook/create-react-app) with the addition of [Storybook](https://storybook.js.org/), [Material-UI](https://material-ui.com/), [Reach Router](https://reach.tech/router), [Apollo](https://www.apollographql.com/) and more.
-- [titus-starter-backend](https://github.com/nearform/titus/tree/master/packages/titus-starter-backend) - A server-side starter shell complete with [Hapi](https://hapijs.com/), [PostgreSQL](https://www.postgresql.org/), [Docker](https://www.docker.com/), [GraphQL](https://graphql.org/) and more.
 - [titus-components](https://github.com/nearform/titus/tree/master/packages/titus-components) - A collection of React components ready to drop in to your application.
-- [titus-kitchen-sink](https://github.com/nearform/titus/tree/master/packages/titus-kitchen-sink) - An implementation of the starter shell with detailed examples and documentation.
-- [titus-kitchen-sink-backend](https://github.com/nearform/titus/tree/master/packages/titus-kitchen-sink-backend) - An implementation of the back-end starter shell.
-- [titus-cli](https://github.com/nearform/titus/tree/master/packages/titus-cli) - A command line interface (CLI) to perform common tasks such as installing the starter shells.
-
-
+- [titus-kitchen-sink](https://github.com/nearform/titus/tree/master/packages/titus-kitchen-sink) - An sample client-side application based off of [create-react-app](https://github.com/facebook/create-react-app) with the addition of [Storybook](https://storybook.js.org/), [Material-UI](https://material-ui.com/), [Reach Router](https://reach.tech/router), [Apollo](https://www.apollographql.com/) and more.
+- [titus-kitchen-sink-backend](https://github.com/nearform/titus/tree/master/packages/titus-kitchen-sink-backend) - A sample server-side application complete with [Hapi](https://hapijs.com/), [PostgreSQL](https://www.postgresql.org/), [Docker](https://www.docker.com/), [GraphQL](https://graphql.org/) and more.
 
 ## Ethos & Goals
 
 The aim of Titus is to give projects a faster 'time to first feature' by providing a core set of technologies, frameworks and techniques which aid in modern web application development.
-
-## Getting Started
-
-The quickest way to get started with Titus is to use the CLI to create a starter frontend and backend application.
-
-You can do this by running:
-
-```
-npx @nearform/titus-cli init <project-name>
-```
-
-This command will generate frontend and backend starter applications.
-
-For further information on the Titus CLI either run `npx @nearform/titus-cli --help` or take a look at the [titus-cli readme](https://github.com/nearform/titus/blob/master/packages/titus-cli/README.md).
 
 ## Development
 
@@ -59,7 +40,7 @@ Individual sub-packages are built during the bootstrap process.
 
 ### kitchen-sink sample application
 
-This repository includes a sample application showcasing the features availabe in Titus and third party libraries. The documentation can be found [here](https://nearform.github.io/titus).
+This repository includes a sample application showcasing the features availabe in Titus and third party libraries. The running application can be found [here](https://nearform.github.io/titus).
 
 ### Convenience Scripts
 
@@ -71,6 +52,10 @@ Some commands have been added to the root package for convenience.
 | build:component    | build the components project        |
 | start:kitchen-sink | starts the kitchen sink app         |
 | stop:kitchen-sink  | stops the kitchen sink app          |
+
+### Documentation
+
+Documentation for the contents of the repository can be found [here](https://nearform.github.io/titus).
 
 ### Infrastructure documentation
 
