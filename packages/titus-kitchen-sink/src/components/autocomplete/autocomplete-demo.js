@@ -33,7 +33,7 @@ class AutocompleteDemo extends React.Component {
   }
 
   state = {
-    filterType: 'startswith',
+    filterType: 'startsWith',
     timerId: null,
     items: null,
     loading: false
@@ -107,7 +107,7 @@ class AutocompleteDemo extends React.Component {
               name="filterType"
               displayEmpty
             >
-              <MenuItem value="startswith">startswith (default)</MenuItem>
+              <MenuItem value="startsWith">startsWith (default)</MenuItem>
               <MenuItem value="contains">contains</MenuItem>
             </Select>
             <FormHelperText>Change an autocomplete filter type</FormHelperText>
@@ -141,7 +141,7 @@ class AutocompleteDemo extends React.Component {
               onChange={this.handleChange}
               onInputChange={this.handleGetSuggestions}
               maxResults={10}
-              loading={loading ? 'true' : undefined}
+              loading={loading}
               items={items}
             />
           </FormControl>

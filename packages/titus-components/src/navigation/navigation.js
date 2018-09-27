@@ -91,11 +91,17 @@ const styles = theme => ({
 
 export class Navigation extends Component {
   static propTypes = {
+    /** The title to display on the top toolbar. */
     title: PropTypes.string.isRequired,
+    /** Classes provided by the Material-UI styling infrastructure, for internal use. */
     classes: PropTypes.object.isRequired,
+    /** Theme provided by the Material-UI styling infrastructure, for internal use. */
     theme: PropTypes.object.isRequired,
+    /** The menu items to display on the left drawer. */
     items: PropTypes.node.isRequired,
+    /** The content to display in the content area. */
     children: PropTypes.node.isRequired,
+    /** A function which renders the elements displayed in the right area of the top toolbar. */
     headerRight: PropTypes.func
   }
 

@@ -7,6 +7,24 @@ import { FileUploaderContext } from './FileUploaderContext'
 import UploaderContainer from './material/UploaderContainer'
 
 export class Uploader extends React.Component {
+  static defaultProps = {
+    maxItems: 1,
+    logger: console
+  }
+  
+  static propTypes = {
+    /** Maximum number of files that can be uploaded. */
+    maxItems: PropTypes.number,
+    /** An instance of the `UploaderService` class. */
+    service: PropTypes.object,
+    /** A custom logger used to log internal operations. */
+    logger: PropTypes.object,
+    /** Callback function invoked when upload is completed. */
+    onUploadDone: PropTypes.func,
+    /** Callback function invoked when upload has failed. */
+    onUploadError: PropTypes.func
+  }
+
   constructor(props) {
     super(props)
 
@@ -17,7 +35,7 @@ export class Uploader extends React.Component {
       removeFile: this.handleRemovefile.bind(this),
       service: this.props.service,
       dragOnUploadError: null,
-      logger: this.props.logger || console,
+      logger: this.props.logger,
       onUploadError: this.handleUploadError.bind(this),
       onUploadDone: this.handleUploadDone.bind(this),
       onUploadCancel: this.handleUploadCancel.bind(this)
@@ -71,18 +89,6 @@ export class Uploader extends React.Component {
       </FileUploaderContext.Provider>
     )
   }
-}
-
-Uploader.defaultProps = {
-  maxItems: 1
-}
-
-Uploader.propTypes = {
-  maxItems: PropTypes.number,
-  service: PropTypes.object,
-  logger: PropTypes.object,
-  onUploadDone: PropTypes.func,
-  onUploadError: PropTypes.func
 }
 
 export default DragDropContext(HTML5Backend)(Uploader)

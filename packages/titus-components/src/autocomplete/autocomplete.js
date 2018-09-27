@@ -1,27 +1,37 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import Downshift from 'downshift'
 import MaterialDownshift from './material/material-downshift'
 
 class Autocomplete extends React.Component {
   static propTypes = {
-    data: PropTypes.array,
-    onInputChange: PropTypes.func,
-    onChange: PropTypes.func,
-    inputValue: PropTypes.string,
-    placeholder: PropTypes.string,
-    id: PropTypes.string,
-    filterType: PropTypes.string,
-    maxResults: PropTypes.number,
-    loading: PropTypes.any,
-    items: PropTypes.array
+    /** The items used to populate the autocomplete list with a static list of elements. */
+    data: T.arrayOf(T.shape({ key: T.string, value: T.string })),
+    /** Callback function invoked to retrieve a dynamic list of items, provided in the `items` prop. */
+    onInputChange: T.func,
+    /** Callback function invoked when an item is selected from the list. */
+    onChange: T.func,
+    /** The input element placeholder. */
+    placeholder: T.string,
+    /** The ID of the rendered input element. */
+    id: T.string,
+    /** The type of filter to use to match autocomplete items with user input. */
+    filterType: T.oneOf(['contains', 'startsWith']),
+    /** Maximum number of results returned in the autocomplete list. */
+    maxResults: T.number,
+    /** Whether to show a loading indicator when loading suggestions. */
+    loading: T.bool,
+    /** The items to used to populate the autocomplete list dynamically after responding to the `onInputChange` callback. */
+    items: T.arrayOf(T.shape({ key: T.string, value: T.string }))
   }
 
-  constructor(props) {
-    super(props)
-    // if all data is passed in, we're managing this state internally
-    // ourselves to suggested listitems
-    this.state = { internalItems: null }
+  static defaultProps = {
+    filterType: 'startsWith',
+    maxResults: 5
+  }
+
+  state = {
+    internalItems: null
   }
 
   renderMaterial = props => {
@@ -36,7 +46,7 @@ class Autocomplete extends React.Component {
         <MaterialDownshift
           {...props}
           items={onInputChange ? items : internalItems}
-          loading={loading ? 'true' : undefined}
+          loading={loading}
           placeholder={placeholder}
           id={id}
           onInputChange={handleInputChange}
@@ -48,8 +58,8 @@ class Autocomplete extends React.Component {
   handleInputChange = ({ target: { value } }) => {
     const {
       data,
-      filterType = 'startsWith',
-      maxResults = 5,
+      filterType,
+      maxResults,
       onInputChange
     } = this.props
 
