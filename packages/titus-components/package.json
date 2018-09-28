@@ -1,6 +1,6 @@
 {
   "name": "@nearform/titus-components",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A library of React components for Titus",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -32,12 +32,11 @@
     "@types/reach__router": "^1.0.1",
     "aws-sdk": "^2.318.0",
     "downshift": "^2.0.10",
-    "nodemon": "^1.17.5",
+    "prop-types": "^15.6.2",
     "react-dnd": "^5.0.0",
     "react-dnd-html5-backend-filedrop": "^1.0.0"
   },
   "peerDependencies": {
-    "@reach/router": "^1.1.1",
     "react": "16.x"
   },
   "devDependencies": {
@@ -63,6 +62,7 @@
     "jest-environment-jsdom": "^23.4.0",
     "jest-environment-jsdom-global": "^1.1.0",
     "lodash": "^4.17.10",
+    "nodemon": "^1.17.5",
     "nwb": "0.21.x",
     "prettier": "^1.14.3",
     "react": "^16.5.2",

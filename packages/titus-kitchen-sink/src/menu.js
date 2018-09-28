@@ -1,5 +1,4 @@
 import React from 'react'
-import { ListItemLink } from '@nearform/titus-components'
 
 import List from '@material-ui/core/List'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
@@ -18,6 +17,8 @@ import CloudUploadIcon from '@material-ui/icons/CloudUpload'
 import AuthIcon from '@material-ui/icons/Lock'
 import InvertColorsIcon from '@material-ui/icons/InvertColors'
 import LanguageIcon from '@material-ui/icons/Language'
+
+import ListItemLink from './components/list-item-link'
 
 const styles = {
   active: {
