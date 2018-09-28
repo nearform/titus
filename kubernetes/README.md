@@ -7,7 +7,7 @@ This demo app has two components, a `frontend` React app and (backend) `api`
 based on Node.js that is called by the frontend for certain functions.
 
 The code for the `frontend` can be found in [packages/titus-kitchen-sink](https://github.com/nearform/titus/tree/master/packages/titus-kitchen-sink)
-and the code for the `api` can be found in [packages/titus-kitchen-sink-backend](https://github.com/nearform/titus/tree/master/packages/titus-starter-backend).
+and the code for the `api` can be found in [packages/titus-kitchen-sink-backend](https://github.com/nearform/titus/tree/master/packages/titus-kitchen-sink-backend).
 
 ## CI
 
