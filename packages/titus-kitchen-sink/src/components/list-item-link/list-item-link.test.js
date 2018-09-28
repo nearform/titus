@@ -11,7 +11,7 @@ describe('ListItemLink', () => {
         }),
         { virtual: true }
       )
-      const ListItemLink = require('../../src/list-item-link/list-item-link')
+      const ListItemLink = require('./list-item-link')
         .default
       const { getByTestId } = render(<ListItemLink />)
 
