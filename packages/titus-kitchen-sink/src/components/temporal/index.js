@@ -74,7 +74,7 @@ class Temporal extends React.Component {
         </Typography>
         <Paper className={classNames(classes.paperPadding, classes.verticalMargin)}>
           <Query query={loadFoodData}>
-          {({ loading, error, data: { allFood = [] } }) => {
+          {({ loading, error, data: { allFood = [] } = {} }) => {
             if (error) {
               return (
                 <Typography color="error">
