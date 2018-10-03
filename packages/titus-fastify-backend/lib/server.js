@@ -6,12 +6,29 @@ const config = require('../config/default')
 // const loaders = require('./graphql').loaders
 // const pgPlugin = require('./pg-plugin')
 const Fastify = require('fastify')
+const swagger = require('fastify-swagger')
 
 const server = Fastify({
   logger: config.logger.pino
 })
 
 const init = async () => {
+  // Add plugins
+  server.register(swagger, {
+    routePrefix: '/documentation',
+    exposeRoute: process.env.NODE_ENV !== 'production',
+    swagger: {
+      info: config.swagger.info,
+      consumes: ['application/json'],
+      produces: ['application/json']
+    }
+  })
+
+  server.ready(err => {
+    if (err) throw err
+    server.swagger()
+  })
+
   // Declare a route
   server.get('/', async (request, reply) => {
     return { hello: 'world' }
