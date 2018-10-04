@@ -6,9 +6,9 @@ const config = require('../config/default')
 
 // const graphqlSchema = require('./graphql').schema
 // const loaders = require('./graphql').loaders
-// const pgPlugin = require('./pg-plugin')
 
 const helloRoute = require('./routes/hello')
+const dbRoute = require('./routes/db')
 
 const server = Fastify({
   logger: config.logger.pino
@@ -17,9 +17,14 @@ const server = Fastify({
 const init = async () => {
   // Run the server!
   try {
-    server.register(helloRoute).after(() => {
-      console.log('Registered')
-    })
+    // Register plugins
+    server
+      .register(require('fastify-postgres'), config.db)
+
+    // Register routes
+    server
+      .register(helloRoute)
+      .register(dbRoute)
 
     await server.ready()
     await server.listen(config.fastify.port, config.fastify.host)
