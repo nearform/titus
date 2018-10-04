@@ -9,6 +9,7 @@ const config = require('../config/default')
 
 const helloRoute = require('./routes/hello')
 const dbRoute = require('./routes/db')
+const foodRoutes = require('./routes/rest/food')
 
 const server = Fastify({
   logger: config.logger.pino
@@ -25,6 +26,7 @@ const init = async () => {
     server
       .register(helloRoute)
       .register(dbRoute)
+      .register(foodRoutes)
 
     await server.ready()
     await server.listen(config.fastify.port, config.fastify.host)
