@@ -1,6 +1,8 @@
+const fastifyPlugin = require('fastify-plugin')
+
 const foodClient = require('../../rest/food')
 
-module.exports = function (server, opts, next) {
+function plugin (server, opts, next) {
   server.get('/food', async (request, reply) => {
     const { offset, limit } = request.query
 
@@ -56,3 +58,8 @@ module.exports = function (server, opts, next) {
 
   next()
 }
+
+module.exports = fastifyPlugin(plugin, {
+  fastify: '1.x',
+  name: 'food-routes'
+})
