@@ -16,7 +16,13 @@ function plugin (server, opts, next) {
     path: '/foodgroup/:id',
     method: 'GET',
     schema: {
-      tags: ['food-group']
+      tags: ['food-group'],
+      params: {
+        type: 'object',
+        properties: {
+          id: { type: 'string' }
+        }
+      }
     },
     handler: async (request, reply) => {
       const { id } = request.params
@@ -29,7 +35,13 @@ function plugin (server, opts, next) {
     path: '/foodgroup/list/:ids',
     method: 'GET',
     schema: {
-      tags: ['food-group']
+      tags: ['food-group'],
+      params: {
+        type: 'object',
+        properties: {
+          ids: { type: 'string' }
+        }
+      }
     },
     handler: async (request, reply) => {
       const { ids } = request.params
@@ -42,10 +54,16 @@ function plugin (server, opts, next) {
     path: '/foodgroup',
     method: 'PUT',
     schema: {
-      tags: ['food-group']
+      tags: ['food-group'],
+      body: {
+        type: 'object',
+        properties: {
+          name: { type: 'string' }
+        }
+      }
     },
     handler: async (request, reply) => {
-      const { name } = request.params
+      const { name } = request.body
 
       return request.dbClient.foodGroup.create({ name })
     }

@@ -29,7 +29,14 @@ function plugin (server, opts, next) {
     path: '/locales/:language/:namespace',
     method: 'GET',
     schema: {
-      tags: ['i18n']
+      tags: ['i18n'],
+      params: {
+        type: 'object',
+        properties: {
+          language: { type: 'string' },
+          namespace: { type: 'string' }
+        }
+      }
     },
     handler: async (request, reply) => {
       const { language, namespace } = request.params

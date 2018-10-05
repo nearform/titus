@@ -16,7 +16,13 @@ function plugin (server, opts, next) {
     path: '/diet/type/:id',
     method: 'DELETE',
     schema: {
-      tags: ['diet-type']
+      tags: ['diet-type'],
+      params: {
+        type: 'object',
+        properties: {
+          id: { type: 'string' }
+        }
+      }
     },
     handler: async (request, reply) => {
       const { id } = request.params
@@ -29,7 +35,13 @@ function plugin (server, opts, next) {
     path: '/diet/type/visibility/:id',
     method: 'POST',
     schema: {
-      tags: ['diet-type']
+      tags: ['diet-type'],
+      params: {
+        type: 'object',
+        properties: {
+          id: { type: 'string' }
+        }
+      }
     },
     handler: async (request, reply) => {
       const { id } = request.params
