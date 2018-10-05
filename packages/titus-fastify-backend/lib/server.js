@@ -1,6 +1,7 @@
 'use strict'
 
 const Fastify = require('fastify')
+const swagger = require('fastify-swagger')
 
 const config = require('../config/default')
 
@@ -17,11 +18,19 @@ const server = Fastify({
 })
 
 const init = async () => {
-  // Run the server!
   try {
     // Register plugins
     server
       .register(require('fastify-postgres'), config.db)
+      .register(swagger, {
+        routePrefix: '/documentation',
+        exposeRoute: process.env.NODE_ENV !== 'production',
+        swagger: {
+          info: config.swagger.info,
+          consumes: ['application/json'],
+          produces: ['application/json']
+        }
+      })
 
     // Register routes
     server
@@ -31,6 +40,9 @@ const init = async () => {
       .register(dietTypeRoutes)
 
     await server.ready()
+
+    server.swagger()
+
     await server.listen(config.fastify.port, config.fastify.host)
 
     server.log.info(`Server started at ${config.fastify.host}:${config.fastify.port}`)
