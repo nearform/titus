@@ -2,11 +2,12 @@
 
 const Fastify = require('fastify')
 const swagger = require('fastify-swagger')
+const postgres = require('fastify-postgres')
+const GQL = require('fastify-gql')
 
 const config = require('../config/default')
 
-// const graphqlSchema = require('./graphql').schema
-// const loaders = require('./graphql').loaders
+const graphql = require('./graphql')
 
 const foodRoutes = require('./routes/rest/food')
 const foodHistoryRoutes = require('./routes/rest/foodHistory')
@@ -31,6 +32,10 @@ const init = async () => {
           produces: ['application/json']
         }
       })
+      .register(GQL, {
+        schema: graphql.executable,
+        graphiql: true
+      })
 
     // Register routes
     server
@@ -38,6 +43,8 @@ const init = async () => {
       .register(foodHistoryRoutes)
       .register(foodGroupRoutes)
       .register(dietTypeRoutes)
+    schema: graphql.executable,
+    graphiql: true
 
     await server.ready()
 
