@@ -1,7 +1,5 @@
 const fastifyPlugin = require('fastify-plugin')
 
-const foodClient = require('../../rest/food')
-
 function plugin (server, opts, next) {
   server.route({
     path: '/food',
@@ -9,7 +7,7 @@ function plugin (server, opts, next) {
     handler: async (request, reply) => {
       const { offset, limit } = request.query
 
-      return foodClient.getAll(server.pg, { offset, limit })
+      return request.dbClient.food.getAll({ offset, limit })
     }
   })
 
@@ -19,7 +17,7 @@ function plugin (server, opts, next) {
     handler: async (request, reply) => {
       const { id } = request.params
 
-      return foodClient.getById(server.pg, { id })
+      return request.dbClient.food.getById({ id })
     }
   })
 
@@ -29,7 +27,7 @@ function plugin (server, opts, next) {
     handler: async (request, reply) => {
       const { type, needle } = request.params
 
-      return foodClient.search(server.pg, { type, needle })
+      return request.dbClient.food.search({ type, needle })
     }
   })
 
@@ -39,7 +37,7 @@ function plugin (server, opts, next) {
     handler: async (request, reply) => {
       const { keywordType, needle } = request.params
 
-      return foodClient.keyword(server.pg, { keywordType, needle })
+      return request.dbClient.food.keyword({ keywordType, needle })
     }
   })
 
@@ -54,7 +52,7 @@ function plugin (server, opts, next) {
         foodGroupId
       }
 
-      return foodClient.create(server.pg, { food })
+      return request.dbClient.food.create({ food })
     }
   })
 
@@ -70,7 +68,7 @@ function plugin (server, opts, next) {
         foodGroupId
       }
 
-      return foodClient.update(server.pg, { food })
+      return request.dbClient.food.update({ food })
     }
   })
 
@@ -80,7 +78,7 @@ function plugin (server, opts, next) {
     handler: async (request, reply) => {
       const { ids } = request.params
 
-      return foodClient.deleteFoods(server.pg, { ids })
+      return request.dbClient.food.deleteFoods({ ids })
     }
   })
 
