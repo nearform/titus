@@ -8,5 +8,7 @@ const loaders = require('../model').loaders
 
 module.exports = {
   schema: makeExecutableSchema({ typeDefs, resolvers }),
+  resolvers,
+  typeDefs,
   loaders
 }

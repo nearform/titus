@@ -9,7 +9,7 @@ const resolvers = {
   },
   FoodHistory: {
     foodGroup (root, args, context) {
-      return context.loaders.foodGroup.getById.load(root.foodGroupId)
+      return context.app.dataloaders().foodGroup.getById.load(root.foodGroupId)
     }
   }
 }

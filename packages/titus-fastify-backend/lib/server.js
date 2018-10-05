@@ -22,7 +22,7 @@ const init = async () => {
   try {
     // Register plugins
     server
-      .register(require('fastify-postgres'), config.db)
+      .register(postgres, config.db)
       .register(swagger, {
         routePrefix: '/documentation',
         exposeRoute: process.env.NODE_ENV !== 'production',
@@ -43,8 +43,10 @@ const init = async () => {
       .register(foodHistoryRoutes)
       .register(foodGroupRoutes)
       .register(dietTypeRoutes)
-    schema: graphql.executable,
-    graphiql: true
+
+    server.decorate('dataloaders', () => {
+      return graphql.loaders(server.pg)
+    })
 
     await server.ready()
 

@@ -7,7 +7,6 @@ const resolvers = {
       return food.getById(context.app.pg, args)
     },
     allFood (root, args, context) {
-      console.log({root, args, context})
       return food.getAll(context.app.pg, args)
     },
     search (root, args, context) {
@@ -19,7 +18,7 @@ const resolvers = {
   },
   Food: {
     foodGroup (root, args, context) {
-      return context.loaders.foodGroup.getById.load(root.foodGroupId)
+      return context.app.dataloaders().foodGroup.getById.load(root.foodGroupId)
     }
   },
   Mutation: {
