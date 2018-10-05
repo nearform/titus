@@ -4,6 +4,7 @@ const Fastify = require('fastify')
 const swagger = require('fastify-swagger')
 const postgres = require('fastify-postgres')
 const GQL = require('fastify-gql')
+const cors = require('fastify-cors')
 
 const config = require('../config/default')
 
@@ -22,6 +23,7 @@ const init = async () => {
   try {
     // Register plugins
     server
+      .register(cors, { origin: true })
       .register(postgres, config.db)
       .register(swagger, {
         routePrefix: '/documentation',
@@ -33,7 +35,7 @@ const init = async () => {
         }
       })
       .register(GQL, {
-        schema: graphql.executable,
+        schema: graphql.schema,
         graphiql: true
       })
 
