@@ -7,6 +7,7 @@ const config = require('../config/default')
 
 // const graphqlSchema = require('./graphql').schema
 // const loaders = require('./graphql').loaders
+const dbClient = require('./plugins/db-client')
 
 const foodRoutes = require('./routes/rest/food')
 const foodHistoryRoutes = require('./routes/rest/foodHistory')
@@ -31,6 +32,7 @@ const init = async () => {
           produces: ['application/json']
         }
       })
+      .register(dbClient)
 
     // Register routes
     server
