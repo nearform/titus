@@ -1,49 +1,56 @@
 'use strict'
 
+const Fastify = require('fastify')
+const swagger = require('fastify-swagger')
+
 const config = require('../config/default')
 
 // const graphqlSchema = require('./graphql').schema
 // const loaders = require('./graphql').loaders
-// const pgPlugin = require('./pg-plugin')
-const Fastify = require('fastify')
-const swagger = require('fastify-swagger')
+
+const foodRoutes = require('./routes/rest/food')
+const foodHistoryRoutes = require('./routes/rest/foodHistory')
+const foodGroupRoutes = require('./routes/rest/foodGroup')
+const dietTypeRoutes = require('./routes/rest/dietType')
 
 const server = Fastify({
   logger: config.logger.pino
 })
 
 const init = async () => {
-  // Add plugins
-  server.register(swagger, {
-    routePrefix: '/documentation',
-    exposeRoute: process.env.NODE_ENV !== 'production',
-    swagger: {
-      info: config.swagger.info,
-      consumes: ['application/json'],
-      produces: ['application/json']
-    }
-  })
+  try {
+    // Register plugins
+    server
+      .register(require('fastify-postgres'), config.db)
+      .register(swagger, {
+        routePrefix: '/documentation',
+        exposeRoute: process.env.NODE_ENV !== 'production',
+        swagger: {
+          info: config.swagger.info,
+          consumes: ['application/json'],
+          produces: ['application/json']
+        }
+      })
 
-  server.ready(err => {
-    if (err) throw err
+    // Register routes
+    server
+      .register(foodRoutes)
+      .register(foodHistoryRoutes)
+      .register(foodGroupRoutes)
+      .register(dietTypeRoutes)
+
+    await server.ready()
+
     server.swagger()
-  })
 
-  // Declare a route
-  server.get('/', async (request, reply) => {
-    return { hello: 'world' }
-  })
+    await server.listen(config.fastify.port, config.fastify.host)
 
-  // Run the server!
-  const start = async () => {
-    try {
-      await server.listen(config.fastify.port, config.fastify.host)
-    } catch (err) {
-      server.log.error(err)
-      process.exit(1)
-    }
+    server.log.info(`Server started at ${config.fastify.host}:${config.fastify.port}`)
+  } catch (err) {
+    server.log.error(err)
+
+    process.exit(1)
   }
-  return start()
 }
 
 process.on('unhandledRejection', err => {
