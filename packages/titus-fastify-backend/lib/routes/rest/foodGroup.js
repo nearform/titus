@@ -3,26 +3,42 @@ const fastifyPlugin = require('fastify-plugin')
 const foodGroupClient = require('../../rest/foodGroup')
 
 function plugin (server, opts, next) {
-  server.get('/foodgroup', async (request, reply) => {
-    return foodGroupClient.getAll(server.pg)
+  server.route({
+    path: '/foodgroup',
+    method: 'GET',
+    handler: async (request, reply) => {
+      return foodGroupClient.getAll(server.pg)
+    }
   })
 
-  server.get('/foodgroup/:id', async (request, reply) => {
-    const { id } = request.params
+  server.route({
+    path: '/foodgroup/:id',
+    method: 'GET',
+    handler: async (request, reply) => {
+      const { id } = request.params
 
-    return foodGroupClient.getById(server.pg, { id })
+      return foodGroupClient.getById(server.pg, { id })
+    }
   })
 
-  server.get('/foodgroup/list/:ids', async (request, reply) => {
-    const { ids } = request.params
+  server.route({
+    path: '/foodgroup/list/:ids',
+    method: 'GET',
+    handler: async (request, reply) => {
+      const { ids } = request.params
 
-    return foodGroupClient.getByIds(server.pg, ids)
+      return foodGroupClient.getByIds(server.pg, ids)
+    }
   })
 
-  server.put('/foodgroup', async (request, reply) => {
-    const { name } = request.params
+  server.route({
+    path: '/foodgroup',
+    method: 'PUT',
+    handler: async (request, reply) => {
+      const { name } = request.params
 
-    return foodGroupClient.create(server.pg, { name })
+      return foodGroupClient.create(server.pg, { name })
+    }
   })
 
   next()

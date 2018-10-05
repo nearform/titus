@@ -3,10 +3,14 @@ const fastifyPlugin = require('fastify-plugin')
 const foodHistoryClient = require('../../rest/foodHistory')
 
 function plugin (server, opts, next) {
-  server.get('/food/history/:id', async (request, reply) => {
-    const { id } = request.params
+  server.route({
+    path: '/food/history/:id',
+    method: 'GET',
+    handler: async (request, reply) => {
+      const { id } = request.params
 
-    return foodHistoryClient.findByFoodId(server.pg, { id })
+      return foodHistoryClient.findByFoodId(server.pg, { id })
+    }
   })
 
   next()
