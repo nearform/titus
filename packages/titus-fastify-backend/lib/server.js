@@ -14,6 +14,8 @@ const foodHistoryRoutes = require('./routes/rest/foodHistory')
 const foodGroupRoutes = require('./routes/rest/foodGroup')
 const dietTypeRoutes = require('./routes/rest/dietType')
 
+const i18nRoutes = require('./routes/translations')
+
 const server = Fastify({
   logger: config.logger.pino
 })
@@ -40,6 +42,7 @@ const init = async () => {
       .register(foodHistoryRoutes)
       .register(foodGroupRoutes)
       .register(dietTypeRoutes)
+      .register(i18nRoutes)
 
     await server.ready()
 
