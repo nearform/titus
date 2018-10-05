@@ -28,6 +28,9 @@ function plugin (server, opts, next) {
   server.route({
     path: '/locales/:language/:namespace',
     method: 'GET',
+    schema: {
+      tags: ['i18n']
+    },
     handler: async (request, reply) => {
       const { language, namespace } = request.params
 

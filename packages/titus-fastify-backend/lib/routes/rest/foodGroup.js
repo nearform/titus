@@ -4,6 +4,9 @@ function plugin (server, opts, next) {
   server.route({
     path: '/foodgroup',
     method: 'GET',
+    schema: {
+      tags: ['food-group']
+    },
     handler: async (request, reply) => {
       return request.dbClient.foodGroup.getAll(server.pg)
     }
@@ -12,6 +15,9 @@ function plugin (server, opts, next) {
   server.route({
     path: '/foodgroup/:id',
     method: 'GET',
+    schema: {
+      tags: ['food-group']
+    },
     handler: async (request, reply) => {
       const { id } = request.params
 
@@ -22,6 +28,9 @@ function plugin (server, opts, next) {
   server.route({
     path: '/foodgroup/list/:ids',
     method: 'GET',
+    schema: {
+      tags: ['food-group']
+    },
     handler: async (request, reply) => {
       const { ids } = request.params
 
@@ -32,6 +41,9 @@ function plugin (server, opts, next) {
   server.route({
     path: '/foodgroup',
     method: 'PUT',
+    schema: {
+      tags: ['food-group']
+    },
     handler: async (request, reply) => {
       const { name } = request.params
 
