@@ -1,14 +1,16 @@
 const fastifyPlugin = require('fastify-plugin')
 
+const modelHelperFn = require('./model-helper')
+
 const foodModel = require('../model/food')
 const dietTypeModel = require('../model/dietType')
 const foodGroupModel = require('../model/foodGroup')
 const foodHistoryModel = require('../model/foodHistory')
 
-function plugin (server, opts, next) {
+function plugin (server, options, next) {
   const { pg } = server
 
-  const modelHelper = (fn) => async (opts) => ({ data: await fn(pg, opts) })
+  const modelHelper = modelHelperFn(pg)
 
   const dbClient = {
     food: {
