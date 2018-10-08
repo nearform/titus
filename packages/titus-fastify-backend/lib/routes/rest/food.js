@@ -18,9 +18,6 @@ function plugin (server, opts, next) {
       const { offset, limit } = request.query
 
       return request.dbClient.food.getAll({ offset, limit })
-    },
-    config: {
-      trail: true
     }
   })
 
