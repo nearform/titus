@@ -49,6 +49,6 @@ function plugin (server, options, next) {
 
 module.exports = fastifyPlugin(plugin, {
   fastify: '1.x',
-  name: 'database-client-decorator',
+  name: 'db-client-plugin',
   dependencies: ['fastify-postgres']
 })
