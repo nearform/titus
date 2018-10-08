@@ -1,13 +1,11 @@
 const fastifyPlugin = require('fastify-plugin')
 
-const dietTypeClient = require('../../rest/dietType')
-
 function plugin (server, opts, next) {
   server.route({
     path: '/diet/type',
     method: 'GET',
     handler: async (request, reply) => {
-      return dietTypeClient.getAll(server.pg)
+      return request.dbClient.dietType.getAll()
     }
   })
 
@@ -17,7 +15,7 @@ function plugin (server, opts, next) {
     handler: async (request, reply) => {
       const { id } = request.params
 
-      return dietTypeClient.deleteDietType(server.pg, id)
+      return request.dbClient.dietType.deleteDietType(id)
     }
   })
 
@@ -27,7 +25,7 @@ function plugin (server, opts, next) {
     handler: async (request, reply) => {
       const { id } = request.params
 
-      return dietTypeClient.toggleDietTypeVisibility(server.pg, { id })
+      return request.dbClient.dietType.toggleDietTypeVisibility({ id })
     }
   })
 

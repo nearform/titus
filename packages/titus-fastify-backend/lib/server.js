@@ -7,11 +7,14 @@ const config = require('../config/default')
 
 // const graphqlSchema = require('./graphql').schema
 // const loaders = require('./graphql').loaders
+const dbClient = require('./plugins/db-client')
 
 const foodRoutes = require('./routes/rest/food')
 const foodHistoryRoutes = require('./routes/rest/foodHistory')
 const foodGroupRoutes = require('./routes/rest/foodGroup')
 const dietTypeRoutes = require('./routes/rest/dietType')
+
+const i18nRoutes = require('./routes/translations')
 
 const server = Fastify({
   logger: config.logger.pino
@@ -31,6 +34,7 @@ const init = async () => {
           produces: ['application/json']
         }
       })
+      .register(dbClient)
 
     // Register routes
     server
@@ -38,6 +42,7 @@ const init = async () => {
       .register(foodHistoryRoutes)
       .register(foodGroupRoutes)
       .register(dietTypeRoutes)
+      .register(i18nRoutes)
 
     await server.ready()
 

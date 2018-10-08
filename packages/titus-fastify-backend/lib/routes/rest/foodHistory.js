@@ -1,7 +1,5 @@
 const fastifyPlugin = require('fastify-plugin')
 
-const foodHistoryClient = require('../../rest/foodHistory')
-
 function plugin (server, opts, next) {
   server.route({
     path: '/food/history/:id',
@@ -9,7 +7,7 @@ function plugin (server, opts, next) {
     handler: async (request, reply) => {
       const { id } = request.params
 
-      return foodHistoryClient.findByFoodId(server.pg, { id })
+      return request.dbClient.foodHistory.findByFoodId({ id })
     }
   })
 

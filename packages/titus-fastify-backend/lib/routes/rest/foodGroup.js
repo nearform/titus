@@ -1,13 +1,11 @@
 const fastifyPlugin = require('fastify-plugin')
 
-const foodGroupClient = require('../../rest/foodGroup')
-
 function plugin (server, opts, next) {
   server.route({
     path: '/foodgroup',
     method: 'GET',
     handler: async (request, reply) => {
-      return foodGroupClient.getAll(server.pg)
+      return request.dbClient.foodGroup.getAll(server.pg)
     }
   })
 
@@ -17,7 +15,7 @@ function plugin (server, opts, next) {
     handler: async (request, reply) => {
       const { id } = request.params
 
-      return foodGroupClient.getById(server.pg, { id })
+      return request.dbClient.foodGroup.getById({ id })
     }
   })
 
@@ -27,7 +25,7 @@ function plugin (server, opts, next) {
     handler: async (request, reply) => {
       const { ids } = request.params
 
-      return foodGroupClient.getByIds(server.pg, ids)
+      return request.dbClient.foodGroup.getByIds(ids)
     }
   })
 
@@ -37,7 +35,7 @@ function plugin (server, opts, next) {
     handler: async (request, reply) => {
       const { name } = request.params
 
-      return foodGroupClient.create(server.pg, { name })
+      return request.dbClient.foodGroup.create({ name })
     }
   })
 
