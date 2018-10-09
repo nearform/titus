@@ -27,49 +27,49 @@ const search = async (pg, { needle, type }) => {
 
 const keywordSearch = async (pg, { needle, type }) => {
   // defaulting to trigram distance, same as 1-similarity
-  let sql = SQL`SELECT word, word <-> ${needle} score FROM food_words 
+  let sql = SQL`SELECT word, word <-> ${needle} score FROM food_words
     where word <-> ${needle} < 0.7
     ORDER BY SCORE`
 
   switch (type) {
     case 'startsWith':
-      sql = SQL` SELECT word, 1 
-        FROM food_words 
-        WHERE word ILIKE(${needle + '%'}) 
+      sql = SQL` SELECT word, 1
+        FROM food_words
+        WHERE word ILIKE(${needle + '%'})
         ORDER BY LENGTH(word), word`
       break
     case 'contains':
-      sql = SQL` SELECT word, 1 
-        FROM food_words 
-        WHERE word ILIKE(${'%' + needle + '%'}) 
+      sql = SQL` SELECT word, 1
+        FROM food_words
+        WHERE word ILIKE(${'%' + needle + '%'})
         ORDER BY LENGTH(word), word`
       break
     case 'endsWith':
-      sql = SQL` SELECT word, 1 
-        FROM food_words 
-        WHERE word ILIKE(${'%' + needle}) 
+      sql = SQL` SELECT word, 1
+        FROM food_words
+        WHERE word ILIKE(${'%' + needle})
         ORDER BY LENGTH(word), word`
       break
     case 'levenshtein':
       // requires fuzzy extension, basically a fuzzy search, not as efficient as trigram
       // this might be better calculated as a percentage e.g. abc vs abd should be further
       // scored far less than abcdefg vs abddefg, we're just giving back distance, there are a few variants
-      sql = SQL` SELECT word, levenshtein(${needle}, word) score 
-        FROM food_words 
+      sql = SQL` SELECT word, levenshtein(${needle}, word) score
+        FROM food_words
         WHERE levenshtein(${needle}, word) < 4
         ORDER BY score, word`
       break
     case 'soundex':
       // requires fuzzy extension, 4 is an exact soundex match, which may not be an exact match
       // it is good for matching similar sounding names, difference is a convenience function to compare soundex results
-      sql = SQL` SELECT word, difference(${needle}, word) score 
-        FROM food_words 
+      sql = SQL` SELECT word, difference(${needle}, word) score
+        FROM food_words
         WHERE difference(${needle}, word) = 4`
       break
     case 'metaphone':
       // fuzzy again, using double metaphone to compare english and foreign sounding words
       sql = SQL` SELECT word, 1
-        FROM food_words 
+        FROM food_words
         WHERE (dmetaphone(${needle}) = dmetaphone(word))
           OR (dmetaphone_alt(${needle}) = dmetaphone_alt(word))`
       break
