@@ -4,6 +4,9 @@ function plugin (server, opts, next) {
   server.route({
     path: '/diet/type',
     method: 'GET',
+    schema: {
+      tags: ['diet-type']
+    },
     handler: async (request, reply) => {
       return request.dbClient.dietType.getAll()
     }
@@ -12,6 +15,15 @@ function plugin (server, opts, next) {
   server.route({
     path: '/diet/type/:id',
     method: 'DELETE',
+    schema: {
+      tags: ['diet-type'],
+      params: {
+        type: 'object',
+        properties: {
+          id: { type: 'string' }
+        }
+      }
+    },
     handler: async (request, reply) => {
       const { id } = request.params
 
@@ -22,6 +34,15 @@ function plugin (server, opts, next) {
   server.route({
     path: '/diet/type/visibility/:id',
     method: 'POST',
+    schema: {
+      tags: ['diet-type'],
+      params: {
+        type: 'object',
+        properties: {
+          id: { type: 'string' }
+        }
+      }
+    },
     handler: async (request, reply) => {
       const { id } = request.params
 

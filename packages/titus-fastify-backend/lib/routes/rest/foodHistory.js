@@ -4,6 +4,15 @@ function plugin (server, opts, next) {
   server.route({
     path: '/food/history/:id',
     method: 'GET',
+    schema: {
+      tags: ['food-history'],
+      params: {
+        type: 'object',
+        properties: {
+          id: { type: 'string' }
+        }
+      }
+    },
     handler: async (request, reply) => {
       const { id } = request.params
 
