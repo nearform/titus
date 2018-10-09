@@ -5,9 +5,11 @@ const dbClientFactory = require('../db-client')
 function plugin (server, options, next) {
   const { pg } = server
 
+  const dbClient = dbClientFactory({ pg })
+
   server.decorateRequest('dbClient', {
     getter () {
-      return dbClientFactory(pg)
+      return dbClient
     }
   })
 

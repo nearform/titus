@@ -1,11 +1,11 @@
 const ModelHelper = require('./model-helper')
 
-const foodModel = require('../model/food')
+const foodModel = require('./food/food')
 const dietTypeModel = require('../model/dietType')
 const foodGroupModel = require('../model/foodGroup')
 const foodHistoryModel = require('../model/foodHistory')
 
-module.exports = function ({ pg }) {
+module.exports = function dbClientFactory ({ pg }) {
   const modelHelper = ModelHelper(pg)
 
   return {

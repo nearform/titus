@@ -5,13 +5,17 @@ jest.mock('../../lib/db-client')
 
 test('dbClient plugin should call decorateRequest with the dbClient', async () => {
   const serverStub = {
-    decorateRequest: jest.fn()
+    decorateRequest: jest.fn(),
+    pg: 'pg-stub'
   }
 
   dbClientFactory.mockReturnValueOnce('db-client-object')
 
   dbClientPlugin(serverStub, {}, () => {
     expect(serverStub.decorateRequest).toHaveBeenCalledTimes(1)
+    expect(dbClientFactory).toBeCalledWith(expect.objectContaining({
+      pg: 'pg-stub'
+    }))
 
     expect(serverStub.decorateRequest).toBeCalledWith('dbClient', expect.objectContaining({
       getter: expect.any(Function)
