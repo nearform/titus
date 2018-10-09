@@ -1,17 +1,14 @@
-const ModelHelper = require('../../lib/plugins/model-helper')
+const dbClientFactory = require('../../lib/db-client')
 const dbClientPlugin = require('../../lib/plugins/db-client')
 
-jest.mock('../../lib/plugins/model-helper')
+jest.mock('../../lib/db-client')
 
 test('dbClient plugin should call decorateRequest with the dbClient', async () => {
   const serverStub = {
     decorateRequest: jest.fn()
   }
 
-  const modelHelperStub = jest.fn()
-  modelHelperStub.mockReturnValue('WRAPPED FUNC')
-
-  ModelHelper.mockReturnValueOnce(modelHelperStub)
+  dbClientFactory.mockReturnValueOnce('db-client-object')
 
   dbClientPlugin(serverStub, {}, () => {
     expect(serverStub.decorateRequest).toHaveBeenCalledTimes(1)
@@ -22,30 +19,6 @@ test('dbClient plugin should call decorateRequest with the dbClient', async () =
 
     const dbClient = serverStub.decorateRequest.mock.calls[0][1].getter()
 
-    expect(dbClient).toMatchObject({
-      food: {
-        getAll: 'WRAPPED FUNC',
-        getById: 'WRAPPED FUNC',
-        search: 'WRAPPED FUNC',
-        keyword: 'WRAPPED FUNC',
-        create: 'WRAPPED FUNC',
-        update: 'WRAPPED FUNC',
-        deleteFoods: 'WRAPPED FUNC'
-      },
-      dietType: {
-        getAll: 'WRAPPED FUNC',
-        deleteDietType: 'WRAPPED FUNC',
-        toggleDietTypeVisibility: 'WRAPPED FUNC'
-      },
-      foodGroup: {
-        getById: 'WRAPPED FUNC',
-        getByIds: 'WRAPPED FUNC',
-        getAll: 'WRAPPED FUNC',
-        create: 'WRAPPED FUNC'
-      },
-      foodHistory: {
-        findByFoodId: 'WRAPPED FUNC'
-      }
-    })
+    expect(dbClient).toBe('db-client-object')
   })
 })
