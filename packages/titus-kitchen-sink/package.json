@@ -76,6 +76,7 @@
     "pretty-quick": "^1.7.0",
     "react-app-rewire-graphql-tag": "^1.1.0",
     "react-app-rewired": "^1.6.2",
+    "react-jss": "^8.6.1",
     "react-testing-library": "^4.1.2",
     "serve": "^10.0.2",
     "vision": "^5.4.0"
