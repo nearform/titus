@@ -1,33 +1,52 @@
 const fastifyPlugin = require('fastify-plugin')
 
-const dietTypeClient = require('../../rest/dietType')
-
 function plugin (server, opts, next) {
   server.route({
     path: '/diet/type',
     method: 'GET',
+    schema: {
+      tags: ['diet-type']
+    },
     handler: async (request, reply) => {
-      return dietTypeClient.getAll(server.pg)
+      return request.dbClient.dietType.getAll()
     }
   })
 
   server.route({
     path: '/diet/type/:id',
     method: 'DELETE',
+    schema: {
+      tags: ['diet-type'],
+      params: {
+        type: 'object',
+        properties: {
+          id: { type: 'string' }
+        }
+      }
+    },
     handler: async (request, reply) => {
       const { id } = request.params
 
-      return dietTypeClient.deleteDietType(server.pg, id)
+      return request.dbClient.dietType.deleteDietType(id)
     }
   })
 
   server.route({
     path: '/diet/type/visibility/:id',
     method: 'POST',
+    schema: {
+      tags: ['diet-type'],
+      params: {
+        type: 'object',
+        properties: {
+          id: { type: 'string' }
+        }
+      }
+    },
     handler: async (request, reply) => {
       const { id } = request.params
 
-      return dietTypeClient.toggleDietTypeVisibility(server.pg, { id })
+      return request.dbClient.dietType.toggleDietTypeVisibility({ id })
     }
   })
 

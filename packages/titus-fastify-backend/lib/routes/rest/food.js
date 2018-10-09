@@ -1,51 +1,98 @@
 const fastifyPlugin = require('fastify-plugin')
 
-const foodClient = require('../../rest/food')
-
 function plugin (server, opts, next) {
   server.route({
     path: '/food',
     method: 'GET',
+    schema: {
+      tags: ['food'],
+      querystring: {
+        type: 'object',
+        properties: {
+          offset: { type: 'number' },
+          limit: { type: 'number' }
+        }
+      }
+    },
     handler: async (request, reply) => {
       const { offset, limit } = request.query
 
-      return foodClient.getAll(server.pg, { offset, limit })
+      return request.dbClient.food.getAll({ offset, limit })
     }
   })
 
   server.route({
     path: '/food/:id',
     method: 'GET',
+    schema: {
+      tags: ['food'],
+      params: {
+        type: 'object',
+        properties: {
+          id: { type: 'string' }
+        }
+      }
+    },
     handler: async (request, reply) => {
       const { id } = request.params
 
-      return foodClient.getById(server.pg, { id })
+      return request.dbClient.food.getById({ id })
     }
   })
 
   server.route({
     path: '/food/search/:type/:needle',
     method: 'GET',
+    schema: {
+      tags: ['food'],
+      params: {
+        type: 'object',
+        properties: {
+          type: { type: 'string' },
+          needle: { type: 'string' }
+        }
+      }
+    },
     handler: async (request, reply) => {
       const { type, needle } = request.params
 
-      return foodClient.search(server.pg, { type, needle })
+      return request.dbClient.food.search({ type, needle })
     }
   })
 
   server.route({
     path: '/food/keyword/:keywordType/:needle',
     method: 'GET',
+    schema: {
+      tags: ['food'],
+      params: {
+        type: 'object',
+        properties: {
+          keywordType: { type: 'string' },
+          needle: { type: 'string' }
+        }
+      }
+    },
     handler: async (request, reply) => {
       const { keywordType, needle } = request.params
 
-      return foodClient.keyword(server.pg, { keywordType, needle })
+      return request.dbClient.food.keyword({ keywordType, needle })
     }
   })
 
   server.route({
     path: '/food',
     method: 'PUT',
+    schema: {
+      tags: ['food'],
+      body: {
+        type: 'object',
+        properties: {
+          name: { type: 'string' },
+          foodGroupId: { type: 'string' }
+        }
+      }
+    },
     handler: async (request, reply) => {
       const { name, foodGroupId } = request.body
 
@@ -54,13 +101,24 @@ function plugin (server, opts, next) {
         foodGroupId
       }
 
-      return foodClient.create(server.pg, { food })
+      return request.dbClient.food.create({ food })
     }
   })
 
   server.route({
     path: '/food',
     method: 'POST',
+    schema: {
+      tags: ['food'],
+      body: {
+        type: 'object',
+        properties: {
+          id: { type: 'string' },
+          name: { type: 'string' },
+          foodGroupId: { type: 'string' }
+        }
+      }
+    },
     handler: async (request, reply) => {
       const { id, name, foodGroupId } = request.body
 
@@ -70,17 +128,26 @@ function plugin (server, opts, next) {
         foodGroupId
       }
 
-      return foodClient.update(server.pg, { food })
+      return request.dbClient.food.update({ food })
     }
   })
 
   server.route({
     path: '/food/:ids',
     method: 'DELETE',
+    schema: {
+      tags: ['food'],
+      params: {
+        type: 'object',
+        properties: {
+          id: { type: 'string' }
+        }
+      }
+    },
     handler: async (request, reply) => {
       const { ids } = request.params
 
-      return foodClient.deleteFoods(server.pg, { ids })
+      return request.dbClient.food.deleteFoods({ ids })
     }
   })
 
