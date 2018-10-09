@@ -1,14 +1,16 @@
 const fastifyPlugin = require('fastify-plugin')
 
+const ModelHelper = require('./model-helper')
+
 const foodModel = require('../model/food')
 const dietTypeModel = require('../model/dietType')
 const foodGroupModel = require('../model/foodGroup')
 const foodHistoryModel = require('../model/foodHistory')
 
-function plugin (server, opts, next) {
+function plugin (server, options, next) {
   const { pg } = server
 
-  const modelHelper = (fn) => async (opts) => ({ data: await fn(pg, opts) })
+  const modelHelper = ModelHelper(pg)
 
   const dbClient = {
     food: {
@@ -47,6 +49,6 @@ function plugin (server, opts, next) {
 
 module.exports = fastifyPlugin(plugin, {
   fastify: '1.x',
-  name: 'database-client-decorator',
+  name: 'db-client-plugin',
   dependencies: ['fastify-postgres']
 })

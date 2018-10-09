@@ -5,7 +5,7 @@
   "description": "The Fastify backend for the Titus project",
   "main": "index.js",
   "scripts": {
-    "test": "true || jest",
+    "test": "jest",
     "migrate": "node ./tools/migrate build",
     "dev:seed": "node ./tools/migrate seed_dev",
     "dev:seed:udaru:init": "udaru-init --host='postgres' --database='titus' --user='titus' --password='titus'",
@@ -72,6 +72,6 @@
   "jest": {
     "verbose": true,
     "testEnvironment": "node",
-    "testRegex": "./test/.*"
+    "testRegex": "./test/.*.test.js"
   }
 }
