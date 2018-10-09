@@ -1,4 +1,4 @@
-const modelHelperFn = require('../../lib/plugins/model-helper')
+const ModelHelper = require('../../lib/plugins/model-helper')
 const dbClientPlugin = require('../../lib/plugins/db-client')
 
 jest.mock('../../lib/plugins/model-helper')
@@ -11,7 +11,7 @@ test('dbClient plugin should call decorateRequest with the dbClient', async () =
   const modelHelperStub = jest.fn()
   modelHelperStub.mockReturnValue('WRAPPED FUNC')
 
-  modelHelperFn.mockReturnValueOnce(modelHelperStub)
+  ModelHelper.mockReturnValueOnce(modelHelperStub)
 
   dbClientPlugin(serverStub, {}, () => {
     expect(serverStub.decorateRequest).toHaveBeenCalledTimes(1)

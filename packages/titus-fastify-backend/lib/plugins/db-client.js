@@ -1,6 +1,6 @@
 const fastifyPlugin = require('fastify-plugin')
 
-const modelHelperFn = require('./model-helper')
+const ModelHelper = require('./model-helper')
 
 const foodModel = require('../model/food')
 const dietTypeModel = require('../model/dietType')
@@ -10,7 +10,7 @@ const foodHistoryModel = require('../model/foodHistory')
 function plugin (server, options, next) {
   const { pg } = server
 
-  const modelHelper = modelHelperFn(pg)
+  const modelHelper = ModelHelper(pg)
 
   const dbClient = {
     food: {
