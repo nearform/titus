@@ -1,4 +1,5 @@
 const fastifyPlugin = require('fastify-plugin')
+const httpErrors = require('http-errors')
 
 function plugin (server, opts, next) {
   server.route({
@@ -36,7 +37,17 @@ function plugin (server, opts, next) {
     handler: async (request, reply) => {
       const { id } = request.params
 
-      return request.dbClient.food.getById({ id })
+      try {
+        const row = await request.dbClient.food.getById({ id })
+
+        return row
+      } catch (err) {
+        if (err.isDBError && err.isNotFound) {
+          return new httpErrors.NotFound()
+        }
+
+        return new httpErrors.InternalServerError()
+      }
     }
   })
 
