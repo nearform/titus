@@ -112,7 +112,18 @@ function plugin (server, opts, next) {
         foodGroupId
       }
 
-      return request.dbClient.food.create({ food })
+      try {
+        const data = await request.dbClient.food.create({ food })
+
+        return data
+      } catch (err) {
+        if (err.isDBError) {
+          if (err.isDuplicateKey) return new httpErrors.BadRequest()
+          if (err.isForeignKeyViolation) return new httpErrors.BadRequest()
+        }
+
+        return new httpErrors.InternalServerError()
+      }
     }
   })
 
