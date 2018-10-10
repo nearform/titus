@@ -3,11 +3,13 @@ const getById = require('./get-by-id')
 const search = require('./search')
 const keyword = require('./keyword-search')
 const create = require('./create')
+const update = require('./update')
 
 module.exports = {
   getAll,
   getById,
   search,
   keyword,
-  create
+  create,
+  update
 }
