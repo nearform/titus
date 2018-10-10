@@ -155,19 +155,19 @@ function plugin (server, opts, next) {
   })
 
   server.route({
-    path: '/food/:ids',
+    path: '/food',
     method: 'DELETE',
     schema: {
       tags: ['food'],
-      params: {
-        type: 'object',
-        properties: {
-          id: { type: 'string' }
+      body: {
+        type: 'array',
+        items: {
+          type: 'string'
         }
       }
     },
     handler: async (request, reply) => {
-      const { ids } = request.params
+      const ids = request.body
 
       return request.dbClient.food.deleteFoods({ ids })
     }

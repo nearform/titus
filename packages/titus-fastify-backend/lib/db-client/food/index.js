@@ -4,6 +4,7 @@ const search = require('./search')
 const keyword = require('./keyword-search')
 const create = require('./create')
 const update = require('./update')
+const deleteFoods = require('./delete')
 
 module.exports = {
   getAll,
@@ -11,5 +12,6 @@ module.exports = {
   search,
   keyword,
   create,
-  update
+  update,
+  deleteFoods
 }
