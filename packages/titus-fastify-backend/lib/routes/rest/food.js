@@ -169,7 +169,7 @@ function plugin (server, opts, next) {
     handler: async (request, reply) => {
       const ids = request.body
 
-      return request.dbClient.food.deleteFoods({ ids })
+      return request.dbClient.food.delete({ ids })
     }
   })
 

@@ -16,7 +16,7 @@ module.exports = function dbClientFactory ({ pg }) {
       keyword: modelHelper(foodModel.keyword),
       create: modelHelper(foodModel.create),
       update: modelHelper(foodModel.update),
-      deleteFoods: modelHelper(foodModel.deleteFoods)
+      delete: modelHelper(foodModel.delete)
     },
     dietType: {
       getAll: modelHelper(dietTypeModel.getAll),
