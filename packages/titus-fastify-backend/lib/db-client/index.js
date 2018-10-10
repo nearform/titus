@@ -1,7 +1,7 @@
 const ModelHelper = require('./model-helper')
 
 const foodModel = require('./food')
-const dietTypeModel = require('../model/dietType')
+const dietTypeModel = require('./diet-type')
 const foodGroupModel = require('../model/foodGroup')
 const foodHistoryModel = require('../model/foodHistory')
 
