@@ -20,7 +20,7 @@ module.exports = function dbClientFactory ({ pg }) {
     },
     dietType: {
       getAll: modelHelper(dietTypeModel.getAll),
-      deleteDietType: modelHelper(dietTypeModel.deleteDietType),
+      delete: modelHelper(dietTypeModel.delete),
       toggleDietTypeVisibility: modelHelper(dietTypeModel.toggleDietTypeVisibility)
     },
     foodGroup: {

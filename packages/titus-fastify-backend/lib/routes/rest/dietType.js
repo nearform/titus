@@ -27,7 +27,7 @@ function plugin (server, opts, next) {
     handler: async (request, reply) => {
       const { id } = request.params
 
-      return request.dbClient.dietType.deleteDietType(id)
+      return request.dbClient.dietType.delete({ id })
     }
   })
 
