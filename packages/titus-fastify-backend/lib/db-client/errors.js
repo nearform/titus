@@ -1,8 +1,20 @@
+class GenericDBError extends Error {}
+tag(GenericDBError, 'isGeneric')
+
 class NotFoundError extends Error {}
 tag(NotFoundError, 'isNotFound')
 
+class DuplicateKeyError extends Error {}
+tag(DuplicateKeyError, 'isDuplicateKey')
+
+class ForeignKeyViolationError extends Error {}
+tag(ForeignKeyViolationError, 'isForeignKeyViolation')
+
 module.exports = {
-  NotFoundError
+  GenericDBError,
+  NotFoundError,
+  DuplicateKeyError,
+  ForeignKeyViolationError
 }
 
 function tag (Cls, prop) {
