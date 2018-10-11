@@ -5,7 +5,7 @@ const errorHandler = require('../../error-handler')
 
 function plugin (server, opts, next) {
   server.route({
-    path: '/diet/type',
+    path: '/diet-type',
     method: 'GET',
     schema: {
       tags: ['diet-type']
@@ -16,7 +16,7 @@ function plugin (server, opts, next) {
   })
 
   server.route({
-    path: '/diet/type/:id',
+    path: '/diet-type/:id',
     method: 'DELETE',
     schema: {
       tags: ['diet-type'],
