@@ -1,8 +1,9 @@
 const fastifyPlugin = require('fastify-plugin')
+const httpErrors = require('http-errors')
 
 function plugin (server, opts, next) {
   server.route({
-    path: '/food/history/:id',
+    path: '/food/history/:foodId',
     method: 'GET',
     schema: {
       tags: ['food-history'],
@@ -14,9 +15,19 @@ function plugin (server, opts, next) {
       }
     },
     handler: async (request, reply) => {
-      const { id } = request.params
+      const { foodId } = request.params
 
-      return request.dbClient.foodHistory.findByFoodId({ id })
+      try {
+        const row = await request.dbClient.food.history({ foodId })
+
+        return row
+      } catch (err) {
+        if (err.isDBError && err.isNotFound) {
+          return new httpErrors.NotFound()
+        }
+
+        return new httpErrors.InternalServerError()
+      }
     }
   })
 

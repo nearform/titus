@@ -5,6 +5,7 @@ const keyword = require('./keyword-search')
 const create = require('./create')
 const update = require('./update')
 const deleteFood = require('./delete')
+const history = require('./history')
 
 module.exports = {
   getAll,
@@ -13,5 +14,6 @@ module.exports = {
   keyword,
   create,
   update,
-  delete: deleteFood
+  delete: deleteFood,
+  history
 }
