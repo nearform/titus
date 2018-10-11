@@ -3,6 +3,8 @@ const swagger = require('fastify-swagger')
 const postgres = require('fastify-postgres')
 const GQL = require('fastify-gql')
 const cors = require('fastify-cors')
+const pg = require('pg')
+require('pg-range').install(pg)
 
 const config = require('../config/default')
 const graphql = require('./graphql')
@@ -23,7 +25,7 @@ const init = async () => {
     // Register plugins
     server
       .register(cors, { origin: true })
-      .register(postgres, config.db)
+      .register(postgres, {pg, ...config.db})
       .register(swagger, {
         routePrefix: '/documentation',
         exposeRoute: process.env.NODE_ENV !== 'production',
