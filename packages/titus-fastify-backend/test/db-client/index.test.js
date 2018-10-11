@@ -19,21 +19,18 @@ test('dbClient plugin should call decorateRequest with the dbClient', async () =
       keyword: 'WRAPPED FUNC',
       create: 'WRAPPED FUNC',
       update: 'WRAPPED FUNC',
-      deleteFoods: 'WRAPPED FUNC'
+      delete: 'WRAPPED FUNC',
+      history: 'WRAPPED FUNC'
     },
     dietType: {
       getAll: 'WRAPPED FUNC',
-      deleteDietType: 'WRAPPED FUNC',
-      toggleDietTypeVisibility: 'WRAPPED FUNC'
+      delete: 'WRAPPED FUNC',
+      update: 'WRAPPED FUNC'
     },
     foodGroup: {
       getById: 'WRAPPED FUNC',
-      getByIds: 'WRAPPED FUNC',
       getAll: 'WRAPPED FUNC',
       create: 'WRAPPED FUNC'
-    },
-    foodHistory: {
-      findByFoodId: 'WRAPPED FUNC'
     }
   })
 })

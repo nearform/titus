@@ -114,17 +114,17 @@ test('update food API', async () => {
 test('delete foods API', async () => {
   const endpoints = {
     food: {
-      deleteFoods: jest.fn().mockReturnValue('deleteFoods value')
+      delete: jest.fn().mockReturnValue('delete value')
     }
   }
   const plugins = [{ plugin: fakeDbClientPlugin, options: { endpoints } }, { plugin: foodRoutes }]
   const server = await buildServer(plugins)
 
-  const response = await server.inject({ method: 'DELETE', url: '/food/1,2,3,4,5' })
+  const response = await server.inject({ method: 'DELETE', url: '/food', body: [1, 2, 3, 4, 5] })
 
-  expect(endpoints.food.deleteFoods).toHaveBeenCalledTimes(1)
-  expect(endpoints.food.deleteFoods).toBeCalledWith({ ids: '1,2,3,4,5' })
+  expect(endpoints.food.delete).toHaveBeenCalledTimes(1)
+  expect(endpoints.food.delete).toBeCalledWith({ ids: ['1', '2', '3', '4', '5'] })
 
   expect(response.statusCode).toEqual(200)
-  expect(response.body).toEqual('deleteFoods value')
+  expect(response.body).toEqual('delete value')
 })

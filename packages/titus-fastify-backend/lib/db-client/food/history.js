@@ -3,8 +3,8 @@ const camelize = require('camelize')
 
 const dbErrors = require('../errors')
 
-module.exports = async function getAll (pg, { foodId }) {
-  const sql = SQL`
+const getSql = ({ foodId }) => {
+  return SQL`
     SELECT
       id,
       name,
@@ -15,6 +15,11 @@ module.exports = async function getAll (pg, { foodId }) {
     FROM food_history
     WHERE id = ${foodId}
   `
+}
+
+module.exports = async function (pg, opts) {
+  const sql = getSql(opts)
+
   const result = await pg.query(sql)
 
   if (result.rowCount === 0) {

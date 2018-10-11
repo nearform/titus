@@ -1,8 +1,8 @@
 const SQL = require('@nearform/sql')
 const camelize = require('camelize')
 
-module.exports = async function getAll (pg) {
-  const sql = SQL`
+const getSql = () => {
+  return SQL`
     SELECT
       id,
       name,
@@ -12,6 +12,11 @@ module.exports = async function getAll (pg) {
     FROM diet_type
     ORDER BY name ASC
   `
+}
+
+module.exports = async function (pg) {
+  const sql = getSql()
+
   const result = await pg.query(sql)
 
   return camelize(result.rows)

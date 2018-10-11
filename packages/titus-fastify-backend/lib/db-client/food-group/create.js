@@ -13,18 +13,18 @@ const getSql = ({ name }) => {
   `
 }
 
-module.exports = async function search (pg, opts) {
+module.exports = async function (pg, opts) {
   const sql = getSql(opts)
 
   const result = await pg.query(sql)
 
-  const updated = camelize(result.rows[0])
+  const created = camelize(result.rows[0])
 
   return {
-    id: updated.id,
+    id: created.id,
     typeName: 'FoodGroup',
     operation: 'create',
     count: result.rowCount,
-    updated
+    created
   }
 }
