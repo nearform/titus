@@ -1,4 +1,5 @@
 const fastifyPlugin = require('fastify-plugin')
+const httpErrors = require('http-errors')
 
 function plugin (server, opts, next) {
   server.route({
@@ -32,7 +33,7 @@ function plugin (server, opts, next) {
   })
 
   server.route({
-    path: '/diet/type/visibility/:id',
+    path: '/diet-type/:id',
     method: 'POST',
     schema: {
       tags: ['diet-type'],
@@ -41,12 +42,25 @@ function plugin (server, opts, next) {
         properties: {
           id: { type: 'string' }
         }
+      },
+      body: {
+        type: 'object',
+        properties: {
+          name: { type: 'string', minLength: 1 },
+          visible: { type: 'boolean' }
+        },
+        additionalProperties: false
       }
     },
     handler: async (request, reply) => {
       const { id } = request.params
+      const { name, visible } = request.body
 
-      return request.dbClient.dietType.toggleDietTypeVisibility({ id })
+      if (name == null && visible == null) {
+        return new httpErrors.BadRequest()
+      }
+
+      return request.dbClient.dietType.update({ id, name, visible })
     }
   })
 

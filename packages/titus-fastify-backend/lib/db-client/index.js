@@ -21,7 +21,7 @@ module.exports = function dbClientFactory ({ pg }) {
     dietType: {
       getAll: modelHelper(dietTypeModel.getAll),
       delete: modelHelper(dietTypeModel.delete),
-      toggleDietTypeVisibility: modelHelper(dietTypeModel.toggleDietTypeVisibility)
+      update: modelHelper(dietTypeModel.update)
     },
     foodGroup: {
       getById: modelHelper(foodGroupModel.getById),
