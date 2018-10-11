@@ -2,7 +2,7 @@ const ModelHelper = require('./model-helper')
 
 const foodModel = require('./food')
 const dietTypeModel = require('./diet-type')
-const foodGroupModel = require('../model/foodGroup')
+const foodGroupModel = require('./food-group')
 const foodHistoryModel = require('../model/foodHistory')
 
 module.exports = function dbClientFactory ({ pg }) {
@@ -25,7 +25,6 @@ module.exports = function dbClientFactory ({ pg }) {
     },
     foodGroup: {
       getById: modelHelper(foodGroupModel.getById),
-      getByIds: modelHelper(foodGroupModel.getByIds),
       getAll: modelHelper(foodGroupModel.getAll),
       create: modelHelper(foodGroupModel.create)
     },
