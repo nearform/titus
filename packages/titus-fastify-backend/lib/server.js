@@ -1,5 +1,3 @@
-'use strict'
-
 const Fastify = require('fastify')
 const swagger = require('fastify-swagger')
 const postgres = require('fastify-postgres')
@@ -11,7 +9,6 @@ const graphql = require('./graphql')
 const dbClient = require('./plugins/db-client')
 
 const foodRoutes = require('./routes/rest/food')
-const foodHistoryRoutes = require('./routes/rest/foodHistory')
 const foodGroupRoutes = require('./routes/rest/foodGroup')
 const dietTypeRoutes = require('./routes/rest/dietType')
 
@@ -45,7 +42,6 @@ const init = async () => {
     // Register routes
     server
       .register(foodRoutes)
-      .register(foodHistoryRoutes)
       .register(foodGroupRoutes)
       .register(dietTypeRoutes)
       .register(i18nRoutes)

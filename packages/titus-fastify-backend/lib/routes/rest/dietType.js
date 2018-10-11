@@ -1,8 +1,11 @@
 const fastifyPlugin = require('fastify-plugin')
+const httpErrors = require('http-errors')
+
+const errorHandler = require('../../error-handler')
 
 function plugin (server, opts, next) {
   server.route({
-    path: '/diet/type',
+    path: '/diet-type',
     method: 'GET',
     schema: {
       tags: ['diet-type']
@@ -13,7 +16,7 @@ function plugin (server, opts, next) {
   })
 
   server.route({
-    path: '/diet/type/:id',
+    path: '/diet-type/:id',
     method: 'DELETE',
     schema: {
       tags: ['diet-type'],
@@ -27,12 +30,12 @@ function plugin (server, opts, next) {
     handler: async (request, reply) => {
       const { id } = request.params
 
-      return request.dbClient.dietType.deleteDietType(id)
+      return request.dbClient.dietType.delete({ id })
     }
   })
 
   server.route({
-    path: '/diet/type/visibility/:id',
+    path: '/diet-type/:id',
     method: 'POST',
     schema: {
       tags: ['diet-type'],
@@ -41,13 +44,30 @@ function plugin (server, opts, next) {
         properties: {
           id: { type: 'string' }
         }
+      },
+      body: {
+        type: 'object',
+        properties: {
+          name: { type: 'string', minLength: 1 },
+          visible: { type: 'boolean' }
+        },
+        additionalProperties: false
       }
     },
     handler: async (request, reply) => {
       const { id } = request.params
+      const { name, visible } = request.body
 
-      return request.dbClient.dietType.toggleDietTypeVisibility({ id })
+      if (name == null && visible == null) {
+        return new httpErrors.BadRequest()
+      }
+
+      return request.dbClient.dietType.update({ id, name, visible })
     }
+  })
+
+  server.setErrorHandler((err, request, reply) => {
+    reply.send(errorHandler(err))
   })
 
   next()

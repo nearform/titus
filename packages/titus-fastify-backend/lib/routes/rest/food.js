@@ -1,4 +1,5 @@
 const fastifyPlugin = require('fastify-plugin')
+const errorHandler = require('../../error-handler')
 
 function plugin (server, opts, next) {
   server.route({
@@ -48,7 +49,7 @@ function plugin (server, opts, next) {
       params: {
         type: 'object',
         properties: {
-          type: { type: 'string' },
+          type: { type: 'string', enum: ['startsWith', 'endsWith', 'fullText', 'similarity', 'contains'] },
           needle: { type: 'string' }
         }
       }
@@ -68,7 +69,7 @@ function plugin (server, opts, next) {
       params: {
         type: 'object',
         properties: {
-          keywordType: { type: 'string' },
+          keywordType: { type: 'string', enum: ['startsWith', 'contains', 'endsWith', 'levenshtein', 'soundex', 'metaphone', 'trigram'] },
           needle: { type: 'string' }
         }
       }
@@ -133,10 +134,29 @@ function plugin (server, opts, next) {
   })
 
   server.route({
-    path: '/food/:ids',
+    path: '/food',
     method: 'DELETE',
     schema: {
       tags: ['food'],
+      body: {
+        type: 'array',
+        items: {
+          type: 'string'
+        }
+      }
+    },
+    handler: async (request, reply) => {
+      const ids = request.body
+
+      return request.dbClient.food.delete({ ids })
+    }
+  })
+
+  server.route({
+    path: '/food/history/:foodId',
+    method: 'GET',
+    schema: {
+      tags: ['food-history'],
       params: {
         type: 'object',
         properties: {
@@ -145,10 +165,14 @@ function plugin (server, opts, next) {
       }
     },
     handler: async (request, reply) => {
-      const { ids } = request.params
+      const { foodId } = request.params
 
-      return request.dbClient.food.deleteFoods({ ids })
+      return request.dbClient.food.history({ foodId })
     }
+  })
+
+  server.setErrorHandler((err, request, reply) => {
+    reply.send(errorHandler(err))
   })
 
   next()

@@ -1,19 +1,21 @@
 const fastifyPlugin = require('fastify-plugin')
 
+const errorHandler = require('../../error-handler')
+
 function plugin (server, opts, next) {
   server.route({
-    path: '/foodgroup',
+    path: '/food-group',
     method: 'GET',
     schema: {
       tags: ['food-group']
     },
     handler: async (request, reply) => {
-      return request.dbClient.foodGroup.getAll(server.pg)
+      return request.dbClient.foodGroup.getAll()
     }
   })
 
   server.route({
-    path: '/foodgroup/:id',
+    path: '/food-group/:id',
     method: 'GET',
     schema: {
       tags: ['food-group'],
@@ -32,26 +34,7 @@ function plugin (server, opts, next) {
   })
 
   server.route({
-    path: '/foodgroup/list/:ids',
-    method: 'GET',
-    schema: {
-      tags: ['food-group'],
-      params: {
-        type: 'object',
-        properties: {
-          ids: { type: 'string' }
-        }
-      }
-    },
-    handler: async (request, reply) => {
-      const { ids } = request.params
-
-      return request.dbClient.foodGroup.getByIds(ids)
-    }
-  })
-
-  server.route({
-    path: '/foodgroup',
+    path: '/food-group',
     method: 'PUT',
     schema: {
       tags: ['food-group'],
@@ -59,7 +42,8 @@ function plugin (server, opts, next) {
         type: 'object',
         properties: {
           name: { type: 'string' }
-        }
+        },
+        additionalProperties: false
       }
     },
     handler: async (request, reply) => {
@@ -67,6 +51,10 @@ function plugin (server, opts, next) {
 
       return request.dbClient.foodGroup.create({ name })
     }
+  })
+
+  server.setErrorHandler((err, request, reply) => {
+    reply.send(errorHandler(err))
   })
 
   next()

@@ -48,10 +48,10 @@ test('search API', async () => {
   const plugins = [{ plugin: fakeDbClientPlugin, options: { endpoints } }, { plugin: foodRoutes }]
   const server = await buildServer(plugins)
 
-  const response = await server.inject({ method: 'GET', url: '/food/search/typ/ndl' })
+  const response = await server.inject({ method: 'GET', url: '/food/search/startsWith/keyword' })
 
   expect(endpoints.food.search).toHaveBeenCalledTimes(1)
-  expect(endpoints.food.search).toBeCalledWith({ type: 'typ', needle: 'ndl' })
+  expect(endpoints.food.search).toBeCalledWith({ type: 'startsWith', needle: 'keyword' })
 
   expect(response.statusCode).toEqual(200)
   expect(response.body).toEqual('search value')
@@ -66,10 +66,10 @@ test('keyword API', async () => {
   const plugins = [{ plugin: fakeDbClientPlugin, options: { endpoints } }, { plugin: foodRoutes }]
   const server = await buildServer(plugins)
 
-  const response = await server.inject({ method: 'GET', url: '/food/keyword/kwd/ndl' })
+  const response = await server.inject({ method: 'GET', url: '/food/keyword/contains/ndl' })
 
   expect(endpoints.food.keyword).toHaveBeenCalledTimes(1)
-  expect(endpoints.food.keyword).toBeCalledWith({ keywordType: 'kwd', needle: 'ndl' })
+  expect(endpoints.food.keyword).toBeCalledWith({ keywordType: 'contains', needle: 'ndl' })
 
   expect(response.statusCode).toEqual(200)
   expect(response.body).toEqual('keyword value')
@@ -114,17 +114,35 @@ test('update food API', async () => {
 test('delete foods API', async () => {
   const endpoints = {
     food: {
-      deleteFoods: jest.fn().mockReturnValue('deleteFoods value')
+      delete: jest.fn().mockReturnValue('delete value')
     }
   }
   const plugins = [{ plugin: fakeDbClientPlugin, options: { endpoints } }, { plugin: foodRoutes }]
   const server = await buildServer(plugins)
 
-  const response = await server.inject({ method: 'DELETE', url: '/food/1,2,3,4,5' })
+  const response = await server.inject({ method: 'DELETE', url: '/food', body: [1, 2, 3, 4, 5] })
 
-  expect(endpoints.food.deleteFoods).toHaveBeenCalledTimes(1)
-  expect(endpoints.food.deleteFoods).toBeCalledWith({ ids: '1,2,3,4,5' })
+  expect(endpoints.food.delete).toHaveBeenCalledTimes(1)
+  expect(endpoints.food.delete).toBeCalledWith({ ids: ['1', '2', '3', '4', '5'] })
 
   expect(response.statusCode).toEqual(200)
-  expect(response.body).toEqual('deleteFoods value')
+  expect(response.body).toEqual('delete value')
+})
+
+test('foods history API', async () => {
+  const endpoints = {
+    food: {
+      history: jest.fn().mockReturnValue('history value')
+    }
+  }
+  const plugins = [{ plugin: fakeDbClientPlugin, options: { endpoints } }, { plugin: foodRoutes }]
+  const server = await buildServer(plugins)
+
+  const response = await server.inject({ method: 'GET', url: '/food/history/some-id' })
+
+  expect(endpoints.food.history).toHaveBeenCalledTimes(1)
+  expect(endpoints.food.history).toBeCalledWith({ foodId: 'some-id' })
+
+  expect(response.statusCode).toEqual(200)
+  expect(response.body).toEqual('history value')
 })

@@ -38,6 +38,7 @@
     "@nearform/udaru-core": "^5.2.1",
     "axios": "^0.18.0",
     "camelcase": "^5.0.0",
+    "camelize": "^1.0.0",
     "dataloader": "^1.4.0",
     "fastify": "^1.12.1",
     "fastify-cors": "^0.1.0",
