@@ -48,10 +48,10 @@ test('search API', async () => {
   const plugins = [{ plugin: fakeDbClientPlugin, options: { endpoints } }, { plugin: foodRoutes }]
   const server = await buildServer(plugins)
 
-  const response = await server.inject({ method: 'GET', url: '/food/search/typ/ndl' })
+  const response = await server.inject({ method: 'GET', url: '/food/search/startsWith/keyword' })
 
   expect(endpoints.food.search).toHaveBeenCalledTimes(1)
-  expect(endpoints.food.search).toBeCalledWith({ type: 'typ', needle: 'ndl' })
+  expect(endpoints.food.search).toBeCalledWith({ type: 'startsWith', needle: 'keyword' })
 
   expect(response.statusCode).toEqual(200)
   expect(response.body).toEqual('search value')
@@ -66,10 +66,10 @@ test('keyword API', async () => {
   const plugins = [{ plugin: fakeDbClientPlugin, options: { endpoints } }, { plugin: foodRoutes }]
   const server = await buildServer(plugins)
 
-  const response = await server.inject({ method: 'GET', url: '/food/keyword/kwd/ndl' })
+  const response = await server.inject({ method: 'GET', url: '/food/keyword/contains/ndl' })
 
   expect(endpoints.food.keyword).toHaveBeenCalledTimes(1)
-  expect(endpoints.food.keyword).toBeCalledWith({ keywordType: 'kwd', needle: 'ndl' })
+  expect(endpoints.food.keyword).toBeCalledWith({ keywordType: 'contains', needle: 'ndl' })
 
   expect(response.statusCode).toEqual(200)
   expect(response.body).toEqual('keyword value')
@@ -127,4 +127,22 @@ test('delete foods API', async () => {
 
   expect(response.statusCode).toEqual(200)
   expect(response.body).toEqual('delete value')
+})
+
+test('foods history API', async () => {
+  const endpoints = {
+    food: {
+      history: jest.fn().mockReturnValue('history value')
+    }
+  }
+  const plugins = [{ plugin: fakeDbClientPlugin, options: { endpoints } }, { plugin: foodRoutes }]
+  const server = await buildServer(plugins)
+
+  const response = await server.inject({ method: 'GET', url: '/food/history/some-id' })
+
+  expect(endpoints.food.history).toHaveBeenCalledTimes(1)
+  expect(endpoints.food.history).toBeCalledWith({ foodId: 'some-id' })
+
+  expect(response.statusCode).toEqual(200)
+  expect(response.body).toEqual('history value')
 })

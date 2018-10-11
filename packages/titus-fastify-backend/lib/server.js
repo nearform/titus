@@ -1,6 +1,5 @@
 const Fastify = require('fastify')
 const swagger = require('fastify-swagger')
-const httpErrors = require('http-errors')
 
 const config = require('../config/default')
 
@@ -9,7 +8,6 @@ const config = require('../config/default')
 const dbClient = require('./plugins/db-client')
 
 const foodRoutes = require('./routes/rest/food')
-const foodHistoryRoutes = require('./routes/rest/foodHistory')
 const foodGroupRoutes = require('./routes/rest/foodGroup')
 const dietTypeRoutes = require('./routes/rest/dietType')
 
@@ -38,7 +36,6 @@ const init = async () => {
     // Register routes
     server
       .register(foodRoutes)
-      .register(foodHistoryRoutes)
       .register(foodGroupRoutes)
       .register(dietTypeRoutes)
       .register(i18nRoutes)
