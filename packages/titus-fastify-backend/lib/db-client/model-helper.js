@@ -11,7 +11,7 @@ function handleDBError (err) {
   }
 
   if (err.code === FOREIGN_KEY_VIOLATION) {
-    return Promise.reject(new dbErrors.ForeignKeyViolationError())
+    return Promise.reject(new dbErrors.ForeignKeyViolationError(err.message))
   }
 
   return Promise.reject(new dbErrors.GenericDBError(err.message))

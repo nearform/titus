@@ -1,5 +1,5 @@
 const fastifyPlugin = require('fastify-plugin')
-const httpErrors = require('http-errors')
+const errorHandler = require('../../error-handler')
 
 function plugin (server, opts, next) {
   server.route({
@@ -37,17 +37,7 @@ function plugin (server, opts, next) {
     handler: async (request, reply) => {
       const { id } = request.params
 
-      try {
-        const row = await request.dbClient.food.getById({ id })
-
-        return row
-      } catch (err) {
-        if (err.isDBError && err.isNotFound) {
-          return new httpErrors.NotFound()
-        }
-
-        return new httpErrors.InternalServerError()
-      }
+      return request.dbClient.food.getById({ id })
     }
   })
 
@@ -59,7 +49,7 @@ function plugin (server, opts, next) {
       params: {
         type: 'object',
         properties: {
-          type: { type: 'string' },
+          type: { type: 'string', enum: ['startsWith', 'endsWith', 'fullText', 'similarity', 'contains'] },
           needle: { type: 'string' }
         }
       }
@@ -79,7 +69,7 @@ function plugin (server, opts, next) {
       params: {
         type: 'object',
         properties: {
-          keywordType: { type: 'string' },
+          keywordType: { type: 'string', enum: ['startsWith', 'contains', 'endsWith', 'levenshtein', 'soundex', 'metaphone', 'trigram'] },
           needle: { type: 'string' }
         }
       }
@@ -112,18 +102,7 @@ function plugin (server, opts, next) {
         foodGroupId
       }
 
-      try {
-        const data = await request.dbClient.food.create({ food })
-
-        return data
-      } catch (err) {
-        if (err.isDBError) {
-          if (err.isDuplicateKey) return new httpErrors.BadRequest()
-          if (err.isForeignKeyViolation) return new httpErrors.BadRequest()
-        }
-
-        return new httpErrors.InternalServerError()
-      }
+      return request.dbClient.food.create({ food })
     }
   })
 
@@ -171,6 +150,10 @@ function plugin (server, opts, next) {
 
       return request.dbClient.food.delete({ ids })
     }
+  })
+
+  server.setErrorHandler((err, request, reply) => {
+    reply.send(errorHandler(err))
   })
 
   next()

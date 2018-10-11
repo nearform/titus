@@ -1,7 +1,6 @@
-'use strict'
-
 const Fastify = require('fastify')
 const swagger = require('fastify-swagger')
+const httpErrors = require('http-errors')
 
 const config = require('../config/default')
 

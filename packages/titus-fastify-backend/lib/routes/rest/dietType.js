@@ -1,6 +1,8 @@
 const fastifyPlugin = require('fastify-plugin')
 const httpErrors = require('http-errors')
 
+const errorHandler = require('../../error-handler')
+
 function plugin (server, opts, next) {
   server.route({
     path: '/diet/type',
@@ -62,6 +64,10 @@ function plugin (server, opts, next) {
 
       return request.dbClient.dietType.update({ id, name, visible })
     }
+  })
+
+  server.setErrorHandler((err, request, reply) => {
+    reply.send(errorHandler(err))
   })
 
   next()

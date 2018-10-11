@@ -1,5 +1,6 @@
 const fastifyPlugin = require('fastify-plugin')
-const httpErrors = require('http-errors')
+
+const errorHandler = require('../../error-handler')
 
 function plugin (server, opts, next) {
   server.route({
@@ -28,17 +29,7 @@ function plugin (server, opts, next) {
     handler: async (request, reply) => {
       const { id } = request.params
 
-      try {
-        const row = await request.dbClient.foodGroup.getById({ id })
-
-        return row
-      } catch (err) {
-        if (err.isDBError && err.isNotFound) {
-          return new httpErrors.NotFound()
-        }
-
-        return new httpErrors.InternalServerError()
-      }
+      return request.dbClient.foodGroup.getById({ id })
     }
   })
 
@@ -58,19 +49,12 @@ function plugin (server, opts, next) {
     handler: async (request, reply) => {
       const { name } = request.body
 
-      try {
-        const data = await request.dbClient.foodGroup.create({ name })
-
-        return data
-      } catch (err) {
-        if (err.isDBError) {
-          if (err.isDuplicateKey) return new httpErrors.BadRequest()
-          if (err.isForeignKeyViolation) return new httpErrors.BadRequest()
-        }
-
-        return new httpErrors.InternalServerError()
-      }
+      return request.dbClient.foodGroup.create({ name })
     }
+  })
+
+  server.setErrorHandler((err, request, reply) => {
+    reply.send(errorHandler(err))
   })
 
   next()
