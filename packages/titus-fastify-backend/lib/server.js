@@ -1,10 +1,11 @@
 const Fastify = require('fastify')
 const swagger = require('fastify-swagger')
+const postgres = require('fastify-postgres')
+const GQL = require('fastify-gql')
+const cors = require('fastify-cors')
 
 const config = require('../config/default')
-
-// const graphqlSchema = require('./graphql').schema
-// const loaders = require('./graphql').loaders
+const graphql = require('./graphql')
 const dbClient = require('./plugins/db-client')
 
 const foodRoutes = require('./routes/rest/food')
@@ -21,7 +22,8 @@ const init = async () => {
   try {
     // Register plugins
     server
-      .register(require('fastify-postgres'), config.db)
+      .register(cors, { origin: true })
+      .register(postgres, config.db)
       .register(swagger, {
         routePrefix: '/documentation',
         exposeRoute: process.env.NODE_ENV !== 'production',
@@ -31,6 +33,10 @@ const init = async () => {
           produces: ['application/json']
         }
       })
+      .register(GQL, {
+        schema: graphql.schema,
+        graphiql: true
+      })
       .register(dbClient)
 
     // Register routes
@@ -39,6 +45,10 @@ const init = async () => {
       .register(foodGroupRoutes)
       .register(dietTypeRoutes)
       .register(i18nRoutes)
+
+    server.decorate('dataloaders', () => {
+      return graphql.loaders(server.pg)
+    })
 
     await server.ready()
 
