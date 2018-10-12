@@ -1,0 +1,19 @@
+query loadAllDietTypes {
+  allDietTypes {
+    id
+    name
+    visible
+  }
+}
+
+mutation deleteDietType($id: String) {
+  deleteDietType(id: $id) {
+    id
+  }
+}
+
+mutation toggleDietTypeVisibility($id: String) {
+  toggleDietTypeVisibility(id: $id) {
+    id
+  }
+}
