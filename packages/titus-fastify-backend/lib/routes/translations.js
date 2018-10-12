@@ -38,12 +38,13 @@ function plugin (server, opts, next) {
     },
     handler: async (request, reply) => {
       const { language, namespace } = request.params
+      const ns = namespace.split('.')[0] // Because we can't use ext in the route
 
-      if (!resources[language] || !resources[language][namespace]) {
+      if (!resources[language] || !resources[language][ns]) {
         return new httpErrors.NotFound()
       }
 
-      return resources[language][namespace]
+      return resources[language][ns]
     }
   })
 
