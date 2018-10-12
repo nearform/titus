@@ -1,10 +1,9 @@
 'use strict'
-const foodHistory = require('../../model/foodHistory')
 
 const resolvers = {
   Query: {
-    foodHistory (root, args, context) {
-      return foodHistory.findByFoodId(context.app.pg, args)
+    foodHistory (root, {id}, context) {
+      return context.reply.request.dbClient.food.history({foodId: id})
     }
   },
   FoodHistory: {

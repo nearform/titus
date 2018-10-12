@@ -45,6 +45,6 @@ module.exports = async function (pg, opts) {
     typeName: 'Food',
     operation: 'create',
     count: result.rowCount,
-    created
+    updated: created
   }
 }
