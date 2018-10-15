@@ -1,15 +1,14 @@
 'use strict'
-const foodHistory = require('../../model/foodHistory')
 
 const resolvers = {
   Query: {
-    foodHistory (root, args, context) {
-      return foodHistory.findByFoodId(context.app.pg, args)
+    foodHistory (root, {id}, context) {
+      return context.reply.request.dbClient.food.history({foodId: id})
     }
   },
   FoodHistory: {
     foodGroup (root, args, context) {
-      return context.app.dataloaders().foodGroup.getById.load(root.foodGroupId)
+      return context.app.dataloaders(context.reply.request.dbClient).foodGroup.getByIds.load(root.foodGroupId)
     }
   }
 }

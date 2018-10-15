@@ -30,7 +30,7 @@ test('resolves with create object', async () => {
     typeName: 'Food',
     operation: 'create',
     count: 1,
-    created: {
+    updated: {
       id: 'new-food-id',
       name: 'My Food',
       foodGroupId: 'some-id'

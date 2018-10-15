@@ -1,18 +1,17 @@
 'use strict'
-const foodGroup = require('../../model/foodGroup')
 
 const resolvers = {
   Query: {
     foodGroup (root, args, context) {
-      return foodGroup.getById(context.app.pg, args)
+      return context.reply.request.dbClient.foodGroup.getById(args)
     },
     allFoodGroups (root, args, context) {
-      return foodGroup.getAll(context.app.pg)
+      return context.reply.request.dbClient.foodGroup.getAll()
     }
   },
   Mutation: {
     createFoodGroup (root, args, context) {
-      return foodGroup.create(context.app.pg, args)
+      return context.reply.request.dbClient.foodGroup.create(args)
     }
   }
 }
