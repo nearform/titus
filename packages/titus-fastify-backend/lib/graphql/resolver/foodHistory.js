@@ -8,7 +8,7 @@ const resolvers = {
   },
   FoodHistory: {
     foodGroup (root, args, context) {
-      return context.app.dataloaders().foodGroup.getById.load(root.foodGroupId)
+      return context.app.dataloaders(context.reply.request.dbClient).foodGroup.getByIds.load(root.foodGroupId)
     }
   }
 }

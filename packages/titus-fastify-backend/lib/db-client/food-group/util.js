@@ -1,16 +1,5 @@
 'use strict'
 
-const camelcase = require('camelcase')
-
-const formatRows = rows => {
-  return rows.map(row => {
-    return Object.keys(row).reduce((acc, fieldName) => {
-      acc[camelcase(fieldName)] = row[fieldName]
-      return acc
-    }, {})
-  })
-}
-
 const sortByIdArray = (rows, ids) => {
   const dict = arrayToDict(rows)
   return ids.map(id => dict[id])
@@ -46,7 +35,6 @@ const toTsQuery = query => {
 }
 
 module.exports = {
-  formatRows,
   sortByIdArray,
   toTsQuery
 }

@@ -48,9 +48,7 @@ const init = async () => {
       .register(dietTypeRoutes)
       .register(i18nRoutes)
 
-    server.decorate('dataloaders', () => {
-      return graphql.loaders(server.pg)
-    })
+    server.decorate('dataloaders', graphql.dataloaders)
 
     await server.ready()
 

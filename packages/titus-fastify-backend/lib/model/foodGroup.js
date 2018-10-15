@@ -1,16 +1,11 @@
 'use strict'
 
 const DataLoader = require('dataloader')
-const formatRows = require('./util').formatRows
-const sortByIdArray = require('./util').sortByIdArray
-const SQL = require('@nearform/sql')
+const dbClient = require('../db-client')
 
-const getByIds = async (pg, ids) => {
-  const res = await pg.query(SQL`
-  SELECT id, name, created, modified FROM food_group WHERE id = ANY(${[
-    ids
-  ]}::text[])`)
-  return sortByIdArray(formatRows(res.rows), ids)
+const getByIds = async (pg, idListOrSingleId) => {
+  const ids = [].concat(idListOrSingleId)
+  return dbClient({pg}).foodGroup.getByIds({ids})
 }
 
 const dataloaders = pg => ({
