@@ -9,6 +9,7 @@ const cors = require('fastify-cors')
 const config = require('../config/default')
 const graphql = require('./graphql')
 const dbClient = require('./plugins/db-client')
+const dataloaders = require('./plugins/dataloaders')
 
 const foodRoutes = require('./routes/rest/food')
 const foodGroupRoutes = require('./routes/rest/foodGroup')
@@ -40,6 +41,7 @@ const init = async () => {
         graphiql: true
       })
       .register(dbClient)
+      .register(dataloaders, {prefix: '/graphql'})
 
     // Register routes
     server
@@ -47,8 +49,6 @@ const init = async () => {
       .register(foodGroupRoutes)
       .register(dietTypeRoutes)
       .register(i18nRoutes)
-
-    server.decorate('dataloaders', graphql.dataloaders)
 
     await server.ready()
 
