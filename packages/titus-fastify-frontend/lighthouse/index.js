@@ -4,7 +4,7 @@ const handler = require('serve-handler')
 const http = require('http')
 const fs = require('fs')
 
-const PORT = 3001
+const PORT = 3002
 
 const server = http.createServer((request, response) => {
   return handler(request, response, { public: 'build', renderSingl: true })
