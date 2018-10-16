@@ -47,7 +47,7 @@ class Search extends React.Component {
                 onChange={handleChangeSearchType}
               />
             }
-            label={keywordSearch ? 'Keyword Search' : 'RecordSearch'}
+            label={keywordSearch ? 'Keyword Search' : 'Record Search'}
           />
           {keywordSearch ? <KeywordSearch /> : <RecordSearch />}
         </Paper>

@@ -7,7 +7,7 @@ module.exports = (dbClient) => {
     foodGroup: {
       getByIds: new DataLoader(async (idsOrId) => {
         const ids = [].concat(idsOrId)
-        return dbClient.foodGroup.getByIds({ids})
+        return dbClient.foodGroup.getByIds({ ids })
       })
     }
   }
