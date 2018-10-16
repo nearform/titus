@@ -96,10 +96,12 @@ class RecordSearch extends React.Component {
               type: searchType
             }}
           >
-            {({ loading, error, data, refetch }) => {
+            {({ loading, error, data = {}, refetch }) => {
               if (error) {
                 return <Typography color="error">{error}</Typography>
               }
+
+              const items = data.search ? data.search.map(({ id, name }) => ({ key: id, value: name })).slice(0, 10) : null
 
               return (
                 <Autocomplete
@@ -109,16 +111,7 @@ class RecordSearch extends React.Component {
                   onInputChange={this.handleInputChange}
                   maxResults={10}
                   searchType={searchType}
-                  items={
-                    inputValue !== '' && data.search
-                      ? data.search
-                          .map(({ id, name }) => ({
-                            key: id,
-                            value: name
-                          }))
-                          .slice(0, 10)
-                      : null
-                  }
+                  items={items}
                   loading={inputValue !== '' && loading}
                 />
               )
