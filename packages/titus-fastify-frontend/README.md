@@ -29,5 +29,5 @@ Open a browser and then navigate to `localhost:9009`
 To make the `API CRUD Example` work (it's calling the backend api), you need to spin up the backend environment
 
 ```
-cd ../titus-fastify-backend && npm run docker:dev:start
+cd ../titus-fastify-backend && npm start
 ```

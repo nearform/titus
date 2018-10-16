@@ -14,9 +14,7 @@ const Dashboard = () => (
       <li>custom React components built on top of material-ui components and third party libraries</li>
       <li>community open source frontend and backend libraries that we use in our own projects</li>
       <li>
-        NearForm's open source projects, including <a href="https://github.com/nearform/udaru" target="_blank" rel="noreferrer noopener">udaru</a>,&nbsp;
-        <a href="https://github.com/nearform/commentami" target="_blank" rel="noreferrer noopener">commentami</a> and&nbsp;
-        <a href="https://github.com/nearform/react-table" target="_blank" rel="noreferrer noopener">react-table</a>
+        NearForm's open source projects, like<a href="https://github.com/nearform/react-table" target="_blank" rel="noreferrer noopener">react-table</a>
       </li>
     </ul>
   </div>
