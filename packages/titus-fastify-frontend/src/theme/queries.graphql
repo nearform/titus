@@ -1,0 +1,3 @@
+query getThemeName {
+  themeName @client
+}
