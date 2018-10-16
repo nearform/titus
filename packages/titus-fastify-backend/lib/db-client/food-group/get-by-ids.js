@@ -1,15 +1,26 @@
 const SQL = require('@nearform/sql')
 const camelize = require('camelize')
 
-const {sortByIdArray} = require('./util')
-
 const dbErrors = require('../errors')
 
 const getSql = ({ ids }) => {
   return SQL`
-  SELECT id, name, created, modified FROM food_group WHERE id = ANY(${[
-    ids
-  ]}::text[])`
+    WITH cte AS (
+      SELECT
+        id,
+        index
+      FROM UNNEST(${ids}::text[])
+      WITH ORDINALITY t(id, index)
+    )
+    SELECT
+      id,
+      name,
+      created,
+      modified
+    FROM food_group
+    JOIN cte USING (id)
+    ORDER BY index;
+  `
 }
 
 module.exports = async function (pg, opts) {
@@ -21,5 +32,5 @@ module.exports = async function (pg, opts) {
     throw new dbErrors.NotFoundError()
   }
 
-  return sortByIdArray(camelize(result.rows), opts.ids)
+  return camelize(result.rows)
 }
