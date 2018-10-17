@@ -12,10 +12,10 @@ import {
   Button
 } from '@material-ui/core'
 import { Add as AddIcon, Delete as DeleteIcon } from '@material-ui/icons'
-import {
-  loadFoodData,
-  deleteFood
-} from './queries.graphql'
+import { loader } from 'graphql.macro'
+
+const loadFoodData = loader('./queries/loadFoodData.graphql')
+const deleteFood = loader('./queries/deleteFood.graphql')
 
 const styles = theme => ({
   root: {
