@@ -13,6 +13,7 @@ const Input = ({ inputProps, classes, ref, loading, ...other }) => (
         inputRef: ref,
         ...inputProps
       }}
+      className={classes.textField}
       {...other}
     />
     {loading && <LinearProgress />}
@@ -73,6 +74,9 @@ const styles = theme => ({
   inputRoot: {
     position: 'relative',
     flexWrap: 'wrap'
+  },
+  textField: {
+    zIndex: 'auto'
   }
 })
 
