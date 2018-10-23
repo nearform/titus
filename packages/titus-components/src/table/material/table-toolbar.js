@@ -43,7 +43,7 @@ const TableToolbar = ({ numSelected, classes, title, onDelete }) => (
   <Toolbar className={classNames({ [classes.highlight]: numSelected > 0 })}>
     <div className={classes.title}>
       <Typography
-        variant="title"
+        variant="h6"
         color={numSelected > 0 ? 'primary' : 'inherit'}
       >
         {title}

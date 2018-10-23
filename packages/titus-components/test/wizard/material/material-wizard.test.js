@@ -46,7 +46,7 @@ describe('Material Wizard', () => {
         'Step 1 Description'
       )
 
-      expect(container.querySelector('h2').textContent).toBe(
+      expect(container.querySelector('h6').textContent).toBe(
         'Wizard Finished Message'
       )
       expect(container.querySelector('#mock-step-1')).not.toBeNull()

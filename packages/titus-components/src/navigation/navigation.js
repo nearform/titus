@@ -144,7 +144,7 @@ export class Navigation extends Component {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="title" color="inherit" noWrap>
+            <Typography variant="h6" color="inherit" noWrap>
               {title}
             </Typography>
 

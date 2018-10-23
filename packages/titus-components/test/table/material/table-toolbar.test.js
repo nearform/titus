@@ -8,8 +8,8 @@ describe('Table Material TableToolbar', () => {
       const { container } = render(
         <TableToolbar numSelected={2} title="Toolbar title" />
       )
-      expect(container.querySelector('h2').textContent).toBe('Toolbar title')
-      expect(container.querySelector('h2').getAttribute('class')).toContain(
+      expect(container.querySelector('h6').textContent).toBe('Toolbar title')
+      expect(container.querySelector('h6').getAttribute('class')).toContain(
         'colorPrimary'
       )
       expect(container.querySelector('p strong').textContent).toBe('2')
@@ -20,8 +20,8 @@ describe('Table Material TableToolbar', () => {
         <TableToolbar numSelected={0} title="Toolbar title" />
       )
 
-      expect(container.querySelector('h2').textContent).toBe('Toolbar title')
-      expect(container.querySelector('h2').getAttribute('class')).toContain(
+      expect(container.querySelector('h6').textContent).toBe('Toolbar title')
+      expect(container.querySelector('h6').getAttribute('class')).toContain(
         'colorInherit'
       )
       expect(container.querySelector('p strong')).toBeNull()
