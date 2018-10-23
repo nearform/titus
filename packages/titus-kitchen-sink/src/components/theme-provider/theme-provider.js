@@ -1,20 +1,18 @@
 import React from 'react'
 import T from 'prop-types'
-import { Query } from 'react-apollo'
+import { graphql } from 'react-apollo'
 import { MuiThemeProvider } from '@material-ui/core/styles'
-import { getThemeName } from '../../theme/queries.graphql'
 import { themes } from '../../theme'
+import { loader } from 'graphql.macro'
 
-const ThemeProvider = ({ children }) => (
-  <Query query={getThemeName}>
-    {({ data: { themeName } }) => (
-      <MuiThemeProvider theme={themes[themeName]}>{children}</MuiThemeProvider>
-    )}
-  </Query>
+const query = loader('../../theme/query.graphql')
+
+const ThemeProvider = ({ children, data: { themeName } }) => (
+  <MuiThemeProvider theme={themes[themeName]}>{children}</MuiThemeProvider>
 )
 
 ThemeProvider.propTypes = {
   children: T.node.isRequired
 }
 
-export default ThemeProvider
+export default graphql(query)(ThemeProvider)

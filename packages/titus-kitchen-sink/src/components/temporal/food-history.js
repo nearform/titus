@@ -3,8 +3,9 @@ import PropTypes from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 import { Query } from 'react-apollo'
 import { Table } from '@nearform/titus-components'
+import { loader } from 'graphql.macro'
 
-import { loadFoodHistoryData } from './queries.graphql'
+const loadFoodHistoryData = loader('./queries/loadFoodHistoryData.graphql')
 
 const styles = (theme) => ({
   citation: {
@@ -67,7 +68,7 @@ class QueryResult extends React.Component {
 
     const { title, columns, classes, data: { foodHistory = [] } } = this.props
 
-    if (!foodHistory.length) {
+    if (!foodHistory || !foodHistory.length) {
       return (
         <Typography>
           The selected food doesn't have any history, try selecting a different food or make some changes to it

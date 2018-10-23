@@ -11,9 +11,12 @@ import {
   ListItemSecondaryAction
 } from '@material-ui/core'
 import { Visibility, VisibilityOff } from '@material-ui/icons'
-import { loadAllDietTypes } from './queries.graphql'
+import { loader } from 'graphql.macro'
 import { DeleteButton } from './delete-button'
 import { ToggleButton } from './toggle-button'
+
+const loadAllDietTypes = loader('./queries/loadAllDietTypes.graphql')
+
 
 const styles = theme => ({
   progress: {

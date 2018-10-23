@@ -1,0 +1,6 @@
+query recordSearch($needle: String!, $type: String) {
+  search(needle: $needle, type: $type) {
+    id
+    name
+  }
+}

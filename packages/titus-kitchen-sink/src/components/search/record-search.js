@@ -10,7 +10,9 @@ import {
   MenuItem
 } from '@material-ui/core'
 import { Autocomplete } from '@nearform/titus-components'
-import { recordSearch } from './queries.graphql'
+import { loader } from 'graphql.macro'
+
+const recordSearch = loader('./queries/recordSearch.graphql')
 
 const styles = theme => ({
   verticalMargin: {

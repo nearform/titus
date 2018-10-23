@@ -1,0 +1,19 @@
+mutation updateFood($food: FoodInput!) {
+  updateFood(food: $food) {
+    __typename
+    id
+    typeName
+    count
+    operation
+    updated {
+      __typename
+      id
+      name
+      foodGroup {
+        __typename
+        id
+        name
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+mutation deleteDietType($id: String) {
+  deleteDietType(id: $id) {
+    id
+  }
+}

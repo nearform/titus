@@ -1,10 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Query } from 'react-apollo'
+import { graphql } from 'react-apollo'
 import { CircularProgress, Typography, withStyles } from '@material-ui/core'
 import { Table as NfTable } from '@nearform/react-table'
 import MaterialUiTable from './material-ui-table'
-import { loadFoodData } from './queries.graphql'
+import { loader } from 'graphql.macro'
+
+const loadFoodData = loader('./queries/loadFoodData.graphql')
 
 const styles = theme => ({
   progress: {
@@ -73,64 +75,59 @@ class Table extends React.Component {
   }
 
   render() {
-    const { classes, title, columns, pageSize, pageSizeOptions } = this.props
+    const { classes, title, columns, pageSize, pageSizeOptions, data: { loading, error, allFood } } = this.props
+
+    if (loading) {
+      return (
+        <div className={classes.progressWrapper}>
+          <CircularProgress className={classes.progress} />
+        </div>
+      )
+    }
+
+    if (error) {
+      return (
+        <Typography color="error">
+          Oops, there was an error making this request!
+        </Typography>
+      )
+    }
+
+    const food = allFood.map(food => ({
+      id: food.id,
+      name: food.name,
+      foodGroup: food.foodGroup.name,
+      foodGroupId: food.foodGroup.id
+    }))
 
     return (
-      <Query query={loadFoodData}>
-        {({ loading, error, data: { allFood = [], foodGroups = [] } }) => {
-          if (loading) {
-            return (
-              <div className={classes.progressWrapper}>
-                <CircularProgress className={classes.progress} />
-              </div>
-            )
-          }
-          if (error) {
-            return (
-              <Typography color="error">
-                Oops, there was an error making this request!
-              </Typography>
-            )
-          }
+      <React.Fragment>
+        <NfTable
+          columns={columns}
+          pageSize={pageSize}
+          pageSizeOptions={pageSizeOptions}
+          data={food}
+          sorting={[{ id: 'name', asc: true }]}
+          render={props => <MaterialUiTable {...props} title={title} />}
+        />
 
-          const food = allFood.map(food => ({
-            id: food.id,
-            name: food.name,
-            foodGroup: food.foodGroup.name,
-            foodGroupId: food.foodGroup.id
-          }))
-
-          return (
-            <React.Fragment>
-              <NfTable
-                columns={columns}
-                pageSize={pageSize}
-                pageSizeOptions={pageSizeOptions}
-                data={food}
-                sorting={[{ id: 'name', asc: true }]}
-                render={props => <MaterialUiTable {...props} title={title} />}
-              />
-
-              <div className={classes.citation}>
-                <Typography variant="caption">
-                  Nutritional information provided by:
-                </Typography>
-                <Typography variant="caption">
-                  US Department of Agriculture, Agricultural Research Service,
-                  Nutrient Data Laboratory. USDA National Nutrient Database for
-                  Standard Reference, Release 28. Version Current: September
-                  2015. Internet:{' '}
-                  <a href="http://www.ars.usda.gov/ba/bhnrc/ndl">
-                    http://www.ars.usda.gov/ba/bhnrc/ndl
-                  </a>
-                </Typography>
-              </div>
-            </React.Fragment>
-          )
-        }}
-      </Query>
+        <div className={classes.citation}>
+          <Typography variant="caption">
+            Nutritional information provided by:
+          </Typography>
+          <Typography variant="caption">
+            US Department of Agriculture, Agricultural Research Service,
+            Nutrient Data Laboratory. USDA National Nutrient Database for
+            Standard Reference, Release 28. Version Current: September
+            2015. Internet:{' '}
+            <a href="http://www.ars.usda.gov/ba/bhnrc/ndl">
+              http://www.ars.usda.gov/ba/bhnrc/ndl
+            </a>
+          </Typography>
+        </div>
+      </React.Fragment>
     )
   }
 }
 
-export default withStyles(styles)(Table)
+export default graphql(loadFoodData)(withStyles(styles)(Table))

@@ -41,7 +41,7 @@ const init = async () => {
         graphiql: true
       })
       .register(dbClient)
-      .register(dataloaders, {prefix: '/graphql'})
+      .register(dataloaders, { prefix: '/graphql' })
 
     // Register routes
     server
