@@ -52,7 +52,7 @@ const NoPreview = withStyles({
   }
 })(({ classes }) => (
   <div className={classes.root} data-testid="display-card-no-preview">
-    <Typography variant="title">No Preview Available</Typography>
+    <Typography variant="h6">No Preview Available</Typography>
   </div>
 ))
 

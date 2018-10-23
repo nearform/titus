@@ -48,11 +48,11 @@ const MaterialWizard = ({
   <div className={classes.root}>
     <Paper className={classes.wizard}>
       <div className={classes.title}>
-        <Typography variant="display1" gutterBottom data-testid="wizard-title">
+        <Typography variant="h4" gutterBottom data-testid="wizard-title">
           {title}
         </Typography>
         <Typography
-          variant="headline"
+          variant="h5"
           gutterBottom
           data-testid="wizard-description"
         >
@@ -83,7 +83,7 @@ const MaterialWizard = ({
         </Typography>
 
         <Typography
-          variant="title"
+          variant="h6"
           gutterBottom
           className={classNames({
             [classes.hide]: !finished

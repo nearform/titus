@@ -49,7 +49,7 @@
     "lighthouse": "node lighthouse"
   },
   "devDependencies": {
-    "@material-ui/core": "^3.1.1",
+    "@material-ui/core": "^3.3.0",
     "@material-ui/icons": "^3.0.1",
     "@storybook/addon-actions": "^3.4.11",
     "@storybook/addon-links": "^3.4.11",

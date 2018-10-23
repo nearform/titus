@@ -17,7 +17,7 @@ describe('Table', () => {
         />
       )
 
-      expect(container.querySelector('h2').textContent).toBe(
+      expect(container.querySelector('h6').textContent).toBe(
         'Material UI Table'
       )
       expect(container.querySelectorAll('th[scope="col"]').length).toBe(5)
