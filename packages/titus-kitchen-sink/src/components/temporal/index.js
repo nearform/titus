@@ -4,8 +4,10 @@ import classNames from 'classnames'
 import { Query } from 'react-apollo'
 import { FormControl, Paper, Typography, withStyles } from '@material-ui/core'
 import { Autocomplete } from '@nearform/titus-components'
-import { loadFoodData } from '../api/queries.graphql'
+import { loader } from 'graphql.macro'
 import FoodHistory from './food-history'
+
+const loadFoodData = loader('../api/queries/loadFoodData.graphql')
 
 const styles = theme => ({
   root: {

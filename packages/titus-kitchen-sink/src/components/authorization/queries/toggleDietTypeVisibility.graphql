@@ -1,0 +1,5 @@
+mutation toggleDietTypeVisibility($id: String) {
+  toggleDietTypeVisibility(id: $id) {
+    id
+  }
+}

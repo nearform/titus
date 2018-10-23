@@ -12,7 +12,10 @@ import { MockedProvider } from 'react-apollo/test-utils'
 
 import TableRow from './table-row'
 import withContext from '../../../test/with-context'
-import { loadFoodData, updateFood } from './queries.graphql'
+import { loader } from 'graphql.macro'
+
+const loadFoodData = loader('./queries/loadFoodData.graphql')
+const updateFood = loader('./queries/updateFood.graphql')
 
 global.SVGElement = Element
 

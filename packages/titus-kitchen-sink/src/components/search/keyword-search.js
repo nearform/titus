@@ -10,7 +10,9 @@ import {
   MenuItem
 } from '@material-ui/core'
 import { Autocomplete } from '@nearform/titus-components'
-import { keywordSearch } from './queries.graphql'
+import { loader } from 'graphql.macro'
+
+const keywordSearch = loader('./queries/keywordSearch.graphql')
 
 const styles = theme => ({
   verticalMargin: {

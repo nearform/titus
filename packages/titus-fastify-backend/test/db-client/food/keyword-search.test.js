@@ -20,7 +20,7 @@ test('returns row with camelised column names', async () => {
   }
 
   const data = await keywordSearch(pgStub, { needle: 'my-keyword', keywordType: 'levenshtein' })
-  console.log(SQL)
+
   expect(pgStub.query).toHaveBeenCalledTimes(1)
   expect(pgStub.query).toBeCalledWith(sqlStub)
 
