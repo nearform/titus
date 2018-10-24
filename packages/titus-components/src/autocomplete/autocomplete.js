@@ -86,15 +86,18 @@ class Autocomplete extends React.Component {
 
   render() {
     const {
-      props: { onChange },
+      props: { onChange, children },
       renderMaterial,
       itemToString
     } = this
 
     return (
-      <Downshift onChange={onChange} itemToString={itemToString}>
-        {renderMaterial}
-      </Downshift>
+      <React.Fragment>
+        <Downshift onChange={onChange} itemToString={itemToString}>
+          {renderMaterial}
+        </Downshift>
+        {children}
+      </React.Fragment>
     )
   }
 }
