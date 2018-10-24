@@ -30,7 +30,7 @@ describe('Navigation', () => {
           <DummyChild />
         </Autocomplete>
       ))
-      expect(container.querySelector('#dummy-child')).not.toBe(null)
+      expect(container.querySelector('#dummy-child')).not.toBeNull()
     })
   })
 
