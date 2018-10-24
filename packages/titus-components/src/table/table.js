@@ -27,6 +27,7 @@ class Table extends React.Component {
   renderMaterialUiTable = props => (
     <MaterialUiTable
       {...props}
+      children={this.props.children}
       title={this.props.title}
       onDelete={this.props.onDelete}
     />
