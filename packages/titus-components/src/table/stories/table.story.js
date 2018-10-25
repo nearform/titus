@@ -1,10 +1,10 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
-import TableFooter from '@material-ui/core/TableFooter';
-import TableRow from '@material-ui/core/TableRow';
-import TableCell from '@material-ui/core/TableCell';
-import Typography from '@material-ui/core/Typography';
+import TableFooter from '@material-ui/core/TableFooter'
+import TableRow from '@material-ui/core/TableRow'
+import TableCell from '@material-ui/core/TableCell'
+import Typography from '@material-ui/core/Typography'
 
 import { columns, rows } from './dessert-nutrients'
 import Table from '../table'

@@ -39,7 +39,7 @@ describe('Table', () => {
         </Table>
       )
 
-      expect(container.querySelector('table #dummy-child')).not.toBeNull();
+      expect(container.querySelector('table #dummy-child')).not.toBeNull()
     })
   })
 })

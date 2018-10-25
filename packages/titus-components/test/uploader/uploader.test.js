@@ -116,11 +116,13 @@ describe('uploader/uploader', () => {
       />
     )
 
-    let inputElement = container.querySelector('input[type="file"]');
-    let dropAreaContainer = inputElement.nextElementSibling;
+    let inputElement = container.querySelector('input[type="file"]')
+    let dropAreaContainer = inputElement.nextElementSibling
 
-    Simulate.focus(inputElement);
-    expect(dropAreaContainer.className.indexOf('UploadCard-dropAreaContainerFocus-')).toBeGreaterThan(-1);
+    Simulate.focus(inputElement)
+    expect(
+      dropAreaContainer.className.indexOf('UploadCard-dropAreaContainerFocus-')
+    ).toBeGreaterThan(-1)
   })
 
   test('Click on fileInput and add a file', async () => {
