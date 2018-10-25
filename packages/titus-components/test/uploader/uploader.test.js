@@ -88,6 +88,41 @@ describe('uploader/uploader', () => {
     ).toBe('Uploaded 0 of 5')
   })
 
+  test('With input focus', () => {
+    const onUploadDoneMock = jest.fn()
+    const onUploadErrorMock = jest.fn()
+    const getParams = jest.fn()
+    const getTags = jest.fn()
+
+    const Uploader = require('../../src/uploader/uploader').default
+    const awsConfig = {
+      accessKeyId: 'AKIAIUXKFDIWNCOOASDO',
+      secretAccessKey: 'sdlfo9efd98e3dnfwp89fqjpfwfwp',
+      region: 'eu-west-1'
+    }
+
+    const { container } = render(
+      <Uploader
+        service={
+          new (createService())({
+            awsConfig,
+            bucket: 'titus-uploader-471234098732409871234',
+            getParams,
+            getTags
+          })
+        }
+        onUploadDone={onUploadDoneMock}
+        onUploadError={onUploadErrorMock}
+      />
+    )
+
+    let inputElement = container.querySelector('input[type="file"]');
+    let dropAreaContainer = inputElement.nextElementSibling;
+
+    Simulate.focus(inputElement);
+    expect(dropAreaContainer.className.indexOf('UploadCard-dropAreaContainerFocus-')).toBeGreaterThan(-1);
+  })
+
   test('Click on fileInput and add a file', async () => {
     const onUploadDoneMock = jest.fn()
     const onUploadErrorMock = jest.fn()
