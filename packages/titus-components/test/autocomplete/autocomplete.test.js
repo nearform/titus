@@ -9,8 +9,6 @@ const sampleData = [
   { value: 'zAbcd', key: 3 }
 ]
 
-const DummyChild = () => <div id="dummy-child" />
-
 describe('Navigation', () => {
   it('should be defined', () => {
     expect(Autocomplete).toBeDefined()
@@ -22,15 +20,6 @@ describe('Navigation', () => {
       expect(container.querySelector('input').getAttribute('class')).toContain(
         'MuiInput-input'
       )
-    })
-
-    test('Child rendering', () => {
-      const { container } = render((
-        <Autocomplete>
-          <DummyChild />
-        </Autocomplete>
-      ))
-      expect(container.querySelector('#dummy-child')).not.toBeNull()
     })
   })
 
