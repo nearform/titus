@@ -22,7 +22,7 @@
     "prepublish": "npm run build",
     "storybook": "start-storybook -p 6006 -c .storybook",
     "build:storybook:docs": "build-storybook -c .storybook -o ../../docs/components-storybook",
-    "format": "prettier --write *.js **/*.js"
+    "format": "prettier --write '**/*.js'"
   },
   "dependencies": {
     "@material-ui/core": "^3.3.0",

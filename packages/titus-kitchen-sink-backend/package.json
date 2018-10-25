@@ -30,7 +30,7 @@
     "dev:cleandb": "rm -rf pgdata",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "format": "prettier --write *.js **/*.js"
+    "format": "prettier --write '**/*.js'"
   },
   "dependencies": {
     "@nearform/commentami-backend-hapi-plugin": "^1.0.5",
