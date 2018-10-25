@@ -91,7 +91,13 @@ const MaterialDownshift = ({
   id,
   items,
   onInputChange,
-  loading
+  loading,
+  required,
+  disabled,
+  readOnly,
+  error,
+  label,
+  helperText
 }) => (
   <div className={classes.root}>
     <div className={classes.container}>
@@ -99,10 +105,16 @@ const MaterialDownshift = ({
         fullWidth: true,
         loading,
         classes,
+        label,
+        helperText,
         inputProps: getInputProps({
           onChange: onInputChange,
-          placeholder: placeholder,
-          id: id
+          placeholder,
+          id,
+          required,
+          disabled,
+          readOnly,
+          error
         })
       })}
       {isOpen &&
@@ -137,7 +149,13 @@ MaterialDownshift.propTypes = {
   id: PropTypes.string,
   loading: PropTypes.bool,
   onInputChange: PropTypes.func,
-  items: PropTypes.array
+  items: PropTypes.array,
+  required: PropTypes.bool,
+  disabled: PropTypes.bool,
+  readOnly: PropTypes.bool,
+  error: PropTypes.bool,
+  label: PropTypes.string,
+  helperText: PropTypes.string
 }
 
 export default withStyles(styles)(MaterialDownshift)

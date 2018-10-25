@@ -22,7 +22,19 @@ class Autocomplete extends React.Component {
     /** Whether to show a loading indicator when loading suggestions. */
     loading: T.bool,
     /** The items to used to populate the autocomplete list dynamically after responding to the `onInputChange` callback. */
-    items: T.arrayOf(T.shape({ key: T.string, value: T.string }))
+    items: T.arrayOf(T.shape({ key: T.string, value: T.string })),
+    /** If the input element is required. */
+    required: T.bool,
+    /** If the input element is disabled. */
+    disabled: T.bool,
+    /** If the input element is readOnly. */
+    readOnly: T.bool,
+    /** If the input element is invalid. */
+    error: T.bool,
+    /** The label for the input element. */
+    label: T.string,
+    /** The helper text for the input element. */
+    helperText: T.string
   }
 
   static defaultProps = {
@@ -36,7 +48,19 @@ class Autocomplete extends React.Component {
 
   renderMaterial = props => {
     const {
-      props: { placeholder, id, items, loading, onInputChange },
+      props: {
+        placeholder,
+        id,
+        items,
+        loading,
+        onInputChange,
+        required,
+        disabled,
+        readOnly,
+        error,
+        label,
+        helperText
+      },
       state: { internalItems },
       handleInputChange
     } = this
@@ -49,6 +73,12 @@ class Autocomplete extends React.Component {
           loading={loading}
           placeholder={placeholder}
           id={id}
+          required={required}
+          disabled={disabled}
+          readOnly={readOnly}
+          error={error}
+          label={label}
+          helperText={helperText}
           onInputChange={handleInputChange}
         />
       </div>
