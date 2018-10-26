@@ -22,7 +22,7 @@ spec:
         component: "{{ .Values.redis.name }}"
     spec:
       containers:
-        - name: {{ template "titus.name" . }}-{{ .Values.redis.Name }}
+        - name: {{ template "titus.name" . }}-{{ .Values.redis.name }}
           image: "{{ .Values.redis.image.repository }}:{{ .Values.redis.image.tag }}"
           imagePullPolicy: {{ .Values.redis.image.pullPolicy }}
           env:
