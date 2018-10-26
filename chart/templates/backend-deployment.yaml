@@ -23,7 +23,7 @@ spec:
         component: "{{ .Values.backend.name }}"
     spec:
       containers:
-        - name: {{ template "titus.name" . }}-{{ .Values.backend.Name }}
+        - name: {{ template "titus.name" . }}-{{ .Values.backend.name }}
           image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
           imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
           env:
