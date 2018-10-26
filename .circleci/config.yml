@@ -58,7 +58,8 @@ jobs:
   push-containers:
     <<: *defaults
     environment:
-      DOCKER_REPO: "711655675495.dkr.ecr.us-east-1.amazonaws.com"
+      DOCKER_REPO: "711655675495.dkr.ecr.eu-west-1.amazonaws.com"
+      S3_BUCKET: noise-website
     steps:
       - attach_workspace:
           at: .
@@ -72,30 +73,48 @@ jobs:
             unzip awscli-bundle.zip
             sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
       - run:
-          name: Build the frontend Docker containers
+          name: Push frontend to an S3 bucket
           command: |
             set -e
             cd packages/titus-kitchen-sink
-            docker build -t ${DOCKER_REPO}/titus-kitchen-sink-frontend:latest -f docker/Dockerfile .
+            export AWS_ACCESS_KEY_ID=$NOISE_AWS_ACCESS_KEY_ID
+            export AWS_SECRET_ACCESS_KEY=$NOISE_AWS_SECRET_ACCESS_KEY
+            aws s3 sync build s3://${S3_BUCKET} --delete --acl public-read
       - run:
           name: Build the backend Docker containers
           command: |
-            set -e
             cd packages/titus-kitchen-sink-backend/
             mv config/prod.js config/default.js
             docker build -t ${DOCKER_REPO}/titus-kitchen-sink-backend:latest -f docker/api/Dockerfile.prod .
+            set -e
       - run:
-          name: Push the Docker containers to the registry
+          name: Push the Backend Docker image to the registry
           command: |
             set -e
+            export AWS_ACCESS_KEY_ID=$NOISE_AWS_ACCESS_KEY_ID
+            export AWS_SECRET_ACCESS_KEY=$NOISE_AWS_SECRET_ACCESS_KEY
             # Login the AWS ECR registry
-            eval $(aws ecr get-login --no-include-email --region us-east-1)
+            eval $(aws ecr get-login --no-include-email --region eu-west-1)
+            # Create repositories
+            eval $(aws ecr create-repository --repository-name titus-kitchen-sink-backend --region eu-west-1) || true
             # Push the frontend container
-            echo -e "Pushing the frontend container\n"
-            docker push ${DOCKER_REPO}/titus-kitchen-sink-frontend:latest
-            # Push the backend container
             echo -e "Pushing the backend container\n"
             docker push ${DOCKER_REPO}/titus-kitchen-sink-backend:latest
+  helm-upgrade:
+    docker:
+    - image: petrkohut/eks-helm:latest
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: helm upgrade
+          command: |
+            export AWS_ACCESS_KEY_ID=$NOISE_AWS_ACCESS_KEY_ID
+            export AWS_SECRET_ACCESS_KEY=$NOISE_AWS_SECRET_ACCESS_KEY
+            echo $KUBE_CONFIG | base64 -d > kube-config.yaml
+            export KUBECONFIG=./kube-config.yaml
+            helm init
+            helm upgrade -i --debug --tiller-namespace kube-system heapster stable/heapster
 workflows:
   version: 2
   test_and_build:
@@ -122,3 +141,6 @@ workflows:
           #filters:
           #  branches:
           #    only: master
+      - helm-upgrade:
+          requires:
+            - push-containers
