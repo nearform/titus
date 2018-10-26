@@ -61,7 +61,8 @@ class MaterialUiTable extends React.Component {
         pageSize,
         total,
         currentPage,
-        handlePageSizeChange
+        handlePageSizeChange,
+        children
       }
     } = this
     return (
@@ -154,6 +155,7 @@ class MaterialUiTable extends React.Component {
               />
             </TableRow>
           </TableBody>
+          {children}
         </Table>
       </Paper>
     )

@@ -21,6 +21,12 @@ export interface AutocompleteProps {
   items?: Array<DataItem>
   onInputChange?: (item: InputChangeItem) => void
   onChange?: (item: DataItem) => void
+  required?: boolean
+  disabled?: boolean
+  readOnly?: boolean
+  error?: boolean
+  label?: string
+  helperText?: string
 }
 
 declare class Autocomplete extends React.Component<AutocompleteProps> {}

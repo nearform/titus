@@ -38,10 +38,16 @@ export interface AutocompleteProps {
   id?: string
   filterType?: 'contains' | 'startsWith'
   maxResults?: number
-  loading?: any
+  loading?: boolean
   items?: Array<DataItem>
   onInputChange?: (item: InputChangeItem) => void
   onChange?: (item: DataItem) => void
+  required?: boolean
+  disabled?: boolean
+  readOnly?: boolean
+  error?: boolean
+  label?: string
+  helperText?: string
 }
 ```
 

@@ -14,12 +14,48 @@ describe('Navigation', () => {
     expect(Autocomplete).toBeDefined()
   })
 
-  describe('rendering', () => {
+  describe('Rendering', () => {
     test('Default rendering', () => {
       const { container } = render(<Autocomplete />)
       expect(container.querySelector('input').getAttribute('class')).toContain(
         'MuiInput-input'
       )
+    })
+  })
+
+  describe('Standard TextField props', () => {
+    test('Required', () => {
+      const { container } = render(<Autocomplete required />)
+      expect(container.querySelector('input').required).toBe(true)
+    })
+
+    test('Disabled', () => {
+      const { container } = render(<Autocomplete disabled />)
+      expect(container.querySelector('input').disabled).toBe(true)
+    })
+
+    test('Readonly', () => {
+      const { container } = render(<Autocomplete readOnly />)
+      expect(container.querySelector('input').readOnly).toBe(true)
+    })
+
+    test('Error', () => {
+      const { container } = render(<Autocomplete error />)
+      expect(container.querySelector('input[aria-invalid="true"]')).not.toBeNull()
+    })
+
+    test('With label', () => {
+      const { container } = render(<Autocomplete label="Example" />)
+      const label = container.querySelector('label')
+      expect(label).not.toBeNull()
+      expect(label.textContent).toBe('Example')
+    })
+
+    test('With helper text', () => {
+      const { container } = render(<Autocomplete helperText="Example" />)
+      const helperText = container.querySelector('p')
+      expect(helperText).not.toBeNull()
+      expect(helperText.textContent).toBe('Example')
     })
   })
 
