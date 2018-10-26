@@ -43,7 +43,7 @@ spec:
           priorityClassName: "{{ .Values.s3.priorityClassName }}"
 {{- end }}
           containers:
-            - name: {{ template "titus.name" . }}-{{ .Values.s3.Name }}
+            - name: {{ template "titus.name" . }}-{{ .Values.s3.name }}
               image: "{{ .Values.s3.image.repository }}:{{ .Values.s3.image.tag }}"
               imagePullPolicy: {{ .Values.s3.image.pullPolicy }}
               ports:

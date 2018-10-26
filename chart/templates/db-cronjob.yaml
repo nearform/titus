@@ -43,7 +43,7 @@ spec:
           priorityClassName: "{{ .Values.db.priorityClassName }}"
 {{- end }}
           containers:
-            - name: {{ template "titus.name" . }}-{{ .Values.db.Name }}
+            - name: {{ template "titus.name" . }}-{{ .Values.db.name }}
               image: "{{ .Values.db.image.repository }}:{{ .Values.db.image.tag }}"
               imagePullPolicy: {{ .Values.db.image.pullPolicy }}
               ports:
