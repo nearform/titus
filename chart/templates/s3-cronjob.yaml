@@ -1,0 +1,65 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ include "titus.s3.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "titus.name" . }}
+    helm.sh/chart: {{ include "titus.chart" . }}
+    component: "{{ .Values.s3.name }}"
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+  annotations:
+{{ toYaml .Values.db.annotations | indent 4 }}
+spec:
+  schedule: "{{ .Values.s3.schedule }}"
+  {{- with .Values.db.concurrencyPolicy }}
+  concurrencyPolicy: {{ . }}
+  {{- end }}
+  {{- with .Values.db.failedJobsHistoryLimit }}
+  failedJobsHistoryLimit: {{ . }}
+  {{- end }}
+  {{- with .Values.db.successfulJobsHistoryLimit }}
+  successfulJobsHistoryLimit: {{ . }}
+  {{- end }}
+  jobTemplate:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "titus.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        component: "{{ .Values.s3.name }}"
+    spec:
+      activeDeadlineSeconds: 86400
+      template:
+        metadata:
+          labels:
+            app.kubernetes.io/name: {{ include "titus.name" . }}
+            app.kubernetes.io/instance: {{ .Release.Name }}
+            component: "{{ .Values.s3.name }}"
+          annotations:
+{{ toYaml .Values.s3.pod.annotations | indent 12 }}
+        spec:
+          restartPolicy: OnFailure
+{{- if .Values.s3.priorityClassName }}
+          priorityClassName: "{{ .Values.s3.priorityClassName }}"
+{{- end }}
+          containers:
+            - name: {{ template "titus.name" . }}-{{ .Values.s3.Name }}
+              image: "{{ .Values.s3.image.repository }}:{{ .Values.s3.image.tag }}"
+              imagePullPolicy: {{ .Values.s3.image.pullPolicy }}
+              ports:
+                - containerPort: 4569
+                  name: s3
+              resources:
+{{ toYaml .Values.s3.resources | indent 16 }}
+    {{- with .Values.s3.nodeSelector }}
+          nodeSelector:
+{{ toYaml . | indent 12 }}
+    {{- end }}
+    {{- with .Values.s3.affinity }}
+          affinity:
+{{ toYaml . | indent 12 }}
+    {{- end }}
+    {{- with .Values.s3.tolerations }}
+          tolerations:
+{{ toYaml . | indent 12 }}:
+{{- end }}

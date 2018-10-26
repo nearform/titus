@@ -1,0 +1,162 @@
+# Default values for titus.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+backend:
+  name: backend
+
+  replicaCount: 1
+
+  image:
+    repository: titus-backend
+    tag: 711655675495.dkr.ecr.us-east-1.amazonaws.com/titus-kitchen-sink-backend:latest
+    pullPolicy: IfNotPresent
+
+  nameOverride: ""
+  fullnameOverride: ""
+
+  service:
+    type: ClusterIP
+    port: 80
+
+  extraVars:
+    - name: PGHOST
+      value: "titus-db"
+    - name: PGPORT
+      value: "5432"
+    - name: POSTGRES_USER
+      value: "titus"
+    - name: POSTGRES_PASSWORD
+      value: "titus"
+    - name: POSTGRES_DB
+      value: "titus"
+    - name: NF_COMMENTS_PGHOST
+      value: "titus-db"
+    - name: NF_COMMENTS_PGUSER
+      value: "titus"
+    - name: NF_COMMENTS_PASSWORD
+      value: "titus"
+    - name: NF_COMMENTS_DATABASE
+      value: "titus"
+    - name: REDIS_HOST
+      value: "titus-redis"
+    - name: REDIS_PORT
+      value: "6379"
+    - name: REACT_APP_S3_UPLOADER_ENDPOINT
+      value: "http://titus-s3:4569"
+
+  resources: {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #  cpu: 100m
+    #  memory: 128Mi
+    # requests:
+    #  cpu: 100m
+    #  memory: 128Mi
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
+
+redis:
+  name: redis
+
+  replicaCount: 1
+
+  image:
+    tag: redis:latest
+    pullPolicy: IfNotPresent
+
+  nameOverride: ""
+  fullnameOverride: ""
+
+  service:
+    type: ClusterIP
+    port: 6379
+
+  extraVars: {}
+
+  resources: {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #  cpu: 100m
+    #  memory: 128Mi
+    # requests:
+    #  cpu: 100m
+    #  memory: 128Mi
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
+
+db:
+  name: db
+
+  schedule: "15 14 * * *"
+  annotations: {}
+  concurrencyPolicy: "Forbid"
+  failedJobsHistoryLimit: "1"
+  successfulJobsHistoryLimit: "1"
+
+  service:
+    type: ClusterIP
+    port: 5432
+
+  image:
+    tag: 711655675495.dkr.ecr.us-east-1.amazonaws.com/titus-kitchen-sink-db:latest
+    pullPolicy: IfNotPresent
+  
+  pod:
+    annotations: {}
+
+  priorityClassName: ""
+
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
+
+s3:
+  name: fake-s3
+
+  schedule: "15 14 * * *"
+  annotations: {}
+  concurrencyPolicy: "Forbid"
+  failedJobsHistoryLimit: "1"
+  successfulJobsHistoryLimit: "1"
+
+  service:
+    type: LoadBalancer
+    annotations:
+      service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
+      service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:us-east-1:711655675495:certificate/9ee3a25a-5872-4283-b0e2-01468e5a11bf
+      service.beta.kubernetes.io/aws-load-balancer-backend-protocol: tcp
+      service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
+
+  image:
+    tag: mrister/fake-s3
+    pullPolicy: Always
+  
+  pod:
+    annotations: {}
+
+  priorityClassName: ""
+
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}

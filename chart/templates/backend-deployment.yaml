@@ -1,0 +1,51 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ include "titus.backend.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "titus.name" . }}
+    helm.sh/chart: {{ include "titus.chart" . }}
+    component: "{{ .Values.backend.name }}"
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.backend.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "titus.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      component: "{{ .Values.backend.name }}"
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "titus.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        component: "{{ .Values.backend.name }}"
+    spec:
+      containers:
+        - name: {{ template "titus.name" . }}-{{ .Values.backend.Name }}
+          image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
+          imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
+          env:
+            {{- range $key, $value := .Values.backend.extraEnv }}
+            - name: {{ $key }}
+              value: {{ $value }}
+            {{- end }}
+          ports:
+            - name: http
+              containerPort: 5000
+              protocol: TCP
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}

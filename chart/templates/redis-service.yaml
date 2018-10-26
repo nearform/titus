@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "titus.redis.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "titus.name" . }}
+    helm.sh/chart: {{ include "titus.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    component: "{{ .Values.redis.name }}"
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  type: {{ .Values.redis.service.type }}
+  ports:
+    - port: {{ .Values.redis.service.port }}
+      targetPort: redis
+      protocol: TCP
+      name: redis
+  selector:
+    app.kubernetes.io/name: {{ include "titus.name" . }}
+    component: "{{ .Values.redis.name }}"
+    app.kubernetes.io/instance: {{ .Release.Name }}
