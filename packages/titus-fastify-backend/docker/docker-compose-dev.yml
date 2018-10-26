@@ -24,8 +24,8 @@ services:
 
   fastify-api:
     build:
-      context: .
-      dockerfile: api/Dockerfile
+      context: ../
+      dockerfile: $PWD/docker/api/Dockerfile
     env_file: dev.env
     depends_on:
       - postgres
