@@ -10,7 +10,7 @@ import './i18n.js'
 const styles = theme => ({
   button: {
     marginRight: theme.spacing.unit,
-    marginBottom: theme.spacing.unit,
+    marginBottom: theme.spacing.unit
   },
   paper: {
     marginTop: theme.spacing.unit,
@@ -18,31 +18,41 @@ const styles = theme => ({
   }
 })
 
-const LanguageButton = translate()(withStyles(styles)(function LanguageButton({ classes, language, i18n }) {
-  return (
-    <Button
-      color={language === i18n.language ? 'primary' : 'secondary'}
-      className={classes.button} 
-      variant="contained" 
-      onClick={() => i18n.changeLanguage(language)}>
-      {language}
-    </Button>
-  )
-}))
+const LanguageButton = translate()(
+  withStyles(styles)(function LanguageButton({ classes, language, i18n }) {
+    return (
+      <Button
+        color={language === i18n.language ? 'primary' : 'secondary'}
+        className={classes.button}
+        variant="contained"
+        onClick={() => i18n.changeLanguage(language)}
+      >
+        {language}
+      </Button>
+    )
+  })
+)
 
-function Translations ({ classes, t, i18n }) {
+function Translations({ classes, t, i18n }) {
   return (
     <div>
-      <Typography variant="headline" gutterBottom>Translation demo</Typography>
+      <Typography variant="headline" gutterBottom>
+        Translation demo
+      </Typography>
       <Typography variant="subheading" gutterBottom>
-        The text below will be translated when switching locales using the buttons
+        The text below will be translated when switching locales using the
+        buttons
       </Typography>
       <LanguageButton language="en" />
       <LanguageButton language="fr" />
       <LanguageButton language="it" />
-      <Paper className={classes.paper}  >
-        <Typography variant="title" gutterBottom>{t('welcome')}</Typography>
-        <Typography variant="subheading" gutterBottom>{t('description')}</Typography>
+      <Paper className={classes.paper}>
+        <Typography variant="title" gutterBottom>
+          {t('welcome')}
+        </Typography>
+        <Typography variant="subheading" gutterBottom>
+          {t('description')}
+        </Typography>
       </Paper>
     </div>
   )

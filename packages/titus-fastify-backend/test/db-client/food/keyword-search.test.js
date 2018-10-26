@@ -16,10 +16,20 @@ beforeEach(() => {
 
 test('returns row with camelised column names', async () => {
   const pgStub = {
-    query: jest.fn().mockResolvedValue({ rows: [{ some_column: 'some_value' }, { some_column: 'from_search_result' }] })
+    query: jest
+      .fn()
+      .mockResolvedValue({
+        rows: [
+          { some_column: 'some_value' },
+          { some_column: 'from_search_result' }
+        ]
+      })
   }
 
-  const data = await keywordSearch(pgStub, { needle: 'my-keyword', keywordType: 'levenshtein' })
+  const data = await keywordSearch(pgStub, {
+    needle: 'my-keyword',
+    keywordType: 'levenshtein'
+  })
 
   expect(pgStub.query).toHaveBeenCalledTimes(1)
   expect(pgStub.query).toBeCalledWith(sqlStub)

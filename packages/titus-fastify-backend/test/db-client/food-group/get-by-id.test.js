@@ -12,7 +12,9 @@ beforeEach(() => {
 
 test('returns row with camelised column names', async () => {
   const pgStub = {
-    query: jest.fn().mockResolvedValue({ rows: [{ some_column: 'some_value' }] })
+    query: jest
+      .fn()
+      .mockResolvedValue({ rows: [{ some_column: 'some_value' }] })
   }
 
   const data = await getById(pgStub, { id: 123 })
@@ -30,9 +32,9 @@ test('throws error when the entry does not exist in db', async () => {
     query: jest.fn().mockResolvedValue({ rowCount: 0 })
   }
 
-  await expect(
-    getById(pgStub, { id: 123 })
-  ).rejects.toThrow(expect.any(dbErrors.NotFoundError))
+  await expect(getById(pgStub, { id: 123 })).rejects.toThrow(
+    expect.any(dbErrors.NotFoundError)
+  )
 
   expect(SQL).toHaveBeenCalledTimes(1)
 

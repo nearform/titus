@@ -3,7 +3,7 @@ const httpErrors = require('http-errors')
 
 const errorHandler = require('../../error-handler')
 
-function plugin (server, opts, next) {
+function plugin(server, opts, next) {
   server.route({
     path: '/diet-type',
     method: 'GET',

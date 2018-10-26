@@ -17,7 +17,6 @@ import { ToggleButton } from './toggle-button'
 
 const loadAllDietTypes = loader('./queries/loadAllDietTypes.graphql')
 
-
 const styles = theme => ({
   progress: {
     margin: theme.spacing.unit * 2

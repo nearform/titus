@@ -8,7 +8,14 @@ SQL.mockReturnValue('input-query')
 
 test('returns rows array with camelised column names', async () => {
   const pgStub = {
-    query: jest.fn().mockResolvedValue({ rows: [{ some_column: 'some_value' }, { some_other_column: 'some_other_value' }] })
+    query: jest
+      .fn()
+      .mockResolvedValue({
+        rows: [
+          { some_column: 'some_value' },
+          { some_other_column: 'some_other_value' }
+        ]
+      })
   }
 
   const data = await getAll(pgStub, { offset: 10, limit: 5 })

@@ -16,7 +16,10 @@ test('translation API returns resource object', async () => {
     description: 'This is a sample localized resource stored on the server'
   }
 
-  const response = await server.inject({ method: 'GET', url: '/locales/en/translations' })
+  const response = await server.inject({
+    method: 'GET',
+    url: '/locales/en/translations'
+  })
   const body = JSON.parse(response.body)
 
   expect(response.statusCode).toEqual(200)
@@ -24,7 +27,10 @@ test('translation API returns resource object', async () => {
 })
 
 test('translation API returns resource object', async () => {
-  const response = await server.inject({ method: 'GET', url: '/locales/ch/translations' })
+  const response = await server.inject({
+    method: 'GET',
+    url: '/locales/ch/translations'
+  })
 
   expect(response.statusCode).toEqual(404)
   expect(response.statusMessage).toEqual('Not Found')

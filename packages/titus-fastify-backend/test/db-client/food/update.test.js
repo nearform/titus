@@ -45,9 +45,9 @@ test('rejects with NotFoundError when update fails without error', async () => {
     query: jest.fn().mockResolvedValue({ rowCount: 0 })
   }
 
-  await expect(
-    update(pgStub, { food })
-  ).rejects.toThrow(expect.any(dbErrors.NotFoundError))
+  await expect(update(pgStub, { food })).rejects.toThrow(
+    expect.any(dbErrors.NotFoundError)
+  )
 
   expect(pgStub.query).toHaveBeenCalledTimes(1)
   expect(pgStub.query).toBeCalledWith(sqlStub)
@@ -59,9 +59,7 @@ test('rejects with error when db op fails', async () => {
     query: jest.fn().mockRejectedValue(new Error('some error'))
   }
 
-  await expect(
-    update(pgStub, { food })
-  ).rejects.toThrowError('some error')
+  await expect(update(pgStub, { food })).rejects.toThrowError('some error')
 
   expect(pgStub.query).toHaveBeenCalledTimes(1)
   expect(pgStub.query).toBeCalledWith(sqlStub)

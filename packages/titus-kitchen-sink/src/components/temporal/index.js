@@ -27,27 +27,26 @@ const styles = theme => ({
 const columns = [
   {
     accessor: 'name',
-    label: 'Name',
+    label: 'Name'
   },
   {
     accessor: 'foodGroup',
-    label: 'Food Group',
+    label: 'Food Group'
   },
   {
     accessor: 'validSince',
-    label: 'Valid Since',
+    label: 'Valid Since'
   },
   {
     accessor: 'validUntil',
-    label: 'Valid Until',
+    label: 'Valid Until'
   }
 ]
-
 
 class Temporal extends React.Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
-    columns: PropTypes.array.isRequired,
+    columns: PropTypes.array.isRequired
   }
 
   static defaultProps = {
@@ -59,59 +58,76 @@ class Temporal extends React.Component {
     selectedFoodId: ''
   }
 
-  selectFood = ({key}) => this.setState({selectedFoodId: key})
+  selectFood = ({ key }) => this.setState({ selectedFoodId: key })
 
   render() {
     const { classes, title, columns } = this.props
     const { selectedFoodId } = this.state
 
     return (
-      <div  className={classes.root}>
+      <div className={classes.root}>
         <Typography variant="headline" gutterBottom>
           Temporal Tables Demo
         </Typography>
         <Typography variant="subheading" gutterBottom>
-          This demo shows the <a href="https://github.com/nearform/temporal_tables" target="_blank" rel="noopener noreferrer">temporal tables extension</a> in action.
-          It track changes to table records.
+          This demo shows the{' '}
+          <a
+            href="https://github.com/nearform/temporal_tables"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            temporal tables extension
+          </a>{' '}
+          in action. It track changes to table records.
         </Typography>
-        <Paper className={classNames(classes.paperPadding, classes.verticalMargin)}>
+        <Paper
+          className={classNames(classes.paperPadding, classes.verticalMargin)}
+        >
           <Query query={loadFoodData}>
-          {({ loading, error, data: { allFood = [] } = {} }) => {
-            if (error) {
+            {({ loading, error, data: { allFood = [] } = {} }) => {
+              if (error) {
+                return (
+                  <Typography color="error">
+                    Oops, there was an error requesting the list of foods!
+                  </Typography>
+                )
+              }
+
+              const allFoodAutocomplete = allFood.map(({ id, name }) => ({
+                key: id,
+                value: name
+              }))
+
               return (
-                <Typography color="error">
-                  Oops, there was an error requesting the list of foods!
-                </Typography>
-              )
-            }
-
-            const allFoodAutocomplete = allFood.map(({id, name}) => ({key: id, value: name}))
-
-            return (
-              <React.Fragment>
-                <Paper className={classNames(classes.paperPadding, classes.verticalMargin)}>
-                  <FormControl>
-                    <Autocomplete
-                      placeholder="Find a food by typing its name"
-                      id="food-autocomplete"
-                      data={allFoodAutocomplete}
-                      onChange={this.selectFood}
-                      maxResults={10}
-                      filterType="contains"
-                      loading={loading}
+                <React.Fragment>
+                  <Paper
+                    className={classNames(
+                      classes.paperPadding,
+                      classes.verticalMargin
+                    )}
+                  >
+                    <FormControl>
+                      <Autocomplete
+                        placeholder="Find a food by typing its name"
+                        id="food-autocomplete"
+                        data={allFoodAutocomplete}
+                        onChange={this.selectFood}
+                        maxResults={10}
+                        filterType="contains"
+                        loading={loading}
+                      />
+                    </FormControl>
+                  </Paper>
+                  {selectedFoodId && (
+                    <FoodHistory
+                      title={title}
+                      columns={columns}
+                      selectedFoodId={selectedFoodId}
                     />
-                  </FormControl>
-                </Paper>
-                {selectedFoodId && (
-                  <FoodHistory
-                    title={title}
-                    columns={columns}
-                    selectedFoodId={selectedFoodId}
-                  />
-                )}
-              </React.Fragment>
-            )
-          }}
+                  )}
+                </React.Fragment>
+              )
+            }}
           </Query>
         </Paper>
       </div>

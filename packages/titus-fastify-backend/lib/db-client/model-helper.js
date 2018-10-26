@@ -3,7 +3,7 @@ const dbErrors = require('./errors')
 const DUPLICATE_KEY = '23505'
 const FOREIGN_KEY_VIOLATION = '23503'
 
-function handleDBError (err) {
+function handleDBError(err) {
   if (err.isDBError) return Promise.reject(err)
 
   if (err.code === DUPLICATE_KEY) {
@@ -17,4 +17,4 @@ function handleDBError (err) {
   return Promise.reject(new dbErrors.GenericDBError(err.message))
 }
 
-module.exports = (pg) => (fn) => (opts) => fn(pg, opts).catch(handleDBError)
+module.exports = pg => fn => opts => fn(pg, opts).catch(handleDBError)

@@ -5,7 +5,7 @@ const dbClient = require('../db-client')
 
 const getByIds = async (pg, idListOrSingleId) => {
   const ids = [].concat(idListOrSingleId)
-  return dbClient({pg}).foodGroup.getByIds({ids})
+  return dbClient({ pg }).foodGroup.getByIds({ ids })
 }
 
 const dataloaders = pg => ({

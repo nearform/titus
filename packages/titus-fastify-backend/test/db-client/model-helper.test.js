@@ -37,9 +37,7 @@ test('modelHelper should reject with GenericDBError when input function throws',
 
   expect(wrappedFn).toEqual(expect.any(Function))
 
-  await expect(
-    wrappedFn('options')
-  ).rejects.toThrowError('some error occured')
+  await expect(wrappedFn('options')).rejects.toThrowError('some error occured')
 
   expect(fn).toHaveBeenCalledTimes(1)
   expect(fn).toBeCalledWith('pg-client', 'options')
@@ -51,14 +49,16 @@ test('modelHelper should reject with DuplicateKeyError when input function throw
 
   expect(modelHelper).toEqual(expect.any(Function))
 
-  const fn = jest.fn().mockRejectedValue(getErrorStub('23505', 'Some duplicate key error'))
+  const fn = jest
+    .fn()
+    .mockRejectedValue(getErrorStub('23505', 'Some duplicate key error'))
   const wrappedFn = modelHelper(fn)
 
   expect(wrappedFn).toEqual(expect.any(Function))
 
-  await expect(
-    wrappedFn('options')
-  ).rejects.toThrow(expect.any(dbErrors.DuplicateKeyError))
+  await expect(wrappedFn('options')).rejects.toThrow(
+    expect.any(dbErrors.DuplicateKeyError)
+  )
 
   expect(fn).toHaveBeenCalledTimes(1)
   expect(fn).toBeCalledWith('pg-client', 'options')
@@ -70,14 +70,18 @@ test('modelHelper should reject with DuplicateKeyError when input function throw
 
   expect(modelHelper).toEqual(expect.any(Function))
 
-  const fn = jest.fn().mockRejectedValue(getErrorStub('23503', 'Some forieng key violation error'))
+  const fn = jest
+    .fn()
+    .mockRejectedValue(
+      getErrorStub('23503', 'Some forieng key violation error')
+    )
   const wrappedFn = modelHelper(fn)
 
   expect(wrappedFn).toEqual(expect.any(Function))
 
-  await expect(
-    wrappedFn('options')
-  ).rejects.toThrow(expect.any(dbErrors.ForeignKeyViolationError))
+  await expect(wrappedFn('options')).rejects.toThrow(
+    expect.any(dbErrors.ForeignKeyViolationError)
+  )
 
   expect(fn).toHaveBeenCalledTimes(1)
   expect(fn).toBeCalledWith('pg-client', 'options')

@@ -10,12 +10,15 @@ const query = loader('../../theme/query.graphql')
 
 const ThemeSwitcher = ({ data: { themeName }, client }) => (
   <IconButton
-    title={`Switch to ${themeName === THEME.default ? THEME.nearform : THEME.default} theme`}
+    title={`Switch to ${
+      themeName === THEME.default ? THEME.nearform : THEME.default
+    } theme`}
     color="inherit"
     onClick={() =>
       client.writeData({
         data: {
-          themeName: themeName === THEME.default ? THEME.nearform : THEME.default
+          themeName:
+            themeName === THEME.default ? THEME.nearform : THEME.default
         }
       })
     }

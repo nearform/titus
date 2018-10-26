@@ -23,7 +23,7 @@ const getSql = ({ ids }) => {
   `
 }
 
-module.exports = async function (pg, opts) {
+module.exports = async function(pg, opts) {
   const sql = getSql(opts)
 
   const result = await pg.query(sql)

@@ -13,7 +13,9 @@ test('dbClient plugin should call decorateRequest with the dbClient', async () =
 
   const transactionalModelHelperStub = jest.fn()
   transactionalModelHelperStub.mockReturnValue('TRANSACTIONALLY WRAPPED FUNC')
-  transactionalModelHelperFactory.mockReturnValueOnce(transactionalModelHelperStub)
+  transactionalModelHelperFactory.mockReturnValueOnce(
+    transactionalModelHelperStub
+  )
 
   const dbClient = dbClientFactory({ pg: 'pg-stub' })
 

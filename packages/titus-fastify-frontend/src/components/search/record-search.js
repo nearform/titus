@@ -103,7 +103,11 @@ class RecordSearch extends React.Component {
                 return <Typography color="error">{error}</Typography>
               }
 
-              const items = data.search ? data.search.map(({ id, name }) => ({ key: id, value: name })).slice(0, 10) : null
+              const items = data.search
+                ? data.search
+                    .map(({ id, name }) => ({ key: id, value: name }))
+                    .slice(0, 10)
+                : null
 
               return (
                 <Autocomplete

@@ -41,7 +41,9 @@ describe('Navigation', () => {
 
     test('Error', () => {
       const { container } = render(<Autocomplete error />)
-      expect(container.querySelector('input[aria-invalid="true"]')).not.toBeNull()
+      expect(
+        container.querySelector('input[aria-invalid="true"]')
+      ).not.toBeNull()
     })
 
     test('With label', () => {

@@ -9,7 +9,7 @@ const getErrorStub = (code, message) => {
 }
 
 test('transactionalModelHelper should resolve value from the input function', async () => {
-  const pg = { transact: async (fn) => fn('pg-client') }
+  const pg = { transact: async fn => fn('pg-client') }
   const transactionalModelHelper = transactionalModelHelperFactory(pg)
 
   expect(transactionalModelHelper).toEqual(expect.any(Function))
@@ -27,7 +27,7 @@ test('transactionalModelHelper should resolve value from the input function', as
 })
 
 test('transactionalModelHelper should reject with GenericDBError when input function throws', async () => {
-  const pg = { transact: async (fn) => fn('pg-client') }
+  const pg = { transact: async fn => fn('pg-client') }
   const transactionalModelHelper = transactionalModelHelperFactory(pg)
 
   expect(transactionalModelHelper).toEqual(expect.any(Function))
@@ -37,47 +37,51 @@ test('transactionalModelHelper should reject with GenericDBError when input func
 
   expect(wrappedFn).toEqual(expect.any(Function))
 
-  await expect(
-    wrappedFn('options')
-  ).rejects.toThrowError('some error occured')
+  await expect(wrappedFn('options')).rejects.toThrowError('some error occured')
 
   expect(fn).toHaveBeenCalledTimes(1)
   expect(fn).toBeCalledWith('pg-client', 'options')
 })
 
 test('transactionalModelHelper should reject with DuplicateKeyError when input function throws with error code 23505', async () => {
-  const pg = { transact: async (fn) => fn('pg-client') }
+  const pg = { transact: async fn => fn('pg-client') }
   const transactionalModelHelper = transactionalModelHelperFactory(pg)
 
   expect(transactionalModelHelper).toEqual(expect.any(Function))
 
-  const fn = jest.fn().mockRejectedValue(getErrorStub('23505', 'Some duplicate key error'))
+  const fn = jest
+    .fn()
+    .mockRejectedValue(getErrorStub('23505', 'Some duplicate key error'))
   const wrappedFn = transactionalModelHelper(fn)
 
   expect(wrappedFn).toEqual(expect.any(Function))
 
-  await expect(
-    wrappedFn('options')
-  ).rejects.toThrow(expect.any(dbErrors.DuplicateKeyError))
+  await expect(wrappedFn('options')).rejects.toThrow(
+    expect.any(dbErrors.DuplicateKeyError)
+  )
 
   expect(fn).toHaveBeenCalledTimes(1)
   expect(fn).toBeCalledWith('pg-client', 'options')
 })
 
 test('transactionalModelHelper should reject with DuplicateKeyError when input function throws with error code 23503', async () => {
-  const pg = { transact: async (fn) => fn('pg-client') }
+  const pg = { transact: async fn => fn('pg-client') }
   const transactionalModelHelper = transactionalModelHelperFactory(pg)
 
   expect(transactionalModelHelper).toEqual(expect.any(Function))
 
-  const fn = jest.fn().mockRejectedValue(getErrorStub('23503', 'Some forieng key violation error'))
+  const fn = jest
+    .fn()
+    .mockRejectedValue(
+      getErrorStub('23503', 'Some forieng key violation error')
+    )
   const wrappedFn = transactionalModelHelper(fn)
 
   expect(wrappedFn).toEqual(expect.any(Function))
 
-  await expect(
-    wrappedFn('options')
-  ).rejects.toThrow(expect.any(dbErrors.ForeignKeyViolationError))
+  await expect(wrappedFn('options')).rejects.toThrow(
+    expect.any(dbErrors.ForeignKeyViolationError)
+  )
 
   expect(fn).toHaveBeenCalledTimes(1)
   expect(fn).toBeCalledWith('pg-client', 'options')

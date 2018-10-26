@@ -1,6 +1,6 @@
 const httpErrors = require('http-errors')
 
-module.exports = function (err) {
+module.exports = function(err) {
   if (!err.isDBError) {
     return err
   }

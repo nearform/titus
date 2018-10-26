@@ -13,13 +13,18 @@ test('dbClient plugin should call decorateRequest with the dbClient', async () =
 
   dbClientPlugin(serverStub, {}, () => {
     expect(serverStub.decorateRequest).toHaveBeenCalledTimes(1)
-    expect(dbClientFactory).toBeCalledWith(expect.objectContaining({
-      pg: 'pg-stub'
-    }))
+    expect(dbClientFactory).toBeCalledWith(
+      expect.objectContaining({
+        pg: 'pg-stub'
+      })
+    )
 
-    expect(serverStub.decorateRequest).toBeCalledWith('dbClient', expect.objectContaining({
-      getter: expect.any(Function)
-    }))
+    expect(serverStub.decorateRequest).toBeCalledWith(
+      'dbClient',
+      expect.objectContaining({
+        getter: expect.any(Function)
+      })
+    )
 
     const dbClient = serverStub.decorateRequest.mock.calls[0][1].getter()
 

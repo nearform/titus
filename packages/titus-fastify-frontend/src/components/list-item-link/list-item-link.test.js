@@ -11,8 +11,7 @@ describe('ListItemLink', () => {
         }),
         { virtual: true }
       )
-      const ListItemLink = require('./list-item-link')
-        .default
+      const ListItemLink = require('./list-item-link').default
       const { getByTestId } = render(<ListItemLink />)
 
       expect(getByTestId('custom-link')).not.toBeNull()

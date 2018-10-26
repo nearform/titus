@@ -11,18 +11,20 @@ const resources = {
   fr: {
     translations: {
       welcome: 'Bienvenue sur titus et react-i18next',
-      description: 'Ceci est un exemple de ressource localisée stockée sur le serveur'
+      description:
+        'Ceci est un exemple de ressource localisée stockée sur le serveur'
     }
   },
   it: {
     translations: {
       welcome: 'Benvenuto su titus e react-i18next',
-      description: 'Questo è un esempio di risorsa localizzata memorizzata lato server'
+      description:
+        'Questo è un esempio di risorsa localizzata memorizzata lato server'
     }
   }
 }
 
-function plugin (server, opts, next) {
+function plugin(server, opts, next) {
   server.route({
     path: '/locales/:language/:namespace',
     method: 'GET',

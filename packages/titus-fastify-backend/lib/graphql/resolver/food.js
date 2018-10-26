@@ -2,32 +2,34 @@
 
 const resolvers = {
   Query: {
-    food (root, args, context) {
+    food(root, args, context) {
       return context.reply.request.dbClient.food.getById(args)
     },
-    allFood (root, args, context) {
+    allFood(root, args, context) {
       return context.reply.request.dbClient.food.getAll(args)
     },
-    search (root, args, context) {
+    search(root, args, context) {
       return context.reply.request.dbClient.food.search(args)
     },
-    keywordSearch (root, args, context) {
+    keywordSearch(root, args, context) {
       return context.reply.request.dbClient.food.keywordSearch(args)
     }
   },
   Food: {
-    foodGroup (root, args, context) {
-      return context.reply.request.dataloaders.foodGroup.getByIds.load(root.foodGroupId)
+    foodGroup(root, args, context) {
+      return context.reply.request.dataloaders.foodGroup.getByIds.load(
+        root.foodGroupId
+      )
     }
   },
   Mutation: {
-    async createFood (root, args, context) {
+    async createFood(root, args, context) {
       return context.reply.request.dbClient.food.create(args)
     },
-    async updateFood (root, args, context) {
+    async updateFood(root, args, context) {
       return context.reply.request.dbClient.food.update(args)
     },
-    async deleteFoods (root, args, context) {
+    async deleteFoods(root, args, context) {
       return context.reply.request.dbClient.food.delete(args)
     }
   }

@@ -42,10 +42,7 @@ const styles = theme => ({
 const TableToolbar = ({ numSelected, classes, title, onDelete }) => (
   <Toolbar className={classNames({ [classes.highlight]: numSelected > 0 })}>
     <div className={classes.title}>
-      <Typography
-        variant="h6"
-        color={numSelected > 0 ? 'primary' : 'inherit'}
-      >
+      <Typography variant="h6" color={numSelected > 0 ? 'primary' : 'inherit'}>
         {title}
       </Typography>
     </div>

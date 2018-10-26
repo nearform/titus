@@ -9,7 +9,10 @@ test('get all food group API', async () => {
       getAll: jest.fn().mockReturnValue('getAll value')
     }
   }
-  const plugins = [{ plugin: fakeDbClientPlugin, options: { endpoints } }, { plugin: foodGroupRoutes }]
+  const plugins = [
+    { plugin: fakeDbClientPlugin, options: { endpoints } },
+    { plugin: foodGroupRoutes }
+  ]
   const server = await buildServer(plugins)
 
   const response = await server.inject({ method: 'GET', url: '/food-group' })
@@ -26,10 +29,16 @@ test('get food group API', async () => {
       getById: jest.fn().mockReturnValue('getById value')
     }
   }
-  const plugins = [{ plugin: fakeDbClientPlugin, options: { endpoints } }, { plugin: foodGroupRoutes }]
+  const plugins = [
+    { plugin: fakeDbClientPlugin, options: { endpoints } },
+    { plugin: foodGroupRoutes }
+  ]
   const server = await buildServer(plugins)
 
-  const response = await server.inject({ method: 'GET', url: '/food-group/some-id' })
+  const response = await server.inject({
+    method: 'GET',
+    url: '/food-group/some-id'
+  })
 
   expect(endpoints.foodGroup.getById).toHaveBeenCalledTimes(1)
   expect(endpoints.foodGroup.getById).toBeCalledWith({ id: 'some-id' })
@@ -44,10 +53,17 @@ test('create food group API', async () => {
       create: jest.fn().mockReturnValue('create value')
     }
   }
-  const plugins = [{ plugin: fakeDbClientPlugin, options: { endpoints } }, { plugin: foodGroupRoutes }]
+  const plugins = [
+    { plugin: fakeDbClientPlugin, options: { endpoints } },
+    { plugin: foodGroupRoutes }
+  ]
   const server = await buildServer(plugins)
 
-  const response = await server.inject({ method: 'PUT', url: '/food-group', body: { name: 'New Food Group' } })
+  const response = await server.inject({
+    method: 'PUT',
+    url: '/food-group',
+    body: { name: 'New Food Group' }
+  })
 
   expect(endpoints.foodGroup.create).toHaveBeenCalledTimes(1)
   expect(endpoints.foodGroup.create).toBeCalledWith({ name: 'New Food Group' })

@@ -16,7 +16,14 @@ beforeEach(() => {
 
 test('returns rows array with camelised column names', async () => {
   const pgStub = {
-    query: jest.fn().mockResolvedValue({ rows: [{ some_column: 'some_value' }, { some_other_column: 'some_other_value' }] })
+    query: jest
+      .fn()
+      .mockResolvedValue({
+        rows: [
+          { some_column: 'some_value' },
+          { some_other_column: 'some_other_value' }
+        ]
+      })
   }
 
   const data = await getAll(pgStub)
@@ -37,9 +44,7 @@ test('rejects with error when db op fails', async () => {
     query: jest.fn().mockRejectedValue(new Error('something bad happend'))
   }
 
-  await expect(
-    getAll(pgStub)
-  ).rejects.toThrowError('something bad happend')
+  await expect(getAll(pgStub)).rejects.toThrowError('something bad happend')
 
   expect(SQL).toHaveBeenCalledTimes(1)
 

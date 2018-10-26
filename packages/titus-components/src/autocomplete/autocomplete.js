@@ -86,12 +86,7 @@ class Autocomplete extends React.Component {
   }
 
   handleInputChange = ({ target: { value } }) => {
-    const {
-      data,
-      filterType,
-      maxResults,
-      onInputChange
-    } = this.props
+    const { data, filterType, maxResults, onInputChange } = this.props
 
     if (onInputChange) {
       // suggestions handled by container

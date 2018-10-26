@@ -75,7 +75,14 @@ class Table extends React.Component {
   }
 
   render() {
-    const { classes, title, columns, pageSize, pageSizeOptions, data: { loading, error, allFood } } = this.props
+    const {
+      classes,
+      title,
+      columns,
+      pageSize,
+      pageSizeOptions,
+      data: { loading, error, allFood }
+    } = this.props
 
     if (loading) {
       return (
@@ -118,8 +125,8 @@ class Table extends React.Component {
           <Typography variant="caption">
             US Department of Agriculture, Agricultural Research Service,
             Nutrient Data Laboratory. USDA National Nutrient Database for
-            Standard Reference, Release 28. Version Current: September
-            2015. Internet:{' '}
+            Standard Reference, Release 28. Version Current: September 2015.
+            Internet:{' '}
             <a href="http://www.ars.usda.gov/ba/bhnrc/ndl">
               http://www.ars.usda.gov/ba/bhnrc/ndl
             </a>

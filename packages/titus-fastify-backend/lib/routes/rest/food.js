@@ -1,7 +1,7 @@
 const fastifyPlugin = require('fastify-plugin')
 const errorHandler = require('../../error-handler')
 
-function plugin (server, opts, next) {
+function plugin(server, opts, next) {
   server.route({
     path: '/food',
     method: 'GET',
@@ -49,7 +49,16 @@ function plugin (server, opts, next) {
       params: {
         type: 'object',
         properties: {
-          type: { type: 'string', enum: ['startsWith', 'endsWith', 'fullText', 'similarity', 'contains'] },
+          type: {
+            type: 'string',
+            enum: [
+              'startsWith',
+              'endsWith',
+              'fullText',
+              'similarity',
+              'contains'
+            ]
+          },
           needle: { type: 'string' }
         }
       }
@@ -69,7 +78,18 @@ function plugin (server, opts, next) {
       params: {
         type: 'object',
         properties: {
-          keywordType: { type: 'string', enum: ['startsWith', 'contains', 'endsWith', 'levenshtein', 'soundex', 'metaphone', 'trigram'] },
+          keywordType: {
+            type: 'string',
+            enum: [
+              'startsWith',
+              'contains',
+              'endsWith',
+              'levenshtein',
+              'soundex',
+              'metaphone',
+              'trigram'
+            ]
+          },
           needle: { type: 'string' }
         }
       }

@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports.generateSql = function () {
+module.exports.generateSql = function() {
   return `
     INSERT INTO users (id, name, org_id, metadata) values
     ('MrsAdmin', 'Mrs Admin', 'ROOT', null),

@@ -5,7 +5,9 @@ import { IconButton } from '@material-ui/core'
 import { loader } from 'graphql.macro'
 
 const loadAllDietTypes = loader('./queries/loadAllDietTypes.graphql')
-const toggleDietTypeVisibility = loader('./queries/toggleDietTypeVisibility.graphql')
+const toggleDietTypeVisibility = loader(
+  './queries/toggleDietTypeVisibility.graphql'
+)
 
 export const ToggleButton = ({ id, children }) => (
   <Mutation mutation={toggleDietTypeVisibility}>

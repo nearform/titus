@@ -2,7 +2,7 @@ const fastifyPlugin = require('fastify-plugin')
 
 const errorHandler = require('../../error-handler')
 
-function plugin (server, opts, next) {
+function plugin(server, opts, next) {
   server.route({
     path: '/food-group',
     method: 'GET',

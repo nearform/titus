@@ -46,16 +46,18 @@ class NewFoodForm extends React.Component {
     createFood: PropTypes.func.isRequired
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleSubmit (values, { setSubmitting, setErrors }) {
+  handleSubmit(values, { setSubmitting, setErrors }) {
     const id = new Date().getTime()
     const food = values
-    const { loadFoodData: { foodGroups = [] } } = this.props
+    const {
+      loadFoodData: { foodGroups = [] }
+    } = this.props
 
     food.foodGroup = foodGroups.find(({ id }) => id === food.foodGroupId).name
 
@@ -93,8 +95,12 @@ class NewFoodForm extends React.Component {
     return this.props.onClose()
   }
 
-  render () {
-    const { classes, onClose, loadFoodData: { foodGroups = [] } } = this.props
+  render() {
+    const {
+      classes,
+      onClose,
+      loadFoodData: { foodGroups = [] }
+    } = this.props
 
     return (
       <Formik
@@ -105,7 +111,15 @@ class NewFoodForm extends React.Component {
         validationSchema={schema}
         onSubmit={this.handleSubmit}
       >
-        {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          isSubmitting
+        }) => (
           <Dialog
             fullWidth
             open
@@ -118,10 +132,7 @@ class NewFoodForm extends React.Component {
               </DialogTitle>
               <div>
                 <FormGroup row>
-                  <FormControl
-                    className={classes.formControl}
-                    margin="dense"
-                  >
+                  <FormControl className={classes.formControl} margin="dense">
                     <TextField
                       required
                       autoFocus
@@ -140,9 +151,7 @@ class NewFoodForm extends React.Component {
                     margin="dense"
                   >
                     <InputLabel
-                      error={Boolean(
-                        touched.foodGroupId && errors.foodGroupId
-                      )}
+                      error={Boolean(touched.foodGroupId && errors.foodGroupId)}
                       htmlFor="food-group-input"
                     >
                       Food Group
@@ -157,9 +166,7 @@ class NewFoodForm extends React.Component {
                         id: 'food-group-input'
                       }}
                       value={values.foodGroupId}
-                      error={Boolean(
-                        touched.foodGroupId && errors.foodGroupId
-                      )}
+                      error={Boolean(touched.foodGroupId && errors.foodGroupId)}
                       onChange={handleChange}
                       onBlur={handleBlur}
                     >
@@ -170,9 +177,7 @@ class NewFoodForm extends React.Component {
                       ))}
                     </Select>
                     <FormHelperText
-                      error={Boolean(
-                        touched.foodGroupId && errors.foodGroupId
-                      )}
+                      error={Boolean(touched.foodGroupId && errors.foodGroupId)}
                     >
                       {touched.foodGroupId && errors.foodGroupId}
                     </FormHelperText>
@@ -180,11 +185,7 @@ class NewFoodForm extends React.Component {
                 </FormGroup>
               </div>
               <DialogActions>
-                <Button
-                  variant="outlined"
-                  onClick={onClose}
-                  color="primary"
-                >
+                <Button variant="outlined" onClick={onClose} color="primary">
                   Cancel
                 </Button>
                 <Button type="submit" variant="contained" color="primary">

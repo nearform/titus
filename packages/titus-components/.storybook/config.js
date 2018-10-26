@@ -2,7 +2,7 @@ import { configure } from '@storybook/react'
 import { setOptions } from '@storybook/addon-options'
 
 setOptions({
-  name: 'titus-components',
+  name: 'titus-components'
 })
 
 const req = require.context('../src/', true, /.story.js$/)

@@ -1,8 +1,8 @@
 const fastifyPlugin = require('fastify-plugin')
 
-function plugin (server, options, next) {
+function plugin(server, options, next) {
   server.decorateRequest('dbClient', {
-    getter () {
+    getter() {
       return options.endpoints
     }
   })

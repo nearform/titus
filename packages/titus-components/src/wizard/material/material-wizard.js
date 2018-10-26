@@ -51,11 +51,7 @@ const MaterialWizard = ({
         <Typography variant="h4" gutterBottom data-testid="wizard-title">
           {title}
         </Typography>
-        <Typography
-          variant="h5"
-          gutterBottom
-          data-testid="wizard-description"
-        >
+        <Typography variant="h5" gutterBottom data-testid="wizard-description">
           {stepIndex < numSteps ? stepsInfo[stepIndex].description : null}
         </Typography>
       </div>

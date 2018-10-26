@@ -26,8 +26,8 @@ const apolloMocks = [
     },
     result: {
       data: {
-        allFood:  [],
-        foodGroups:  [
+        allFood: [],
+        foodGroups: [
           { id: 'ME_GRUB', name: 'Pirate Food' },
           { id: 'ME_GROG', name: 'Pirate Beverages' }
         ]
@@ -37,8 +37,8 @@ const apolloMocks = [
   {
     request: {
       query: updateFood,
-      variables:{
-        food:{
+      variables: {
+        food: {
           id: 1,
           name: 'Sea Biscuits',
           foodGroupId: 'ME_GRUB',
@@ -54,7 +54,8 @@ const apolloMocks = [
   }
 ]
 
-const wait = (timeout = 0) => new Promise(resolve => setTimeout(resolve, timeout))
+const wait = (timeout = 0) =>
+  new Promise(resolve => setTimeout(resolve, timeout))
 
 afterEach(cleanup)
 

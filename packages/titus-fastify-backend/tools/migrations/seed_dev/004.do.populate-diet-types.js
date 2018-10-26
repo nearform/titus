@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports.generateSql = function () {
+module.exports.generateSql = function() {
   return `
     INSERT INTO diet_type (name, visible) values
     ('Carnivorous', TRUE),

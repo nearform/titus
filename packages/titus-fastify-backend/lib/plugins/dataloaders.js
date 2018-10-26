@@ -1,7 +1,7 @@
 const fastifyPlugin = require('fastify-plugin')
 const dataloaders = require('../dataloaders')
 
-function plugin (server, options, next) {
+function plugin(server, options, next) {
   server.addHook('preHandler', async (request, reply) => {
     request.dataloaders = dataloaders(request.dbClient)
   })

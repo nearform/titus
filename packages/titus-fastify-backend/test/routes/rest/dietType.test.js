@@ -9,7 +9,10 @@ test('get all diet type API', async () => {
       getAll: jest.fn().mockReturnValue('getAll value')
     }
   }
-  const plugins = [{ plugin: fakeDbClientPlugin, options: { endpoints } }, { plugin: dietTypeRoutes }]
+  const plugins = [
+    { plugin: fakeDbClientPlugin, options: { endpoints } },
+    { plugin: dietTypeRoutes }
+  ]
   const server = await buildServer(plugins)
 
   const response = await server.inject({ method: 'GET', url: '/diet-type' })
@@ -26,13 +29,24 @@ test('update diet type API', async () => {
       update: jest.fn().mockReturnValue('update value')
     }
   }
-  const plugins = [{ plugin: fakeDbClientPlugin, options: { endpoints } }, { plugin: dietTypeRoutes }]
+  const plugins = [
+    { plugin: fakeDbClientPlugin, options: { endpoints } },
+    { plugin: dietTypeRoutes }
+  ]
   const server = await buildServer(plugins)
 
-  const response = await server.inject({ method: 'POST', url: '/diet-type/some-id', body: { name: 'Updated Diet Type', visible: false } })
+  const response = await server.inject({
+    method: 'POST',
+    url: '/diet-type/some-id',
+    body: { name: 'Updated Diet Type', visible: false }
+  })
 
   expect(endpoints.dietType.update).toHaveBeenCalledTimes(1)
-  expect(endpoints.dietType.update).toBeCalledWith({ id: 'some-id', name: 'Updated Diet Type', visible: false })
+  expect(endpoints.dietType.update).toBeCalledWith({
+    id: 'some-id',
+    name: 'Updated Diet Type',
+    visible: false
+  })
 
   expect(response.statusCode).toEqual(200)
   expect(response.body).toEqual('update value')
@@ -44,10 +58,16 @@ test('delete diet type API', async () => {
       delete: jest.fn().mockReturnValue('delete value')
     }
   }
-  const plugins = [{ plugin: fakeDbClientPlugin, options: { endpoints } }, { plugin: dietTypeRoutes }]
+  const plugins = [
+    { plugin: fakeDbClientPlugin, options: { endpoints } },
+    { plugin: dietTypeRoutes }
+  ]
   const server = await buildServer(plugins)
 
-  const response = await server.inject({ method: 'DELETE', url: '/diet-type/some-id' })
+  const response = await server.inject({
+    method: 'DELETE',
+    url: '/diet-type/some-id'
+  })
 
   expect(endpoints.dietType.delete).toHaveBeenCalledTimes(1)
   expect(endpoints.dietType.delete).toBeCalledWith({ id: 'some-id' })

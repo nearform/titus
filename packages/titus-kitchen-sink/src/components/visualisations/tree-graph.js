@@ -22,15 +22,15 @@ const generateTree = ({ depth = 4, maxChildren = 2, prev }) => {
     children: [],
     _children: []
   }
-  
+
   if (prev) prev.children.push(newNode)
-  
+
   const noOfChildren = Math.floor(Math.random() * maxChildren + 1)
-  
+
   for (let i = 0; i < noOfChildren; ++i) {
     generateTree({ depth: depth - 1, maxChildren, prev: newNode })
   }
-  
+
   return newNode
 }
 
@@ -205,7 +205,7 @@ class TreeGraph extends React.Component {
     }
 
     const data = hierarchy(this.state.data || [])
-    
+
     return (
       <div
         ref={this.containerRef}

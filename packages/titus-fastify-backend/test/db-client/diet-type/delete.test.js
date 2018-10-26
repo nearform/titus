@@ -37,9 +37,9 @@ test('rejects with error when db op fails', async () => {
     query: jest.fn().mockRejectedValue(new Error('something bad happend'))
   }
 
-  await expect(
-    deleteDietType(pgStub, { id: 'some-id' })
-  ).rejects.toThrowError('something bad happend')
+  await expect(deleteDietType(pgStub, { id: 'some-id' })).rejects.toThrowError(
+    'something bad happend'
+  )
 
   expect(SQL).toHaveBeenCalledTimes(1)
 

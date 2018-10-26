@@ -6,7 +6,7 @@ const dietTypeModel = require('./diet-type')
 const foodGroupModel = require('./food-group')
 
 // pg is fastify-postgres
-module.exports = function dbClientFactory ({ pg }) {
+module.exports = function dbClientFactory({ pg }) {
   const modelHelper = ModelHelper(pg)
   // in current implementation, transactions are not really necessary, you can only use modelHelper if you want
   const transactionalModelHelper = TransactionalModelHelper(pg)

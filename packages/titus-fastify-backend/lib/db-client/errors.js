@@ -17,7 +17,7 @@ module.exports = {
   ForeignKeyViolationError
 }
 
-function tag (Cls, prop) {
+function tag(Cls, prop) {
   Object.defineProperty(Cls.prototype, 'isDBError', { value: true })
   Object.defineProperty(Cls.prototype, prop, { value: true })
 }
