@@ -161,7 +161,9 @@ workflows:
           #filters:
           #  branches:
           #    only: master
-      - upload-frontend-to-s3
+      - upload-frontend-to-s3:
+          requires:
+            - hold
       - helm-upgrade:
           requires:
             - hold
