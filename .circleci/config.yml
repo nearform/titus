@@ -59,7 +59,6 @@ jobs:
     <<: *defaults
     environment:
       DOCKER_REPO: "711655675495.dkr.ecr.eu-west-1.amazonaws.com"
-      S3_BUCKET: noise-website
     steps:
       - attach_workspace:
           at: .
@@ -72,14 +71,6 @@ jobs:
             curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
             unzip awscli-bundle.zip
             sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
-      - run:
-          name: Push frontend to an S3 bucket
-          command: |
-            set -e
-            cd packages/titus-kitchen-sink
-            export AWS_ACCESS_KEY_ID=$NOISE_AWS_ACCESS_KEY_ID
-            export AWS_SECRET_ACCESS_KEY=$NOISE_AWS_SECRET_ACCESS_KEY
-            aws s3 sync build s3://${S3_BUCKET} --delete --acl public-read
       - run:
           name: Build the backend Docker containers
           command: |
@@ -100,6 +91,28 @@ jobs:
             # Push the frontend container
             echo -e "Pushing the backend container\n"
             docker push ${DOCKER_REPO}/titus-kitchen-sink-backend:latest
+  upload-frontend-to-s3:
+    <<: *defaults
+    environment:
+      S3_BUCKET: noise-website
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Install AWS CLI
+          command: |
+            sudo apt-get -y install python-dev
+            curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+            unzip awscli-bundle.zip
+            sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+      - run:
+          name: Push frontend to an S3 bucket
+          command: |
+            set -e
+            cd packages/titus-kitchen-sink
+            export AWS_ACCESS_KEY_ID=$NOISE_AWS_ACCESS_KEY_ID
+            export AWS_SECRET_ACCESS_KEY=$NOISE_AWS_SECRET_ACCESS_KEY
+            aws s3 sync build s3://${S3_BUCKET} --delete --acl public-read
   helm-upgrade:
     docker:
     - image: petrkohut/eks-helm:latest
@@ -141,6 +154,14 @@ workflows:
           #filters:
           #  branches:
           #    only: master
-      - helm-upgrade:
+      - hold:
+          type: approval
           requires:
             - push-containers
+          #filters:
+          #  branches:
+          #    only: master
+      - upload-frontend-to-s3
+      - helm-upgrade:
+          requires:
+            - hold
