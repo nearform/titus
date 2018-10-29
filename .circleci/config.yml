@@ -76,7 +76,7 @@ jobs:
           command: |
             cd packages/titus-kitchen-sink-backend/
             mv config/prod.js config/default.js
-            docker build -t ${DOCKER_REPO}/titus-kitchen-sink-backend:latest -f docker/api/Dockerfile.prod .
+            docker build -t ${DOCKER_REPO}/titus-kitchen-sink-backend:${CIRCLE_SHA1} -f docker/api/Dockerfile.prod .
             set -e
       - run:
           name: Push the Backend Docker image to the registry
