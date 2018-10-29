@@ -8,8 +8,8 @@ backend:
   replicaCount: 1
 
   image:
-    repository: titus-backend
-    tag: 711655675495.dkr.ecr.us-east-1.amazonaws.com/titus-kitchen-sink-backend:latest
+    repository: 711655675495.dkr.ecr.eu-west-1.amazonaws.com/titus-kitchen-sink-backend
+    tag: latest
     pullPolicy: IfNotPresent
 
   nameOverride: ""
@@ -69,7 +69,8 @@ redis:
   replicaCount: 1
 
   image:
-    tag: redis:latest
+    repository: redis
+    tag: latest
     pullPolicy: IfNotPresent
 
   nameOverride: ""
@@ -113,7 +114,8 @@ db:
     port: 5432
 
   image:
-    tag: 711655675495.dkr.ecr.us-east-1.amazonaws.com/titus-kitchen-sink-db:latest
+    tag: 711655675495.dkr.ecr.eu-west-1.amazonaws.com/titus-kitchen-sink-db
+    tag: latest
     pullPolicy: IfNotPresent
   
   pod:
@@ -146,7 +148,8 @@ s3:
       service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
 
   image:
-    tag: mrister/fake-s3
+    repository: mrister
+    tag: fake-s3
     pullPolicy: Always
   
   pod:

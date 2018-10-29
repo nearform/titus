@@ -90,7 +90,7 @@ jobs:
             eval $(aws ecr create-repository --repository-name titus-kitchen-sink-backend --region eu-west-1) || true
             # Push the frontend container
             echo -e "Pushing the backend container\n"
-            docker push ${DOCKER_REPO}/titus-kitchen-sink-backend:latest
+            docker push ${DOCKER_REPO}/titus-kitchen-sink-backend:${CIRCLE_SHA1}
   upload-frontend-to-s3:
     <<: *defaults
     environment:
@@ -127,7 +127,7 @@ jobs:
             echo $KUBE_CONFIG | base64 -d > kube-config.yaml
             export KUBECONFIG=./kube-config.yaml
             helm init
-            helm upgrade -i --debug --tiller-namespace kube-system titus-backend ./chart
+            helm upgrade -i --debug --tiller-namespace kube-system --set image.tag=${CIRCLE_SHA1} titus-backend ./chart
 workflows:
   version: 2
   test_and_build:
