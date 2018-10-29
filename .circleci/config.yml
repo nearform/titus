@@ -127,7 +127,7 @@ jobs:
             echo $KUBE_CONFIG | base64 -d > kube-config.yaml
             export KUBECONFIG=./kube-config.yaml
             helm init
-            helm upgrade -i --debug --tiller-namespace kube-system --set image.tag=${CIRCLE_SHA1} titus-backend ./chart
+            helm upgrade -i --debug --tiller-namespace kube-system --set backend.image.tag=${CIRCLE_SHA1} titus-backend ./chart
 workflows:
   version: 2
   test_and_build:
