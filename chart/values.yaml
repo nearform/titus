@@ -30,30 +30,18 @@ backend:
         secretName: api.noise-titus.nearform.com-cert
 
   extraEnv:
-    - name: PGHOST
-      value: "noisedb.cbbm7etlo64v.eu-west-1.rds.amazonaws.com"
-    - name: PGPORT
-      value: "5432"
-    - name: POSTGRES_USER
-      value: "postgres"
-    - name: POSTGRES_PASSWORD
-      value: "password"
-    - name: POSTGRES_DB
-      value: "titus"
-    - name: NF_COMMENTS_PGHOST
-      value: "titus-db"
-    - name: NF_COMMENTS_PGUSER
-      value: "titus"
-    - name: NF_COMMENTS_PASSWORD
-      value: "titus"
-    - name: NF_COMMENTS_DATABASE
-      value: "titus"
-    - name: REDIS_HOST
-      value: "noise-0001-001.svydcv.0001.euw1.cache.amazonaws.com"
-    - name: REDIS_PORT
-      value: "6379"
-    - name: REACT_APP_S3_UPLOADER_ENDPOINT
-      value: "http://titus-s3:4569"
+    PGHOST: "noisedb.cbbm7etlo64v.eu-west-1.rds.amazonaws.com"
+    PGPORT: "5432"
+    POSTGRES_USER: "postgres"
+    POSTGRES_PASSWORD: "password"
+    POSTGRES_DB: "titus"
+    NF_COMMENTS_PGHOST: "titus-db"
+    NF_COMMENTS_PGUSER: "titus"
+    NF_COMMENTS_PASSWORD: "titus"
+    NF_COMMENTS_DATABASE: "titus"
+    REDIS_HOST: "noise-0001-001.svydcv.0001.euw1.cache.amazonaws.com"
+    REDIS_PORT: "6379"
+    REACT_APP_S3_UPLOADER_ENDPOINT: "http://titus-s3:4569"
 
   resources: {}
     # We usually recommend not to specify default resources and to leave this as a conscious
