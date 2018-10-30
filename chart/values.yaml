@@ -19,15 +19,15 @@ backend:
     type: ClusterIP
     port: 80
 
-  extraVars:
+  extraEnv:
     - name: PGHOST
-      value: "titus-db"
+      value: "noisedb.cbbm7etlo64v.eu-west-1.rds.amazonaws.com"
     - name: PGPORT
       value: "5432"
     - name: POSTGRES_USER
-      value: "titus"
+      value: "postgres"
     - name: POSTGRES_PASSWORD
-      value: "titus"
+      value: "password"
     - name: POSTGRES_DB
       value: "titus"
     - name: NF_COMMENTS_PGHOST
@@ -39,7 +39,7 @@ backend:
     - name: NF_COMMENTS_DATABASE
       value: "titus"
     - name: REDIS_HOST
-      value: "titus-redis"
+      value: "noise-0001-001.svydcv.0001.euw1.cache.amazonaws.com"
     - name: REDIS_PORT
       value: "6379"
     - name: REACT_APP_S3_UPLOADER_ENDPOINT
