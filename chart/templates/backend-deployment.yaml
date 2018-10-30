@@ -29,7 +29,7 @@ spec:
           env:
             {{- range $key, $value := .Values.backend.extraEnv }}
             - name: {{ $key }}
-              value: {{ $value }}
+              value: {{ $value | quote }}
             {{- end }}
           ports:
             - name: http
