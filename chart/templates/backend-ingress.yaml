@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+{{ toYaml .Values.backend.ingress.annotations | indent 4 }}
+  labels:
+    app.kubernetes.io/name: {{ include "titus.name" . }}
+    helm.sh/chart: {{ include "titus.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    component: "{{ .Values.backend.name }}"
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+  name: "{{ .Values.backend.name }}"
+spec:
+  rules:
+  - host: "{{ .Values.backend.ingress.host }}"
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: "{{ .Values.backend.name }}"
+          servicePort: http
+{{- if .Values.backend.ingress.tls }}
+  tls:
+{{ toYaml .Values.backend.ingress.tls | indent 4 }}
+{{- end }}

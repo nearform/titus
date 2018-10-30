@@ -19,6 +19,16 @@ backend:
     type: ClusterIP
     port: 80
 
+  ingress:
+    host: api.noise-titus.nearform.com
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+    tls:
+      - hosts:
+        - api.noise-titus.nearform.com
+        secretName: api.noise-titus.nearform.com-cert
+
   extraEnv:
     - name: PGHOST
       value: "noisedb.cbbm7etlo64v.eu-west-1.rds.amazonaws.com"
