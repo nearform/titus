@@ -84,12 +84,11 @@ jobs:
             set -e
             export AWS_ACCESS_KEY_ID=$NOISE_AWS_ACCESS_KEY_ID
             export AWS_SECRET_ACCESS_KEY=$NOISE_AWS_SECRET_ACCESS_KEY
-            export AWS_REGION=eu-west-1
             # Login the AWS ECR registry
-            eval $(aws ecr get-login --no-include-email)
+            eval $(aws ecr get-login --no-include-email --region eu-west-1)
             # Create repositories
-            eval $(aws ecr create-repository --repository-name titus-kitchen-sink-backend) || true
-            eval $(aws ecr put-lifecycle-policy --repository-name titus-kitchen-sink-backend --lifecycle-policy-text '{ "rules": [{ "rulePriority": 1, "description": "Rotate images when reach countNumber images stored", "selection": { "tagStatus": "any", "countType": "imageCountMoreThan", "countNumber": 50 }, "action": { "type": "expire" } }] }')
+            eval $(aws ecr create-repository --repository-name titus-kitchen-sink-backend --region eu-west-1) || true
+            eval $(aws ecr put-lifecycle-policy --repository-name titus-kitchen-sink-backend --lifecycle-policy-text '{ "rules": [{ "rulePriority": 1, "description": "Rotate images when reach countNumber images stored", "selection": { "tagStatus": "any", "countType": "imageCountMoreThan", "countNumber": 50 }, "action": { "type": "expire" } }] }' --region eu-west-1)
             # Push the frontend container
             echo -e "Pushing the backend container\n"
             docker push ${DOCKER_REPO}/titus-kitchen-sink-backend:${CIRCLE_SHA1}
