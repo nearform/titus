@@ -17,7 +17,7 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: "{{ .Values.backend.name }}"
+          serviceName: {{ include "titus.backend.fullname" . }}
           servicePort: http
 {{- if .Values.backend.ingress.tls }}
   tls:
