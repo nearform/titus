@@ -88,6 +88,7 @@ jobs:
             eval $(aws ecr get-login --no-include-email --region eu-west-1)
             # Create repositories
             eval $(aws ecr create-repository --repository-name titus-kitchen-sink-backend --region eu-west-1) || true
+            eval $(aws ecr put-lifecycle-policy --repository-name titus-kitchen-sink-backend --lifecycle-policy-text '{ "rules": [{ "rulePriority": 1, "description": "Rotate images when reach countNumber images stored", "selection": { "tagStatus": "any", "countType": "imageCountMoreThan", "countNumber": 50 }, "action": { "type": "expire" } }] }')
             # Push the frontend container
             echo -e "Pushing the backend container\n"
             docker push ${DOCKER_REPO}/titus-kitchen-sink-backend:${CIRCLE_SHA1}
