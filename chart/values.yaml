@@ -101,16 +101,12 @@ s3:
   successfulJobsHistoryLimit: "1"
 
   service:
-    type: LoadBalancer
-    annotations:
-      service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
-      service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:us-east-1:711655675495:certificate/9ee3a25a-5872-4283-b0e2-01468e5a11bf
-      service.beta.kubernetes.io/aws-load-balancer-backend-protocol: tcp
-      service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
+    type: ClusterIP
+    port: 80
 
   image:
-    repository: mrister
-    tag: fake-s3
+    repository: mrister/fake-s3
+    tag: latest
     pullPolicy: Always
   
   pod:
