@@ -7,18 +7,30 @@ A starter Hapi and PostgreSQL setup running in Docker.
 * Docker compose config to start database and Hapi
 * Uses host filesystem, so no need to restart containers on code change
 * Hot reloading Hapi server
-* Web-based Postgresql ui using adminer
+* Web-based Postgresql ui using [Adminer](https://www.adminer.org/)
 * Graphql with sample schema and associated db migrations and seed
 * Postgresql Hapi plugin with transaction control
 * Sample source structure for organising Hapi and Graphql components
 * Sample test setup using Jest
 * Linting using eslint/Standard
 
+## Getting started
+
+Run `npm run start`, this will build and run all the necessary docker containers. 
+
+Verify it works with `curl http://127.0.0.1:5000/hello/random`
+
+You can tail the server logs with `docker logs -f docker_api_1`.
+
 ## API documentation
 
-Setting the `NODE_ENV` to `development`, you will be able to access the API `swagger` documentation at [http://localhost:5000/documentation](http://localhost:5000/documentation)
+Setting the `NODE_ENV` to `development`, you will be able to access the API `swagger` documentation at [http://127.0.0.1:5000/documentation](http://127.0.0.1:5000/documentation). This is set by default when you use `npm run start`
 
 ## Developing
+
+`npm run start` will run everything in local development mode. Any code changes you make will automatically restart the server. 
+
+Titus uses Docker Compose, see [docker/docker-compose-dev.yml](docker/docker-compose-dev.yml).
 
 ### Docker
 
@@ -49,8 +61,11 @@ Setting the `NODE_ENV` to `development`, you will be able to access the API `swa
 
 ### Adminer
 
-This provides a web ui for the postgres db on http://localhost:8080
-You can log in with: `titus` as user, password and database.
+[Adminer](https://www.adminer.org/) provides a handy web ui for the postgres db which you can access by opening http://localhost:8080.
+
+* Change 'System' to be 'PostgreSQL'.
+* You can then log in with: `titus` as user, password and database.
+
 
 ### Trail
 

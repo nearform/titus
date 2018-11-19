@@ -70,7 +70,6 @@ Some commands have been added to the root package for convenience.
 | Command            | Description                         |
 | ------------------ | ----------------------------------- |
 | postinstall        | runs 'lerna bootstrap' post install |
-| build:component    | build the components project        |
 | start:kitchen-sink | starts the kitchen sink app         |
 | stop:kitchen-sink  | stops the kitchen sink app          |
 
