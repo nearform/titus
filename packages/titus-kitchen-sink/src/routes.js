@@ -120,11 +120,11 @@ const Routes = () => (
     <AsyncComments path="comments/*" />
     <AsyncUploader path="uploader/*" />
     <AsyncAuthorization path="auth/*" />
-    <AsyncLoginTabs path="auth0/login" />
+    <AsyncLoginTabs path="identity/login" />
     <AsyncAuth0Callback path="auth0/callback" />
+    <AsyncOIDCCallback path="oidc/callback" />
     <AsyncTheming path="theming/*" />
     <AsyncTranslations path="translations/*" />
-    <AsyncOIDCCallback path="oidc/callback" />
   </Router>
 )
 

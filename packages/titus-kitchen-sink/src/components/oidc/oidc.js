@@ -37,7 +37,7 @@ class OIDCAuth {
     localStorage.removeItem('oidc_expires_at')
     localStorage.removeItem('oidc_id_token')
     localStorage.removeItem('oidc_access_token')
-    navigate('/auth0/login')
+    navigate('/identity/login')
   }
   
   parseResponse() {

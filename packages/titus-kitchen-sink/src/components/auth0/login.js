@@ -58,7 +58,7 @@ class Auth0Login extends React.Component {
           'expires_at',
           authResult.expires_in * 1000 + new Date().getTime()
         )
-        navigate('/auth0/login')
+        navigate('/identity/login')
       }
     } catch (error) {
       console.error(error)

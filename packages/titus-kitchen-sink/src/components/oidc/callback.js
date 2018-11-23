@@ -6,7 +6,7 @@ class Auth0Callback extends React.Component {
 
   componentDidMount() {
     oidc.parseResponse()
-    navigate('/auth0/login')
+    navigate('/identity/login')
   }
 
   render() {

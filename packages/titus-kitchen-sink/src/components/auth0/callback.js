@@ -15,7 +15,7 @@ class Auth0Callback extends React.Component {
         this.setState({ err })
       }
 
-      navigate('/auth0/login')
+      navigate('/identity/login')
     })
   }
 
