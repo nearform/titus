@@ -107,11 +107,11 @@ const Menu = () => {
         </ListItemIcon>
         <ListItemText primary="Authorization" />
       </ListItemLink>
-      <ListItemLink to={'/auth0/login'} title="Auth0" getProps={isActiveRoute}>
+      <ListItemLink to={'/identity/login'} title="Identity" getProps={isActiveRoute}>
         <ListItemIcon>
           <AccountCircleIcon />
         </ListItemIcon>
-        <ListItemText primary="Auth0" />
+        <ListItemText primary="Identity" />
       </ListItemLink>
       <ListItemLink to={'/theming'} title="Theming" getProps={isActiveRoute}>
         <ListItemIcon>

@@ -71,8 +71,9 @@ const AsyncAuthorization = Loadable({
   delay: 300,
   timeout: 10000
 })
-const AsyncAuth0Login = Loadable({
-  loader: () => import('./components/auth0/login'),
+
+const AsyncLoginTabs = Loadable({
+  loader: () => import('./components/identity/login-tabs'),
   loading: Loading,
   delay: 300,
   timeout: 10000
@@ -80,6 +81,13 @@ const AsyncAuth0Login = Loadable({
 
 const AsyncAuth0Callback = Loadable({
   loader: () => import('./components/auth0/callback'),
+  loading: Loading,
+  delay: 300,
+  timeout: 10000
+})
+
+const AsyncOIDCCallback = Loadable({
+  loader: () => import('./components/oidc/callback'),
   loading: Loading,
   delay: 300,
   timeout: 10000
@@ -112,8 +120,9 @@ const Routes = () => (
     <AsyncComments path="comments/*" />
     <AsyncUploader path="uploader/*" />
     <AsyncAuthorization path="auth/*" />
-    <AsyncAuth0Login path="auth0/login" />
+    <AsyncLoginTabs path="identity/login" />
     <AsyncAuth0Callback path="auth0/callback" />
+    <AsyncOIDCCallback path="oidc/callback" />
     <AsyncTheming path="theming/*" />
     <AsyncTranslations path="translations/*" />
   </Router>

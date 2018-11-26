@@ -54,7 +54,7 @@ class Auth0 {
     localStorage.removeItem('expires_at')
 
     this.webAuth.logout({
-      returnTo: `${window.location.origin}/auth0/login`,
+      returnTo: `${window.location.origin}/identity/login`,
       clientID: REACT_APP_AUTH0_CLIENT_ID
     })
   }
