@@ -1,5 +1,5 @@
 {
-  "name": "titus-kitchen-sink-fastify-backend",
+  "name": "titus-ks-fastify-backend",
   "version": "0.1.0",
   "private": true,
   "description": "The Fastify backend for the Titus project",
