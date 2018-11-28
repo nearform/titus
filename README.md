@@ -42,6 +42,27 @@ Individual sub-packages are built during the bootstrap process.
 
 This repository includes a sample application showcasing the features availabe in Titus and third party libraries. The running application can be found [here](https://nearform.github.io/titus).
 
+### Auth configuration
+
+In order to connect with Auth0 or any other OIDC provider few environment variables need to be defined.
+
+Titus Kitchen Sink is also able to use the standard OIDC to connect to Auth0 or other OIDC compliant providers. Use the following variables instead of the above mentioned:
+- REACT_APP_OIDC_AUTHORITY
+- REACT_APP_OIDC_CLIENT_ID
+
+For the frontend Auth0 configuration:
+- REACT_APP_AUTH0_DOMAIN
+- REACT_APP_AUTH0_CLIENT_ID
+- REACT_APP_AUTH0_AUDIENCE
+
+For the backend Auth0 configuration:
+- AUTH0_DOMAIN
+- AUTH0_CLIENT_ID
+- AUTH0_CLIENT_SECRET
+- AUTH0_AUDIENCE
+
+Bear in mind that AUTH0_AUDIENCE is optional.
+
 ### Convenience Scripts
 
 Some commands have been added to the root package for convenience.
