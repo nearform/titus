@@ -18,4 +18,4 @@ COPY tools /titus/tools
 COPY docker/startServer-development.sh /titus/startServer.sh
 
 # Start the server
-CMD /titus/startServer.sh
+CMD ["sh", "startServer.sh"]

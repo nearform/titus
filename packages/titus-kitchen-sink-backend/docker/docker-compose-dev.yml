@@ -24,8 +24,8 @@ services:
 
   api:
     build:
-      context: .
-      dockerfile: api/Dockerfile
+      context: ../
+      dockerfile: docker/api/Dockerfile
     env_file: dev.env
     depends_on:
       - titus-db
@@ -34,8 +34,6 @@ services:
       - titus
     ports:
       - "5000:5000"
-    volumes:
-      - ..:/titus
     environment:
       - PGHOST=titus-db
       - PGPORT=5432
