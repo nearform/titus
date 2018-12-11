@@ -5,7 +5,7 @@ const Postgrator = require('postgrator')
 new Postgrator({
   migrationDirectory: `${__dirname}/migrations/${process.argv[2]}`,
   driver: 'pg',
-  host: process.env.PGHOST || 'postgres',
+  host: process.env.PGHOST || 'titus-db',
   port: process.env.PGPORT || '5432',
   database: process.env.POSTGRES_DB || 'postgres',
   username: process.env.POSTGRES_USER || 'postgres',
