@@ -2,6 +2,7 @@
 export PGUSER=$POSTGRES_USER
 export PGPASSWORD=$POSTGRES_PASSWORD
 export PGDATABASE=$POSTGRES_DB
+export PGHOST=$POSTGRES_DB_ENDPOINT
 
 until psql -q -c '\q'; do
   >&2 echo "Waiting for Postgres to start..."
