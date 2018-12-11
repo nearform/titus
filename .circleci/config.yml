@@ -1,6 +1,6 @@
 defaults: &defaults
   docker:
-    - image: circleci/node:10-browsers
+    - image: node:10.14
 
 version: 2
 jobs:
