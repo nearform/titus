@@ -12,7 +12,7 @@ until psql -q -c '\q'; do
 done
 >&2 echo "Postgres is up - starting server..."
 
+npm run initdb
 npm run migrate
 npm run prod:seed:udaru
-npm run prod:seed
 npm run dev:start

@@ -13,6 +13,7 @@ COPY lib /titus/lib
 COPY node_modules /titus/node_modules
 COPY package.json /titus/package.json
 COPY tools /titus/tools
+COPY docker/db/initdb /titus/initdb
 
 # Copy the startup script
 COPY docker/startServer-production.sh /titus/startServer-production.sh

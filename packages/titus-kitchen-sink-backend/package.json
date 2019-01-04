@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "initdb": "cat initdb/*.sql | PGPASSWORD=$POSTGRES_PASSWORD psql -U postgres -1",
     "migrate": "node ./tools/migrate build && npx commentami-core-db-migrate",
     "dev:seed": "node ./tools/migrate seed_dev",
     "dev:seed:udaru:init": "udaru-init --host=$PGHOST --database=$POSTGRES_DB --user=$POSTGRES_USER --password=$POSTGRES_PASSWORD",
