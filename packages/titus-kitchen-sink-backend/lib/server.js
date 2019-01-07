@@ -25,7 +25,7 @@ const init = async () => {
     },
     {
       plugin: auth0,
-      options: config.auth0
+      options: config.auth0 || {}
     },
     {
       plugin: graphqlHapi,

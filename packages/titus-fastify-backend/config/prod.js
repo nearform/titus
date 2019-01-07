@@ -3,6 +3,14 @@
 const {
   API_HOST,
   API_PORT,
+  AUTH0_AUDIENCE,
+  AUTH0_CLIENT_ID,
+  AUTH0_CLIENT_SECRET,
+  AUTH0_DOMAIN,
+  AUTH0_KEY_CACHE,
+  AUTH0_KEY_JWKS_RPM,
+  AUTH0_KEY_JWKS_URI,
+  AUTH0_KEY_RATE_LIMIT,
   PGHOST,
   PGPORT,
   POSTGRES_USER,
@@ -35,5 +43,18 @@ module.exports = {
   },
   authorization: {
     url: 'https://titus.nearform.com/authorization/'
+  },
+  auth0: {
+    domain: `https://${AUTH0_DOMAIN}`,
+    clientId: AUTH0_CLIENT_ID,
+    clientSecret: AUTH0_CLIENT_SECRET,
+    audience: AUTH0_AUDIENCE,
+    key: {
+      cache: !!AUTH0_KEY_CACHE,
+      rateLimit: !!AUTH0_KEY_RATE_LIMIT,
+      jwksRequestsPerMinute: AUTH0_KEY_JWKS_RPM || 5,
+      jwksUri:
+        AUTH0_KEY_JWKS_URI || `https://${AUTH0_DOMAIN}/.well-known/jwks.json`
+    }
   }
 }
