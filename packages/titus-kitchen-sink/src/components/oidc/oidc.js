@@ -9,7 +9,6 @@ const {
 class OIDCAuth {
  
   constructor() {
-    console.log(process.env)
     const settings = {
       authority: REACT_APP_OIDC_AUTHORITY,
       client_id: REACT_APP_OIDC_CLIENT_ID,
