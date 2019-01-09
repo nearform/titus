@@ -18,7 +18,7 @@ const Dashboard = () => (
     <Typography paragraph variant="body2">
       Titus works like a style guide for software patterns and processes. Each sub section of the app contains a Journey through 
       one of these patterns or processes. These Journeys are wrapped in a neat shell, powered by a backend server, and deployed as 
-      a full application to a real cloud service. In this way, we can demonstrate, not only popular Journey's product owners are 
+      a full application to a real cloud service. In this way, we can demonstrate, not only popular Journey&#39;s product owners are 
       likely to encounter, but also how to combine these journeys into a cohesive application that can be deployed using modern 
       best practices.
     </Typography>
@@ -31,7 +31,7 @@ const Dashboard = () => (
       <li>Custom React components built on top of material-ui components and third party libraries</li>
       <li>Community open source frontend and backend libraries that we use in our own production level projects</li>
       <li>
-        NearForm's own open source projects, including <a href="https://github.com/nearform/udaru" target="_blank" rel="noreferrer noopener">udaru</a>,&nbsp;
+        NearForm&#39;s own open source projects, including <a href="https://github.com/nearform/udaru" target="_blank" rel="noreferrer noopener">udaru</a>,&nbsp;
         <a href="https://github.com/nearform/commentami" target="_blank" rel="noreferrer noopener">commentami</a> and&nbsp;
         <a href="https://github.com/nearform/react-table" target="_blank" rel="noreferrer noopener">react-table</a>
       </li>
@@ -39,7 +39,7 @@ const Dashboard = () => (
     <Typography variant="display1" gutterBottom>As a Starter Kit</Typography>
     <Typography paragraph variant="body2">
       We have built Titus with reuse in mind. No singular kit could hope to cover all possibilities. Instead we encourage you to take the bits you need
-      and drop the parts you don't. Titus should be looked at as an accelerator, not as a set of rules.
+      and drop the parts you don&#39;t. Titus should be looked at as an accelerator, not as a set of rules.
     </Typography>
   </div>
 )
