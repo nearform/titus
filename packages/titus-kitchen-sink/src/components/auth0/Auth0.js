@@ -25,7 +25,6 @@ class Auth0 {
   parseHash(cb) {
     this.webAuth.parseHash((err, authResult) => {
       if (err) {
-        console.log(err)
         return cb(err)
       }
 
