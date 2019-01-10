@@ -117,7 +117,6 @@ class Comments extends React.Component {
     try {
       const { user } = this.state
       const { username, password } = data[user]
-
       await client.connect({
         auth: {
           headers: {

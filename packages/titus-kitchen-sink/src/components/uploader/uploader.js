@@ -42,7 +42,7 @@ const UploaderPage = () => (
     service={
       new UploaderService({
         awsConfig,
-        bucket: process.env.REACT_APP_S3_UPLOADER_REGION,
+        bucket: process.env.REACT_APP_S3_UPLOADER_BUCKET,
         getParams,
         getTags
       })
