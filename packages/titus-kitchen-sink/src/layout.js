@@ -4,7 +4,7 @@ import { Navigation } from '@nearform/titus-components'
 import Menu from './menu'
 import Routes from './routes'
 const meta = {
-  appName: 'Titus Docs and Examples'
+  appName: 'Titus'
 }
 export const Layout = props => {
   return (
