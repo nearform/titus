@@ -61,6 +61,7 @@ const Dashboard = () => (
           <a href="https://github.com/nearform/commentami" target="_blank" rel="noreferrer noopener">commentami</a> and&nbsp;
           <a href="https://github.com/nearform/react-table" target="_blank" rel="noreferrer noopener">react-table</a>
         </li>
+        <li>Add some more...</li>
       </ul>
     </Typography>
   </div>
