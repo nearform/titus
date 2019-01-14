@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap && lerna exec npm install",
+    "clean": "lerna clean",
     "lint:all": "lerna run --parallel lint",
     "test:all": "lerna run test",
     "precommit": "lerna run --parallel format ; lerna run --parallel lint:fix",
