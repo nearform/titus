@@ -7,9 +7,7 @@
     "clean": "lerna clean",
     "lint:all": "lerna run --parallel lint",
     "test:all": "lerna run test",
-    "precommit": "lerna run --parallel format ; lerna run --parallel lint:fix",
-    "prepush": "lerna run test",
-    "postinstall": "lerna bootstrap && lerna exec npm install",
+    "postinstall": "lerna bootstrap --no-commit-hooks && lerna exec npm install",
     "start:kitchen-sink-fastify": "lerna run --scope titus-ks-fastify* --stream start",
     "stop:kitchen-sink-fastify": "lerna run --scope titus-ks-fastify* --stream stop",
     "start:kitchen-sink": "lerna run --scope titus-kitchen* --stream start",
@@ -23,5 +21,11 @@
   },
   "dependencies": {
     "fastify-postgres": "^1.2.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lerna run --parallel format ; lerna run --parallel lint:fix",
+      "pre-push": "lerna run test"
+    }
   }
 }
