@@ -10,28 +10,30 @@ import TreeGraph from './tree-graph'
 
 const Visualisations = () => (
   <div>
-    <Typography variant="h3" gutterBottom>
-      Visualisation
+    <Typography variant="h3" gutterBottom>Visualisation</Typography>
+    <Typography paragraph>
+      At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti
+      atque.
     </Typography>
     <Grid container spacing={24}>
       <Grid item xs={12} sm={6} md={4} lg={3}>
         <Paper>
-          <Area />
+          <Area/>
         </Paper>
       </Grid>
       <Grid item xs={12} sm={6} md={4} lg={3}>
         <Paper>
-          <Bar />
+          <Bar/>
         </Paper>
       </Grid>
       <Grid item xs={12} sm={6} md={4} lg={3}>
         <Paper>
-          <Candlestick />
+          <Candlestick/>
         </Paper>
       </Grid>
       <Grid item xs={12} sm={12} md={12} lg={12}>
         <Paper>
-          <TreeGraph />
+          <TreeGraph/>
         </Paper>
       </Grid>
     </Grid>

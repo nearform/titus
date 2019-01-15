@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
+import {withStyles} from '@material-ui/core/styles'
 import {
   Typography,
   MenuItem,
@@ -9,7 +9,7 @@ import {
   FormControl,
   Paper
 } from '@material-ui/core'
-import { DietaryTypes } from './dietary-restrictions'
+import {DietaryTypes} from './dietary-restrictions'
 
 const styles = theme => ({
   root: {
@@ -41,37 +41,41 @@ export class Authorization extends Component {
     userId: localStorage.getItem('titus-user') || 'MrsAdmin'
   }
 
-  changeUser = ({ target: { value: userId } }) =>
-    this.setState({ userId }, () => localStorage.setItem('titus-user', userId))
+  changeUser = ({target: {value: userId}}) =>
+    this.setState({userId}, () => localStorage.setItem('titus-user', userId))
 
   render() {
-    const { userId } = this.state
-    const { classes } = this.props
+    const {userId} = this.state
+    const {classes} = this.props
 
     return (
-      <Paper className={classes.root}>
-        <Typography variant="headline" gutterBottom>
-          Authorization Demo
+      <div>
+        <Typography variant="h3" gutterBottom>Authorization</Typography>
+        <Typography paragraph>
+          At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti
+          atque.
         </Typography>
-        <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="select-user">Switch User</InputLabel>
-          <Select
-            value={userId}
-            onChange={this.changeUser}
-            inputProps={{ id: 'select-user' }}
-          >
-            <MenuItem value="MrsAdmin">Mrs Admin</MenuItem>
-            <MenuItem value="MissEditor">Miss Editor</MenuItem>
-            <MenuItem value="MrUser">Mr User</MenuItem>
-          </Select>
-        </FormControl>
-        <div>
-          <Typography variant="headline" gutterBottom>
-            Dietary Types
-          </Typography>
-        </div>
-        <DietaryTypes userId={userId} />
-      </Paper>
+        <Paper className={classes.root}>
+          <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="select-user">Switch User</InputLabel>
+            <Select
+              value={userId}
+              onChange={this.changeUser}
+              inputProps={{id: 'select-user'}}
+            >
+              <MenuItem value="MrsAdmin">Mrs Admin</MenuItem>
+              <MenuItem value="MissEditor">Miss Editor</MenuItem>
+              <MenuItem value="MrUser">Mr User</MenuItem>
+            </Select>
+          </FormControl>
+          <div>
+            <Typography variant="headline" gutterBottom>
+              Dietary Types
+            </Typography>
+          </div>
+          <DietaryTypes userId={userId}/>
+        </Paper>
+      </div>
     )
   }
 }

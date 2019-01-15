@@ -1,26 +1,24 @@
 import React from 'react'
-import { withStyles } from '@material-ui/core/styles'
+import {withStyles} from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 
-const styles = ({ nearform = {}, spacing }) => 
-  Object.assign({ 
-    paper: { 
-      padding: spacing.unit * 2,
-      marginBottom: spacing.unit
-    } 
-  },
-  Object
-    .keys(nearform)
-    .map(key => ({ [key]: { color: nearform[key], borderColor: nearform[key] } }))
-    .reduce((acc, c) => Object.assign(acc, c), {})
+const styles = ({nearform = {}, spacing}) =>
+  Object.assign({
+      paper: {
+        padding: spacing.unit * 2,
+        marginBottom: spacing.unit
+      }
+    },
+    Object
+      .keys(nearform)
+      .map(key => ({[key]: {color: nearform[key], borderColor: nearform[key]}}))
+      .reduce((acc, c) => Object.assign(acc, c), {})
   )
 
-const Dashboard = ({ classes }) => (
+const Dashboard = ({classes}) => (
   <div>
-    <Typography variant="headline" gutterBottom>
-      Theming Demo
-    </Typography>
+    <Typography variant="h3" gutterBottom>Theming</Typography>
     <Typography paragraph>
       This is a dashboard showing the theme we use at NearForm. Use the theme switcher button above to switch theme.
     </Typography>
@@ -54,4 +52,4 @@ const Dashboard = ({ classes }) => (
   </div>
 )
 
-export default withStyles(styles, { withTheme: true })(Dashboard)
+export default withStyles(styles, {withTheme: true})(Dashboard)
