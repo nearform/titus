@@ -8,7 +8,7 @@ RUN apk upgrade && apk add postgresql-client
 
 # Copy the server code
 COPY config /titus/config
-COPY index.js /titus/index.js
+COPY theming.js /titus/theming.js
 COPY lib /titus/lib
 COPY node_modules /titus/node_modules
 COPY package.json /titus/package.json

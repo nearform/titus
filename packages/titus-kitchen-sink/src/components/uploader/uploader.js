@@ -1,12 +1,12 @@
 import React from 'react'
 import {UploaderService, Uploader} from '@nearform/titus-components'
-import Typography from '@material-ui/core/Typography'
+import {Grid, Typography} from '@material-ui/core'
 
 const awsConfig = {
   accessKeyId: process.env.REACT_APP_S3_UPLOADER_ACCESS_KEY_ID,
   secretAccessKey: process.env.REACT_APP_S3_UPLOADER_SECRET_ACCESS_KEY,
   computeChecksums: true,
-  sslEnabled: true
+  sslEnabled: true,
 }
 
 const s3Endpoint = (process.env.REACT_APP_S3_UPLOADER_ENDPOINT || '').trim()
@@ -15,7 +15,7 @@ if (s3Endpoint) {
   awsConfig.s3 = {
     endpoint: s3Endpoint,
     s3BucketEndpoint: false,
-    computeChecksums: false
+    computeChecksums: false,
   }
   awsConfig.s3ForcePathStyle = true
   awsConfig.sslEnabled = false
@@ -28,7 +28,7 @@ function getParams(file) {
     Key: file.id,
     Body: file.orig,
     ContentType: file.type,
-    Metadata: {'original-name': file.name}
+    Metadata: {'original-name': file.name},
   }
 }
 
@@ -38,26 +38,30 @@ function getTags(file) {
 }
 
 const UploaderPage = () => (
-  <div>
-    <Typography variant="h3" gutterBottom>Uploader</Typography>
-    <Typography paragraph>
-      At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti
-      atque.
-    </Typography>
-    <Uploader
-      maxItems={5}
-      service={
-        new UploaderService({
-          awsConfig,
-          bucket: process.env.REACT_APP_S3_UPLOADER_BUCKET,
-          getParams,
-          getTags
-        })
-      }
-      onUploadDone={console.log}
-      onUploadError={console.log}
-    />
-  </div>
+  <Grid container spacing={24}>
+    <Grid item xs={12} sm={12} md={12} lg={12}>
+      <Typography variant="h3" gutterBottom>Uploader</Typography>
+      <Typography paragraph>
+        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti
+        atque.
+      </Typography>
+    </Grid>
+    <Grid item xs={12} sm={12} md={12} lg={12}>
+      <Uploader
+        maxItems={5}
+        service={
+          new UploaderService({
+            awsConfig,
+            bucket: process.env.REACT_APP_S3_UPLOADER_BUCKET,
+            getParams,
+            getTags,
+          })
+        }
+        onUploadDone={console.log}
+        onUploadError={console.log}
+      />
+    </Grid>
+  </Grid>
 )
 
 export default UploaderPage

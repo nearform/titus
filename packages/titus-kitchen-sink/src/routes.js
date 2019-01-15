@@ -1,42 +1,42 @@
 import React from 'react'
 import Loadable from 'react-loadable'
-import { Router } from '@reach/router'
+import {Router} from '@reach/router'
 import Loading from './loading'
 
 const AsyncDashboard = Loadable({
-  loader: () => import('./components/dashboard/dashboard'),
+  loader: () => import('./components/dashboard'),
   loading: Loading,
   delay: 300,
   timeout: 10000
 })
 
 const AsyncWizard = Loadable({
-  loader: () => import('./components/wizard/wizard'),
+  loader: () => import('./components/wizard'),
   loading: Loading,
   delay: 300,
   timeout: 10000
 })
 
 const AsyncVisualisations = Loadable({
-  loader: () => import('./components/visualisations/visualisations'),
+  loader: () => import('./components/visualisations'),
   loading: Loading,
   delay: 300,
   timeout: 10000
 })
 const AsyncTables = Loadable({
-  loader: () => import('./components/tables/tables'),
+  loader: () => import('./components/tables'),
   loading: Loading,
   delay: 300,
   timeout: 10000
 })
 const AsyncAutocompleteDemo = Loadable({
-  loader: () => import('./components/autocomplete/autocomplete-demo'),
+  loader: () => import('./components/autocomplete'),
   loading: Loading,
   delay: 300,
   timeout: 10000
 })
 const AsyncApi = Loadable({
-  loader: () => import('./components/api/table'),
+  loader: () => import('./components/api'),
   loading: Loading,
   delay: 300,
   timeout: 10000
@@ -48,32 +48,32 @@ const AsyncTemporal = Loadable({
   timeout: 10000
 })
 const AsyncSearch = Loadable({
-  loader: () => import('./components/search/search'),
+  loader: () => import('./components/search'),
   loading: Loading,
   delay: 300,
   timeout: 10000
 })
 const AsyncComments = Loadable({
-  loader: () => import('./components/comments/comments'),
+  loader: () => import('./components/comments'),
   loading: Loading,
   delay: 300,
   timeout: 10000
 })
 const AsyncUploader = Loadable({
-  loader: () => import('./components/uploader/uploader'),
+  loader: () => import('./components/uploader'),
   loading: Loading,
   delay: 300,
   timeout: 10000
 })
 const AsyncAuthorization = Loadable({
-  loader: () => import('./components/authorization/authorization'),
+  loader: () => import('./components/authorization'),
   loading: Loading,
   delay: 300,
   timeout: 10000
 })
 
 const AsyncLoginTabs = Loadable({
-  loader: () => import('./components/identity/login-tabs'),
+  loader: () => import('./components/identity'),
   loading: Loading,
   delay: 300,
   timeout: 10000
@@ -109,22 +109,22 @@ const AsyncTranslations = Loadable({
 
 const Routes = () => (
   <Router>
-    <AsyncDashboard path="/" />
-    <AsyncWizard path="wizard/*" />
-    <AsyncVisualisations path="visualisations/*" />
-    <AsyncTables path="tables/*" />
-    <AsyncAutocompleteDemo path="autocomplete/*" />
-    <AsyncApi path="api/*" />
-    <AsyncTemporal path="temporal/*" />
-    <AsyncSearch path="search/*" />
-    <AsyncComments path="comments/*" />
-    <AsyncUploader path="uploader/*" />
-    <AsyncAuthorization path="auth/*" />
-    <AsyncLoginTabs path="identity/login" />
-    <AsyncAuth0Callback path="auth0/callback" />
-    <AsyncOIDCCallback path="oidc/callback" />
-    <AsyncTheming path="theming/*" />
-    <AsyncTranslations path="translations/*" />
+    <AsyncDashboard path="/"/>
+    <AsyncWizard path="wizard/*"/>
+    <AsyncVisualisations path="visualisations/*"/>
+    <AsyncTables path="tables/*"/>
+    <AsyncAutocompleteDemo path="autocomplete/*"/>
+    <AsyncApi path="api/*"/>
+    <AsyncTemporal path="temporal/*"/>
+    <AsyncSearch path="search/*"/>
+    <AsyncComments path="comments/*"/>
+    <AsyncUploader path="uploader/*"/>
+    <AsyncAuthorization path="auth/*"/>
+    <AsyncLoginTabs path="identity/login"/>
+    <AsyncAuth0Callback path="auth0/callback"/>
+    <AsyncOIDCCallback path="oidc/callback"/>
+    <AsyncTheming path="theming/*"/>
+    <AsyncTranslations path="translations/*"/>
   </Router>
 )
 
