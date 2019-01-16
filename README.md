@@ -38,6 +38,12 @@ lerna bootstrap
 
 Individual sub-packages are built during the bootstrap process.
 
+In order to get the application running you must first create the `.env` files required. To achieve that, there is a convenience script that you must run in the root folder:
+
+```
+npm run create:env
+```
+
 ### kitchen-sink sample application
 
 This repository includes a sample application showcasing the features availabe in Titus and third party libraries. The running application can be found [here](https://nearform.github.io/titus).
