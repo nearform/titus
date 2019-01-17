@@ -1,3 +1,3 @@
-import Theming from './theming'
+import ThemingDashboard from './theming'
 
-export default Theming
+export default ThemingDashboard

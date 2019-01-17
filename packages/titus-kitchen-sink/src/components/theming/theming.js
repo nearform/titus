@@ -14,7 +14,7 @@ const styles = ({nearform = {}, spacing}) =>
       .reduce((acc, c) => Object.assign(acc, c), {}),
   )
 
-const Theming = ({classes}) => (
+const ThemingDashboard = ({classes}) => (
   <Grid container spacing={24}>
     <Grid item xs={12} sm={12} md={12} lg={12}>
       <Typography variant="h3" gutterBottom>Theming</Typography>
@@ -54,4 +54,4 @@ const Theming = ({classes}) => (
   </Grid>
 )
 
-export default withStyles(styles, {withTheme: true})(Theming)
+export default withStyles(styles, {withTheme: true})(ThemingDashboard)
