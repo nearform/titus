@@ -8,7 +8,7 @@ COPY docker docker
 COPY lib lib
 COPY node_modules node_modules
 COPY tools tools
-COPY index.js theming.js
+COPY index.js index.js
 
 # Postgresql client is needed to poll db from cli
 RUN apk add postgresql-client && apk add bash
