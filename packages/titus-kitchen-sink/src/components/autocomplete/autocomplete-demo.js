@@ -1,36 +1,40 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import {Grid, MenuItem, Typography, Paper, FormControl, Select, FormHelperText, withStyles} from '@material-ui/core'
-import {Autocomplete} from '@nearform/titus-components'
-import {countries} from './mock/countries'
+import { Grid, MenuItem, Typography, Paper, FormControl, Select, FormHelperText, withStyles } from '@material-ui/core'
+import { Autocomplete } from '@nearform/titus-components'
+import { PageHeading } from '../utils'
+import { countries } from './mock/countries'
 import levenshtein from 'fast-levenshtein'
+
+const MORE_INFO = 'More info dialog content'
+const SUB_HEADER = 'This autocomplete component is built on PayPal\'s downshift with a material-ui render prop.'
 
 const styles = theme => ({
   root: {
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column'
   },
   paperPadding: {
     padding: theme.spacing.unit * 3,
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column'
   },
   verticalMargin: {
-    marginBottom: theme.spacing.unit * 3,
-  },
+    marginBottom: theme.spacing.unit * 3
+  }
 })
 
 class AutocompleteDemo extends Component {
   static propTypes = {
-    classes: PropTypes.object,
+    classes: PropTypes.object
   }
 
   state = {
     filterType: 'startsWith',
     timerId: null,
     items: null,
-    loading: false,
+    loading: false
   }
 
   handleChange = item => {
@@ -38,12 +42,12 @@ class AutocompleteDemo extends Component {
   }
 
   handleFilterChange = event => {
-    this.setState({filterType: event.target.value})
+    this.setState({ filterType: event.target.value })
   }
 
-  handleGetSuggestions = ({value, maxResults}) => {
+  handleGetSuggestions = ({ value, maxResults }) => {
     clearTimeout(this.state.timerId) // cancel previous timer, we only want one request after the delay
-    this.setState({loading: true})
+    this.setState({ loading: true })
 
     const a = value.toLowerCase()
 
@@ -59,7 +63,7 @@ class AutocompleteDemo extends Component {
             return {
               key: country.key,
               value: country.value,
-              distance: distance,
+              distance: distance
             }
           })
           .sort((x, y) => x.distance - y.distance)
@@ -67,24 +71,18 @@ class AutocompleteDemo extends Component {
 
         this.setState({
           loading: false,
-          items: items,
+          items: items
         })
-      }, 500),
+      }, 500)
     })
   }
 
   render() {
-    const {classes} = this.props
-    const {filterType, loading, items} = this.state
+    const { classes } = this.props
+    const { filterType, loading, items } = this.state
     return (
       <Grid container spacing={24} className={classes.root}>
-        <Grid item xs={12} sm={12} md={12} lg={12}>
-          <Typography variant="h3" gutterBottom>Autocomplete</Typography>
-          <Typography paragraph>
-            This autocomplete component is built on PayPal's downshift with a
-            material-ui render prop.
-          </Typography>
-        </Grid>
+        <PageHeading header="Autocomplete" subHeader={SUB_HEADER} moreInfo={MORE_INFO}/>
         <Grid item xs={12} sm={12} md={12} lg={12}>
           <Paper
             className={classNames(classes.paperPadding, classes.verticalMargin)}

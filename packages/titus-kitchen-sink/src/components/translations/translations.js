@@ -1,21 +1,24 @@
 import * as React from 'react'
-import {translate} from 'react-i18next'
-import {Typography, Button, Paper, withStyles, Grid} from '@material-ui/core'
-
+import { translate } from 'react-i18next'
+import { Typography, Button, Paper, withStyles, Grid } from '@material-ui/core'
 import './i18n.js'
+import { PageHeading } from '../utils'
+
+const MORE_INFO = 'More info dialog content'
+const SUB_HEADER = 'The text below will be translated when switching locales using the buttons'
 
 const styles = theme => ({
   button: {
     marginRight: theme.spacing.unit,
-    marginBottom: theme.spacing.unit,
+    marginBottom: theme.spacing.unit
   },
   paper: {
     marginTop: theme.spacing.unit,
-    padding: theme.spacing.unit,
-  },
+    padding: theme.spacing.unit
+  }
 })
 
-const LanguageButton = translate()(withStyles(styles)(function LanguageButton({classes, language, i18n}) {
+const LanguageButton = translate()(withStyles(styles)(function LanguageButton({ classes, language, i18n }) {
   return (
     <Button
       color={language === i18n.language ? 'primary' : 'secondary'}
@@ -27,15 +30,10 @@ const LanguageButton = translate()(withStyles(styles)(function LanguageButton({c
   )
 }))
 
-function Translations({classes, t, i18n}) {
+function Translations({ classes, t }) {
   return (
     <Grid container spacing={24}>
-      <Grid item xs={12} sm={12} md={12} lg={12}>
-        <Typography variant="h3" gutterBottom>Translation</Typography>
-        <Typography paragraph>
-          The text below will be translated when switching locales using the buttons
-        </Typography>
-      </Grid>
+      <PageHeading header="Translation" subHeader={SUB_HEADER} moreInfo={MORE_INFO}/>
       <Grid item xs={12} sm={12} md={12} lg={12}>
         <LanguageButton language="en"/>
         <LanguageButton language="fr"/>

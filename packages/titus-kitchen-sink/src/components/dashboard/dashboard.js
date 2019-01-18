@@ -1,10 +1,13 @@
 import React from 'react'
-import {Grid, Typography} from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
+import { PageHeading } from '../utils'
+
+const MORE_INFO = 'More info dialog content'
 
 const Dashboard = () => (
   <Grid container spacing={24}>
+    <PageHeading header="Titus" moreInfo={MORE_INFO}/>
     <Grid item xs={12} sm={12} md={12} lg={12}>
-      <Typography variant="h3" gutterBottom>Titus</Typography>
       <Typography paragraph>
         Titus is an opinionated sample application, created to showcase how we think about and develop software
         at <a href="https://nearform.com" target="_blank" rel="noreferrer noopener">NearForm</a>.
