@@ -84,10 +84,8 @@ class AutocompleteDemo extends React.Component {
     const { filterType, loading, items } = this.state
     return (
       <div className={classes.root}>
-        <Typography variant="headline" gutterBottom>
-          Autocomplete Demo
-        </Typography>
-        <Typography variant="subheading" gutterBottom>
+        <Typography variant="h3" gutterBottom>Autocomplete</Typography>
+        <Typography paragraph>
           This autocomplete component is built on PayPal's downshift with a
           material-ui render prop.
         </Typography>

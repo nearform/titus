@@ -1,7 +1,7 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
-import { Typography, FormControlLabel, Switch, Paper } from '@material-ui/core'
+import {withStyles} from '@material-ui/core/styles'
+import {Typography, FormControlLabel, Switch, Paper} from '@material-ui/core'
 import RecordSearch from './record-search'
 import KeywordSearch from './keyword-search'
 
@@ -28,17 +28,22 @@ class Search extends React.Component {
   }
 
   handleChangeSearchType = () => {
-    this.setState(({ keywordSearch }) => ({ keywordSearch: !keywordSearch }))
+    this.setState(({keywordSearch}) => ({keywordSearch: !keywordSearch}))
   }
 
   render() {
     const {
-      props: { classes },
-      state: { keywordSearch },
+      props: {classes},
+      state: {keywordSearch},
       handleChangeSearchType
     } = this
     return (
-      <Fragment>
+      <div>
+        <Typography variant="h3" gutterBottom>Search</Typography>
+        <Typography paragraph>
+          At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti
+          atque.
+        </Typography>
         <Paper className={classes.root}>
           <FormControlLabel
             control={
@@ -47,9 +52,9 @@ class Search extends React.Component {
                 onChange={handleChangeSearchType}
               />
             }
-            label={keywordSearch ? 'Keyword Search' : 'RecordSearch'}
+            label={keywordSearch ? 'Keyword Search' : 'Record Search'}
           />
-          {keywordSearch ? <KeywordSearch /> : <RecordSearch />}
+          {keywordSearch ? <KeywordSearch/> : <RecordSearch/>}
         </Paper>
         <div className={classes.citation}>
           <Typography variant="caption">
@@ -65,7 +70,7 @@ class Search extends React.Component {
             </a>
           </Typography>
         </div>
-      </Fragment>
+      </div>
     )
   }
 }

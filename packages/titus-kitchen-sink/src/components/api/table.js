@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { graphql } from 'react-apollo'
-import { CircularProgress, Typography, withStyles } from '@material-ui/core'
-import { Table as NfTable } from '@nearform/react-table'
+import {graphql} from 'react-apollo'
+import {CircularProgress, Typography, withStyles} from '@material-ui/core'
+import {Table as NfTable} from '@nearform/react-table'
 import MaterialUiTable from './material-ui-table'
-import { loader } from 'graphql.macro'
+import {loader} from 'graphql.macro'
 
 const loadFoodData = loader('./queries/loadFoodData.graphql')
 
@@ -70,17 +70,17 @@ class Table extends React.Component {
   static defaultProps = {
     pageSize: 5,
     pageSizeOptions: [5, 10, 20, 50],
-    title: 'API CRUD Example',
+    title: 'CRUD Examples',
     columns
   }
 
   render() {
-    const { classes, title, columns, pageSize, pageSizeOptions, data: { loading, error, allFood } } = this.props
+    const {classes, title, columns, pageSize, pageSizeOptions, data: {loading, error, allFood}} = this.props
 
     if (loading) {
       return (
         <div className={classes.progressWrapper}>
-          <CircularProgress className={classes.progress} />
+          <CircularProgress className={classes.progress}/>
         </div>
       )
     }
@@ -101,14 +101,19 @@ class Table extends React.Component {
     }))
 
     return (
-      <React.Fragment>
+      <div>
+        <Typography variant="h3" gutterBottom>API</Typography>
+        <Typography paragraph>
+          At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti
+          atque.
+        </Typography>
         <NfTable
           columns={columns}
           pageSize={pageSize}
           pageSizeOptions={pageSizeOptions}
           data={food}
-          sorting={[{ id: 'name', asc: true }]}
-          render={props => <MaterialUiTable {...props} title={title} />}
+          sorting={[{id: 'name', asc: true}]}
+          render={props => <MaterialUiTable {...props} title={title}/>}
         />
 
         <div className={classes.citation}>
@@ -125,7 +130,7 @@ class Table extends React.Component {
             </a>
           </Typography>
         </div>
-      </React.Fragment>
+      </div>
     )
   }
 }

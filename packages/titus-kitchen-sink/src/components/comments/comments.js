@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import 'regenerator-runtime/runtime'
-import { withStyles } from '@material-ui/core/styles'
+import {withStyles} from '@material-ui/core/styles'
 import {
   Reference,
   SidebarsController,
@@ -13,7 +13,7 @@ import {
   buildWebsocketClient
 } from '@nearform/commentami-react-components'
 import Sidebar from './sidebar'
-import { Typography, Paper, Divider, colors, Grid } from '@material-ui/core'
+import {Typography, Paper, Divider, colors, Grid} from '@material-ui/core'
 import UserChooser from './user-chooser'
 
 const data = {
@@ -115,8 +115,8 @@ class Comments extends React.Component {
     const client = buildWebsocketClient(process.env.REACT_APP_COMMENTS_ENDPOINT)
 
     try {
-      const { user } = this.state
-      const { username, password } = data[user]
+      const {user} = this.state
+      const {username, password} = data[user]
       await client.connect({
         auth: {
           headers: {
@@ -143,83 +143,90 @@ class Comments extends React.Component {
   }
 
   handleUserChange = async user => {
-    this.setState({ user }, () => this.disconnect().then(this.connect))
+    this.setState({user}, () => this.disconnect().then(this.connect))
   }
 
   render() {
-    const { service } = this.state
-    const { users, classes } = this.props
+    const {service} = this.state
+    const {users, classes} = this.props
 
     return (
-      <DeepLinkController>
-        <SidebarsController>
-          <Resource resource="titus-demo-comments" service={service}>
-            <Paper elevation={1} className={classes.root}>
-              <Grid
-                container
-                justify="flex-end"
-                alignItems="baseline"
-                className={classes.chooseContainer}
-              >
-                <Typography gutterBottom color="textSecondary">
-                  Change The User:
-                </Typography>
-                <UserChooser values={users} onChange={this.handleUserChange} />
-              </Grid>
+      <div>
+        <Typography variant="h3" gutterBottom>Comments</Typography>
+        <Typography paragraph>
+          At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti
+          atque.
+        </Typography>
+        <DeepLinkController>
+          <SidebarsController>
+            <Resource resource="titus-demo-comments" service={service}>
+              <Paper elevation={1} className={classes.root}>
+                <Grid
+                  container
+                  justify="flex-end"
+                  alignItems="baseline"
+                  className={classes.chooseContainer}
+                >
+                  <Typography gutterBottom color="textSecondary">
+                    Change The User:
+                  </Typography>
+                  <UserChooser values={users} onChange={this.handleUserChange}/>
+                </Grid>
 
-              <Reference
-                reference="reference-1"
-                className={classes.headerReference}
-                activeClassName={classes.referenceActive}
-              >
-                <Typography variant="display1" gutterBottom>
-                  Commentable title of commentable sections
-                </Typography>
-              </Reference>
+                <Reference
+                  reference="reference-1"
+                  className={classes.headerReference}
+                  activeClassName={classes.referenceActive}
+                >
+                  <Typography variant="display1" gutterBottom>
+                    Commentable title of commentable sections
+                  </Typography>
+                </Reference>
 
-              <Divider className={classes.divider} />
+                <Divider className={classes.divider}/>
 
-              <Reference
-                reference="reference-2"
-                className={classes.reference}
-                activeClassName={classes.referenceActive}
-              >
-                <Typography gutterBottom>
+                <Reference
+                  reference="reference-2"
+                  className={classes.reference}
+                  activeClassName={classes.referenceActive}
+                >
+                  <Typography gutterBottom>
                   <span className={classes.boldText}>
                     Comment this section! Double click to comment!
                   </span>{' '}
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                  in justo id lorem venenatis facilisis. Morbi dictum euismod
-                  ipsum et convallis. Cras diam dui, maximus eu posuere et,
-                  pulvinar ac lorem. In hac habitasse platea dictumst. Phasellus
-                  venenatis eget sem vitae auctor.
-                </Typography>
-              </Reference>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
+                    in justo id lorem venenatis facilisis. Morbi dictum euismod
+                    ipsum et convallis. Cras diam dui, maximus eu posuere et,
+                    pulvinar ac lorem. In hac habitasse platea dictumst. Phasellus
+                    venenatis eget sem vitae auctor.
+                  </Typography>
+                </Reference>
 
-              <Divider className={classes.divider} />
+                <Divider className={classes.divider}/>
 
-              <Reference
-                reference="reference-3"
-                className={classes.reference}
-                activeClassName={classes.referenceActive}
-              >
-                <Typography gutterBottom>
+                <Reference
+                  reference="reference-3"
+                  className={classes.reference}
+                  activeClassName={classes.referenceActive}
+                >
+                  <Typography gutterBottom>
                   <span className={classes.boldText}>
                     Comment this section! Click on the icon to the left!
                   </span>{' '}
-                  More Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Vestibulum convallis, nulla id bibendum ornare, leo erat
-                  faucibus ligula, vel ullamcorper nibh nisi in arcu. Donec
-                  lobortis sapien nec pretium auctor. Aenean vulputate odio
-                  nulla, quis facilisis est viverra et.
-                </Typography>
-              </Reference>
-            </Paper>
+                    More Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Vestibulum convallis, nulla id bibendum ornare, leo erat
+                    faucibus ligula, vel ullamcorper nibh nisi in arcu. Donec
+                    lobortis sapien nec pretium auctor. Aenean vulputate odio
+                    nulla, quis facilisis est viverra et.
+                  </Typography>
+                </Reference>
+              </Paper>
 
-            <Sidebar />
-          </Resource>
-        </SidebarsController>
-      </DeepLinkController>
+              <Sidebar/>
+            </Resource>
+          </SidebarsController>
+        </DeepLinkController>
+      </div>
     )
   }
 }
