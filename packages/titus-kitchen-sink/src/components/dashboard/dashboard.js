@@ -4,14 +4,7 @@ import {Grid, Typography} from '@material-ui/core'
 const Dashboard = () => (
   <Grid container spacing={24}>
     <Grid item xs={12} sm={12} md={12} lg={12}>
-      <Typography variant="h3" gutterBottom>Dashboard</Typography>
-      <Typography paragraph>
-        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti
-        atque.
-      </Typography>
-    </Grid>
-    <Grid item xs={12} sm={12} md={12} lg={12}>
-      <Typography variant="h4" gutterBottom>Titus</Typography>
+      <Typography variant="h3" gutterBottom>Titus</Typography>
       <Typography paragraph>
         Titus is an opinionated sample application, created to showcase how we think about and develop software
         at <a href="https://nearform.com" target="_blank" rel="noreferrer noopener">NearForm</a>.
