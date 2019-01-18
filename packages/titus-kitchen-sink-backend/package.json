@@ -31,7 +31,8 @@
     "dev:cleandb": "rm -rf pgdata",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "format": "prettier --write *.js **/*.js"
+    "format": "prettier --write *.js **/*.js",
+    "create:env": "node -r fs -e \"fs.copyFileSync('docker/dev.env.sample', 'docker/dev.env', fs.constants.COPYFILE_EXCL)\""
   },
   "dependencies": {
     "@nearform/commentami-backend-hapi-plugin": "^1.0.5",

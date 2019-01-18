@@ -13,7 +13,8 @@
     "start:kitchen-sink": "lerna run --scope titus-kitchen* --stream start",
     "stop:kitchen-sink": "lerna run --scope titus-kitchen* --stream stop",
     "lighthouse": "lerna run lighthouse",
-    "build:docs": "lerna run docz:build"
+    "build:docs": "lerna run docz:build",
+    "create:env": "lerna run --scope titus-kitchen* create:env"
   },
   "devDependencies": {
     "husky": "^1.3.1",
