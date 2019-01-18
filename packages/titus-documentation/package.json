@@ -13,8 +13,11 @@
     "docz:build": "docz build && npm run copy"
   },
   "devDependencies": {
-    "docz": "^0.11.2",
-    "remark-bookmarks": "^1.0.0",
-    "remark-external-links": "^2.0.0"
+    "docz": "^0.13.7",
+    "remark-bookmarks": "^2.0.0",
+    "remark-external-links": "^4.0.0"
+  },
+  "dependencies": {
+    "docz-theme-default": "^0.13.7"
   }
 }
