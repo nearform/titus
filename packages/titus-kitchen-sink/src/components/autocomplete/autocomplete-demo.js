@@ -1,42 +1,36 @@
-import React from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import { withStyles } from '@material-ui/core/styles'
-import MenuItem from '@material-ui/core/MenuItem'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
-import FormHelperText from '@material-ui/core/FormHelperText'
-import FormControl from '@material-ui/core/FormControl'
-import Select from '@material-ui/core/Select'
-import { Autocomplete } from '@nearform/titus-components'
-import { countries } from './mock/countries'
+import {Grid, MenuItem, Typography, Paper, FormControl, Select, FormHelperText, withStyles} from '@material-ui/core'
+import {Autocomplete} from '@nearform/titus-components'
+import {countries} from './mock/countries'
 import levenshtein from 'fast-levenshtein'
 
 const styles = theme => ({
   root: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   paperPadding: {
     padding: theme.spacing.unit * 3,
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   verticalMargin: {
-    marginBottom: theme.spacing.unit * 3
-  }
+    marginBottom: theme.spacing.unit * 3,
+  },
 })
 
-class AutocompleteDemo extends React.Component {
+class AutocompleteDemo extends Component {
   static propTypes = {
-    classes: PropTypes.object
+    classes: PropTypes.object,
   }
 
   state = {
     filterType: 'startsWith',
     timerId: null,
     items: null,
-    loading: false
+    loading: false,
   }
 
   handleChange = item => {
@@ -44,12 +38,12 @@ class AutocompleteDemo extends React.Component {
   }
 
   handleFilterChange = event => {
-    this.setState({ filterType: event.target.value })
+    this.setState({filterType: event.target.value})
   }
 
-  handleGetSuggestions = ({ value, maxResults }) => {
+  handleGetSuggestions = ({value, maxResults}) => {
     clearTimeout(this.state.timerId) // cancel previous timer, we only want one request after the delay
-    this.setState({ loading: true })
+    this.setState({loading: true})
 
     const a = value.toLowerCase()
 
@@ -65,7 +59,7 @@ class AutocompleteDemo extends React.Component {
             return {
               key: country.key,
               value: country.value,
-              distance: distance
+              distance: distance,
             }
           })
           .sort((x, y) => x.distance - y.distance)
@@ -73,80 +67,84 @@ class AutocompleteDemo extends React.Component {
 
         this.setState({
           loading: false,
-          items: items
+          items: items,
         })
-      }, 500)
+      }, 500),
     })
   }
 
   render() {
-    const { classes } = this.props
-    const { filterType, loading, items } = this.state
+    const {classes} = this.props
+    const {filterType, loading, items} = this.state
     return (
-      <div className={classes.root}>
-        <Typography variant="headline" gutterBottom>
-          Autocomplete Demo
-        </Typography>
-        <Typography variant="subheading" gutterBottom>
-          This autocomplete component is built on PayPal's downshift with a
-          material-ui render prop.
-        </Typography>
-        <Paper
-          className={classNames(classes.paperPadding, classes.verticalMargin)}
-        >
-          <Typography variant="body1" paragraph>
-            <strong>
-              Select a search filter from the list below and then start typing a
-              country name:
-            </strong>
+      <Grid container spacing={24} className={classes.root}>
+        <Grid item xs={12} sm={12} md={12} lg={12}>
+          <Typography variant="h3" gutterBottom>Autocomplete</Typography>
+          <Typography paragraph>
+            This autocomplete component is built on PayPal's downshift with a
+            material-ui render prop.
           </Typography>
-          <FormControl className={classes.verticalMargin}>
-            <Select
-              value={filterType}
-              onChange={this.handleFilterChange}
-              name="filterType"
-              displayEmpty
-            >
-              <MenuItem value="startsWith">startsWith (default)</MenuItem>
-              <MenuItem value="contains">contains</MenuItem>
-            </Select>
-            <FormHelperText>Change an autocomplete filter type</FormHelperText>
-          </FormControl>
+        </Grid>
+        <Grid item xs={12} sm={12} md={12} lg={12}>
+          <Paper
+            className={classNames(classes.paperPadding, classes.verticalMargin)}
+          >
+            <Typography variant="body1" paragraph>
+              <strong>
+                Select a search filter from the list below and then start typing a
+                country name:
+              </strong>
+            </Typography>
+            <FormControl className={classes.verticalMargin}>
+              <Select
+                value={filterType}
+                onChange={this.handleFilterChange}
+                name="filterType"
+                displayEmpty
+              >
+                <MenuItem value="startsWith">startsWith (default)</MenuItem>
+                <MenuItem value="contains">contains</MenuItem>
+              </Select>
+              <FormHelperText>Change an autocomplete filter type</FormHelperText>
+            </FormControl>
 
-          <FormControl>
-            <Autocomplete
-              placeholder={'Find a country using the filterType: ' + filterType}
-              id="titus-autocomplete"
-              data={filterType !== 'levenshtein' ? countries : null}
-              onChange={this.handleChange}
-              maxResults={10}
-              filterType={filterType}
-            />
-          </FormControl>
-        </Paper>
+            <FormControl>
+              <Autocomplete
+                placeholder={'Find a country using the filterType: ' + filterType}
+                id="titus-autocomplete"
+                data={filterType !== 'levenshtein' ? countries : null}
+                onChange={this.handleChange}
+                maxResults={10}
+                filterType={filterType}
+              />
+            </FormControl>
+          </Paper>
+        </Grid>
 
-        <Paper className={classes.paperPadding}>
-          <Typography variant="body1" paragraph>
-            <strong>
-              This uses a custom search filter algorithm implemented in this
-              container (in this case fast-levenshtein):
-            </strong>
-          </Typography>
-          <FormControl>
-            <Autocomplete
-              placeholder={
-                'Find a country using custom algorithm (levenshtein)'
-              }
-              id="titus-autocomplete"
-              onChange={this.handleChange}
-              onInputChange={this.handleGetSuggestions}
-              maxResults={10}
-              loading={loading}
-              items={items}
-            />
-          </FormControl>
-        </Paper>
-      </div>
+        <Grid item xs={12} sm={12} md={12} lg={12}>
+          <Paper className={classes.paperPadding}>
+            <Typography variant="body1" paragraph>
+              <strong>
+                This uses a custom search filter algorithm implemented in this
+                container (in this case fast-levenshtein):
+              </strong>
+            </Typography>
+            <FormControl>
+              <Autocomplete
+                placeholder={
+                  'Find a country using custom algorithm (levenshtein)'
+                }
+                id="titus-autocomplete"
+                onChange={this.handleChange}
+                onInputChange={this.handleGetSuggestions}
+                maxResults={10}
+                loading={loading}
+                items={items}
+              />
+            </FormControl>
+          </Paper>
+        </Grid>
+      </Grid>
     )
   }
 }

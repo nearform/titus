@@ -4,18 +4,24 @@
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap && lerna exec npm install",
+    "clean": "lerna clean",
     "lint:all": "lerna run --parallel lint",
     "test:all": "lerna run test",
-    "precommit": "lerna run --parallel format ; lerna run --parallel lint:fix",
-    "prepush": "lerna run test",
     "postinstall": "lerna bootstrap && lerna exec npm install",
     "start:kitchen-sink": "lerna run --scope titus-kitchen* --stream start",
     "stop:kitchen-sink": "lerna run --scope titus-kitchen* --stream stop",
     "lighthouse": "lerna run lighthouse",
-    "build:docs": "lerna run docz:build"
+    "build:docs": "lerna run docz:build",
+    "create:env": "lerna run --scope titus-kitchen* create:env"
   },
   "devDependencies": {
-    "husky": "^0.14.3",
+    "husky": "^1.3.1",
     "lerna": "^2.11.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lerna run --parallel format ; lerna run --parallel lint:fix",
+      "pre-push": "lerna run test"
+    }
   }
 }

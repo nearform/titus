@@ -1,9 +1,8 @@
 {
-  "name": "titus-kitchen-sink",
+  "name": "titus-ks-fastify-frontend",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@nearform/commentami-react-components": "^1.0.5",
     "@nearform/react-table": "^1.1.0",
     "@nearform/titus-components": "^1.0.0",
     "@reach/router": "^1.2.1",
@@ -22,7 +21,6 @@
     "i18next": "^11.9.0",
     "i18next-browser-languagedetector": "^2.2.3",
     "i18next-xhr-backend": "^1.5.1",
-    "oidc-client": "^1.5.4",
     "react": "^16.5.2",
     "react-apollo": "^2.2.2",
     "react-dom": "^16.5.2",
@@ -47,12 +45,11 @@
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
     "format": "prettier --write *.js **/*.js",
-    "lighthouse": "node lighthouse",
-    "create:env": "node -r fs -e \"fs.copyFileSync('.env.sample', '.env', fs.constants.COPYFILE_EXCL)\""
+    "lighthouse": "node lighthouse"
   },
   "devDependencies": {
-    "@material-ui/core": "^3.9.0",
-    "@material-ui/icons": "^3.0.2",
+    "@material-ui/core": "^3.1.1",
+    "@material-ui/icons": "^3.0.1",
     "@storybook/addon-actions": "^3.4.11",
     "@storybook/addon-links": "^3.4.11",
     "@storybook/addons": "^3.4.11",
