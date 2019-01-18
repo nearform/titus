@@ -1,7 +1,6 @@
-import React from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import {withStyles} from '@material-ui/core/styles'
-import {Typography, FormControlLabel, Switch, Paper} from '@material-ui/core'
+import {Typography, FormControlLabel, Switch, Paper, Grid, withStyles} from '@material-ui/core'
 import RecordSearch from './record-search'
 import KeywordSearch from './keyword-search'
 
@@ -9,22 +8,22 @@ const styles = theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    padding: theme.spacing.unit * 3
+    padding: theme.spacing.unit * 3,
   },
   citation: {
     '& span:first-of-type': {
-      marginTop: theme.spacing.unit * 3
-    }
-  }
+      marginTop: theme.spacing.unit * 3,
+    },
+  },
 })
 
-class Search extends React.Component {
+class Search extends Component {
   static propTypes = {
-    classes: PropTypes.object
+    classes: PropTypes.object,
   }
 
   state = {
-    keywordSearch: false
+    keywordSearch: false,
   }
 
   handleChangeSearchType = () => {
@@ -35,28 +34,32 @@ class Search extends React.Component {
     const {
       props: {classes},
       state: {keywordSearch},
-      handleChangeSearchType
+      handleChangeSearchType,
     } = this
     return (
-      <div>
-        <Typography variant="h3" gutterBottom>Search</Typography>
-        <Typography paragraph>
-          At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti
-          atque.
-        </Typography>
-        <Paper className={classes.root}>
-          <FormControlLabel
-            control={
-              <Switch
-                checked={keywordSearch}
-                onChange={handleChangeSearchType}
-              />
-            }
-            label={keywordSearch ? 'Keyword Search' : 'Record Search'}
-          />
-          {keywordSearch ? <KeywordSearch/> : <RecordSearch/>}
-        </Paper>
-        <div className={classes.citation}>
+      <Grid container spacing={24}>
+        <Grid item xs={12} sm={12} md={12} lg={12}>
+          <Typography variant="h3" gutterBottom>Search</Typography>
+          <Typography paragraph>
+            At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti
+            atque.
+          </Typography>
+        </Grid>
+        <Grid item xs={12} sm={12} md={12} lg={12}>
+          <Paper className={classes.root}>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={keywordSearch}
+                  onChange={handleChangeSearchType}
+                />
+              }
+              label={keywordSearch ? 'Keyword Search' : 'Record Search'}
+            />
+            {keywordSearch ? <KeywordSearch/> : <RecordSearch/>}
+          </Paper>
+        </Grid>
+        <Grid item xs={12} sm={12} md={12} lg={12} className={classes.citation}>
           <Typography variant="caption">
             Nutritional information provided by:
           </Typography>
@@ -69,8 +72,8 @@ class Search extends React.Component {
               http://www.ars.usda.gov/ba/bhnrc/ndl
             </a>
           </Typography>
-        </div>
-      </div>
+        </Grid>
+      </Grid>
     )
   }
 }

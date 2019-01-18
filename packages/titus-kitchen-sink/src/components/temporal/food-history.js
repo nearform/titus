@@ -1,34 +1,34 @@
-import React from 'react'
+import React, {Component, PureComponent} from 'react'
 import PropTypes from 'prop-types'
-import { Typography, withStyles } from '@material-ui/core'
-import { Query } from 'react-apollo'
-import { Table } from '@nearform/titus-components'
-import { loader } from 'graphql.macro'
+import {Typography, withStyles} from '@material-ui/core'
+import {Query} from 'react-apollo'
+import {Table} from '@nearform/titus-components'
+import {loader} from 'graphql.macro'
 
 const loadFoodHistoryData = loader('./queries/loadFoodHistoryData.graphql')
 
 const styles = (theme) => ({
   citation: {
     '& span:first-of-type': {
-      marginTop: theme.spacing.unit * 3
-    }
-  }
+      marginTop: theme.spacing.unit * 3,
+    },
+  },
 })
 
-export default class FoodHistory extends React.PureComponent {
+export default class FoodHistory extends PureComponent {
   static propTypes = {
     selectedFoodId: PropTypes.string,
     title: PropTypes.string.isRequired,
-    columns: PropTypes.array.isRequired
+    columns: PropTypes.array.isRequired,
   }
 
-  render () {
-    const { selectedFoodId, title, columns } = this.props
+  render() {
+    const {selectedFoodId, title, columns} = this.props
 
     return (
       <Query
         query={loadFoodHistoryData}
-        variables={{ id: selectedFoodId }}
+        variables={{id: selectedFoodId}}
         skip={!selectedFoodId}
         fetchPolicy="cache-and-network"
       >
@@ -44,20 +44,20 @@ export default class FoodHistory extends React.PureComponent {
   }
 }
 
-class QueryResult extends React.Component {
+class QueryResult extends Component {
   static propTypes = {
     error: PropTypes.object,
     data: PropTypes.object,
     title: PropTypes.string.isRequired,
     columns: PropTypes.array.isRequired,
-    classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired,
   }
 
   static defaultProps = {
-    data: {}
+    data: {},
   }
 
-  render () {
+  render() {
     if (this.props.error) {
       return (
         <Typography color="error">
@@ -66,7 +66,7 @@ class QueryResult extends React.Component {
       )
     }
 
-    const { title, columns, classes, data: { foodHistory = [] } } = this.props
+    const {title, columns, classes, data: {foodHistory = []}} = this.props
 
     if (!foodHistory || !foodHistory.length) {
       return (
@@ -85,7 +85,7 @@ class QueryResult extends React.Component {
     }))
 
     return (
-      <React.Fragment>
+      <>
         <Table
           title={title}
           columns={columns}
@@ -105,7 +105,7 @@ class QueryResult extends React.Component {
             </a>
           </Typography>
         </div>
-      </React.Fragment>
+      </>
     )
   }
 }
