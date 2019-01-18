@@ -1,6 +1,6 @@
 import React from 'react'
 import Loadable from 'react-loadable'
-import {Router} from '@reach/router'
+import { Router } from '@reach/router'
 import Loading from './loading'
 
 const AsyncDashboard = Loadable({
@@ -109,22 +109,22 @@ const AsyncTranslations = Loadable({
 
 const Routes = () => (
   <Router>
-    <AsyncDashboard path="/"/>
-    <AsyncWizard path="wizard/*"/>
-    <AsyncVisualisations path="visualisations/*"/>
-    <AsyncTables path="tables/*"/>
-    <AsyncAutocompleteDemo path="autocomplete/*"/>
-    <AsyncApi path="api/*"/>
-    <AsyncTemporal path="temporal/*"/>
-    <AsyncSearch path="search/*"/>
-    <AsyncComments path="comments/*"/>
-    <AsyncUploader path="uploader/*"/>
-    <AsyncAuthorization path="auth/*"/>
-    <AsyncLoginTabs path="identity/login"/>
-    <AsyncAuth0Callback path="auth0/callback"/>
-    <AsyncOIDCCallback path="oidc/callback"/>
-    <AsyncTheming path="theming/*"/>
-    <AsyncTranslations path="translations/*"/>
+    <AsyncDashboard path="/" />
+    <AsyncWizard path="wizard/*" />
+    <AsyncVisualisations path="visualisations/*" />
+    <AsyncTables path="tables/*" />
+    <AsyncAutocompleteDemo path="autocomplete/*" />
+    <AsyncApi path="api/*" />
+    <AsyncTemporal path="temporal/*" />
+    <AsyncSearch path="search/*" />
+    <AsyncComments path="comments/*" />
+    <AsyncUploader path="uploader/*" />
+    <AsyncAuthorization path="auth/*" />
+    <AsyncLoginTabs path="identity/login" />
+    <AsyncAuth0Callback path="auth0/callback" />
+    <AsyncOIDCCallback path="oidc/callback" />
+    <AsyncTheming path="theming/*" />
+    <AsyncTranslations path="translations/*" />
   </Router>
 )
 
