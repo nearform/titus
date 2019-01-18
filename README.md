@@ -13,8 +13,14 @@ This repository is a [monorepo](https://lernajs.io/) containing distinct parts o
 - [titus-kitchen-sink-backend](https://github.com/nearform/titus/tree/master/packages/titus-kitchen-sink-backend) - A sample server-side application complete with [Hapi](https://hapijs.com/), [PostgreSQL](https://www.postgresql.org/), [Docker](https://www.docker.com/), [GraphQL](https://graphql.org/) and more.
 
 ## Ethos & Goals
-
 The aim of Titus is to give projects a faster 'time to first feature' by providing a core set of technologies, frameworks and techniques which aid in modern web application development.
+
+## Documentation
+Documentation for Titus is found in the [titus-documentation][docs-home] package, in [packages][packages] directory. For convenience, the documentation is auto-built and deployed as a [webpage][docs]. The deployed docs can be found in the [docs] folder in the root of this repository. Deployment is via Github Pages.
+
+### Infrastructure documentation
+
+Info about how the Titus demo app (kitchen-sink) is deployed can be found [here](https://github.com/nearform/titus/blob/master/kubernetes/README.md).
 
 ## Development
 
@@ -79,10 +85,7 @@ Some commands have been added to the root package for convenience.
 | start:kitchen-sink | starts the kitchen sink app         |
 | stop:kitchen-sink  | stops the kitchen sink app          |
 
-### Documentation
 
-Documentation for the contents of the repository can be found [here](https://nearform.github.io/titus).
-
-### Infrastructure documentation
-
-Info about how the Titus demo app (kitchen-sink) is deployed can be found [here](https://github.com/nearform/titus/blob/master/kubernetes/README.md).
+[docs]: https://nearform.github.io/titus
+[docs-home]: ./packages/titus-documentation
+[packages]: ./packages
