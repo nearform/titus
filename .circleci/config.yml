@@ -102,6 +102,22 @@ jobs:
             # Push the backend container
             echo -e "Pushing the backend container\n"
             docker push ${DOCKER_REPO}/titus-kitchen-sink-backend:${CIRCLE_WORKFLOW_ID}
+  release-preproduction:
+    <<: *defaults
+    environment:
+      DOCKER_REPO: "711655675495.dkr.ecr.us-east-1.amazonaws.com"
+    steps:
+      - attach_workspace:
+          at: .
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Install Helm
+          command:
+            curl https://storage.googleapis.com/kubernetes-helm/helm-v2.9.0-linux-amd64.tar.gz -o "helm.tar.gz"
+            tar xvzf helm.tar.gz
+            sudo cp ./linux-amd64/helm /usr/local/helm
+            helm list
 workflows:
   version: 2
   test_and_build:
