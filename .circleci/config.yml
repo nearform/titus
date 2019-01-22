@@ -123,7 +123,6 @@ jobs:
           command: |
             sudo curl "https://amazon-eks.s3-us-west-2.amazonaws.com/1.11.5/2018-12-06/bin/linux/amd64/aws-iam-authenticator" -o /usr/local/bin/aws-iam-authenticator
             sudo chmod a+x /usr/local/bin/aws-iam-authenticator
-            echo $PATH
       - run:
           name: EKS k8s configuration
           command:
@@ -135,7 +134,7 @@ jobs:
             tar xvzf helm.tar.gz
             ls ./linux-amd64/
             sudo cp ./linux-amd64/helm /usr/local/bin/helm
-            helm list
+            helm init --client-only
 
 workflows:
   version: 2
