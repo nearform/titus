@@ -118,6 +118,10 @@ jobs:
             tar xvzf helm.tar.gz
             sudo cp ./linux-amd64/helm /usr/local/helm
             helm list
+      - run:
+          name: EKS k8s configuration
+          command:
+            aws eks update-kubeconfig --name titus
 workflows:
   version: 2
   test_and_build:
@@ -141,6 +145,9 @@ workflows:
             - test
             - lint
             - lighthouse
+      - release-preproduction:
+          requires:
+          - push-containers
           #filters:
           #  branches:
           #    only: master
