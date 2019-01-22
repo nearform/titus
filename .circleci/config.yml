@@ -121,7 +121,7 @@ jobs:
       - run:
           name: EKS k8s configuration
           command:
-            aws eks update-kubeconfig --name titus
+            aws eks update-kubeconfig --name titus --region eu-west-1
       - run:
           name: Install Helm
           command: |
