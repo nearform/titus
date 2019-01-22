@@ -17,7 +17,7 @@ const PageHeading = ({ classes, header, subHeader, moreInfo }) => (
         {subHeader && (<Typography paragraph>{subHeader}</Typography>)}
       </Grid>
       {moreInfo && (<Grid item className={classes.moreInfoContainer}>
-        <MoreInfo/>
+        <MoreInfo title={header} content={moreInfo}/>
       </Grid>)}
     </Grid>
   </Grid>
