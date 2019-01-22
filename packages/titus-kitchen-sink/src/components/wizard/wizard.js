@@ -1,8 +1,12 @@
-import React, {Component} from 'react'
-import {Wizard} from '@nearform/titus-components'
+import React, { Component } from 'react'
+import { Wizard } from '@nearform/titus-components'
+import { PageHeading } from '../utils'
 import SimpleStep from './simple-step'
 import SummaryStep from './summary-step'
-import {Grid, Typography} from '@material-ui/core'
+import { Grid } from '@material-ui/core'
+
+const MORE_INFO = 'More info dialog content'
+const SUBHEADER = 'Whenever data needs to be input via one or more simple or complex steps, a Wizard is often the best choice of control.'
 
 class WizardDemo extends Component {
   handleFinish = data => {
@@ -12,14 +16,7 @@ class WizardDemo extends Component {
   render() {
     return (
       <Grid container spacing={24}>
-        <Grid item xs={12} sm={12} md={12} lg={12}>
-          <Typography variant="h3" gutterBottom>Wizard</Typography>
-          <Typography paragraph>
-            Whenever data needs to be input via one or more simple or complex steps, a Wizard is often the best choice
-            of
-            control.
-          </Typography>
-        </Grid>
+        <PageHeading header="Wizard" subHeader={SUBHEADER} moreInfo={MORE_INFO}/>
         <Grid item xs={12} sm={12} md={12} lg={12}>
           <Wizard
             onFinish={this.handleFinish}
