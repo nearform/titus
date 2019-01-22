@@ -117,7 +117,7 @@ jobs:
             curl https://storage.googleapis.com/kubernetes-helm/helm-v2.9.0-linux-amd64.tar.gz -o "helm.tar.gz"
             tar xvzf helm.tar.gz
             ls ./linux-amd64/
-            sudo cp ./linux-amd64/helm /usr/local/helm
+            sudo cp ./linux-amd64/helm /usr/local/bin/helm
             helm list
       - run:
           name: EKS k8s configuration
