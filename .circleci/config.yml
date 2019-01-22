@@ -82,14 +82,14 @@ jobs:
           command: |
             set -e
             cd packages/titus-kitchen-sink
-            docker build -t ${DOCKER_REPO}/titus-kitchen-sink-frontend:${CIRCLE_BUILD_NUM} -f docker/Dockerfile .
+            docker build -t ${DOCKER_REPO}/titus-kitchen-sink-frontend:${CIRCLE_WORKFLOW_ID} -f docker/Dockerfile .
       - run:
           name: Build the backend Docker containers
           command: |
             set -e
             cd packages/titus-kitchen-sink-backend/
             mv config/prod.js config/default.js
-            docker build -t ${DOCKER_REPO}/titus-kitchen-sink-backend:${CIRCLE_BUILD_NUM} -f docker/api/Dockerfile.prod .
+            docker build -t ${DOCKER_REPO}/titus-kitchen-sink-backend:${CIRCLE_WORKFLOW_ID} -f docker/api/Dockerfile.prod .
       - run:
           name: Push the Docker containers to the registry
           command: |
@@ -98,10 +98,10 @@ jobs:
             eval $(aws ecr get-login --no-include-email --region us-east-1)
             # Push the frontend container
             echo -e "Pushing the frontend container\n"
-            docker push ${DOCKER_REPO}/titus-kitchen-sink-frontend:${CIRCLE_BUILD_NUM}
+            docker push ${DOCKER_REPO}/titus-kitchen-sink-frontend:${CIRCLE_WORKFLOW_ID}
             # Push the backend container
             echo -e "Pushing the backend container\n"
-            docker push ${DOCKER_REPO}/titus-kitchen-sink-backend:${CIRCLE_BUILD_NUM}
+            docker push ${DOCKER_REPO}/titus-kitchen-sink-backend:${CIRCLE_WORKFLOW_ID}
 workflows:
   version: 2
   test_and_build:
