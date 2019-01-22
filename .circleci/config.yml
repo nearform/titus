@@ -119,6 +119,10 @@ jobs:
             unzip awscli-bundle.zip
             sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
       - run:
+          name: Install AWS IAM Authenticator
+          command:
+            curl "https://amazon-eks.s3-us-west-2.amazonaws.com/1.11.5/2018-12-06/bin/linux/amd64/aws-iam-authenticator" -o /usr/local/bin/aws-iam-authenticator
+      - run:
           name: EKS k8s configuration
           command:
             aws eks update-kubeconfig --name titus-noise --region eu-west-1
