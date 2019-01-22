@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
 import { CircularProgress, Typography, withStyles, Grid } from '@material-ui/core'
 import { Table as NfTable } from '@nearform/react-table'
 import { PageHeading } from '../utils'
-import MaterialUiTable from './material-ui-table'
 import { loader } from 'graphql.macro'
+import { MaterialUiTable } from './'
 
 const MORE_INFO = 'More info dialog content'
 const SUB_HEADER = 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque.'
@@ -63,7 +63,7 @@ const columns = [
   }
 ]
 
-class Table extends React.Component {
+class Table extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
     columns: PropTypes.array.isRequired,

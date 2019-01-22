@@ -3,19 +3,16 @@ import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { Mutation } from 'react-apollo'
 import { lighten } from '@material-ui/core/styles/colorManipulator'
-import { withStyles } from '@material-ui/core/styles'
 import {
   Toolbar,
   Typography,
   IconButton,
   Tooltip,
-  Button
+  Button,
+  withStyles
 } from '@material-ui/core'
 import { Add as AddIcon, Delete as DeleteIcon } from '@material-ui/icons'
-import { loader } from 'graphql.macro'
-
-const loadFoodData = loader('./queries/loadFoodData.graphql')
-const deleteFood = loader('./queries/deleteFood.graphql')
+import { deleteFood, loadFoodData } from './lib/utils'
 
 const styles = theme => ({
   root: {
@@ -88,7 +85,7 @@ const TableToolbar = ({ numSelected, classes, title, rows, onAddClick }) => (
             {title}
           </Typography>
         </div>
-        <div className={classes.spacer} />
+        <div className={classes.spacer}/>
         <div className={classes.rightControls}>
           {!numSelected && (
             <div className={classes.actions}>
@@ -100,7 +97,7 @@ const TableToolbar = ({ numSelected, classes, title, rows, onAddClick }) => (
                   color="primary"
                   onClick={onAddClick}
                 >
-                  <AddIcon />
+                  <AddIcon/>
                 </Button>
               </Tooltip>
             </div>
@@ -121,7 +118,7 @@ const TableToolbar = ({ numSelected, classes, title, rows, onAddClick }) => (
                     className={classes.button}
                     onClick={handleDelete({ deleteFood, rows })}
                   >
-                    <DeleteIcon />
+                    <DeleteIcon/>
                   </IconButton>
                 </Tooltip>
               </div>

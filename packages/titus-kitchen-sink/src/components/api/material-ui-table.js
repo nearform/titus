@@ -7,10 +7,7 @@ import {
   TablePagination,
   Paper
 } from '@material-ui/core'
-import Header from './header'
-import TableToolbar from './table-toolbar'
-import TableRow from './table-row'
-import NewFoodForm from './new-food-form'
+import { Header, TableToolbar, TableRow, NewFoodForm } from './'
 
 class MaterialUiTable extends Component {
   static propTypes = {
@@ -71,7 +68,7 @@ class MaterialUiTable extends Component {
           numSelected={selecting[0] === 'all' ? total : selecting.length}
         />
 
-        {this.state.adding && <NewFoodForm onClose={this.resetAdding} />}
+        {this.state.adding && <NewFoodForm onClose={this.resetAdding}/>}
 
         <Table>
           <Header

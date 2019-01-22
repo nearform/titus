@@ -9,13 +9,9 @@ import {
   within
 } from 'react-testing-library'
 import { MockedProvider } from 'react-apollo/test-utils'
-
-import TableRow from './table-row'
-import withContext from '../../../test/with-context'
-import { loader } from 'graphql.macro'
-
-const loadFoodData = loader('./queries/loadFoodData.graphql')
-const updateFood = loader('./queries/updateFood.graphql')
+import { TableRow } from '../'
+import withContext from '../../../../test/with-context'
+import { loadFoodData, updateFood } from '../lib/utils'
 
 global.SVGElement = Element
 
@@ -26,8 +22,8 @@ const apolloMocks = [
     },
     result: {
       data: {
-        allFood:  [],
-        foodGroups:  [
+        allFood: [],
+        foodGroups: [
           { id: 'ME_GRUB', name: 'Pirate Food' },
           { id: 'ME_GROG', name: 'Pirate Beverages' }
         ]
@@ -37,8 +33,8 @@ const apolloMocks = [
   {
     request: {
       query: updateFood,
-      variables:{
-        food:{
+      variables: {
+        food: {
           id: 1,
           name: 'Sea Biscuits',
           foodGroupId: 'ME_GRUB',
@@ -79,7 +75,7 @@ describe('<TableRow />', () => {
     const { queryByText, getByLabelText, queryByLabelText } = render(
       <Context>
         <MockedProvider mocks={apolloMocks} addTypename={false}>
-          <TableRow row={rowData} />
+          <TableRow row={rowData}/>
         </MockedProvider>
       </Context>
     )
@@ -98,7 +94,7 @@ describe('<TableRow />', () => {
     const { getByLabelText, getByText } = render(
       <Context>
         <MockedProvider mocks={apolloMocks} addTypename={false}>
-          <TableRow row={rowData} />
+          <TableRow row={rowData}/>
         </MockedProvider>
       </Context>
     )
@@ -180,7 +176,7 @@ describe('<TableRow />', () => {
     const { getByLabelText, getByText } = render(
       <Context>
         <MockedProvider mocks={apolloMocks} addTypename={false}>
-          <TableRow row={rowData} />
+          <TableRow row={rowData}/>
         </MockedProvider>
       </Context>
     )

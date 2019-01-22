@@ -1,17 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { TableCell, Checkbox } from '@material-ui/core'
-import {
-  TableHeaderRow as NfTableHeaderRow,
-  TableHeader as NfTableHeader
-} from '@nearform/react-table'
-import HeaderRow from './header-row'
-import SortingHeaderCell from './sorting-header-cell'
+import { TableHeaderRow, TableHeader } from '@nearform/react-table'
+import { HeaderRow, SortingHeaderCell } from './'
 
 const Header = ({ handleRowSelect, selecting, columns }) => (
-  <NfTableHeaderRow component={HeaderRow}>
+  <TableHeaderRow component={HeaderRow}>
     {[
-      <NfTableHeader key="select-all">
+      <TableHeader key="select-all">
         <TableCell padding="checkbox">
           <Checkbox
             color="primary"
@@ -20,19 +16,19 @@ const Header = ({ handleRowSelect, selecting, columns }) => (
             checked={selecting[0] === 'all'}
           />
         </TableCell>
-      </NfTableHeader>,
+      </TableHeader>,
       ...columns.reduce((acc, curr, index) => {
         if (curr.accessor) {
           acc.push(
-            <NfTableHeader {...curr} key={index} component={SortingHeaderCell}>
+            <TableHeader {...curr} key={index} component={SortingHeaderCell}>
               {curr.label}
-            </NfTableHeader>
+            </TableHeader>
           )
         }
         return acc
       }, [])
     ]}
-  </NfTableHeaderRow>
+  </TableHeaderRow>
 )
 
 Header.propTypes = {
