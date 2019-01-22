@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { AppBar, Tabs, Tab, Grid } from '@material-ui/core'
-import Auth0Login from '../auth0/login'
+import { Auth0Login } from '../auth0'
 import OIDCLogin from '../oidc/login'
 import { PageHeading } from '../utils'
 

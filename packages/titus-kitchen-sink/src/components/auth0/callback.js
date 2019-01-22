@@ -1,8 +1,8 @@
-import React from 'react'
-import { auth0 } from './Auth0'
+import React, { Component } from 'react'
+import auth0 from './Auth0'
 import { navigate } from '@reach/router'
 
-class Auth0Callback extends React.Component {
+class Auth0Callback extends Component {
   state = {
     authentication: null,
     token: null,

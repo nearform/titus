@@ -1,9 +1,9 @@
-import React from 'react'
-import { auth0 } from './Auth0'
+import React, { Component } from 'react'
+import auth0 from './Auth0'
 import { navigate } from '@reach/router'
 import { Button, Paper, Grid, withStyles, Typography } from '@material-ui/core'
 import LockIcon from '@material-ui/icons/Lock'
-import { LoginForm } from '../login/login'
+import { LoginForm } from '../login'
 import * as yup from 'yup'
 
 const styles = theme => ({
@@ -31,7 +31,7 @@ const schema = yup.object().shape({
   password: yup.string().required('Password is required.')
 })
 
-class Auth0Login extends React.Component {
+class Auth0Login extends Component {
   static defaultProps = {
     auth0
   }
@@ -66,7 +66,7 @@ class Auth0Login extends React.Component {
   }
 
   render() {
-    const { classes } = this.props
+    const { classes, auth0 } = this.props
 
     return (
       <Grid container spacing={24} className={classes.root}>
@@ -80,8 +80,8 @@ class Auth0Login extends React.Component {
               spacing={24}
               className={classes.container}
             >
-              {this.props.auth0.isAuthenticated ? (
-                <React.Fragment>
+              {auth0.isAuthenticated ? (
+                <>
                   <Typography variant="title" color="inherit" noWrap>
                     You are logged in.
                   </Typography>
@@ -89,22 +89,22 @@ class Auth0Login extends React.Component {
                   <Button
                     variant="contained"
                     color="secondary"
-                    disabled={!this.props.auth0.isAuthenticated}
-                    onClick={() => this.props.auth0.logout()}
+                    disabled={!auth0.isAuthenticated}
+                    onClick={() => auth0.logout()}
                   >
                     Log Out
                   </Button>
-                </React.Fragment>
+                </>
               ) : (
                 <Button
                   className={classes.button}
                   variant="contained"
                   color="secondary"
-                  disabled={this.props.auth0.isAuthenticated}
+                  disabled={auth0.isAuthenticated}
                   onClick={() => this.authorize()}
                 >
                   Login Through Auth0
-                  <LockIcon className={classes.rightIcon} />
+                  <LockIcon className={classes.rightIcon}/>
                 </Button>
               )}
             </Grid>
@@ -112,7 +112,7 @@ class Auth0Login extends React.Component {
         </Grid>
         <Grid item xs={12}>
           <Paper>
-            {!this.props.auth0.isAuthenticated ? (
+            {!auth0.isAuthenticated ? (
               <div className={classes.formRoot}>
                 <LoginForm
                   login={this.backendLogin}

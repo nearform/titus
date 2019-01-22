@@ -64,4 +64,6 @@ class Auth0 {
   }
 }
 
-export const auth0 = new Auth0()
+const auth0 = new Auth0()
+
+export default auth0
