@@ -135,6 +135,7 @@ jobs:
             ls ./linux-amd64/
             sudo cp ./linux-amd64/helm /usr/local/bin/helm
             helm init --client-only
+            helm list
 
 workflows:
   version: 2
