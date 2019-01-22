@@ -12,7 +12,7 @@ import {
   withStyles
 } from '@material-ui/core'
 import { Add as AddIcon, Delete as DeleteIcon } from '@material-ui/icons'
-import { deleteFood, loadFoodData } from './lib/utils'
+import { deleteFood, loadFoodData } from './lib/data'
 
 const styles = theme => ({
   root: {

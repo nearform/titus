@@ -11,7 +11,7 @@ import {
 import { MockedProvider } from 'react-apollo/test-utils'
 import { TableRow } from '../'
 import withContext from '../../../../test/with-context'
-import { loadFoodData, updateFood } from '../lib/utils'
+import { loadFoodData, updateFood } from '../lib/data'
 
 global.SVGElement = Element
 

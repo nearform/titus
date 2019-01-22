@@ -16,7 +16,7 @@ import {
   FormGroup,
   withStyles
 } from '@material-ui/core'
-import { loadFoodData } from './lib/utils'
+import { loadFoodData } from './lib/data'
 
 const styles = theme => ({
   formControl: {

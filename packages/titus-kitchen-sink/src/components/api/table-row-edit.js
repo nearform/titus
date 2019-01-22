@@ -11,7 +11,7 @@ import {
   MenuItem
 } from '@material-ui/core'
 import { Clear as ResetIcon, Check as SaveIcon } from '@material-ui/icons'
-import { loadFoodData, updateFood } from './lib/utils'
+import { loadFoodData, updateFood } from './lib/data'
 
 const schema = Yup.object().shape({
   name: Yup.string().required('Name must not be empty.'),
