@@ -7,7 +7,7 @@ import ListItem from '@material-ui/core/ListItem'
 const LinkAsFn = props => <Link {...props} />
 
 const ListItemLink = props => (
-  <ListItem {...props} button component={LinkAsFn} />
+  <ListItem {...props} button component={LinkAsFn}/>
 )
 
 export default ListItemLink

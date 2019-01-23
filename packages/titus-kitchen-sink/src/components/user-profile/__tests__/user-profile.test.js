@@ -7,8 +7,8 @@ import {
 } from 'react-testing-library'
 import 'jest-dom/extend-expect'
 
-import { UserProfile } from './user-profile'
-import { AuthContext } from '../authentication/authentication-context'
+import { UserProfile } from '../user-profile'
+import { AuthContext } from '../../authentication'
 
 // automatically unmount and cleanup DOM after the test is finished.
 afterEach(cleanup)
@@ -24,7 +24,7 @@ describe('User profile', () => {
     }
     const { container } = render(
       <AuthContext.Provider value={{ user }}>
-        <UserProfile />
+        <UserProfile/>
       </AuthContext.Provider>
     )
 

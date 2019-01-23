@@ -22,10 +22,6 @@ const styles = theme => ({
 })
 
 class Search extends Component {
-  static propTypes = {
-    classes: PropTypes.object
-  }
-
   state = {
     keywordSearch: false
   }
@@ -74,6 +70,10 @@ class Search extends Component {
       </Grid>
     )
   }
+}
+
+Search.propTypes = {
+  classes: PropTypes.object
 }
 
 export default withStyles(styles)(Search)

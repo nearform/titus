@@ -26,10 +26,6 @@ const styles = theme => ({
 })
 
 class AutocompleteDemo extends Component {
-  static propTypes = {
-    classes: PropTypes.object
-  }
-
   state = {
     filterType: 'startsWith',
     timerId: null,
@@ -37,13 +33,9 @@ class AutocompleteDemo extends Component {
     loading: false
   }
 
-  handleChange = item => {
-    alert('You selected: ' + item.value + ' (' + item.key + ')')
-  }
+  handleChange = item => alert('You selected: ' + item.value + ' (' + item.key + ')')
 
-  handleFilterChange = event => {
-    this.setState({ filterType: event.target.value })
-  }
+  handleFilterChange = e => this.setState({ filterType: e.target.value })
 
   handleGetSuggestions = ({ value, maxResults }) => {
     clearTimeout(this.state.timerId) // cancel previous timer, we only want one request after the delay
@@ -145,6 +137,10 @@ class AutocompleteDemo extends Component {
       </Grid>
     )
   }
+}
+
+AutocompleteDemo.propTypes = {
+  classes: PropTypes.object
 }
 
 export default withStyles(styles)(AutocompleteDemo)

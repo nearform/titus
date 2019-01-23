@@ -3,43 +3,34 @@ import PropTypes from 'prop-types'
 import { Mutation } from 'react-apollo'
 import { IconButton } from '@material-ui/core'
 import { Delete as DeleteIcon } from '@material-ui/icons'
-import { loader } from 'graphql.macro'
+import { deleteDietType, loadAllDietTypes } from './lib/data'
 
-const loadAllDietTypes = loader('./queries/loadAllDietTypes.graphql')
-const deleteDietType = loader('./queries/deleteDietType.graphql')
+const update = (cache, { data: { deleteDietType: { id } } }) => {
+  const data = cache.readQuery({
+    query: loadAllDietTypes
+  })
+
+  data.allDietTypes = data.allDietTypes.filter(
+    ({ id: identifier }) => identifier !== id
+  )
+  cache.writeQuery({
+    query: loadAllDietTypes,
+    data
+  })
+}
 
 export const DeleteButton = ({ id }) => (
   <Mutation mutation={deleteDietType}>
     {deleteDietType => (
       <IconButton
         aria-label="Delete"
-        onClick={e =>
-          deleteDietType({
-            variables: { id },
-            update: (
-              cache,
-              {
-                data: {
-                  deleteDietType: { id }
-                }
-              }
-            ) => {
-              const data = cache.readQuery({
-                query: loadAllDietTypes
-              })
-
-              data.allDietTypes = data.allDietTypes.filter(
-                ({ id: identifier }) => identifier !== id
-              )
-              cache.writeQuery({
-                query: loadAllDietTypes,
-                data
-              })
-            }
-          })
+        onClick={() => deleteDietType({
+          variables: { id },
+          update
+        })
         }
       >
-        <DeleteIcon />
+        <DeleteIcon/>
       </IconButton>
     )}
   </Mutation>

@@ -1,19 +1,17 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { Query } from 'react-apollo'
 import { FormControl, Grid, Paper, Typography, withStyles } from '@material-ui/core'
 import { Autocomplete } from '@nearform/titus-components'
-import { loader } from 'graphql.macro'
 import { PageHeading } from '../utils'
-import FoodHistory from './food-history'
+import { FoodHistory } from './'
+import { loadFoodData } from './lib/data'
 
 const MORE_INFO = 'More info dialog content'
 const SUB_HEADER = <>This demo shows the <a href="https://github.com/nearform/temporal_tables" target="_blank"
                                             rel="noopener noreferrer">temporal tables extension</a> in action. It track
   changes to table records.</>
-
-const loadFoodData = loader('../api/queries/loadFoodData.graphql')
 
 const styles = theme => ({
   root: {
@@ -50,17 +48,7 @@ const columns = [
 ]
 
 
-class Temporal extends React.Component {
-  static propTypes = {
-    title: PropTypes.string.isRequired,
-    columns: PropTypes.array.isRequired
-  }
-
-  static defaultProps = {
-    title: 'Food record history',
-    columns
-  }
-
+class Temporal extends Component {
   state = {
     selectedFoodId: ''
   }
@@ -89,7 +77,7 @@ class Temporal extends React.Component {
                 const allFoodAutocomplete = allFood.map(({ id, name }) => ({ key: id, value: name }))
 
                 return (
-                  <React.Fragment>
+                  <>
                     <Paper className={classNames(classes.paperPadding, classes.verticalMargin)}>
                       <FormControl>
                         <Autocomplete
@@ -110,7 +98,7 @@ class Temporal extends React.Component {
                         selectedFoodId={selectedFoodId}
                       />
                     )}
-                  </React.Fragment>
+                  </>
                 )
               }}
             </Query>
@@ -119,6 +107,16 @@ class Temporal extends React.Component {
       </Grid>
     )
   }
+}
+
+Temporal.propTypes = {
+  title: PropTypes.string.isRequired,
+  columns: PropTypes.array.isRequired
+}
+
+Temporal.defaultProps = {
+  title: 'Food record history',
+  columns
 }
 
 export default withStyles(styles)(Temporal)
