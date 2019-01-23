@@ -156,10 +156,10 @@ workflows:
   version: 2
   test_and_build:
     jobs:
-      - install
-      - release-preproduction
-          requires:
-            - install 
+    - install
+    - release-preproduction
+        requires:
+        - install 
           #filters:
           #  branches:
           #    only: master
