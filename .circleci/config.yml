@@ -159,7 +159,7 @@ workflows:
       - install
       - release-preproduction
           requires:
-            - install
+            - install 
           #filters:
           #  branches:
           #    only: master
