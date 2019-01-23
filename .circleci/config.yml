@@ -156,6 +156,7 @@ workflows:
   version: 2
   test_and_build:
     jobs:
+      - install
       - release-preproduction
           requires:
             - install
