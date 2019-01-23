@@ -136,6 +136,12 @@ jobs:
             sudo cp ./linux-amd64/helm /usr/local/bin/helm
             helm init --client-only
             helm list
+      - run:
+           name: Install kubectl
+           command: |
+            curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+            cp kubectl /usr/local/bin/kubectl
+            kubectl get nodes
 
 workflows:
   version: 2
