@@ -157,7 +157,25 @@ workflows:
   test_and_build:
     jobs:
       - install
-      - release-preproduction:
+      - build:
           requires:
             - install
+      - lint:
+          requires:
+            - install
+      - test:
+          requires:
+            - lint
+      - lighthouse:
+          requires:
+            - build
+      - push-containers:
+          requires:
+            - build
+            - test
+            - lint
+            - lighthouse
+      - release-preproduction:
+          requires:
+            - push-containers
       
