@@ -149,17 +149,17 @@ jobs:
                 helm upgrade --install titus ./infrastructure/helm \
                    --set docker.images.preproduction.backend=${DOCKER_REPO}/titus-kitchen-sink-backend:${CIRCLE_WORKFLOW_ID} \
                    --set docker.images.preproduction.frontend=${DOCKER_REPO}/titus-kitchen-sink-frontend:${CIRCLE_WORKFLOW_ID} \
-                   --set docker.images.production.backend=$(kubectl get deployment titus-backend -o=jsonpath='{$.spec.template.spec.containers[:1].image}')
+                   --set docker.images.production.backend=$(kubectl get deployment titus-backend -o=jsonpath='{$.spec.template.spec.containers[:1].image}') \
                    --set docker.images.production.frontend=$(kubectl get deployment titus-frontend -o=jsonpath='{$.spec.template.spec.containers[:1].image}')
 
 workflows:
   version: 2
   test_and_build:
     jobs:
-    - install
-    - release-preproduction
+      - install
+      - release-preproduction
         requires:
-        - install 
+          - install 
           #filters:
           #  branches:
           #    only: master
