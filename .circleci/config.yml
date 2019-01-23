@@ -10,7 +10,10 @@ jobs:
       - checkout
       - run:
           name: submodule init
-          command: git submodule init
+          command: git submodule init && git submodule update
+      - run:
+          name: noise submodule init
+          command: cd infrastructure && git submodule init && git submodule update
       - run:
           name: install
           command: npm install
@@ -154,7 +157,7 @@ workflows:
   test_and_build:
     jobs:
       - install
-      - release_preproduction:
+      - release-preproduction:
           requires:
             - install
       
