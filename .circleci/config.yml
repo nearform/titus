@@ -13,7 +13,7 @@ jobs:
           command: git submodule init
       - run:
           name: submodule pull
-          command: cd infrastructure && git pull origin master
+          command: cd infrastructure && git pull origin master && git submodule init
       - run:
           name: install
           command: npm install
