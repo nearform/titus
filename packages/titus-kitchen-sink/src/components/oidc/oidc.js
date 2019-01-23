@@ -7,7 +7,7 @@ const {
 } = process.env
 
 class OIDCAuth {
- 
+
   constructor() {
     const settings = {
       authority: REACT_APP_OIDC_AUTHORITY,
@@ -28,7 +28,7 @@ class OIDCAuth {
   }
 
   isAuthenticated() {
-    const expiresAt = JSON.parse(localStorage.getItem('oidc_expires_at'))  
+    const expiresAt = JSON.parse(localStorage.getItem('oidc_expires_at'))
     return (expiresAt * 1000) < new Date().getTime()
   }
 
@@ -38,7 +38,7 @@ class OIDCAuth {
     localStorage.removeItem('oidc_access_token')
     navigate('/identity/login')
   }
-  
+
   parseResponse() {
     return this.client.processSigninResponse().then((response) => {
       localStorage.setItem('oidc_access_token', response.access_token)

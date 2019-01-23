@@ -11,7 +11,7 @@ import {
   withStyles
 } from '@material-ui/core'
 import { PageHeading } from '../utils'
-import { DietaryTypes } from './dietary-restrictions'
+import { DietaryTypes } from './'
 
 const MORE_INFO = 'More info dialog content'
 const SUB_HEADER = 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque.'
@@ -29,13 +29,13 @@ const styles = theme => ({
   }
 })
 
-export class Authorization extends Component {
+class Authorization extends Component {
   static propTypes = {
     classes: PropTypes.object.isRequired
   }
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     // NOTE: This, or something similar to help identify a user, would usually
     // come from an authentication service

@@ -3,10 +3,9 @@ import { graphql } from 'react-apollo'
 import IconButton from '@material-ui/core/IconButton'
 import InvertColorsIcon from '@material-ui/icons/InvertColors'
 import { loader } from 'graphql.macro'
+import { THEME } from '../theme'
 
-import { THEME } from '../../theme'
-
-const query = loader('../../theme/query.graphql')
+const query = loader('../theme/query.graphql')
 
 const ThemeSwitcher = ({ data: { themeName }, client }) => (
   <IconButton

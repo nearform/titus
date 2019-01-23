@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { oidc } from './oidc'
 import { navigate } from '@reach/router'
 
-class Auth0Callback extends React.Component {
+class Auth0Callback extends Component {
 
   componentDidMount() {
     oidc.parseResponse()
@@ -10,7 +10,7 @@ class Auth0Callback extends React.Component {
   }
 
   render() {
-      return (<div></div>)
+    return (<div></div>)
   }
 }
 

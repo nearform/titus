@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {
   withStyles,
@@ -13,11 +13,9 @@ import {
   CommentsList,
   withSidebars
 } from '@nearform/commentami-react-components/dist/ui'
-import NewCommentForm from './new-comment'
+import { NewComment, Comment } from './'
 
-import Comment from './comment'
-
-const styles = theme => {
+const styles = () => {
   return {
     container: {
       width: '40vw'
@@ -31,13 +29,7 @@ const styles = theme => {
   }
 }
 
-class Sidebar extends React.Component {
-  static propTypes = {
-    commentami: PropTypes.object.isRequired,
-    controller: PropTypes.object.isRequired,
-    classes: PropTypes.object
-  }
-
+class Sidebar extends Component {
   render() {
     const { classes, controller, commentami } = this.props
 
@@ -71,13 +63,13 @@ class Sidebar extends React.Component {
                   controller.updateActive()
                 }}
               >
-                <CloseIcon />
+                <CloseIcon/>
               </IconButton>
             </Tooltip>
           </Grid>
 
           <Grid className={classes.item}>
-            <NewCommentForm
+            <NewComment
               onSubmit={async comment => {
                 await commentami.commentable.addComment(
                   controller.reference,
@@ -96,6 +88,12 @@ class Sidebar extends React.Component {
       </Drawer>
     )
   }
+}
+
+Sidebar.propTypes = {
+  commentami: PropTypes.object.isRequired,
+  controller: PropTypes.object.isRequired,
+  classes: PropTypes.object
 }
 
 export default withStyles(styles)(withSidebars(withResource(Sidebar)))

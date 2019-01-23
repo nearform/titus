@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Query } from 'react-apollo'
 import { withStyles } from '@material-ui/core/styles'
@@ -10,9 +10,7 @@ import {
   MenuItem
 } from '@material-ui/core'
 import { Autocomplete } from '@nearform/titus-components'
-import { loader } from 'graphql.macro'
-
-const recordSearch = loader('./queries/recordSearch.graphql')
+import { recordSearch } from './lib/data'
 
 const styles = theme => ({
   verticalMargin: {
@@ -20,11 +18,7 @@ const styles = theme => ({
   }
 })
 
-class RecordSearch extends React.Component {
-  static propTypes = {
-    classes: PropTypes.object
-  }
-
+class RecordSearch extends Component {
   state = {
     timerId: null,
     inputChanged: false,
@@ -70,7 +64,7 @@ class RecordSearch extends React.Component {
     ]
 
     return (
-      <Fragment>
+      <>
         <Typography variant="headline" gutterBottom>
           Search the Food Records
         </Typography>
@@ -98,7 +92,7 @@ class RecordSearch extends React.Component {
               type: searchType
             }}
           >
-            {({ loading, error, data, refetch }) => {
+            {({ loading, error, data }) => {
               if (error) {
                 return <Typography color="error">{error}</Typography>
               }
@@ -114,11 +108,11 @@ class RecordSearch extends React.Component {
                   items={
                     inputValue !== '' && data.search
                       ? data.search
-                          .map(({ id, name }) => ({
-                            key: id,
-                            value: name
-                          }))
-                          .slice(0, 10)
+                        .map(({ id, name }) => ({
+                          key: id,
+                          value: name
+                        }))
+                        .slice(0, 10)
                       : null
                   }
                   loading={inputValue !== '' && loading}
@@ -127,9 +121,13 @@ class RecordSearch extends React.Component {
             }}
           </Query>
         </FormControl>
-      </Fragment>
+      </>
     )
   }
+}
+
+RecordSearch.propTypes = {
+  classes: PropTypes.object
 }
 
 export default withStyles(styles)(RecordSearch)

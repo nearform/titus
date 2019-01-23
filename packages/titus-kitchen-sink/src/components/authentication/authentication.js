@@ -1,7 +1,7 @@
 export class Authentication {
   authKey = 'titus-auth-key'
 
-  login({ username, password }) {
+  login({ username }) {
     window.localStorage.setItem(this.authKey, username)
 
     return new Promise(resolve => resolve({ username }))

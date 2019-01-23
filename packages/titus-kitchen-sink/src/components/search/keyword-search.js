@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Query } from 'react-apollo'
 import { withStyles } from '@material-ui/core/styles'
@@ -10,9 +10,7 @@ import {
   MenuItem
 } from '@material-ui/core'
 import { Autocomplete } from '@nearform/titus-components'
-import { loader } from 'graphql.macro'
-
-const keywordSearch = loader('./queries/keywordSearch.graphql')
+import { keywordSearch } from './lib/data'
 
 const styles = theme => ({
   verticalMargin: {
@@ -20,11 +18,7 @@ const styles = theme => ({
   }
 })
 
-class KeywordSearch extends React.Component {
-  static propTypes = {
-    classes: PropTypes.object
-  }
-
+class KeywordSearch extends Component {
   state = {
     timerId: null,
     inputChanged: false,
@@ -72,7 +66,7 @@ class KeywordSearch extends React.Component {
     ]
 
     return (
-      <React.Fragment>
+      <>
         <Typography variant="headline" gutterBottom>
           Search Food Keywords
         </Typography>
@@ -100,7 +94,7 @@ class KeywordSearch extends React.Component {
               type: searchType
             }}
           >
-            {({ loading, error, data, refetch }) => {
+            {({ loading, error, data }) => {
               if (error) {
                 return <Typography color="error">{error}</Typography>
               }
@@ -116,12 +110,12 @@ class KeywordSearch extends React.Component {
                   items={
                     inputValue !== '' && data.keywordSearch
                       ? data.keywordSearch
-                          .map(({ word, score }, index) => ({
-                            key: `${index}-${word}`,
-                            value: word,
-                            score: score
-                          }))
-                          .slice(0, 10)
+                        .map(({ word, score }, index) => ({
+                          key: `${index}-${word}`,
+                          value: word,
+                          score: score
+                        }))
+                        .slice(0, 10)
                       : null
                   }
                   loading={inputValue !== '' && loading}
@@ -130,9 +124,13 @@ class KeywordSearch extends React.Component {
             }}
           </Query>
         </FormControl>
-      </React.Fragment>
+      </>
     )
   }
+}
+
+KeywordSearch.propTypes = {
+  classes: PropTypes.object
 }
 
 export default withStyles(styles)(KeywordSearch)

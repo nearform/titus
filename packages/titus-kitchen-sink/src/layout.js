@@ -1,5 +1,5 @@
 import React from 'react'
-import HeaderRight from './components/header-right/header-right'
+import HeaderRight from './components/header-right'
 import { Navigation } from '@nearform/titus-components'
 import Menu from './menu'
 import Routes from './routes'

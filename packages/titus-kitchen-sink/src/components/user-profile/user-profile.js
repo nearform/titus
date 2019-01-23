@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { Button, Typography, Popover, withStyles } from '@material-ui/core'
 import { Face as FaceIcon } from '@material-ui/icons'
-
-import { AuthConsumer } from '../authentication/authentication-context'
+import { AuthConsumer } from '../authentication'
 
 const styles = {
   root: {
@@ -24,16 +23,7 @@ const styles = {
   }
 }
 
-export class UserProfile extends React.Component {
-  static propTypes = {
-    classes: PropTypes.object,
-    className: PropTypes.string
-  }
-
-  static defaultProps = {
-    classes: {}
-  }
-
+export class UserProfile extends Component {
   state = {
     open: false
   }
@@ -61,7 +51,7 @@ export class UserProfile extends React.Component {
               color="inherit"
             >
               <div className={classes.content}>
-                <FaceIcon />
+                <FaceIcon/>
               </div>
               <Popover
                 className="userProfilePopOver"
@@ -91,5 +81,15 @@ export class UserProfile extends React.Component {
     )
   }
 }
+
+UserProfile.propTypes = {
+  classes: PropTypes.object,
+  className: PropTypes.string
+}
+
+UserProfile.defaultProps = {
+  classes: {}
+}
+
 
 export default withStyles(styles)(UserProfile)

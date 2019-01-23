@@ -1,20 +1,18 @@
 import React, { Component } from 'react'
 import { AppBar, Tabs, Tab, Grid } from '@material-ui/core'
-import { Auth0Login } from '../auth0'
-import OIDCLogin from '../oidc/login'
-import { PageHeading } from '../utils'
+import { Auth0Login } from './auth0'
+import { OIDCLogin } from './oidc'
+import { PageHeading } from './utils'
 
 const MORE_INFO = 'More info dialog content'
 const SUB_HEADER = 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque.'
 
-class Login extends Component {
+class Identity extends Component {
   state = {
     tabsValue: 0
   }
 
-  handleChange = (event, value) => {
-    this.setState({ tabsValue: value })
-  }
+  handleChange = (_, value) => this.setState({ tabsValue: value })
 
   render() {
     const { tabsValue } = this.state
@@ -36,4 +34,4 @@ class Login extends Component {
   }
 }
 
-export default Login
+export default Identity

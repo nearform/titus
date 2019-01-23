@@ -1,4 +1,5 @@
-import Login, {LoginForm} from './login'
+import Login from './login'
+import LoginForm from './login-form'
 
 export {LoginForm}
 

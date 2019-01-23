@@ -9,7 +9,8 @@ import {
   withStyles,
   FormHelperText
 } from '@material-ui/core'
-const styles = theme => ({
+
+const styles = () => ({
   resetButton: {
     margin: '1em 0'
   },
@@ -17,6 +18,7 @@ const styles = theme => ({
     marginBottom: '0.5em'
   }
 })
+
 const schema = yup.object().shape({
   comment: yup.string().required('A comment cannot be empty.')
 })
