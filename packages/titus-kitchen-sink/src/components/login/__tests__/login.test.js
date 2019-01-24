@@ -1,8 +1,8 @@
 import React from 'react'
 import { render, fireEvent, cleanup, wait } from 'react-testing-library'
 
-import Login from './login'
-import { AuthContext } from '../authentication/authentication-context'
+import Login from '../login'
+import { AuthContext } from '../../authentication'
 
 // automatically unmount and cleanup DOM after the test is finished.
 afterEach(cleanup)
@@ -12,9 +12,9 @@ describe('Login form', () => {
     expect(Login).toBeDefined()
   })
 
-  it("Validation: doesn't submit if username or password are empty", async () => {
+  it('Validation: doesn\'t submit if username or password are empty', async () => {
     const mockFn = jest.fn()
-    const { container } = render(<Login submitLogin={mockFn} />)
+    const { container } = render(<Login submitLogin={mockFn}/>)
 
     const form = container.querySelector('form')
     const btn = form.querySelector('button')
@@ -31,7 +31,7 @@ describe('Login form', () => {
     const login = jest.fn()
     const { container } = render(
       <AuthContext.Provider value={{ login }}>
-        <Login />
+        <Login/>
       </AuthContext.Provider>
     )
 

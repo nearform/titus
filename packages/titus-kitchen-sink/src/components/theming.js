@@ -1,6 +1,6 @@
 import React from 'react'
 import { withStyles, Paper, Typography, Grid } from '@material-ui/core'
-import { PageHeading } from '../utils'
+import { PageHeading } from './utils'
 
 const MORE_INFO = 'More info dialog content'
 const SUB_HEADER = 'This is a dashboard showing the theme we use at NearForm. Use the theme switcher button above to switch theme.'

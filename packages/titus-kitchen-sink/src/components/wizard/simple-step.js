@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import TextField from '@material-ui/core/TextField'
+import { TextField } from '@material-ui/core'
 
-class SimpleStep extends React.Component {
+class SimpleStep extends Component {
   stepSatisfyCheck = name => {
     const { handleSatisfied, stepIndex } = this.props
     const stepSatisfied = name && name.trim() !== ''

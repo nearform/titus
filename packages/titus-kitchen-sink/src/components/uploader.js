@@ -1,7 +1,7 @@
 import React from 'react'
 import { UploaderService, Uploader } from '@nearform/titus-components'
 import { Grid } from '@material-ui/core'
-import { PageHeading } from '../utils'
+import { PageHeading } from './utils'
 
 const MORE_INFO = 'More info dialog content'
 const SUB_HEADER = 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque.'

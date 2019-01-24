@@ -12,7 +12,7 @@ import {
   colors
 } from '@material-ui/core'
 
-const styles = theme => ({
+const styles = () => ({
   card: {
     margin: '1em 0'
   },

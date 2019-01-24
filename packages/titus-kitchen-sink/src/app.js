@@ -6,7 +6,7 @@ import { createGenerateClassName, CssBaseline } from '@material-ui/core'
 import { ApolloProvider } from 'react-apollo'
 
 import Auth from './components/authentication/auth'
-import ThemeProvider from './components/theme-provider/theme-provider'
+import ThemeProvider from './components/theme-provider'
 import Loading from './loading'
 import { THEME } from './theme'
 

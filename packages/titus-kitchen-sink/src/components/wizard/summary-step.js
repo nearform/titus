@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Typography from '@material-ui/core/Typography'
-import Switch from '@material-ui/core/Switch'
-import Divider from '@material-ui/core/Divider'
-import ExpansionPanel from '@material-ui/core/ExpansionPanel'
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
+import {
+  Typography,
+  Switch,
+  Divider,
+  ExpansionPanel,
+  ExpansionPanelSummary,
+  ExpansionPanelDetails
+} from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
-class WizardSummaryStep extends React.Component {
+class WizardSummaryStep extends Component {
   handleChange = event => {
     const { handleDataChanged, handleSatisfied, stepIndex } = this.props
     const stepData = { confirmed: event.target.checked }
@@ -20,12 +22,12 @@ class WizardSummaryStep extends React.Component {
     const { stepsData, stepsInfo, data } = this.props
 
     return (
-      <React.Fragment>
+      <>
         {stepsInfo.slice(0, -1).map((stepInfo, index) => {
           return (
             <div key={index}>
               <ExpansionPanel key={stepInfo.id}>
-                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
                   <Typography variant="subheading" gutterBottom>
                     Step {index + 1} - {stepInfo.title}
                   </Typography>
@@ -46,13 +48,13 @@ class WizardSummaryStep extends React.Component {
             </div>
           )
         })}
-        <Divider />
+        <Divider/>
         <Switch
           checked={data.confirmed}
           onChange={this.handleChange}
           value="stepSatisfied"
         />
-      </React.Fragment>
+      </>
     )
   }
 }

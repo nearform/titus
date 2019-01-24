@@ -1,50 +1,39 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 export const AuthContext = React.createContext({})
 
 export const AuthConsumer = AuthContext.Consumer
 
-export class AuthProvider extends React.Component {
-  static propTypes = {
-    children: PropTypes.node,
-    authentication: PropTypes.object
-  }
-
+class AuthProvider extends Component {
   state = {
     isAuthenticated: this.props.authentication.isAuthenticated(),
     user: this.props.authentication.getUserData()
   }
 
-  login = ({ username, password }) => {
-    return this.props.authentication
-      .login({ username, password })
-      .then(user => {
-        this.setState({
-          isAuthenticated: this.props.authentication.isAuthenticated(),
-          user
-        })
+  login = ({ username, password }) => this.props.authentication
+    .login({ username, password })
+    .then(user => {
+      this.setState({
+        isAuthenticated: this.props.authentication.isAuthenticated(),
+        user
       })
-  }
-
-  logout = () => {
-    return this.props.authentication.logout().then(result => {
-      result &&
-        this.setState({
-          isAuthenticated: this.props.authentication.isAuthenticated(),
-          user: null
-        })
     })
-  }
 
-  getProps = () => {
-    return {
-      login: this.login,
-      logout: this.logout,
+  logout = () => this.props.authentication.logout().then(result => {
+    result &&
+    this.setState({
       isAuthenticated: this.props.authentication.isAuthenticated(),
-      user: this.props.authentication.getUserData()
-    }
-  }
+      user: null
+    })
+  })
+
+  getProps = () => ({
+    login: this.login,
+    logout: this.logout,
+    isAuthenticated: this.props.authentication.isAuthenticated(),
+    user: this.props.authentication.getUserData()
+  })
 
   render() {
     const { children } = this.props
@@ -56,3 +45,10 @@ export class AuthProvider extends React.Component {
     )
   }
 }
+
+AuthProvider.propTypes = {
+  children: PropTypes.node,
+  authentication: PropTypes.object
+}
+
+export default AuthProvider

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {
   TableCell,
@@ -7,9 +7,9 @@ import {
   TableRow as MaterialTableRow
 } from '@material-ui/core'
 import { Edit as EditIcon } from '@material-ui/icons'
-import TableRowEdit from './table-row-edit'
+import { TableRowEdit } from './'
 
-class TableRow extends React.Component {
+class TableRow extends Component {
   static propTypes = {
     handleRowSelect: PropTypes.func,
     selected: PropTypes.bool,
@@ -21,13 +21,9 @@ class TableRow extends React.Component {
     isEditing: false
   }
 
-  onEditClick = () => {
-    this.setState({ isEditing: true })
-  }
+  onEditClick = () => this.setState({ isEditing: true })
 
-  onDone = () => {
-    this.setState({ isEditing: false })
-  }
+  onDone = () => this.setState({ isEditing: false })
 
   render() {
     const { selected, rowKey, handleRowSelect, row } = this.props
@@ -53,7 +49,7 @@ class TableRow extends React.Component {
         </TableCell>
 
         {isEditing ? (
-          <TableRowEdit row={row} onDone={this.onDone} />
+          <TableRowEdit row={row} onDone={this.onDone}/>
         ) : (
           <React.Fragment>
             <TableCell
@@ -77,10 +73,10 @@ class TableRow extends React.Component {
                 aria-label="Edit"
                 onClick={this.onEditClick}
               >
-                <EditIcon />
+                <EditIcon/>
               </Button>
             </TableCell>
-            <TableCell />
+            <TableCell/>
           </React.Fragment>
         )}
       </MaterialTableRow>

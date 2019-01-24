@@ -1,8 +1,7 @@
 import * as Yup from 'yup'
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Formik, Form } from 'formik'
-import { withStyles } from '@material-ui/core/styles'
 import {
   TextField,
   Select,
@@ -14,13 +13,10 @@ import {
   DialogActions,
   DialogTitle,
   FormControl,
-  FormGroup
+  FormGroup,
+  withStyles
 } from '@material-ui/core'
-import { graphql, compose } from 'react-apollo'
-import { loader } from 'graphql.macro'
-
-const loadFoodData = loader('./queries/loadFoodData.graphql')
-const createFood = loader('./queries/createFood.graphql')
+import { loadFoodData } from './lib/data'
 
 const styles = theme => ({
   formControl: {
@@ -38,7 +34,7 @@ const schema = Yup.object().shape({
   foodGroupId: Yup.string().required('Food Group must be selected.')
 })
 
-class NewFoodForm extends React.Component {
+class NewFoodForm extends Component {
   static propTypes = {
     onClose: PropTypes.func.isRequired,
     classes: PropTypes.object.isRequired,
@@ -46,13 +42,7 @@ class NewFoodForm extends React.Component {
     createFood: PropTypes.func.isRequired
   }
 
-  constructor (props) {
-    super(props)
-
-    this.handleSubmit = this.handleSubmit.bind(this)
-  }
-
-  handleSubmit (values, { setSubmitting, setErrors }) {
+  handleSubmit = (values) => {
     const id = new Date().getTime()
     const food = values
     const { loadFoodData: { foodGroups = [] } } = this.props
@@ -93,7 +83,7 @@ class NewFoodForm extends React.Component {
     return this.props.onClose()
   }
 
-  render () {
+  render() {
     const { classes, onClose, loadFoodData: { foodGroups = [] } } = this.props
 
     return (
@@ -105,7 +95,7 @@ class NewFoodForm extends React.Component {
         validationSchema={schema}
         onSubmit={this.handleSubmit}
       >
-        {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
+        {({ values, errors, touched, handleChange, handleBlur }) => (
           <Dialog
             fullWidth
             open
@@ -199,7 +189,4 @@ class NewFoodForm extends React.Component {
   }
 }
 
-export default compose(
-  graphql(loadFoodData, { name: 'loadFoodData' }),
-  graphql(createFood, { name: 'createFood' })
-)(withStyles(styles)(NewFoodForm))
+export default withStyles(styles)(NewFoodForm)

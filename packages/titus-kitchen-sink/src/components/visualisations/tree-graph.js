@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Component } from 'react'
 import { Group } from '@vx/group'
 import { Cluster } from '@vx/hierarchy'
 import { LinkVerticalStep } from '@vx/shape'
@@ -8,8 +8,7 @@ import { hierarchy } from 'd3-hierarchy'
 import uuid from 'uuid'
 import generateName from 'sillyname'
 import RefreshIcon from '@material-ui/icons/Refresh'
-import Button from '@material-ui/core/Button'
-import Tooltip from '@material-ui/core/Tooltip'
+import { Button, Tooltip } from '@material-ui/core'
 
 const generateTree = ({ depth = 4, maxChildren = 2, prev }) => {
   if (depth === 0) {
@@ -22,19 +21,19 @@ const generateTree = ({ depth = 4, maxChildren = 2, prev }) => {
     children: [],
     _children: []
   }
-  
+
   if (prev) prev.children.push(newNode)
-  
+
   const noOfChildren = Math.floor(Math.random() * maxChildren + 1)
-  
+
   for (let i = 0; i < noOfChildren; ++i) {
     generateTree({ depth: depth - 1, maxChildren, prev: newNode })
   }
-  
+
   return newNode
 }
 
-class TreeGraph extends React.Component {
+class TreeGraph extends Component {
   constructor(props) {
     super(props)
 
@@ -108,7 +107,7 @@ class TreeGraph extends React.Component {
           {node.data.name}
         </Text>
         {node.data._children.length > 0 && (
-          <Fragment>
+          <>
             <circle
               cx={width / 2}
               cy={0 - height / 2}
@@ -127,7 +126,7 @@ class TreeGraph extends React.Component {
             >
               {node.data._children.length}
             </Text>
-          </Fragment>
+          </>
         )}
       </Group>
     )
@@ -161,7 +160,7 @@ class TreeGraph extends React.Component {
   chart({ width, height, padding, data }) {
     return (
       <svg width={width} height={height}>
-        <LinearGradient id="rootlg" from="#032e5f" to="#0f6dc6" />
+        <LinearGradient id="rootlg" from="#032e5f" to="#0f6dc6"/>
         <Cluster
           top={padding.top}
           left={padding.left}
@@ -205,7 +204,7 @@ class TreeGraph extends React.Component {
     }
 
     const data = hierarchy(this.state.data || [])
-    
+
     return (
       <div
         ref={this.containerRef}
@@ -221,7 +220,7 @@ class TreeGraph extends React.Component {
         }}
       >
         {this.state.data && (
-          <Fragment>
+          <>
             <Tooltip
               title={'Regenerate data'}
               enterDelay={500}
@@ -232,7 +231,7 @@ class TreeGraph extends React.Component {
                 onClick={this.regenerate}
                 style={{ position: 'absolute' }}
               >
-                <RefreshIcon />
+                <RefreshIcon/>
               </Button>
             </Tooltip>
             {this.chart({
@@ -241,7 +240,7 @@ class TreeGraph extends React.Component {
               padding,
               data
             })}
-          </Fragment>
+          </>
         )}
       </div>
     )

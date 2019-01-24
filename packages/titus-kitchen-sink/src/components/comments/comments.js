@@ -12,9 +12,8 @@ import {
   buildWebsocketClient
 } from '@nearform/commentami-react-components'
 import { PageHeading } from '../utils'
-import Sidebar from './sidebar'
 import { Typography, Paper, Divider, colors, Grid, withStyles } from '@material-ui/core'
-import UserChooser from './user-chooser'
+import { UserChooser, Sidebar } from './'
 
 const MORE_INFO = 'More info dialog content'
 const SUB_HEADER = 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque.'
@@ -92,10 +91,6 @@ const styles = theme => ({
 })
 
 class Comments extends Component {
-  static propTypes = {
-    classes: PropTypes.object
-  }
-
   static defaultProps = {
     users: ['John Smith', 'Jane Doe', 'Titus User']
   }
@@ -231,5 +226,10 @@ class Comments extends Component {
     )
   }
 }
+
+Comments.propTypes = {
+  classes: PropTypes.object
+}
+
 
 export default withStyles(styles)(Comments)
