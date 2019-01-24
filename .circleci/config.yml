@@ -151,7 +151,14 @@ jobs:
                    --set docker.images.preproduction.frontend=${DOCKER_REPO}/titus-kitchen-sink-frontend:${CIRCLE_WORKFLOW_ID} \
                    --set docker.images.production.backend=$(kubectl get deployment titus-backend -o=jsonpath='{$.spec.template.spec.containers[:1].image}') \
                    --set docker.images.production.frontend=$(kubectl get deployment titus-frontend -o=jsonpath='{$.spec.template.spec.containers[:1].image}')
-
+  deploy-to-prod:
+      steps:
+        - attach_workspace:
+                - at: .
+        - setup_remote_docker:
+                docker_layer_catching: true
+        - run:
+            kubectl get pods
 workflows:
   version: 2
   test_and_build:
