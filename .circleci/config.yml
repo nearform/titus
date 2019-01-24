@@ -143,15 +143,8 @@ jobs:
             sudo cp kubectl /usr/local/bin/kubectl
             sudo chmod a+x /usr/local/bin/kubectl
             kubectl get nodes
-      - run:
-            name: Deploy to preproduction
-            command: |
-                helm upgrade --install titus ./infrastructure/helm \
-                   --set docker.images.preproduction.backend=${DOCKER_REPO}/titus-kitchen-sink-backend:${CIRCLE_WORKFLOW_ID} \
-                   --set docker.images.preproduction.frontend=${DOCKER_REPO}/titus-kitchen-sink-frontend:${CIRCLE_WORKFLOW_ID} \
-                   --set docker.images.production.backend=$(kubectl get deployment titus-backend -o=jsonpath='{$.spec.template.spec.containers[:1].image}') \
-                   --set docker.images.production.frontend=$(kubectl get deployment titus-frontend -o=jsonpath='{$.spec.template.spec.containers[:1].image}')
-  deploy-to-prod:
+      
+  release-production:
       steps:
         - attach_workspace:
                 - at: .
@@ -163,26 +156,10 @@ workflows:
   version: 2
   test_and_build:
     jobs:
-      - install
-      - build:
-          requires:
-            - install
-      - lint:
-          requires:
-            - install
-      - test:
-          requires:
-            - lint
-      - lighthouse:
-          requires:
-            - build
-      - push-containers:
-          requires:
-            - build
-            - test
-            - lint
-            - lighthouse
       - release-preproduction:
           requires:
             - push-containers
+      - release-production:
+            requires:
+                - release-preproduction
       
