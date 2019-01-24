@@ -152,6 +152,7 @@ jobs:
                    --set docker.images.production.backend=$(kubectl get deployment titus-backend -o=jsonpath='{$.spec.template.spec.containers[:1].image}') \
                    --set docker.images.production.frontend=$(kubectl get deployment titus-frontend -o=jsonpath='{$.spec.template.spec.containers[:1].image}')
   release-production:
+      <<: *defaults
       steps:
         - attach_workspace:
                 - at: .
