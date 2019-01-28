@@ -152,14 +152,52 @@ jobs:
                    --set docker.images.production.backend=$(kubectl get deployment titus-backend -o=jsonpath='{$.spec.template.spec.containers[:1].image}') \
                    --set docker.images.production.frontend=$(kubectl get deployment titus-frontend -o=jsonpath='{$.spec.template.spec.containers[:1].image}')
   release-production:
-      <<: *defaults
-      steps:
+    <<: *defaults
+    steps:
         - attach_workspace:
                 - at: .
         - setup_remote_docker:
                 docker_layer_catching: true
-        - run:
-            kubectl get pods
+      - run:
+          name: Install AWS CLI
+          command: |
+            sudo apt-get -y install python-dev
+            curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+            unzip awscli-bundle.zip
+            sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+      - run:
+          name: Install AWS IAM Authenticator
+          command: |
+            sudo curl "https://amazon-eks.s3-us-west-2.amazonaws.com/1.11.5/2018-12-06/bin/linux/amd64/aws-iam-authenticator" -o /usr/local/bin/aws-iam-authenticator
+            sudo chmod a+x /usr/local/bin/aws-iam-authenticator
+      - run:
+          name: EKS k8s configuration
+          command:
+            aws eks update-kubeconfig --name titus-noise --region eu-west-1
+      - run:
+          name: Install Helm
+          command: |
+            curl https://storage.googleapis.com/kubernetes-helm/helm-v2.9.0-linux-amd64.tar.gz -o "helm.tar.gz"
+            tar xvzf helm.tar.gz
+            ls ./linux-amd64/
+            sudo cp ./linux-amd64/helm /usr/local/bin/helm
+            helm init --client-only
+            helm list
+      - run:
+           name: Install kubectl
+           command: |
+            curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+            sudo cp kubectl /usr/local/bin/kubectl
+            sudo chmod a+x /usr/local/bin/kubectl
+            kubectl get nodes
+      - run:
+            name: Deploy to preproduction
+            command: |
+                helm upgrade --install titus ./infrastructure/helm \
+                   --set docker.images.preproduction.backend=$(kubectl get deployment titus-backend-preprod -o=jsonpath='{$.spec.template.spec.containers[:1].image}') \
+                   --set docker.images.preproduction.frontend=$(kubectl get deployment titus-frontend-preprod -o=jsonpath='{$.spec.template.spec.containers[:1].image}') \
+                   --set docker.images.production.backend=${DOCKER_REPO}/titus-kitchen-sink-backend:${CIRCLE_WORKFLOW_ID} \
+                   --set docker.images.production.frontend=${DOCKER_REPO}/titus-kitchen-sink-frontend:${CIRCLE_WORKFLOW_ID}
 workflows:
   version: 2
   test_and_build:
