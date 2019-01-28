@@ -186,9 +186,12 @@ workflows:
       - release-preproduction:
           requires:
             - push-containers
-      - release-production:
+      - request-deployment:
           type: approval
-          requires:
+          requires: 
             - release-preproduction
+      - release-production:
+          requires:
+            - request-deployment
           
       
