@@ -40,7 +40,7 @@ const validate = async (request, username, password, h) => {
 
 module.exports = {
   name: 'titus-commentami',
-  register: async function register (server, options) {
+  register: async function register(server, options) {
     await server.register(require('hapi-auth-basic'))
 
     server.auth.strategy('simple', 'basic', { validate })

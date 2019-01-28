@@ -3,7 +3,7 @@ const fetch = require('node-fetch')
 const dietType = require('../../model/dietType')
 const config = require('../../../config/default')
 
-async function checkStatus (response) {
+async function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response
   } else {
@@ -13,7 +13,7 @@ async function checkStatus (response) {
   }
 }
 
-function checkUserAccess (auth, user, action, resource) {
+function checkUserAccess(auth, user, action, resource) {
   return fetch(
     `${config.authorization.url}access/${user}/${action}/${resource}`,
     {
@@ -30,7 +30,7 @@ function checkUserAccess (auth, user, action, resource) {
 
 const resolvers = {
   Query: {
-    async allDietTypes (root, args, context) {
+    async allDietTypes(root, args, context) {
       const authorized = await checkUserAccess(
         'ROOTid',
         context.user,
@@ -46,7 +46,7 @@ const resolvers = {
     }
   },
   Mutation: {
-    async deleteDietType (root, args, context) {
+    async deleteDietType(root, args, context) {
       const authorized = await checkUserAccess(
         'ROOTid',
         context.user,
@@ -60,7 +60,7 @@ const resolvers = {
 
       throw new Error('unauthorized')
     },
-    async toggleDietTypeVisibility (root, args, context) {
+    async toggleDietTypeVisibility(root, args, context) {
       const authorized = await checkUserAccess(
         'ROOTid',
         context.user,

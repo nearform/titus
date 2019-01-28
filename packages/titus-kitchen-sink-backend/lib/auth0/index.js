@@ -4,9 +4,9 @@ const jwt = require('hapi-auth-jwt2')
 const jwksRsa = require('jwks-rsa')
 module.exports = {
   name: 'titus-auth0',
-  register: async function register (server, options) {
+  register: async function register(server, options) {
     await server.register(jwt)
-    const validate = async function (decoded, request) {
+    const validate = async function(decoded, request) {
       return { isValid: !!decoded.id }
     }
     server.auth.strategy('jwt', 'jwt', {
@@ -22,7 +22,7 @@ module.exports = {
     server.route({
       method: 'POST',
       path: '/login',
-      handler: function (req, h) {
+      handler: function(req, h) {
         /**
          * To do this, you need to make sure you configure your auth0 tenant correctly.
          *

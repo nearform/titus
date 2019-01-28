@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports.generateSql = function () {
+module.exports.generateSql = function() {
   return `
   INSERT INTO food_group (name) values
   ('Dairy and Egg Products'),
