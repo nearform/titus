@@ -14,8 +14,8 @@ const Bar = () => (
       tickValues={[1, 2, 3, 4]}
       tickFormat={['Quarter 1', 'Quarter 2', 'Quarter 3', 'Quarter 4']}
     />
-    <VictoryAxis dependentAxis tickFormat={x => `$${x / 1000}k`}/>
-    <VictoryBar data={barData} x="quarter" y="earnings"/>
+    <VictoryAxis dependentAxis tickFormat={x => `$${x / 1000}k`} />
+    <VictoryBar data={barData} x="quarter" y="earnings" />
   </VictoryChart>
 )
 

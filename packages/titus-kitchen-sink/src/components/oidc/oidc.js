@@ -1,13 +1,9 @@
 import oidcClient from 'oidc-client'
 import { navigate } from '@reach/router'
 
-const {
-  REACT_APP_OIDC_AUTHORITY,
-  REACT_APP_OIDC_CLIENT_ID
-} = process.env
+const { REACT_APP_OIDC_AUTHORITY, REACT_APP_OIDC_CLIENT_ID } = process.env
 
 class OIDCAuth {
-
   constructor() {
     const settings = {
       authority: REACT_APP_OIDC_AUTHORITY,
@@ -20,16 +16,19 @@ class OIDCAuth {
   }
 
   authenticate() {
-    this.client.createSigninRequest({ state: { bar: 15 } }).then((req) => {
-      window.location = req.url
-    }).catch((err) => {
-      console.log(err)
-    })
+    this.client
+      .createSigninRequest({ state: { bar: 15 } })
+      .then(req => {
+        window.location = req.url
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   isAuthenticated() {
     const expiresAt = JSON.parse(localStorage.getItem('oidc_expires_at'))
-    return (expiresAt * 1000) < new Date().getTime()
+    return expiresAt * 1000 < new Date().getTime()
   }
 
   logout() {
@@ -40,7 +39,7 @@ class OIDCAuth {
   }
 
   parseResponse() {
-    return this.client.processSigninResponse().then((response) => {
+    return this.client.processSigninResponse().then(response => {
       localStorage.setItem('oidc_access_token', response.access_token)
       localStorage.setItem('oidc_id_token', response.id_token)
       localStorage.setItem('oidc_expires_at', response.expires_at)

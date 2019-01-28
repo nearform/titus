@@ -51,7 +51,7 @@ export class UserProfile extends Component {
               color="inherit"
             >
               <div className={classes.content}>
-                <FaceIcon/>
+                <FaceIcon />
               </div>
               <Popover
                 className="userProfilePopOver"
@@ -90,6 +90,5 @@ UserProfile.propTypes = {
 UserProfile.defaultProps = {
   classes: {}
 }
-
 
 export default withStyles(styles)(UserProfile)

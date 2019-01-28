@@ -104,7 +104,7 @@ class Auth0Login extends Component {
                   onClick={() => this.authorize()}
                 >
                   Login Through Auth0
-                  <LockIcon className={classes.rightIcon}/>
+                  <LockIcon className={classes.rightIcon} />
                 </Button>
               )}
             </Grid>

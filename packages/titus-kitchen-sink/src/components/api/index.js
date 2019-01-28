@@ -8,6 +8,15 @@ import MaterialUiTable from './material-ui-table'
 import TableRowEdit from './table-row-edit'
 import SortingHeaderCell from './sorting-header-cell'
 
-export { Header, TableToolbar, TableRow, NewFoodForm, MaterialUiTable, TableRowEdit, HeaderRow, SortingHeaderCell }
+export {
+  Header,
+  TableToolbar,
+  TableRow,
+  NewFoodForm,
+  MaterialUiTable,
+  TableRowEdit,
+  HeaderRow,
+  SortingHeaderCell
+}
 
 export default Table

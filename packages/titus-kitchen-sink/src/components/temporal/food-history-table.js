@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { Component } from 'react'
 
-const styles = (theme) => ({
+const styles = theme => ({
   citation: {
     '& span:first-of-type': {
       marginTop: theme.spacing.unit * 3
@@ -22,17 +22,23 @@ class FoodHistoryTable extends Component {
       )
     }
 
-    const { title, columns, classes, data: { foodHistory = [] } } = this.props
+    const {
+      title,
+      columns,
+      classes,
+      data: { foodHistory = [] }
+    } = this.props
 
     if (!foodHistory || !foodHistory.length) {
       return (
         <Typography>
-          The selected food doesn't have any history, try selecting a different food or make some changes to it
+          The selected food doesn't have any history, try selecting a different
+          food or make some changes to it
         </Typography>
       )
     }
 
-    const history = foodHistory.map((food) => ({
+    const history = foodHistory.map(food => ({
       id: food.id,
       name: food.name,
       foodGroup: food.foodGroup.name,
@@ -42,11 +48,7 @@ class FoodHistoryTable extends Component {
 
     return (
       <>
-        <Table
-          title={title}
-          columns={columns}
-          rows={history}
-        />
+        <Table title={title} columns={columns} rows={history} />
         <div className={classes.citation}>
           <Typography variant="caption">
             Nutritional information provided by:
@@ -54,8 +56,8 @@ class FoodHistoryTable extends Component {
           <Typography variant="caption">
             US Department of Agriculture, Agricultural Research Service,
             Nutrient Data Laboratory. USDA National Nutrient Database for
-            Standard Reference, Release 28. Version Current: September
-            2015. Internet:{' '}
+            Standard Reference, Release 28. Version Current: September 2015.
+            Internet:{' '}
             <a href="http://www.ars.usda.gov/ba/bhnrc/ndl">
               http://www.ars.usda.gov/ba/bhnrc/ndl
             </a>

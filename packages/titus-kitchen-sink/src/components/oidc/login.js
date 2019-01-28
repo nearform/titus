@@ -52,7 +52,7 @@ class OIDCLogin extends React.Component {
                   onClick={this.authenticate}
                 >
                   Login Through OIDC
-                  <LockIcon className={classes.rightIcon}/>
+                  <LockIcon className={classes.rightIcon} />
                 </Button>
               ) : (
                 <React.Fragment>
