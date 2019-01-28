@@ -154,10 +154,10 @@ jobs:
   release-production:
     <<: *defaults
     steps:
-        - attach_workspace:
-                - at: .
-        - setup_remote_docker:
-                docker_layer_catching: true
+      - attach_workspace:
+          at: .
+      - setup_remote_docker:
+          docker_layer_catching: true
       - run:
           name: Install AWS CLI
           command: |
