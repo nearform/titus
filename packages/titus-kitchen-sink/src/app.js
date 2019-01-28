@@ -4,7 +4,6 @@ import Loadable from 'react-loadable'
 import ApolloClient, { InMemoryCache } from 'apollo-boost'
 import { createGenerateClassName, CssBaseline } from '@material-ui/core'
 import { ApolloProvider } from 'react-apollo'
-
 import Auth from './components/authentication/auth'
 import ThemeProvider from './components/theme-provider'
 import Loading from './loading'
@@ -47,7 +46,7 @@ const generateClassName = createGenerateClassName()
 
 const App = () => (
   <ApolloProvider client={apolloClient}>
-    <React.Fragment>
+    <>
       <CssBaseline />
       {/*
         JssProvider is required to fix classname conflict on production build,
@@ -62,7 +61,7 @@ const App = () => (
           </Auth>
         </ThemeProvider>
       </JssProvider>
-    </React.Fragment>
+    </>
   </ApolloProvider>
 )
 
