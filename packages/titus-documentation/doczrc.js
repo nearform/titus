@@ -48,11 +48,11 @@ export default {
   repository: 'https://github.com/nearform/titus',
   indexHtml: 'src/index.html',
   htmlContext: {
-    favicon: `public/favicon.png`
+    favicon: `${base}/static/img/favicon.png`
   },
   themeConfig: {
     logo: {
-      src: `public/logo.svg`,
+      src: `${base}/static/img/logo.svg`,
       width: 150
     },
     colors: {

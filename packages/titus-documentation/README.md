@@ -8,5 +8,5 @@ Packages will be installed when npm install is ran in the root repository.
 
 | Command            | Description                         |
 | ------------------ | ----------------------------------- |
-| titus-docs:dev     | runs 'lerna bootstrap' post install |
-| titus-docs:build   | starts the kitchen sink app         |
+| docz:dev           | runs 'lerna bootstrap' post install |
+| docz:build         | starts the kitchen sink app         |
