@@ -1,6 +1,9 @@
 'use strict'
 
-const { makeExecutableSchema, addMockFunctionsToSchema } = require('graphql-tools')
+const {
+  makeExecutableSchema,
+  addMockFunctionsToSchema
+} = require('graphql-tools')
 const { graphql } = require('graphql')
 const typeDefs = require('../../lib/graphql/schema')
 const resolvers = require('../../lib/graphql/resolver/scalars')
@@ -40,7 +43,9 @@ describe('queries', () => {
     }
     `
 
-    const { data: { food } } = await graphql(schema, query)
+    const {
+      data: { food }
+    } = await graphql(schema, query)
 
     expect(food).toEqual({
       id: mockId,
@@ -70,7 +75,9 @@ describe('queries', () => {
     }
     `
 
-    const { data: { foodHistory } } = await graphql(schema, query, null, null, { id: mockId })
+    const {
+      data: { foodHistory }
+    } = await graphql(schema, query, null, null, { id: mockId })
 
     expect(foodHistory).toContainEqual({
       id: mockId,
@@ -96,7 +103,9 @@ describe('queries', () => {
     }
     `
 
-    const { data: { search } } = await graphql(schema, query)
+    const {
+      data: { search }
+    } = await graphql(schema, query)
 
     expect(search).toContainEqual({
       id: mockId,
@@ -114,7 +123,9 @@ describe('queries', () => {
     }
     `
 
-    const { data: { keywordSearch } } = await graphql(schema, query)
+    const {
+      data: { keywordSearch }
+    } = await graphql(schema, query)
 
     expect(keywordSearch).toContainEqual({
       word: mockString,
@@ -136,7 +147,9 @@ describe('queries', () => {
     }
     `
 
-    const { data: { allFood } } = await graphql(schema, query)
+    const {
+      data: { allFood }
+    } = await graphql(schema, query)
 
     expect(allFood).toContainEqual({
       id: mockId,
@@ -158,7 +171,9 @@ describe('queries', () => {
     }
     `
 
-    const { data: { foodGroup } } = await graphql(schema, query)
+    const {
+      data: { foodGroup }
+    } = await graphql(schema, query)
 
     expect(foodGroup).toEqual({
       id: mockId,
@@ -176,7 +191,9 @@ describe('queries', () => {
     }
     `
 
-    const { data: { allFoodGroups } } = await graphql(schema, query)
+    const {
+      data: { allFoodGroups }
+    } = await graphql(schema, query)
 
     expect(allFoodGroups).toContainEqual({
       id: mockId,
@@ -195,7 +212,9 @@ describe('queries', () => {
     }
     `
 
-    const { data: { allDietTypes } } = await graphql(schema, query)
+    const {
+      data: { allDietTypes }
+    } = await graphql(schema, query)
 
     expect(allDietTypes).toContainEqual({
       id: mockId,
@@ -222,7 +241,9 @@ describe('mutations', () => {
     }
     `
 
-    const { data: { createFood } } = await graphql(schema, mutation)
+    const {
+      data: { createFood }
+    } = await graphql(schema, mutation)
 
     expect(createFood).toEqual({
       typeName: mockString,
@@ -252,7 +273,9 @@ describe('mutations', () => {
     }
     `
 
-    const { data: { updateFood } } = await graphql(schema, mutation)
+    const {
+      data: { updateFood }
+    } = await graphql(schema, mutation)
 
     expect(updateFood).toEqual({
       typeName: mockString,
@@ -278,7 +301,9 @@ describe('mutations', () => {
     }
     `
 
-    const { data: { deleteFoods } } = await graphql(schema, mutation)
+    const {
+      data: { deleteFoods }
+    } = await graphql(schema, mutation)
 
     expect(deleteFoods).toEqual({
       typeName: mockString,
@@ -298,7 +323,9 @@ describe('mutations', () => {
     }
     `
 
-    const { data: { createFoodGroup } } = await graphql(schema, mutation)
+    const {
+      data: { createFoodGroup }
+    } = await graphql(schema, mutation)
 
     expect(createFoodGroup).toEqual({
       id: mockId,
@@ -318,7 +345,9 @@ describe('mutations', () => {
     }
     `
 
-    const { data: { deleteDietType } } = await graphql(schema, mutation)
+    const {
+      data: { deleteDietType }
+    } = await graphql(schema, mutation)
 
     expect(deleteDietType).toEqual({
       typeName: mockString,
@@ -340,7 +369,9 @@ describe('mutations', () => {
     }
     `
 
-    const { data: { toggleDietTypeVisibility } } = await graphql(schema, mutation)
+    const {
+      data: { toggleDietTypeVisibility }
+    } = await graphql(schema, mutation)
 
     expect(toggleDietTypeVisibility).toEqual({
       typeName: mockString,

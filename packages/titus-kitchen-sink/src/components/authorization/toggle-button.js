@@ -28,9 +28,9 @@ export const ToggleButton = ({ id, children }) => (
                 dietType =>
                   dietType.id === id
                     ? {
-                      ...dietType,
-                      visible: !dietType.visible
-                    }
+                        ...dietType,
+                        visible: !dietType.visible
+                      }
                     : dietType
               )
 

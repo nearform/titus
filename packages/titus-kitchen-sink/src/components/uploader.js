@@ -4,7 +4,8 @@ import { Grid } from '@material-ui/core'
 import { PageHeading } from './utils'
 
 const MORE_INFO = 'More info dialog content'
-const SUB_HEADER = 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque.'
+const SUB_HEADER =
+  'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque.'
 
 const awsConfig = {
   accessKeyId: process.env.REACT_APP_S3_UPLOADER_ACCESS_KEY_ID,
@@ -43,7 +44,11 @@ function getTags(file) {
 
 const UploaderPage = () => (
   <Grid container spacing={24}>
-    <PageHeading header="Uploader" subHeader={SUB_HEADER} moreInfo={MORE_INFO}/>
+    <PageHeading
+      header="Uploader"
+      subHeader={SUB_HEADER}
+      moreInfo={MORE_INFO}
+    />
     <Grid item xs={12} sm={12} md={12} lg={12}>
       <Uploader
         maxItems={5}

@@ -24,7 +24,7 @@ describe('User profile', () => {
     }
     const { container } = render(
       <AuthContext.Provider value={{ user }}>
-        <UserProfile/>
+        <UserProfile />
       </AuthContext.Provider>
     )
 

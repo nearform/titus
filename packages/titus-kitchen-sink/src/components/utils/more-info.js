@@ -48,7 +48,7 @@ class MoreInfo extends React.Component {
     return (
       <>
         <div className={classes.moreInfo} onClick={this.handleOpen}>
-          <Info/>
+          <Info />
           <Typography>More Info</Typography>
         </div>
 
@@ -60,7 +60,12 @@ class MoreInfo extends React.Component {
         >
           <Grid container spacing={24} className={classes.moreInfoModal}>
             <Grid item xs={12} sm={12} md={12} lg={12}>
-              <Grid container spacing={24} justify="space-between" alignItems="center">
+              <Grid
+                container
+                spacing={24}
+                justify="space-between"
+                alignItems="center"
+              >
                 <Typography variant="h6" id="modal-title">
                   More information about {title}
                 </Typography>

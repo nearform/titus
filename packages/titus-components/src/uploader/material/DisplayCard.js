@@ -94,9 +94,9 @@ const DisplayCard = ({
         background: error
           ? colorError
           : done
-            ? colorDone
-            : `linear-gradient(to right, ${colorProgress} ${uploadProgress}%, ${colorBase} ${uploadProgress}%, ${colorBase} ${100 -
-                uploadProgress}%)`
+          ? colorDone
+          : `linear-gradient(to right, ${colorProgress} ${uploadProgress}%, ${colorBase} ${uploadProgress}%, ${colorBase} ${100 -
+              uploadProgress}%)`
       }}
       {...(error
         ? {

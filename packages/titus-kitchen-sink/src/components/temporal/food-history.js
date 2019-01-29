@@ -15,12 +15,8 @@ class FoodHistory extends PureComponent {
         skip={!selectedFoodId}
         fetchPolicy="cache-and-network"
       >
-        {(props) => (
-          <FoodHistoryTable
-            title={title}
-            columns={columns}
-            {...props}
-          />
+        {props => (
+          <FoodHistoryTable title={title} columns={columns} {...props} />
         )}
       </Query>
     )

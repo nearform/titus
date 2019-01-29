@@ -63,7 +63,7 @@ class Sidebar extends Component {
                   controller.updateActive()
                 }}
               >
-                <CloseIcon/>
+                <CloseIcon />
               </IconButton>
             </Tooltip>
           </Grid>

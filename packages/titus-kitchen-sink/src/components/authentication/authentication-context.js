@@ -11,22 +11,22 @@ class AuthProvider extends Component {
     user: this.props.authentication.getUserData()
   }
 
-  login = ({ username, password }) => this.props.authentication
-    .login({ username, password })
-    .then(user => {
+  login = ({ username, password }) =>
+    this.props.authentication.login({ username, password }).then(user => {
       this.setState({
         isAuthenticated: this.props.authentication.isAuthenticated(),
         user
       })
     })
 
-  logout = () => this.props.authentication.logout().then(result => {
-    result &&
-    this.setState({
-      isAuthenticated: this.props.authentication.isAuthenticated(),
-      user: null
+  logout = () =>
+    this.props.authentication.logout().then(result => {
+      result &&
+        this.setState({
+          isAuthenticated: this.props.authentication.isAuthenticated(),
+          user: null
+        })
     })
-  })
 
   getProps = () => ({
     login: this.login,

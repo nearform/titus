@@ -68,7 +68,7 @@ class MaterialUiTable extends Component {
           numSelected={selecting[0] === 'all' ? total : selecting.length}
         />
 
-        {this.state.adding && <NewFoodForm onClose={this.resetAdding}/>}
+        {this.state.adding && <NewFoodForm onClose={this.resetAdding} />}
 
         <Table>
           <Header

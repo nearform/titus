@@ -27,7 +27,7 @@ class WizardSummaryStep extends Component {
           return (
             <div key={index}>
               <ExpansionPanel key={stepInfo.id}>
-                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
+                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                   <Typography variant="subheading" gutterBottom>
                     Step {index + 1} - {stepInfo.title}
                   </Typography>
@@ -48,7 +48,7 @@ class WizardSummaryStep extends Component {
             </div>
           )
         })}
-        <Divider/>
+        <Divider />
         <Switch
           checked={data.confirmed}
           onChange={this.handleChange}

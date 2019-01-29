@@ -85,7 +85,7 @@ const TableToolbar = ({ numSelected, classes, title, rows, onAddClick }) => (
             {title}
           </Typography>
         </div>
-        <div className={classes.spacer}/>
+        <div className={classes.spacer} />
         <div className={classes.rightControls}>
           {!numSelected && (
             <div className={classes.actions}>
@@ -97,7 +97,7 @@ const TableToolbar = ({ numSelected, classes, title, rows, onAddClick }) => (
                   color="primary"
                   onClick={onAddClick}
                 >
-                  <AddIcon/>
+                  <AddIcon />
                 </Button>
               </Tooltip>
             </div>
@@ -118,7 +118,7 @@ const TableToolbar = ({ numSelected, classes, title, rows, onAddClick }) => (
                     className={classes.button}
                     onClick={handleDelete({ deleteFood, rows })}
                   >
-                    <DeleteIcon/>
+                    <DeleteIcon />
                   </IconButton>
                 </Tooltip>
               </div>

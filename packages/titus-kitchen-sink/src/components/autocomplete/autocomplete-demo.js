@@ -1,14 +1,24 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import { Grid, MenuItem, Typography, Paper, FormControl, Select, FormHelperText, withStyles } from '@material-ui/core'
+import {
+  Grid,
+  MenuItem,
+  Typography,
+  Paper,
+  FormControl,
+  Select,
+  FormHelperText,
+  withStyles
+} from '@material-ui/core'
 import { Autocomplete } from '@nearform/titus-components'
 import { PageHeading } from '../utils'
 import { countries } from './mock/countries'
 import levenshtein from 'fast-levenshtein'
 
 const MORE_INFO = 'More info dialog content'
-const SUB_HEADER = 'This autocomplete component is built on PayPal\'s downshift with a material-ui render prop.'
+const SUB_HEADER =
+  "This autocomplete component is built on PayPal's downshift with a material-ui render prop."
 
 const styles = theme => ({
   root: {
@@ -33,7 +43,8 @@ class AutocompleteDemo extends Component {
     loading: false
   }
 
-  handleChange = item => alert('You selected: ' + item.value + ' (' + item.key + ')')
+  handleChange = item =>
+    alert('You selected: ' + item.value + ' (' + item.key + ')')
 
   handleFilterChange = e => this.setState({ filterType: e.target.value })
 
@@ -74,15 +85,19 @@ class AutocompleteDemo extends Component {
     const { filterType, loading, items } = this.state
     return (
       <Grid container spacing={24} className={classes.root}>
-        <PageHeading header="Autocomplete" subHeader={SUB_HEADER} moreInfo={MORE_INFO}/>
+        <PageHeading
+          header="Autocomplete"
+          subHeader={SUB_HEADER}
+          moreInfo={MORE_INFO}
+        />
         <Grid item xs={12} sm={12} md={12} lg={12}>
           <Paper
             className={classNames(classes.paperPadding, classes.verticalMargin)}
           >
             <Typography variant="body1" paragraph>
               <strong>
-                Select a search filter from the list below and then start typing a
-                country name:
+                Select a search filter from the list below and then start typing
+                a country name:
               </strong>
             </Typography>
             <FormControl className={classes.verticalMargin}>
@@ -95,12 +110,16 @@ class AutocompleteDemo extends Component {
                 <MenuItem value="startsWith">startsWith (default)</MenuItem>
                 <MenuItem value="contains">contains</MenuItem>
               </Select>
-              <FormHelperText>Change an autocomplete filter type</FormHelperText>
+              <FormHelperText>
+                Change an autocomplete filter type
+              </FormHelperText>
             </FormControl>
 
             <FormControl>
               <Autocomplete
-                placeholder={'Find a country using the filterType: ' + filterType}
+                placeholder={
+                  'Find a country using the filterType: ' + filterType
+                }
                 id="titus-autocomplete"
                 data={filterType !== 'levenshtein' ? countries : null}
                 onChange={this.handleChange}

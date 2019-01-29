@@ -7,8 +7,8 @@ const getAsEntry = item =>
   item.getAsEntry
     ? item.getAsEntry()
     : item.webkitGetAsEntry
-      ? item.webkitGetAsEntry()
-      : null
+    ? item.webkitGetAsEntry()
+    : null
 
 class UploadFileDescriptor {
   constructor(file, idSuffix, isDirectory) {

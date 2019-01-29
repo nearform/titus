@@ -26,7 +26,15 @@ const LoginForm = ({ login, classes, schema, header, subheader }) => (
 
       return login({ username, password })
     }}
-    render={({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
+    render={({
+      values,
+      errors,
+      touched,
+      handleChange,
+      handleBlur,
+      handleSubmit,
+      isSubmitting
+    }) => (
       <form noValidate className={classes.form} onSubmit={handleSubmit}>
         <Typography variant="title" gutterBottom>
           {header}
@@ -44,11 +52,11 @@ const LoginForm = ({ login, classes, schema, header, subheader }) => (
           margin="normal"
         />
         {touched.username &&
-        errors.username && (
-          <Typography color="error" variant="subheading" gutterBottom>
-            {errors.username}
-          </Typography>
-        )}
+          errors.username && (
+            <Typography color="error" variant="subheading" gutterBottom>
+              {errors.username}
+            </Typography>
+          )}
         <TextField
           error={Boolean(touched.password && errors.password)}
           onChange={handleChange}
@@ -62,11 +70,11 @@ const LoginForm = ({ login, classes, schema, header, subheader }) => (
           margin="normal"
         />
         {touched.password &&
-        errors.password && (
-          <Typography color="error" variant="subheading" gutterBottom>
-            {errors.password}
-          </Typography>
-        )}
+          errors.password && (
+            <Typography color="error" variant="subheading" gutterBottom>
+              {errors.password}
+            </Typography>
+          )}
         <Button
           disabled={isSubmitting}
           variant="contained"

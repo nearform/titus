@@ -13,12 +13,16 @@ const PageHeading = ({ classes, header, subHeader, moreInfo }) => (
   <Grid item xs={12} sm={12} md={12} lg={12}>
     <Grid container spacing={24} justify="space-between" alignItems="center">
       <Grid item>
-        <Typography variant="h3" gutterBottom>{header}</Typography>
-        {subHeader && (<Typography paragraph>{subHeader}</Typography>)}
+        <Typography variant="h3" gutterBottom>
+          {header}
+        </Typography>
+        {subHeader && <Typography paragraph>{subHeader}</Typography>}
       </Grid>
-      {moreInfo && (<Grid item className={classes.moreInfoContainer}>
-        <MoreInfo title={header} content={moreInfo}/>
-      </Grid>)}
+      {moreInfo && (
+        <Grid item className={classes.moreInfoContainer}>
+          <MoreInfo title={header} content={moreInfo} />
+        </Grid>
+      )}
     </Grid>
   </Grid>
 )
@@ -26,14 +30,8 @@ const PageHeading = ({ classes, header, subHeader, moreInfo }) => (
 PageHeading.propTypes = {
   classes: PropTypes.object.isRequired,
   header: PropTypes.string.isRequired,
-  subHeader: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element
-  ]),
-  moreInfo: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element
-  ])
+  subHeader: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  moreInfo: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
 }
 
 export default withStyles(styles)(PageHeading)

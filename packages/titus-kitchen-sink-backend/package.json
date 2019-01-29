@@ -31,7 +31,6 @@
     "dev:cleandb": "rm -rf pgdata",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "format": "prettier --write *.js **/*.js",
     "create:env": "node -r fs -e \"fs.copyFileSync('docker/dev.env.sample', 'docker/dev.env', fs.constants.COPYFILE_EXCL)\""
   },
   "dependencies": {
@@ -61,6 +60,7 @@
   "devDependencies": {
     "babel-eslint": "^8.2.3",
     "eslint": "^4.19.1",
+    "eslint-config-prettier": "^4.0.0",
     "eslint-config-standard": "^11.0.0",
     "eslint-config-standard-react": "^6.0.0",
     "eslint-plugin-import": "^2.12.0",

@@ -42,10 +42,12 @@ class NewFoodForm extends Component {
     createFood: PropTypes.func.isRequired
   }
 
-  handleSubmit = (values) => {
+  handleSubmit = values => {
     const id = new Date().getTime()
     const food = values
-    const { loadFoodData: { foodGroups = [] } } = this.props
+    const {
+      loadFoodData: { foodGroups = [] }
+    } = this.props
 
     food.foodGroup = foodGroups.find(({ id }) => id === food.foodGroupId).name
 
@@ -84,7 +86,11 @@ class NewFoodForm extends Component {
   }
 
   render() {
-    const { classes, onClose, loadFoodData: { foodGroups = [] } } = this.props
+    const {
+      classes,
+      onClose,
+      loadFoodData: { foodGroups = [] }
+    } = this.props
 
     return (
       <Formik
@@ -108,10 +114,7 @@ class NewFoodForm extends Component {
               </DialogTitle>
               <div>
                 <FormGroup row>
-                  <FormControl
-                    className={classes.formControl}
-                    margin="dense"
-                  >
+                  <FormControl className={classes.formControl} margin="dense">
                     <TextField
                       required
                       autoFocus
@@ -130,9 +133,7 @@ class NewFoodForm extends Component {
                     margin="dense"
                   >
                     <InputLabel
-                      error={Boolean(
-                        touched.foodGroupId && errors.foodGroupId
-                      )}
+                      error={Boolean(touched.foodGroupId && errors.foodGroupId)}
                       htmlFor="food-group-input"
                     >
                       Food Group
@@ -147,9 +148,7 @@ class NewFoodForm extends Component {
                         id: 'food-group-input'
                       }}
                       value={values.foodGroupId}
-                      error={Boolean(
-                        touched.foodGroupId && errors.foodGroupId
-                      )}
+                      error={Boolean(touched.foodGroupId && errors.foodGroupId)}
                       onChange={handleChange}
                       onBlur={handleBlur}
                     >
@@ -160,9 +159,7 @@ class NewFoodForm extends Component {
                       ))}
                     </Select>
                     <FormHelperText
-                      error={Boolean(
-                        touched.foodGroupId && errors.foodGroupId
-                      )}
+                      error={Boolean(touched.foodGroupId && errors.foodGroupId)}
                     >
                       {touched.foodGroupId && errors.foodGroupId}
                     </FormHelperText>
@@ -170,11 +167,7 @@ class NewFoodForm extends Component {
                 </FormGroup>
               </div>
               <DialogActions>
-                <Button
-                  variant="outlined"
-                  onClick={onClose}
-                  color="primary"
-                >
+                <Button variant="outlined" onClick={onClose} color="primary">
                   Cancel
                 </Button>
                 <Button type="submit" variant="contained" color="primary">

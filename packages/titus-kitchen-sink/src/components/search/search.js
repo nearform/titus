@@ -1,12 +1,20 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Typography, FormControlLabel, Switch, Paper, Grid, withStyles } from '@material-ui/core'
+import {
+  Typography,
+  FormControlLabel,
+  Switch,
+  Paper,
+  Grid,
+  withStyles
+} from '@material-ui/core'
 import { PageHeading } from '../utils'
 import RecordSearch from './record-search'
 import KeywordSearch from './keyword-search'
 
 const MORE_INFO = 'More info dialog content'
-const SUB_HEADER = 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque.'
+const SUB_HEADER =
+  'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque.'
 
 const styles = theme => ({
   root: {
@@ -38,7 +46,11 @@ class Search extends Component {
     } = this
     return (
       <Grid container spacing={24}>
-        <PageHeading header="Search" subHeader={SUB_HEADER} moreInfo={MORE_INFO}/>
+        <PageHeading
+          header="Search"
+          subHeader={SUB_HEADER}
+          moreInfo={MORE_INFO}
+        />
         <Grid item xs={12} sm={12} md={12} lg={12}>
           <Paper className={classes.root}>
             <FormControlLabel
@@ -50,7 +62,7 @@ class Search extends Component {
               }
               label={keywordSearch ? 'Keyword Search' : 'Record Search'}
             />
-            {keywordSearch ? <KeywordSearch/> : <RecordSearch/>}
+            {keywordSearch ? <KeywordSearch /> : <RecordSearch />}
           </Paper>
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12} className={classes.citation}>

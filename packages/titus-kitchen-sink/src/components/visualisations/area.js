@@ -16,7 +16,7 @@ const Area = () => (
   <VictoryChart theme={VictoryTheme.material}>
     <VictoryStack colorScale={'blue'}>
       {areaData.map((data, i) => (
-        <VictoryArea key={i} data={data} interpolation={'basis'}/>
+        <VictoryArea key={i} data={data} interpolation={'basis'} />
       ))}
     </VictoryStack>
   </VictoryChart>

@@ -1,14 +1,20 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
-import { CircularProgress, Typography, withStyles, Grid } from '@material-ui/core'
+import {
+  CircularProgress,
+  Typography,
+  withStyles,
+  Grid
+} from '@material-ui/core'
 import { Table as NfTable } from '@nearform/react-table'
 import { PageHeading } from '../utils'
 import { loader } from 'graphql.macro'
 import { MaterialUiTable } from './'
 
 const MORE_INFO = 'More info dialog content'
-const SUB_HEADER = 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque.'
+const SUB_HEADER =
+  'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque.'
 
 const loadFoodData = loader('./queries/loadFoodData.graphql')
 
@@ -79,12 +85,19 @@ class Table extends Component {
   }
 
   render() {
-    const { classes, title, columns, pageSize, pageSizeOptions, data: { loading, error, allFood } } = this.props
+    const {
+      classes,
+      title,
+      columns,
+      pageSize,
+      pageSizeOptions,
+      data: { loading, error, allFood }
+    } = this.props
 
     if (loading) {
       return (
         <div className={classes.progressWrapper}>
-          <CircularProgress className={classes.progress}/>
+          <CircularProgress className={classes.progress} />
         </div>
       )
     }
@@ -106,7 +119,7 @@ class Table extends Component {
 
     return (
       <Grid container spacing={24} className={classes.root}>
-        <PageHeading header="API" subHeader={SUB_HEADER} moreInfo={MORE_INFO}/>
+        <PageHeading header="API" subHeader={SUB_HEADER} moreInfo={MORE_INFO} />
         <Grid item xs={12} sm={12} md={12} lg={12}>
           <NfTable
             columns={columns}
@@ -114,7 +127,7 @@ class Table extends Component {
             pageSizeOptions={pageSizeOptions}
             data={food}
             sorting={[{ id: 'name', asc: true }]}
-            render={props => <MaterialUiTable {...props} title={title}/>}
+            render={props => <MaterialUiTable {...props} title={title} />}
           />
         </Grid>
 
@@ -125,8 +138,8 @@ class Table extends Component {
           <Typography variant="caption">
             US Department of Agriculture, Agricultural Research Service,
             Nutrient Data Laboratory. USDA National Nutrient Database for
-            Standard Reference, Release 28. Version Current: September
-            2015. Internet:{' '}
+            Standard Reference, Release 28. Version Current: September 2015.
+            Internet:{' '}
             <a href="http://www.ars.usda.gov/ba/bhnrc/ndl">
               http://www.ars.usda.gov/ba/bhnrc/ndl
             </a>

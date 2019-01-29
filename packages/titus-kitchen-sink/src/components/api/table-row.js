@@ -49,7 +49,7 @@ class TableRow extends Component {
         </TableCell>
 
         {isEditing ? (
-          <TableRowEdit row={row} onDone={this.onDone}/>
+          <TableRowEdit row={row} onDone={this.onDone} />
         ) : (
           <React.Fragment>
             <TableCell
@@ -73,10 +73,10 @@ class TableRow extends Component {
                 aria-label="Edit"
                 onClick={this.onEditClick}
               >
-                <EditIcon/>
+                <EditIcon />
               </Button>
             </TableCell>
-            <TableCell/>
+            <TableCell />
           </React.Fragment>
         )}
       </MaterialTableRow>

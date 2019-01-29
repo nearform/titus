@@ -8,12 +8,12 @@ import { MenuContainer } from './'
 export const UserChooser = ({ values, onChange }) => (
   <MenuContainer values={values}>
     {({
-        options,
-        getSelectedOption,
-        getMenuProps,
-        getMenuItemProps,
-        getListItemProps
-      }) => (
+      options,
+      getSelectedOption,
+      getMenuProps,
+      getMenuItemProps,
+      getListItemProps
+    }) => (
       <React.Fragment>
         <List>
           <ListItem
@@ -24,7 +24,7 @@ export const UserChooser = ({ values, onChange }) => (
               'aria-label': 'Select a User'
             })}
           >
-            <ListItemText primary={getSelectedOption()}/>
+            <ListItemText primary={getSelectedOption()} />
           </ListItem>
         </List>
 

@@ -12,11 +12,19 @@ import {
   buildWebsocketClient
 } from '@nearform/commentami-react-components'
 import { PageHeading } from '../utils'
-import { Typography, Paper, Divider, colors, Grid, withStyles } from '@material-ui/core'
+import {
+  Typography,
+  Paper,
+  Divider,
+  colors,
+  Grid,
+  withStyles
+} from '@material-ui/core'
 import { UserChooser, Sidebar } from './'
 
 const MORE_INFO = 'More info dialog content'
-const SUB_HEADER = 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque.'
+const SUB_HEADER =
+  'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque.'
 
 const data = {
   'John Smith': {
@@ -150,7 +158,11 @@ class Comments extends Component {
 
     return (
       <Grid container spacing={24}>
-        <PageHeading header="Comments" subHeader={SUB_HEADER} moreInfo={MORE_INFO}/>
+        <PageHeading
+          header="Comments"
+          subHeader={SUB_HEADER}
+          moreInfo={MORE_INFO}
+        />
         <Grid item xs={12} sm={12} md={12} lg={12}>
           <DeepLinkController>
             <SidebarsController>
@@ -165,7 +177,10 @@ class Comments extends Component {
                     <Typography gutterBottom color="textSecondary">
                       Change The User:
                     </Typography>
-                    <UserChooser values={users} onChange={this.handleUserChange}/>
+                    <UserChooser
+                      values={users}
+                      onChange={this.handleUserChange}
+                    />
                   </Grid>
 
                   <Reference
@@ -178,7 +193,7 @@ class Comments extends Component {
                     </Typography>
                   </Reference>
 
-                  <Divider className={classes.divider}/>
+                  <Divider className={classes.divider} />
 
                   <Reference
                     reference="reference-2"
@@ -186,18 +201,18 @@ class Comments extends Component {
                     activeClassName={classes.referenceActive}
                   >
                     <Typography gutterBottom>
-                  <span className={classes.boldText}>
-                    Comment this section! Double click to comment!
-                  </span>{' '}
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                      in justo id lorem venenatis facilisis. Morbi dictum euismod
-                      ipsum et convallis. Cras diam dui, maximus eu posuere et,
-                      pulvinar ac lorem. In hac habitasse platea dictumst. Phasellus
-                      venenatis eget sem vitae auctor.
+                      <span className={classes.boldText}>
+                        Comment this section! Double click to comment!
+                      </span>{' '}
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Proin in justo id lorem venenatis facilisis. Morbi dictum
+                      euismod ipsum et convallis. Cras diam dui, maximus eu
+                      posuere et, pulvinar ac lorem. In hac habitasse platea
+                      dictumst. Phasellus venenatis eget sem vitae auctor.
                     </Typography>
                   </Reference>
 
-                  <Divider className={classes.divider}/>
+                  <Divider className={classes.divider} />
 
                   <Reference
                     reference="reference-3"
@@ -205,19 +220,19 @@ class Comments extends Component {
                     activeClassName={classes.referenceActive}
                   >
                     <Typography gutterBottom>
-                  <span className={classes.boldText}>
-                    Comment this section! Click on the icon to the left!
-                  </span>{' '}
-                      More Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Vestibulum convallis, nulla id bibendum ornare, leo erat
-                      faucibus ligula, vel ullamcorper nibh nisi in arcu. Donec
-                      lobortis sapien nec pretium auctor. Aenean vulputate odio
-                      nulla, quis facilisis est viverra et.
+                      <span className={classes.boldText}>
+                        Comment this section! Click on the icon to the left!
+                      </span>{' '}
+                      More Lorem ipsum dolor sit amet, consectetur adipiscing
+                      elit. Vestibulum convallis, nulla id bibendum ornare, leo
+                      erat faucibus ligula, vel ullamcorper nibh nisi in arcu.
+                      Donec lobortis sapien nec pretium auctor. Aenean vulputate
+                      odio nulla, quis facilisis est viverra et.
                     </Typography>
                   </Reference>
                 </Paper>
 
-                <Sidebar/>
+                <Sidebar />
               </Resource>
             </SidebarsController>
           </DeepLinkController>
@@ -230,6 +245,5 @@ class Comments extends Component {
 Comments.propTypes = {
   classes: PropTypes.object
 }
-
 
 export default withStyles(styles)(Comments)
