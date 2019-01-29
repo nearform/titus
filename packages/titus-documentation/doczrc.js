@@ -52,7 +52,8 @@ export default {
   },
   themeConfig: {
     logo: {
-      src: `${base}/static/img/logo.svg`
+      src: `${base}/static/img/logo.svg`,
+      width: 150
     },
     colors: {
       primary: nearformTheme.colors.blue,
