@@ -64,7 +64,7 @@
     "jest-environment-jsdom-global": "^1.1.0",
     "lodash": "^4.17.10",
     "nodemon": "^1.17.5",
-    "nwb": "^0.23.0",
+    "nwb": "~0.21.0",
     "prettier": "^1.14.3",
     "react": "^16.5.2",
     "react-dnd-test-backend": "^5.0.1",
