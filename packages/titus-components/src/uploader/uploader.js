@@ -11,7 +11,7 @@ export class Uploader extends React.Component {
     maxItems: 1,
     logger: console
   }
-  
+
   static propTypes = {
     /** Maximum number of files that can be uploaded. */
     maxItems: PropTypes.number,

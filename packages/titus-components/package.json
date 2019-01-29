@@ -21,8 +21,7 @@
     "lint:fix": "eslint src --fix",
     "prepublish": "npm run build",
     "storybook": "start-storybook -p 6006 -c .storybook",
-    "build:storybook:docs": "build-storybook -c .storybook -o ../../docs/components-storybook",
-    "format": "prettier --write *.js **/*.js"
+    "build:storybook:docs": "build-storybook -c .storybook -o ../../docs/components-storybook"
   },
   "dependencies": {
     "@material-ui/core": "^3.3.0",
@@ -52,10 +51,12 @@
     "babel-preset-react": "^6.24.1",
     "babel-runtime": "^6.26.0",
     "eslint": "^4.1.1",
+    "eslint-config-prettier": "^4.0.0",
     "eslint-config-react-app": "^2.1.0",
     "eslint-plugin-flowtype": "^2.50.1",
     "eslint-plugin-import": "^2.6.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.1.0",
     "jest": "^23.4.1",
     "jest-dom": "^1.12.1",
@@ -63,7 +64,7 @@
     "jest-environment-jsdom-global": "^1.1.0",
     "lodash": "^4.17.10",
     "nodemon": "^1.17.5",
-    "nwb": "0.21.x",
+    "nwb": "^0.23.0",
     "prettier": "^1.14.3",
     "react": "^16.5.2",
     "react-dnd-test-backend": "^5.0.1",
