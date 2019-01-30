@@ -51,12 +51,11 @@ const LoginForm = ({ login, classes, schema, header, subheader }) => (
           label="Username"
           margin="normal"
         />
-        {touched.username &&
-          errors.username && (
-            <Typography color="error" variant="subheading" gutterBottom>
-              {errors.username}
-            </Typography>
-          )}
+        {touched.username && errors.username && (
+          <Typography color="error" variant="subheading" gutterBottom>
+            {errors.username}
+          </Typography>
+        )}
         <TextField
           error={Boolean(touched.password && errors.password)}
           onChange={handleChange}
@@ -69,12 +68,11 @@ const LoginForm = ({ login, classes, schema, header, subheader }) => (
           type="password"
           margin="normal"
         />
-        {touched.password &&
-          errors.password && (
-            <Typography color="error" variant="subheading" gutterBottom>
-              {errors.password}
-            </Typography>
-          )}
+        {touched.password && errors.password && (
+          <Typography color="error" variant="subheading" gutterBottom>
+            {errors.password}
+          </Typography>
+        )}
         <Button
           disabled={isSubmitting}
           variant="contained"

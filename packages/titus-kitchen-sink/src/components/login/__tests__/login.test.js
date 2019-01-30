@@ -40,8 +40,7 @@ describe('Login form', () => {
 
     // setting some value for username and password
     form.querySelectorAll('input').forEach(input => {
-      input.value = 'hunter2'
-      fireEvent.change(input)
+      fireEvent.change(input, { target: { value: 'hunter2' } })
     })
 
     // clicking on Login button

@@ -73,10 +73,9 @@ const NewComment = props => {
                 error={Boolean(touched.comment && errors.comment)}
               />
 
-              {touched.comment &&
-                errors.comment && (
-                  <FormHelperText error>{errors.comment}</FormHelperText>
-                )}
+              {touched.comment && errors.comment && (
+                <FormHelperText error>{errors.comment}</FormHelperText>
+              )}
             </FormControl>
             <FormControl fullWidth>
               <Button
