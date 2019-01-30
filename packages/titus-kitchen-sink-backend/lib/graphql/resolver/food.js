@@ -3,32 +3,32 @@ const food = require('../../model/food')
 
 const resolvers = {
   Query: {
-    food (root, args, context) {
+    food(root, args, context) {
       return food.getById(context.pg, args)
     },
-    allFood (root, args, context) {
+    allFood(root, args, context) {
       return food.getAll(context.pg, args)
     },
-    search (root, args, context) {
+    search(root, args, context) {
       return food.search(context.pg, args)
     },
-    keywordSearch (root, args, context) {
+    keywordSearch(root, args, context) {
       return food.keywordSearch(context.pg, args)
     }
   },
   Food: {
-    foodGroup (root, args, context) {
+    foodGroup(root, args, context) {
       return context.loaders.foodGroup.getById.load(root.foodGroupId)
     }
   },
   Mutation: {
-    async createFood (root, args, context) {
+    async createFood(root, args, context) {
       return food.create(context.pg, args)
     },
-    async updateFood (root, args, context) {
+    async updateFood(root, args, context) {
       return food.update(context.pg, args)
     },
-    async deleteFoods (root, args, context) {
+    async deleteFoods(root, args, context) {
       return food.deleteFoods(context.pg, args)
     }
   }

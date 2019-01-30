@@ -2,16 +2,32 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { Query } from 'react-apollo'
-import { FormControl, Grid, Paper, Typography, withStyles } from '@material-ui/core'
+import {
+  FormControl,
+  Grid,
+  Paper,
+  Typography,
+  withStyles
+} from '@material-ui/core'
 import { Autocomplete } from '@nearform/titus-components'
 import { PageHeading } from '../utils'
 import { FoodHistory } from './'
 import { loadFoodData } from './lib/data'
 
 const MORE_INFO = 'More info dialog content'
-const SUB_HEADER = <>This demo shows the <a href="https://github.com/nearform/temporal_tables" target="_blank"
-                                            rel="noopener noreferrer">temporal tables extension</a> in action. It track
-  changes to table records.</>
+const SUB_HEADER = (
+  <>
+    This demo shows the{' '}
+    <a
+      href="https://github.com/nearform/temporal_tables"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      temporal tables extension
+    </a>{' '}
+    in action. It track changes to table records.
+  </>
+)
 
 const styles = theme => ({
   root: {
@@ -47,7 +63,6 @@ const columns = [
   }
 ]
 
-
 class Temporal extends Component {
   state = {
     selectedFoodId: ''
@@ -61,9 +76,15 @@ class Temporal extends Component {
 
     return (
       <Grid container spacing={24} className={classes.root}>
-        <PageHeading header="Temporal Tables" subHeader={SUB_HEADER} moreInfo={MORE_INFO}/>
+        <PageHeading
+          header="Temporal Tables"
+          subHeader={SUB_HEADER}
+          moreInfo={MORE_INFO}
+        />
         <Grid item xs={12} sm={12} md={12} lg={12}>
-          <Paper className={classNames(classes.paperPadding, classes.verticalMargin)}>
+          <Paper
+            className={classNames(classes.paperPadding, classes.verticalMargin)}
+          >
             <Query query={loadFoodData}>
               {({ loading, error, data: { allFood = [] } = {} }) => {
                 if (error) {
@@ -74,11 +95,19 @@ class Temporal extends Component {
                   )
                 }
 
-                const allFoodAutocomplete = allFood.map(({ id, name }) => ({ key: id, value: name }))
+                const allFoodAutocomplete = allFood.map(({ id, name }) => ({
+                  key: id,
+                  value: name
+                }))
 
                 return (
                   <>
-                    <Paper className={classNames(classes.paperPadding, classes.verticalMargin)}>
+                    <Paper
+                      className={classNames(
+                        classes.paperPadding,
+                        classes.verticalMargin
+                      )}
+                    >
                       <FormControl>
                         <Autocomplete
                           placeholder="Find a food by typing its name"

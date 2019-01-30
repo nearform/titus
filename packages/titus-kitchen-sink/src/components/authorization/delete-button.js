@@ -5,7 +5,14 @@ import { IconButton } from '@material-ui/core'
 import { Delete as DeleteIcon } from '@material-ui/icons'
 import { deleteDietType, loadAllDietTypes } from './lib/data'
 
-const update = (cache, { data: { deleteDietType: { id } } }) => {
+const update = (
+  cache,
+  {
+    data: {
+      deleteDietType: { id }
+    }
+  }
+) => {
   const data = cache.readQuery({
     query: loadAllDietTypes
   })
@@ -24,13 +31,14 @@ export const DeleteButton = ({ id }) => (
     {deleteDietType => (
       <IconButton
         aria-label="Delete"
-        onClick={() => deleteDietType({
-          variables: { id },
-          update
-        })
+        onClick={() =>
+          deleteDietType({
+            variables: { id },
+            update
+          })
         }
       >
-        <DeleteIcon/>
+        <DeleteIcon />
       </IconButton>
     )}
   </Mutation>

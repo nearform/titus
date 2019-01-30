@@ -4,5 +4,5 @@ import { action } from '@storybook/addon-actions'
 import Login from '..'
 
 storiesOf('Login', module).add('default', () => (
-  <Login submitLogin={action('submit')}/>
+  <Login submitLogin={action('submit')} />
 ))

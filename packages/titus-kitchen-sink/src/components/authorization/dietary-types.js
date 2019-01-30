@@ -14,7 +14,6 @@ import { Visibility, VisibilityOff } from '@material-ui/icons'
 import { DeleteButton, ToggleButton } from './'
 import { loadAllDietTypes } from './lib/data'
 
-
 const styles = theme => ({
   progress: {
     margin: theme.spacing.unit * 2
@@ -34,7 +33,7 @@ const DietaryTypes = ({ classes, userId }) => (
       if (loading) {
         return (
           <div className={classes.progressWrapper}>
-            <CircularProgress className={classes.progress}/>
+            <CircularProgress className={classes.progress} />
           </div>
         )
       }
@@ -50,24 +49,24 @@ const DietaryTypes = ({ classes, userId }) => (
       return (
         <List className={classes.list}>
           {data &&
-          data.allDietTypes &&
-          data.allDietTypes.length &&
-          data.allDietTypes.map(
-            ({ id, name, visible }) =>
-              userId !== 'MrUser' || (userId === 'MrUser' && visible) ? (
-                <ListItem key={id}>
-                  <ListItemText primary={name}/>
-                  <ListItemSecondaryAction>
-                    {userId === 'MrsAdmin' && <DeleteButton id={id}/>}
-                    {(userId === 'MrsAdmin' || userId === 'MissEditor') && (
-                      <ToggleButton id={id}>
-                        {visible ? <Visibility/> : <VisibilityOff/>}
-                      </ToggleButton>
-                    )}
-                  </ListItemSecondaryAction>
-                </ListItem>
-              ) : null
-          )}
+            data.allDietTypes &&
+            data.allDietTypes.length &&
+            data.allDietTypes.map(
+              ({ id, name, visible }) =>
+                userId !== 'MrUser' || (userId === 'MrUser' && visible) ? (
+                  <ListItem key={id}>
+                    <ListItemText primary={name} />
+                    <ListItemSecondaryAction>
+                      {userId === 'MrsAdmin' && <DeleteButton id={id} />}
+                      {(userId === 'MrsAdmin' || userId === 'MissEditor') && (
+                        <ToggleButton id={id}>
+                          {visible ? <Visibility /> : <VisibilityOff />}
+                        </ToggleButton>
+                      )}
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                ) : null
+            )}
         </List>
       )
     }}

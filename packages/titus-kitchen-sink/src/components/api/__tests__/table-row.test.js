@@ -50,7 +50,8 @@ const apolloMocks = [
   }
 ]
 
-const wait = (timeout = 0) => new Promise(resolve => setTimeout(resolve, timeout))
+const wait = (timeout = 0) =>
+  new Promise(resolve => setTimeout(resolve, timeout))
 
 afterEach(cleanup)
 
@@ -75,7 +76,7 @@ describe('<TableRow />', () => {
     const { queryByText, getByLabelText, queryByLabelText } = render(
       <Context>
         <MockedProvider mocks={apolloMocks} addTypename={false}>
-          <TableRow row={rowData}/>
+          <TableRow row={rowData} />
         </MockedProvider>
       </Context>
     )
@@ -94,7 +95,7 @@ describe('<TableRow />', () => {
     const { getByLabelText, getByText } = render(
       <Context>
         <MockedProvider mocks={apolloMocks} addTypename={false}>
-          <TableRow row={rowData}/>
+          <TableRow row={rowData} />
         </MockedProvider>
       </Context>
     )
@@ -176,7 +177,7 @@ describe('<TableRow />', () => {
     const { getByLabelText, getByText } = render(
       <Context>
         <MockedProvider mocks={apolloMocks} addTypename={false}>
-          <TableRow row={rowData}/>
+          <TableRow row={rowData} />
         </MockedProvider>
       </Context>
     )

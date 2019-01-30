@@ -110,12 +110,12 @@ class KeywordSearch extends Component {
                   items={
                     inputValue !== '' && data.keywordSearch
                       ? data.keywordSearch
-                        .map(({ word, score }, index) => ({
-                          key: `${index}-${word}`,
-                          value: word,
-                          score: score
-                        }))
-                        .slice(0, 10)
+                          .map(({ word, score }, index) => ({
+                            key: `${index}-${word}`,
+                            value: word,
+                            score: score
+                          }))
+                          .slice(0, 10)
                       : null
                   }
                   loading={inputValue !== '' && loading}

@@ -23,8 +23,8 @@ const Candlestick = () => (
     domainPadding={{ x: 25 }}
     scale={{ x: 'time' }}
   >
-    <VictoryAxis tickFormat={t => `${t.getDate()}/${t.getMonth()}`}/>
-    <VictoryAxis dependentAxis/>
+    <VictoryAxis tickFormat={t => `${t.getDate()}/${t.getMonth()}`} />
+    <VictoryAxis dependentAxis />
     <VictoryCandlestick
       candleColors={{ positive: '#5f5c5b', negative: '#c43a31' }}
       data={candlestickData}

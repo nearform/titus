@@ -117,23 +117,22 @@ const MaterialDownshift = ({
           error
         })
       })}
-      {isOpen &&
-        items && (
-          <Paper className={classes.paper} square>
-            {items.map((suggestion, index) =>
-              Suggestion({
-                suggestion,
-                index,
-                itemProps: getItemProps({
-                  key: suggestion.key,
-                  item: suggestion
-                }),
-                highlightedIndex,
-                selectedItem
-              })
-            )}
-          </Paper>
-        )}
+      {isOpen && items && (
+        <Paper className={classes.paper} square>
+          {items.map((suggestion, index) =>
+            Suggestion({
+              suggestion,
+              index,
+              itemProps: getItemProps({
+                key: suggestion.key,
+                item: suggestion
+              }),
+              highlightedIndex,
+              selectedItem
+            })
+          )}
+        </Paper>
+      )}
     </div>
   </div>
 )

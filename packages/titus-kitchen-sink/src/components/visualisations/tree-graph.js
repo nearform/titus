@@ -160,7 +160,7 @@ class TreeGraph extends Component {
   chart({ width, height, padding, data }) {
     return (
       <svg width={width} height={height}>
-        <LinearGradient id="rootlg" from="#032e5f" to="#0f6dc6"/>
+        <LinearGradient id="rootlg" from="#032e5f" to="#0f6dc6" />
         <Cluster
           top={padding.top}
           left={padding.left}
@@ -231,7 +231,7 @@ class TreeGraph extends Component {
                 onClick={this.regenerate}
                 style={{ position: 'absolute' }}
               >
-                <RefreshIcon/>
+                <RefreshIcon />
               </Button>
             </Tooltip>
             {this.chart({

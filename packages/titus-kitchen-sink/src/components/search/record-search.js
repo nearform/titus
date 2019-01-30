@@ -108,11 +108,11 @@ class RecordSearch extends Component {
                   items={
                     inputValue !== '' && data.search
                       ? data.search
-                        .map(({ id, name }) => ({
-                          key: id,
-                          value: name
-                        }))
-                        .slice(0, 10)
+                          .map(({ id, name }) => ({
+                            key: id,
+                            value: name
+                          }))
+                          .slice(0, 10)
                       : null
                   }
                   loading={inputValue !== '' && loading}

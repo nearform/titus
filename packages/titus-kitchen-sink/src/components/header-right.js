@@ -4,8 +4,8 @@ import ThemeSwitcher from './theme-switcher'
 
 const HeaderRight = props => (
   <div {...props}>
-    <ThemeSwitcher/>
-    <UserProfile/>
+    <ThemeSwitcher />
+    <UserProfile />
   </div>
 )
 

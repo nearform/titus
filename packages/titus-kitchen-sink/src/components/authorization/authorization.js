@@ -14,7 +14,8 @@ import { PageHeading } from '../utils'
 import { DietaryTypes } from './'
 
 const MORE_INFO = 'More info dialog content'
-const SUB_HEADER = 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque.'
+const SUB_HEADER =
+  'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque.'
 
 const styles = theme => ({
   root: {
@@ -55,7 +56,11 @@ class Authorization extends Component {
 
     return (
       <Grid container spacing={24}>
-        <PageHeading header="Authorization" subHeader={SUB_HEADER} moreInfo={MORE_INFO}/>
+        <PageHeading
+          header="Authorization"
+          subHeader={SUB_HEADER}
+          moreInfo={MORE_INFO}
+        />
         <Grid item xs={12} sm={12} md={12} lg={12}>
           <Paper className={classes.root}>
             <FormControl className={classes.formControl}>
@@ -75,7 +80,7 @@ class Authorization extends Component {
                 Dietary Types
               </Typography>
             </div>
-            <DietaryTypes userId={userId}/>
+            <DietaryTypes userId={userId} />
           </Paper>
         </Grid>
       </Grid>

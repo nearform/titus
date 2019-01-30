@@ -27,18 +27,12 @@ storiesOf('Autocomplete', module)
   ))
   .add('disabled', () => (
     <div>
-      <Autocomplete
-        placeholder="I am disabled"
-        disabled
-      />
+      <Autocomplete placeholder="I am disabled" disabled />
     </div>
   ))
   .add('read only', () => (
     <div>
-      <Autocomplete
-        placeholder="I am read only"
-        readOnly
-      />
+      <Autocomplete placeholder="I am read only" readOnly />
     </div>
   ))
   .add('with error', () => (
