@@ -153,6 +153,8 @@ jobs:
                    --set docker.images.production.frontend=$(kubectl get deployment titus-frontend -o=jsonpath='{$.spec.template.spec.containers[:1].image}')
   release-production:
     <<: *defaults
+    environment:
+      DOCKER_REPO: "711655675495.dkr.ecr.us-east-1.amazonaws.com"
     steps:
       - attach_workspace:
           at: .
@@ -224,12 +226,23 @@ workflows:
       - release-preproduction:
           requires:
             - push-containers
+          filters:
+            branches:
+                only:
+                    - master
       - request-deployment:
           type: approval
           requires: 
             - release-preproduction
+          filters:
+            branches:
+                only:
+                    - master
       - release-production:
           requires:
             - request-deployment
-          
+          filters:
+            branches:
+                only:
+                    - master
       
