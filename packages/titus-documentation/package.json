@@ -6,13 +6,13 @@
     "test": "exit 0",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "docs:build": "docz build && sh copy-imgs.sh",
-    "docs:dev": "docz dev",
-    "docs:serve": "serve -s -l 3000 ../../docs"
+    "docs:build": "docz build",
+    "docs:dev": "docz dev"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.3",
     "docz": "^0.13.7",
+    "docz-theme-default": "^0.13.7",
     "eslint": "^4.19.1",
     "eslint-config-prettier": "^4.0.0",
     "eslint-config-standard": "^11.0.0",
@@ -22,10 +22,6 @@
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^3.1.0",
     "remark-bookmarks": "^2.0.0",
-    "remark-external-links": "^4.0.0",
-    "serve": "^10.1.1"
-  },
-  "dependencies": {
-    "docz-theme-default": "^0.13.7"
+    "remark-external-links": "^4.0.0"
   }
 }
