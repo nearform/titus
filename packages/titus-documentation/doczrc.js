@@ -68,17 +68,28 @@ export default {
       sidebarText: nearformTheme.colors.sand4
     },
     styles: {
+      body: {
+        fontFamily: "'Poppins', sans-serif"
+      },
       h1: {
-        color: nearformTheme.colors.midnightBlue
+        color: nearformTheme.colors.midnightBlue,
+        fontFamily: "'Poppins', sans-serif",
+        fontWeight: 100
       },
       h2: {
-        color: nearformTheme.colors.supersplit
+        color: nearformTheme.colors.supersplit,
+        fontFamily: "'Poppins', sans-serif",
+        fontWeight: 100
       },
       h3: {
-        color: nearformTheme.colors.brunchPink
+        color: nearformTheme.colors.brunchPink,
+        fontFamily: "'Poppins', sans-serif",
+        fontWeight: 100
       },
       h4: {
-        color: nearformTheme.colors.bubblegum
+        color: nearformTheme.colors.bubblegum,
+        fontFamily: "'Poppins', sans-serif",
+        fontWeight: 100
       }
     }
   }
