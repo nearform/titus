@@ -1,38 +1,8 @@
-# Titus Components
+[![Logo][logo-img]][docs]
 
-Shareable components ready to be dropped in to any React application.
+Your are browsing the repository for __titus-components__. All documentation for titus is stored in a central location. Including for this repo.
 
-## Features
+- Get the whole picture by viewing our __[Documentation][docs]__
 
-* Autocomplete
-* List item link
-* Navigation
-* Table
-* Wizard
-
-## Installation
-
-```
-npm install --S @nearform/titus-components
-```
-
-## Development
-
-```
-npm install
-```
-
-## Build
-
-```
-npm run build
-```
-
-## Lint
-
-```
-npm run lint
-
-# To use eslint autofix
-npm run lint:fix
-```
+[docs]: https://nearform.github.io/titus
+[logo-img]: /docs/public/logo.svg

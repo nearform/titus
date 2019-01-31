@@ -1,4 +1,8 @@
-# titus-backend
-A starter Hapi and PostgreSQL setup running in Docker.
+[![Logo][logo-img]][docs]
 
-- To get started, view the [Documentation](https://nearform.github.io/titus)
+Your are browsing the repository for __titus-backend__. All documentation for titus is stored in a central location. Including for this repo.
+
+- Get the whole picture by viewing our __[Documentation][docs]__
+
+[docs]: https://nearform.github.io/titus
+[logo-img]: /docs/public/logo.svg

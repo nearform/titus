@@ -2,6 +2,8 @@ import * as path from 'path'
 import externalLinks from 'remark-external-links'
 import remarkBookmarks from 'remark-bookmarks'
 
+// Add all bookmarks here that should be shared they
+// can be referenced in .mdx like so: [link-name]
 const bookmarks = {
   '@nearform/react-table': 'https://github.com/nearform/react-table',
   'create-react-app': 'https://github.com/facebook/create-react-app',
@@ -20,7 +22,14 @@ const bookmarks = {
   Storybook: 'https://storybook.js.org/'
 }
 
-const nearformTheme = {
+const theme = {
+  logo: {
+    src: `public/logo.svg`,
+    width: 150
+  },
+  fonts: {
+    primary: "'Poppins', sans-serif"
+  },
   colors: {
     blue: '#2165e5',
     midnightBlue: '#194cac',
@@ -34,16 +43,13 @@ const nearformTheme = {
   }
 }
 
-const searchPath = path.resolve(__dirname, '../')
-const base = '/titus'
-
 export default {
   description: 'This is the official documentation of @nearform/titus monorepo',
   mdPlugins: [externalLinks.default, [remarkBookmarks, { bookmarks }]],
-  src: searchPath,
+  src: path.resolve(__dirname, '../'),
   files: `{*/*.mdx,*/src/*.mdx,*/src/**/*.mdx}`,
   dest: `../../docs`,
-  base: `${base}/`,
+  base: `/titus/`,
   hashRouter: true,
   repository: 'https://github.com/nearform/titus',
   indexHtml: 'src/index.html',
@@ -51,40 +57,37 @@ export default {
     favicon: `public/favicon.png`
   },
   themeConfig: {
-    logo: {
-      src: `public/logo.svg`,
-      width: 150
-    },
+    logo: theme.logo,
     colors: {
-      primary: nearformTheme.colors.blue,
-      text: nearformTheme.colors.sand4,
-      link: nearformTheme.colors.blue,
-      background: nearformTheme.colors.sand1,
+      primary: theme.colors.blue,
+      text: theme.colors.sand4,
+      link: theme.colors.blue,
+      background: theme.colors.sand1,
       sidebarBg: '#f7f7f7',
-      sidebarText: nearformTheme.colors.sand4
+      sidebarText: theme.colors.sand4
     },
     styles: {
       body: {
-        fontFamily: "'Poppins', sans-serif"
+        fontFamily: theme.fonts.primary
       },
       h1: {
-        color: nearformTheme.colors.midnightBlue,
-        fontFamily: "'Poppins', sans-serif",
+        color: theme.colors.midnightBlue,
+        fontFamily: theme.fonts.primary,
         fontWeight: 100
       },
       h2: {
-        color: nearformTheme.colors.supersplit,
-        fontFamily: "'Poppins', sans-serif",
+        color: theme.colors.supersplit,
+        fontFamily: theme.fonts.primary,
         fontWeight: 100
       },
       h3: {
-        color: nearformTheme.colors.brunchPink,
-        fontFamily: "'Poppins', sans-serif",
+        color: theme.colors.brunchPink,
+        fontFamily: theme.fonts.primary,
         fontWeight: 100
       },
       h4: {
-        color: nearformTheme.colors.bubblegum,
-        fontFamily: "'Poppins', sans-serif",
+        color: theme.colors.bubblegum,
+        fontFamily: theme.fonts.primary,
         fontWeight: 100
       }
     }
