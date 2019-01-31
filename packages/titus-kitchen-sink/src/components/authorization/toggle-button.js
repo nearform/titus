@@ -24,14 +24,13 @@ export const ToggleButton = ({ id, children }) => (
                 query: loadAllDietTypes
               })
 
-              data.allDietTypes = data.allDietTypes.map(
-                dietType =>
-                  dietType.id === id
-                    ? {
-                        ...dietType,
-                        visible: !dietType.visible
-                      }
-                    : dietType
+              data.allDietTypes = data.allDietTypes.map(dietType =>
+                dietType.id === id
+                  ? {
+                      ...dietType,
+                      visible: !dietType.visible
+                    }
+                  : dietType
               )
 
               cache.writeQuery({

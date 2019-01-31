@@ -143,8 +143,7 @@ describe('<TableRow />', () => {
     expect(foodGroupCell).toHaveTextContent('Pirate Beverages')
 
     // Change food name input value
-    nameInput.value = 'Sea Biscuits'
-    fireEvent.change(nameInput)
+    fireEvent.change(nameInput, { target: { value: 'Sea Biscuits' } })
     // Verify updated value
     expect(nameInput).toHaveAttribute('value', 'Sea Biscuits')
 
@@ -198,8 +197,7 @@ describe('<TableRow />', () => {
 
     // Change food name input value
     const nameInput = nameCell.querySelector('input')
-    nameInput.value = 'Sea Biscuits'
-    fireEvent.change(nameInput)
+    fireEvent.change(nameInput, { target: { value: 'Sea Biscuits' } })
     // Verify updated value
     expect(nameInput).toHaveAttribute('value', 'Sea Biscuits')
 

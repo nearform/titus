@@ -51,21 +51,20 @@ const DietaryTypes = ({ classes, userId }) => (
           {data &&
             data.allDietTypes &&
             data.allDietTypes.length &&
-            data.allDietTypes.map(
-              ({ id, name, visible }) =>
-                userId !== 'MrUser' || (userId === 'MrUser' && visible) ? (
-                  <ListItem key={id}>
-                    <ListItemText primary={name} />
-                    <ListItemSecondaryAction>
-                      {userId === 'MrsAdmin' && <DeleteButton id={id} />}
-                      {(userId === 'MrsAdmin' || userId === 'MissEditor') && (
-                        <ToggleButton id={id}>
-                          {visible ? <Visibility /> : <VisibilityOff />}
-                        </ToggleButton>
-                      )}
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                ) : null
+            data.allDietTypes.map(({ id, name, visible }) =>
+              userId !== 'MrUser' || (userId === 'MrUser' && visible) ? (
+                <ListItem key={id}>
+                  <ListItemText primary={name} />
+                  <ListItemSecondaryAction>
+                    {userId === 'MrsAdmin' && <DeleteButton id={id} />}
+                    {(userId === 'MrsAdmin' || userId === 'MissEditor') && (
+                      <ToggleButton id={id}>
+                        {visible ? <Visibility /> : <VisibilityOff />}
+                      </ToggleButton>
+                    )}
+                  </ListItemSecondaryAction>
+                </ListItem>
+              ) : null
             )}
         </List>
       )
