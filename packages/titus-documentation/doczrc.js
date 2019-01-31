@@ -34,17 +34,13 @@ const nearformTheme = {
   }
 }
 
-const PACKAGES = path.resolve(__dirname, '../')
+const searchPath = path.resolve(__dirname, '../')
 const base = '/titus'
-
-const { NODE_ENV } = process.env
-
-const IMG_PATH = NODE_ENV === 'development' ? '/public' : `${base}/static/img`
 
 export default {
   description: 'This is the official documentation of @nearform/titus monorepo',
   mdPlugins: [externalLinks.default, [remarkBookmarks, { bookmarks }]],
-  src: PACKAGES,
+  src: searchPath,
   files: `{*/*.mdx,*/src/*.mdx,*/src/**/*.mdx}`,
   dest: `../../docs`,
   base: `${base}/`,
@@ -52,11 +48,11 @@ export default {
   repository: 'https://github.com/nearform/titus',
   indexHtml: 'src/index.html',
   htmlContext: {
-    favicon: `${IMG_PATH}/favicon.png`
+    favicon: `public/favicon.png`
   },
   themeConfig: {
     logo: {
-      src: `${IMG_PATH}/logo.svg`,
+      src: `public/logo.svg`,
       width: 150
     },
     colors: {
