@@ -1,0 +1,48 @@
+---
+name: Overview
+menu: Documentation
+route: /documentation
+order: 6
+---
+
+# Documentation
+Titus supports good documentation practices within the stack. This is achieved by using DocZ to pull together documents which are maintained under each package of the repo.
+
+Documentation is handled by the [titus-documentation]() package. It's job is to coordinate the root structure of the documentation site, as well as provide the tooling to build and view the documentation.
+
+Some documentation is stored in other packages. To capture these pages, titus-documentation scans all packages for .mdx files. These files are added to the documentation according to the meta in their header yaml.
+
+## Viewing locally
+A pre-built version of the documentation is available in the `docs/` folder in the root of the project. For convenience, this can be served locally by running the following command,
+
+```sh
+npm run docs:view
+```
+
+This comand can be ran in the root of the project or in the titus-documentation package itself.
+
+Once ran, the documentation will be available at `localhost:3000`.
+
+## Building
+A static copy of the docs can be built for publishing to [Github Pages]() or some other static hosting site.
+
+The built documentation site is written to the `doc/s` folder in the root of the project.
+
+To build a new version of the documentation, run the following command,
+
+```sh
+npm run docs:build
+```
+
+This comand can be ran in the root of the project or in the titus-documentation package itself.
+
+It is expected that any output from the build will be checked in, as it represents an update to the documentation.
+
+## Development
+Working with the documentation is easy, thanks to live reload.
+
+```sh
+npm run docs:Dev
+```
+
+More to follow soon...
