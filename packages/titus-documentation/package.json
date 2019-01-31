@@ -6,8 +6,7 @@
     "test": "exit 0",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "docs:copy-logo": "cp public/favicon.png public/logo.svg ../../docs/static/img",
-    "docs:build": "docz build && npm run docs:copy-logo",
+    "docs:build": "docz build && sh copy-imgs.sh",
     "docs:dev": "docz dev",
     "docs:serve": "serve -s -l 3000 ../../docs"
   },
