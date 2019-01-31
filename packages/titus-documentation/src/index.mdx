@@ -1,19 +1,33 @@
 ---
-name: Overview
-order: 10
+name: Home
 route: /
+order: 10
 ---
 
 # Titus
 
-The **Titus** project showcases coding practices, tools and styles we use at [NearForm](https://nearform.com).
+**Titus** is a fully featured starter kit, designed to accelerate projects. It contains a solid foundation for bootstrapping new projects, without writing the same boilerplate code again and again.
 
-It contains a solid foundation for bootstrapping new projects, without writing the same boilerplate code again and again.
+It is an opinionanted approach for starting a new application, but it's flexible enough to be tuned to match personal preferences.
 
-It's clearly an opinionanted approach for starting a new application, but it's flexible enough to be tuned to match personal preferences.
-
-It's different from application generators like [create-react-app] (in fact, it builds on top of it), because the purpose of Titus is to showcase how we do things and provide code examples that can easily be reused, rather than a barebones application skeleton.
+It's different from application generators like [create-react-app]() (in fact, it builds on top of it), because the purpose of Titus is to showcase how we do things and provide code examples that can easily be reused, rather than a barebones application skeleton.
 
 Therefore, while Titus can be used to create a new application, you can just as easily start with create-react-app and include the parts of Titus that you find useful.
 
 On the other hand it's even easier to start with the Titus [sample application](/kitchen-sink) and remove the parts that you don't need.
+
+## Overview
+Titus is a Monorepo project that represents a full stack application. The primary constiuent parts are,
+
+- [titus-kitchen-sink](): A client-side app generated using [create-react-app]()
+- [titus-kitchen-sink-backend](): A server side app built using [hapi]()
+- [titus-noise](): A deployment pipeline, using [noise]() that enables continious cloud delivery
+- [titus-components](): A collection of various useful components for use (or deletion)
+
+On top of these services Titus also provides some common sense infrastructure,
+
+- A [PostgreSql]() database with and [adminer]() management frontend
+- A [Redis]() deployment
+- An [S3]() Faker service
+
+All of this gets deployed locally via docker to keep installation and orchastration a breeze.

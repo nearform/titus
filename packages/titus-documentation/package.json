@@ -1,15 +1,15 @@
 {
   "name": "titus-documentation",
   "version": "1.0.0",
-  "description": "Documentation for titus monorepo",
   "private": true,
   "scripts": {
     "test": "exit 0",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "copy": "cp public/favicon.png public/logo.svg ../../docs/static/img",
-    "docz:dev": "docz dev",
-    "docz:build": "docz build && npm run copy"
+    "docs:copy-logo": "cp public/favicon.png public/logo.svg ../../docs/static/img",
+    "docs:build": "docz build && npm run docs:copy-logo",
+    "docs:dev": "docz dev",
+    "docs:serve": "serve -s -l 3000 ../../docs"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.3",
@@ -23,7 +23,8 @@
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^3.1.0",
     "remark-bookmarks": "^2.0.0",
-    "remark-external-links": "^4.0.0"
+    "remark-external-links": "^4.0.0",
+    "serve": "^10.1.1"
   },
   "dependencies": {
     "docz-theme-default": "^0.13.7"
