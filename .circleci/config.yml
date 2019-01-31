@@ -193,7 +193,7 @@ jobs:
             sudo chmod a+x /usr/local/bin/kubectl
             kubectl get nodes
       - run:
-            name: Deploy to preproduction
+            name: Deploy to production
             command: |
                 helm upgrade --install titus ./infrastructure/helm \
                    --set docker.images.preproduction.backend=$(kubectl get deployment titus-backend-preprod -o=jsonpath='{$.spec.template.spec.containers[:1].image}') \
