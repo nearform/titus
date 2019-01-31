@@ -1,7 +1,6 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = function override(config) {
-  //do stuff with the webpack config...
   const plugins = [
     new CopyWebpackPlugin([
       {
