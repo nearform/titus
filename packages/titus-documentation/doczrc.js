@@ -2,7 +2,7 @@ import * as path from 'path'
 import externalLinks from 'remark-external-links'
 import remarkBookmarks from 'remark-bookmarks'
 
-// Add all bookmarks here that should be shared they 
+// Add all bookmarks here that should be shared they
 // can be referenced in .mdx like so: [link-name]
 const bookmarks = {
   '@nearform/react-table': 'https://github.com/nearform/react-table',
