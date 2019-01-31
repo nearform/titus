@@ -45,7 +45,7 @@ export default {
   description: 'This is the official documentation of @nearform/titus monorepo',
   mdPlugins: [externalLinks.default, [remarkBookmarks, { bookmarks }]],
   src: PACKAGES,
-  files: `{*/src/*.mdx,*/src/**/*.mdx}`,
+  files: `{*/*.mdx,*/src/*.mdx,*/src/**/*.mdx}`,
   dest: `../../docs`,
   base: `${base}/`,
   hashRouter: true,
