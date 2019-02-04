@@ -5,4 +5,4 @@ Your are browsing the repository for __titus-backend__. All documentation for ti
 - Get the whole picture by viewing our __[Documentation][docs]__
 
 [docs]: https://nearform.github.io/titus
-[logo-img]: /docs/public/logo.svg
+[logo-img]: /docs/img/logo.svg

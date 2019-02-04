@@ -11,9 +11,7 @@
     "start:showcase": "lerna run --scope titus-*-showcase --stream start",
     "stop:showcase": "lerna run --scope titus-*-showcase --stream stop",
     "lighthouse": "lerna run lighthouse",
-    "create:env": "lerna run --scope titus-*-showcase create:env",
-    "docs:build": "lerna run --stream docs:build",
-    "docs:dev": "lerna run --stream docs:dev"
+    "create:env": "lerna run --scope titus-*-showcase create:env"
   },
   "devDependencies": {
     "husky": "^1.3.1",
