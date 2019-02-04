@@ -1,10 +1,10 @@
 # Contributing
 
 ## Code
-To follow...
+Add some content here about accepting pull requests and other contributing tasks.
 
 ## Documentation
-We welcome documentation contributions. Our documentation can be viewed live at [nearform.github.io/titus-noise][docs]
+We welcome documentation contributions. Our documentation can be viewed live at [your-url][docs]
 
 ### Running Documentation locally
 Our documentation can be ran by serving the docs folder at a given port. For ease of use you can use the `docsfiy-cli` should you have node installed.
@@ -22,7 +22,7 @@ docsify serve docs
 Which will produce,
 
 ```sh
-Serving /path/to/your/repo/titus-noise/docs now.
+Serving /path/to/your/repo/name/docs now.
 Listening at http://localhost:3000
 ```
 
@@ -60,4 +60,4 @@ Which will produce,
 
 The documentation will be served on `localhost:4000` in this case.
 
-[docs]:https://nearform.github.io/titus-noise
+[docs]:/
