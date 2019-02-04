@@ -1,5 +1,5 @@
 {
-  "name": "titus-kitchen-sink-backend",
+  "name": "titus-be-showcase",
   "version": "1.0.0",
   "private": true,
   "description": "The backend for the Titus project",

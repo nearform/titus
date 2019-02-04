@@ -8,10 +8,10 @@
     "lint:all": "lerna run --parallel lint",
     "test:all": "lerna run test",
     "postinstall": "lerna bootstrap && lerna exec npm install",
-    "start:kitchen-sink": "lerna run --scope titus-kitchen* --stream start",
-    "stop:kitchen-sink": "lerna run --scope titus-kitchen* --stream stop",
+    "start:showcase": "lerna run --scope titus-*-showcase --stream start",
+    "stop:showcase": "lerna run --scope titus-*-showcase --stream stop",
     "lighthouse": "lerna run lighthouse",
-    "create:env": "lerna run --scope titus-kitchen* create:env",
+    "create:env": "lerna run --scope titus-*-showcase create:env",
     "docs:build": "lerna run --stream docs:build",
     "docs:dev": "lerna run --stream docs:dev"
   },
