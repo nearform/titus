@@ -5,4 +5,4 @@ Your are browsing the repository for __titus-components__. All documentation for
 - Get the whole picture by viewing our __[Documentation][docs]__
 
 [docs]: https://nearform.github.io/titus
-[logo-img]: /docs/public/logo.svg
+[logo-img]: /docs/img/logo.svg
