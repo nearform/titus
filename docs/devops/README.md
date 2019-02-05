@@ -1,4 +1,4 @@
-# Deployment
+# DevOps
 Deployment for Titus is a fully featured, modern, production grade experience. There are a number of ways to look at Titus' deployment tooling. For simplicity we have broken it down into two views, Infrastructure, and CI Pipeline.
 
 ### Infrastructure
