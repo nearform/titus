@@ -39,7 +39,6 @@ describe('Navigation', () => {
       )
 
       expect(container.querySelector('#mock-main')).not.toBeNull()
-      expect(container.querySelector('#mock-items')).not.toBeNull()
       expect(container.querySelector('h6').textContent).toBe('Test title')
       expect(
         getByTestId('app-bar-drawer').firstChild.getAttribute('class')
