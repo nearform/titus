@@ -19,7 +19,7 @@ Taking 4 to 6 weeks to show a client value in a system they are paying for is an
 ## Getting started
 The quickest way to get started is to view our quick start guide. It covers, forking, cloning, and pulling Titus local. From there it will walk you through configuration and deployment. All you need installed is the latest stable versions of [Docker]() and [Node]().
 
-- Go to the [Quick start](/quick-start)
+- Go to the [Quick start](/quick-start/)
 
 
 [logo-img]: img/logo-pos.svg

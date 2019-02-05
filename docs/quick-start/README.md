@@ -84,9 +84,6 @@ Should produce a slightly more detailed version of the output below,
 CONTAINER ID        IMAGE            PORTS                              NAMES
 5fae4357593d        docker_api       0.0.0.0:5000->5000/tcp, 8080/tcp   docker_api_1
 d119b3262ff7        docker_titus-db  0.0.0.0:5432->5432/tcp             docker_titus-db_1
-9970ccaaee48        mrister/fake-s3  0.0.0.0:4569->4569/tcp             docker_s3_1
-ddbe5f6e0913        adminer          0.0.0.0:8080->8080/tcp             docker_adminer_1
-0470eec65534        redis:alpine     0.0.0.0:6379->6379/tcp             docker_redis_1
 ```
 
 If all of the services above are listed, you are now free running Titus! Congratulations.
@@ -99,3 +96,7 @@ npm run stop:kitchen-sink
 ```
 
 Which will stop all applicable docker containers and services.
+
+## Next steps
+
+- [Deployment](deployment/)
