@@ -1,7 +1,5 @@
 # Deployment
-
-## Deployment Topology
-Deployment for Titus is a fully featured, modern, production grade experience. There are a number of ways to look at the topology of Titus' deployment tooling. For  we have broken it down into two views, Infrastructural, and CI Pipeline.
+Deployment for Titus is a fully featured, modern, production grade experience. There are a number of ways to look at Titus' deployment tooling. For simplicity we have broken it down into two views, Infrastructure, and CI Pipeline.
 
 ### Infrastructure
 Titus runs on [Kubernetes]() and can be deployed to [Azure](), [AWS](), and [GCP](). Low level infrastructure is managed by [Terraform](), with service level infrastructure managed by [Kubernetes](). Services are deployed using [CircleCI]() which runs [Helm]() to handle service updates to the running cluster.
