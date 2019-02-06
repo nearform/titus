@@ -33,7 +33,7 @@ jobs:
           name: Build the production frontend bundle
           command: |
             set -e
-            cd packages/titus-backend
+            cd packages/titus-fe-showcase
             mv .env.prod .env
             npm run build
       - persist_to_workspace:
