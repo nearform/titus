@@ -53,12 +53,9 @@
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
-    "hapi-swagger": "^9.3.0",
-    "inert": "^5.1.2",
     "jest": "^24.0.0",
     "nodemon": "^1.18.7",
-    "prettier": "^1.16.2",
-    "vision": "^5.4.4"
+    "prettier": "^1.16.2"
   },
   "jest": {
     "verbose": true,

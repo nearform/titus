@@ -49,13 +49,6 @@ module.exports = {
     poolSize: 10,
     idleTimeoutMillis: 30000
   },
-  swagger: {
-    host: '127.0.0.1:5000',
-    info: {
-      title: `${name} API Documentation`,
-      version
-    }
-  },
   authorization: {
     url: 'http://localhost:5000/authorization/'
   },
