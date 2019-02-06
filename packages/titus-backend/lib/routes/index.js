@@ -2,7 +2,4 @@
 
 const error = require('./error')
 
-module.exports = (server, config) =>
-  [].concat(
-    error(server, config)
-  )
+module.exports = (server, config) => [].concat(error(server, config))
