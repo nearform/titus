@@ -60,11 +60,6 @@ module.exports = {
           getUserFromRequest: async (request, payload) => {
             return request.auth.credentials
           }
-        },
-        multines: {
-          type: 'redis',
-          host: config.redis.host,
-          port: config.redis.port
         }
       }
     })
