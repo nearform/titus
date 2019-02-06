@@ -1,12 +1,12 @@
 # Quick start
-![quick-start-quote](../img/titus-quick-start-quote.svg)
+![quick-start-quote][]
 
 Titus is easy to install and run. We encourage developers to install Titus locally themselves It should feel easy to navigate around, start, and stop. Before we go further however, let us ensure you have all of the prerequisites installed. 
 
-You will need the latest stable versions of [Node.js](), and [Docker](). Both of these should be trivial to install and do not require any special setup.
+You will need the latest stable versions of [Node][], and [Docker][]. Both of these should be trivial to install and do not require any special setup. There are other tools to install for deployment purposes, these will be covered later in the [DevOps][] section of this documentation.
 
 ## Clone the source repo
-To kick everything off, fork [Titus]() on Github, it will be easier to maintain your own fork as Titus is designed to diverge, it is unlikely you will need to pull from the source repository again outside of some minor cherry-picking.
+To kick everything off, fork [Titus][] on Github, it will be easier to maintain your own fork as Titus is designed to diverge, it is unlikely you will need to pull from the source repository again outside of some minor cherry-picking.
 
 Once you have your fork, clone a copy of it locally,
 
@@ -41,21 +41,18 @@ npm run create:env
 ```
 
 ### Configure Auth (Optional) 
-Titus supports any auth provider that is [OpenID Connect (OIDC)]() compliant. In order to connect with Auth0 or any other OIDC provider few environment variables need to be defined.
+Titus supports any auth provider that is [OpenID Connect][] (OIDC) compliant. In order to connect with Auth0 or any other OIDC provider few environment variables need to be defined.
 
-Both the frontend and backend are able to use the standard OIDC to connect to Auth0 or other OIDC compliant providers. Use the following variables instead of the above mentioned:
+Both the frontend and backend are able to use the standard OIDC to connect to Auth0 or other OIDC compliant providers.
 
-For the frontend Auth0 configuration:
-```
-REACT_APP_OIDC_AUTHORITY
-REACT_APP_OIDC_CLIENT_ID
-```
+For the frontend
 
-For the backend Auth0 configuration:
 ```
 REACT_APP_AUTH0_DOMAIN
 REACT_APP_AUTH0_CLIENT_ID
 REACT_APP_AUTH0_AUDIENCE
+REACT_APP_OIDC_AUTHORITY
+REACT_APP_OIDC_CLIENT_ID
 ```
 
 For backend app:
@@ -104,5 +101,22 @@ To do.
 
 ## Next steps
 
-- Deep dive into our documentation for [Developers](developers/).
-- See our detailed [DevOps](devops/) documentation.
+- Deep dive into our documentation for [Developers][].
+- See our detailed [DevOps][] documentation.
+
+
+<!-- External Links -->
+[Noise]: https://nearform.github.io/noise
+[titus-noise-cli]: https://github.com/nearform/titus-noise-cli
+[CircleCI]: https://circleci.com/product/#features
+[Docker]: https://www.docker.com/
+[Node]: https://nodejs.org/en/
+[OpenID Connect]: https://openid.net/connect/ 
+
+<!-- Internal Links -->
+[DevOps]: devops/
+[Developers]: developers/
+
+
+<!-- Images -->
+[quick-start-quote]: ../img/titus-quick-start-quote.svg
