@@ -10,8 +10,6 @@ const {
   POSTGRES_PASSWORD,
   POSTGRES_DB,
   NODE_ENV,
-  REDIS_HOST,
-  REDIS_PORT,
   AUTH0_DOMAIN,
   AUTH0_CLIENT_ID,
   AUTH0_CLIENT_SECRET,
@@ -41,10 +39,6 @@ module.exports = {
       prettyPrint: NODE_ENV !== 'production',
       level: 'debug'
     }
-  },
-  redis: {
-    host: REDIS_HOST || 'redis',
-    port: REDIS_PORT || 6379
   },
   db: {
     host: PGHOST || null,
