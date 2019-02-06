@@ -8,9 +8,8 @@ A starter Hapi and PostgreSQL setup running in Docker.
 * Uses host filesystem, so no need to restart containers on code change
 * Hot reloading Hapi server
 * Web-based Postgresql ui using [Adminer](https://www.adminer.org/)
-* Graphql with sample schema and associated db migrations and seed
 * Postgresql Hapi plugin with transaction control
-* Sample source structure for organising Hapi and Graphql components
+* Sample source structure for organising Hapi
 * Sample test setup using Jest
 * Linting using eslint/Standard
 
@@ -65,12 +64,3 @@ Titus uses Docker Compose, see [docker/docker-compose-dev.yml](docker/docker-com
 
 * Change 'System' to be 'PostgreSQL'.
 * You can then log in with: `titus` as user, password and database.
-
-
-### Trail
-
-Audit trails are available using [nearForm's Trail service](https://github.com/nearform/trail).
-
-You can navigate to http://localhost:5000/hello in your browser to add an audit trail item to the database.
-
-To view audit trail items navigate to [](http://localhost:5000/trails?from=<date-from>&to=<date-to>), where `<date-from>` and `<date-to>` are ISO 8601 formatted dates, e.g. http://localhost:5000/trails?from=2017-07-06T12%3A34%3A56.123&to=2018-07-06T12%3A34%3A56.123

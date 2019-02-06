@@ -1,7 +1,5 @@
 'use strict'
 
-const TrailManager = require('@nearform/trail-core').TrailsManager
-
 const food = require('../../rest/food')
 const {
   id,
@@ -14,10 +12,6 @@ const {
   needle,
   foodWithFoodGroupId
 } = require('./schemas')
-
-const trailManager = new TrailManager()
-
-const subject = 'food'
 
 const getAll = () => ({
   method: 'GET',
@@ -37,12 +31,6 @@ const getAll = () => ({
     }
   },
   handler: async (request, h) => {
-    await trailManager.insert({
-      when: new Date(),
-      who: request.info.remoteAddress,
-      what: 'getAll',
-      subject
-    })
     return food.getAll(request.pg, request.query)
   }
 })
@@ -63,12 +51,6 @@ const getById = () => ({
     }
   },
   handler: async (request, h) => {
-    await trailManager.insert({
-      when: new Date(),
-      who: request.info.remoteAddress,
-      what: 'getById',
-      subject
-    })
     return food.getById(request.pg, request.params)
   }
 })
@@ -89,12 +71,6 @@ const search = () => ({
     }
   },
   handler: async (request, h) => {
-    await trailManager.insert({
-      when: new Date(),
-      who: request.info.remoteAddress,
-      what: 'search',
-      subject
-    })
     return food.search(request.pg, request.params)
   }
 })
@@ -115,12 +91,6 @@ const keyword = () => ({
     }
   },
   handler: async (request, h) => {
-    await trailManager.insert({
-      when: new Date(),
-      who: request.info.remoteAddress,
-      what: 'keyword',
-      subject
-    })
     return food.keyword(request.pg, request.params)
   }
 })
@@ -140,12 +110,6 @@ const create = () => ({
     }
   },
   handler: async (request, h) => {
-    await trailManager.insert({
-      when: new Date(),
-      who: request.info.remoteAddress,
-      what: 'create',
-      subject
-    })
     return food.create(request.pg, { food: request.payload })
   }
 })
@@ -165,12 +129,6 @@ const update = () => ({
     }
   },
   handler: async (request, h) => {
-    await trailManager.insert({
-      when: new Date(),
-      who: request.info.remoteAddress,
-      what: 'update',
-      subject
-    })
     return food.update(request.pg, { food: request.payload })
   }
 })
@@ -193,12 +151,6 @@ const deleteFoods = () => ({
     }
   },
   handler: async (request, h) => {
-    await trailManager.insert({
-      when: new Date(),
-      who: request.info.remoteAddress,
-      what: 'delete',
-      subject
-    })
     return food.deleteFoods(request.pg, request.params)
   }
 })

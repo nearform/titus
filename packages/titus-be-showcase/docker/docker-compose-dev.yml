@@ -44,12 +44,5 @@ services:
     environment:
       - ADMINER_DEFAULT_SERVER=titus-db
 
-  s3:
-    image: "mrister/fake-s3"
-    ports:
-    - "4569:4569"
-    volumes:
-    - /data/fake-s3
-
 networks:
     titus:

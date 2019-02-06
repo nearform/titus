@@ -1,13 +1,7 @@
 'use strict'
 
-const TrailManager = require('@nearform/trail-core').TrailsManager
-
 const foodHistory = require('../../rest/foodHistory')
 const { id } = require('./schemas')
-
-const trailManager = new TrailManager()
-
-const subject = 'foodHistory'
 
 const findByFoodId = () => ({
   method: 'GET',
@@ -25,12 +19,6 @@ const findByFoodId = () => ({
     }
   },
   handler: async (request, h) => {
-    await trailManager.insert({
-      when: new Date(),
-      who: request.info.remoteAddress,
-      what: 'getById',
-      subject
-    })
     return foodHistory.findByFoodId(request.pg, request.params)
   }
 })

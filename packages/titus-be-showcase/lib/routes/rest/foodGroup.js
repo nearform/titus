@@ -1,13 +1,7 @@
 'use strict'
 
-const TrailManager = require('@nearform/trail-core').TrailsManager
-
 const foodGroup = require('../../rest/foodGroup')
 const { id, idList, swaggerIdList, foodGroupWithoutId } = require('./schemas')
-
-const trailManager = new TrailManager()
-
-const subject = 'foodGroup'
 
 const getAll = () => ({
   method: 'GET',
@@ -23,12 +17,6 @@ const getAll = () => ({
     }
   },
   handler: async (request, h) => {
-    await trailManager.insert({
-      when: new Date(),
-      who: request.info.remoteAddress,
-      what: 'getAll',
-      subject
-    })
     return foodGroup.getAll(request.pg)
   }
 })
@@ -48,12 +36,6 @@ const getById = () => ({
     }
   },
   handler: async (request, h) => {
-    await trailManager.insert({
-      when: new Date(),
-      who: request.info.remoteAddress,
-      what: 'getById',
-      subject
-    })
     return foodGroup.getById(request.pg, request.params)
   }
 })
@@ -76,12 +58,6 @@ const getByIds = () => ({
     }
   },
   handler: async (request, h) => {
-    await trailManager.insert({
-      when: new Date(),
-      who: request.info.remoteAddress,
-      what: 'getById',
-      subject
-    })
     return foodGroup.getByIds(request.pg, request.params.ids)
   }
 })
@@ -101,12 +77,6 @@ const create = () => ({
     }
   },
   handler: async (request, h) => {
-    await trailManager.insert({
-      when: new Date(),
-      who: request.info.remoteAddress,
-      what: 'create',
-      subject
-    })
     return foodGroup.create(request.pg, request.payload)
   }
 })

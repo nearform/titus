@@ -34,8 +34,6 @@ module.exports = {
     host: PGHOST || null,
     port: PGPORT || 5432,
     database: POSTGRES_DB || 'titus',
-    // NOTE: Required for udaru, which uses 'user' rather than 'username'
-    user: POSTGRES_USER || 'titus',
     username: POSTGRES_USER || 'titus',
     password: POSTGRES_PASSWORD || 'titus',
     poolSize: 10,

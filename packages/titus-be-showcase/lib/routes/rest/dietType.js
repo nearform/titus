@@ -1,13 +1,7 @@
 'use strict'
 
-const TrailManager = require('@nearform/trail-core').TrailsManager
-
 const dietType = require('../../rest/dietType')
 const { id } = require('./schemas')
-
-const trailManager = new TrailManager()
-
-const subject = 'dietType'
 
 const getAll = () => ({
   method: 'GET',
@@ -23,12 +17,6 @@ const getAll = () => ({
     }
   },
   handler: async (request, h) => {
-    await trailManager.insert({
-      when: new Date(),
-      who: request.info.remoteAddress,
-      what: 'getAll',
-      subject
-    })
     return dietType.getAll(request.pg)
   }
 })
@@ -48,12 +36,6 @@ const deleteDietType = () => ({
     }
   },
   handler: async (request, h) => {
-    await trailManager.insert({
-      when: new Date(),
-      who: request.info.remoteAddress,
-      what: 'deleteDietType',
-      subject
-    })
     return dietType.deleteDietType(request.pg, request.params.id)
   }
 })
@@ -73,12 +55,6 @@ const toggleDietTypeVisibility = () => ({
     }
   },
   handler: async (request, h) => {
-    await trailManager.insert({
-      when: new Date(),
-      who: request.info.remoteAddress,
-      what: 'toggleDietTypeVisibility',
-      subject
-    })
     return dietType.toggleDietTypeVisibility(request.pg, request.params)
   }
 })
