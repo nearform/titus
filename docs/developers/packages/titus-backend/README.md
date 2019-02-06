@@ -7,7 +7,6 @@ A starter Hapi and PostgreSQL setup running in Docker.
 * Docker compose config to start database and Hapi
 * Uses host filesystem, so no need to restart containers on code change
 * Hot reloading Hapi server
-* Web-based Postgresql ui using [Adminer](https://www.adminer.org/)
 * Postgresql Hapi plugin with transaction control
 * Sample source structure for organising Hapi
 * Sample test setup using Jest
@@ -57,10 +56,3 @@ Titus uses Docker Compose, see [docker/docker-compose-dev.yml](docker/docker-com
 ### Testing
 
 `test` - run tests using Jest
-
-### Adminer
-
-[Adminer](https://www.adminer.org/) provides a handy web ui for the postgres db which you can access by opening http://localhost:8080.
-
-* Change 'System' to be 'PostgreSQL'.
-* You can then log in with: `titus` as user, password and database.
