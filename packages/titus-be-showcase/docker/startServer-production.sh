@@ -14,5 +14,4 @@ done
 
 npm run initdb
 npm run migrate
-npm run prod:seed:udaru
 npm run dev:start

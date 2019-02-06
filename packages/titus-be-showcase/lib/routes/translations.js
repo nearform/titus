@@ -1,9 +1,5 @@
 'use strict'
 
-const TrailManager = require('@nearform/trail-core').TrailsManager
-
-const trailManager = new TrailManager()
-
 const resources = {
   en: {
     translations: {
@@ -36,13 +32,6 @@ const translations = () => ({
   },
   handler: async (request, h) => {
     const { language, namespace } = request.params
-
-    await trailManager.insert({
-      when: new Date(),
-      who: request.info.remoteAddress,
-      what: 'get',
-      subject: 'locales'
-    })
 
     try {
       return resources[language][namespace]
