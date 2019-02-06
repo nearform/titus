@@ -20,10 +20,6 @@ Verify it works with `curl http://127.0.0.1:5000/hello/random`
 
 You can tail the server logs with `docker logs -f docker_api_1`.
 
-## API documentation
-
-Setting the `NODE_ENV` to `development`, you will be able to access the API `swagger` documentation at [http://127.0.0.1:5000/documentation](http://127.0.0.1:5000/documentation). This is set by default when you use `npm run start`
-
 ## Developing
 
 `npm run start` will run everything in local development mode. Any code changes you make will automatically restart the server. 

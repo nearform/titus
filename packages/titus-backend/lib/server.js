@@ -2,7 +2,6 @@
 
 const hapi = require('hapi')
 const pino = require('hapi-pino')
-const HapiSwagger = require('hapi-swagger')
 const config = require('../config/default')
 const pgPlugin = require('./pg-plugin')
 const routes = require('./routes')
@@ -25,17 +24,6 @@ const init = async () => {
       options: config.pg
     }
   ])
-
-  if (process.env.NODE_ENV === 'development') {
-    await server.register([
-      require('inert'),
-      require('vision'),
-      {
-        plugin: HapiSwagger,
-        options: config.swagger || {}
-      }
-    ])
-  }
 
   await server.start()
   server.logger().info(`Server running at: ${server.info.uri}`)
