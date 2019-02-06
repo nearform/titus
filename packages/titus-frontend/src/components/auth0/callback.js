@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
+import history from '../../history'
 import auth0 from './Auth0'
-import { navigate } from '@reach/router'
 
 class Auth0Callback extends Component {
   state = {
@@ -15,7 +15,7 @@ class Auth0Callback extends Component {
         this.setState({ err })
       }
 
-      navigate('/identity/login')
+      history.push('/identity/login')
     })
   }
 

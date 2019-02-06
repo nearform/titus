@@ -1,16 +1,19 @@
 import React, { lazy, Suspense } from 'react'
-import { Router } from '@reach/router'
+import { Route, Router } from 'react-router-dom'
+import history from './history'
 import Loading from './loading'
 
 const AsyncDashboard = lazy(() => import('./components/dashboard'))
 
 const Routes = () => (
-  <Suspense fallback={<Loading />}>
-    <Router>
-      <AsyncDashboard path="/" />
+  <Router history={history}>
+    <Suspense fallback={<Loading />}>
+      <Route path="/">
+        <AsyncDashboard />
+      </Route>
       {/* INSERT NEW ROUTES HERE */}
-    </Router>
-  </Suspense>
+    </Suspense>
+  </Router>
 )
 
 export default Routes

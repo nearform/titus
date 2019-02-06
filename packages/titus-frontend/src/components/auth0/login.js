@@ -1,30 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import auth0 from './Auth0'
-import { navigate } from '@reach/router'
-import { Button, Paper, Grid, withStyles, Typography } from '@material-ui/core'
-import LockIcon from '@material-ui/icons/Lock'
+import history from '../../history'
 import { LoginForm } from '../login'
 import * as yup from 'yup'
-
-const styles = theme => ({
-  root: {
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2
-  },
-  button: {
-    marginTop: theme.spacing.unit * 2,
-    marginBottom: theme.spacing.unit * 2
-  },
-  container: {
-    padding: theme.spacing.unit * 2
-  },
-  rightIcon: {
-    marginLeft: theme.spacing.unit
-  },
-  formRoot: {
-    padding: theme.spacing.unit * 5
-  }
-})
 
 const schema = yup.object().shape({
   username: yup.string().required('Username is required.'),
@@ -58,7 +36,7 @@ class Auth0Login extends Component {
           'expires_at',
           authResult.expires_in * 1000 + new Date().getTime()
         )
-        navigate('/identity/login')
+        history.push('/identity/login')
       }
     } catch (error) {
       console.error(error)
@@ -69,10 +47,10 @@ class Auth0Login extends Component {
     const { classes, auth0 } = this.props
 
     return (
-      <Grid container spacing={24} className={classes.root}>
-        <Grid item xs={12}>
-          <Paper>
-            <Grid
+      <div container spacing={24} className={classes.root}>
+        <div item xs={12}>
+          <div>
+            <div
               container
               direction="row"
               justify="space-around"
@@ -81,22 +59,22 @@ class Auth0Login extends Component {
               className={classes.container}
             >
               {auth0.isAuthenticated ? (
-                <>
-                  <Typography variant="title" color="inherit" noWrap>
+                <Fragment>
+                  <span variant="title" color="inherit" noWrap>
                     You are logged in.
-                  </Typography>
+                  </span>
 
-                  <Button
+                  <button
                     variant="contained"
                     color="secondary"
                     disabled={!auth0.isAuthenticated}
                     onClick={() => auth0.logout()}
                   >
                     Log Out
-                  </Button>
-                </>
+                  </button>
+                </Fragment>
               ) : (
-                <Button
+                <button
                   className={classes.button}
                   variant="contained"
                   color="secondary"
@@ -104,14 +82,16 @@ class Auth0Login extends Component {
                   onClick={() => this.authorize()}
                 >
                   Login Through Auth0
-                  <LockIcon className={classes.rightIcon} />
-                </Button>
+                  {/** ADD MATERIAL LOCK ICON
+                    <LockIcon className={classes.rightIcon} />
+                  */}
+                </button>
               )}
-            </Grid>
-          </Paper>
-        </Grid>
-        <Grid item xs={12}>
-          <Paper>
+            </div>
+          </div>
+        </div>
+        <div item xs={12}>
+          <div>
             {!auth0.isAuthenticated ? (
               <div className={classes.formRoot}>
                 <LoginForm
@@ -121,11 +101,11 @@ class Auth0Login extends Component {
                 />
               </div>
             ) : null}
-          </Paper>
-        </Grid>
-      </Grid>
+          </div>
+        </div>
+      </div>
     )
   }
 }
 
-export default withStyles(styles)(Auth0Login)
+export default Auth0Login
