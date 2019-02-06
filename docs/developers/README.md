@@ -1,3 +1,5 @@
+![titus-developers-quote][]
+
 # Developers
 
 ## Documentation
@@ -34,3 +36,6 @@ We find the need for a database in over 80% of project cases. With this in mind 
 Clients consider 'logging in' as the primary first feature they want to see when. Titus comes pre-configured for Auth0.
 
 - [More information](starter-docs)
+
+<!-- Images -->
+[titus-developers-quote]: ../img/titus-developers-quote.svg
