@@ -1,3 +1,5 @@
+![titus-devops-quote][]
+
 # DevOps
 Deployment for Titus is a fully featured, modern, production grade experience. There are a number of ways to look at Titus' deployment tooling. For simplicity we have broken it down into two views, Infrastructure, and CI Pipeline.
 
@@ -22,3 +24,6 @@ Titus includes a fully featured, production ready, CI Pipeline. Titus uses Circl
 
 
 [CircleCI]: /
+
+<!-- Images -->
+[titus-devops-quote]: ../img/titus-devops-quote.svg
