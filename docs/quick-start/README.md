@@ -1,5 +1,6 @@
-# Quick start
 ![quick-start-quote][]
+
+# Quick start
 
 Titus is easy to install and run. We encourage developers to install Titus locally themselves It should feel easy to navigate around, start, and stop. Before we go further however, let us ensure you have all of the prerequisites installed. 
 
@@ -112,6 +113,7 @@ To do.
 [Docker]: https://www.docker.com/
 [Node]: https://nodejs.org/en/
 [OpenID Connect]: https://openid.net/connect/ 
+[Titus]: https://github.com/nearform/titus
 
 <!-- Internal Links -->
 [DevOps]: devops/
