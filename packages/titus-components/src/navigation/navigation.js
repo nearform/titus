@@ -64,6 +64,9 @@ const styles = theme => ({
       width: theme.spacing.unit * 9
     }
   },
+  navigation: {
+    paddingLeft: '24px'
+  },
   toolbar: {
     display: 'flex',
     alignItems: 'center',
@@ -98,7 +101,7 @@ export class Navigation extends Component {
     /** Theme provided by the Material-UI styling infrastructure, for internal use. */
     theme: PropTypes.object.isRequired,
     /** The menu items to display on the left drawer. */
-    items: PropTypes.node.isRequired,
+    items: PropTypes.node,
     /** The content to display in the content area. */
     children: PropTypes.node.isRequired,
     /** A function which renders the elements displayed in the right area of the top toolbar. */
@@ -133,17 +136,22 @@ export class Navigation extends Component {
           })}
           data-testid="app-bar"
         >
-          <Toolbar disableGutters={!menuOpen}>
-            <IconButton
-              color="inherit"
-              aria-label="Open Menu"
-              onClick={handleMenuOpen}
-              className={classNames(classes.menuButton, {
-                [classes.hide]: menuOpen
-              })}
-            >
-              <MenuIcon />
-            </IconButton>
+          <Toolbar
+            disableGutters={!menuOpen}
+            className={items ? '' : classes.navigation}
+          >
+            {items && (
+              <IconButton
+                color="inherit"
+                aria-label="Open Menu"
+                onClick={handleMenuOpen}
+                className={classNames(classes.menuButton, {
+                  [classes.hide]: menuOpen
+                })}
+              >
+                <MenuIcon />
+              </IconButton>
+            )}
             <Typography variant="h6" color="inherit" noWrap>
               {title}
             </Typography>
@@ -151,31 +159,33 @@ export class Navigation extends Component {
             {HeaderRight && <HeaderRight className={classes.headerRight} />}
           </Toolbar>
         </AppBar>
-        <Drawer
-          color="primary"
-          variant="permanent"
-          classes={{
-            paper: classNames(classes.drawerPaper, {
-              [classes.drawerPaperClose]: !menuOpen
-            })
-          }}
-          open={menuOpen}
-          /* any click in the drawer will propogate and close it */
-          onClick={handleMenuClose}
-          data-testid="app-bar-drawer"
-        >
-          <div className={classes.toolbar}>
-            <IconButton>
-              {theme.direction === 'rtl' ? (
-                <ChevronRightIcon data-testid="app-bar-drawer-icon-right" />
-              ) : (
-                <ChevronLeftIcon data-testid="app-bar-drawer-icon-left" />
-              )}
-            </IconButton>
-          </div>
-          <Divider />
-          {items}
-        </Drawer>
+        {items && (
+          <Drawer
+            color="primary"
+            variant="permanent"
+            classes={{
+              paper: classNames(classes.drawerPaper, {
+                [classes.drawerPaperClose]: !menuOpen
+              })
+            }}
+            open={menuOpen}
+            /* any click in the drawer will propogate and close it */
+            onClick={handleMenuClose}
+            data-testid="app-bar-drawer"
+          >
+            <div className={classes.toolbar}>
+              <IconButton>
+                {theme.direction === 'rtl' ? (
+                  <ChevronRightIcon data-testid="app-bar-drawer-icon-right" />
+                ) : (
+                  <ChevronLeftIcon data-testid="app-bar-drawer-icon-left" />
+                )}
+              </IconButton>
+            </div>
+            <Divider />
+            {items}
+          </Drawer>
+        )}
         <div className={classes.content}>
           <div className={classes.toolbar} />
           <main className={classes.main}>{children}</main>
