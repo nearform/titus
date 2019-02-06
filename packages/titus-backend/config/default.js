@@ -1,5 +1,4 @@
 'use strict'
-const { name, version } = require('../package.json')
 
 const {
   API_HOST,
