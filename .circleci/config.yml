@@ -59,8 +59,8 @@ jobs:
           at: .
       - run: npm run lighthouse
       - store_artifacts:
-          path: packages/titus-backend/lighthouse-report.html
-          destination: titus-backend-lighthouse-report.html
+          path: packages/titus-fe-showcase/lighthouse-report.html
+          destination: titus-fe-showcase-lighthouse-report.html
   push-containers:
     <<: *defaults
     environment:
