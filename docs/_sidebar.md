@@ -1,6 +1,5 @@
 * [Home](/)
 * [Quick start](/quick-start/)
-* [Architecture](/architecture/)
-* [Packages](/packages/)
-* [Deployment](/deployment/)
+* [Developers](/developers/)
+* [DevOps](/devops/)
 * [Contributing](/contributing/)

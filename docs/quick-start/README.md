@@ -5,7 +5,7 @@ Titus is easy to install and run. We encourage developers to install Titus local
 
 You will need the latest stable versions of [Node.js](), and [Docker](). Both of these should be trivial to install and do not require any special setup.
 
-## Clone the repo
+## Clone the source repo
 To kick everything off, fork [Titus]() on Github, it will be easier to maintain your own fork as Titus is designed to diverge, it is unlikely you will need to pull from the source repository again outside of some minor cherry-picking.
 
 Once you have your fork, clone a copy of it locally,
@@ -99,9 +99,10 @@ npm run stop:stack
 
 Which will stop all applicable docker containers and services.
 
-## Useful commands
+### Useful commands
 To do.
 
 ## Next steps
 
-- [Deployment](deployment/)
+- Deep dive into our documentation for [Developers](developers/).
+- See our detailed [DevOps](devops/) documentation.

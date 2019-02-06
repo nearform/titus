@@ -5,7 +5,7 @@ The CI Pipeline is simply a collection of jobs, which can be ran in different wo
 
 ![titus-ci-pipeline-overview](../img/titus-ci-pipeline-overview.svg)
 
-## The "test_and_build" workflow
+## Understanding the Workflow
 The test_and_build workflow defines the following jobs that run before anything is deployed,
 
 - __install:__ Pulls in any sub-modules and kicks off an install of the project
@@ -32,6 +32,8 @@ Assuming a pre-production release has been completed and validated by users, the
 - __request_deployment:__ A manual step which requires approval inside CircleCI
 - __release-production:__ Using [Helm](), deploy to a production env running [K8s]()
 
-## Understanding what gets deployed
+## What gets deployed when
+
+![titus-ci-pipeline](../img/titus-ci-pipeline.svg)
 
 [CircleCI]: /

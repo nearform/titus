@@ -45,17 +45,17 @@ serve -s -l 4000 docs
 
 Which will produce,
 
-```
- ┌──────────────────────────────────────────────────┐
- │                                                  │
- │   Serving!                                       │
- │                                                  │
- │   - Local:            http://localhost:4000      │
- │   - On Your Network:  http://192.168.1.60:4000   │
- │                                                  │
- │   Copied local address to clipboard!             │
- │                                                  │
- └──────────────────────────────────────────────────┘
+```sh 
+┌──────────────────────────────────────────────────┐
+│                                                  │
+│   Serving!                                       │
+│                                                  │
+│   - Local:            http://localhost:4000      │
+│   - On Your Network:  http://192.168.1.60:4000   │
+│                                                  │
+│   Copied local address to clipboard!             │
+│                                                  │
+└──────────────────────────────────────────────────┘
 ```
 
 The documentation will be served on `localhost:4000` in this case.
