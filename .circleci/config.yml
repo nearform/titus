@@ -212,7 +212,7 @@ workflows:
           requires:
             - install
             - lint
-        - build:
+      - build:
           requires:
             - lint
             - test
