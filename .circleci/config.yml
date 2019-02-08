@@ -26,9 +26,9 @@ jobs:
           key: 'v1-node_modules'
           paths:
             - ~/dist/node_modules
-      - run:
-          name: bootstrap
-          command: npm run bootstrap
+#      - run:
+#          name: bootstrap
+#          command: npm run bootstrap
       - persist_to_workspace:
           root: .
           paths:
