@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Dashboard from '../dashboard'
+import Dashboard from '../'
 
 describe('<Dashboard />', () => {
   it('renders without crashing', () => {

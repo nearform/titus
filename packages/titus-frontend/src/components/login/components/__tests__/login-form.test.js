@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import LoginForm from '../components/login-form'
+import LoginForm from '../login-form'
 
 let container
 afterEach(() => {
