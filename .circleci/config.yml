@@ -211,7 +211,6 @@ workflows:
       - test:
           requires:
             - install
-            - lint
       - build:
           requires:
             - lint
@@ -219,8 +218,6 @@ workflows:
       - push-containers:
           requires:
             - build
-            - lint
-            - test
           filters:
             branches:
                 only:
