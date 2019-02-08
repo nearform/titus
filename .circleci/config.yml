@@ -1,6 +1,7 @@
 defaults: &defaults
   docker:
     - image: circleci/node:10-browsers
+  working_directory: ~/dist
 
 version: 2
 jobs:
@@ -211,16 +212,14 @@ workflows:
       - test:
           requires:
             - install
-            - lint
       - build:
           requires:
-            - lint
             - test
+            - lint
+            - install
       - push-containers:
           requires:
             - build
-            - lint
-            - test
           filters:
             branches:
                 only:
