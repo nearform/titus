@@ -76,3 +76,4 @@ Titus uses Docker Compose, see [docker/docker-compose-dev.yml](docker/docker-com
 [pgsql]: https://www.postgresql.org/docs/
 [pino]: https://github.com/pinojs/pino
 [jest]: https://jestjs.io/
+
