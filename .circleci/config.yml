@@ -15,9 +15,17 @@ jobs:
       - run:
           name: noise submodule init
           command: cd infrastructure && git submodule init && git submodule update
+      - restore_cache:
+          name: "Restore build cache"
+          keys: 'v1-node_modules'
       - run:
           name: install
           command: npm install
+      - save_cache:
+          name: "Saving node_modules folder"
+          key: 'v1-node_modules'
+          paths:
+            - ~/dist/node_modules
       - run:
           name: bootstrap
           command: npm run bootstrap
