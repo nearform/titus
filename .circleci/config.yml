@@ -213,11 +213,12 @@ workflows:
             - install
       - build:
           requires:
-            - lint
-            - test
+            - install
       - push-containers:
           requires:
             - build
+            - test
+            - lint
           filters:
             branches:
                 only:
