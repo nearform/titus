@@ -239,18 +239,23 @@ workflows:
             branches:
                 only:
                     - master
-      - request-deployment:
-          type: approval
-          requires:
-            - release-preproduction
-          filters:
-            branches:
-                only:
-                    - master
+#      - request-deployment:
+#          type: approval
+#          requires:
+#            - push-containers
+#          filters:
+#            tags:
+#                only: /v[0-9]+(\.[0-9]+)*
+#            branches
+#                only:
+#                    - master
       - release-production:
           requires:
-            - request-deployment
+            - push-containers
           filters:
-            branches:
+            tags:
+                only: /v[0-9]+(\.[0-9]+)*
+            branches
                 only:
                     - master
+
