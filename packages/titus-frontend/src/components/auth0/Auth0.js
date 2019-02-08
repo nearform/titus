@@ -9,10 +9,10 @@ const {
 class Auth0 {
   constructor() {
     this.webAuth = new WebAuth({
-      domain: REACT_APP_AUTH0_DOMAIN,
-      clientID: REACT_APP_AUTH0_CLIENT_ID,
+      domain: REACT_APP_AUTH0_DOMAIN || '',
+      clientID: REACT_APP_AUTH0_CLIENT_ID || '',
       redirectUri: `${window.location.origin}/auth0/callback`,
-      audience: REACT_APP_AUTH0_AUDIENCE,
+      audience: REACT_APP_AUTH0_AUDIENCE || '',
       responseType: 'token id_token',
       scope: 'openid'
     })
