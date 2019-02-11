@@ -1,1 +1,1 @@
-module.exports = (server, config) => []
+module.exports = () => []

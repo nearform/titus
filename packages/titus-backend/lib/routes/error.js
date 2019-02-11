@@ -12,7 +12,7 @@ const error = () => ({
       }
     }
   },
-  handler: async (request, h) => {
+  handler: async request => {
     throw new Error(request.params.name)
   }
 })
