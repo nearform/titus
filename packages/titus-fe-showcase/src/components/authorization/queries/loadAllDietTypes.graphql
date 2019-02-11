@@ -1,7 +1,0 @@
-query loadAllDietTypes {
-  allDietTypes {
-    id
-    name
-    visible
-  }
-}

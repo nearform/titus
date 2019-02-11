@@ -69,7 +69,7 @@ AUTH0_AUDIENCE
 Titus runs locally on Docker. Ensure Docker has started on your machine before running the stack. To run the full stack, in the root of the project, run,
 
 ```sh
-npm run start:stack
+npm run start:all
 ```
 
 Running the command below,
@@ -86,13 +86,22 @@ CONTAINER ID        IMAGE            PORTS                              NAMES
 d119b3262ff7        docker_titus-db  0.0.0.0:5432->5432/tcp             docker_titus-db_1
 ```
 
-If all of the services above are listed, Congratulations, you know have the full Titus system running on your machine.
+The services above represent titus-backend, and a running instance of PostgreSql. The frontend runs locally to allow for fast iteration by developers. It is available at `localhost:3000`,
+
+![x](../img/titus-login.png)
+
+The login is set to accept any reasonable username and password. On successful login you will see
+the splash page,
+
+![x](../img/titus-home-page.png)
+
+Congratulations, you are now running the titus stack locally.
 
 ### Stopping the stack
 You can can also stop the stack by running
 
 ```sh
-npm run stop:stack
+npm run stop:all
 ```
 
 Which will stop all applicable docker containers and services.

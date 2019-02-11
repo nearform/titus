@@ -42,8 +42,8 @@ jobs:
           name: Build the production frontend bundle
           command: |
             set -e
-            cd packages/titus-fe-showcase
-            mv .env.prod .env
+            cd packages/titus-frontend
+            mv .env.sample .env
             npm run build
       - persist_to_workspace:
           root: .
@@ -68,8 +68,8 @@ jobs:
           at: .
       - run: npm run lighthouse
       - store_artifacts:
-          path: packages/titus-fe-showcase/lighthouse-report.html
-          destination: titus-fe-showcase-lighthouse-report.html
+          path: packages/titus-frontend/lighthouse-report.html
+          destination: titus-frontend-lighthouse-report.html
   push-containers:
     <<: *defaults
     environment:
@@ -90,15 +90,15 @@ jobs:
           name: Build the frontend Docker containers
           command: |
             set -e
-            cd packages/titus-fe-showcase
-            docker build -t ${DOCKER_REPO}/titus-fe-showcase:${CIRCLE_WORKFLOW_ID} -f docker/Dockerfile .
+            cd packages/titus-frontend
+            docker build -t ${DOCKER_REPO}/titus-frontend:${CIRCLE_WORKFLOW_ID} -f docker/Dockerfile .
       - run:
           name: Build the backend Docker containers
           command: |
             set -e
-            cd packages/titus-be-showcase/
+            cd packages/titus-backend/
             mv config/prod.js config/default.js
-            docker build -t ${DOCKER_REPO}/titus-be-showcase:${CIRCLE_WORKFLOW_ID} -f docker/api/Dockerfile.prod .
+            docker build -t ${DOCKER_REPO}/titus-backend:${CIRCLE_WORKFLOW_ID} -f docker/api/Dockerfile.prod .
       - run:
           name: Push the Docker containers to the registry
           command: |
@@ -107,10 +107,10 @@ jobs:
             eval $(aws ecr get-login --no-include-email --region us-east-1)
             # Push the frontend container
             echo -e "Pushing the frontend container\n"
-            docker push ${DOCKER_REPO}/titus-fe-showcase:${CIRCLE_WORKFLOW_ID}
+            docker push ${DOCKER_REPO}/titus-frontend:${CIRCLE_WORKFLOW_ID}
             # Push the backend container
             echo -e "Pushing the backend container\n"
-            docker push ${DOCKER_REPO}/titus-be-showcase:${CIRCLE_WORKFLOW_ID}
+            docker push ${DOCKER_REPO}/titus-backend:${CIRCLE_WORKFLOW_ID}
   release-preproduction:
     <<: *defaults
     environment:
@@ -156,8 +156,8 @@ jobs:
             name: Deploy to preproduction
             command: |
                 helm upgrade --install titus ./infrastructure/helm \
-                   --set docker.images.preproduction.backend=${DOCKER_REPO}/titus-be-showcase:${CIRCLE_WORKFLOW_ID} \
-                   --set docker.images.preproduction.frontend=${DOCKER_REPO}/titus-fe-showcase:${CIRCLE_WORKFLOW_ID} \
+                   --set docker.images.preproduction.backend=${DOCKER_REPO}/titus-backend:${CIRCLE_WORKFLOW_ID} \
+                   --set docker.images.preproduction.frontend=${DOCKER_REPO}/titus-frontend:${CIRCLE_WORKFLOW_ID} \
                    --set docker.images.production.backend=$(kubectl get deployment titus-backend -o=jsonpath='{$.spec.template.spec.containers[:1].image}') \
                    --set docker.images.production.frontend=$(kubectl get deployment titus-frontend -o=jsonpath='{$.spec.template.spec.containers[:1].image}')
   release-production:
@@ -207,8 +207,8 @@ jobs:
                 helm upgrade --install titus ./infrastructure/helm \
                    --set docker.images.preproduction.backend=$(kubectl get deployment titus-backend-preprod -o=jsonpath='{$.spec.template.spec.containers[:1].image}') \
                    --set docker.images.preproduction.frontend=$(kubectl get deployment titus-frontend-preprod -o=jsonpath='{$.spec.template.spec.containers[:1].image}') \
-                   --set docker.images.production.backend=${DOCKER_REPO}/titus-be-showcase:${CIRCLE_WORKFLOW_ID} \
-                   --set docker.images.production.frontend=${DOCKER_REPO}/titus-fe-showcase:${CIRCLE_WORKFLOW_ID}
+                   --set docker.images.production.backend=${DOCKER_REPO}/titus-backend:${CIRCLE_WORKFLOW_ID} \
+                   --set docker.images.production.frontend=${DOCKER_REPO}/titus-frontend:${CIRCLE_WORKFLOW_ID}
 workflows:
   version: 2
   untagged_build:
