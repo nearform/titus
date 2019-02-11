@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import history from '../../history'
-import auth0 from './Auth0'
+import auth0 from './auth0'
 
 class Auth0Callback extends Component {
   state = {
