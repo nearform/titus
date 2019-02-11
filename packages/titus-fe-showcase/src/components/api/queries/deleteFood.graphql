@@ -1,8 +1,0 @@
-mutation deleteFood($ids: [String]!) {
-  deleteFoods(ids: $ids) {
-    ids
-    count
-    typeName
-    operation
-  }
-}

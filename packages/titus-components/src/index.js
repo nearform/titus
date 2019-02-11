@@ -1,6 +1,0 @@
-export { default as Navigation } from './navigation/navigation'
-export { default as Table } from './table/table'
-export { default as Autocomplete } from './autocomplete/autocomplete'
-export { default as Wizard } from './wizard/wizard'
-export { default as Uploader } from './uploader/uploader'
-export { default as UploaderService } from './uploader/services/UploaderService'
