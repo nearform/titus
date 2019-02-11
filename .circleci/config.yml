@@ -266,14 +266,32 @@ workflows:
       - lint:
           requires:
             - install
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only:
+                - /v[0-9]+(\.[0-9]+).*/
       - test:
           requires:
             - install
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only:
+                - /v[0-9]+(\.[0-9]+).*/
       - build:
           requires:
             - test
             - lint
             - install
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only:
+                - /v[0-9]+(\.[0-9]+).*/
       - push-containers:
           requires:
             - build
