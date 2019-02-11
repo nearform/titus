@@ -256,7 +256,13 @@ workflows:
 #                    - master
   tagged_build:
     jobs:
-      - install
+      - install:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only:
+                - /v[0-9]+(\.[0-9]+).*/
       - lint:
           requires:
             - install
