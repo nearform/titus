@@ -5,7 +5,7 @@ The CI Pipeline is simply a collection of jobs, which can be ran in different wo
 
 ![titus-ci-pipeline-overview](../img/titus-ci-pipeline-overview.svg)
 
-## Understanding the Workflow
+## The Workflows
 The both workflows define the following jobs that run before anything is deployed,
 
 - __install:__ Pulls in any sub-modules and kicks off an install of the project
@@ -23,13 +23,14 @@ To ensure CI conventions are being followed, Titus includes default support for 
 
 - __release-preproduction:__ Using [Helm](), deploy to a pre-production env running [K8s]()
 
+![titus-ci-pipeline-overview](../img/circle-untagged.png)
+
 ### Guarded release to Production
 Assuming a pre-production release has been completed and validated by users, the next step is to deploy to production proper. To deploy to production, a tag must be created in git and pushed to the repo. Generally tags should be made off of master, but any tag will kick off the final step, which is,
 
 - __release-production:__ Using [Helm](), deploy to a production env running [K8s]()
 
-## What gets deployed when
+![titus-ci-pipeline-overview](../img/circle-tagged.png)
 
-![titus-ci-pipeline](../img/titus-ci-pipeline.svg)
 
 [CircleCI]: /
