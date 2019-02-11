@@ -13,9 +13,8 @@ const limit = joi
   .integer()
   .default(50)
 
-const idList = async ({ ids }) => {
-  return Promise.resolve({ ids: ids.split(',').map(s => s.trim()) })
-}
+const idList = async ({ ids }) =>
+  Promise.resolve({ ids: ids.split(',').map(s => s.trim()) })
 
 const needle = joi.string().required()
 
