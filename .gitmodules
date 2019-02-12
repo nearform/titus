@@ -1,3 +1,0 @@
-[submodule "infrastructure"]
-	path = infrastructure
-	url = git@github.com:nearform/titus-noise.git
