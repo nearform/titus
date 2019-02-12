@@ -5,7 +5,7 @@ const Dashboard = () => (
   <AuthConsumer>
     {({ logout }) => (
       <div className="container">
-        <button className="logout" onClick={logout}>
+        <button className="logout button" onClick={logout}>
           LOGOUT
         </button>
         <img
