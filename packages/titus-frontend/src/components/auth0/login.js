@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import auth0 from './Auth0'
+import auth0 from './auth0'
 import history from '../../history'
 import LoginForm from '../login/components/login-form'
 import * as yup from 'yup'
@@ -55,6 +55,7 @@ class Auth0Login extends Component {
             <h1>You are logged in.</h1>
 
             <button
+              className="button"
               disabled={!auth0.isAuthenticated}
               onClick={() => auth0.logout()}
             >
@@ -63,6 +64,7 @@ class Auth0Login extends Component {
           </Fragment>
         ) : (
           <button
+            className="button"
             disabled={auth0.isAuthenticated}
             onClick={() => this.authorize()}
           >
