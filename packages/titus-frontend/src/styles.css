@@ -41,7 +41,7 @@ a:visited {
   color: var(--brunchPink);
 }
 
-button.button {
+.button {
   background: var(--blue);
   border: 0;
   color: var(--white);
