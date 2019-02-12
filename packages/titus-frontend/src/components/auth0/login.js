@@ -55,6 +55,7 @@ class Auth0Login extends Component {
             <h1>You are logged in.</h1>
 
             <button
+              className="button"
               disabled={!auth0.isAuthenticated}
               onClick={() => auth0.logout()}
             >
@@ -63,6 +64,7 @@ class Auth0Login extends Component {
           </Fragment>
         ) : (
           <button
+            className="button"
             disabled={auth0.isAuthenticated}
             onClick={() => this.authorize()}
           >

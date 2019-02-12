@@ -14,7 +14,7 @@ In other words, we provide everything you need to start deploying features, in a
 ### Developers first experience
 Developer experience in Titus, is second to none. We want developers to enjoy using Titus so much, it becomes frictionless to select it. To ensure we keep to this ideal, our development motto is,
 
-![titus-ci-pipeline][]
+![titus-developer-statement][]
 
 With this in mind, Titus is well documented includes modern tooling like [Storybook][], has linting and testing as first class citizen, and supports common sense inclusions such as quality logging and docker convenience commands for day to day debugging. 
 
@@ -28,7 +28,7 @@ To keep this part of Titus easy to use we maintain a tool, [titus-noise-cli][] w
 ### Production grade CI Pipeline
 The primary goal of Titus is to enable you to get to building features in sprint one. We care a lot about this point. To ensure you can get features out the door quickly, we use a modern deployment pipeline to ensure you can deliver continuously.
 
-![titus-ci-pipeline][]
+![titus-ci-pipeline-overview][]
 
 Our CI is built upon [CircleCI][]'s Workflows and allows us to break our deployment into discrete jobs and workflows. The primary outputs of our CI are containers, which are built continuously, and deployment, which happens continuously to staging and be
 
@@ -57,4 +57,5 @@ The quickest way to get started is to view our quick start guide. It covers, for
 [titus-deployment-workflow]: img/titus-deployment-workflow.svg
 [titus-developer-statement]: img/titus-developer-statement.svg
 [titus-ci-pipeline]: img/titus-ci-pipeline.svg
+[titus-ci-pipeline-overview]: img/titus-ci-pipeline-overview.svg
 [titus-infrastructure-pipeline]: img/titus-infrastructure-pipeline.svg

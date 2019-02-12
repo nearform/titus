@@ -53,7 +53,7 @@ const LoginForm = ({ login, schema, header }) => (
         {touched && errors.password && (
           <div className="login__error">{errors.password}</div>
         )}
-        <button disabled={isSubmitting} type="submit">
+        <button className="button" disabled={isSubmitting} type="submit">
           Login
         </button>
       </form>
@@ -62,10 +62,12 @@ const LoginForm = ({ login, schema, header }) => (
 )
 
 LoginForm.propTypes = {
+  /** Function to call on successful submit */
   login: PropTypes.func,
+  /** yup schema for form validation */
   schema: PropTypes.object,
-  header: PropTypes.string,
-  subheader: PropTypes.string
+  /** Title of the form, appears in h1 */
+  header: PropTypes.string
 }
 
 export default LoginForm

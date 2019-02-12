@@ -19,7 +19,6 @@ body {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300;
   margin: 0;
-  text-align: center;
 }
 
 a {
@@ -42,7 +41,7 @@ a:visited {
   color: var(--brunchPink);
 }
 
-button {
+.button {
   background: var(--blue);
   border: 0;
   color: var(--white);
@@ -79,9 +78,17 @@ h1 {
   margin-bottom: 1rem;
 }
 
-#root {
+#story-root {
   display: flex;
   justify-content: center;
+  text-align: center;
+  flex: 1;
+}
+
+.story-wrapper > div {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .container {
