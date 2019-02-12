@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import auth0 from './auth0'
+import auth0 from './Auth0'
 import history from '../../history'
 import LoginForm from '../login/components/login-form'
 import * as yup from 'yup'
