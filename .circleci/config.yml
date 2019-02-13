@@ -134,6 +134,13 @@ jobs:
           command:
             aws eks update-kubeconfig --name titus-noise --region eu-central-1
       - run:
+           name: Install kubectl
+           command: |
+            curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+            sudo cp kubectl /usr/local/bin/kubectl
+            sudo chmod a+x /usr/local/bin/kubectl
+            kubectl get nodes
+      - run:
           name: Install Helm
           command: |
             curl https://storage.googleapis.com/kubernetes-helm/helm-v2.9.0-linux-amd64.tar.gz -o "helm.tar.gz"
@@ -142,13 +149,6 @@ jobs:
             sudo cp ./linux-amd64/helm /usr/local/bin/helm
             helm init --client-only
             helm list
-      - run:
-           name: Install kubectl
-           command: |
-            curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-            sudo cp kubectl /usr/local/bin/kubectl
-            sudo chmod a+x /usr/local/bin/kubectl
-            kubectl get nodes
       - run:
             name: Deploy to preproduction
             command: |
@@ -186,7 +186,13 @@ jobs:
           name: EKS k8s configuration
           command:
             aws eks update-kubeconfig --name titus-noise --region eu-central-1
-            kubectl config get-contexts
+      - run:
+           name: Install kubectl
+           command: |
+            curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+            sudo cp kubectl /usr/local/bin/kubectl
+            sudo chmod a+x /usr/local/bin/kubectl
+            kubectl get nodes
       - run:
           name: Install Helm
           command: |
@@ -196,13 +202,6 @@ jobs:
             sudo cp ./linux-amd64/helm /usr/local/bin/helm
             helm init --client-only
             helm list
-      - run:
-           name: Install kubectl
-           command: |
-            curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-            sudo cp kubectl /usr/local/bin/kubectl
-            sudo chmod a+x /usr/local/bin/kubectl
-            kubectl get nodes
       - run:
             name: Deploy to production
             command: |
