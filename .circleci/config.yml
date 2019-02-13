@@ -186,6 +186,7 @@ jobs:
           name: EKS k8s configuration
           command:
             aws eks update-kubeconfig --name titus-noise --region eu-central-1
+            kubectl config get-contexts
       - run:
           name: Install Helm
           command: |
