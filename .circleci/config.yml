@@ -11,7 +11,7 @@ jobs:
       - checkout
       - run:
           name: Git checkout infrastructure
-          command: git clone git@github.com:nearform/titus-noise.git infrastructure
+          command: git clone git@github.com:nearform/titus-deploy.git infrastructure
       - restore_cache:
           name: "Restore build cache"
           keys: 'v1-node_modules'
@@ -132,7 +132,7 @@ jobs:
       - run:
           name: EKS k8s configuration
           command:
-            aws eks update-kubeconfig --name titus-noise --region eu-west-1
+            aws eks update-kubeconfig --name titus-noise --region eu-central-1
       - run:
           name: Install Helm
           command: |
@@ -185,7 +185,7 @@ jobs:
       - run:
           name: EKS k8s configuration
           command:
-            aws eks update-kubeconfig --name titus-noise --region eu-west-1
+            aws eks update-kubeconfig --name titus-noise --region eu-central-1
       - run:
           name: Install Helm
           command: |
