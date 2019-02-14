@@ -16,7 +16,7 @@
     "docker:dev:exec": "docker-compose -f docker/docker-compose-dev.yml exec api",
     "docker:dev:migrate": "docker-compose -f docker/docker-compose-dev.yml exec api npm run migrate",
     "docker:dev:seed": "docker-compose -f docker/docker-compose-dev.yml exec api npm run dev:seed",
-    "dev:start": "nodemon --ignore pgdata/ -P 5000 -L .",
+    "dev:start": "nodemon --config .nodemonrc .",
     "start": "npm run docker:dev:start",
     "stop": "npm run docker:dev:stop",
     "dev:cleandb": "rm -rf pgdata",
