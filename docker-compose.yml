@@ -4,9 +4,7 @@ services:
 
   titus-db:
     container_name: titus-db
-    build:
-      context: packages/titus-services/db
-      dockerfile: Dockerfile
+    image: postgres:10.4-alpine
     environment:
       - POSTGRES_USER=titus
       - POSTGRES_PASSWORD=titus
@@ -17,7 +15,7 @@ services:
       - titus
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./packages/titus-services/db/initdb:/docker-entrypoint-initdb.d
+      - ./packages/titus-backend/initdb:/docker-entrypoint-initdb.d
 
   api:
     container_name: titus-api
