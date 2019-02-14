@@ -253,6 +253,7 @@ workflows:
             tags:
               ignore: /.*/
   tagged_deployment:
+    jobs:
       - release-production:
           filters:
             branches:
