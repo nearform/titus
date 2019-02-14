@@ -12,17 +12,17 @@
     "yup": "^0.26.10"
   },
   "scripts": {
-    "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "cross-env CI=true react-scripts test --env=jsdom",
-    "test:watch": "react-scripts test --env=jsdom",
+    "create:env": "node -r fs -e \"fs.copyFileSync('.env.sample', '.env', fs.constants.COPYFILE_EXCL)\"",
     "eject": "react-scripts eject",
+    "lighthouse": "node lighthouse",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
+    "start": "react-scripts start",
     "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public",
-    "lighthouse": "node lighthouse",
-    "create:env": "node -r fs -e \"fs.copyFileSync('.env.sample', '.env', fs.constants.COPYFILE_EXCL)\""
+    "storybook:build": "build-storybook -s public",
+    "test": "cross-env CI=true react-scripts test --env=jsdom",
+    "test:watch": "react-scripts test --env=jsdom"
   },
   "lint-staged": {
     "*.{js,css,md}": [

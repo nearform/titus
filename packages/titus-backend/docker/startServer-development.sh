@@ -12,4 +12,4 @@ done
 
 npm run migrate
 npm run dev:seed
-npm run dev:start
+npm run start

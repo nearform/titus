@@ -3,13 +3,20 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "postinstall": "lerna bootstrap && lerna exec npm install",
+    "clean:all": "lerna clean",
     "create:env": "lerna run --parallel create:env",
+    "docker:dev:exec": "docker-compose exec api",
+    "docker:dev:logs": "docker-compose logs -f",
+    "docker:dev:migrate": "docker-compose exec api npm run migrate",
+    "docker:dev:rmi": "docker-compose down --rmi all",
+    "docker:dev:seed": "docker-compose exec api npm run dev:seed",
+    "docker:dev:start": "docker-compose up -d --build",
+    "docker:dev:stop": "docker-compose down",
     "lint:all": "lerna run --parallel lint",
-    "test:all": "lerna run --parallel test",
-    "start:all": "lerna run --stream start",
-    "stop:all": "lerna run --stream stop",
-    "clean:all": "lerna clean"
+    "postinstall": "lerna bootstrap && lerna exec npm install",
+    "start:all": "npm run docker:dev:start",
+    "stop:all": "npm run docker:dev:stop",
+    "test:all": "lerna run --parallel test"
   },
   "devDependencies": {
     "lerna": "^2.11.0"
