@@ -1,0 +1,41 @@
+version: '3.6'
+
+services:
+
+  titus-db:
+    container_name: titus-db
+    build:
+      context: packages/titus-services/db
+      dockerfile: Dockerfile
+    environment:
+      - POSTGRES_USER=titus
+      - POSTGRES_PASSWORD=titus
+      - POSTGRES_DB=titus
+    ports:
+      - "5432:5432"
+    networks:
+      - titus
+    volumes:
+      - ./packages/titus-backend/pgdata:/var/lib/postgresql/data
+      - ./packages/titus-services/db/initdb:/docker-entrypoint-initdb.d
+
+  api:
+    container_name: titus-api
+    build:
+      context: packages/titus-backend/docker
+      dockerfile: Dockerfile
+    env_file: packages/titus-backend/docker/dev.env
+    depends_on:
+      - titus-db
+    networks:
+      - titus
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./packages/titus-backend:/titus
+    environment:
+      - PGHOST=titus-db
+      - PGPORT=5432
+
+networks:
+    titus:

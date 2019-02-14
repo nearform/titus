@@ -7,4 +7,4 @@ USER root
 RUN apk upgrade && apk add postgresql-client
 
 # Poll db to ensure it is up before proceeding
-CMD ./docker/startServer-$NODE_ENV.sh
+CMD ./startServer-$NODE_ENV.sh
