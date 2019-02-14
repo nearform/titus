@@ -16,7 +16,7 @@ services:
     networks:
       - titus
     volumes:
-      - ./packages/titus-backend/pgdata:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
       - ./packages/titus-services/db/initdb:/docker-entrypoint-initdb.d
 
   api:
@@ -39,3 +39,8 @@ services:
 
 networks:
     titus:
+
+volumes:
+  postgres_data:
+    # run `docker volume create --name postgres_data -d local`
+    external: true
