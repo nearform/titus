@@ -18,7 +18,7 @@ services:
       - ./packages/titus-backend/initdb:/docker-entrypoint-initdb.d
 
   api:
-    container_name: titus-api
+    container_name: titus-backend
     build:
       context: packages/titus-backend/docker
       dockerfile: Dockerfile
@@ -34,6 +34,21 @@ services:
     environment:
       - PGHOST=titus-db
       - PGPORT=5432
+
+  frontend:
+    container_name: titus-frontend
+    image: nearform/alpine3-s2i-nodejs
+    env_file: packages/titus-frontend/.env
+    working_dir: /titus
+    entrypoint: npm start
+    depends_on:
+      - api
+    networks:
+      - titus
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./packages/titus-frontend:/titus
 
 networks:
     titus:
