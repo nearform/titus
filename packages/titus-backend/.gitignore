@@ -56,7 +56,7 @@ typings/
 
 # dotenv environment variables file
 .env
-../titus-services/dev.env
+docker/dev.env
 
 # next.js build output
 .next
