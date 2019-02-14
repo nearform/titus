@@ -166,8 +166,9 @@ jobs:
     environment:
       DOCKER_REPO: "711655675495.dkr.ecr.us-east-1.amazonaws.com"
     steps:
-      - attach_workspace:
-          at: .
+      - run:
+          name: Git checkout infrastructure
+          command: git clone git@github.com:nearform/titus-deploy.git infrastructure
       - setup_remote_docker:
           docker_layer_catching: true
       - run:
@@ -203,13 +204,13 @@ jobs:
             helm init --client-only
             helm list
       - run:
-            name: Deploy to production
+            name: Promote pre Prod image to Prod
             command: |
                 helm upgrade --install titus ./infrastructure/helm \
                    --set docker.images.preproduction.backend=$(kubectl get deployment titus-backend-preprod -o=jsonpath='{$.spec.template.spec.containers[:1].image}') \
                    --set docker.images.preproduction.frontend=$(kubectl get deployment titus-frontend-preprod -o=jsonpath='{$.spec.template.spec.containers[:1].image}') \
-                   --set docker.images.production.backend=${DOCKER_REPO}/titus-backend:${CIRCLE_WORKFLOW_ID} \
-                   --set docker.images.production.frontend=${DOCKER_REPO}/titus-frontend:${CIRCLE_WORKFLOW_ID} \
+                   --set docker.images.production.backend=$(kubectl get deployment titus-backend-preprod -o=jsonpath='{$.spec.template.spec.containers[:1].image}') \
+                   --set docker.images.production.frontend=$(kubectl get deployment titus-frontend-preprod -o=jsonpath='{$.spec.template.spec.containers[:1].image}') \
                    --set docker.images.preproduction.showcasefrontend=$(kubectl get deployment titus-showcase-frontend-preprod -o=jsonpath='{$.spec.template.spec.containers[:1].image}') \
                    --set docker.images.preproduction.showcasebackend=$(kubectl get deployment titus-showcase-backend-preprod -o=jsonpath='{$.spec.template.spec.containers[:1].image}') \
                    --set docker.images.production.showcasefrontend=$(kubectl get deployment titus-showcase-frontend -o=jsonpath='{$.spec.template.spec.containers[:1].image}') \
@@ -251,56 +252,8 @@ workflows:
                     - master
             tags:
               ignore: /.*/
-  tagged_build:
-    jobs:
-      - install:
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only:
-                - /v[0-9]+(\.[0-9]+).*/
-      - lint:
-          requires:
-            - install
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only:
-                - /v[0-9]+(\.[0-9]+).*/
-      - test:
-          requires:
-            - install
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only:
-                - /v[0-9]+(\.[0-9]+).*/
-      - build:
-          requires:
-            - test
-            - lint
-            - install
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only:
-                - /v[0-9]+(\.[0-9]+).*/
-      - push-containers:
-          requires:
-            - build
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only:
-                - /v[0-9]+(\.[0-9]+).*/
+  tagged_deployment:
       - release-production:
-          requires:
-            - push-containers
           filters:
             branches:
               ignore: /.*/
