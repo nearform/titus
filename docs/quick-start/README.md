@@ -41,52 +41,19 @@ To generate a default set of `.env` files for all packages, run the following co
 npm run create:env
 ```
 
-### Configure Auth (Optional) 
-Titus supports any auth provider that is [OpenID Connect][] (OIDC) compliant. In order to connect with Auth0 or any other OIDC provider some environment variables need to be defined.
+## Running the stack
+Titus runs locally on Docker. To facilitate easier development docker is set to run watched versions of both the front and backend. This means as you make and save changes, those changes should be reflected automatically in the containers. 
 
-Both the frontend and backend are able to use the standard OIDC to connect to Auth0 or other OIDC compliant providers.
-
-For the frontend:
-
-```
-REACT_APP_AUTH0_DOMAIN
-REACT_APP_AUTH0_CLIENT_ID
-REACT_APP_AUTH0_AUDIENCE
-REACT_APP_OIDC_AUTHORITY
-REACT_APP_OIDC_CLIENT_ID
-```
-
-For backend app:
-
-```
-AUTH0_DOMAIN
-AUTH0_CLIENT_ID
-AUTH0_CLIENT_SECRET
-AUTH0_AUDIENCE
-```
-
-## Run the stack
-Titus runs locally on Docker. Ensure Docker has started on your machine before running the stack. To run the full stack, in the root of the project, run,
+Ensure Docker has started on your machine before running the stack. To run the full stack, in the root of the project, run:
 
 ```sh
 npm run start:all
 ```
 
-Running the command below:
+Running the command `docker ps` will produce a log of the running set of containers, one for each service, frontend, backend, and the Postgres database.
 
-```sh
-docker ps
-```
-
-Should produce a slightly more detailed version of the output below:
-
-```sh
-CONTAINER ID        IMAGE            PORTS                              NAMES
-5fae4357593d        docker_api       0.0.0.0:5000->5000/tcp, 8080/tcp   docker_api_1
-d119b3262ff7        docker_titus-db  0.0.0.0:5432->5432/tcp             docker_titus-db_1
-```
-
-The services above represent titus-backend and a running instance of PostgreSQL. The frontend runs locally to allow for fast iteration by developers. It is available at `localhost:3000`:
+### Logging in
+The running application can be accessed at `localhost:3000` in any modern web browser,
 
 ![x](../img/titus-login.png)
 
@@ -95,7 +62,32 @@ the splash page:
 
 ![x](../img/titus-home-page.png)
 
-Congratulations, you are now running the Titus stack locally!
+### Manipulating the  running stack
+A number of useful commands for manipulating the running docker stack have been included as easy to run scripts. These can be ran by running `npm run <command>` in the root of the repo; where command is:
+
+- `docker:dev:exec`
+  - Runs `docker-compose exec api` to get fast access to the backend
+- `docker:dev:logs`: 
+  - Runs `docker-compose logs` and passes `-f` so they auto-tail
+- `docker:dev:migrate` 
+  - Runs `docker-compose exec api npm run migrate` which asks the backend to run migrations
+- `docker:dev:rmi`
+  - Runs `docker-compose down` but passes ` --rmi all` to tear down the system fully
+- `docker:dev:seed`
+  - Runs `docker-compose exec api npm run dev:seed` which asks the backend to run data seeding
+- `docker:dev:start` 
+  - First, runs `create:pg:volume` to create a data volume 
+  - Then, `docker-compose up -d --build` to start the system locally in docker
+- `docker:dev:stop`
+  - Runs `docker-compose down` to spin down the running system
+
+For example, to tear down the system, spin it back up, and tail the logs, the commands would be,
+
+```sh
+npm run docker:dev:rmi
+npm run docker:dev:start   // or just start:all for short
+npm run docker:dev:logs
+```
 
 ### Stopping the stack
 You can can also stop the stack by running:
@@ -104,7 +96,24 @@ You can can also stop the stack by running:
 npm run stop:all
 ```
 
-Which will stop all applicable docker containers and services.
+This will not delete the stack containers or volumes, to do so run,
+
+```sh
+npm run docker:dev:rmi
+```
+
+### Linting and Testing
+Linting and testing can be ran can across the stack by running `npm run <command>` in the root of the repo; where command is,
+
+- `lint:all`
+  - Runs the `lint` command in each package that has one
+
+or 
+
+- `test:all`
+  - Runs the `test` command in each package that has one
+
+Both frontend and backend starter kits have linting and testing built in and as such should run green in both cases by default, and red should any change violate the included rules.
 
 ## Next steps
 
