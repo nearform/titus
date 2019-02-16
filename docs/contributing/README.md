@@ -13,13 +13,13 @@ Our documentation can be ran by serving the docs folder at a given port. For eas
 npm install  -g docsify-cli
 ```
 
-Next, in the root folder, run the cli, and thus the docs,
+Next in the root folder run the docsify cli:
 
 ```sh
 docsify serve docs
 ```
 
-Which will produce,
+Which will produce:
 
 ```sh
 Serving /path/to/your/repo/titus-noise/docs now.
@@ -31,19 +31,19 @@ The documentation will be served on `localhost:3000`.
 #### Serving in other ways
 Our documentation builds on the fly. This means all you need to do is serve the docs folder. Any program or cli tool used for serving a folder will work; __as long as it can handle hash routing__.
 
-Another popular module for serving files is `serve` on npm. This can be installed via
+Another popular module for serving files is `serve` on npm. This can be installed via:
 
 ```sh
 npm install  -g docsify-cli
 ```
 
-and ran, with hash router support like so,
+and ran, with hash router support like so:
 
 ```sh
 serve -s -l 4000 docs
 ```
 
-Which will produce,
+Which will produce:
 
 ```sh 
 ┌──────────────────────────────────────────────────┐
