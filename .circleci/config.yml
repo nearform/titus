@@ -95,7 +95,7 @@ jobs:
             set -e
             cd packages/titus-backend/
             mv config/prod.js config/default.js
-            docker build -t ${DOCKER_REPO}/titus-backend:${CIRCLE_WORKFLOW_ID} -f docker/api/Dockerfile.prod .
+            docker build -t ${DOCKER_REPO}/titus-backend:${CIRCLE_WORKFLOW_ID} -f docker/Dockerfile.prod .
       - run:
           name: Push the Docker containers to the registry
           command: |
