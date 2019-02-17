@@ -3,7 +3,7 @@
 # Developers
 
 ## Documentation
-Documentation for projects and modules or tools produced for the project is of vital importance to ensure the long term knowledge sharing. With this in mind, Titus itself is heavily documented in the `docs/` folder in the root of the repository. We have also included a docs template package in `packages/` to make documentation for any part of the project a breeze.
+Documentation for projects and modules or tools produced for the project is of vital importance to ensure the long term knowledge sharing. With this in mind, Titus itself is heavily documented in the `docs/` folder in the root of the repository. We have also included a docs template package in `packages/titus-starter-docs` to make documentation for any new part of the project a breeze.
 
 ## Packages
 Titus includes a number of applications and services out of the box.
@@ -27,8 +27,8 @@ Titus includes a start kit for documentation that is ready to run. The documenta
 ## Services
 Titus comes pre configured with a number of services pre configured to run locally and when deployed. 
 
-### PostgreSql
-We find the need for a database in over 80% of project cases. With this in mind Titus comes with a pre-configured instance of PostgreSql.
+### PostgreSQL
+We find the need for a database in over 80% of project cases. With this in mind Titus comes with a pre-configured instance of PostgreSQL.
 
 - [More information](starter-docs)
 
