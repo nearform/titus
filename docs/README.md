@@ -11,29 +11,32 @@ On top of all this there are other pieces included that will help speed up appli
 
 In other words, we provide everything you need to start deploying features, in a production ready, scalable manner.
 
-### Developers first experience
+### Developer first experience
 Developer experience in Titus is second to none. We want developers to enjoy using Titus so much it becomes frictionless to select it. To ensure we keep to this ideal our development motto is:
 
 ![titus-developer-statement][]
 
-With this in mind, Titus is well documented includes modern tooling like [Storybook][], has linting and testing as first class citizen, and supports common sense inclusions such as quality logging and docker convenience commands for day to day debugging. 
+With this in mind, Titus is well documented, includes modern tooling like [Storybook][], has linting and testing as first class citizens, and supports common-sense inclusions such as quality logging and docker convenience commands for day to day building and working with the stack locally. 
 
 ### No compromise DevOps
-To achieve a rock-solid but easy to configure infrastructural base, we make use of [Terraform][] in conjunction with [Kubernetes][] (K8s) manage infrastructure and service needs. We keep deployment configuration simple by using [Noise][], which wraps common Terraform configurations into an easy to use Terraform plugin. Noise itself is used in a configuration repo, which contains secrets, helm charts, etc.
+To achieve a rock-solid but easy to configure infrastructural base, we make use of [Terraform][] in conjunction with [Kubernetes][] (K8s) to deploy and manage infrastructure and service needs. We keep deployment configuration simple by using [Noise][], which wraps common Terraform configurations into an easy to use Terraform plugin. Noise itself is used in a configuration repo, which contains secrets, helm charts, etc.
 
-![titus-infrastructure-pipeline][]
+![titus-pipeline][]
 
-To keep this part of Titus easy to use we maintain a tool, [titus-noise-cli][] which can generate template copies of titus-noise, that can be tailored to your needs.
+The Titus repository itself is deployed to [AWS][] via [CircleCI][] and can be configured with ease to work with [Azure][] via [Azure Pipelines][] with minimal changes. [Google Cloud Platform][GCP], support is not yet included in Noise but the stack itself can be deployed to there, should you wish to add the infrastructure scripts to support it.
 
 ### Production grade CI pipeline
-The primary goal of Titus is to enable you to get to building features in sprint one. We care a lot about this point. To ensure you can get features out the door quickly we use a modern deployment pipeline to ensure you can deliver continuously.
+The primary goal of Titus is to enable you to get to building features in sprint one. We care a lot about this point and so use a modern deployment pipeline to ensure you can deliver continuously:
 
-![titus-ci-pipeline-overview][]
+![titus-ci-pipeline][]
 
-Our CI is built upon [CircleCI][]'s Workflows and allows us to break our deployment into discrete jobs and workflows. The primary outputs of our CI are containers, which are built continuously, and deployment, which happens continuously to staging and be
+### You decide the details
+Perhaps the most important feature of Titus is how little in includes. There are no decisions made on CSS, no deviation from standard linting rules and no clever frontend framework to get tangled up with.
 
-### Getting started
-The quickest way to get started is to view our quick start guide. It covers, forking, cloning, and pulling Titus local. From there it will walk you through configuration and deployment. All you need installed is the latest stable versions of [Docker][] and [Node][].
+We understand these things will vary project to project, so we get out of your way and let you make those decisions. We just make sure you can build deploy those decisions with ease.
+
+## Explore Titus
+The quickest way to get exploring is to view our quick start guide. It covers, forking, cloning and pulling Titus locally. From there it will walk you through configuration and local deployment to Docker. All you need installed is the latest stable versions of [Docker][] and [Node][].
 
 - Go to the [Quick start][]
 
@@ -47,6 +50,10 @@ The quickest way to get started is to view our quick start guide. It covers, for
 [Kubernetes]:  https://kubernetes.io/
 [Docker]: https://www.docker.com/
 [Node]: https://nodejs.org/en/
+[AWS]: /
+[Azure]: /
+[Azure Pipelines]: /
+[GCP]: /
 
 <!-- Internal Links -->
 [Quick start]: quick-start/
@@ -57,5 +64,4 @@ The quickest way to get started is to view our quick start guide. It covers, for
 [titus-deployment-workflow]: img/titus-deployment-workflow.svg
 [titus-developer-statement]: img/titus-developer-statement.svg
 [titus-ci-pipeline]: img/titus-ci-pipeline.svg
-[titus-ci-pipeline-overview]: img/titus-ci-pipeline-overview.svg
-[titus-infrastructure-pipeline]: img/titus-infrastructure-pipeline.svg
+[titus-pipeline]: img/titus-pipeline.svg
