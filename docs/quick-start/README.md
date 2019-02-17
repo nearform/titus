@@ -50,23 +50,34 @@ Ensure Docker has started on your machine before running the stack. To run the f
 npm run start:all
 ```
 
-Running the command `docker ps` will produce a log of the running set of containers, one for each service, frontend, backend, and the Postgres database.
+Running the command `docker ps` will produce a log of the running set of containers, one for each service, frontend, backend, and the Postgres database. It should look something like this:
+
+```sh
+CONTAINER ID        IMAGE                         NAMES
+d4673b6d74f9        nearform/alpine3-s2i-nodejs   titus-frontend
+6d3d2fc5da44        titus_api                     titus-backend
+e553c840fbdc        postgres:10.4-alpine          titus-db
+```
+
+Congratulations! You are now running titus locally. Check the `docker-compose.yml` file in the root of the repository for specifics of what is running in docker and how it is composed.
 
 ### Logging in
-The running application can be accessed at `localhost:3000` in any modern web browser,
+The running application can be accessed at `localhost:3000` in any modern web browser. First access will require you to log into the system:
 
 ![x](../img/titus-login.png)
 
 The login is set to accept any reasonable username and password. On successful login you will see
-the splash page:
+the splash page for Titus:
 
 ![x](../img/titus-home-page.png)
+
+The splash screen will link you back to the documentation (here) should you not have started from the titus site. Note that you can also log out of the system on the splash screen.
 
 ### Manipulating the  running stack
 A number of useful commands for manipulating the running docker stack have been included as easy to run scripts. These can be ran by running `npm run <command>` in the root of the repo; where command is:
 
 - `docker:dev:exec`
-  - Runs `docker-compose exec api` to get fast access to the backend
+  - Runs `docker-compose exec api` to get fast access to the backend container
 - `docker:dev:logs`: 
   - Runs `docker-compose logs` and passes `-f` so they auto-tail
 - `docker:dev:migrate` 
@@ -81,7 +92,7 @@ A number of useful commands for manipulating the running docker stack have been 
 - `docker:dev:stop`
   - Runs `docker-compose down` to spin down the running system
 
-For example, to tear down the system, spin it back up, and tail the logs, the commands would be,
+For example, to tear down the system, spin it back up and tail the logs, the commands would be:
 
 ```sh
 npm run docker:dev:rmi
@@ -96,20 +107,17 @@ You can can also stop the stack by running:
 npm run stop:all
 ```
 
-This will not delete the stack containers or volumes, to do so run,
+While this command will stop the system it will not delete the stack containers or volumes. To delete the containers produced run:
 
 ```sh
 npm run docker:dev:rmi
 ```
 
 ### Linting and Testing
-Linting and testing can be ran can across the stack by running `npm run <command>` in the root of the repo; where command is,
+Linting and testing can be ran can across the stack by running `npm run <command>` in the root of the repo; where command can be one of:
 
 - `lint:all`
   - Runs the `lint` command in each package that has one
-
-or 
-
 - `test:all`
   - Runs the `test` command in each package that has one
 
