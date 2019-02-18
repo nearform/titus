@@ -199,8 +199,8 @@ jobs:
             name: Promote pre Prod image to Prod
             command: |
                 helm upgrade --install titus-prod ./infrastructure/titus-starter-kit  -f ./infrastructure/titus-starter-kit/values.prod.yaml \
-                --set docker.images.frontend=${DOCKER_REPO}/$(kubectl get deployment titus-dev-frontend -o=jsonpath='{$.spec.template.spec.containers[:1].image}') \
-                --set docker.images.backend=${DOCKER_REPO}/$(kubectl get deployment titus-dev-backend -o=jsonpath='{$.spec.template.spec.containers[:1].image}')
+                --set docker.images.frontend=$(kubectl get deployment titus-dev-frontend -o=jsonpath='{$.spec.template.spec.containers[:1].image}') \
+                --set docker.images.backend=$(kubectl get deployment titus-dev-backend -o=jsonpath='{$.spec.template.spec.containers[:1].image}')
 
 workflows:
   version: 2
