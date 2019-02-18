@@ -27,7 +27,49 @@ Azure documentation will follow once we have an Azure pipelines file in place.
 Services are deployed using [CircleCI]() which runs [Helm]() to handle service updates to the running cluster.
 
 ### On AWS using CircleCI
-To Do.
+    1. Make sure you have your management environmentn setup in accordance to the Noise documnentation. See: [Setup Local management env](https://nearform.github.io/noise/#/setup-local/)
+    1. Clone [titus-infra-aws](https://github.com/nearform/titus-infra-aws) to a new folder
+    1. Clone [Noise](https://github.com/nearform/noise) to a new folder either inside of titus-infra-aws or you would need to symlink the two projects together
+    as titus-infra-aws makes use of Noise as a module.
+    1. Create an S3 bucket in accordance to Noise instructions here: [Create an S3 bucket for terraform state](https://nearform.github.io/noise/#/providers/aws/)
+        You dont need to run terraform steps from the Noise instructions.
+    1. Go into the titus-infra-aws folder and edit the main.tf file.
+        Change values:
+            - Set appropriate region in provider.
+            - Set appropriate aws_region in module.
+            - Set provider profile to the same profile as your local environment.
+            - Set appropriate project name
+            - Terraaform -> Backend -> Bucket : To the name of the bucket you created above.
+            - If you want to also change the name on the backend bucket defined in the last lines of the main.tf file.
+
+#### CirclecI
+
+    1. Add your project thru the UI of circleci by searching the project under `Add projects`
+        It will add a deployment key for you repository and setup the necessary hooks.
+        Make sure you have admin access to the repository todo this.
+    1. Under environment variables add this:
+        - AWS_ACCESS_KEY_ID
+        - AWS_SECRET_ACCESS_KEY
+        - AWS_DEFAULT_REGION
+        - S3_BUCKET
+        These values should have been used during the standup of the Noise environment that support Titus.
+    1. Make sure you .circleci/config.yaml is updated with the necessary container repository value
+    This value is defined as `DOCKER_REPO` in the config file and should reflect the value of the ECR repo from AWS Console
+    1. Control that the docker container name is set correctly for frontend and backend images.
+    1. Note the build will fail because its missing deployment in the cluster.
+
+#### First deploy
+    1. Goto AWS ECR and get the image names for your just newly built images that failed to deploy and run this command
+    1. Go into the titus-deploy folder.
+    1. Note that you are deploying both prod and dev on this image you just built.
+    ```sh
+    helm upgrade --install titus-prod titus-starter-kit  -f titus-starter-kit/values.prod.oyaml \
+        --set docker.images.frontend=<replace me with docker image>
+        --set docker.images.backend=<replace me with docker image>
+    helm upgrade --install titus-dev titus-starter-kit  -f titus-starter-kit/values.dev.yaml \
+        --set docker.images.frontend=<replace me with docker image>
+        --set docker.images.backend=<replace me with docker image>
+    ```
 
 ### On Azure
 Azure documentation will follow once we have an Azure pipelines file in place.
