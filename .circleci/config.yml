@@ -2,7 +2,10 @@ defaults: &defaults
   docker:
     - image: circleci/node:10-browsers
   working_directory: ~/dist
-
+  environment:
+    DOCKER_REPO: "711655675495.dkr.ecr.us-east-1.amazonaws.com"
+    DOCKER_FRONTEND: "titus-frontend"
+    DOCKER_BACKEND: "titus-backend"
 version: 2
 jobs:
   install:
@@ -69,8 +72,6 @@ jobs:
           destination: titus-frontend-lighthouse-report.html
   push-containers:
     <<: *defaults
-    environment:
-      DOCKER_REPO: "711655675495.dkr.ecr.us-east-1.amazonaws.com"
     steps:
       - attach_workspace:
           at: .
@@ -88,14 +89,14 @@ jobs:
           command: |
             set -e
             cd packages/titus-frontend
-            docker build -t ${DOCKER_REPO}/titus-frontend:${CIRCLE_WORKFLOW_ID} -f docker/Dockerfile .
+            docker build -t ${DOCKER_REPO}/${DOCKER_FRONTEND}:${CIRCLE_WORKFLOW_ID} -f docker/Dockerfile .
       - run:
           name: Build the backend Docker containers
           command: |
             set -e
             cd packages/titus-backend/
             mv config/prod.js config/default.js
-            docker build -t ${DOCKER_REPO}/titus-backend:${CIRCLE_WORKFLOW_ID} -f docker/Dockerfile.prod .
+            docker build -t ${DOCKER_REPO}/${DOCKER_BACKEND}:${CIRCLE_WORKFLOW_ID} -f docker/Dockerfile.prod .
       - run:
           name: Push the Docker containers to the registry
           command: |
@@ -104,14 +105,12 @@ jobs:
             eval $(aws ecr get-login --no-include-email --region us-east-1)
             # Push the frontend container
             echo -e "Pushing the frontend container\n"
-            docker push ${DOCKER_REPO}/titus-frontend:${CIRCLE_WORKFLOW_ID}
+            docker push ${DOCKER_REPO}/${DOCKER_FRONTEND}:${CIRCLE_WORKFLOW_ID}
             # Push the backend container
             echo -e "Pushing the backend container\n"
-            docker push ${DOCKER_REPO}/titus-backend:${CIRCLE_WORKFLOW_ID}
+            docker push ${DOCKER_REPO}/${DOCKER_BACKEND}:${CIRCLE_WORKFLOW_ID}
   release-preproduction:
     <<: *defaults
-    environment:
-      DOCKER_REPO: "711655675495.dkr.ecr.us-east-1.amazonaws.com"
     steps:
       - attach_workspace:
           at: .
@@ -153,8 +152,8 @@ jobs:
             name: Deploy to preproduction
             command: |
                 helm upgrade --install titus ./infrastructure/helm \
-                   --set docker.images.preproduction.backend=${DOCKER_REPO}/titus-backend:${CIRCLE_WORKFLOW_ID} \
-                   --set docker.images.preproduction.frontend=${DOCKER_REPO}/titus-frontend:${CIRCLE_WORKFLOW_ID} \
+                   --set docker.images.preproduction.backend=${DOCKER_REPO}/${DOCKER_BACKEND}:${CIRCLE_WORKFLOW_ID} \
+                   --set docker.images.preproduction.frontend=${DOCKER_REPO}/${DOCKER_FRONTEND}:${CIRCLE_WORKFLOW_ID} \
                    --set docker.images.production.backend=$(kubectl get deployment titus-backend -o=jsonpath='{$.spec.template.spec.containers[:1].image}') \
                    --set docker.images.production.frontend=$(kubectl get deployment titus-frontend -o=jsonpath='{$.spec.template.spec.containers[:1].image}') \
                    --set docker.images.preproduction.showcasebackend=$(kubectl get deployment titus-showcase-backend-preprod -o=jsonpath='{$.spec.template.spec.containers[:1].image}') \
@@ -163,8 +162,6 @@ jobs:
                    --set docker.images.production.showcasebackend=$(kubectl get deployment titus-showcase-backend -o=jsonpath='{$.spec.template.spec.containers[:1].image}')
   release-production:
     <<: *defaults
-    environment:
-      DOCKER_REPO: "711655675495.dkr.ecr.us-east-1.amazonaws.com"
     steps:
       - checkout
       - run:
