@@ -1,7 +1,7 @@
 const pino = require('hapi-pino')
 
 module.exports = {
-  name: 'titus-loggier',
+  name: 'titus-logger',
   register: async (server, options) => {
     await server.register({
       plugin: pino,
