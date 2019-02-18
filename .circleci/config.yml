@@ -151,7 +151,7 @@ jobs:
       - run:
             name: Deploy to preproduction
             command: |
-                helm upgrade --install ./infrastructure/titus-dev titus-starter-kit  -f ./infrastructure/titus-starter-kit/values.dev.yaml \
+                helm upgrade --install titus-dev ./infrastructure/titus-starter-kit  -f ./infrastructure/titus-starter-kit/values.dev.yaml \
                 --set docker.images.frontend=${DOCKER_REPO}/${DOCKER_FRONTEND}:${CIRCLE_WORKFLOW_ID} \
                 --set docker.images.backend=${DOCKER_REPO}/${DOCKER_BACKEND}:${CIRCLE_WORKFLOW_ID}
   release-production:
@@ -198,7 +198,7 @@ jobs:
       - run:
             name: Promote pre Prod image to Prod
             command: |
-                helm upgrade --install ./infrastructure/titus-prod titus-starter-kit  -f ./infrastructure/titus-starter-kit/values.prod.yaml \
+                helm upgrade --install titus-prod ./infrastructure/titus-starter-kit  -f ./infrastructure/titus-starter-kit/values.prod.yaml \
                 --set docker.images.frontend=${DOCKER_REPO}/$(kubectl get deployment titus-dev-frontend -o=jsonpath='{$.spec.template.spec.containers[:1].image}') \
                 --set docker.images.backend=${DOCKER_REPO}/$(kubectl get deployment titus-dev-backend -o=jsonpath='{$.spec.template.spec.containers[:1].image}')
 
