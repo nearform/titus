@@ -17,7 +17,7 @@
     "postinstall": "lerna bootstrap && lerna exec npm install",
     "start:all": "npm run docker:dev:start",
     "stop:all": "npm run docker:dev:stop",
-    "test:all": "lerna run --parallel test"
+    "test": "lerna run --parallel test"
   },
   "devDependencies": {
     "lerna": "^2.11.0"

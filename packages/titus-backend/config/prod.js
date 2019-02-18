@@ -1,5 +1,3 @@
-'use strict'
-
 const {
   API_HOST,
   API_PORT,
@@ -20,15 +18,11 @@ const {
 } = process.env
 
 module.exports = {
+  logLevel: 'info',
+  isProduction: /^\s$production\s*$/i.test(NODE_ENV),
   hapi: {
     host: API_HOST || null,
     port: API_PORT || 5000
-  },
-  logger: {
-    pino: {
-      prettyPrint: NODE_ENV !== 'production',
-      level: 'debug'
-    }
   },
   db: {
     host: PGHOST || null,
@@ -38,9 +32,6 @@ module.exports = {
     password: POSTGRES_PASSWORD || 'titus',
     poolSize: 10,
     idleTimeoutMillis: 30000
-  },
-  authorization: {
-    url: 'https://titus.nearform.com/authorization/'
   },
   auth0: {
     domain: `https://${AUTH0_DOMAIN}`,
