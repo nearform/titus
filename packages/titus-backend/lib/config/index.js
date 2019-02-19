@@ -50,9 +50,9 @@ module.exports = {
   pgPlugin: {
     host: PGHOST,
     port: +PGPORT,
-    database: PGPASSWORD,
+    database: PGDATABASE,
     user: PGUSER,
-    password: PGDATABASE,
+    password: PGPASSWORD,
     poolSize: 10,
     idleTimeoutMillis: 30000
   },
