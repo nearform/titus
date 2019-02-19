@@ -1,8 +1,5 @@
-'use strict'
-
 const PgPool = require('pg-pool')
-const pg = require('pg')
-require('pg-range').install(pg)
+require('pg-range').install(require('pg'))
 
 const pluginName = 'pgPlugin'
 
@@ -34,7 +31,7 @@ module.exports = {
       }
     })
 
-    server.events.on('response', request => {
+    server.events.on('response', async request => {
       if (request.pg) {
         if (isTransactional(request)) {
           const error =
@@ -45,7 +42,7 @@ module.exports = {
           const action = error ? 'ROLLBACK' : 'COMMIT'
           server.logger().debug(action)
           try {
-            request.pg.query(action)
+            await request.pg.query(action)
           } catch (e) {
             server.logger().error(e)
           }
@@ -53,7 +50,7 @@ module.exports = {
 
         server.logger().debug('Returning database connection.')
         try {
-          request.pg.release()
+          await request.pg.release()
         } catch (e) {
           server.logger().error(e)
         }

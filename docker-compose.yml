@@ -17,7 +17,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
       - ./packages/titus-backend/initdb:/docker-entrypoint-initdb.d
 
-  api:
+  titus-backend:
     container_name: titus-backend
     build:
       context: packages/titus-backend/docker
@@ -35,14 +35,14 @@ services:
       - PGHOST=titus-db
       - PGPORT=5432
 
-  frontend:
+  titus-frontend:
     container_name: titus-frontend
     image: nearform/alpine3-s2i-nodejs
     env_file: packages/titus-frontend/.env
     working_dir: /titus
     entrypoint: npm start
     depends_on:
-      - api
+      - titus-backend
     networks:
       - titus
     ports:

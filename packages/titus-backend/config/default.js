@@ -1,5 +1,3 @@
-'use strict'
-
 const {
   API_HOST,
   API_PORT,
@@ -20,6 +18,8 @@ const {
 } = process.env
 
 module.exports = {
+  logLevel: 'debug',
+  isProduction: /^\s$production\s*$/i.test(NODE_ENV),
   hapi: {
     host: API_HOST || null,
     port: API_PORT || 5000,
@@ -33,12 +33,6 @@ module.exports = {
       }
     }
   },
-  logger: {
-    pino: {
-      prettyPrint: NODE_ENV !== 'production',
-      level: 'debug'
-    }
-  },
   db: {
     host: PGHOST || null,
     port: PGPORT || 5432,
@@ -47,9 +41,6 @@ module.exports = {
     password: POSTGRES_PASSWORD || 'postgres',
     poolSize: 10,
     idleTimeoutMillis: 30000
-  },
-  authorization: {
-    url: 'http://localhost:5000/authorization/'
   },
   auth0: {
     domain: `https://${AUTH0_DOMAIN}`,
