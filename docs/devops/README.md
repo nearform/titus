@@ -71,15 +71,13 @@ __5.__ Note the build will fail because its missing deployment in the cluster. T
 #### First deploy
 __1.__ Goto AWS ECR and get the image names for your just newly built images that failed to deploy and run this command
 __2.__ Go into the titus-deploy folder.
-__3.__ Note that you are deploying both prod and dev on this image you just built.
-    ```sh
-    helm upgrade --install titus-prod titus-starter-kit  -f titus-starter-kit/values.prod.yaml \
-        --set docker.images.frontend=<replace me with docker image>
-        --set docker.images.backend=<replace me with docker image>
-    helm upgrade --install titus-dev titus-starter-kit  -f titus-starter-kit/values.dev.yaml \
-        --set docker.images.frontend=<replace me with docker image>
-        --set docker.images.backend=<replace me with docker image>
-    ```
+__3.__ Run these commands:
+
+```sh
+helm upgrade --install titus-prod titus-starter-kit  -f titus-starter-kit/values.prod.yaml --set docker.images.frontend=<replace me with docker image> --set docker.images.backend=<replace me with docker image>
+helm upgrade --install titus-dev titus-starter-kit  -f titus-starter-kit/values.dev.yaml --set docker.images.frontend=<replace me with docker image> --set docker.images.backend=<replace me with docker image>
+```
+___Note:___ This will deploy same image to both prod and dev environment. If you wanted to add more environments you create another line and add necessary sections to circleci configuration.
 
 ### On Azure
 Azure documentation will follow once we have an Azure pipelines file in place.
