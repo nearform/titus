@@ -17,12 +17,6 @@ Titus makes use of [Noise]() which is a Terraform plugin that that understands h
 
 The exact nature of how to set up infrastructure varies from provider to provider, so is broken down into provider specific guides below. Note, you will need to be proficient with your chosen provider, and Terraform, the guides below are not suitable to learn either:
 
-### On AWS
-To Do.
-
-### On Azure
-Azure documentation will follow once we have an Azure pipelines file in place.
-
 ## Setting up CI Deployment
 Services are deployed using [CircleCI]() which runs [Helm]() to handle service updates to the running cluster.
 
