@@ -5,20 +5,21 @@
   "description": "The backend for the Titus project",
   "main": "index.js",
   "scripts": {
-    "create:env": "node -r fs -e \"fs.copyFileSync('docker/dev.env.sample', 'docker/dev.env', fs.constants.COPYFILE_EXCL)\"",
+    "create:env": "node -r fs -e \"fs.copyFileSync('.env.sample', '.env', fs.constants.COPYFILE_EXCL)\"",
     "dev:seed": "node ./tools/migrate seed_dev",
-    "initdb": "cat tools/initdb/*.sql | PGPASSWORD=$POSTGRES_PASSWORD psql -U postgres -1",
+    "initdb": "cat tools/initdb/*.sql | psql -1",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "migrate": "node ./tools/migrate build",
     "start": "nodemon --config .nodemonrc .",
-    "test": "jest --config .jest.json",
-    "test:watch": "jest --config .jest.json --watch"
+    "test": "jest --config .jest.json --coverage",
+    "test:watch": "jest --config .jest.json --watch --verbose"
   },
   "dependencies": {
     "axios": "^0.18.0",
     "boom": "^7.3.0",
     "dotenv": "^6.2.0",
+    "dotenv-expand": "^4.2.0",
     "hapi": "^18.0.1",
     "hapi-auth-jwt2": "^8.3.0",
     "hapi-pino": "^5.2.0",

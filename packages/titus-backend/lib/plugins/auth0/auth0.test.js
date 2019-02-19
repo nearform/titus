@@ -2,6 +2,7 @@ const axios = require('axios')
 const hapi = require('hapi')
 const faker = require('faker')
 const nock = require('nock')
+const pino = require('hapi-pino')
 const { sign } = require('jsonwebtoken')
 
 describe('auth0 plugin', () => {
@@ -48,8 +49,8 @@ bxrE9MNUZ2aPFaFp+DyAe+b4nDwuJaW2LURbr8AEZga7oQj0uYxcYw==
     server = hapi.server()
     await server.register([
       {
-        plugin: require('../logger'),
-        options: { logLevel: 'silent' }
+        plugin: pino,
+        options: { level: 'silent' }
       },
       {
         plugin: require('.'),

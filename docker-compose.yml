@@ -10,50 +10,12 @@ services:
       - POSTGRES_PASSWORD=titus
       - POSTGRES_DB=titus
     ports:
-      - "5432:5432"
-    networks:
-      - titus
+      - 5432:5432
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - ./packages/titus-backend/initdb:/docker-entrypoint-initdb.d
-
-  titus-backend:
-    container_name: titus-backend
-    build:
-      context: packages/titus-backend/docker
-      dockerfile: Dockerfile
-    env_file: packages/titus-backend/docker/dev.env
-    depends_on:
-      - titus-db
-    networks:
-      - titus
-    ports:
-      - "5000:5000"
-    volumes:
-      - ./packages/titus-backend:/titus
-    environment:
-      - PGHOST=titus-db
-      - PGPORT=5432
-
-  titus-frontend:
-    container_name: titus-frontend
-    image: nearform/alpine3-s2i-nodejs
-    env_file: packages/titus-frontend/.env
-    working_dir: /titus
-    entrypoint: npm start
-    depends_on:
-      - titus-backend
-    networks:
-      - titus
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./packages/titus-frontend:/titus
-
-networks:
-    titus:
+      - titus-pg-data:/var/lib/postgresql/data
+      - ./packages/titus-backend/tools/initdb:/docker-entrypoint-initdb.d
 
 volumes:
-  postgres_data:
-    # run `docker volume create --name postgres_data -d local`
+  titus-pg-data:
+    # run `docker volume create --name titus-pg-data -d local`
     external: true

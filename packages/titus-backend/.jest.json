@@ -1,4 +1,7 @@
 {
-  "verbose": true,
-  "testEnvironment": "node"
+  "testEnvironment": "node",
+  "collectCoverageFrom": [
+    "lib/**/*.{js,jsx}",
+    "!**/node_modules/**"
+  ]
 }
