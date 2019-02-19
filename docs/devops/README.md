@@ -49,12 +49,12 @@ __5.__ Go into the titus-infra-aws folder and edit the main.tf file.
 
 __Change values:__
 
-    - Set appropriate region in provider.
-    - Set appropriate aws_region in module.
-    - Set provider profile to the same profile as your local environment.
-    - Set appropriate project name
-    - Terraform -> Backend -> Bucket : To the name of the bucket you created above.
-    - If you want to also change the name on the backend bucket defined in the last lines of the main.tf file.
+* Set appropriate region in provider.
+* Set appropriate aws_region in module.
+* Set provider profile to the same profile as your local environment.
+* Set appropriate project name
+* Terraform -> Backend -> Bucket : To the name of the bucket you created above.
+* If you want to also change the name on the backend bucket defined in the last lines of the main.tf file.
 
 __6.__ Now run the command `terraform plan` and with some luck you have no errors and a report of 90+ resources creaated.
 
