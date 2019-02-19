@@ -1,1 +1,1 @@
-module.exports = [{ plugin: require('./health') }]
+module.exports = [require('./health')]

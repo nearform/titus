@@ -1,5 +1,6 @@
 const axios = require('axios')
 const hapi = require('hapi')
+const pino = require('hapi-pino')
 const { version } = require('../../../package')
 
 describe('health route', () => {
@@ -19,8 +20,8 @@ describe('health route', () => {
     server = hapi.server()
     await server.register([
       {
-        plugin: require('../../plugins/logger'),
-        options: { logLevel: 'silent' }
+        plugin: pino,
+        options: { level: 'silent' }
       },
       require('../../plugins/pg'),
       require('.')

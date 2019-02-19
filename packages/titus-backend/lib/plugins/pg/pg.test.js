@@ -1,6 +1,7 @@
 const axios = require('axios')
 const hapi = require('hapi')
 const faker = require('faker')
+const pino = require('hapi-pino')
 const { badRequest } = require('boom')
 
 describe('pg plugin', () => {
@@ -21,8 +22,8 @@ describe('pg plugin', () => {
     server = hapi.server()
     await server.register([
       {
-        plugin: require('../logger'),
-        options: { logLevel: 'silent' }
+        plugin: pino,
+        options: { level: 'silent' }
       },
       require('.')
     ])

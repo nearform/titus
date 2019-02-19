@@ -25,7 +25,7 @@ npm install
 npm run create:env
 ```
 
-This will create a `dev.env` file inside the `docker` directory. You must fill in the Auth0 environment variables with the data from your Auth0 app
+This will create a `.env` file inside the root directory. You must fill in the Auth0 environment variables with the data from your Auth0 app
 
 ```
 npm start

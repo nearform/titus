@@ -1,25 +1,26 @@
 const { version } = require('../../../package')
 
 module.exports = {
-  name: 'health-route',
-  register: async (server, options) => {
+  name: 'healthRoute',
+  /**
+   * Registers health check route, issuing database dummy query to check its availability
+   * @async
+   * @param {Hapi.Server} server  - in which stratgy and routes are registered
+   */
+  register: async server => {
     server.route({
       method: 'GET',
       path: '/healthcheck',
       config: {
         plugins: { pgPlugin: {} }
       },
-      handler: async request => {
+      handler: async ({ pg, logger }) => {
         let dbRes
         try {
-          dbRes = await request.pg.query('SELECT $1::text as message', [
-            'Hello world!'
-          ])
+          dbRes = await pg.query('SELECT $1::text as message', ['Hello world!'])
         } catch (err) {
           // swallow error
-          server
-            .logger()
-            .debug({ err }, `failed to read DB during health check`)
+          logger.debug({ err }, `failed to read DB during health check`)
         }
         return {
           version,

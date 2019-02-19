@@ -10,21 +10,34 @@ const isTransactional = request => {
 
 module.exports = {
   name: pluginName,
+  /**
+   * Registers Postgres connection management plugin.
+   * It will attach a pg object to routes for them to issue queries against database.
+   * Also automatically commit (or rollback, in case of thrown errors) transactionnal routes.
+   *
+   * To enable it, include `plugins: { pgPlugin: {} }` to your route `options`
+   * To enable transactional support: `plugins: { pgPlugin: { transactional: true } }`
+   * @async
+   * @param {Hapi.Server} server  - in which stratgy and routes are registered
+   * @param {Object} options      - pg-pool options
+   * @see https://github.com/brianc/node-pg-pool#create
+   */
   register: async (server, options) => {
     const pool = new PgPool(options)
 
     server.ext({
       type: 'onPreHandler',
       method: async (request, h) => {
-        if (!request.route.settings.plugins[pluginName]) {
+        const { route, logger } = request
+        if (!route.settings.plugins[pluginName]) {
           return h.continue
         }
 
-        server.logger().debug('Getting database connection')
+        logger.debug('Getting database connection')
         request.pg = await pool.connect()
 
         if (isTransactional(request)) {
-          server.logger().debug('Begin transaction')
+          logger.debug('Begin transaction')
           await request.pg.query('BEGIN')
         }
         return h.continue
@@ -32,27 +45,28 @@ module.exports = {
     })
 
     server.events.on('response', async request => {
-      if (request.pg) {
+      const { pg, response, logger } = request
+      if (pg) {
         if (isTransactional(request)) {
           const error =
-            request.response &&
-            (request.response.statusCode !== 200 ||
-              (request.response.source && request.response.source.error))
+            response &&
+            (response.statusCode !== 200 ||
+              (response.source && response.source.error))
 
           const action = error ? 'ROLLBACK' : 'COMMIT'
-          server.logger().debug(action)
+          logger.debug(action)
           try {
-            await request.pg.query(action)
+            await pg.query(action)
           } catch (e) {
-            server.logger().error(e)
+            logger.error(e)
           }
         }
 
-        server.logger().debug('Returning database connection.')
+        logger.debug('Returning database connection.')
         try {
-          await request.pg.release()
+          await pg.release()
         } catch (e) {
-          server.logger().error(e)
+          logger.error(e)
         }
       }
     })

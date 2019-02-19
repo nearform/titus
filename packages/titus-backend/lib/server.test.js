@@ -1,15 +1,9 @@
 const axios = require('axios')
 const startServer = require('./server')
-const config = require('../config/default')
+const config = require('./config')
 
 describe('server', () => {
   let server
-  let level
-
-  beforeAll(async () => {
-    level = config.logLevel
-    config.logLevel = 'silent'
-  })
 
   afterEach(async () => {
     if (server) {
@@ -17,12 +11,14 @@ describe('server', () => {
     }
   })
 
-  afterAll(async () => {
-    config.logLevel = level
-  })
-
   it('starts a server handling 404', async () => {
-    server = await startServer()
+    server = await startServer({
+      ...config,
+      'hapi-pino': {
+        ...config['hapi-pino'],
+        level: 'silent'
+      }
+    })
     const response = await axios.get(`${server.info.uri}/unknown`, {
       validateStatus: () => true
     })
