@@ -46,7 +46,9 @@ __4.__ Create an S3 bucket in accordance to Noise instructions found here: [Crea
 You dont need to run terraform steps from the Noise instructions.
 
 __5.__ Go into the titus-infra-aws folder and edit the main.tf file.
-    __Change values:__
+
+__Change values:__
+
     - Set appropriate region in provider.
     - Set appropriate aws_region in module.
     - Set provider profile to the same profile as your local environment.
@@ -54,9 +56,9 @@ __5.__ Go into the titus-infra-aws folder and edit the main.tf file.
     - Terraform -> Backend -> Bucket : To the name of the bucket you created above.
     - If you want to also change the name on the backend bucket defined in the last lines of the main.tf file.
 
-        __6.__ Now run the command `terraform plan` and with some luck you have no errors and a report of 90+ resources creaated.
+__6.__ Now run the command `terraform plan` and with some luck you have no errors and a report of 90+ resources creaated.
 
-        __7.__ Run the command: `terraform apply` - type yes when asked and sit back.
+__7.__ Run the command: `terraform apply` - type yes when asked and sit back.
 
 #### CirclecI
 
