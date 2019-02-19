@@ -16,40 +16,34 @@ For a given repo or location, copy the titus-starter-package and rename it docs;
 The documentation pulls in its dependencies via the browser when it runs, this means it will require internet connection to run. This can be avoided by copying the linked dependencies in `index.html` locally and linking to the local versions. Note, this means you will also need to deploy these dependencies for documentation to work in a hosted environment.
 
 ## Running Locally
-Documentation can be ran by serving the docs folder at a given port. For ease of use you can use the `docsfiy-cli` which is a CLI tool made by the [docsify][] team:
+Documentation can be ran by serving the docs folder at a given port. 
+For ease of use you can use the `docsfiy-cli` which is a CLI tool made by the [docsify] team:
 
+From the `packages/titus-starter-docs` folder:
 ```sh
-npm install  -g docsify-cli
-```
-
-Next in the root folder run the docsify cli:
-
-```sh
-docsify serve docs
+npx docsify init .
+npx docsify serve . -p 4000
 ```
 
 Which will produce:
 
 ```sh
-Serving /path/to/your/repo/titus-noise/docs now.
-Listening at http://localhost:3000
+Serving /path/to/your/repo/titus/packages/titus-starter-docs now.
+Listening at http://localhost:4000
+
 ```
+
+The documentation will be served on `localhost:4000`.
 
 The documentation will be served on `localhost:3000`.
 
 #### Serving in other ways
 Our documentation builds on the fly. This means all you need to do is serve the docs folder. Any program or cli tool used for serving a folder will work; __as long as it can handle hash routing__.
 
-Another popular module for serving files is `serve` on npm. This can be installed via:
+Another popular module for serving files is `serve` on npm. This can be ran, with hash router support like so:
 
 ```sh
-npm install  -g docsify-cli
-```
-
-and ran, with hash router support like so:
-
-```sh
-serve -s -l 4000 docs
+npx serve -s -l 4000 .
 ```
 
 Which will produce:
@@ -69,10 +63,4 @@ The documentation will be served on `localhost:4000` in this case.
 Docs can be deployed to any host that supports hash routing. This includes Github Pages, Serve, and Commons Host. For ease of use, the docs for Titus themselves are deployed to Github Pages.
 
 
-[docsify]: /
-
-<!-- Images -->
-[hapi]: https://hapijs.com/api/18.1.0
-[pgsql]: https://www.postgresql.org/docs/
-[pino]: https://github.com/pinojs/pino
-[jest]: https://jestjs.io/
+[docsify]: https://docsify.js.org
