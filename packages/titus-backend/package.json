@@ -13,7 +13,7 @@
     "migrate": "node ./tools/migrate build",
     "start": "nodemon --config .nodemonrc .",
     "test": "jest --config .jest.json --coverage",
-    "test:watch": "jest --config .jest.json --watch"
+    "test:watch": "jest --config .jest.json --watch --verbose"
   },
   "dependencies": {
     "axios": "^0.18.0",
