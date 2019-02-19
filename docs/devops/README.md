@@ -28,7 +28,7 @@ Services are deployed using [CircleCI]() which runs [Helm]() to handle service u
 
 ### On AWS using CircleCI
 
-To setup the titus deployment on an AWS environment making use of CircleCI there is several steps to run through and consder.
+To setup the titus deployment on an AWS environment making use of CircleCI there is several steps to run through and consider.
 The current circleci config is setup to have the team work on branches that gets commited to a master and at a code freeze
 the team would release tag the current master that also would be running in the dev environment. And that would trigger a propagation
 of the dev image into the production / staging environment.
@@ -36,42 +36,42 @@ of the dev image into the production / staging environment.
 
 #### Howto setup the EKS environment.
 
-1. Make sure you have your management environmentn setup in accordance to the Noise documnentation. See: [Setup Local management env](https://nearform.github.io/noise/#/setup-local/)
-1. Clone [titus-infra-aws](https://github.com/nearform/titus-infra-aws) to a new folder
-1. Clone [Noise](https://github.com/nearform/noise) to a new folder either inside of titus-infra-aws or you would need to symlink the two projects together as titus-infra-aws makes use of Noise as a module.
-1. Create an S3 bucket in accordance to Noise instructions found here: [Create an S3 bucket for terraform state](https://nearform.github.io/noise/#/providers/aws/).
+__1.__ Make sure you have your management environment setup in accordance to the Noise documnentation. See: [Setup Local management env](https://nearform.github.io/noise/#/setup-local/)
+__2.__ Clone [titus-infra-aws](https://github.com/nearform/titus-infra-aws) to a new folder
+__3.__ Clone [Noise](https://github.com/nearform/noise) to a new folder either inside of titus-infra-aws or you would need to symlink the two projects together as titus-infra-aws makes use of Noise as a module.
+__4.__ Create an S3 bucket in accordance to Noise instructions found here: [Create an S3 bucket for terraform state](https://nearform.github.io/noise/#/providers/aws/).
 You dont need to run terraform steps from the Noise instructions.
-1. Go into the titus-infra-aws folder and edit the main.tf file.
-    Change values:
+__5.__ Go into the titus-infra-aws folder and edit the main.tf file.
+    __Change values:__
     - Set appropriate region in provider.
     - Set appropriate aws_region in module.
     - Set provider profile to the same profile as your local environment.
     - Set appropriate project name
-    - Terraaform -> Backend -> Bucket : To the name of the bucket you created above.
+    - Terraform -> Backend -> Bucket : To the name of the bucket you created above.
     - If you want to also change the name on the backend bucket defined in the last lines of the main.tf file.
-1. Now run the command `terraform plan` and with some luck you have no errors and a report of 90+ resources creaated.
-1. Run the command: `terraform apply` - type yes when asked and sit back.
+__6.__ Now run the command `terraform plan` and with some luck you have no errors and a report of 90+ resources creaated.
+__7.__ Run the command: `terraform apply` - type yes when asked and sit back.
 
 #### CirclecI
 
-1. Add your project thru the UI of circleci by searching the project under `Add projects`
+__1.__ Add your project thru the UI of circleci by searching the project under `Add projects`
 It will add a deployment key for you repository and setup the necessary hooks.
 Make sure you have admin access to the repository todo this.
-1. Under environment variables add this:
+__2.__ Under environment variables add this:
     - AWS_ACCESS_KEY_ID
     - AWS_SECRET_ACCESS_KEY
     - AWS_DEFAULT_REGION
     - S3_BUCKET
 These values should have been used during the standup of the Noise environment that support Titus.
-1. Make sure you .circleci/config.yaml is updated with the necessary container repository value (AWS ECR id value)
+__3.__ Make sure you .circleci/config.yaml is updated with the necessary container repository value (AWS ECR id value)
 This value is defined as `DOCKER_REPO` in the config file and should reflect the value of the ECR repo from AWS Console
-1. Control that the docker container name is set correctly for frontend and backend images.
-1. Note the build will fail because its missing deployment in the cluster. That is fine, because that means you now have an image so you can create the deployment.
+__4.__ Control that the docker container name is set correctly for frontend and backend images.
+__5.__ Note the build will fail because its missing deployment in the cluster. That is fine, because that means you now have an image so you can create the deployment.
 
 #### First deploy
-1. Goto AWS ECR and get the image names for your just newly built images that failed to deploy and run this command
-1. Go into the titus-deploy folder.
-1. Note that you are deploying both prod and dev on this image you just built.
+__1.__ Goto AWS ECR and get the image names for your just newly built images that failed to deploy and run this command
+__2.__ Go into the titus-deploy folder.
+__3.__ Note that you are deploying both prod and dev on this image you just built.
     ```sh
     helm upgrade --install titus-prod titus-starter-kit  -f titus-starter-kit/values.prod.yaml \
         --set docker.images.frontend=<replace me with docker image>
@@ -101,4 +101,4 @@ Titus includes a fully featured, production ready, CI Pipeline. Titus uses Circl
 [CircleCI]: /
 
 <!-- Images -->
-[titus-devops-quote]: ../img/titus-devops-quote.svg
+[titu__s-devops-quote]: ../img/titus-devops-quote.svg
