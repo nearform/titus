@@ -15,18 +15,7 @@ Titus makes use of [Noise]() which is a Terraform plugin that that understands h
 
 The exact nature of how to set up infrastructure varies from provider to provider, so is broken down into provider specific guides below. Note, you will need to be proficient with your chosen provider, and Terraform, the guides below are not suitable to learn either:
 
-## Setting up CI Deployment
-Services are deployed using [CircleCI]() which runs [Helm]() to handle service updates to the running cluster.
-
-### On AWS using CircleCI
-
-To setup the titus deployment on an AWS environment making use of CircleCI there is several steps to run through and consider.
-The current circleci config is setup to have the team work on branches that gets commited to a master and at a code freeze
-the team would release tag the current master that also would be running in the dev environment. And that would trigger a propagation
-of the dev image into the production / staging environment.
-
-
-#### Howto setup the EKS environment.
+#### Howto setup the EKS environment on AWS.
 
 __1.__ Make sure you have your management environment setup in accordance to the Noise documnentation. See: [Setup Local management env](https://nearform.github.io/noise/#/setup-local/)
 
@@ -51,6 +40,16 @@ __Change values:__
 __6.__ Now run the command `terraform plan` and with some luck you have no errors and a report of 90+ resources creaated.
 
 __7.__ Run the command: `terraform apply` - type yes when asked and sit back.
+
+## Setting up CI Deployment
+Services are deployed using [CircleCI]() which runs [Helm]() to handle service updates to the running cluster.
+
+### On AWS using CircleCI
+
+To setup the titus deployment on an AWS environment making use of CircleCI there is several steps to run through and consider.
+The current circleci config is setup to have the team work on branches that gets commited to a master and at a code freeze
+the team would release tag the current master that also would be running in the dev environment. And that would trigger a propagation
+of the dev image into the production / staging environment.
 
 #### CirclecI
 
