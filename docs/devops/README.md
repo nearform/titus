@@ -1,5 +1,3 @@
-![titus-devops-quote][]
-
 # DevOps
 Deployment for Titus is a fully featured, modern, production grade experience. There are a number of ways to look at Titus' deployment tooling. For simplicity the pipeline can be broken it down into two types of deployment, Infrastructure, which is handled via [Noise]() and [Terraform]() and Services, which is handled by helm.
 
