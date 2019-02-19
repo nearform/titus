@@ -12,7 +12,7 @@
     "lint:fix": "eslint . --fix",
     "migrate": "node ./tools/migrate build",
     "start": "nodemon --config .nodemonrc .",
-    "test": "jest --config .jest.json --coverage --reporters=tap",
+    "test": "jest --config .jest.json --coverage",
     "test:watch": "jest --config .jest.json --watch"
   },
   "dependencies": {

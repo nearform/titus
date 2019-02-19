@@ -11,7 +11,7 @@ const isTransactional = request => {
 module.exports = {
   name: pluginName,
   /**
-   * Registers PostGres connection management plugin.
+   * Registers Postgres connection management plugin.
    * It will attach a pg object to routes for them to issue queries against database.
    * Also automatically commit (or rollback, in case of thrown errors) transactionnal routes.
    *
