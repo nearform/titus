@@ -21,7 +21,7 @@
     "start": "react-scripts start",
     "storybook": "start-storybook -p 9009 -s public",
     "storybook:build": "build-storybook -s public",
-    "test": "cross-env CI=true react-scripts test --env=jsdom",
+    "test": "cross-env CI=true react-scripts test --env=jsdom --coverage",
     "test:watch": "react-scripts test --env=jsdom"
   },
   "lint-staged": {
