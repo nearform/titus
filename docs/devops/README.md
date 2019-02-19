@@ -97,7 +97,7 @@ Azure documentation will follow once we have an Azure pipelines file in place.
 
 
 ## Apps & Services
-Titus includes a fully featured, production ready, CI Pipeline. Titus uses CircleCI as it's infrastructure of choice for continuous integration. The Titus CI Pipeline includes all of the steps needed to build assets, lint and test, as well as pushing containers and deployment proper. 
+Titus includes a fully featured, production ready, CI Pipeline. Titus uses CircleCI as it's infrastructure of choice for continuous integration. The Titus CI Pipeline includes all of the steps needed to build assets, lint and test, as well as pushing containers and deployment proper.
 
 ![titus-ci-pipeline](../img/titus-ci-pipeline.svg)
 
