@@ -1,17 +1,62 @@
 # Titus Backend
 
-A starter [Hapi][hapi] and [PostgreSQL][pgsql] setup running in Docker.
+A starter [Hapi] server with [PostgreSQL][node-postgres] and [Auth0] plugins.
 
 ## Features
 
-* Docker compose config to start database and Hapi
-* Uses host filesystem, so no need to restart containers on code change
-* Hot reloading Hapi server
-* Postgresql Hapi plugin with transaction control
-* Sample source structure for organising Hapi
-* Sample test setup using [Jest][jest]
-* Logger of choice is [Pino][pino]
-* Linting using eslint/Standard
+* Provides Http server with Hapi
+* Logger of choice is [Pino]
+* Automatic restart and hot reloading thanks to [NodeMon]
+* Follow [12-Factor App recommendation][config] and reads configuration from env variables 
+* Postgresql plugin with transaction control at route level
+* Sample source structure for organising Hapi routes and plugin
+* Tested with [Jest], [nock] and [faker]
+* Code linter is [ESLint]
+* Code formatted is [Prettier] with [Standard] preset
+
+
+## Introduction
+
+Titus-backend is lightweight on purpose. 
+
+What you'll implement with it is your own business, and we're providing you an unopiniated, working shell.
+We only provide what we think is common in our projects: a configurable Http Server, with JSON logging, health check route and database capabilities.
+
+There's room for you to add, customize or even replace parts and bits.
+
+### Organization
+
+* `lib/` - contains the server sources
+* `lib/config` - server configuration: read values from env variables, with default values from `.env` file
+* `lib/plugins` - Hapi plugins for cross-cutting features. Contains PG instrumenter and Auth0 + [jwt] strategy
+* `lib/routs` - Hapi plugins declaring HTTP routes. You'll find the health-check there
+* `tools/` - contains tooling not used by the server itself, but related to it, such as database migration tools and scripts
+
+### Auth0 plugin
+
+It declares `POST /login` route, which expects JSON body with `username` and `password` keys.
+Those values will be sent to [Auth0] and if authentication succeeded, you'll get a [jwt] in return, that your application should store.
+
+It also declared an Hapi authentication [strategy] named `jwt`. Use in in the route you'd like to protect.
+Accessing those routes will require a valid jwt value in `Authorization` HTTP header.
+
+Have a look at `lib/plugins/auth0/auth0.test.js` for some examples.
+
+### Pg plugin
+
+It automatically instrument other routes with a [pg][node-postgres] so they could issue queries against database.
+It automatically commits (or rolls back, in case of thrown errors) transactionnal routes.
+
+To enable it, include `plugins: { pgPlugin: {} }` to your route `options`
+To enable transactional support: `plugins: { pgPlugin: { transactional: true } }`
+
+Have a look at `lib/plugins/pg/pg.test.js` for some examples.
+
+### Health check route
+
+`GET /healthcheck` endpoint is intended to your production cluster, as it tells when your backend is ready to use.
+It returns your application version and server timestamp, but also run a dummy query against database, to be sure it's available.
+
 
 ## Installation
 
@@ -19,61 +64,62 @@ A starter [Hapi][hapi] and [PostgreSQL][pgsql] setup running in Docker.
 npm install
 ```
 
+But it was covered when you ran `npm install` at root level ;)
+
+
 ## Running Locally
 
-```
-npm run create:env
-```
+1. Edit your configuration:
+  ```
+  npm run create:env
+  ```
 
-This will create a `.env` file inside the root directory. You must fill in the Auth0 environment variables with the data from your Auth0 app
+  This will create a `.env` file inside the root directory, from the `.env.sample` file.
+  These are your configuration values. You can ammend the file when running locally, and also override individual variables in your environement.
 
-```
-npm start
-```
+  You must fill in the `AUTH0_*` variables with the data from your Auth0 app, may you need to use it for authentication.
 
-This will build and run all the necessary docker containers. 
+1. Make sure Postgres is running and available. If you've ran `npm run start:all` at root level, [docker-compose] took care of it.
 
-Verify it works with `curl http://127.0.0.1:5000/hello/random`
+1. Start the server
+  ```
+  npm start
+  ```
+  
+  This will start your server on `http://localhost:5000`. 
+  Any changes in `lib/` or in `.env` you make will automatically restart the server. 
 
-You can tail the server logs with `docker logs -f docker_api_1`.
-
-## Developing
-
-`npm start` will run everything in local development mode. Any code changes you make will automatically restart the server. 
-
-Titus uses Docker Compose, see [docker/docker-compose-dev.yml](docker/docker-compose-dev.yml).
-
-### Docker
-
-`docker:dev:start` - start the db, api and web db ui in Docker for local development.  This will also migrate and seed the db.
-`docker:dev:stop` - stop all development Docker containers
-
-#### Other useful script
-
-* `docker:dev:migrate` - migrate the db
-* `docker:dev:seed` - seed the db with dev data
-* `docker:dev:rmi` - remove all development Docker images
-* `docker:dev:logs` - show and follow all development Docker logs
-* `docker:dev:exec` - execute a command in the dev api Docker container, e.g. `npm run docker:dev:exec -- ls`
-
-### API
-
-* `dev:start` - start the Hapi server on the host machine (used inside the Docker container)
-* `dev:cleandb` - deletes the `pgdata` directory containing the database data. THIS WILL DELETE YOUR DATABASE!
-
-### Linting
-
-* `lint` - uses eslint / prettier
-* `lint:fix` - uses eslint / prettier (with autofix flag)
-
-### Testing
-
-`test` - run tests using Jest
+  Verify it works and can reach its DB with `curl http://127.0.0.1:5000/healthcheck`.
 
 
-<!-- Images -->
-[hapi]: https://hapijs.com/api/18.1.0
-[pgsql]: https://www.postgresql.org/docs/
-[pino]: https://github.com/pinojs/pino
-[jest]: https://jestjs.io/
+## Testing and Linting
 
+* `npm test` - run all the tests with code coverage (it's the command CI is using).
+* `npm run test:watch` - starts Jest in watch mode: it'll run tests against the modified files (since last commit), and will automatically run them again on code change.
+* `npm run lint` - apply ESLint / Prettier on sources
+* `npm run lint:fix` - uses ESLint / Prettier (with autofix flag)
+
+
+## Database management
+
+* `npm run db:init` - apply SQL initialization scripts with `psql` CLI against your database
+* `npm run db:migrate` - apply DB migration scripts from `tools/migrations/build` with [postgrator] 
+* `npm run db:seed` - seed the DB with dev data from `tools/migrations/seed_dev` with [postgrator]
+
+
+[Jest]: https://jestjs.io
+[ESLint]: https://eslint.org
+[Prettier]: https://prettier.io
+[Standard]: https://standardjs.com
+[Hapi]: https://hapijs.com
+[Pino]: http://getpino.io
+[Auth0]: https://auth0.com
+[NodeMon]: https://nodemon.io
+[node-postgres]: https://node-postgres.com
+[jwt]: https://jwt.io
+[nock]: https://github.com/nock/nock#readme
+[faker]: http://marak.github.io/faker.js
+[postgrator]: https://github.com/rickbergfalk/postgrator#readme
+[docker-compose]: https://docs.docker.com/compose
+[config]: https://12factor.net/config
+[strategy]: https://hapijs.com/tutorials/auth?lang=en_US#strategies
