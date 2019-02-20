@@ -5,6 +5,7 @@
   "scripts": {
     "clean:all": "lerna clean",
     "create:env": "lerna run --parallel create:env",
+    "doc:serve": "docsify serve -p 4000 docs",
     "docker:dev:create-volume": "docker volume create --name titus-pg-data -d local",
     "docker:dev:logs": "docker-compose logs -f",
     "docker:dev:rmi": "docker-compose down --rmi all",
@@ -19,6 +20,7 @@
     "test:all": "npm run test"
   },
   "devDependencies": {
+    "docsify-cli": "^4.3.0",
     "lerna": "^2.11.0"
   }
 }

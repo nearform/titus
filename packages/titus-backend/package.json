@@ -6,11 +6,11 @@
   "main": "index.js",
   "scripts": {
     "create:env": "node -r fs -e \"fs.copyFileSync('.env.sample', '.env', fs.constants.COPYFILE_EXCL)\"",
-    "dev:seed": "node ./tools/migrate seed_dev",
-    "initdb": "cat tools/initdb/*.sql | psql -1",
+    "db:init": "cat tools/initdb/*.sql | psql -1",
+    "db:migrate": "node ./tools/migrate build",
+    "db:seed": "node ./tools/migrate seed_dev",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "migrate": "node ./tools/migrate build",
     "start": "nodemon --config .nodemonrc .",
     "test": "jest --config .jest.json --coverage",
     "test:watch": "jest --config .jest.json --watch --verbose"
