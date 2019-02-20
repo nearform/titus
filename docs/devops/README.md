@@ -82,6 +82,14 @@ __4.__ Control that the docker container name is set correctly for frontend and 
 
 __5.__ Note the build will fail because its missing deployment in the cluster. That is fine, because that means you now have an image so you can create the deployment.
 
+#### Deploying secrets
+__1.__ In your titus-deploy repository you will have a chart that is called helm-secrets.
+
+__2.__ Read through the [README.md](https://github.com/nearform/titus-deploy/tree/master/titus-secrets) provided in the helm chart as it will explain the process
+of creating and maintaing your secrets. And keep them a secret.
+
+__3.__ Install the secrets helm chart.
+
 #### First deploy
 
 __1.__ Goto AWS ECR and get the image names for your just newly built images that failed to deploy and run this command
