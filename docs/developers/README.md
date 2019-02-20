@@ -9,7 +9,7 @@ With Titus we wanted to ensure the developer experience accelerated the speed at
 
 - Commands for linting, testing, running, stopping your application should be included. Commands to support local manipulation, spinning up and tearing down of the system should be included and documented.
 
-- Selecting technologies such as CSS frameworks or data management libraries is your on choice. Titus is lean and just opinionated enough to be reusable and reduces the overall complexity of use. It does not stand in your way.
+- Selecting technologies such as CSS frameworks or data management libraries is your own choice. Titus is lean and just opinionated enough to be reusable and reduces the overall complexity of use. It does not stand in your way.
 
 - A complete CI solution should be included that can build assets, lint and run tests, produce production ready containers and support deployment via helm should be included.
 
