@@ -18,11 +18,11 @@ With Titus we wanted to ensure the developer experience accelerated the speed at
 Across this documentation you will find the results of decisions made using the guidelines above. Rather than list each choice individually, we try call out external links to all tools and libraries. Where appropriate we explain some decisions in detail.
 
 ## Packages
-Titus includes a just what's needed out of the box. Each package has a minimal complement of features and technology inclusions. In all cases we have defaulted to choices that we have found to work successfully in real production software. Overall Titus provides just enough of everything to be deployment ready, without locking developers into feature level technology decisions.
+Titus includes just what's needed out of the box. Each package has a minimal complement of features and technology inclusions. In all cases we have defaulted to choices that we have found to work successfully in real production software. Overall Titus provides just enough of everything to be deployment ready, without locking developers into feature level technology decisions.
 
-Package are managed with [Lerna] so you could easily add more and easily manage their inter-dependencies.
+Packages are managed with [Lerna] so you could easily add more and easily manage their inter-dependencies.
 
-All packages we provide you include:
+All packages we provide include:
 - [Jest] for testing
 - [ESLint] code linter and [Prettier] code formatter
 - Some usefull testing libraries, such as [nock] or [faker]
@@ -45,7 +45,7 @@ We provide as well a plugin to instrument your routes with [node-postgres] toolk
 - [More information](developers/packages/titus-backend/)
 
 ### Starter Docs Kit
-Titus includes start kit, __titus-starter-docs__, for documentation that is ready to run.
+Titus includes a documentation start kit, __titus-starter-docs__, so you could easily document your application.
 
 This package is Github Pages and CDN friendly and can be hosted in folder of a given repo without the need to include dependencies solely to support documentation. 
 
