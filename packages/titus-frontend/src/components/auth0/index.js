@@ -1,3 +1,3 @@
 import Auth0Login from './login'
 
-export { Auth0Login }
+export default Auth0Login

@@ -86,15 +86,10 @@ But it was covered when you ran `npm install` at root level ;)
   npm start
   ```
   
-  This will start your web server on `http://localhost:5000`
+  This will start your server on `http://localhost:5000`. 
+  Any changes in `lib/` or in `.env` you make will automatically restart the server. 
 
   Verify it works and can reach its DB with `curl http://127.0.0.1:5000/healthcheck`.
-
-
-## Developing
-
-`npm start` will run everything in local development mode. 
-Any changes in `lib/` or in `.env` you make will automatically restart the server. 
 
 
 ## Testing and Linting
@@ -110,6 +105,7 @@ Any changes in `lib/` or in `.env` you make will automatically restart the serve
 * `npm run db:init` - apply SQL initialization scripts with `psql` CLI against your database
 * `npm run db:migrate` - apply DB migration scripts from `tools/migrations/build` with [postgrator] 
 * `npm run db:seed` - seed the DB with dev data from `tools/migrations/seed_dev` with [postgrator]
+
 
 [Jest]: https://jestjs.io
 [ESLint]: https://eslint.org
