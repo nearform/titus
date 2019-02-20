@@ -13,7 +13,7 @@ Titus makes use of [Noise](https://nearform.github.io/noise/#/) which is a Terra
 - A configured Noise plugin via a `main.tf` file
 - Any additional terraform or other scripts custom to the deployment
 
-The exact nature of how to set up infrastructure varies from provider to provider, so is broken down into provider specific guides below. Note, you will need to be proficient with your chosen provider, and Terraform, the guides below are not suitable to learn either:
+The exact nature of how to set up infrastructure varies from provider to provider, so is broken down into provider specific guides below. Note, you will need to be proficient with your chosen provider as well as in Terraform. The guides below are not suitable to learn either.
 
 ## Setting up CI Deployment
 Services are deployed using [CircleCI](https://circleci.com) which runs [Helm](https://helm.sh/) to handle service updates to the running cluster.
