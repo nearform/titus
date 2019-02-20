@@ -15,7 +15,7 @@ const Dashboard = () => (
         />
         <p>
           Develop and Deploy to features in week one using Titus, an Accelerated
-          Development & Deployment Stack. Titus is production ready can be
+          Development & Deployment Stack. Titus is production ready and can be
           deployed to all major cloud providers.
         </p>
         <a
