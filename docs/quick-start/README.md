@@ -42,7 +42,7 @@ npm run create:env
 ```
 
 ## Running the stack
-Titus runs locally on Docker. To facilitate easier development docker is set to run watched versions of both the front and backend. This means as you make and save changes, those changes should be reflected automatically in the containers. 
+Titus runs PostgresSQL locally on Docker. Frontend and backend are running locally using Lerna, being both watched, which means as you make and save changes those changes should be picked up automatically and reflected in the running application. 
 
 Ensure Docker has started on your machine before running the stack. To run the full stack, in the root of the project, run:
 
@@ -50,12 +50,10 @@ Ensure Docker has started on your machine before running the stack. To run the f
 npm run start:all
 ```
 
-Running the command `docker ps` will produce a log of the running set of containers, one for each service, frontend, backend, and the Postgres database. It should look something like this:
+Running the command `docker ps` will produce a log of the running set of containers, in our case just the Postgres database. It should look something like this:
 
 ```sh
 CONTAINER ID        IMAGE                         NAMES
-d4673b6d74f9        nearform/alpine3-s2i-nodejs   titus-frontend
-6d3d2fc5da44        titus_api                     titus-backend
 e553c840fbdc        postgres:10.4-alpine          titus-db
 ```
 
@@ -76,27 +74,21 @@ The splash screen will link you back to the documentation (here) should you not 
 ### Manipulating the  running stack
 A number of useful commands for manipulating the running docker stack have been included as easy to run scripts. These can be ran by running `npm run <command>` in the root of the repo; where command is:
 
-- `docker:dev:exec`
-  - Runs `docker-compose exec api` to get fast access to the backend container
 - `docker:dev:logs`: 
   - Runs `docker-compose logs` and passes `-f` so they auto-tail
-- `docker:dev:migrate` 
-  - Runs `docker-compose exec api npm run migrate` which asks the backend to run migrations
 - `docker:dev:rmi`
-  - Runs `docker-compose down` but passes ` --rmi all` to tear down the system fully
-- `docker:dev:seed`
-  - Runs `docker-compose exec api npm run dev:seed` which asks the backend to run data seeding
+  - Runs `docker-compose down` but passes ` --rmi all` to tear down postgres fully
 - `docker:dev:start` 
   - First, runs `create:pg:volume` to create a data volume 
-  - Then, `docker-compose up -d --build` to start the system locally in docker
+  - Then, `docker-compose up -d --build` to start Postgres locally in docker
 - `docker:dev:stop`
-  - Runs `docker-compose down` to spin down the running system
+  - Runs `docker-compose down` to spin down the running Postgres
 
 For example, to tear down the system, spin it back up and tail the logs, the commands would be:
 
 ```sh
 npm run docker:dev:rmi
-npm run docker:dev:start   // or just start:all for short
+npm run start:all
 npm run docker:dev:logs
 ```
 
@@ -130,12 +122,8 @@ Both frontend and backend starter kits have linting and testing built in and as 
 
 
 <!-- External Links -->
-[Noise]: https://nearform.github.io/noise
-[titus-noise-cli]: https://github.com/nearform/titus-noise-cli
-[CircleCI]: https://circleci.com/product/#features
 [Docker]: https://www.docker.com/
 [Node]: https://nodejs.org/en/
-[OpenID Connect]: https://openid.net/connect/ 
 [Titus]: https://github.com/nearform/titus
 
 <!-- Internal Links -->

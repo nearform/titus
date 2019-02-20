@@ -1,6 +1,6 @@
 ![logo][]
 
-Develop and Deploy solutions quickly using Titus, an Accelerated Development & Deployment Stack. Titus is production ready can be deployed to all major cloud providers.
+Develop and Deploy solutions quickly using Titus, an Accelerated Development & Deployment Stack. Titus is production ready and can be deployed to all major cloud providers.
 
 ## What is Titus
 Titus is a Application Development & Deployment Stack suitable for SaaS type solutions. It scaffolds ready to deploy frontend, backend and database while including infrastructure and service tooling for continuous integration and deployment.
@@ -23,7 +23,7 @@ To achieve a rock-solid but easy to configure infrastructural base, we make use 
 
 ![titus-pipeline][]
 
-The Titus repository itself is deployed to [AWS][] via [CircleCI][] and can be configured with ease to work with [Azure][] via [Azure Pipelines][] with minimal changes. [Google Cloud Platform][GCP], support is not yet included in Noise but the stack itself can be deployed to there, should you wish to add the infrastructure scripts to support it.
+The Titus repository itself is deployed to AWS via [CircleCI][] and can be configured with ease to work with Azure via Azure Pipelines with minimal changes. Google Cloud Platform, support is not yet included in Noise but the stack itself can be deployed to there, should you wish to add the infrastructure scripts to support it.
 
 ### Production grade CI pipeline
 The primary goal of Titus is to enable you to get to building features in sprint one. We care a lot about this point and so use a modern deployment pipeline to ensure you can deliver continuously:
@@ -50,10 +50,6 @@ The quickest way to get exploring is to view our quick start guide. It covers, f
 [Kubernetes]:  https://kubernetes.io/
 [Docker]: https://www.docker.com/
 [Node]: https://nodejs.org/en/
-[AWS]: /
-[Azure]: /
-[Azure Pipelines]: /
-[GCP]: /
 
 <!-- Internal Links -->
 [Quick start]: quick-start/
