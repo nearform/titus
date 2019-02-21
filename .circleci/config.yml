@@ -6,6 +6,7 @@ defaults: &defaults
     DOCKER_REPO: "711655675495.dkr.ecr.us-east-1.amazonaws.com"
     DOCKER_FRONTEND: "titus-frontend"
     DOCKER_BACKEND: "titus-backend"
+    TITUS_DEPLOY_REPO: "git@github.com:nearform/titus-deploy.git"
 version: 2
 jobs:
   install:
@@ -14,7 +15,7 @@ jobs:
       - checkout
       - run:
           name: Git checkout infrastructure
-          command: git clone git@github.com:nearform/titus-deploy.git infrastructure
+          command: git clone ${TITUS_DEPLOY_REPO} infrastructure
       - restore_cache:
           name: "Restore build cache"
           keys: 'v1-node_modules'
@@ -161,7 +162,7 @@ jobs:
       - checkout
       - run:
           name: Git checkout infrastructure
-          command: git clone git@github.com:nearform/titus-deploy.git infrastructure
+          command: git clone ${TITUS_DEPLOY_REPO} infrastructure
       - setup_remote_docker:
           docker_layer_catching: true
       - run:
