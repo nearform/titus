@@ -7,6 +7,8 @@ defaults: &defaults
     DOCKER_FRONTEND: "titus-frontend"
     DOCKER_BACKEND: "titus-backend"
     TITUS_DEPLOY_REPO: "git@github.com:nearform/titus-deploy.git"
+    AWS_ECR_REGION: ${AWS_DEFAULT_REGION}
+    AWS_EKS_REGION: ${AWS_DEFAULT_REGION}
 version: 2
 jobs:
   install:
@@ -104,7 +106,7 @@ jobs:
           command: |
             set -e
             # Login the AWS ECR registry
-            eval $(aws ecr get-login --no-include-email --region us-east-1)
+            eval $(aws ecr get-login --no-include-email --region ${AWS_ECR_REGION})
             # Push the frontend container
             echo -e "Pushing the frontend container\n"
             docker push ${DOCKER_REPO}/${DOCKER_FRONTEND}:${CIRCLE_WORKFLOW_ID}
@@ -133,7 +135,7 @@ jobs:
       - run:
           name: EKS k8s configuration
           command:
-            aws eks update-kubeconfig --name titus-noise --region eu-central-1
+            aws eks update-kubeconfig --name titus-noise --region ${AWS_EKS_REGION}
       - run:
            name: Install kubectl
            command: |
@@ -180,7 +182,7 @@ jobs:
       - run:
           name: EKS k8s configuration
           command:
-            aws eks update-kubeconfig --name titus-noise --region eu-central-1
+            aws eks update-kubeconfig --name titus-noise --region ${AWS_EKS_REGION}
       - run:
            name: Install kubectl
            command: |
