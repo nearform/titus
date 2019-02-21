@@ -1,4 +1,4 @@
-![titus-developers-quote][]
+![titus-developers-quote]
 
 # Developers
 A large percentage of the success of a project rests in the ability of it's developers to work unimpeded. In many cases tooling for building and running a given stack locally can seriously hamper productivity.
