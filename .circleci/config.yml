@@ -7,8 +7,9 @@ defaults: &defaults
     DOCKER_FRONTEND: "titus-frontend"
     DOCKER_BACKEND: "titus-backend"
     TITUS_DEPLOY_REPO: "git@github.com:nearform/titus-deploy.git"
-    AWS_ECR_REGION: ${AWS_DEFAULT_REGION}
-    AWS_EKS_REGION: ${AWS_DEFAULT_REGION}
+    AWS_ECR_REGION: "us-east-1"
+    AWS_EKS_REGION: "eu-central-1"
+    CLUSTER_NAME: "titus-noise"
 version: 2
 jobs:
   install:
@@ -135,7 +136,7 @@ jobs:
       - run:
           name: EKS k8s configuration
           command:
-            aws eks update-kubeconfig --name titus-noise --region ${AWS_EKS_REGION}
+            aws eks update-kubeconfig --name ${CLUSTER_NAME} --region ${AWS_EKS_REGION}
       - run:
            name: Install kubectl
            command: |
@@ -182,7 +183,7 @@ jobs:
       - run:
           name: EKS k8s configuration
           command:
-            aws eks update-kubeconfig --name titus-noise --region ${AWS_EKS_REGION}
+            aws eks update-kubeconfig --name ${CLUSTER_NAME} --region ${AWS_EKS_REGION}
       - run:
            name: Install kubectl
            command: |
