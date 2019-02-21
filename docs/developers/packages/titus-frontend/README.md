@@ -14,10 +14,10 @@ A [React] application with routing and minimalist login components.
 
 ## Introduction
 
-Titus-backend is lightweight on purpose. 
+Titus-frontend is lightweight on purpose. 
 
 What you'll implement with it is your own business, and we're providing you an unopiniated, working shell.
-We only provide what we think is common in our projects: a configurable Http Server, with JSON logging, health check route and database capabilities.
+We only provide what we think is common in our projects.
 
 There's room for you to add, customize or even replace parts and bits.
 
@@ -105,7 +105,7 @@ To package the application, use:
 ```
 npm run build
 ```
-which will clean a produce a new bundle in `build/` folder.
+which will produce a new bundle in `build/` folder.
 
 
 
