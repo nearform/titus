@@ -6,6 +6,10 @@ defaults: &defaults
     DOCKER_REPO: "711655675495.dkr.ecr.us-east-1.amazonaws.com"
     DOCKER_FRONTEND: "titus-frontend"
     DOCKER_BACKEND: "titus-backend"
+    TITUS_DEPLOY_REPO: "git@github.com:nearform/titus-deploy.git"
+    AWS_ECR_REGION: "us-east-1"
+    AWS_EKS_REGION: "eu-central-1"
+    CLUSTER_NAME: "titus-noise"
 version: 2
 jobs:
   install:
@@ -14,7 +18,7 @@ jobs:
       - checkout
       - run:
           name: Git checkout infrastructure
-          command: git clone git@github.com:nearform/titus-deploy.git infrastructure
+          command: git clone ${TITUS_DEPLOY_REPO} infrastructure
       - restore_cache:
           name: "Restore build cache"
           keys: 'v1-node_modules'
@@ -103,7 +107,7 @@ jobs:
           command: |
             set -e
             # Login the AWS ECR registry
-            eval $(aws ecr get-login --no-include-email --region us-east-1)
+            eval $(aws ecr get-login --no-include-email --region ${AWS_ECR_REGION})
             # Push the frontend container
             echo -e "Pushing the frontend container\n"
             docker push ${DOCKER_REPO}/${DOCKER_FRONTEND}:${CIRCLE_WORKFLOW_ID}
@@ -132,7 +136,7 @@ jobs:
       - run:
           name: EKS k8s configuration
           command:
-            aws eks update-kubeconfig --name titus-noise --region eu-central-1
+            aws eks update-kubeconfig --name ${CLUSTER_NAME} --region ${AWS_EKS_REGION}
       - run:
            name: Install kubectl
            command: |
@@ -161,7 +165,7 @@ jobs:
       - checkout
       - run:
           name: Git checkout infrastructure
-          command: git clone git@github.com:nearform/titus-deploy.git infrastructure
+          command: git clone ${TITUS_DEPLOY_REPO} infrastructure
       - setup_remote_docker:
           docker_layer_catching: true
       - run:
@@ -179,7 +183,7 @@ jobs:
       - run:
           name: EKS k8s configuration
           command:
-            aws eks update-kubeconfig --name titus-noise --region eu-central-1
+            aws eks update-kubeconfig --name ${CLUSTER_NAME} --region ${AWS_EKS_REGION}
       - run:
            name: Install kubectl
            command: |

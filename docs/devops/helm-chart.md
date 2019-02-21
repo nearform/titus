@@ -1,4 +1,4 @@
-## New standup of helm charts.
+# New standup of helm charts.
 
 1. If you built a new environment variables need to be updated in values.yaml
     ```yaml

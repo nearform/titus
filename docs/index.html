@@ -28,6 +28,26 @@
       type="image/png" 
       href="img/favicon.png"
       >
+    <style>
+      /* custom list numbers */
+      ol {
+        list-style: none; 
+        counter-reset: li;
+      }
+
+      ol > li {
+        counter-increment: li
+      }
+      
+      ol > li::before {
+        content: counter(li) "."; 
+        color: #484CAC;
+        font-weight: bold;
+        float: left; 
+        width: 1.5em;
+        margin-left: -1em
+      }
+    </style>
   </head>
   <body>
     <div id="app"></div>
