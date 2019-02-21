@@ -60,7 +60,9 @@ And that would trigger a propagation of the dev image into the production / stag
   }
   ```
 
-1. Now run the command `terraform plan` and with some luck you have no errors and a report of 90+ resources creaated.
+1. Init terraform: run the command `terraform init`
+
+1. Now run the command `terraform plan` and with some luck you have no errors and a report of 90+ resources created.
 
 1. Run the command: `terraform apply` - type yes when asked and sit back.
 
