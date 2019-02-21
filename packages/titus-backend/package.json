@@ -11,6 +11,7 @@
     "db:seed": "node ./tools/migrate seed_dev",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "lint:staged": "lint-staged",
     "start": "nodemon --config .nodemonrc .",
     "test": "jest --config .jest.json --coverage",
     "test:watch": "jest --config .jest.json --watch --verbose"
@@ -43,7 +44,15 @@
     "eslint-plugin-standard": "^4.0.0",
     "faker": "^4.1.0",
     "jest": "^24.0.0",
+    "lint-staged": "^8.1.4",
     "nock": "^10.0.6",
     "prettier": "^1.16.2"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
   }
 }
