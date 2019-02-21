@@ -19,6 +19,7 @@ module.exports = async (config = require('./config')) => {
       options: config[plugin.name]
     }))
   )
+
   await server.start()
 
   server
