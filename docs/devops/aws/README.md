@@ -50,7 +50,7 @@ And that would trigger a propagation of the dev image into the production / stag
 
   module "noise" {
     aws_region = "eu-west-1"                  # Set appropriate region
-    project_name = "titus-noise"              # Change according to your projct
+    project_name = "titus-noise"              # Change according to your project
     ...
   }
 
@@ -65,6 +65,11 @@ And that would trigger a propagation of the dev image into the production / stag
 1. Now run the command `terraform plan` and with some luck you have no errors and a report of 90+ resources created.
 
 1. Run the command: `terraform apply` - type yes when asked and sit back.
+
+1. Install K8s controller configuration locally (change name according to your project :
+  ```sh
+  aws eks update-kubeconfig --name titus-noise
+  ```
 
 
 ## Customize your infrastructure
