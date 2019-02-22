@@ -1,54 +1,63 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import history from '../../history'
 
 export const AuthContext = React.createContext({})
 
 export const AuthConsumer = AuthContext.Consumer
 
-class AuthProvider extends Component {
-  state = {
-    isAuthenticated: this.props.authentication.isAuthenticated(),
-    user: this.props.authentication.getUserData()
+export const AuthProvider = ({ authentication, children, component }) => {
+  const [isAuthenticated, setAuthenticated] = useState(
+    authentication.isAuthenticated()
+  )
+  const [user, setUser] = useState(authentication.getUserData())
+  const [loginError, setLoginError] = useState(null)
+  const [logoutError, setLogoutError] = useState(null)
+
+  const login = async data => {
+    try {
+      setLoginError(null)
+      const user = await authentication.login(data)
+      if (user) {
+        setAuthenticated(authentication.isAuthenticated())
+        setUser(user)
+        history.push('/')
+      }
+    } catch (err) {
+      setLoginError(err.message)
+    }
   }
 
-  login = ({ username, password }) =>
-    this.props.authentication.login({ username, password }).then(user => {
-      this.setState({
-        isAuthenticated: this.props.authentication.isAuthenticated(),
-        user
-      })
-    })
-
-  logout = () =>
-    this.props.authentication.logout().then(result => {
-      result &&
-        this.setState({
-          isAuthenticated: this.props.authentication.isAuthenticated(),
-          user: null
-        })
-    })
-
-  getProps = () => ({
-    login: this.login,
-    logout: this.logout,
-    isAuthenticated: this.props.authentication.isAuthenticated(),
-    user: this.props.authentication.getUserData()
-  })
-
-  render() {
-    const { children } = this.props
-
-    return (
-      <AuthContext.Provider value={this.getProps()}>
-        {children}
-      </AuthContext.Provider>
-    )
+  const logout = async () => {
+    try {
+      setLogoutError(null)
+      const result = await authentication.logout()
+      if (result) {
+        setAuthenticated(false)
+        setUser(null)
+        history.push('/login')
+      }
+    } catch (err) {
+      this.setState({ logoutError: err.message })
+    }
   }
+
+  const context = {
+    login,
+    logout,
+    loginError,
+    logoutError,
+    isAuthenticated,
+    user,
+    component,
+    authentication
+  }
+
+  return <AuthContext.Provider value={context}>{children}</AuthContext.Provider>
 }
 
 AuthProvider.propTypes = {
   children: PropTypes.node,
-  authentication: PropTypes.object
+  authentication: PropTypes.object,
+  component: PropTypes.func
 }
-
-export default AuthProvider

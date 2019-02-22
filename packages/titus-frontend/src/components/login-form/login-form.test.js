@@ -1,13 +1,15 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import LoginForm from '../login-form'
+import LoginForm from '.'
 
-let container
-afterEach(() => {
-  container.unmount()
-})
-describe('Login', () => {
-  it("Validation: doesn't submit if username or password are empty", () => {
+describe('LoginForm', () => {
+  let container
+
+  afterEach(() => {
+    container.unmount()
+  })
+
+  it('should not submit if username or password are empty', () => {
     const mockFn = jest.fn()
     container = mount(<LoginForm login={mockFn} />)
     expect(container.find('button').length).toEqual(1)

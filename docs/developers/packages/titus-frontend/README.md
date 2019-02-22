@@ -26,34 +26,55 @@ There's room for you to add, customize or even replace parts and bits.
 * `build/` - your bundled application for production usage
 * `public/` - static assets: index.html, icons, images
 * `src/index.js` - main entry points, loads your React application and service worker
-* `src/app.js` - your application, loads styles and routes
-* `src/routes.js` - powered by [react-router], provides an example of route with preconditions (requires authentication)
+* `src/app.js` - your application, loads styles and routes (powered by [react-router])
 * `src/serviceWorker.js` - service worker (from [CRA]), turn your application to a Progressive Web Application
-* `src/components/` - a set or components to implement a login form, an authenticated dashboard, and [Auth0] utilities
+* `src/components/` - a set of components to implement a login form, an authentication context and various authentication providers
+* `src/page/` - a set of page components asynchronously loaded when declaring routes
 * `lighthouse/` - runs Google's [Lighthouse] to evaluate your application performance and accessibility
 
-### Dummy login
+### In-memory Authentication Provider
 
-By default titus-frontend provides a dummy Login screen (`src/components/login/`) and a browser-only authentication provider (`src/components/authentication/`).
+By default titus-frontend does not use a "real" authentication provider.
+`src/components/auth-provider/in-memory/` allows almost any combination of username/password, and there's no server roundtrip.
 
-Any combination of username/passwod is acceptable, and there's no 
-validation on server.
 Once logged in a token is stored in local storage, and it grants access to the protected dashboard.
 
-This simply demonstrates how protected routes work.
+### Titus-backend Provider
 
-### Auth0 login
-
-We included another login form and authentication providers, wired to Auth0 (`src/components/auth0`).
+If you have an Auth0 application configured, you can use titus backend login endpoint to authenticate users.
+In this situation:
+- users provides valid Auth0 credentials
+- they are send to titus-backend
+- titus-backend validate them against Auth0
+- when successfull, titus-backent return authentication data to th provider
+- the provider get the details, store them in local storage, and grant access to dashboard
 
 To enabled it, you'll have to:
-1. provide Auth0 details in `.env` file (`REACT_APP_AUTH0_*` variables)
-1. replace the dummy login component with the Auth0 one. 
-   In `src/app.js`: 
+1. provide Auth0 details in **titus-backend**'s `.env` file (`AUTH0_*` variables)
+1. change the provider used in `src/app.js`: 
    ```js
-   const AsyncLogin = lazy(() => import('./components/auth0'))
+   // import Authentication, { Login } from './components/auth-providers/in-memory'
+   import Authentication, { Login } from './components/auth-providers/titus-backend'
    ```
 
+### Auth0 Provider
+
+If you have an Auth0 application configured, you can use [Auth0 Universal Login][auth0-login].
+In this situation:
+- users click on titus "Login Through Auth0" button
+- they are redirected to Auth0 login page
+- they provide their credentials
+- they are redirected titus login page, with authentication data in the url
+- the provider get the details, store them in local storage, and grant access to dashboard
+
+To enabled it, you'll have to:
+1. provide Auth0 details in **titus-frontend**'s `.env` file (`REACT_APP_AUTH0_*` variables)
+1. in Auth0 configuration, make sure the `/login` route is allowed in both _Allowed Callback URLs_ and _Allowed Logout URLs_ lists.
+1. change the provider used in `src/app.js`: 
+   ```js
+   // import Authentication, { Login } from './components/auth-providers/in-memory'
+   import Authentication, { Login } from './components/auth-providers/auth0'
+   ```
 
 ## Installation
 
@@ -121,3 +142,4 @@ which will produce a new bundle in `build/` folder.
 [Lighthouse]: https://developers.google.com/web/tools/lighthouse
 [Storybook]: https://storybook.js.org
 [webpack-dev-server]: https://webpack.js.org/configuration/dev-server
+[auth0-login]: https://auth0.com/docs/universal-login

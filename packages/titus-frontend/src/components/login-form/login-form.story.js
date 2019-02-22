@@ -1,6 +1,6 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import LoginForm from './login-form'
+import LoginForm from '.'
 
 storiesOf('Login form', module).add(
   'default',
