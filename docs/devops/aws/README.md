@@ -101,9 +101,14 @@ And that would trigger a propagation of the dev image into the production / stag
 
 ## Configure CirclecI
 
-This assumes you've already forked [Titus] repository. CircleCI will access and deploy it.
+This assumes you've already forked [titus] repository, and cloned it locally.
+```sh
+git clone git@github.com:your-name/titus.git
+```
 
-1. On CircleCI UI, add your project by searching the project under `Add projects`.
+CircleCI will access and deploy it.
+
+1. _On CircleCI UI_, add your project by searching the project under `Add projects`.
   ![circle-add-project]
   It will add a deployment key for you repository and setup the necessary hooks.
   Make sure you have admin access to the repository todo this.
@@ -120,7 +125,9 @@ This assumes you've already forked [Titus] repository. CircleCI will access and 
   - `S3_BUCKET`: name of the S3 bucket in `titus-infra-aws/main.tf`: `aws_s3_bucket.b.name`
   ![circle-env-variables]
 
-1. In titus repo, update the values in `.circleci/config.yaml`:
+1. _On AWS Console_, you need to create as many [ECR repositories][ecr] as deployed applications needs.
+
+1. _In titus repo_, update the values in `.circleci/config.yaml`:
   - `DOCKER_REPO`: in AWS console, ECR service, use the URI, ie: `123456789.dkr.ecr.eu-west-1.amazonaws.com`
   - `TITUS_DEPLOY_REPO`: add your titus-deploy fork: `git@github.com:your-name/titus-deploy.git`
   - `AWS_ECR_REGION`: AWS region hosting the infrastructure
@@ -139,11 +146,13 @@ Just Commit your changes, push them, and let the magic be!
 [noise-state-bucket]: https://nearform.github.io/noise/#/providers/aws/?id=create-an-s3-bucket-for-terraform-state
 [titus-infra-aws]: https://github.com/nearform/titus-infra-aws
 [titus-deploy]: https://github.com/nearform/titus-deploy
+[titus]: https://github.com/nearform/titus
 [Terraform]: https://www.terraform.io
 [Azure]: https://azure.microsoft.com
 [AWS]: https://aws.amazon.com
 [Helm]: https://helm.sh
 [Kubernetes]: https://kubernetes.io
+[ecr]: https://eu-west-1.console.aws.amazon.com/ecr/repositories
 
 [circle-add-project]: ../../img/circle-add-project.png
 [circle-env-variables]: ../../img/circle-env-variables.png
