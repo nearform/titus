@@ -1,16 +1,14 @@
-export class Authentication {
+export default class Authentication {
   authKey = 'titus-auth-key'
 
-  login({ username }) {
+  async login({ username }) {
     window.localStorage.setItem(this.authKey, username)
-
-    return new Promise(resolve => resolve({ username }))
+    return { username }
   }
 
-  logout() {
+  async logout() {
     window.localStorage.removeItem(this.authKey)
-
-    return new Promise(resolve => resolve(true))
+    return true
   }
 
   isAuthenticated() {
@@ -21,3 +19,5 @@ export class Authentication {
     return { username: window.localStorage.getItem(this.authKey) }
   }
 }
+
+export { Form as Login } from './form'

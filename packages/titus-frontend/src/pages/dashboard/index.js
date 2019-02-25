@@ -1,5 +1,5 @@
 import React from 'react'
-import { AuthConsumer } from '../authentication'
+import { AuthConsumer } from '../../components/authentication/authentication-context'
 
 const Dashboard = () => (
   <AuthConsumer>
