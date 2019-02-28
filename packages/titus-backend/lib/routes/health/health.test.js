@@ -30,6 +30,7 @@ describe('health route', () => {
   })
 
   beforeEach(() => {
+    jest.setTimeout(10e4)
     jest.resetAllMocks()
     mockConnect.mockResolvedValue(pg)
   })
@@ -38,7 +39,6 @@ describe('health route', () => {
 
   it('should return server health with DB check', async () => {
     pg.query.mockResolvedValue({ rowCount: 1 })
-
     const response = await axios.get(`${server.info.uri}/healthcheck`)
     expect(response.status).toEqual(200)
     expect(response.data).toEqual(
