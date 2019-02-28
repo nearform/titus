@@ -81,6 +81,10 @@ bxrE9MNUZ2aPFaFp+DyAe+b4nDwuJaW2LURbr8AEZga7oQj0uYxcYw==
     await server.start()
   })
 
+  beforeEach(() => {
+    jest.setTimeout(10e4)
+  })
+
   afterAll(async () => server.stop())
 
   afterEach(nock.cleanAll)
