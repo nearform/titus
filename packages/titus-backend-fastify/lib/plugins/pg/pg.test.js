@@ -1,4 +1,3 @@
-const config = require('../../config')
 const faker = require('faker')
 
 describe('pg plugin', () => {
@@ -22,7 +21,7 @@ describe('pg plugin', () => {
       }
     })
 
-    address = await server.listen(config.fastify)
+    address = await server.listen(5003)
     server.pg.connect = jest.fn()
   })
 

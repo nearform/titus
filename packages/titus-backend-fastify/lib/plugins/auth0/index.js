@@ -1,5 +1,4 @@
 const axios = require('axios')
-const { forbidden } = require('boom')
 const fp = require('fastify-plugin')
 
 /**
@@ -23,63 +22,69 @@ const fp = require('fastify-plugin')
  * @see https://github.com/auth0/node-jwks-rsa#usage
  */
 
-async function plugin(server, options) {
-  server.register(require('fastify-jwt'), {
-    secret: 'supersecret'
-  })
-
-  server.auth.strategy('jwt', 'jwt', {
-    complete: true,
-    // key: jwksRsa.hapiJwt2KeyAsync(options.key),
-    verifyOptions: {
-      audience: options.audience,
-      issuer: `${options.domain}/`,
-      algorithms: ['RS256']
-    },
-    validate: async decoded => ({ isValid: !!decoded.id })
-  })
-
-  server.route({
-    method: 'POST',
-    url: '/login',
-    handler: async ({ log, payload: { username, password } }) => {
+async function auth0(server, options) {
+  server
+    .register(require('fastify-jwt'), {
+      secret: options.jwt.secret
+    })
+    .decorate('verifyJWT', async function(request, reply) {
       try {
-        const { data } = await axios({
+        await request.jwtVerify()
+      } catch (err) {
+        reply.send(err)
+      }
+    })
+    .register(require('fastify-auth'))
+    .after(() => {
+      server
+        .route({
           method: 'POST',
-          url: `${options.domain}/oauth/token`,
-          headers: { 'content-type': 'application/json' },
-          data: {
-            grant_type: 'password',
-            username,
-            password,
-            client_id: options.clientId,
-            client_secret: options.clientSecret
+          url: '/login',
+          handler: async ({ log, body: { username, password } }, reply) => {
+            try {
+              const { data } = await axios({
+                method: 'POST',
+                url: `${options.auth0.domain}/oauth/token`,
+                headers: { 'content-type': 'application/json' },
+                data: {
+                  grant_type: options.auth0.grantType,
+                  username,
+                  password,
+                  client_id: options.auth0.clientId,
+                  client_secret: options.auth0.clientSecret,
+                  audience: options.auth0.audience
+                }
+              })
+              const token = server.jwt.sign(data)
+              return { token }
+            } catch (err) {
+              const details =
+                (err.response &&
+                  err.response.data &&
+                  err.response.data.error_description) ||
+                err.message
+              log.warn(
+                {
+                  response: {
+                    ...err.response,
+                    request: undefined
+                  }
+                },
+                `Fail to authenticate: ${details}`
+              )
+              reply.code(403).send(details)
+            }
           }
         })
-        return data
-      } catch (err) {
-        const details =
-          (err.response &&
-            err.response.data &&
-            err.response.data.error_description) ||
-          err.message
-        log.warn(
-          {
-            response: {
-              ...err.response,
-              request: undefined
-            }
-          },
-          `Fail to authenticate: ${details}`
-        )
-        return forbidden(details)
-      }
-    },
-    options: {
-      cors: true,
-      auth: false
-    }
-  })
+        .route({
+          method: 'GET',
+          url: '/auth',
+          preHandler: server.auth([server.verifyJWT]),
+          handler: async ({ log, user }) => {
+            return user
+          }
+        })
+    })
 }
 
-module.exports = fp(plugin)
+module.exports = fp(auth0)

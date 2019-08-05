@@ -15,11 +15,23 @@ describe('server', () => {
     expect(address.address).toEqual(config.fastify.host)
   })
 
+  it('starts a server using env custom port', async () => {
+    const customConfig = {
+      ...config,
+      fastify: {
+        port: 5555
+      }
+    }
+    server = await startServer(customConfig)
+    address = server.server.address()
+    expect(address.port).toEqual(customConfig.fastify.port)
+  })
+
   it('throws an error when listening', async () => {
-    const mockExit = jest.spyOn(process, 'exit').mockImplementation(() => {})
+    server.listen = jest.fn().mockRejectedValue()
+    server.log.error = jest.fn()
     server = await startServer({ ...config, fastify: 2 })
-    expect(mockExit).toHaveBeenCalledWith(1)
-    mockExit.mockRestore()
+    expect(server.log.error).toHaveBeenCalled()
   })
 
   it('handle 404', async () => {

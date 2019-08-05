@@ -1,5 +1,6 @@
 const path = require('path')
 const autoLoad = require('fastify-autoload')
+const cors = require('fastify-cors')
 /**
  * Configure and starts Fastify server with all required plugins and routes
  * @async
@@ -12,23 +13,22 @@ const autoLoad = require('fastify-autoload')
 module.exports = async (config = require('./config')) => {
   const server = require('fastify')(config.fastifyInit)
 
-  server.register(autoLoad, {
-    dir: path.join(__dirname, 'plugins'),
-    options: config,
-    ignorePattern: /.*auth0/
-  })
-
-  server.register(autoLoad, {
-    dir: path.join(__dirname, 'routes'),
-    options: config
-  })
+  server
+    .register(cors, config.cors)
+    .register(autoLoad, {
+      dir: path.join(__dirname, 'plugins'),
+      options: config
+    })
+    .register(autoLoad, {
+      dir: path.join(__dirname, 'routes'),
+      options: config
+    })
 
   try {
     const address = await server.listen(config.fastify)
     server.log.info(`Server running at: ${address}`)
   } catch (err) {
     server.log.error(err)
-    process.exit(1)
   }
 
   return server
