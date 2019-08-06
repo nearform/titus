@@ -3,6 +3,7 @@
 const path = require('path')
 const autoLoad = require('fastify-autoload')
 const cors = require('fastify-cors')
+const fp = require('fastify-plugin')
 /**
  * Configure and starts Fastify server with all required plugins and routes
  * @async
@@ -12,9 +13,7 @@ const cors = require('fastify-cors')
  * @returns {Fastify.Server} started Fastify server instance
  */
 
-module.exports = async (config = require('./config')) => {
-  const server = require('fastify')(config.fastifyInit)
-
+function plugin(server, config) {
   server
     .register(cors, config.cors)
     .register(autoLoad, {
@@ -25,13 +24,6 @@ module.exports = async (config = require('./config')) => {
       dir: path.join(__dirname, 'routes'),
       options: config
     })
-
-  try {
-    const address = await server.listen(config.fastify)
-    server.log.info(`Server running at: ${address}`)
-  } catch (err) {
-    server.log.error(err)
-  }
-
-  return server
 }
+
+module.exports = fp(plugin)
