@@ -1,3 +1,5 @@
+'use strict'
+
 const faker = require('faker')
 
 describe('pg plugin', () => {

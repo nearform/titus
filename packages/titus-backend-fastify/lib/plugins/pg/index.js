@@ -1,3 +1,5 @@
+'use strict'
+
 require('pg-range').install(require('pg'))
 const fp = require('fastify-plugin')
 

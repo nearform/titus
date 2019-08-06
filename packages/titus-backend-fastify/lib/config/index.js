@@ -1,3 +1,5 @@
+'use strict'
+
 require('dotenv-expand')(require('dotenv').config())
 
 const {

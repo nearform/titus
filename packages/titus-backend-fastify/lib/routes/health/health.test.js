@@ -1,3 +1,5 @@
+'use strict'
+
 const { version } = require('../../../package')
 
 describe('health route', () => {

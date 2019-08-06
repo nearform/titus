@@ -1,3 +1,5 @@
+'use strict'
+
 const startServer = require('./lib/server')
 
 const main = async () => {

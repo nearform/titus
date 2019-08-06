@@ -1,3 +1,5 @@
+'use strict'
+
 const { version } = require('../../../package')
 
 async function plugin(server) {
