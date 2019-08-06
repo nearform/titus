@@ -33,7 +33,8 @@
     "pg": "^7.8.0",
     "pg-pool": "^2.0.6",
     "pg-range": "^1.0.1",
-    "postgrator": "^3.6.0"
+    "postgrator": "^3.6.0",
+    "under-pressure": "^3.1.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",

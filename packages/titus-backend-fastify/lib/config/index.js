@@ -45,6 +45,8 @@ module.exports = {
     poolSize: 10,
     idleTimeoutMillis: 30000
   },
+  // under pressure options: https://github.com/fastify/under-pressure
+  underPressure: {},
   // cors options: https://github.com/fastify/fastify-cors
   cors: { origin: !!CORS_ORIGIN },
   // auth0 plugin options: see plugins/auth0/index.js

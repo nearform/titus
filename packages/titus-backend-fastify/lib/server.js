@@ -13,7 +13,7 @@ const fp = require('fastify-plugin')
  * @returns {Fastify.Server} started Fastify server instance
  */
 
-function plugin(server, config) {
+async function plugin(server, config) {
   server
     .register(cors, config.cors)
     .register(autoLoad, {

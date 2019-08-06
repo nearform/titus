@@ -1,9 +1,9 @@
 'use strict'
 
 const { version } = require('../../../package')
-
-async function plugin(server) {
-  server.route({
+const fp = require('fastify-plugin')
+async function health(server, options) {
+  server.register(require('under-pressure'), options.underPressure).route({
     method: 'GET',
     url: '/healthcheck',
     handler: async ({ log }) => {
@@ -17,15 +17,15 @@ async function plugin(server) {
         // swallow error
         log.debug({ err }, `failed to read DB during health check`)
       }
-
       return {
         version,
         serverTimestamp: new Date(),
         status: 'ok',
+        memoryUsage: server.memoryUsage(),
         db: dbRes && dbRes.rowCount === 1 ? 'ok' : 'fail'
       }
     }
   })
 }
 
-module.exports = plugin
+module.exports = fp(health)
