@@ -4,7 +4,7 @@
 To follow...
 
 ## Documentation
-We welcome documentation contributions. Our documentation can be viewed live at [nearform.github.io/titus-noise][docs]
+We welcome documentation contributions. Our documentation can be viewed live at [nearform.github.io/titus][docs]
 
 ### Running Documentation locally
 Our documentation can be ran by serving the docs folder at a given port. 
@@ -53,4 +53,4 @@ Which will produce:
 
 The documentation will be served on `localhost:4000` in this case.
 
-[docs]:https://nearform.github.io/titus-noise
+[docs]:https://nearform.github.io/titus
