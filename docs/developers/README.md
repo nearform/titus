@@ -44,6 +44,15 @@ We also provide a plugin to instrument your routes with [node-postgres] toolkit 
 
 - [More information](developers/packages/titus-backend/)
 
+### Backend Kit (Fastify)
+The backend, __titus-backend-fastify__, is built on [Fastify] server with [Pino], to make logging a treat.
+
+We also provide a plugin to instrument your routes with [node-postgres] toolkit for easier interfacing with Postgres, and another plugin for enabling [Auth0] authentication with [JSON Web Tokens][jwt].
+
+[NodeMon] is used to to power hot reloading on file changes when running locally, and make sure your application restarts on uncaught exceptions or unhandled promises.
+
+- [More information](developers/packages/titus-backend-fastify/)
+
 ### Starter Docs Kit
 Titus includes a documentation start kit, __titus-starter-docs__, so you can easily document your application.
 
@@ -90,6 +99,7 @@ Clients consider 'logging in' as the primary first feature they want to see when
 [ESLint]: https://eslint.org
 [Prettier]: https://prettier.io
 [Hapi]: https://hapijs.com
+[Fastify]: https://fastify.io
 [Pino]: http://getpino.io
 [Auth0]: https://auth0.com
 [NodeMon]: https://nodemon.io
