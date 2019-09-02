@@ -11,7 +11,7 @@ const Dashboard = () => (
         <img
           alt="Titus logo"
           style={{ height: '50vh' }}
-          src="img/logo-pos.svg"
+          src="img/Accel_Logo_Titus.svg"
         />
         <p>
           Develop and Deploy to features quickly using Titus, an Accelerated

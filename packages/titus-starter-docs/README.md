@@ -1,4 +1,8 @@
+&nbsp;
+
 ![Logo][logo-img]
+
+&nbsp;
 
 Add a brief summary of your project here.
 
@@ -12,5 +16,5 @@ We have included some documentation on contributing to these documents.
 - [Take a look][docs]
 
 
-[logo-img]: img/logo-pos.svg
+[logo-img]: img/Accel_Logo_Titus.svg
 [docs]:contributing/
