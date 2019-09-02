@@ -15,3 +15,4 @@ Titus is a production grade, end-to-end, project stack created for modern web ap
 
 [logo-img]: docs/img/logo-pos.svg
 [docs]: https://nearform.github.io/titus
+[link]: docs/img/logo-pos.svg
