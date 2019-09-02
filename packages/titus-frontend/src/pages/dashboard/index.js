@@ -10,7 +10,12 @@ const Dashboard = () => (
         </button>
         <img
           alt="Titus logo"
-          style={{ height: '50vh' }}
+          style={{
+            width: '100%',
+            height: '100%',
+            'margin-bottom': '10vh',
+            'margin-top': '10vh'
+          }}
           src="img/Accel_Logo_Titus.svg"
         />
         <p>
