@@ -61,7 +61,7 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-      - run: 
+      - run:
           name: test
           command: |
             npm run create:env
@@ -232,21 +232,21 @@ workflows:
                     - master
             tags:
                 ignore: /.*/
-      - release-preproduction:
-          requires:
-            - push-containers
-          filters:
-            branches:
-                only:
-                    - master
-            tags:
-              ignore: /.*/
-  tagged_deployment:
-    jobs:
-      - release-production:
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only:
-                - /v[0-9]+(\.[0-9]+).*/
+  #     - release-preproduction:
+  #         requires:
+  #           - push-containers
+  #         filters:
+  #           branches:
+  #               only:
+  #                   - master
+  #           tags:
+  #             ignore: /.*/
+  # tagged_deployment:
+  #   jobs:
+  #     - release-production:
+  #         filters:
+  #           branches:
+  #             ignore: /.*/
+  #           tags:
+  #             only:
+  #               - /v[0-9]+(\.[0-9]+).*/
