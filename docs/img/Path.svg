@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="14px" viewBox="0 0 22 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 57.1 (83088) - https://sketch.com -->
+    <title>Path</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Accelerator-Website" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square">
+        <g id="HOME" transform="translate(-1381.000000, -39.000000)" stroke="#FFFFFF" stroke-width="3">
+            <g id="Header">
+                <polyline id="Path" transform="translate(1392.000000, 46.000000) rotate(90.000000) translate(-1392.000000, -46.000000) " points="1388 54 1396 46 1388 38"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>
