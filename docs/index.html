@@ -3,18 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <title>Titus: Documentation</title>
-    <meta 
-      http-equiv="X-UA-Compatible" 
-      content="IE=edge,chrome=1" 
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="IE=edge,chrome=1"
     />
-    <meta 
-      name="description" 
-      content="Documentation for Titus Noise" 
+    <meta
+      name="description"
+      content="Documentation for Titus Noise"
     />
     <meta
       name="viewport"
       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
     />
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
     <link
       rel="stylesheet"
       href="//unpkg.com/docsify-themeable@0.6.2/dist/css/theme-defaults.css"
@@ -23,35 +24,322 @@
       rel="stylesheet"
       href="//unpkg.com/@nearform/docsify-theme-nearform@2.0.1/theme-nearform.min.css"
     />
-    <link 
-      rel="icon" 
-      type="image/png" 
+    <link
+      rel="icon"
+      type="image/png"
       href="img/favicon.png"
       >
     <style>
       /* custom list numbers */
       ol {
-        list-style: none; 
+        list-style: none;
         counter-reset: li;
       }
 
       ol > li {
         counter-increment: li
       }
-      
+
       ol > li::before {
-        content: counter(li) "."; 
+        content: counter(li) ".";
         color: #484CAC;
         font-weight: bold;
-        float: left; 
+        float: left;
         width: 1.5em;
         margin-left: -1em
       }
+
+      #navbar {
+        overflow: hidden;
+        background-color: #394662;
+        position: fixed;
+        top: 0;
+        height: 90px;
+        width: 100%;
+        z-index: 100
+      }
+
+      #navbar div {
+        position: fixed;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        right: 26px;
+        top: 45px;
+      }
+
+      #nav-right>* {
+        color: #f2f2f2;
+        text-decoration: none;
+        font-size: 16px;
+        font-family: Poppins;
+        line-height: 40px;
+      }
+
+      #nav-right a {
+        padding: 16px;
+      }
+
+      #nav-right {
+        margin-right: 26px;
+      }
+
+      #nav-right button {
+        border: 2px solid #FFFFFF;
+        padding: 0px 16px;
+        border-radius: 4px;
+        background-color: #272D3A;
+        /* width: 192px; */
+        text-align: left;
+        margin-left: 16px;
+      }
+
+      .arrow-down{
+        transform: rotate(0deg);
+        transition: transform 200ms linear;
+      }
+
+      .arrow-down.open{
+        transform: rotate(180deg);
+        transition: transform 200ms linear;
+      }
+
+      #panel {
+        position: fixed;
+        float: right;
+        width: 380px;
+        z-index: 50;
+        right: 23px;
+        top: 26.5px;
+      }
+
+      #panel.hidden {
+        height: 0;
+        -webkit-transition: height 0.2s linear;
+        -moz-transition: height 0.2s linear;
+        -ms-transition: height 0.2s linear;
+        -o-transition: height 0.2s linear;
+        transition: height 0.2s linear;
+      }
+
+      #panel.visible {
+        height: 317.5px;
+        -webkit-transition: height 0.2s linear;
+        -moz-transition: height 0.2s linear;
+        -ms-transition: height 0.2s linear;
+        -o-transition: height 0.2s linear;
+        transition: height 0.2s linear;
+      }
+
+      #blank-panel-space {
+        width: 100%;
+        height: 20%;
+      }
+
+      .panel-link {
+        float: left;
+        height: 40%;
+        width: 126px;
+        color: #ffffff;
+        background-color: #394662;
+      }
+      .panel-link img {
+        height: 52%;
+      }
+      .panel-link text {
+        font-size: 12px;
+        float: bottom;
+      }
+
+      @media (max-width: 500px) {
+      #accelerators-view-mobile {
+        display: inline-block !important;
+        width: 60px;
+      }
+      #accelerators-view {
+        display: none !important;
+      }
+      #nav-right button > .arrow {
+        float: center;
+        margin-top: 13px;
+      }
+      #nav-right {
+        margin-right: 5px;
+      }
+      #nav-right button {
+        margin-left: 5px;
+      }
+
+      #nav-right a {
+        padding: 5px;
+      }
+
+      #panel {
+        right: 0px;
+        width: 100%;
+
+      }
+      .panel-link {
+        height: 40%;
+        width: 33.333333%;
+      }
+
+      .panel-link text {
+        font-size: 9px;
+        float: bottom;
+      }
+
+      .panel-link img.hidden {
+        height: 0px;
+        -webkit-transition: height 0.2s linear;
+        -moz-transition: height 0.2s linear;
+        -ms-transition: height 0.2s linear;
+        -o-transition: height 0.2s linear;
+        transition: height 0.2s linear;
+      }
+      .panel-link img.visible {
+        height: 60px;
+        -webkit-transition: height 0.2s linear;
+        -moz-transition: height 0.2s linear;
+        -ms-transition: height 0.2s linear;
+        -o-transition: height 0.2s linear;
+        transition: height 0.2s linear;
+      }
+    }
+
+    @media (min-width: 501px) {
+      #accelerators-view-mobile {
+        display: none !important;
+      }
+
+      #accelerators-view {
+        display: inline-block !important;
+        width: 192px;
+      }
+
+      #nav-right button > .arrow {
+        float: right;
+        margin-top: 13px;
+      }
+    }
+
+      .titus:hover {
+        background: linear-gradient(180deg, #272C3B calc(100% / 126 * 119), #76A3C5 calc(50% / 126 * 7));
+      }
+
+      .quantum:hover {
+        background: linear-gradient(180deg, #272C3B calc(100% / 126 * 119), #1A9988 calc(50% / 126 * 7));
+      }
+
+      .orion:hover {
+        background: linear-gradient(180deg, #272C3B calc(100% / 126 * 119), #F1C232 calc(50% / 126 * 7));
+      }
+
+      .taurus:hover {
+        background: linear-gradient(180deg, #272C3B calc(100% / 126 * 119), #45818E calc(50% / 126 * 7));
+      }
+
+      .polaris:hover {
+        background: linear-gradient(180deg, #272C3B calc(100% / 126 * 119), #2165E3 calc(50% / 126 * 7));
+      }
+
+      .mira:hover {
+        background: linear-gradient(180deg, #272C3B calc(100% / 126 * 119), #FB775E calc(50% / 126 * 7));
+      }
+
+      #logo {
+        position: relative;
+        top: 50%;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        float: left;
+        margin-left: 33px
+      }
+
+      .content {
+        margin-top: 90px;
+      }
+
+      .github-corner {
+        margin-top: 90px;
+      }
+
+      .sidebar {
+        margin-top: 90px;
+      }
+
+      .sidebar-toggle {
+        margin-top: 90px;
+      }
+
     </style>
   </head>
   <body>
+    <div id="navbar">
+      <picture id="logo">
+        <source media="(max-width: 660px)" srcset="/img/N_Logo.svg">
+        <img src="/img/NF Logo.svg" alt="NF Logo" style="width:auto;">
+      </picture>
+      <div id="nav-right">
+        <a class="active" href="javascript:void(0)">Home</a>
+        <a href="javascript:void(0)">About</a>
+        <button id="accelerators-view" class="ignore-click-off">Accelerators<img id="icon" src="/img/Path.svg" alt="Expand" class="arrow arrow-down"></button>
+        <button id="accelerators-view-mobile" class="ignore-click-off"><img id="icon-mobile" src="/img/Path.svg" alt="Expand" class="arrow arrow-down"></button>
+      </div>
+    </div>
+    <div id="panel" class="hidden">
+      <div id="blank-panel-space"></div>
+      <span>
+        <form style="display: inline" action="https://nearform.github.io/titus/#/" method="get">
+          <button class="panel-link titus">
+            <img class="ignore-click-off hidden" src="/img/TITUS.svg" alt="TITUS Logo" >
+            <br>
+            <text class="ignore-click-off">SaaS</text>
+          </button>
+        </form>
+        <form style="display: inline" action="https://nearform.github.io/quantum/#/" method="get">
+          <button class="panel-link quantum">
+            <img class="ignore-click-off hidden" src="/img/QUANTUM.svg" alt="QUANTUM Logo" >
+            <br>
+            <text class="ignore-click-off">DESIGN SYSTEM</text>
+          </button>
+        </form>
+        <form style="display: inline" action="https://nearform.github.io/orion/#/" method="get">
+          <button class="panel-link orion">
+            <img class="ignore-click-off hidden" src="/img/ORION.svg" alt="ORION Logo" >
+            <br>
+            <text class="ignore-click-off">CMS</text>
+          </button>
+        </form>
+      </span>
+      <span>
+        <form style="display: inline" action="https://nearform.github.io/taurus/#/" method="get">
+          <button class="panel-link taurus">
+            <img class="ignore-click-off hidden" src="/img/TAURUS.svg" alt="TAURUS Logo" >
+            <br>
+            <text class="ignore-click-off">INFRASTRUCTURE</text>
+          </button>
+        </form>
+        <form style="display: inline" action="https://nearform.github.io/polaris/#/" method="get">
+          <button class="panel-link polaris">
+            <img class="ignore-click-off hidden" src="/img/POLARIS.svg" alt="POLARIS Logo" >
+            <br>
+            <text class="ignore-click-off">OMNI CHANNEL</text>
+          </button>
+        </form>
+        <form style="display: inline" action="https://nearform.github.io/mira/#/" method="get">
+          <button class="panel-link mira">
+            <img class="ignore-click-off hidden" src="/img/MIRA.svg" alt="MIRA Logo" >
+            <br>
+            <text class="ignore-click-off">SERVERLESS</text>
+          </button>
+        </form>
+      </span>
+    </div>
+
     <div id="app"></div>
+
     <script>
+
       window.$docsify = {
         name: '<img src=img/logo-pos.svg style="height:4em;" />',
         repo: 'https://github.com/nearform/titus',
@@ -59,6 +347,64 @@
         auto2top: true,
         subMaxLevel: 2
       }
+
+      var open = false;
+      var icon = document.getElementById('icon');
+      var iconMobile = document.getElementById('icon-mobile');
+      var panel = document.getElementById('panel');
+      var panelLinkImagesHidden = document.getElementsByClassName('ignore-click-off hidden');
+      var panelLinkImagesVisible = document.getElementsByClassName('ignore-click-off visible');
+
+      var viewAcceleratorsButton = document.getElementById('accelerators-view')
+      var viewAcceleratorsButtonMobile = document.getElementById('accelerators-view-mobile')
+
+      const clickHandle = function() {
+
+        if(open){
+          icon.className = 'arrow arrow-down';
+          iconMobile.className = 'arrow arrow-down';
+          panel.className = 'hidden';
+          while(panelLinkImagesVisible.length) {
+            panelLinkImagesVisible[0].className = 'ignore-click-off hidden'
+          }
+        } else{
+          icon.className = 'arrow arrow-down open';
+          iconMobile.className = 'arrow arrow-down open';
+          panel.className = 'visible';
+          while(panelLinkImagesHidden.length) {
+            panelLinkImagesHidden[0].className = 'ignore-click-off visible'
+          }
+        }
+        open = !open;
+      }
+
+      viewAcceleratorsButton.addEventListener('click', clickHandle)
+      viewAcceleratorsButtonMobile.addEventListener('click', clickHandle)
+
+      document.body.addEventListener('keydown', function(e) {
+        if(e.key == "Escape"){
+          open = false;
+          icon.className = 'arrow arrow-down';
+          iconMobile.className = 'arrow arrow-down';
+          panel.className = 'hidden';
+          while(panelLinkImagesVisible.length) {
+            panelLinkImagesVisible[0].className = 'ignore-click-off hidden'
+          }
+        }
+      });
+
+      document.addEventListener('click', function (event) {
+        if (open && !(event.target.matches('.ignore-click-off') || event.target.matches('.arrow') || event.target.matches('#panel') || event.target.matches('.panel-link'))) {
+          open = false;
+          icon.className = 'arrow arrow-down';
+          iconMobile.className = 'arrow arrow-down';
+          panel.className = 'hidden';
+          while (panelLinkImagesVisible.length) {
+            panelLinkImagesVisible[0].className = 'ignore-click-off hidden'
+          }
+          event.preventDefault();
+        }
+      });
     </script>
     <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
     <script src="//unpkg.com/docsify/lib/plugins/search.min.js"></script>
