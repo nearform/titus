@@ -57,7 +57,18 @@ ol > li::before {
 }
 
 #nav-right a {
-  padding: 16px;
+  margin: 16px;
+  display: inline-block;
+  border-bottom: 3px solid #394662;
+  transition: border-color 300ms ease, opacity 200ms ease, color 300ms ease;
+  color: #fff;
+  line-height: 40px;
+  text-decoration: none;
+}
+
+#nav-right a:hover {
+  border-bottom: 3px solid var(--accel-secondary-color);
+  color: var(--accel-secondary-color);
 }
 
 #nav-right {
@@ -71,11 +82,20 @@ ol > li::before {
   background-color: #272D3A;
   text-align: left;
   margin-left: 16px;
+  transition: border-color 300ms ease, opacity 200ms ease, color 300ms ease;
+}
+#nav-right button:hover {
+  border: 2px solid var(--accel-secondary-color);
+  color: var(--accel-secondary-color);
 }
 
 .arrow-down{
   transform: rotate(0deg);
-  transition: transform 200ms linear;
+  transition: transform 200ms linear, filter 300ms ease;
+}
+
+#nav-right button:hover .arrow-down{
+  filter: brightness(0) saturate(100%) invert(66%) sepia(12%) saturate(1063%) hue-rotate(163deg) brightness(92%) contrast(88%);
 }
 
 .arrow-down.open{
