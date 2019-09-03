@@ -1,4 +1,25 @@
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
 ![logo]
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
 
 Develop and Deploy solutions quickly using Titus, an Accelerated Development & Deployment Stack. Titus is production ready and can be deployed to all major cloud providers.
 
@@ -16,7 +37,7 @@ Developer experience in Titus is second to none. We want developers to enjoy usi
 
 ![titus-developer-statement]
 
-With this in mind, Titus is well documented, includes modern tooling like [Storybook], has linting and testing as first class citizens, and supports common-sense inclusions such as quality logging and docker convenience commands for day to day building and working with the stack locally. 
+With this in mind, Titus is well documented, includes modern tooling like [Storybook], has linting and testing as first class citizens, and supports common-sense inclusions such as quality logging and docker convenience commands for day to day building and working with the stack locally.
 
 ### No compromise DevOps
 To achieve a rock-solid but easy to configure infrastructural base, we make use of [Terraform] in conjunction with [Kubernetes] (K8s) to deploy and manage infrastructure and service needs. We keep deployment configuration simple by using [Noise], which wraps common Terraform configurations into an easy to use Terraform plugin. Noise itself is used in a configuration repo, which contains secrets, helm charts, etc.
@@ -59,7 +80,7 @@ The quickest way to get exploring is to view our quick start guide. It covers, f
 [Quick start]: quick-start/
 
 <!-- Images -->
-[logo]: img/logo-pos.svg
+[logo]: img/Accel_Logo_Titus.svg
 [titus-feature-overview]: img/titus-feature-overview.svg
 [titus-deployment-workflow]: img/titus-deployment-workflow.svg
 [titus-developer-statement]: img/titus-developer-statement.svg
