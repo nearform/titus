@@ -30,6 +30,14 @@
       href="img/favicon.png"
       >
     <style>
+
+      :root {
+        --accel-secondary-color: #76A3C5;
+        --sidebar-nav-link-border-color--active: var(--accel-secondary-color);
+        --sidebar-nav-link-color--active: var(--accel-secondary-color);
+        --sidebar-nav-link-color--hover: var(--accel-secondary-color);
+      }
+
       /* custom list numbers */
       ol {
         list-style: none;
@@ -267,6 +275,10 @@
 
       .github-corner {
         margin-top: 90px;
+      }
+
+      .github-corner svg {
+        fill: var(--accel-secondary-color);
       }
 
       .sidebar {
