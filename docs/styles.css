@@ -52,7 +52,7 @@ ol > li::before {
   color: #f2f2f2;
   text-decoration: none;
   font-size: 16px;
-  font-family: Poppins;
+  font-family: 'Poppins', sans-serif;
   line-height: 40px;
 }
 
