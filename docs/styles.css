@@ -78,20 +78,17 @@ ol > li::before {
 #nav-right button {
   border: 2px solid #FFFFFF;
   padding: 0px 16px;
+  height: 50px;
   border-radius: 4px;
   background-color: #272D3A;
   text-align: left;
   margin-left: 16px;
   transition: border-color 300ms ease, opacity 200ms ease, color 300ms ease;
 }
-#nav-right button:hover {
-  border: 2px solid var(--accel-secondary-color);
-  color: var(--accel-secondary-color);
-}
 
 .arrow-down{
   transform: rotate(0deg);
-  transition: transform 200ms linear, filter 300ms ease;
+  transition: transform 200ms linear, filter 150ms ease;
 }
 
 #nav-right button:hover .arrow-down{
@@ -119,6 +116,7 @@ ol > li::before {
   -ms-transition: height 0.2s linear;
   -o-transition: height 0.2s linear;
   transition: height 0.2s linear;
+  overflow: hidden;
 }
 
 #panel.visible {
@@ -128,6 +126,7 @@ ol > li::before {
   -ms-transition: height 0.2s linear;
   -o-transition: height 0.2s linear;
   transition: height 0.2s linear;
+  overflow: hidden;
 }
 
 #blank-panel-space {
@@ -171,6 +170,8 @@ ol > li::before {
 
   #nav-right button {
     margin-left: 5px;
+    background-color: #394662;
+    border: 0px;
   }
 
   #nav-right a {
@@ -224,6 +225,11 @@ ol > li::before {
   #nav-right button > .arrow {
     float: right;
     margin-top: 13px;
+  }
+
+  #nav-right button:hover {
+    border: 2px solid var(--accel-secondary-color);
+    color: var(--accel-secondary-color);
   }
 }
 
