@@ -282,3 +282,9 @@ ol > li::before {
 .sidebar-toggle {
   margin-top: 90px;
 }
+
+img[src*="#logo"] {
+  width: 100%;
+  margin: calc(50vh - 90px) 0px;
+  transform: translate(0%, -50%);
+}
