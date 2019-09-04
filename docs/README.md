@@ -1,25 +1,4 @@
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
 ![logo]
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
 
 Develop and deploy your solutions quickly using Titus, an application development and deployment stack. Titus is production ready and can be deployed to all major cloud providers.
 
@@ -80,7 +59,7 @@ The quickest way to get exploring is to view our Quick Start Guide. It covers fo
 [Quick start]: quick-start/
 
 <!-- Images -->
-[logo]: img/Accel_Logo_Titus.svg
+[logo]: img/Accel_Logo_Titus.svg#logo
 [titus-feature-overview]: img/titus-feature-overview.svg
 [titus-deployment-workflow]: img/titus-deployment-workflow.svg
 [titus-developer-statement]: img/titus-developer-statement.svg
