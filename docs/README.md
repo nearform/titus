@@ -3,13 +3,11 @@
 Develop and Deploy solutions quickly using Titus, an Accelerated Development & Deployment Stack. Titus is production ready and can be deployed to all major cloud providers.
 
 ## What is Titus
-Titus is a Application Development & Deployment Stack suitable for SaaS type solutions. It scaffolds ready to deploy frontend, backend and database while including infrastructure and service tooling for continuous integration and deployment.
+Titus is a application development & deployment Stack suitable for SaaS type solutions. It scaffolds ready to deploy frontend, backend and database while including infrastructure and service tooling for continuous integration and deployment.
 
 On top of all this there are other pieces included that will help speed up application development, while maintaining high quality software and documentation. It looks a little something like this:
 
 ![titus-feature-overview]
-
-In other words, we provide everything you need to start deploying features, in a production ready, scalable manner.
 
 ### Developer first experience
 Developer experience in Titus is second to none. We want developers to enjoy using Titus so much it becomes frictionless to select it. To ensure we keep to this ideal our development motto is:
