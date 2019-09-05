@@ -4,8 +4,6 @@
 
 &nbsp;
 
-&nbsp;
-
 [![CircleCI][ci-badge]][ci-link]
 [![Lerna][lerna-badge]][lerna-link]
 
