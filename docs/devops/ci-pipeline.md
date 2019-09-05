@@ -3,8 +3,6 @@ To make various build, test, and deploy tasks easy to run continuously we use [C
 
 The CI Pipeline is simply a collection of jobs which can be ran in different workflows. Right now, we have two workflows that share a number of jobs; it looks like this:
 
-Hello!
-
 ![titus-ci-pipeline-overview](../img/titus-ci-pipeline-overview.svg)
 
 ## The Workflows
