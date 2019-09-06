@@ -1,9 +1,9 @@
 ![titus-developers-quote]
 
 # Developers
-A large percentage of the success of a project rests in the ability of it's developers to work unimpeded. In many cases tooling for building and running a given stack locally can seriously hamper productivity.
+A large factor in the success of a project rests in the ability of its developers to work unimpeded. In many cases tooling for building and running a given stack locally can reduce productivity.
 
-With Titus we wanted to ensure the developer experience accelerated the speed at which developers work. We do this by following the guidelines below:
+With Titus we ensure the developer experience accelerates the speed at which developers work. We do this by following the guidelines below:
 
 - Local development should be easy for both frontend and backend developers. They should have easy solution to spin up the entire application localy, without giving up on developer tools.
 
