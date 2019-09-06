@@ -1,89 +1,89 @@
 ![titus-developers-quote]
 
 # Developers
-A large factor in the success of a project rests in the ability of its developers to work unimpeded. In many cases tooling for building and running a given stack locally can reduce productivity.
+A large factor in the success of a project rests in the ability of its developers to work unimpeded. Often, tooling for building and running a given stack locally can reduce productivity.
 
 With Titus we ensure the developer experience accelerates the speed at which developers work. We do this by following the guidelines below:
 
-- Local development should be easy for both frontend and backend developers. They should have easy solution to spin up the entire application localy, without giving up on developer tools.
+- Local development should be easy for both frontend and backend developers. They should have an easy solution to spin up the application locally, without giving up on developer tools.
 
 - Commands for linting, testing, running and stopping your application should be included. Commands to support local manipulation, spinning up and tearing down of the system should be included and documented.
 
-- Selecting technologies such as CSS frameworks or data management libraries is your own choice. Titus is lean and just opinionated enough to be reusable and reduces the overall complexity of use. It does not stand in your way.
+- Selecting technologies, such as CSS frameworks or data management libraries, is your own choice. Titus is lean and opinionated enough to be reusable and reduce complexity. It does not stand in your way.
 
-- A complete CI solution should be included that can build assets, lint and run tests, produce production ready containers and support deployment via helm should be included.
+- A complete CI solution should be included that can build assets, lint and run tests, produce production ready containers, and support deployment via Helm.
 
-- Documentation for projects and modules is of vital importance to ensure the long term knowledge sharing. Markdown is now an industry standard, and it can produce easy-to-host static sites.
+- Documentation for projects and modules is of vital importance to ensure knowledge sharing. Markdown is now an industry standard and can produce easy-to-host static sites.
 
-Across this documentation you will find the results of decisions made using the guidelines above. Rather than list each choice individually, we try call out external links to all tools and libraries. Where appropriate we explain some decisions in detail.
+In our documentation you will find the decision results using the guidelines above. Rather than list each choice, we include external links to all the tools and libraries. Where appropriate, we explain decisions in more detail.
 
 ## Packages
-Titus includes just what's needed out of the box. Each package has a minimal complement of features and technology inclusions. In all cases we have defaulted to choices that we have found to work successfully in real production software. Overall Titus provides just enough of everything to be deployment ready, without locking developers into feature level technology decisions.
+Titus includes just what's needed out of the box. Each package has a minimal complement of features and technology inclusions. In all cases we chose packages that worked successfully for us in real production software. Titus provides just enough of everything to be deployment ready, without locking developers into feature-level technology decisions.
 
-Packages are managed with [Lerna] so you could easily add more and easily manage their inter-dependencies.
+Packages are managed with [Lerna] so you can add more packages and also manage their interdependencies.
 
 All packages we provide include:
 - [Jest] for testing
 - [ESLint] code linter and [Prettier] code formatter
-- Some usefull testing libraries, such as [nock] or [faker]
+- testing libraries, such as [nock] or [faker]
 
 ### Frontend Kit
 The frontend, __titus-frontend__, is a minimal app built on [create-react-app] and [react-router]. 
 
 We include [yup] for form validation, which powers the included auth components. React components are tested with [Enzyme].
-As it runs with [webpack-dev-server], it supports hot rebuilding.
+Because it runs with [webpack-dev-server], it supports hot rebuilding.
 
 - [More information](developers/packages/titus-frontend/)
 
 ### Backend Kit
-The backend, __titus-backend__, is built on [Hapi] server with [Pino], to make logging a treat.
+The backend, __titus-backend__, is built on a [Hapi] server with [Pino], to make logging a treat.
 
-We also provide a plugin to instrument your routes with [node-postgres] toolkit for easier interfacing with Postgres, and another plugin for enabling [Auth0] authentication with [JSON Web Tokens][jwt].
+We also provide a plugin to instrument your routes with a [node-postgres] toolkit for easier interfacing with Postgres, and another plugin for enabling [Auth0] authentication with [JSON Web Tokens][jwt].
 
-[NodeMon] is used to to power hot reloading on file changes when running locally, and make sure your application restarts on uncaught exceptions or unhandled promises.
+[NodeMon] is used to power hot reloading on file changes when running locally, and make sure your application restarts due to uncaught exceptions or unhandled promises.
 
 - [More information](developers/packages/titus-backend/)
 
 ### Backend Kit (Fastify)
 The backend, __titus-backend-fastify__, is built on [Fastify] server with [Pino], to make logging a treat.
 
-We also provide a plugin to instrument your routes with [node-postgres] toolkit for easier interfacing with Postgres, and another plugin for enabling [Auth0] authentication with [JSON Web Tokens][jwt].
+We also provide a plugin to instrument your routes with a [node-postgres] toolkit for easier interfacing with Postgres, and another plugin for enabling [Auth0] authentication with [JSON Web Tokens][jwt].
 
-[NodeMon] is used to to power hot reloading on file changes when running locally, and make sure your application restarts on uncaught exceptions or unhandled promises.
+[NodeMon] is used to power hot reloading on file changes when running locally, and make sure your application restarts due to uncaught exceptions or unhandled promises.
 
 - [More information](developers/packages/titus-backend-fastify/)
 
 ### Starter Docs Kit
-Titus includes a documentation start kit, __titus-starter-docs__, so you can easily document your application.
+Titus includes a documentation starter kit, __titus-starter-docs__, so you can document your application.
 
-This package is Github Pages and CDN friendly and can be hosted in the folder of a given repo without the need to include dependencies solely to support documentation. 
+This package is GitHub Pages and CDN (Content Delvery Network) friendly and can be hosted in the folder of a given repo without the need to include dependencies solely to support documentation. 
 
-Docs are powered by [docsify] which requires zero in-repo dependencies, and provide hot-reloading when editing the docs
+Documents are powered by [docsify] which has no in-repo dependencies, and provides hot reloading when editing the documents.
 
 - [More information](developers/packages/titus-starter-docs/)
 
 ## Services
-Your application is likely to depend on external and cloud services. 
-Titus comes pre-configured with a database and an authentication service, the bare minimum we could think of from our projects.
+Your application is likely to depend on both external and cloud services. 
+Titus comes preconfigured with a database and an authentication service, the minimum we think you need based on our projects.
 
 [Production parity][parity] really matters to us, so we're leveraging [docker-compose] to manage your database.
 
-However, production parity is about reducing the gap between development and production and not compromising on development tools.
-Titus packages still run as node.js regular application on your OS. This plays better with Lerna's symlinks and [webpack-dev-server].
+Production parity is about reducing the gap between development and production and not compromising on development tools.
+Titus packages run as node.js applications on your OS. This plays better with Lerna's symlinks and [webpack-dev-server].
 
-Since we use Dockerfile to bundle the packages, it's always possible run them locally using docker-compose (or minikube) if you want to.
+As we use Dockerfile to bundle the packages, it's also possible run them locally using Docker Compose (or Minikube) if you wish.
 
 ### PostgreSQL
-Titus includes a pre configured instance of PostgreSQL. 
+Titus includes a preconfigured instance of PostgreSQL. 
 
-When used with __titus-backend__ migrations (powered by [postgrator]) and seeding support can be taken advantage of. 
+When PostgreSQL is used with __titus-backend__, migrations (powered by [postgrator]) and seeding support can be taken advantage of. 
 
-Locally Titus makes use of docker compose and docker volumes to handle the database. When running on a cloud provider, the included relation database service is used.
+Locally Titus uses Docker Compose and Docker Volumes to handle the database. When running on a cloud provider, the included relation database service is used.
 
 - [More information](starter-docs)
 
 ### Auth via Auth0
-Clients consider 'logging in' as the primary first feature they want to see when. Titus comes pre-configured for Auth0.
+Clients consider logging in as the first feature they want to see. Titus comes preconfigured for Auth0.
 
 - [More information](starter-docs)
 
