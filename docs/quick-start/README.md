@@ -2,9 +2,9 @@
 
 # Quick start
 
-Titus is easy to install and run. We encourage developers to install Titus locally themselves - it should feel easy to navigate around, start and stop. Before we go further however, let's ensure you have all of the prerequisites installed. 
+Titus is easy to install and run. We encourage developers to install Titus locally themselves - it is easy to navigate, start and stop. Before starting, let's ensure you have all of the prerequisites installed. 
 
-You will need the latest stable versions of [Node], and [Docker]. Both of these should be trivial to install and do not require any special setup. There are other tools to install for deployment purposes, these will be covered later in the [DevOps] section of this documentation.
+You need the latest stable versions of [Node], and [Docker]. Both of these should be trivial to install and do not require any special setup. There are other tools to install for deployment purposes, these will be covered later in the [DevOps] section of this documentation.
 
 ## Clone the source repo
 To kick everything off, fork [Titus] on Github, it will be easier to maintain your own fork as Titus is designed to diverge, it is unlikely you will need to pull from the source repository again outside of some minor cherry-picking.
@@ -24,7 +24,7 @@ npm install
 
 Dependencies are installed for all constituent parts of the repository.
 
-## Configure the environment
+## Configure the Environment
 Titus uses `.env` files in each package to control various configuration. In all cases there are `.sample.env` files documenting what values should be in the `.env` file proper.
 
 However, before the stack can be ran, the actual `.env` files need to be created and populated. A convenience script exists to automate this process. 
@@ -37,7 +37,7 @@ npm run create:env
 
 You can read more about configuring the environment in our documentation [Developers][DevelopersBe] section .
 
-## Running the stack
+## Running the Stack
 Titus runs your application locally, leveraging docker for external services such as database.
 We take advantage of Lerna shortcuts to start all the packages in a row.
 Our packages support hot-reloading thanks to [Webpack dev server][webpack-dev-server] (for titus-frontend) and [NodeMon] (for titus-backend). 
@@ -71,8 +71,8 @@ the splash page for Titus:
 
 The splash screen will link you back to the documentation (here) should you not have started from the titus site. Note that you can also log out of the system on the splash screen.
 
-### Manipulating the  running stack
-A number of useful commands for manipulating the running docker stack have been included as easy to run scripts. These can be ran by running `npm run <command>` in the root of the repo; where command is:
+### Manipulating the Running Stack
+A number of useful commands for manipulating the running Docker stack have been included as easy to run scripts. These can be ran by running `npm run <command>` in the root of the repo; the commands are:
 
 - `npm run docker:dev:create-volume` - runs `docker volume create` to create a data volume with name `titus-pg-data`
 - `npm run docker:dev:logs` - runs `docker-compose logs` and passes `-f` so they auto-tail
@@ -80,7 +80,7 @@ A number of useful commands for manipulating the running docker stack have been 
 - `npm run docker:dev:start` - first, runs `docker:dev:create-volume` to create a data volume, then `docker-compose up -d --build` to start Postgres locally in docker
 - `npm run docker:dev:stop` - Runs `docker-compose down` to spin down the running Postgres
 
-For example, to tear down the system, spin it back up and tail the logs, the commands would be:
+For example, to tear down the system, spin it back up and tail the logs, the commands are:
 
 ```sh
 npm run docker:dev:rmi
@@ -88,8 +88,8 @@ npm run start:all
 npm run docker:dev:logs
 ```
 
-### Stopping the stack
-You can can also stop the stack by running:
+### Stopping the Stack
+You can stop the stack with the command:
 
 ```sh
 npm run stop:all
