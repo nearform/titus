@@ -1,110 +1,116 @@
 # Titus Backend
 
-A starter [Hapi] server with [PostgreSQL][node-postgres] and [Auth0] plugins.
+Titus backend is starter [Hapi] server with [PostgreSQL][node-postgres] and [Auth0] plugins.
 
 ## Features
 
+Titus backend consists of the following:
+
 * Hapi HTTP server 
-* Logger of choice is [Pino]
-* Automatic restart and hot reloading thanks to [NodeMon]
-* Follows [12-Factor App recommendation][config] and reads configuration from env variables 
-* Postgresql plugin with transaction control at route level
+* [Pino] logger
+* Automatic restart and hot reloading with [NodeMon]
+* [12-Factor App recommendation][config] and reads configuration from environment variables 
+* PostgreSQL plugin with transaction control at route level
 * Sample source structure for organising Hapi routes and plugin
-* Tested with [Jest], [nock] and [faker]
-* Code linter is [ESLint]
-* Code formatted is [Prettier] with [Standard] preset
+* [Jest], [nock] and [faker] test tools
+* [ESLint] code linter
+* [Prettier] code formatter with [Standard] preset
 
 
 ## Introduction
+ 
 
-Titus-backend is lightweight on purpose. 
+What you implement with Titus backend is your choice, we provide you with an unopiniated working shell to get started.
+We provide what is common in our projects: a configurable HTTP Server with JSON logging, health check route and database capabilities.
 
-What you'll implement with it is your own business, and we're providing you an unopiniated, working shell.
-We only provide what we think is common in our projects: a configurable Http Server, with JSON logging, health check route and database capabilities.
+There is scope for you to add, customise and even replace features and plugins.
 
-There's room for you to add, customize or even replace parts and bits.
-
-### Organization
+### Organisation
+Titus backend is structured as follows:
 
 * `lib/` - contains the server sources
-* `lib/config` - server configuration: read values from env variables, with default values from `.env` file
-* `lib/plugins` - Hapi plugins for cross-cutting features. Contains PG instrumenter and Auth0 + [jwt] strategy
+* `lib/config` - server configuration: reads environment variable values, with default values from the `.env` file
+* `lib/plugins` - hapi plugins for cross-cutting features. Contains PG instrumenter and Auth0 + [jwt] strategy
 * `lib/routs` - Hapi plugins declaring HTTP routes. You'll find the health-check there
 * `tools/` - contains tooling not used by the server itself, but related to it, such as database migration tools and scripts
 
-### Auth0 plugin
+### Auth0 Plugin
 
-Declares `POST /login` route, which expects JSON body with `username` and `password` keys.
-Those values will be sent to [Auth0] and if authentication succeeded, you'll get a [jwt] in return that your application should store.
+The Auth0 plugin declares a `POST /login` route, which expects a JSON body with `username` and `password` keys.
+Those values are passed to [Auth0] and if authentication succeeds, you get a [jwt] in return that your application should store.
 
-It also declares a Hapi authentication [strategy] named `jwt`. Use it in the route you'd like to protect.
-Accessing those routes will require a valid jwt value in `Authorization` HTTP header.
+The Auth0 plugin also declares a hapi authentication [strategy] named `jwt`. Use this in the routes you would like to protect.
+Accessing these routes requires a valid jwt value in the `Authorization` HTTP header.
 
 Have a look at `lib/plugins/auth0/auth0.test.js` for some examples.
 
-### Pg plugin
+### Pg Plugin
 
 The Pg plugin automatically instruments other routes with a [pg][node-postgres] so they can issue queries against the database.
 It automatically commits (or rolls back, in case of thrown errors) transactionnal routes.
 
 To enable it, include `plugins: { pgPlugin: {} }` to your route `options`
-To enable transactional support: `plugins: { pgPlugin: { transactional: true } }`
+To enable transactional support set the transactional to true as follows: `plugins: { pgPlugin: { transactional: true } }`
 
 Have a look at `lib/plugins/pg/pg.test.js` for some examples.
 
-### Health check route
+### Health Check Route
 
-The `GET /healthcheck` endpoint is intended for your production cluster, it tells when your backend is ready to use.
-It returns your application version and server timestamp, but also run a dummy query against database, to be sure it's available.
+The `GET /healthcheck` endpoint is intended for your production cluster. It tells your backend is ready to use when
+it returns your application version and server timestamp. It also runs a dummy query against the database, to ensure it is available.
 
 
 ## Installation
+To install Titus backend, run the following command:
 
 ```
 npm install
 ```
 
-But it was covered when you ran `npm install` at root level ;)
+**Note** The Titus backend is automatically installed if you previously ran `npm install` at root level.
 
 
 ## Running Locally
+To run your application locally, perform the following steps:
 
-1. Edit your configuration:
+1. Edit your environment configuration:
   ```
   npm run create:env
   ```
 
-  This will create a `.env` file inside the root directory from the `.env.sample` file.
+  This creates a `.env` file in the root directory based on the `.env.sample` file.
   These are your configuration values. You can ammend the file when running locally, and also override individual variables in your environment.
 
-  You must fill in the `AUTH0_*` variables with the data from your Auth0 app, if you need to use it for authentication.
+  You must edit the `.env` to fill in the `AUTH0_*` variables with the data from your Auth0 app, if you need to use it for authentication.
 
-1. Make sure Postgres is running and available. If you've ran `npm run start:all` at root level, [docker-compose] took care of it.
+1. Make sure PostgreSQL is running and available. If you ran `npm run start:all` at root level, [docker-compose] took care of it.
 
 1. Start the server
   ```
   npm start
   ```
   
-  This will start your server on `http://localhost:5000`. 
-  Any changes in `lib/` or in `.env` you make will automatically restart the server. 
+  This starts your server on `http://localhost:5000`. 
+  If you make any changes in `lib/` or in `.env` the server automatically restarts. 
 
-  Verify it works and can reach its database with `curl http://127.0.0.1:5000/healthcheck`.
+  Verify the application works and can reach the database using the command `curl http://127.0.0.1:5000/healthcheck`.
 
 
 ## Testing and Linting
+The following commands can be used for testing and linting your application:
 
-* `npm test` - run all the tests with code coverage (it's the command CI is using).
-* `npm run test:watch` - starts Jest in watch mode: it'll run tests against the modified files (since last commit), and will automatically run them again on code change.
-* `npm run lint` - apply ESLint / Prettier on sources
-* `npm run lint:fix` - uses ESLint / Prettier (with autofix flag)
+* `npm test` - run all the tests with code coverage (it's the command CI is using)
+* `npm run test:watch` - start Jest in watch mode: run tests against the modified files (since last commit), and automatically runs them again if you change the code 
+* `npm run lint` - apply ESLint / Prettier to sources
+* `npm run lint:fix` - use ESLint / Prettier (with autofix flag)
 
 
-## Database management
+## Database Management
+The following commands can be used with your Titus backend database:
 
-* `npm run db:init` - apply SQL initialization scripts with `psql` CLI against your database
-* `npm run db:migrate` - apply DB migration scripts from `tools/migrations/build` with [postgrator] 
-* `npm run db:seed` - seed the DB with dev data from `tools/migrations/seed_dev` with [postgrator]
+* `npm run db:init` - apply SQL initialisation scripts with `psql` CLI against your database
+* `npm run db:migrate` - apply database migration scripts from `tools/migrations/build` with [postgrator] 
+* `npm run db:seed` - seed the database with dev data from `tools/migrations/seed_dev` with [postgrator]
 
 
 [Jest]: https://jestjs.io
