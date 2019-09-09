@@ -1,6 +1,6 @@
 # Titus Backend
 
-Titus backend is starter [Hapi] server with [PostgreSQL][node-postgres] and [Auth0] plugins.
+Titus backend is a starter [hapi] server with [PostgreSQL][node-postgres] and [Auth0] plugins.
 
 ## Features
 
@@ -11,7 +11,7 @@ Titus backend consists of the following:
 * Automatic restart and hot reloading with [NodeMon]
 * [12-Factor App recommendation][config] and reads configuration from environment variables 
 * PostgreSQL plugin with transaction control at route level
-* Sample source structure for organising Hapi routes and plugin
+* Sample source structure for organising hapi routes and plugin
 * [Jest], [nock] and [faker] test tools
 * [ESLint] code linter
 * [Prettier] code formatter with [Standard] preset
@@ -31,7 +31,7 @@ Titus backend is structured as follows:
 * `lib/` - contains the server sources
 * `lib/config` - server configuration: reads environment variable values, with default values from the `.env` file
 * `lib/plugins` - hapi plugins for cross-cutting features. Contains PG instrumenter and Auth0 + [jwt] strategy
-* `lib/routs` - Hapi plugins declaring HTTP routes. You'll find the health-check there
+* `lib/routs` - hapi plugins declaring HTTP routes. The health check is also contained here
 * `tools/` - contains tooling not used by the server itself, but related to it, such as database migration tools and scripts
 
 ### Auth0 Plugin
@@ -47,7 +47,7 @@ Have a look at `lib/plugins/auth0/auth0.test.js` for some examples.
 ### Pg Plugin
 
 The Pg plugin automatically instruments other routes with a [pg][node-postgres] so they can issue queries against the database.
-It automatically commits (or rolls back, in case of thrown errors) transactionnal routes.
+It automatically commits (or rolls back, in case of thrown errors) transactional routes.
 
 To enable it, include `plugins: { pgPlugin: {} }` to your route `options`
 To enable transactional support set the transactional to true as follows: `plugins: { pgPlugin: { transactional: true } }`
@@ -91,15 +91,15 @@ To run your application locally, perform the following steps:
   ```
   
   This starts your server on `http://localhost:5000`. 
-  If you make any changes in `lib/` or in `.env` the server automatically restarts. 
+  If you make any changes in `lib/` or in `.env`, the server automatically restarts. 
 
-  Verify the application works and can reach the database using the command `curl http://127.0.0.1:5000/healthcheck`.
+  Verify the application works and can reach the database using the command: `curl http://127.0.0.1:5000/healthcheck`.
 
 
 ## Testing and Linting
 The following commands can be used for testing and linting your application:
 
-* `npm test` - run all the tests with code coverage (it's the command CI is using)
+* `npm test` - run all the tests with code coverage (this is the command CI uses)
 * `npm run test:watch` - start Jest in watch mode: run tests against the modified files (since last commit), and automatically runs them again if you change the code 
 * `npm run lint` - apply ESLint / Prettier to sources
 * `npm run lint:fix` - use ESLint / Prettier (with autofix flag)
