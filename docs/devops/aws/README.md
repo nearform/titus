@@ -1,37 +1,34 @@
 # AWS Provider
 
-To setup the titus deployment on an [AWS] environment making use of [CircleCI] there is several steps to run through and consider.
+To setup a Titus deployment on an [AWS] environment using [CircleCI] there is several steps to run perfrom. 
 
-The current CircleCI config is setup to have the team work on branches that gets commited to a master and at a code freeze
-the team would release tag the current master that also would be running in the dev environment.
+The current CircleCI configuration is set up so that the team work on branches that are commited to the master. At code freeze,
+the team release tag the current master that is also running in the development environment.
+That triggers a propagation of the development image to the production and staging environments.
 
-And that would trigger a propagation of the dev image into the production / staging environment.
 
+## Setup the EKS environment
 
-## Setup the EKS environment.
-
-1. Once you have your AWS account, install AWS CLI and configure you AWS profile, [as explaind here][noise-aws-setup].
+1. Once you have your AWS account, install AWS CLI and configure your AWS profile, [as explained here][noise-aws-setup].
 
 1. Make sure you have your management environment setup in accordance to the Noise documnentation. See: [Setup Local management env][noise-local-setup]
 
-1. Clone [titus-infra-aws] to a new folder
+1. Clone [titus-infra-aws] to a new folder as follows:
    ```sh
    git clone git@github.com:nearform/titus-infra-aws.git
    ```
 
-1. Clone [Noise] to a new folder either
+1. Clone [Noise] to a new folder as follows:
    ```sh
    git clone git@github.com:nearform/noise.git
    ```
-
-1. Add a symlink to noise inside titus-infra-aws
+1. Add a symbolic link to the noise directory from the titus-infra-aws directory as follows:
   ```sh
   cd titus-infra-aws
   ln -s ../noise
   ```
-
 1. Create an S3 bucket in accordance to Noise instructions found here: [Create an S3 bucket for terraform state][noise-state-bucket].
-  **You only need to create the bucket, don't run terraform steps**.
+  **You only need to create the bucket, you do not run the Terraform steps**.
 
 1. Edit the `titus-infra-aws/main.tf` file:
   ```yaml
@@ -60,26 +57,27 @@ And that would trigger a propagation of the dev image into the production / stag
   }
   ```
 
-1. Init terraform: run the command `terraform init`
+1. Initialise Terraform using the command: 
+`terraform init`
 
-1. Now run the command `terraform plan` and with some luck you have no errors and a report of 90+ resources created.
+1. Run the command `terraform plan` . The output indicates 90+ resources were created.
 
-1. Run the command: `terraform apply` - type yes when asked and sit back.
+1. Run the command: `terraform apply` - type 'yes' when prompted.
 
-1. Install K8s controller configuration locally (change name according to your project :
+1. Install the K8s controller configuration locally (change <name> according to your project) :
   ```sh
-  aws eks update-kubeconfig --name titus-noise
+  aws eks update-kubeconfig --<name> titus-noise
   ```
 
 
-## Customize your infrastructure
+## Customise your Infrastructure
 
-1. Fork [titus-deploy] repository on github, and clone it
+1. Fork the [titus-deploy] repository on github, and clone it using the following command:
    ```sh
    git clone git@github.com:your-name/titus-deploy.git
    ```
 
-1. in `titus-starter-kit/values.dev.yaml` edit
+1. Edit the file `titus-starter-kit/values.dev.yaml` as follows:
   ```yaml
   env:
     name: "titus-dev"                  # Change according to your project
@@ -87,13 +85,13 @@ And that would trigger a propagation of the dev image into the production / stag
     ...
   ``` 
 
-1. perform similar changes in `titus-starter-kit/values.prod.yaml` for your production environement
+1. Perform similar changes in `titus-starter-kit/values.prod.yaml` for your production environment.
 
-1. Commit you changes and push them to your fork
+1. Commit your changes and push them to your fork.
 
-1. Read through the [titus-secret/README.md](https://github.com/nearform/titus-deploy/tree/master/titus-secrets) provided in the helm chart as it will explain the process of creating and maintaing your secrets. And keep them a secret.
+1. Read through the [titus-secret/README.md](https://github.com/nearform/titus-deploy/tree/master/titus-secrets) provided in the Helm chart as it will explain the process of creating and maintaining your secrets. And keep them a secret.
 
-1. Install the secrets helm chart
+1. Install the secrets Helm chart as follows:
   ```sh
   helm install titus-deploy/titus-secrets/helm-secrets
   ```
@@ -101,7 +99,7 @@ And that would trigger a propagation of the dev image into the production / stag
 
 ## Configure CirclecI
 
-This assumes you've already forked [titus] repository, and cloned it locally.
+This assumes you've already forked the [titus] repository, and cloned it locally.
 ```sh
 git clone git@github.com:your-name/titus.git
 ```
@@ -110,10 +108,10 @@ CircleCI will access and deploy it.
 
 1. _On CircleCI UI_, add your project by searching the project under `Add projects`.
   ![circle-add-project]
-  It will add a deployment key for you repository and setup the necessary hooks.
-  Make sure you have admin access to the repository todo this.
+  It will add a deployment key for your repository and setup the necessary hooks.
+  Make sure you have admin access to the repository to do this.
 
-1. In order for CircleCI to access your titus-deploy fork, in CircleCI titus project settings:
+1. For CircleCI to access your titus-deploy fork, in CircleCI titus project settings:
   - go to `Permissions` > `Checkout SSH keys`
   - In `Add user key`, click on `Create and add user key` button
   - Authenticate with Github (if not already), and complete the operation
@@ -125,7 +123,7 @@ CircleCI will access and deploy it.
   - `S3_BUCKET`: name of the S3 bucket in `titus-infra-aws/main.tf`: `aws_s3_bucket.b.name`
   ![circle-env-variables]
 
-1. _On AWS Console_, you need to create as many [ECR repositories][ecr] as deployed applications needs.
+1. _On AWS Console_, you need to create as many [ECR repositories][ecr] as the deployed applications need.
 
 1. _In titus repo_, update the values in `.circleci/config.yaml`:
   - `DOCKER_REPO`: in AWS console, ECR service, use the URI, ie: `123456789.dkr.ecr.eu-west-1.amazonaws.com`
@@ -134,9 +132,9 @@ CircleCI will access and deploy it.
   - `AWS_EKS_REGION`: AWS region hosting the infrastructure
 
 
-#### First deploy
+#### First Deployment
 
-Just Commit your changes, push them, and let the magic be!
+Commit your changes, push them, and let the magic begin!
 
 
 [CircleCI]: https://circleci.com
