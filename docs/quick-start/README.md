@@ -118,7 +118,7 @@ Both frontend and backend starter kits have linting and testing built in and as 
 
 
 <!-- External Links -->
-[Docker]: https://www.docker.com/
+[Docker]: hhttps://docs.docker.com/install/#supported-platforms
 [Node]: https://nodejs.org/en/
 [Titus]: https://github.com/nearform/titus
 [webpack-dev-server]: https://webpack.js.org/configuration/dev-server

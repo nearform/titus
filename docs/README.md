@@ -43,12 +43,11 @@ The quickest way to get exploring is to view our Quick Start Guide. It covers fo
 
 <!-- External Links -->
 [Taurus]: https://nf-taurus.netlify.com
-[titus-noise-cli]: https://github.com/nearform/titus-noise-cli
 [CircleCI]: https://circleci.com/product/#features
 [Storybook]: https://storybook.js.org/
 [Terraform]: https://www.terraform.io/
 [Kubernetes]:  https://kubernetes.io/
-[Docker]: https://www.docker.com/
+[Docker]: https://docs.docker.com/install/#supported-platforms
 [Node]: https://nodejs.org/en/
 [AWS]: https://aws.amazon.com/
 [Azure]: https://azure.microsoft.com
