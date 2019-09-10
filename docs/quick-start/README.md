@@ -2,7 +2,7 @@
 
 # Quick start
 
-Titus is easy to install and run. We encourage developers to install Titus locally themselves - it should feel easy to navigate around, start and stop. Before we go further however, let's ensure you have all of the prerequisites installed. 
+Titus is easy to install and run. We encourage developers to install Titus locally themselves - it should feel easy to navigate around, start and stop. Before we go further however, let's ensure you have all of the prerequisites installed.
 
 You will need the latest stable versions of [Node], and [Docker]. Both of these should be trivial to install and do not require any special setup. There are other tools to install for deployment purposes, these will be covered later in the [DevOps] section of this documentation.
 
@@ -27,7 +27,7 @@ Dependencies are installed for all constituent parts of the repository.
 ## Configure the environment
 Titus uses `.env` files in each package to control various configuration. In all cases there are `.sample.env` files documenting what values should be in the `.env` file proper.
 
-However, before the stack can be ran, the actual `.env` files need to be created and populated. A convenience script exists to automate this process. 
+However, before the stack can be ran, the actual `.env` files need to be created and populated. A convenience script exists to automate this process.
 
 To generate a default set of `.env` files for all packages, run the following command in the root of the project:
 
@@ -40,7 +40,7 @@ You can read more about configuring the environment in our documentation [Develo
 ## Running the stack
 Titus runs your application locally, leveraging docker for external services such as database.
 We take advantage of Lerna shortcuts to start all the packages in a row.
-Our packages support hot-reloading thanks to [Webpack dev server][webpack-dev-server] (for titus-frontend) and [NodeMon] (for titus-backend). 
+Our packages support hot-reloading thanks to [Webpack dev server][webpack-dev-server] (for titus-frontend) and [Nodemon] (for titus-backend).
 
 Ensure Docker has started on your machine before running the stack. To run the full stack, in the root of the project, run:
 
@@ -122,7 +122,7 @@ Both frontend and backend starter kits have linting and testing built in and as 
 [Node]: https://nodejs.org/en/
 [Titus]: https://github.com/nearform/titus
 [webpack-dev-server]: https://webpack.js.org/configuration/dev-server
-[NodeMon]: https://nodemon.io
+[Nodemon]: https://nodemon.io
 
 <!-- Internal Links -->
 [DevOps]: devops/

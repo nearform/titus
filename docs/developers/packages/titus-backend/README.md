@@ -4,10 +4,10 @@ A starter [Hapi] server with [PostgreSQL][node-postgres] and [Auth0] plugins.
 
 ## Features
 
-* Hapi HTTP server 
+* Hapi HTTP server
 * Logger of choice is [Pino]
-* Automatic restart and hot reloading thanks to [NodeMon]
-* Follows [12-Factor App recommendation][config] and reads configuration from env variables 
+* Automatic restart and hot reloading thanks to [Nodemon]
+* Follows [12-Factor App recommendation][config] and reads configuration from env variables
 * Postgresql plugin with transaction control at route level
 * Sample source structure for organising Hapi routes and plugin
 * Tested with [Jest], [nock] and [faker]
@@ -17,7 +17,7 @@ A starter [Hapi] server with [PostgreSQL][node-postgres] and [Auth0] plugins.
 
 ## Introduction
 
-Titus-backend is lightweight on purpose. 
+Titus-backend is lightweight on purpose.
 
 What you'll implement with it is your own business, and we're providing you an unopiniated, working shell.
 We only provide what we think is common in our projects: a configurable Http Server, with JSON logging, health check route and database capabilities.
@@ -85,9 +85,9 @@ But it was covered when you ran `npm install` at root level ;)
   ```
   npm start
   ```
-  
-  This will start your server on `http://localhost:5000`. 
-  Any changes in `lib/` or in `.env` you make will automatically restart the server. 
+
+  This will start your server on `http://localhost:5000`.
+  Any changes in `lib/` or in `.env` you make will automatically restart the server.
 
   Verify it works and can reach its database with `curl http://127.0.0.1:5000/healthcheck`.
 
@@ -103,7 +103,7 @@ But it was covered when you ran `npm install` at root level ;)
 ## Database management
 
 * `npm run db:init` - apply SQL initialization scripts with `psql` CLI against your database
-* `npm run db:migrate` - apply DB migration scripts from `tools/migrations/build` with [postgrator] 
+* `npm run db:migrate` - apply DB migration scripts from `tools/migrations/build` with [postgrator]
 * `npm run db:seed` - seed the DB with dev data from `tools/migrations/seed_dev` with [postgrator]
 
 
@@ -114,7 +114,7 @@ But it was covered when you ran `npm install` at root level ;)
 [Hapi]: https://hapijs.com
 [Pino]: http://getpino.io
 [Auth0]: https://auth0.com
-[NodeMon]: https://nodemon.io
+[Nodemon]: https://nodemon.io
 [node-postgres]: https://node-postgres.com
 [jwt]: https://jwt.io
 [nock]: https://github.com/nock/nock#readme

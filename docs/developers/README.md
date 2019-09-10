@@ -28,7 +28,7 @@ All packages we provide include:
 - Some usefull testing libraries, such as [nock] or [faker]
 
 ### Frontend Kit
-The frontend, __titus-frontend__, is a minimal app built on [create-react-app] and [react-router]. 
+The frontend, __titus-frontend__, is a minimal app built on [create-react-app] and [react-router].
 
 We include [yup] for form validation, which powers the included auth components. React components are tested with [Enzyme].
 As it runs with [webpack-dev-server], it supports hot rebuilding.
@@ -40,7 +40,7 @@ The backend, __titus-backend__, is built on [Hapi] server with [Pino], to make l
 
 We also provide a plugin to instrument your routes with [node-postgres] toolkit for easier interfacing with Postgres, and another plugin for enabling [Auth0] authentication with [JSON Web Tokens][jwt].
 
-[NodeMon] is used to to power hot reloading on file changes when running locally, and make sure your application restarts on uncaught exceptions or unhandled promises.
+[Nodemon] is used to to power hot reloading on file changes when running locally, and make sure your application restarts on uncaught exceptions or unhandled promises.
 
 - [More information](developers/packages/titus-backend/)
 
@@ -49,21 +49,21 @@ The backend, __titus-backend-fastify__, is built on [Fastify] server with [Pino]
 
 We also provide a plugin to instrument your routes with [node-postgres] toolkit for easier interfacing with Postgres, and another plugin for enabling [Auth0] authentication with [JSON Web Tokens][jwt].
 
-[NodeMon] is used to to power hot reloading on file changes when running locally, and make sure your application restarts on uncaught exceptions or unhandled promises.
+[Nodemon] is used to to power hot reloading on file changes when running locally, and make sure your application restarts on uncaught exceptions or unhandled promises.
 
 - [More information](developers/packages/titus-backend-fastify/)
 
 ### Starter Docs Kit
 Titus includes a documentation start kit, __titus-starter-docs__, so you can easily document your application.
 
-This package is Github Pages and CDN friendly and can be hosted in the folder of a given repo without the need to include dependencies solely to support documentation. 
+This package is Github Pages and CDN friendly and can be hosted in the folder of a given repo without the need to include dependencies solely to support documentation.
 
 Docs are powered by [docsify] which requires zero in-repo dependencies, and provide hot-reloading when editing the docs
 
 - [More information](developers/packages/titus-starter-docs/)
 
 ## Services
-Your application is likely to depend on external and cloud services. 
+Your application is likely to depend on external and cloud services.
 Titus comes pre-configured with a database and an authentication service, the bare minimum we could think of from our projects.
 
 [Production parity][parity] really matters to us, so we're leveraging [docker-compose] to manage your database.
@@ -74,9 +74,9 @@ Titus packages still run as node.js regular application on your OS. This plays b
 Since we use Dockerfile to bundle the packages, it's always possible run them locally using docker-compose (or minikube) if you want to.
 
 ### PostgreSQL
-Titus includes a pre configured instance of PostgreSQL. 
+Titus includes a pre configured instance of PostgreSQL.
 
-When used with __titus-backend__ migrations (powered by [postgrator]) and seeding support can be taken advantage of. 
+When used with __titus-backend__ migrations (powered by [postgrator]) and seeding support can be taken advantage of.
 
 Locally Titus makes use of docker compose and docker volumes to handle the database. When running on a cloud provider, the included relation database service is used.
 
@@ -102,7 +102,7 @@ Clients consider 'logging in' as the primary first feature they want to see when
 [Fastify]: https://fastify.io
 [Pino]: http://getpino.io
 [Auth0]: https://auth0.com
-[NodeMon]: https://nodemon.io
+[Nodemon]: https://nodemon.io
 [node-postgres]: https://node-postgres.com
 [docsify]: https://docsify.js.org
 [Lerna]: https://lernajs.io
