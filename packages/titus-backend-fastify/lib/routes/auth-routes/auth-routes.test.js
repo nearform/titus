@@ -17,6 +17,12 @@ describe('auth0 plugin', () => {
   beforeAll(async () => {
     server = require('fastify')()
 
+    server.register(require('../../plugins/auth0'), {
+      jwt: {
+        secret: 'That1Super_Secret'
+      }
+    })
+
     server.register(require('.'), {
       auth0: {
         domain,
@@ -24,9 +30,6 @@ describe('auth0 plugin', () => {
         clientSecret,
         audience,
         grantType
-      },
-      jwt: {
-        secret: 'That1Super_Secret'
       }
     })
 
