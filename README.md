@@ -9,9 +9,9 @@
 [![CircleCI][ci-badge]][ci-link]
 [![Lerna][lerna-badge]][lerna-link]
 
-Titus is a production grade, end-to-end stack created for modern web application development. It comes with dev-ops and auth pre-configured. We designed Titus to be a supremely useful walking skeleton that can get you to deployed in "sprint one".
+Titus is a production grade, end-to-end stack for modern web application development. It includes devops and auth preconfigured. Titus is a walking skeleton that gets your application deployed with minimum effort.
 
-- Get the whole picture by viewing our __[Documentation][docs]__
+- To get the full picture, view our __[Documentation][docs]__
 
 [lerna-link]: https://lernajs.io/
 [lerna-badge]: https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg
