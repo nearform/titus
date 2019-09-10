@@ -17,13 +17,13 @@ describe('auth0 plugin', () => {
   beforeAll(async () => {
     server = require('fastify')()
 
-    server.register(require('../../plugins/auth0'), {
+    server.register(require('.'), {
       jwt: {
         secret: 'That1Super_Secret'
       }
     })
 
-    server.register(require('.'), {
+    server.register(require('./auth0-routes.js'), {
       auth0: {
         domain,
         clientId,
