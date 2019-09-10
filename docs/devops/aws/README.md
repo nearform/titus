@@ -10,53 +10,53 @@ And that would trigger a propagation of the dev image into the production / stag
 
 ## Setup the EKS environment.
 
-1. Once you have your AWS account, install AWS CLI and configure you AWS profile, [as explaind here][noise-aws-setup].
+1. Once you have your AWS account, install AWS CLI and configure you AWS profile, [as explaind here][taurus-aws-setup].
 
-1. Make sure you have your management environment setup in accordance to the Noise documnentation. See: [Setup Local management env][noise-local-setup]
+1. Make sure you have your management environment setup in accordance to the Taurus documnentation. See: [Setup Local management env][taurus-local-setup]
 
 1. Clone [titus-infra-aws] to a new folder
    ```sh
    git clone git@github.com:nearform/titus-infra-aws.git
    ```
 
-1. Clone [Noise] to a new folder either
+1. Clone [Taurus] to a new folder either
    ```sh
-   git clone git@github.com:nearform/noise.git
+   git clone git@github.com:nearform/taurus.git
    ```
 
-1. Add a symlink to noise inside titus-infra-aws
+1. Add a symlink to taurus inside titus-infra-aws
   ```sh
   cd titus-infra-aws
-  ln -s ../noise
+  ln -s ../taurus
   ```
 
-1. Create an S3 bucket in accordance to Noise instructions found here: [Create an S3 bucket for terraform state][noise-state-bucket].
+1. Create an S3 bucket in accordance to Taurus instructions found here: [Create an S3 bucket for terraform state][taurus-state-bucket].
   **You only need to create the bucket, don't run terraform steps**.
 
 1. Edit the `titus-infra-aws/main.tf` file:
   ```yaml
   provider "aws" {
     region     = "eu-west-1" # Set appropriate region
-    profile    = "noise"     # Set same name as your local environment
+    profile    = "taurus"     # Set same name as your local environment
   }
 
   terraform {
     backend "s3" {
-      bucket  = "titus-noise-terraform-state" # Change for the name of the bucket you created
+      bucket  = "titus-taurus-terraform-state" # Change for the name of the bucket you created
       region  = "eu-west-1"                   # Set appropriate region
       ...
     }
   }
 
-  module "noise" {
+  module "taurus" {
     aws_region = "eu-west-1"                  # Set appropriate region
-    project_name = "titus-noise"              # Change according to your project
+    project_name = "titus-taurus"              # Change according to your project
     ...
   }
 
   resource "aws_s3_bucket" "b" {
-    region = "eu-west-1"         # Set appropriate region 
-    ...   
+    region = "eu-west-1"         # Set appropriate region
+    ...
   }
   ```
 
@@ -68,7 +68,7 @@ And that would trigger a propagation of the dev image into the production / stag
 
 1. Install K8s controller configuration locally (change name according to your project :
   ```sh
-  aws eks update-kubeconfig --name titus-noise
+  aws eks update-kubeconfig --name titus-taurus
   ```
 
 
@@ -85,7 +85,7 @@ And that would trigger a propagation of the dev image into the production / stag
     name: "titus-dev"                  # Change according to your project
     host: "titus-preprod.nearform.com" # Provide a DNS host you manage and that has a CNAME in AWS Route53
     ...
-  ``` 
+  ```
 
 1. perform similar changes in `titus-starter-kit/values.prod.yaml` for your production environement
 
@@ -140,10 +140,10 @@ Just Commit your changes, push them, and let the magic be!
 
 
 [CircleCI]: https://circleci.com
-[Noise]: https://nearform.github.io/noise
-[noise-aws-setup]: https://nearform.github.io/noise/#/setup-local/?id=for-aws
-[noise-local-setup]: https://nearform.github.io/noise/#/setup-local/?id=install-dependencies
-[noise-state-bucket]: https://nearform.github.io/noise/#/providers/aws/?id=create-an-s3-bucket-for-terraform-state
+[Taurus]: https://nf-taurus.netlify.com
+[taurus-aws-setup]: https://nf-taurus.netlify.com/#/setup-local/?id=for-aws
+[taurus-local-setup]: https://nf-taurus.netlify.com/#/setup-local/?id=install-dependencies
+[taurus-state-bucket]: https://nf-taurus.netlify.com/#/providers/aws/?id=create-an-s3-bucket-for-terraform-state
 [titus-infra-aws]: https://github.com/nearform/titus-infra-aws
 [titus-deploy]: https://github.com/nearform/titus-deploy
 [titus]: https://github.com/nearform/titus
