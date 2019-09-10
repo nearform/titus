@@ -4,7 +4,7 @@
 
 Titus is easy to install and run. We encourage developers to install Titus locally themselves - it should feel easy to navigate around, start and stop. Before we go further however, let's ensure you have all of the prerequisites installed.
 
-You will need the latest stable versions of [Node], and [Docker]. Both of these should be trivial to install and do not require any special setup. There are other tools to install for deployment purposes, these will be covered later in the [DevOps] section of this documentation.
+You will need the latest stable versions of [Node], [npm], and [Docker]. Both of these should be trivial to install and do not require any special setup. There are other tools to install for deployment purposes, these will be covered later in the [DevOps] section of this documentation.
 
 ## Clone the source repo
 To kick everything off, fork [Titus] on Github, it will be easier to maintain your own fork as Titus is designed to diverge, it is unlikely you will need to pull from the source repository again outside of some minor cherry-picking.
@@ -118,8 +118,9 @@ Both frontend and backend starter kits have linting and testing built in and as 
 
 
 <!-- External Links -->
-[Docker]: hhttps://docs.docker.com/install/#supported-platforms
+[Docker]: https://docs.docker.com/install/#supported-platforms
 [Node]: https://nodejs.org/en/
+[npm]: https://www.npmjs.com/get-npm
 [Titus]: https://github.com/nearform/titus
 [webpack-dev-server]: https://webpack.js.org/configuration/dev-server
 [Nodemon]: https://nodemon.io

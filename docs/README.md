@@ -36,7 +36,7 @@ Perhaps the most important feature of Titus is its simplicity. There are no CSS 
 We understand these things vary from project to project, so we get out of your way and let you make those decisions. We just make sure you can build and deploy those decisions with ease.
 
 ## Explore Titus
-The quickest way to get exploring is to view our Quick Start Guide. It covers forking, cloning and pulling Titus locally. It takes you through configuration and the local deployment to Docker. All you need installed are the latest stable versions of both [Docker] and [Node].
+The quickest way to get exploring is to view our Quick Start Guide. It covers forking, cloning and pulling Titus locally. It takes you through configuration and the local deployment to Docker. All you need installed are the latest stable versions of  [Docker], [Node], and [npm].
 
 - Go to the [Quick Start] Guide.
 
@@ -49,6 +49,7 @@ The quickest way to get exploring is to view our Quick Start Guide. It covers fo
 [Kubernetes]:  https://kubernetes.io/
 [Docker]: https://docs.docker.com/install/#supported-platforms
 [Node]: https://nodejs.org/en/
+[npm]: https://www.npmjs.com/get-npm
 [AWS]: https://aws.amazon.com/
 [Azure]: https://azure.microsoft.com
 [Azure Pipelines]: https://azure.microsoft.com/en-us/services/devops/pipelines/
