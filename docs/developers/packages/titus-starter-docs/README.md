@@ -1,8 +1,9 @@
 # Titus Documentation Starter Kit
 
-This document describes how to install and run the documentation that is included in Titus. The documentation can be run locally or online. 
+This document describes how to install and run the documentation kit that is included in Titus. The documentation can run locally or online. 
 
 ## Features
+The documentation kit includes the following features:
 
 * Easy to use Markdown documentation
 * Includes a user-friendly theme
@@ -12,13 +13,13 @@ This document describes how to install and run the documentation that is include
 
 
 ## Installation
-For a given repo or location, copy the titus-starter-package and rename it `docs`. 
-You can move the renamed folder to where you want your documentation to be within the repo.
+For a given repository or location, copy the titus-starter-package and rename it `docs`. 
+You can move the renamed folder to where you want your documentation to be within the repository.
 
 The documentation pulls in its dependencies via the browser when it runs. Therefore, it requires an internet connection to run. Alternatively, you can copy the dependencies listed in the file `index.html` locally and link to the local versions. **Note**, this means you also need to deploy these dependencies for the documentation to work in a hosted environment.
 
-## Running Locally
-Documentation is ran by serving the docs folder at a given port. 
+## Run Locally
+To run the documentation locally, serve the docs folder at a given port as shown: 
 
 ```sh
 > titus@x.y.z doc:serve /path/to/your/repo/titus
@@ -54,10 +55,10 @@ If you moved `packages/titus-start-docs` to the root folder and renamed it `docs
 npm run doc:serve
 ```
 
-#### Serving in Other Ways
-Our documentation builds on the fly. This means all you need to do is serve the docs folder. Any program or CLI tool used for serving a folder will work; __as long as it can handle hash routing__.
+#### Serve the Documentation in Other Ways
+Our documentation builds on the fly. This means all you need to do is serve the 'docs' folder. Any program or CLI tool used to serve a folder works; __as long as it can handle hash routing__.
 
-Another popular module for serving files is using `serve` on npm. This can be done, with hash router support, as follows:
+Another popular module to serve files is using `serve` on npm. To do this, with hash router support, use the command:
 
 ```sh
 npx serve -s -l 4000 .
@@ -76,7 +77,7 @@ Copied local address to clipboard!
 
 The documentation is served on `localhost:4000` in this case.
 
-## Running Documents Online
+## Run Documents Online
 Documents can be deployed to any host that supports hash routing. This includes GitHub Pages, Serve and Commons Host. For ease of use, the Titus documents are deployed to GitHub Pages.
 
 
