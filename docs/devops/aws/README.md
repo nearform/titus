@@ -1,17 +1,17 @@
 # AWS Provider
 
-To setup a Titus deployment on an [AWS] environment using [CircleCI] there is several steps to run perfrom. 
+To set up a Titus deployment on an [AWS] environment using [CircleCI], there are several steps to perform. 
 
-The current CircleCI configuration is set up so that the team work on branches that are commited to the master. At code freeze,
+The CircleCI configuration lets the team make changes on branches that are then commited to the master. At code freeze,
 the team release tag the current master that is also running in the development environment.
-That triggers a propagation of the development image to the production and staging environments.
+This triggers a propagation of the development image to the production and staging environments.
 
 
 ## Setup the EKS environment
 
 1. Once you have your AWS account, install AWS CLI and configure your AWS profile, [as explained here][noise-aws-setup].
 
-1. Make sure you have your management environment setup in accordance to the Noise documnentation. See: [Setup Local management env][noise-local-setup]
+1. Ensure your management environment is set up as described in the Noise documnentation. See: [Setup Local Management env][noise-local-setup]
 
 1. Clone [titus-infra-aws] to a new folder as follows:
    ```sh
@@ -27,8 +27,8 @@ That triggers a propagation of the development image to the production and stagi
    cd titus-infra-aws
    ln -s ../noise
    ```
-1. Create an S3 bucket in accordance to Noise instructions found here: [Create an S3 bucket for terraform state][noise-state-bucket].
-  **Note:** You only need to create the bucket, you do not run the Terraform steps.
+1. Create an S3 bucket as described in the Noise instructions found here: [Create an S3 bucket for terraform state][noise-state-bucket].
+  **Note:** You need to create the bucket only, you do not run the Terraform steps.
 
 1. Edit the `titus-infra-aws/main.tf` file:
     ```yaml
@@ -59,7 +59,7 @@ That triggers a propagation of the development image to the production and stagi
 1. Initialise Terraform using the command: 
   `terraform init`
 
-1. Run the command: `terraform plan` . The output indicates 90+ resources were created.
+1. Run the command: `terraform plan` . The output indicates 90+ resources are created.
 
 1. Run the command: `terraform apply` .Type 'yes' when prompted.
 
@@ -77,12 +77,12 @@ That triggers a propagation of the development image to the production and stagi
    ```
 
 1. Edit the file `titus-starter-kit/values.dev.yaml` as follows:
-  ```yaml
-  env:
-    name: "titus-dev"                  # Change according to your project
-    host: "titus-preprod.nearform.com" # Provide a DNS host you manage and that has a CNAME in AWS Route53
-    ...
-  ``` 
+   ```yaml
+   env:
+     name: "titus-dev"                  # Change according to your project
+     host: "titus-preprod.nearform.com" # Provide a DNS host you manage and that has a CNAME in AWS Route53
+     ...
+   ``` 
 
 1. Perform similar changes in the file `titus-starter-kit/values.prod.yaml` for your production environment.
 
@@ -91,19 +91,19 @@ That triggers a propagation of the development image to the production and stagi
 1. Read through the [titus-secret/README.md](https://github.com/nearform/titus-deploy/tree/master/titus-secrets) provided in the Helm chart as it explains the process of creating and maintaining your secrets. And keep them a secret.
 
 1. Install the secrets Helm chart as follows:
-  ```sh
-  helm install titus-deploy/titus-secrets/helm-secrets
-  ```
+    ```sh
+    helm install titus-deploy/titus-secrets/helm-secrets
+    ```
 
 
 ## Configure CirclecI
 
-This assumes you've already forked the [titus] repository, and cloned it locally.
-```sh
-git clone git@github.com:your-name/titus.git
-```
+If you have not done previously, fork the [titus] repository, and clone it locally as follows:
+     ```sh
+     git clone git@github.com:your-name/titus.git
+     ```
 
-CircleCI will access and deploy it.
+CircleCI accesses and deploys it.
 
 1. _On CircleCI UI_, add your project by searching the project under `Add projects`.
   ![circle-add-project]
@@ -112,10 +112,10 @@ CircleCI will access and deploy it.
 
 1. For CircleCI to access your titus-deploy fork, in CircleCI titus project settings:
   - select `Permissions` > `Checkout SSH keys`
-  - in `Add user key`, click on `Create and add user key` 
+  - in `Add user key`, click `Create and add user key` 
   - Authenticate with Github (if not done already), and complete the operation
 
-1. Under CircleCI project environment variables add the following:
+1. Edit the CircleCI project environment variables to add the following:
   - `AWS_ACCESS_KEY_ID`
   - `AWS_SECRET_ACCESS_KEY`
   - `AWS_DEFAULT_REGION`: AWS region hosting the infrastructure
