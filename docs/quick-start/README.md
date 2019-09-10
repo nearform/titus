@@ -104,9 +104,9 @@ npm run docker:dev:rmi
 ### Linting and Testing
 Linting and testing can be ran can across the stack by running `npm run <command>` in the root of the repo; where command can be one of:
 
-- `lint:all`
+- `npm run lint:all`
   - Runs the `lint` command in each package that has one
-- `test:all`
+- `npm run test:all`
   - Runs the `test` command in each package that has one
 
 Both frontend and backend starter kits have linting and testing built in and as such should run green in both cases by default, and red should any change violate the included rules.
@@ -128,7 +128,7 @@ Both frontend and backend starter kits have linting and testing built in and as 
 <!-- Internal Links -->
 [DevOps]: devops/
 [Developers]: developers/
-[DevelopersBe]: developers/packages/titus-backend
+[DevelopersBe]: developers/?id=backend-kit
 
 
 <!-- Images -->
