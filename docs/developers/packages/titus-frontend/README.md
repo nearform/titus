@@ -1,6 +1,6 @@
 # Titus Frontend
 
-Titus frontend is a [React] application with routing and minimalist login components. This section describes Titus frontend, and how to install, configure, run, test and build your frontend application.
+Titus frontend is a [React] application with routing and minimalist login components. This section describes Titus frontend and how to install, configure, run, test and build your frontend application.
 
 ## Features
 Titus frontend consists of the following: 
@@ -42,12 +42,12 @@ Once logged in, a token is stored in the local storage, and it grants access to 
 ### Titus-backend Provider
 
 If you have an Auth0 application configured, you can use the titus-backend login endpoint to authenticate users.
-In this authenication is performed as follows:
-- users provide valid Auth0 credentials
+In this case, authenication is performed as follows:
+- provide your valid Auth0 credentials
 - the credentials are passed to titus-backend
 - titus-backend validates them against Auth0
 - when successful, titus-backend returns authentication data to the provider
-- the provider gets the details, stores them in local storage, and grants access to dashboard
+- provider stores the details in local storage, and grants access to dashboard
 
 To enable it, do the following:
 1. Provide Auth0 details in the titus-backend `.env` file (`AUTH0_*` variables)
@@ -61,11 +61,11 @@ To enable it, do the following:
 
 If you have an Auth0 application configured, you can use [Auth0 Universal Login][auth0-login].
 In this situation:
-- users click on titus "Login Through Auth0" button
-- they are redirected to Auth0 login page
-- they provide their credentials
-- they are redirected titus login page, with authentication data in the url
-- the provider get the details, store them in local storage, and grant access to dashboard
+- click on Titus "Login Through Auth0" button
+- you are redirected to Auth0 login page
+- provide your credentials
+- you are redirected Titus login page, with authentication data in the URL
+- the provider stores the details in local storage and grants access to dashboard
 
 To enable it, do the following:
 1. Provide Auth0 details in the titus-frontend `.env` file (`REACT_APP_AUTH0_*` variables)
@@ -83,10 +83,10 @@ To install Titus frontend, run the following command:
 npm install
 ```
 
-But it was covered when you ran `npm install` at root level ;)
+Note The Titus frontend is automatically installed if you previously ran npm install at root level.
 
 
-## Running Locally
+## Run Locally
 To run your application locally, perform the following steps:
 
 1. Edit your configuration as follows:
@@ -107,8 +107,8 @@ To run your application locally, perform the following steps:
   Open a browser and navigate to `localhost:3000`.
 
 
-## Testing and Linting
-The following commands can be used for testing and linting your application:
+## Test and Lint
+The following commands can be used to test and lint your application:
 
 * `npm test` - run all the tests with code coverage (it's the command CI is using).
 * `npm run test:watch` - start Jest in watch mode: run tests against the modified files (since last commit), and automatically runs them again if you change the code.
