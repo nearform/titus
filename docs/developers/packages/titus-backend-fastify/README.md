@@ -35,7 +35,7 @@ Titus backend is structured as follows:
 ### Auth0 Plugin
 
 The Auth0 plugin declares a `POST /login` route, which expects a JSON body with `username` and `password` keys.
-These values are passed to [Auth0] and if authentication succeeds, you get a [jwt] in return, that your application should store.
+These values are passed to [Auth0] and if authentication succeeds, you get a [jwt] in return that your application should store.
 
 It also declares a fastify authentication [strategy] named `jwt`. Use this in the route you would like to protect.
 Accessing these routes requires a valid jwt value in the `Authorization` HTTP header.
@@ -65,7 +65,7 @@ npm install
 
 
 
-## Running Locally
+## Run Locally
 To run your application locally, perform the following steps:
 
 1. Edit your configuration
@@ -91,8 +91,8 @@ To run your application locally, perform the following steps:
   Verify your application works and can reach the database using the command `curl http://127.0.0.1:5000/healthcheck`.
 
 
-## Testing and Linting
-The following commands can be used for testing and linting your application:
+## Test and Lint
+The following commands can be used to test and lint your application:
 
 * `npm test` - run all the tests with code coverage (this is the command CI uses)
 * `npm run test:watch` - start Jest in watch mode: it runs tests against the modified files (since last commit), and automatically runs them again if you change the code.
