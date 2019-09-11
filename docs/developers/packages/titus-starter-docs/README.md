@@ -2,7 +2,7 @@
 
 A documentation starter kit that is easy to use and run.
 
-## Features
+# Features
 
 * Easy to use markdown documentation
 * Nice easy to read and use theme included
@@ -10,13 +10,13 @@ A documentation starter kit that is easy to use and run.
 * Ready to add content, just copy and rename!
 * Supports svg images for nice diagramming
 
-## Installation
+# Installation
 For a given repo or location, copy the titus-starter-package and rename it `docs`; move this folder to where you want your documentation to live.
 
 The documentation pulls in its dependencies via the browser when it runs, this means it will require internet connection to run. This can be avoided by copying the linked dependencies in `index.html` locally and linking to the local versions. Note, this means you will also need to deploy these dependencies for documentation to work in a hosted environment.
 
-## Running Locally
-Documentation can be ran by serving the docs folder at a given port. 
+# Running Locally
+Documentation can be ran by serving the docs folder at a given port.
 
 Which will produce:
 
@@ -46,12 +46,12 @@ Listening at http://localhost:4000
 
 The documentation will be served on `localhost:4000`.
 
-Assuming you moved `packages/titus-start-docs` to root folder and renamed it `docs`, you could also use: 
+Assuming you moved `packages/titus-start-docs` to root folder and renamed it `docs`, you could also use:
 ```sh
 npm run doc:serve
 ```
 
-#### Serving in other ways
+### Serving in other ways
 Our documentation builds on the fly. This means all you need to do is serve the docs folder. Any program or cli tool used for serving a folder will work; __as long as it can handle hash routing__.
 
 Another popular module for serving files is `serve` on npm. This can be ran, with hash router support like so:
@@ -62,7 +62,7 @@ npx serve -s -l 4000 .
 
 Which will produce:
 
-```sh 
+```sh
 Serving!
 
 Local:  http://localhost:4000
@@ -73,7 +73,7 @@ Copied local address to clipboard!
 
 The documentation will be served on `localhost:4000` in this case.
 
-## Running online
+# Running online
 Docs can be deployed to any host that supports hash routing. This includes Github Pages, Serve, and Commons Host. For ease of use, the docs for Titus themselves are deployed to Github Pages.
 
 

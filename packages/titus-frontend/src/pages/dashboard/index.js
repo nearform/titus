@@ -24,7 +24,7 @@ const Dashboard = () => (
           deployed to all major cloud providers.
         </p>
         <a
-          href="https://nearform.github.io/titus"
+          href="https://nf-titus.netlify.com/"
           rel="noopener noreferrer"
           target="_blank"
         >
