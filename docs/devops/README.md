@@ -19,13 +19,13 @@ Titus makes use of [Taurus] which is a Terraform plugin that that understands ho
 The exact nature of how to set up infrastructure varies from provider to provider, so is broken down into provider specific guides below. Note, you will need to be proficient with your chosen provider as well as in Terraform. The guides below are not suitable to learn either.
 
 
-## Deployment on AWS using CircleCI
+## AWS Deployment using CircleCI
 Services are deployed using [CircleCI] which runs [Helm] to handle service updates to the running cluster.
 
 - [Detailed walk through](devops/aws/)
 
 
-## Deployment on Azure using Pipelines
+## Azure Deployment using Pipelines
 Azure documentation will follow once we have an Azure pipelines file in place.
 
 Stay tuned!
