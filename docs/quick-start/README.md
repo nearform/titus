@@ -6,7 +6,7 @@ Titus is easy to install and run. We encourage developers to install Titus local
 
 You will need the latest stable versions of [Node], [npm], and [Docker]. Both of these should be trivial to install and do not require any special setup. There are other tools to install for deployment purposes, these will be covered later in the [DevOps] section of this documentation.
 
-## Clone the source repo
+# Clone the source repo
 To kick everything off, fork [Titus] on Github, it will be easier to maintain your own fork as Titus is designed to diverge, it is unlikely you will need to pull from the source repository again outside of some minor cherry-picking.
 
 Once you have your fork, clone a copy of it locally:
@@ -15,7 +15,7 @@ Once you have your fork, clone a copy of it locally:
 git clone https://github.com/<your-fork>/titus.git
 ```
 
-## Install dependencies
+# Install dependencies
 While in the root folder of the project, run the following npm command:
 
 ```sh
@@ -24,7 +24,7 @@ npm install
 
 Dependencies are installed for all constituent parts of the repository.
 
-## Configure the environment
+# Configure the environment
 Titus uses `.env` files in each package to control various configuration. In all cases there are `.sample.env` files documenting what values should be in the `.env` file proper.
 
 However, before the stack can be ran, the actual `.env` files need to be created and populated. A convenience script exists to automate this process.
@@ -37,7 +37,7 @@ npm run create:env
 
 You can read more about configuring the environment in our documentation [Developers][DevelopersBe] section .
 
-## Running the stack
+# Running the stack
 Titus runs your application locally, leveraging docker for external services such as database.
 We take advantage of Lerna shortcuts to start all the packages in a row.
 Our packages support hot-reloading thanks to [Webpack dev server][webpack-dev-server] (for titus-frontend) and [Nodemon] (for titus-backend).
@@ -59,7 +59,7 @@ e553c840fbdc        postgres:10.4-alpine          titus-db
 
 Congratulations! You are now running titus locally. Check the `docker-compose.yml` file in the root of the repository for specifics of what is running in docker and how it is composed.
 
-### Logging in
+## Logging in
 The running application can be accessed at `localhost:3000` in any modern web browser. First access will require you to log into the system:
 
 ![x](../img/titus-login.png)
@@ -71,7 +71,7 @@ the splash page for Titus:
 
 The splash screen will link you back to the documentation (here) should you not have started from the titus site. Note that you can also log out of the system on the splash screen.
 
-### Manipulating the  running stack
+## Manipulating the  running stack
 A number of useful commands for manipulating the running docker stack have been included as easy to run scripts. These can be ran by running `npm run <command>` in the root of the repo; where command is:
 
 - `npm run docker:dev:create-volume` - runs `docker volume create` to create a data volume with name `titus-pg-data`
@@ -88,7 +88,7 @@ npm run start:all
 npm run docker:dev:logs
 ```
 
-### Stopping the stack
+## Stopping the stack
 You can can also stop the stack by running:
 
 ```sh
@@ -101,7 +101,7 @@ While this command will stop the system it will not delete the stack containers 
 npm run docker:dev:rmi
 ```
 
-### Linting and Testing
+## Linting and Testing
 Linting and testing can be ran can across the stack by running `npm run <command>` in the root of the repo; where command can be one of:
 
 - `npm run lint:all`
@@ -111,7 +111,7 @@ Linting and testing can be ran can across the stack by running `npm run <command
 
 Both frontend and backend starter kits have linting and testing built in and as such should run green in both cases by default, and red should any change violate the included rules.
 
-## Next steps
+# Next steps
 
 - Deep dive into our documentation for [Developers].
 - See our detailed [DevOps] documentation.

@@ -33,6 +33,6 @@ If everything is correct, you should be able to interact with the cluster:
 kubectl get nodes
 ```
 
-## Deploying new versions
+# Deploying new versions
 
 Deployment of new versions is done by upgrading the Helm chart as standard and you can replace the values [here](./helm/values.yaml) to customize it.

@@ -8,7 +8,7 @@ the team would release tag the current master that also would be running in the 
 And that would trigger a propagation of the dev image into the production / staging environment.
 
 
-## Setup the EKS environment.
+# Setup the EKS environment.
 
 1. Once you have your AWS account, install AWS CLI and configure you AWS profile, [as explaind here][taurus-aws-setup].
 
@@ -72,7 +72,7 @@ And that would trigger a propagation of the dev image into the production / stag
   ```
 
 
-## Customize your infrastructure
+# Customize your infrastructure
 
 1. Fork [titus-deploy] repository on github, and clone it
    ```sh
@@ -99,7 +99,7 @@ And that would trigger a propagation of the dev image into the production / stag
   ```
 
 
-## Configure CirclecI
+# Configure CirclecI
 
 This assumes you've already forked [titus] repository, and cloned it locally.
 ```sh
@@ -134,7 +134,7 @@ CircleCI will access and deploy it.
   - `AWS_EKS_REGION`: AWS region hosting the infrastructure
 
 
-#### First deploy
+### First deploy
 
 Just Commit your changes, push them, and let the magic be!
 

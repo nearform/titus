@@ -41,8 +41,8 @@ Titus includes a fully featured, production ready, CI Pipeline. Titus uses Circl
 
 ## Guides
 
-- [Adding a new service or app helm chart](devops/helm-chart.md)
-- [CI Pipeline Guide](devops/ci-pipeline.md)
+- [Adding a new service or app helm chart](devops/helm-chart/)
+- [CI Pipeline Guide](devops/ci-pipeline/)
 
 
 [CircleCI]: https://circleci.com
