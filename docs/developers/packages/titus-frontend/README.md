@@ -138,6 +138,7 @@ which will produce a new bundle in `build/` folder.
 [Enzyme]: https://airbnb.io/enzyme
 [ESLint]: https://eslint.org
 [Prettier]: https://prettier.io
+[Standard]: https://standardjs.com/
 [Auth0]: https://auth0.com
 [Lighthouse]: https://developers.google.com/web/tools/lighthouse
 [Storybook]: https://storybook.js.org
