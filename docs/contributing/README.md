@@ -1,13 +1,13 @@
 # Contributing
 
-## Code
+# Code
 To follow...
 
-## Documentation
+# Documentation
 We welcome documentation contributions. Our documentation can be viewed live at [nearform.github.io/titus][docs]
 
-### Running Documentation locally
-Our documentation can be ran by serving the docs folder at a given port. 
+## Running Documentation locally
+Our documentation can be ran by serving the docs folder at a given port.
 For ease of use you can use the `docsfiy-cli` should you have node installed.
 
 From the root folder:
@@ -27,7 +27,7 @@ Listening at http://localhost:4000
 
 The documentation will be served on `localhost:4000`.
 
-#### Serving in other ways
+### Serving in other ways
 Our documentation builds on the fly. This means all you need to do is serve the docs folder. Any program or cli tool used for serving a folder will work; __as long as it can handle hash routing__.
 
 Another popular module for serving files is `serve` on npm. This can be ran, with hash router support like so:
@@ -38,7 +38,7 @@ npx serve -s -l 4000 docs
 
 Which will produce:
 
-```sh 
+```sh
 ┌──────────────────────────────────────────────────┐
 │                                                  │
 │   Serving!                                       │
