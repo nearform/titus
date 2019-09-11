@@ -61,7 +61,7 @@ To enable it, do the following:
 
 If you have an Auth0 application configured, you can use [Auth0 Universal Login][auth0-login].
 In this situation:
-- click on Titus "Login Through Auth0" button
+- click on the **Login Through Auth0** button
 - you are redirected to Auth0 login page
 - provide your credentials
 - you are redirected Titus login page, with authentication data in the URL
