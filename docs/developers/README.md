@@ -82,7 +82,7 @@ Titus includes a preconfigured instance of PostgreSQL.
 
 When PostgreSQL is used with __titus-backend__, migrations (powered by [postgrator]) and seeding support can be taken advantage of. 
 
-Locally Titus uses Docker Compose and Docker Volumes to handle the database. When running on a cloud provider, the included relation database service is used.
+Locally Titus uses Docker Compose and Docker Volumes to run and manage the database. When running on a cloud provider, the included relational database service is used.
 
 - [More information](starter-docs)
 
