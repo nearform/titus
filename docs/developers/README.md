@@ -17,12 +17,16 @@ With Titus we ensure the developer experience accelerates the speed at which dev
 
 In our documentation you will find the decision results using the guidelines above. Rather than list each choice, we include external links to all the tools and libraries. Where appropriate, we explain decisions in more detail.
 
-## Packages
-Titus includes just what's needed out of the box. Each package has a minimal complement of features and technology inclusions. In all cases we chose packages that worked successfully for us in real production software. Titus provides just enough of everything to be deployment ready, without locking developers into feature-level technology decisions.
+## Kits
+Titus includes just what's needed out of the box. Each kit has a minimal complement of features and technology inclusions. In all cases we chose kits that work successfully for us in real production software. Titus provides just enough of everything to be deployment ready, without locking developers into feature-level technology decisions.
 
-Packages are managed with [Lerna] so you can add more packages and also manage their interdependencies.
+Kits are managed with [Lerna] so you can add more packages and also manage their interdependencies.
+Titus includes the following kits:
+* Frontend Kit
+* Backend Kit
+* Starter Docs Kit
 
-All packages we provide include:
+All kits we provide include:
 - [Jest] for testing
 - [ESLint] code linter and [Prettier] code formatter
 - testing libraries, such as [nock] or [faker]
