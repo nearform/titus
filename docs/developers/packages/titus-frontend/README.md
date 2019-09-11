@@ -83,7 +83,7 @@ To install Titus frontend, run the following command:
 npm install
 ```
 
-Note The Titus frontend is automatically installed if you previously ran npm install at root level.
+Note The Titus frontend is automatically installed if you previously ran `npm install` at root level.
 
 
 ## Run Locally
