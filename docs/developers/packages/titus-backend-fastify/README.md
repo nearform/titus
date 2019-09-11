@@ -35,7 +35,7 @@ Titus backend is structured as follows:
 ### Auth0 Plugin
 
 The Auth0 plugin declares a `POST /login` route, which expects a JSON body with `username` and `password` keys.
-These values are passed to [Auth0] and if authentication succeeds, you get a [jwt] in return that your application should store.
+These values are passed to [Auth0] and if authentication succeeds, you get a [jwt] in return that your application must store.
 
 It also declares a fastify authentication [strategy] named `jwt`. Use this in the route you would like to protect.
 Accessing these routes requires a valid jwt value in the `Authorization` HTTP header.
