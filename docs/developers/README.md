@@ -39,14 +39,6 @@ Because it runs with [webpack-dev-server], it supports hot rebuilding.
 
 - [More information](developers/packages/titus-frontend/)
 
-### Backend Kit
-The backend, __titus-backend__, is built on a [Hapi] server with [Pino], to make logging a treat.
-
-We also provide a plugin to instrument your routes with a [node-postgres] toolkit for easier interfacing with Postgres, and another plugin for enabling [Auth0] authentication with [JSON Web Tokens][jwt].
-
-[NodeMon] is used to power hot reloading on file changes when running locally, and make sure your application restarts due to uncaught exceptions or unhandled promises.
-
-- [More information](developers/packages/titus-backend/)
 
 ### Backend Kit (Fastify)
 The backend, __titus-backend-fastify__, is built on [Fastify] server with [Pino], to make logging a treat.
