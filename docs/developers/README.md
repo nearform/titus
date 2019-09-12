@@ -7,13 +7,13 @@ With Titus we ensure the developer experience is accelerated and enhanced. Titus
 
 - Providing a solution that is easy to use for both frontend and backend developers. It is designed to spin up your application locally, without compromising on developer tools.
 
-- Including commands for linting, testing, running and stopping your application should. Commands to support local manipulation, spinning up and tearing down of the system are also included and documented.
+- Including commands for linting, testing, running and stopping your application. Commands to support local manipulation, spinning up and tearing down of the system are also included and documented.
 
 - Including a complete CI solution that builds assets, lints and runs tests, produces production ready containers, and supports deployment via Helm.
 
 - Letting you select technologies, such as CSS frameworks or data management libraries, of your own choice. Titus is lean and opinionated enough to be reusable and reduce complexity. 
 
-- Including documentation for projects and modules that vital to ensure knowledge sharing. Markdown is now an industry standard and can produce easy-to-host static sites.
+- Including documentation for projects and modules is vital to ensure knowledge sharing. Markdown is an industry standard and can produce easy-to-host static sites.
 
 Our documentation includes details on how to install, configure and deploy an application using Titus. We also include external links to all the tools and libraries used with Titus.
 
@@ -43,16 +43,16 @@ Because it runs with [webpack-dev-server], it supports hot rebuilding.
 ### Backend Kit (Fastify)
 The backend, __titus-backend-fastify__, is built on [Fastify] server with [Pino], to make logging a treat.
 
-We also provide a plugin to instrument your routes with a [node-postgres] toolkit for easier interfacing with Postgres, and another plugin for enabling [Auth0] authentication with [JSON Web Tokens][jwt].
+We also provide a plugin to instrument your routes with a [node-postgres] toolkit for easier interfacing with PostgreSQL, and another plugin for enabling [Auth0] authentication with [JSON Web Tokens][jwt].
 
-[NodeMon] is used to power hot reloading on file changes when running locally, and make sure your application restarts due to uncaught exceptions or unhandled promises.
+[NodeMon] is used to power hot reloading on file changes when running locally, and ensures your application restarts due to uncaught exceptions or unhandled promises.
 
 - [More information](developers/packages/titus-backend-fastify/)
 
 ### Documentation Kit
 Titus includes a documentation kit, __titus-starter-docs__, so you can document your application.
 
-This package is GitHub Pages and CDN (Content Delvery Network) friendly and can be hosted in the folder of a given repo without the need to include dependencies solely to support documentation. 
+This kit is GitHub Pages and CDN (Content Delvery Network) friendly and can be hosted in the folder of a given repo without the need to include dependencies solely to support documentation. 
 
 Documents are powered by [docsify] which has no in-repo dependencies, and provides hot reloading when editing the documents.
 
@@ -79,7 +79,7 @@ Locally Titus uses Docker Compose and Docker Volumes to run and manage the datab
 - [More information](starter-docs)
 
 ### Auth via Auth0
-Logging in is usually the first feature you want to see. Titus is preconfigured for Auth0.
+Logging in is usually the first feature you want to see when you run your application. Titus is preconfigured for Auth0.
 
 - [More information](starter-docs)
 
