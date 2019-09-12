@@ -9,7 +9,7 @@
 [![CircleCI][ci-badge]][ci-link]
 [![Lerna][lerna-badge]][lerna-link]
 
-Titus is a production grade, end-to-end stack for modern web application development. It includes DevOps and auth preconfigured. Titus is a reusable kit that gets your application deployed with minimum effort.
+Titus is a production grade, end-to-end stack for modern web application development. It includes DevOps and authentication preconfigured. Titus is a reusable kit that deploys your application with minimum effort.
 
 - To get the full picture, view our __[Documentation][docs]__
 
