@@ -1,21 +1,21 @@
 ![titus-developers-quote]
 
 # Developers
-A large factor in the success of a project rests in the ability of its developers to work unimpeded. Often, tooling for building and running a given stack locally can reduce productivity.
+A large factor in the success of a project rests in the ability of its developers to work unimpeded. Often, tooling for building and running a given stack locally reduces productivity.
 
-With Titus we ensure the developer experience accelerates the speed at which developers work. We do this by following the guidelines below:
+With Titus we ensure the developer experience is accelerated and enhanced. Titus does this by:
 
-- Local development should be easy for both frontend and backend developers. They should have an easy solution to spin up the application locally, without giving up on developer tools.
+- Providing a solution that is easy to use for both frontend and backend developers. It is designed to spin up your application locally, without compromising on developer tools.
 
-- Commands for linting, testing, running and stopping your application should be included. Commands to support local manipulation, spinning up and tearing down of the system should be included and documented.
+- Including commands for linting, testing, running and stopping your application should. Commands to support local manipulation, spinning up and tearing down of the system are also included and documented.
 
-- Selecting technologies, such as CSS frameworks or data management libraries, is your own choice. Titus is lean and opinionated enough to be reusable and reduce complexity. It does not stand in your way.
+- Including a complete CI solution that builds assets, lints and runs tests, produces production ready containers, and supports deployment via Helm.
 
-- A complete CI solution should be included that can build assets, lint and run tests, produce production ready containers, and support deployment via Helm.
+- Letting you select technologies, such as CSS frameworks or data management libraries, of your own choice. Titus is lean and opinionated enough to be reusable and reduce complexity. 
 
-- Documentation for projects and modules is of vital importance to ensure knowledge sharing. Markdown is now an industry standard and can produce easy-to-host static sites.
+- Including documentation for projects and modules that vital to ensure knowledge sharing. Markdown is now an industry standard and can produce easy-to-host static sites.
 
-In our documentation you will find the decision results using the guidelines above. Rather than list each choice, we include external links to all the tools and libraries. Where appropriate, we explain decisions in more detail.
+Our documentation includes details on how to install, configure and deploy an application using Titus. We also include external links to all the tools and libraries used with Titus.
 
 ## Kits
 Titus includes just what's needed out of the box. Each kit has a minimal complement of features and technology inclusions. In all cases we chose kits that work successfully for us in real production software. Titus provides just enough of everything to be deployment ready, without locking developers into feature-level technology decisions.
@@ -24,7 +24,7 @@ Kits are managed with [Lerna] so you can add more packages and also manage their
 Titus includes the following kits:
 * Frontend Kit
 * Backend Kit
-* Starter Docs Kit
+* Documentation Kit
 
 All kits we provide include:
 - [Jest] for testing
@@ -49,8 +49,8 @@ We also provide a plugin to instrument your routes with a [node-postgres] toolki
 
 - [More information](developers/packages/titus-backend-fastify/)
 
-### Starter Docs Kit
-Titus includes a documentation starter kit, __titus-starter-docs__, so you can document your application.
+### Documentation Kit
+Titus includes a documentation kit, __titus-starter-docs__, so you can document your application.
 
 This package is GitHub Pages and CDN (Content Delvery Network) friendly and can be hosted in the folder of a given repo without the need to include dependencies solely to support documentation. 
 
@@ -72,14 +72,14 @@ As we use Dockerfile to bundle the packages, it's also possible run them locally
 ### PostgreSQL
 Titus includes a preconfigured instance of PostgreSQL. 
 
-When PostgreSQL is used with __titus-backend__, migrations (powered by [postgrator]) and seeding support can be taken advantage of. 
+When PostgreSQL is used with __titus-backend__, you can take advantage of migration (powered by [postgrator]) and seeding support. 
 
 Locally Titus uses Docker Compose and Docker Volumes to run and manage the database. When running on a cloud provider, the included relational database service is used.
 
 - [More information](starter-docs)
 
 ### Auth via Auth0
-Clients consider logging in as the first feature they want to see. Titus comes preconfigured for Auth0.
+Logging in is usually the first feature you want to see. Titus is preconfigured for Auth0.
 
 - [More information](starter-docs)
 
