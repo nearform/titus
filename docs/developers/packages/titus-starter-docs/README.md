@@ -1,4 +1,4 @@
-# Titus Documentation Starter Kit
+# Titus Documentation Kit
 
 This document describes how to install and run the documentation kit that is included in Titus. The documentation can run locally or online. 
 
