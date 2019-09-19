@@ -6,7 +6,7 @@
     - [AWS Deployment using CircleCI](/devops/?id=AWS-Deployment-using-CircleCI)
         - [Walk Through](/devops/aws/)
             - [Setup the EKS environment](/devops/aws/?id=setup-the-eks-environment)
-            - [Customize your infrastructure](/devops/aws/?id=customize-your-infrastructure)
+            - [Customise your infrastructure](/devops/aws/?id=customise-your-infrastructure)
             - [Configure CircleCI](/devops/aws/?id=configure-circleci)
     - [Azure Deployment using Pipelines](/devops/?id=Azure-Deployment-using-Pipelines)
     - [Apps & Services](/devops/?id=Apps-amp-Services)

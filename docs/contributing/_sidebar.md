@@ -3,5 +3,5 @@
 - [Developers](/developers/)
 - [DevOps](/devops/)
 - [Contributing](/contributing/)
-  - [Code](?id=code)
-  - [Documentation](?id=documentation)
+  - [Code](/contributing/?id=code)
+  - [Documentation](/contributing/?id=documentation)

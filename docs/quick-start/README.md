@@ -1,13 +1,13 @@
 ![quick-start-quote]
 
-# Quick start
+# Titus Quick Start
 
-Titus is easy to install and run. We encourage developers to install Titus locally themselves - it should feel easy to navigate around, start and stop. Before we go further however, let's ensure you have all of the prerequisites installed.
+Titus is easy to install and run. We encourage developers to install Titus locally themselves - it is easy to navigate, start and stop. Before starting, let's ensure you have all of the prerequisites installed.
 
-You will need the latest stable versions of [Node], [npm], and [Docker]. Both of these should be trivial to install and do not require any special setup. There are other tools to install for deployment purposes, these will be covered later in the [DevOps] section of this documentation.
+You need the latest stable versions of [Node], and [Docker]. Both of these are straightforward to install and do not require any special setup. There are other tools to install for deployment purposes, these are described in the [DevOps] section of this documentation.
 
-# Clone the source repo
-To kick everything off, fork [Titus] on Github, it will be easier to maintain your own fork as Titus is designed to diverge, it is unlikely you will need to pull from the source repository again outside of some minor cherry-picking.
+## Clone the Source Repository
+To start, fork [Titus] on Github. It is easier to maintain your own fork as Titus is designed to diverge. It is unlikely you will need to pull from the source repository again.
 
 Once you have your fork, clone a copy of it locally:
 
@@ -15,72 +15,71 @@ Once you have your fork, clone a copy of it locally:
 git clone https://github.com/<your-fork>/titus.git
 ```
 
-# Install dependencies
-While in the root folder of the project, run the following npm command:
+## Install Dependencies
+Change directory to the root folder of the project, and run the following npm command:
 
 ```sh
 npm install
 ```
 
-Dependencies are installed for all constituent parts of the repository.
+Dependencies are installed for all parts of the repository.
 
-# Configure the environment
-Titus uses `.env` files in each package to control various configuration. In all cases there are `.sample.env` files documenting what values should be in the `.env` file proper.
+## Configure the Environment
+Titus uses the `.env` files in each package to control various configurations. There are `.sample.env` files for each package, documenting sample values that can be used in each `.env` file.
 
-However, before the stack can be ran, the actual `.env` files need to be created and populated. A convenience script exists to automate this process.
-
-To generate a default set of `.env` files for all packages, run the following command in the root of the project:
+Before running the stack, generate a default set of `.env` files for all packages. o do this, run the following command in the root directory of the project:
 
 ```sh
 npm run create:env
 ```
 
-You can read more about configuring the environment in our documentation [Developers][DevelopersBe] section .
+You can read more about configuring the environment in the [Developers][DevelopersBe] section of our documentation.
 
-# Running the stack
-Titus runs your application locally, leveraging docker for external services such as database.
-We take advantage of Lerna shortcuts to start all the packages in a row.
-Our packages support hot-reloading thanks to [Webpack dev server][webpack-dev-server] (for titus-frontend) and [Nodemon] (for titus-backend).
+## Run the Stack
+Titus runs your application locally, leveraging Docker for external services such as a database.
+We take advantage of Lerna shortcuts to start all the packages in sequence.
+Our packages support hot reloading; using [Webpack dev server][webpack-dev-server] (for Titus frontend) and [NodeMon] (for Titus backend).
 
-Ensure Docker has started on your machine before running the stack. To run the full stack, in the root of the project, run:
+Ensure Docker has started on your machine before running the stack.
+To run the full stack, in the root of the project, run the command:
 
 ```sh
 npm run start:all
 ```
 
-Frontend and backend logs will be outputted to the console if you start the application with the command above.
+Frontend and backend logs are output to the console if you run the stack with the command above.
 
-Running the command `docker ps` will produce a log of the running set of containers, in our case just the Postgres database. It should look something like this:
+The command `docker ps` produces a log of the running set of containers, in our case, the Postgres database. For example:
 
 ```sh
 CONTAINER ID        IMAGE                         NAMES
 e553c840fbdc        postgres:10.4-alpine          titus-db
 ```
 
-Congratulations! You are now running titus locally. Check the `docker-compose.yml` file in the root of the repository for specifics of what is running in docker and how it is composed.
+Congratulations! You are now running Titus locally. You can check the `docker-compose.yml` file in the root of the repository for specifics of what is running in Docker.
 
-## Logging in
-The running application can be accessed at `localhost:3000` in any modern web browser. First access will require you to log into the system:
+### Log In
+The application is accessed at `localhost:3000` in a web browser. First access requires you to log in to the system:
 
 ![x](../img/titus-login.png)
 
-The login is set to accept any reasonable username and password. On successful login you will see
-the splash page for Titus:
+Enter a username and password. A minimum of 4 characters (including at least one letter or one number) is required for the password. On successful log in, the home page for Titus is displayed:
 
 ![x](../img/titus-home-page.png)
 
-The splash screen will link you back to the documentation (here) should you not have started from the titus site. Note that you can also log out of the system on the splash screen.
+The home page links you to the documentation (here), if you did not start from the Titus site.
+**Note** You can log out of the system from the home page.
 
-## Manipulating the  running stack
-A number of useful commands for manipulating the running docker stack have been included as easy to run scripts. These can be ran by running `npm run <command>` in the root of the repo; where command is:
+### Manipulate the Running Stack
+A number of useful commands for manipulating the running Docker stack are included with Titus as easy to run scripts. Use the command format `npm run <command>` in the root directory of the repository. For example:
 
 - `npm run docker:dev:create-volume` - runs `docker volume create` to create a data volume with name `titus-pg-data`
 - `npm run docker:dev:logs` - runs `docker-compose logs` and passes `-f` so they auto-tail
 - `npm run docker:dev:rmi` - runs `docker-compose down` but passes ` --rmi all` to tear down postgres fully
-- `npm run docker:dev:start` - first, runs `docker:dev:create-volume` to create a data volume, then `docker-compose up -d --build` to start Postgres locally in docker
+- `npm run docker:dev:start` - first, runs `docker:dev:create-volume` to create a data volume, then `docker-compose up -d --build` to start Postgres locally in Docker
 - `npm run docker:dev:stop` - Runs `docker-compose down` to spin down the running Postgres
 
-For example, to tear down the system, spin it back up and tail the logs, the commands would be:
+For example, to tear down the system, spin it back up and tail the logs, the commands are:
 
 ```sh
 npm run docker:dev:rmi
@@ -88,30 +87,28 @@ npm run start:all
 npm run docker:dev:logs
 ```
 
-## Stopping the stack
-You can can also stop the stack by running:
+### Stop the Stack
+You can stop the stack with the command:
 
 ```sh
 npm run stop:all
 ```
 
-While this command will stop the system it will not delete the stack containers or volumes. To delete the containers produced run:
+This command stops the system, but does not delete the stack containers or volumes. To delete the containers and volumes, run the command:
 
 ```sh
 npm run docker:dev:rmi
 ```
 
-## Linting and Testing
-Linting and testing can be ran can across the stack by running `npm run <command>` in the root of the repo; where command can be one of:
+### Linting and Testing
+To perform linting and testing across the stack, use the command format `npm run <command>` in the root directory of the repository. For example:
+- `npm run lint:all`- Runs the `lint` command in each package that has one
+- `npm run test:all`- Runs the `test` command in each package that has one
 
-- `npm run lint:all`
-  - Runs the `lint` command in each package that has one
-- `npm run test:all`
-  - Runs the `test` command in each package that has one
+Both frontend and backend starter kits have linting and testing built in and run green in both cases by default. If any changes break the included rules, the starter kit runs red.
 
-Both frontend and backend starter kits have linting and testing built in and as such should run green in both cases by default, and red should any change violate the included rules.
-
-# Next steps
+## Next Step
+If you would like more information, select the documentation most relevant to you:
 
 - Deep dive into our documentation for [Developers].
 - See our detailed [DevOps] documentation.
