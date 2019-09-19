@@ -20,12 +20,12 @@ This triggers a propagation of the development image to the production and stagi
 
 1. Clone [Taurus] to a new folder as follows:
     ```sh
-    git clone git@github.com:nearform/noise.git
+    git clone git@github.com:nearform/taurus.git
     ```
-1. Add a symbolic link to the noise directory from the titus-infra-aws directory as follows:
+1. Add a symbolic link to the taurus directory from the titus-infra-aws directory as follows:
    ```sh
    cd titus-infra-aws
-   ln -s ../noise
+   ln -s ../taurus
    ```
 1. Create an S3 bucket as described in the Taurus instructions found here: [Create an S3 bucket for terraform state][taurus-state-bucket].
   **Note:** You need to create the bucket only, you do not run the Terraform steps.
@@ -34,7 +34,7 @@ This triggers a propagation of the development image to the production and stagi
     ```yaml
    provider "aws" {
      region     = "eu-west-1" # Set appropriate region
-     profile    = "noise"     # Set same name as your local environment
+     profile    = "taurus"     # Set same name as your local environment
    }
 
    terraform {
@@ -45,9 +45,9 @@ This triggers a propagation of the development image to the production and stagi
      }
    }
 
-   module "noise" {
+   module "taurus" {
      aws_region = "eu-west-1"                  # Set appropriate region
-     project_name = "titus-noise"              # Change according to your project
+     project_name = "titus-taurus"              # Change according to your project
      ...
    }
 
@@ -65,7 +65,7 @@ This triggers a propagation of the development image to the production and stagi
 
 1. Install the K8s controller configuration locally (change <name> according to your project) :
    ```sh
-     aws eks update-kubeconfig --<name> titus-noise
+     aws eks update-kubeconfig --<name> titus-taurus
    ```
 
 
