@@ -2,7 +2,7 @@
 
 # DevOps
 Deployment for Titus is a fully featured, modern, production grade experience. There are a number of ways to look at Titus' deployment tooling. The pipeline can be broken into two types of deployment:
-* Infrastructure - handled via [Taurus] and [Terraform] 
+* Infrastructure - handled via [Taurus] and [Terraform]
 * Services - handled by Helm.
 
 ![titus-infrastructure-pipeline](../img/titus-pipeline.svg)
@@ -44,8 +44,8 @@ Titus includes a fully featured, production-ready CI pipeline. Titus uses Circle
 
 ## Guides
 
-- [Add a New Service or App Helm Chart](devops/helm-chart.md)
-- [CI Pipeline Guide](devops/ci-pipeline.md)
+- [Add a New Service or App Helm Chart](devops/helm-chart/)
+- [CI Pipeline Guide](devops/ci-pipeline/)
 
 
 [CircleCI]: https://circleci.com
