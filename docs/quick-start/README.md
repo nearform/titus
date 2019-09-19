@@ -2,7 +2,7 @@
 
 # Titus Quick Start
 
-Titus is easy to install and run. We encourage developers to install Titus locally themselves - it is easy to navigate, start and stop. Before starting, let's ensure you have all of the prerequisites installed. 
+Titus is easy to install and run. We encourage developers to install Titus locally themselves - it is easy to navigate, start and stop. Before starting, let's ensure you have all of the prerequisites installed.
 
 You need the latest stable versions of [Node], and [Docker]. Both of these are straightforward to install and do not require any special setup. There are other tools to install for deployment purposes, these are described in the [DevOps] section of this documentation.
 
@@ -25,7 +25,7 @@ npm install
 Dependencies are installed for all parts of the repository.
 
 ## Configure the Environment
-Titus uses the `.env` files in each package to control various configurations. There are `.sample.env` files for each package, documenting sample values that can be used in each `.env` file. 
+Titus uses the `.env` files in each package to control various configurations. There are `.sample.env` files for each package, documenting sample values that can be used in each `.env` file.
 
 Before running the stack, generate a default set of `.env` files for all packages. o do this, run the following command in the root directory of the project:
 
@@ -38,9 +38,9 @@ You can read more about configuring the environment in the [Developers][Develope
 ## Run the Stack
 Titus runs your application locally, leveraging Docker for external services such as a database.
 We take advantage of Lerna shortcuts to start all the packages in sequence.
-Our packages support hot reloading; using [Webpack dev server][webpack-dev-server] (for Titus frontend) and [NodeMon] (for Titus backend). 
+Our packages support hot reloading; using [Webpack dev server][webpack-dev-server] (for Titus frontend) and [NodeMon] (for Titus backend).
 
-Ensure Docker has started on your machine before running the stack. 
+Ensure Docker has started on your machine before running the stack.
 To run the full stack, in the root of the project, run the command:
 
 ```sh
@@ -67,7 +67,7 @@ Enter a username and password. A minimum of 4 characters (including at least one
 
 ![x](../img/titus-home-page.png)
 
-The home page links you to the documentation (here), if you did not start from the Titus site. 
+The home page links you to the documentation (here), if you did not start from the Titus site.
 **Note** You can log out of the system from the home page.
 
 ### Manipulate the Running Stack
@@ -101,9 +101,9 @@ npm run docker:dev:rmi
 ```
 
 ### Linting and Testing
-To perform linting and testing across the stack, use the command format `npm run <command>` in the root directory of the repository. For example: 
-- `lint:all`- Runs the `lint` command in each package that has one
-- `test:all`- Runs the `test` command in each package that has one
+To perform linting and testing across the stack, use the command format `npm run <command>` in the root directory of the repository. For example:
+- `npm run lint:all`- Runs the `lint` command in each package that has one
+- `npm run test:all`- Runs the `test` command in each package that has one
 
 Both frontend and backend starter kits have linting and testing built in and run green in both cases by default. If any changes break the included rules, the starter kit runs red.
 
@@ -115,16 +115,17 @@ If you would like more information, select the documentation most relevant to yo
 
 
 <!-- External Links -->
-[Docker]: https://www.docker.com/
+[Docker]: https://docs.docker.com/install/#supported-platforms
 [Node]: https://nodejs.org/en/
+[npm]: https://www.npmjs.com/get-npm
 [Titus]: https://github.com/nearform/titus
 [webpack-dev-server]: https://webpack.js.org/configuration/dev-server
-[NodeMon]: https://nodemon.io
+[Nodemon]: https://nodemon.io
 
 <!-- Internal Links -->
 [DevOps]: devops/
 [Developers]: developers/
-[DevelopersBe]: developers/packages/titus-backend
+[DevelopersBe]: developers/?id=backend-kit
 
 
 <!-- Images -->

@@ -5,10 +5,10 @@ Titus backend is a starter [fastify] server with [PostgreSQL][node-postgres] and
 ## Features
 Titus backend consists of the following:
 
-* Fastify HTTP server 
+* Fastify HTTP server
 * [Pino] logger (comes with fastify)
-* Automatic restart and hot reloading with [NodeMon]
-* [12-Factor App recommendation][config] and reads configuration from environment variables 
+* Automatic restart and hot reloading with [Nodemon]
+* [12-Factor App recommendation][config] and reads configuration from environment variables
 * PostgreSQL plugin with transaction control at route level
 * Sample source structure for organising fastify routes and plugin
 * [Jest], [nock] and [faker] test tools
@@ -16,7 +16,7 @@ Titus backend consists of the following:
 * [Prettier] code format with [Standard] preset
 
 
-## Introduction
+# Introduction
 
 What you implement with Titus backend(fastify) is your choice. We provide an unopiniated, working shell.
 We provide what is common in our projects: a configurable HTTP Server with JSON logging, health check route and database capabilities.
@@ -30,7 +30,7 @@ Titus backend is structured as follows:
 * `lib/config` - server configuration: reads environment variable values, with default values from the`.env` file
 * `lib/plugins` - fastify plugins for cross-cutting features. Contains PG instrumenter and Auth0 + [jwt] strategy
 * `lib/routes` - fastify plugins to declare HTTP routes. The health check route is also here
-* `tools/` - contains tooling, such as database migration tools and scripts 
+* `tools/` - contains tooling, such as database migration tools and scripts
 
 ### Auth0 Plugin
 
@@ -84,9 +84,9 @@ To run your application locally, perform the following steps:
   ```
   npm start
   ```
-  
-  This starts your server on `http://localhost:5000`. 
-  If you make any changes in `lib/` or in `.env`, the server automatically restarts. 
+
+  This starts your server on `http://localhost:5000`.
+  If you make any changes in `lib/` or in `.env`, the server automatically restarts.
 
   Verify your application works and can reach the database using the command `curl http://127.0.0.1:5000/healthcheck`.
 
@@ -104,7 +104,7 @@ The following commands can be used to test and lint your application:
 The following commands can be used with your Titus backend database:
 
 * `npm run db:init` - apply SQL initialisation scripts with `psql` CLI against your database
-* `npm run db:migrate` - apply database migration scripts from `tools/migrations/build` with [postgrator] 
+* `npm run db:migrate` - apply database migration scripts from `tools/migrations/build` with [postgrator]
 * `npm run db:seed` - seed the database with dev data from `tools/migrations/seed_dev` with [postgrator]
 
 
@@ -115,7 +115,7 @@ The following commands can be used with your Titus backend database:
 [fastify]: https://fastify.io
 [Pino]: http://getpino.io
 [Auth0]: https://auth0.com
-[NodeMon]: https://nodemon.io
+[Nodemon]: https://nodemon.io
 [fastify-postgres]: https://github.com/fastify/fastify-postgres
 [jwt]: https://jwt.io
 [nock]: https://github.com/nock/nock#readme

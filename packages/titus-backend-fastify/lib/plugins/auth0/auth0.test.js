@@ -18,15 +18,18 @@ describe('auth0 plugin', () => {
     server = require('fastify')()
 
     server.register(require('.'), {
+      jwt: {
+        secret: 'That1Super_Secret'
+      }
+    })
+
+    server.register(require('./auth0-routes.js'), {
       auth0: {
         domain,
         clientId,
         clientSecret,
         audience,
         grantType
-      },
-      jwt: {
-        secret: 'That1Super_Secret'
       }
     })
 

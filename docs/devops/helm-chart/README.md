@@ -15,16 +15,16 @@
 
 # Configuration
 
-Follow the instructions [in NOISE](https://github.com/nearform/noise) to configure the required
+Follow the instructions [in Taurus](https://nf-taurus.netlify.com) to configure the required
 elements.
 
 Titus is deployed by via Helm with the Helm Chart on [this folder](./helm). To
 configure Kubernetes access, do the following:
 
-- Create an AWS profile called `noise` and set the AWS CLI to use it:
+- Create an AWS profile called `taurus` and set the AWS CLI to use it:
     ```
-        aws configure --profile noise
-        export AWS_PROFILE=noise
+        aws configure --profile taurus
+        export AWS_PROFILE=taurus
     ```
 - Copy the configuration on [kubectl-config](./kubectl-config) into ~/.kube/config
 

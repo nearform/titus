@@ -1,6 +1,6 @@
 # Titus Documentation Kit
 
-This document describes how to install and run the documentation kit that is included in Titus. The documentation can run locally or online. 
+This document describes how to install and run the documentation kit that is included in Titus. The documentation can run locally or online.
 
 ## Features
 The documentation kit includes the following features:
@@ -13,13 +13,13 @@ The documentation kit includes the following features:
 
 
 ## Installation
-For a given repository or location, copy the titus-starter-package and rename it `docs`. 
+For a given repository or location, copy the titus-starter-package and rename it `docs`.
 You can move the renamed folder to where you want your documentation to be within the repository.
 
 The documentation pulls in its dependencies via the browser when it runs. Therefore, it requires an internet connection to run. Alternatively, you can copy the dependencies listed in the file `index.html` locally and link to the local versions. **Note**, this means you also need to deploy these dependencies for the documentation to work in a hosted environment.
 
 ## Run Locally
-To run the documentation locally, serve the docs folder at a given port as shown: 
+To run the documentation locally, serve the docs folder at a given port as shown:
 
 ```sh
 > titus@x.y.z doc:serve /path/to/your/repo/titus
@@ -50,7 +50,7 @@ Listening at http://localhost:4000
 
 The documentation is served on `localhost:4000`.
 
-If you moved `packages/titus-start-docs` to the root folder and renamed it `docs`, you could also use: 
+If you moved `packages/titus-start-docs` to the root folder and renamed it `docs`, you could also use:
 ```sh
 npm run doc:serve
 ```
@@ -66,7 +66,7 @@ npx serve -s -l 4000 .
 
 This displays the following:
 
-```sh 
+```sh
 Serving!
 
 Local:  http://localhost:4000

@@ -1,6 +1,6 @@
 # AWS Provider
 
-To set up a Titus deployment on an [AWS] environment using [CircleCI], there are several steps to perform. 
+To set up a Titus deployment on an [AWS] environment using [CircleCI], there are several steps to perform.
 
 The CircleCI configuration lets the team make changes on branches that are then commited to the master. At code freeze,
 the team release tag the current master that is also running in the development environment.
@@ -9,16 +9,16 @@ This triggers a propagation of the development image to the production and stagi
 
 ## Setup the EKS environment
 
-1. Once you have your AWS account, install AWS CLI and configure your AWS profile, [as explained here][noise-aws-setup].
+1. Once you have your AWS account, install AWS CLI and configure your AWS profile, [as explained here][taurus-aws-setup].
 
-1. Ensure your management environment is set up as described in the Noise documnentation. See: [Setup Local Management env][noise-local-setup]
+1. Ensure your management environment is set up as described in the Taurus documnentation. See: [Setup Local Management env][taurus-local-setup]
 
 1. Clone [titus-infra-aws] to a new folder as follows:
    ```sh
    git clone git@github.com:nearform/titus-infra-aws.git
    ```
 
-1. Clone [Noise] to a new folder as follows:
+1. Clone [Taurus] to a new folder as follows:
     ```sh
     git clone git@github.com:nearform/noise.git
     ```
@@ -27,7 +27,7 @@ This triggers a propagation of the development image to the production and stagi
    cd titus-infra-aws
    ln -s ../noise
    ```
-1. Create an S3 bucket as described in the Noise instructions found here: [Create an S3 bucket for terraform state][noise-state-bucket].
+1. Create an S3 bucket as described in the Taurus instructions found here: [Create an S3 bucket for terraform state][taurus-state-bucket].
   **Note:** You need to create the bucket only, you do not run the Terraform steps.
 
 1. Edit the `titus-infra-aws/main.tf` file:
@@ -39,7 +39,7 @@ This triggers a propagation of the development image to the production and stagi
 
    terraform {
      backend "s3" {
-       bucket  = "titus-noise-terraform-state" # Change for the name of the bucket you created
+       bucket  = "titus-taurus-terraform-state" # Change for the name of the bucket you created
        region  = "eu-west-1"                   # Set appropriate region
        ...
      }
@@ -52,11 +52,11 @@ This triggers a propagation of the development image to the production and stagi
    }
 
    resource "aws_s3_bucket" "b" {
-     region = "eu-west-1"         # Set appropriate region 
-     ...   
+     region = "eu-west-1"         # Set appropriate region
+     ...
    }
    ```
-1. Initialise Terraform using the command: 
+1. Initialise Terraform using the command:
   `terraform init`
 
 1. Run the command: `terraform plan` . The output indicates 90+ resources are created.
@@ -82,7 +82,7 @@ This triggers a propagation of the development image to the production and stagi
      name: "titus-dev"                  # Change according to your project
      host: "titus-preprod.nearform.com" # Provide a DNS host you manage and that has a CNAME in AWS Route53
      ...
-   ``` 
+   ```
 
 1. Perform similar changes in the file `titus-starter-kit/values.prod.yaml` for your production environment.
 
@@ -96,7 +96,7 @@ This triggers a propagation of the development image to the production and stagi
     ```
 
 
-## Configure CirclecI
+# Configure CirclecI
 
 If you have not done previously, fork the [titus] repository, and clone it locally as follows:
      ```sh
@@ -112,7 +112,7 @@ CircleCI accesses and deploys it.
 
 1. For CircleCI to access your titus-deploy fork, in CircleCI titus project settings:
   - select `Permissions` > `Checkout SSH keys`
-  - in `Add user key`, click `Create and add user key` 
+  - in `Add user key`, click `Create and add user key`
   - Authenticate with Github (if not done already), and complete the operation
 
 1. Edit the CircleCI project environment variables to add the following:
@@ -137,10 +137,10 @@ Commit your changes, push them, and let the magic begin!
 
 
 [CircleCI]: https://circleci.com
-[Noise]: https://nearform.github.io/noise
-[noise-aws-setup]: https://nearform.github.io/noise/#/setup-local/?id=for-aws
-[noise-local-setup]: https://nearform.github.io/noise/#/setup-local/?id=install-dependencies
-[noise-state-bucket]: https://nearform.github.io/noise/#/providers/aws/?id=create-an-s3-bucket-for-terraform-state
+[Taurus]: https://nf-taurus.netlify.com
+[taurus-aws-setup]: https://nf-taurus.netlify.com/#/setup-local/?id=for-aws
+[taurus-local-setup]: https://nf-taurus.netlify.com/#/setup-local/?id=install-dependencies
+[taurus-state-bucket]: https://nf-taurus.netlify.com/#/providers/aws/?id=create-an-s3-bucket-for-terraform-state
 [titus-infra-aws]: https://github.com/nearform/titus-infra-aws
 [titus-deploy]: https://github.com/nearform/titus-deploy
 [titus]: https://github.com/nearform/titus
