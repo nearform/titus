@@ -1,7 +1,7 @@
 - [Home](/)
 - [Quick start](/quick-start/)
 - [Developers](/developers/)
-    - [Packages](/developers/?id=packages)
+    - [Kits](/developers/?id=kits)
         - [Frontend Kit](/developers/packages/titus-frontend/)
         - [Backend Kit](/developers/packages/titus-backend/)
             - [Features](/developers/packages/titus-backend/?id=features)
