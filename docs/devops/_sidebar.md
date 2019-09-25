@@ -1,5 +1,5 @@
 - [Home](/)
-- [Quick start](/quick-start/)
+- [Quick Start Guide](/quick-start/)
 - [Developers](/developers/)
 - [DevOps](/devops/)
     - [Setting up Infrastructure](/devops/?id=Setting-up-Infrastructure)
@@ -11,4 +11,4 @@
     - [Guides](/devops/?id=Guides)
         - [Helm Chart](/devops/helm-chart/)
         - [CI Pipeline](/devops/ci-pipeline/)
-- [Contributing](/contributing/)
+- [Contribute to Titus](/contributing/)

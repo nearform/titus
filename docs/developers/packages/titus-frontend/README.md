@@ -1,8 +1,13 @@
 # Titus Frontend
+## Overview
+Titus frontend is a [React] application with routing and minimalist login components. This section describes Titus frontend and how to install, configure, run, test and build your frontend application. 
 
-Titus frontend is a [React] application with routing and minimalist login components. This section describes Titus frontend and how to install, configure, run, test and build your frontend application.
+What you implement with Titus frontend is your choice, we provide you with an unopinionated working shell.
+We provide what is common in our projects.
 
-## Features
+There is scope for you to add, customise or even replace features.
+
+### Features
 Titus frontend consists of the following:
 
 * React application with [Create React App][CRA]
@@ -11,14 +16,6 @@ Titus frontend consists of the following:
 * [Jest] and [Enzyme] test tools
 * [ESLint] code linter
 * [Prettier] code format with [Standard] preset
-
-
-# Introduction
-
-What you implement with Titus frontend is your choice, we provide you with an unopiniated, working shell.
-We provide what is common in our projects.
-
-There is scope for you to add, customise or even replace features.
 
 ### Organisation
 Titus frontend is structured as follows:
@@ -32,17 +29,18 @@ Titus frontend is structured as follows:
 * `src/page/` - a set of page components asynchronously loaded when declaring routes
 * `lighthouse/` - runs Google's [Lighthouse] to evaluate your application performance and accessibility
 
-## In-memory Authentication Provider
+## Configure Authentication
+### In-memory Authentication Provider
 
 By default, titus-frontend does not use a real authentication provider.
 `src/components/auth-provider/in-memory/` allows almost any combination of username and password, and there's no server roundtrip.
 
 Once logged in, a token is stored in the local storage, and it grants access to the protected dashboard.
 
-## Titus-backend Provider
+### Titus-backend Provider
 
 If you have an Auth0 application configured, you can use the titus-backend login endpoint to authenticate users.
-In this case, authenication is performed as follows:
+In this case, authentication is performed as follows:
 - provide your valid Auth0 credentials
 - the credentials are passed to titus-backend
 - titus-backend validates them against Auth0
@@ -57,7 +55,7 @@ To enable it, do the following:
    import Authentication, { Login } from './components/auth-providers/titus-backend'
    ```
 
-## Auth0 Provider
+### Auth0 Provider
 
 If you have an Auth0 application configured, you can use [Auth0 Universal Login][auth0-login].
 In this situation:
@@ -76,7 +74,7 @@ To enable it, do the following:
    import Authentication, { Login } from './components/auth-providers/auth0'
    ```
 
-## Installation
+## Install the Frontend
 To install Titus frontend, run the following command:
 
 ```
@@ -86,7 +84,7 @@ npm install
 Note The Titus frontend is automatically installed if you previously ran `npm install` at root level.
 
 
-## Run Locally
+## Run the Frontend Locally
 To run your application locally, perform the following steps:
 
 1. Edit your configuration as follows:
@@ -107,7 +105,7 @@ To run your application locally, perform the following steps:
   Open a browser and navigate to `localhost:3000`.
 
 
-## Test and Lint
+## Test and Lint the Frontend
 The following commands can be used to test and lint your application:
 
 * `npm test` - run all the tests with code coverage (it's the command CI is using).
@@ -119,7 +117,7 @@ The following commands can be used to test and lint your application:
 * `npm run storybook:build` - make a static version of all your stories in the `storybook-static/` folder
 
 
-## Build for Production
+## Build the Application
 
 The application runs locally with transpilation and hot reloading.
 But in production, your application is bundled and optimised, so you can host it as static files.

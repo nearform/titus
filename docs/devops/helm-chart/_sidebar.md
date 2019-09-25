@@ -11,4 +11,4 @@
             - [Configuration](/devops/helm-chart/?id=configuration)
             - [Deploying new versions](/devops/helm-chart/?id=deploying-new-versions)
         - [CI Pipeline](/devops/ci-pipeline/)
-- [Contributing](/contributing/)
+- [Contribute to Titus](/contributing/)

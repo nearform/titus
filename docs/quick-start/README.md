@@ -100,8 +100,8 @@ This command stops the system, but does not delete the stack containers or volum
 npm run docker:dev:rmi
 ```
 
-### Linting and Testing
-To perform linting and testing across the stack, use the command format `npm run <command>` in the root directory of the repository. For example:
+### Lint and Test
+To lint and test across the stack, use the command format `npm run <command>` in the root directory of the repository. For example:
 - `npm run lint:all`- Runs the `lint` command in each package that has one
 - `npm run test:all`- Runs the `test` command in each package that has one
 

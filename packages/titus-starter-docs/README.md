@@ -10,7 +10,7 @@ Add a brief summary of your project here.
 An overview is a good way to kick off linking around documents.
 
 
-## Contributing
+## Contribute to Titus
 We have included some documentation on contributing to these documents.
 
 - [Take a look][docs]

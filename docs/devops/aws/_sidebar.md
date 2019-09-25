@@ -1,5 +1,5 @@
 - [Home](/)
-- [Quick start](/quick-start/)
+- [Quick Start Guide](/quick-start/)
 - [Developers](/developers/)
 - [DevOps](/devops/)
     - [Setting up Infrastructure](/devops/?id=Setting-up-Infrastructure)
@@ -11,4 +11,4 @@
     - [Azure Deployment using Pipelines](/devops/?id=Azure-Deployment-using-Pipelines)
     - [Apps & Services](/devops/?id=Apps-amp-Services)
     - [Guides](/devops/?id=Guides)
-- [Contributing](/contributing/)
+- [Contribute to Titus](/contributing/)
