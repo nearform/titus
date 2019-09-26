@@ -4,7 +4,6 @@
     - [Kits](/developers/?id=kits)
         - [Frontend Kit](/developers/packages/titus-frontend/)
         - [Backend Kit](/developers/packages/titus-backend/)
-        - [Backend Kit - Fastify](/developers/packages/titus-backend-fastify/)
         - [Starter Docs Kit](/developers/packages/titus-starter-docs/)
             - [Features](/developers/packages/titus-starter-docs/?id=features)
             - [Installation](/developers/packages/titus-starter-docs/?id=installation)

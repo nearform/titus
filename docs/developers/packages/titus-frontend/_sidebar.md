@@ -10,7 +10,6 @@
             - [Test and Lint](/developers/packages/titus-frontend/?id=test-and-lint)
             - [Build for production](/developers/packages/titus-frontend/?id=build-for-production)
         - [Backend Kit](/developers/packages/titus-backend/)
-        - [Backend Kit - Fastify](/developers/packages/titus-backend-fastify/)
         - [Starter Docs Kit](/developers/packages/titus-starter-docs/)
     - [Services](/developers/?id=services)
 - [DevOps](/devops/)
