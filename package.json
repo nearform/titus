@@ -15,8 +15,6 @@
     "postinstall": "lerna bootstrap",
     "start": "npm run docker:dev:start && lerna run --scope titus-backend dev:seed && lerna run --parallel start",
     "start:all": "npm run start",
-    "start-fastify": "npm run docker:dev:start && lerna run --scope titus-backend-fastify dev:seed && lerna run --parallel start",
-    "start:all-fastify": "npm run start-fastify",
     "stop:all": "npm run docker:dev:stop",
     "test": "lerna run --parallel test",
     "test:all": "npm run test"
