@@ -41,7 +41,9 @@ export default class Authentication {
   }
 
   isAuthenticated() {
-    return this.user !== false
+    const regex = /^CognitoIdentityServiceProvider/
+    const awsKeys = Object.keys(localStorage).filter(e => regex.test(e))
+    return awsKeys.length > 0
   }
 
   getUserData() {
