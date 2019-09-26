@@ -4,27 +4,41 @@ import Auth from '@aws-amplify/auth'
 const {
   REACT_APP_AWS_REGION: region,
   REACT_APP_AWS_POOL_ID: userPoolId,
-  REACT_APP_AWS_POOL_CLIENT_ID: userPoolWebClientId
+  REACT_APP_AWS_POOL_CLIENT_ID: userPoolWebClientId,
+  REACT_APP_AWS_IDENTITY_POOL_ID: identityPoolId
 } = process.env
 
 Amplify.configure({
-  Auth: { region, userPoolId, userPoolWebClientId }
+  Auth: { identityPoolId, region, userPoolId, userPoolWebClientId }
 })
 
 export default class Authentication {
+  loginData = false
+
   async login({ username, password }) {
-    Auth.signIn(username, password)
-      .then(success => console.log('successful sign in'))
-      .catch(err => console.log(err))
+    let login = false
+    try {
+      login = await Auth.signIn(username, password)
+    } catch ({ message }) {
+      throw new Error(message)
+    }
+    this.loginData = login
+    return { username: login.username }
   }
 
-  async parseHash() {}
+  async logout() {
+    await Auth.signOut()
+    this.loginData = false
+    return true
+  }
 
-  async logout() {}
+  isAuthenticated() {
+    return this.loginData !== false
+  }
 
-  isAuthenticated() {}
-
-  getUserData() {}
+  getUserData() {
+    return this.loginData
+  }
 }
 
 export { Form as Login } from './form'
