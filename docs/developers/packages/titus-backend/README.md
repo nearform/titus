@@ -18,7 +18,7 @@ Titus backend consists of the following:
 
 # Introduction
 
-What you implement with Titus backend(fastify) is your choice. We provide an unopiniated, working shell.
+What you implement with Titus backend is your choice. We provide an unopiniated, working shell.
 We provide what is common in our projects: a configurable HTTP Server with JSON logging, health check route and database capabilities.
 
 There is scope for you to add, customise or even replace plugins and features.

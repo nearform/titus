@@ -40,7 +40,7 @@ Because it runs with [webpack-dev-server], it supports hot rebuilding.
 - [More information](developers/packages/titus-frontend/)
 
 
-### Backend Kit (Fastify)
+### Backend Kit
 The backend, __titus-backend__, is built on [Fastify] server with [Pino], to make logging a treat.
 
 We also provide a plugin to instrument your routes with a [node-postgres] toolkit for easier interfacing with PostgreSQL, and another plugin for enabling [Auth0] authentication with [JSON Web Tokens][jwt].
