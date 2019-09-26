@@ -2,6 +2,6 @@
 - [Quick Start Guide](/quick-start/)
 - [Developers](/developers/)
 - [DevOps](/devops/)
-- [Contribute to Titus](/contributing/)
+- [Contribute to Titus](/contributing/?id=contribute-to-titus)
   - [Code](/contributing/?id=code)
   - [Documentation](/contributing/?id=documentation)

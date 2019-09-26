@@ -1,4 +1,4 @@
-# New Standup of Helm Charts
+# Add a New Helm Chart
 
 1. If you built a new environment, update the following variables in the values.yaml file:
     ```yaml
@@ -13,7 +13,7 @@
     ```
     You can get both of these values from AWS by going into RDS and Elasticache.
 
-# Configuration
+## Configure the Helm Chart
 
 Follow the instructions [in Taurus](https://nf-taurus.netlify.com) to configure the required
 elements.
@@ -33,6 +33,6 @@ To interact with the cluster, use the command:
 kubectl get nodes
 ```
 
-## Deploy New Versions
+## Deploy a New Version
 
-To deploy new versions, upgrade the Helm chart and you can replace the values [here](./helm/values.yaml) to customise it.
+To deploy a new version, upgrade the Helm chart and you can modify the values in the [Helm yaml file](./helm/values.yaml) to customise it.

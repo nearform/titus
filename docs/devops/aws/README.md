@@ -1,4 +1,4 @@
-# AWS Provider
+# Deploy Titus on AWS Using CircleCI
 
 To set up a Titus deployment on an [AWS] environment using [CircleCI], there are several steps to perform.
 
@@ -7,7 +7,7 @@ the team release tag the current master that is also running in the development 
 This triggers a propagation of the development image to the production and staging environments.
 
 
-## Setup the EKS environment
+## Set up the EKS Environment
 
 1. Once you have your AWS account, install AWS CLI and configure your AWS profile, [as explained here][taurus-aws-setup].
 

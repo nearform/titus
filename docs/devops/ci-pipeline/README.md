@@ -1,13 +1,11 @@
-# The CI Pipeline
-To simplify the continuous build, test and deploy tasks, we use [CircleCI][]. Our pipeline uses the [Jobs]() and [Workflows]() functionality that CircleCI provides, which is controlled by the `config.yaml` file in the `.circle/` folder.
+# Build, Test and Deploy Using the CI Pipeline
+To simplify the continuous build, test and deploy tasks, we use [CircleCI]. Our pipeline uses the [Jobs]() and [Workflows]() functionality that CircleCI provides, which is controlled by the `config.yaml` file in the `.circle/` folder.
 
 The CI Pipeline is a collection of jobs that can be executed in different workflows. We have two workflows that share a number of jobs; it looks like this:
 
-Hello!
-
 ![titus-ci-pipeline-overview](../../img/titus-ci-pipeline.svg)
 
-# The Workflows
+## The Workflows
 Both workflows define the following jobs that run before anything is deployed:
 
 - __install:__ Pulls in submodules and starts an install of the project
@@ -35,4 +33,4 @@ If your preproduction release has completed and been validated, you can deploy i
 ![titus-ci-pipeline-overview](../../img/circle-tagged.png)
 
 
-[CircleCI]: /
+[CircleCI]: https://circleci.com/
