@@ -1,6 +1,7 @@
 ![titus-developers-quote]
 
 # Developers
+## Overview
 A large factor in the success of a project rests in the ability of its developers to work unimpeded. Often, tooling for building and running a given stack locally reduces productivity.
 
 With Titus we ensure the developer experience is accelerated and enhanced. Titus does this by:
@@ -22,9 +23,9 @@ Titus includes just what's needed out of the box. Each kit has a minimal complem
 
 Kits are managed with [Lerna] so you can add more packages and also manage their interdependencies.
 Titus includes the following kits:
-* Frontend Kit
-* Backend Kit
-* Documentation Kit
+* [Frontend Kit](developers/packages/titus-frontend/)
+* [Backend Kit](developers/packages/titus-backend-fastify/)
+* [Documentation Kit](developers/packages/titus-starter-docs/)
 
 All kits we provide include:
 - [Jest] for testing
@@ -37,26 +38,48 @@ The frontend, __titus-frontend__, is a minimal app built on [create-react-app] a
 We include [yup] for form validation, which powers the included auth components. React components are tested with [Enzyme].
 Because it runs with [webpack-dev-server], it supports hot rebuilding.
 
-- [More information](developers/packages/titus-frontend/)
+The Titus frontend kit consists of the following:
+
+* React application with [Create React App][CRA]
+* Route management with [react-router]
+* Login component (with optional Auth0 support)
+* [Jest] and [Enzyme] test tools
+* [ESLint] code linter
+* [Prettier] code format with [Standard] preset
 
 
-### Backend Kit (Fastify)
+Refer to the section [Titus Frontend](developers/packages/titus-frontend/) for more details.
+
+
+### Backend Kit
 The backend, __titus-backend-fastify__, is built on [Fastify] server with [Pino], to make logging a treat.
 
 We also provide a plugin to instrument your routes with a [node-postgres] toolkit for easier interfacing with PostgreSQL, and another plugin for enabling [Auth0] authentication with [JSON Web Tokens][jwt].
 
 [Nodemon] is used to power hot reloading on file changes when running locally, and ensures your application restarts due to uncaught exceptions or unhandled promises.
 
-- [More information](developers/packages/titus-backend-fastify/)
+The Titus backend kit consists of the following:
+
+* Fastify HTTP server
+* [Pino] logger (comes with fastify)
+* Automatic restart and hot reloading with [Nodemon]
+* [12-Factor App recommendation][config] and reads configuration from environment variables
+* PostgreSQL plugin with transaction control at route level
+* Sample source structure for organising fastify routes and plugin
+* [Jest], [nock] and [faker] test tools
+* [ESLint] code linter
+* [Prettier] code format with [Standard] preset
+
+Refer to the section [Titus Backend](developers/packages/titus-backend-fastify/) for more details.
 
 ### Documentation Kit
 Titus includes a documentation kit, __titus-starter-docs__, so you can document your application.
 
-This kit is GitHub Pages and CDN (Content Delvery Network) friendly and can be hosted in the folder of a given repo without the need to include dependencies solely to support documentation.
+This kit is GitHub Pages and CDN (Content Delivery Network) friendly and can be hosted in the folder of a given repo without the need to include dependencies solely to support documentation.
 
 Documents are powered by [docsify] which has no in-repo dependencies, and provides hot reloading when editing the documents.
 
-- [More information](developers/packages/titus-starter-docs/)
+Refer to the section [Documentation Kit](developers/packages/titus-starter-docs/) for more details.
 
 ## Services
 Your application is likely to depend on both external and cloud services.
@@ -69,22 +92,26 @@ Titus packages run as node.js applications on your OS. This plays better with Le
 
 As we use Dockerfile to bundle the packages, it's also possible run them locally using Docker Compose (or Minikube) if you wish.
 
-### PostgreSQL
+### Database Service
 Titus includes a preconfigured instance of PostgreSQL.
 
 When PostgreSQL is used with __titus-backend__, you can take advantage of migration (powered by [postgrator]) and seeding support.
 
 Locally Titus uses Docker Compose and Docker Volumes to run and manage the database. When running on a cloud provider, the included relational database service is used.
 
-- [More information](starter-docs)
+Refer to the section [Manage the Backend Database] for more details.
 
-### Auth via Auth0
-Logging in is usually the first feature you want to see when you run your application. Titus is preconfigured for Auth0.
+### Authentication Service
+Logging in is usually the first feature you want to see when you run your application. Titus is preconfigured with the Auth0 authentication service.
 
-- [More information](starter-docs)
+Refer to [Configure Authentication] for more details.
 
 <!-- Images -->
 [titus-developers-quote]: ../img/titus-developers-quote.svg
+
+<!-- Internal Links -->
+[Manage the Backend Database]: developers/packages/titus-backend-fastify/?id=manage-the-backend-database
+[Configure Authentication]: developers/packages/titus-frontend/?id=configure-authentication
 
 <!-- External Links -->
 [create-react-app]: https://facebook.github.io/create-react-app

@@ -1,24 +1,8 @@
-# Titus Backend
-
+# Titus Backend Kit
+## Overview
 Titus backend is a starter [fastify] server with [PostgreSQL][node-postgres] and [Auth0] plugins.
 
-## Features
-Titus backend consists of the following:
-
-* Fastify HTTP server
-* [Pino] logger (comes with fastify)
-* Automatic restart and hot reloading with [Nodemon]
-* [12-Factor App recommendation][config] and reads configuration from environment variables
-* PostgreSQL plugin with transaction control at route level
-* Sample source structure for organising fastify routes and plugin
-* [Jest], [nock] and [faker] test tools
-* [ESLint] code linter
-* [Prettier] code format with [Standard] preset
-
-
-# Introduction
-
-What you implement with Titus backend(fastify) is your choice. We provide an unopiniated, working shell.
+What you implement with Titus backend(fastify) is your choice. We provide an unopinionated, working shell.
 We provide what is common in our projects: a configurable HTTP Server with JSON logging, health check route and database capabilities.
 
 There is scope for you to add, customise or even replace plugins and features.
@@ -54,7 +38,7 @@ The `GET /healthcheck` endpoint is intended for your production cluster. Your ba
 it returns your application version and server timestamp. It also runs a dummy query against the database, to ensure it's available.
 
 
-## Installation
+## Install the Backend
 To install Titus backend, run the following command:
 
 ```
@@ -65,7 +49,7 @@ npm install
 
 
 
-## Run Locally
+## Run the Backend Locally
 To run your application locally, perform the following steps:
 
 1. Edit your configuration
@@ -91,8 +75,8 @@ To run your application locally, perform the following steps:
   Verify your application works and can reach the database using the command `curl http://127.0.0.1:5000/healthcheck`.
 
 
-## Test and Lint
-The following commands can be used to test and lint your application:
+## Test and Lint the Backend
+Use the following commands to test and lint your application:
 
 * `npm test` - run all the tests with code coverage (this is the command CI uses)
 * `npm run test:watch` - start Jest in watch mode: it runs tests against the modified files (since last commit), and automatically runs them again if you change the code.
@@ -100,7 +84,7 @@ The following commands can be used to test and lint your application:
 * `npm run lint:fix` - use ESLint / Prettier (with the autofix flag)
 
 
-## Database Management
+## Manage the Backend Database
 The following commands can be used with your Titus backend database:
 
 * `npm run db:init` - apply SQL initialisation scripts with `psql` CLI against your database

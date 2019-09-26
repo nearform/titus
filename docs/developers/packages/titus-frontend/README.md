@@ -1,4 +1,4 @@
-# Titus Frontend
+# Titus Frontend Kit
 ## Overview
 Titus frontend is a [React] application with routing and minimalist login components. This section describes Titus frontend and how to install, configure, run, test and build your frontend application. 
 
@@ -6,16 +6,6 @@ What you implement with Titus frontend is your choice, we provide you with an un
 We provide what is common in our projects.
 
 There is scope for you to add, customise or even replace features.
-
-### Features
-Titus frontend consists of the following:
-
-* React application with [Create React App][CRA]
-* Route management with [react-router]
-* Login component (with optional Auth0 support)
-* [Jest] and [Enzyme] test tools
-* [ESLint] code linter
-* [Prettier] code format with [Standard] preset
 
 ### Organisation
 Titus frontend is structured as follows:
