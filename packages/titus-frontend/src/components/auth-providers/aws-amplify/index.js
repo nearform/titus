@@ -13,31 +13,39 @@ Amplify.configure({
 })
 
 export default class Authentication {
-  loginData = false
+  user = false
 
-  async login({ username, password }) {
-    let login = false
+  async login({ username, newPassword, password }) {
+    let user = false
     try {
-      login = await Auth.signIn(username, password)
-    } catch ({ message }) {
-      throw new Error(message)
+      user = await Auth.signIn(username, password)
+      if (newPassword) {
+        user = await Auth.completeNewPassword(user, newPassword)
+      } else if (user.challengeName === 'NEW_PASSWORD_REQUIRED') {
+        throw new Error(
+          'Please enter your temporary password and a new password'
+        )
+      }
+      user = await Auth.currentAuthenticatedUser({ bypassCache: false })
+    } catch (error) {
+      throw new Error(error.message)
     }
-    this.loginData = login
-    return { username: login.username }
+    this.user = user
+    return { username: user.username }
   }
 
   async logout() {
     await Auth.signOut()
-    this.loginData = false
+    this.user = false
     return true
   }
 
   isAuthenticated() {
-    return this.loginData !== false
+    return this.user !== false
   }
 
   getUserData() {
-    return this.loginData
+    return this.user
   }
 }
 

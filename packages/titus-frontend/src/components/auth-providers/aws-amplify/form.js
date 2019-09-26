@@ -14,6 +14,7 @@ export const Form = ({ login, loginError }) => (
     schema={schema}
     loginError={loginError}
     header={`Please provide AWS Cognito account details:`}
+    allowChangePassword
   />
 )
 
