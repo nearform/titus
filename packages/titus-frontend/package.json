@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "auth0-js": "^9.10.0",
+    "aws-amplify": "^1.1.40",
     "cross-env": "^5.2.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
