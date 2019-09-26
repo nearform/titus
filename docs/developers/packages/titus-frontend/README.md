@@ -75,6 +75,19 @@ To enable it, do the following:
    // import Authentication, { Login } from './components/auth-providers/in-memory'
    import Authentication, { Login } from './components/auth-providers/auth0'
    ```
+   
+## AWS Amplify Provider
+
+If you have a user and identity pools configured in AWS Cognito, you can use [AWS Amplify Authentication][aws-amplify-authentication].
+In this case, the entered username and password is validated against the specified user pool.
+
+To enable it, do the following:
+1. Provide AWS details in the **titus-frontend** `.env` file (`REACT_APP_AWS_*` variables)
+1. Change the provider variable in the file `src/app.js`, as follows:
+  ```js
+  // import Authentication, { Login } from './components/auth-providers/in-memory'
+  import Authentication, { Login } from './components/auth-providers/aws-amplify'
+  ```
 
 ## Installation
 To install Titus frontend, run the following command:
@@ -146,3 +159,4 @@ This command produces a new bundle in `build/` folder.
 [Storybook]: https://storybook.js.org
 [webpack-dev-server]: https://webpack.js.org/configuration/dev-server
 [auth0-login]: https://auth0.com/docs/universal-login
+[aws-amplify-authentication]: https://aws-amplify.github.io/docs/js/authentication
