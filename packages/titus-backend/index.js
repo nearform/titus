@@ -16,7 +16,7 @@ const main = async () => {
   server.log.info(`Server running at: ${address}`)
 
   process.on('SIGINT', () => {
-    server.stop({ timeout: 10e3 }).then(err => {
+    server.close().then(err => {
       process.exit(err ? 1 : 0)
     })
   })

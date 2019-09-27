@@ -40,7 +40,7 @@ describe('auth0 plugin', () => {
     jest.setTimeout(10e4)
   })
 
-  afterAll(async () => server.stop())
+  afterAll(async () => server.close())
 
   afterEach(nock.cleanAll)
 
