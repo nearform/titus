@@ -1,4 +1,4 @@
-# Contributing
+# Contribute to Titus
 
 # Code
 To follow...
@@ -6,16 +6,16 @@ To follow...
 # Documentation
 We welcome documentation contributions. Our documentation can be viewed live at [nearform.github.io/titus][docs]
 
-## Running Documentation locally
-Our documentation can be ran by serving the docs folder at a given port.
-For ease of use you can use the `docsfiy-cli` should you have node installed.
+## Run the Documentation Locally
+Our documentation is run by serving the docs folder at a given port.
+If you have node installed, you can use `docsfiy-cli`.
 
-From the root folder:
+From the root folder on a command console, enter the command:
 ```sh
 npm run doc:serve
 ```
 
-Which will produce:
+This displays the following:
 
 ```sh
 > titus@x.y.z doc:serve /path/to/your/repo/titus
@@ -25,18 +25,18 @@ Serving /path/to/your/repo/titus/docs now.
 Listening at http://localhost:4000
 ```
 
-The documentation will be served on `localhost:4000`.
+The documentation is served on `localhost:4000`.
 
-### Serving in other ways
-Our documentation builds on the fly. This means all you need to do is serve the docs folder. Any program or cli tool used for serving a folder will work; __as long as it can handle hash routing__.
+### Serve in Other Ways
+Our documentation builds on the fly. All you need to do is serve the docs folder. Any program or cli tool used for serving a folder works - __as long as it can handle hash routing__.
 
-Another popular module for serving files is `serve` on npm. This can be ran, with hash router support like so:
+Another popular module to serve files is `serve` on npm. To run, with hash router support, enter the command:
 
 ```sh
 npx serve -s -l 4000 docs
 ```
 
-Which will produce:
+This displays the following:
 
 ```sh
 ┌──────────────────────────────────────────────────┐
@@ -51,6 +51,6 @@ Which will produce:
 └──────────────────────────────────────────────────┘
 ```
 
-The documentation will be served on `localhost:4000` in this case.
+The documentation is served on `localhost:4000` in this case.
 
 [docs]:https://nearform.github.io/titus

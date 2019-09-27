@@ -1,4 +1,4 @@
-# AWS Provider
+# Deploy Titus on AWS Using CircleCI
 
 To set up a Titus deployment on an [AWS] environment using [CircleCI], there are several steps to perform.
 
@@ -7,7 +7,7 @@ the team release tag the current master that is also running in the development 
 This triggers a propagation of the development image to the production and staging environments.
 
 
-## Setup the EKS environment
+## Set up the EKS Environment
 
 1. Once you have your AWS account, install AWS CLI and configure your AWS profile, [as explained here][taurus-aws-setup].
 
@@ -28,6 +28,7 @@ This triggers a propagation of the development image to the production and stagi
    ln -s ../taurus
    ```
 1. Create an S3 bucket as described in the Taurus instructions found here: [Create an S3 bucket for terraform state][taurus-state-bucket].
+
   **Note:** You need to create the bucket only, you do not run the Terraform steps.
 
 1. Edit the `titus-infra-aws/main.tf` file:
@@ -73,7 +74,7 @@ This triggers a propagation of the development image to the production and stagi
 
 1. Fork the [titus-deploy] repository on GitHub, and clone it using the following command:
    ```sh
-   git clone git@github.com:your-name/titus-deploy.git
+      git clone git@github.com:your-name/titus-deploy.git
    ```
 
 1. Edit the file `titus-starter-kit/values.dev.yaml` as follows:
@@ -99,20 +100,23 @@ This triggers a propagation of the development image to the production and stagi
 # Configure CirclecI
 
 If you have not done previously, fork the [titus] repository, and clone it locally as follows:
-     ```sh
-     git clone git@github.com:your-name/titus.git
-     ```
+```sh
+  git clone git@github.com:your-name/titus.git
+```
 
 CircleCI accesses and deploys it.
 
-1. _On CircleCI UI_, add your project by searching the project under `Add projects`.
+1. On the **CircleCI UI**, add your project by searching the project under **Add Projects**.
   ![circle-add-project]
-  It adds a deployment key for your repository and sets up the necessary hooks.
-  Make sure you have administrator access to the repository to do this.
+  Fig 1. Add Project in CircleCI UI
+
+  This adds a deployment key for your repository and sets up the necessary hooks.
+
+  **Note:** You need administrator access to the repository to do this.
 
 1. For CircleCI to access your titus-deploy fork, in CircleCI titus project settings:
-  - select `Permissions` > `Checkout SSH keys`
-  - in `Add user key`, click `Create and add user key`
+  - select **Permissions** > **Checkout SSH keys**
+  - select **Add user key**,  and select **Create and add user key**
   - Authenticate with Github (if not done already), and complete the operation
 
 1. Edit the CircleCI project environment variables to add the following:
@@ -120,18 +124,20 @@ CircleCI accesses and deploys it.
   - `AWS_SECRET_ACCESS_KEY`
   - `AWS_DEFAULT_REGION`: AWS region hosting the infrastructure
   - `S3_BUCKET`: name of the S3 bucket in `titus-infra-aws/main.tf`: `aws_s3_bucket.b.name`
+
   ![circle-env-variables]
+  Fig 2. Edit the CircleCI Environment Variables
 
-1. _On AWS Console_, create as many [ECR repositories][ecr] as the deployed applications need.
+1. On the **AWS Console**, create as many [ECR repositories][ecr] as the deployed applications need.
 
-1. _In titus repo_, update the values in `.circleci/config.yaml`:
+1. In the **Titus repo**, update the values in the file `.circleci/config.yaml`:
   - `DOCKER_REPO`: in AWS console, ECR service, use the URI, that is: `123456789.dkr.ecr.eu-west-1.amazonaws.com`
   - `TITUS_DEPLOY_REPO`: add your titus-deploy fork: `git@github.com:your-name/titus-deploy.git`
   - `AWS_ECR_REGION`: AWS region hosting the infrastructure
   - `AWS_EKS_REGION`: AWS region hosting the infrastructure
 
 
-#### First Deployment
+#### Deploy Your Changes
 
 Commit your changes, push them, and let the magic begin!
 

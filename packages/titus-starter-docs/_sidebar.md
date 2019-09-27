@@ -1,2 +1,2 @@
 * [Home](/)
-* [Contributing](/contributing/)
+* [Contribute to Titus](/contributing/)

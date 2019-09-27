@@ -1,6 +1,6 @@
 ![quick-start-quote]
 
-# Titus Quick Start
+# Titus Quick Start Guide
 
 Titus is easy to install and run. We encourage developers to install Titus locally themselves - it is easy to navigate, start and stop. Before starting, let's ensure you have all of the prerequisites installed.
 
@@ -27,7 +27,7 @@ Dependencies are installed for all parts of the repository.
 ## Configure the Environment
 Titus uses the `.env` files in each package to control various configurations. There are `.sample.env` files for each package, documenting sample values that can be used in each `.env` file.
 
-Before running the stack, generate a default set of `.env` files for all packages. o do this, run the following command in the root directory of the project:
+Before running the stack, generate a default set of `.env` files for all packages. To do this, run the following command in the root directory of the project:
 
 ```sh
 npm run create:env
@@ -38,7 +38,7 @@ You can read more about configuring the environment in the [Developers][Develope
 ## Run the Stack
 Titus runs your application locally, leveraging Docker for external services such as a database.
 We take advantage of Lerna shortcuts to start all the packages in sequence.
-Our packages support hot reloading; using [Webpack dev server][webpack-dev-server] (for Titus frontend) and [NodeMon] (for Titus backend).
+Our packages support hot reloading, using [webpack devServer][webpack-dev-server] (for Titus frontend) and [NodeMon] (for Titus backend).
 
 Ensure Docker has started on your machine before running the stack.
 To run the full stack, in the root of the project, run the command:
@@ -62,13 +62,16 @@ Congratulations! You are now running Titus locally. You can check the `docker-co
 The application is accessed at `localhost:3000` in a web browser. First access requires you to log in to the system:
 
 ![x](../img/titus-login.png)
+Fig1. Titus Login Page
 
 Enter a username and password. A minimum of 4 characters (including at least one letter or one number) is required for the password. On successful log in, the home page for Titus is displayed:
 
 ![x](../img/titus-home-page.png)
+Fig.2 Titus Home Page
 
 The home page links you to the documentation (here), if you did not start from the Titus site.
-**Note** You can log out of the system from the home page.
+
+**Note:** You can log out of the system from the home page.
 
 ### Manipulate the Running Stack
 A number of useful commands for manipulating the running Docker stack are included with Titus as easy to run scripts. Use the command format `npm run <command>` in the root directory of the repository. For example:
@@ -100,8 +103,8 @@ This command stops the system, but does not delete the stack containers or volum
 npm run docker:dev:rmi
 ```
 
-### Linting and Testing
-To perform linting and testing across the stack, use the command format `npm run <command>` in the root directory of the repository. For example:
+### Lint and Test
+To lint and test across the stack, use the command format `npm run <command>` in the root directory of the repository. For example:
 - `npm run lint:all`- Runs the `lint` command in each package that has one
 - `npm run test:all`- Runs the `test` command in each package that has one
 
