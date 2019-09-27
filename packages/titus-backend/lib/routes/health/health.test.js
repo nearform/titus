@@ -1,47 +1,38 @@
-const axios = require('axios')
-const hapi = require('hapi')
-const pino = require('hapi-pino')
+'use strict'
+
 const { version } = require('../../../package')
 
 describe('health route', () => {
-  let server
-  const pg = {
-    query: jest.fn().mockResolvedValue([]),
-    release: jest.fn()
+  let server, address
+  const client = {
+    query: jest.fn().mockResolvedValue([])
   }
-  // by convention, has to start with 'mock' so Jest could is it
-  const mockConnect = jest.fn()
 
   beforeAll(async () => {
-    jest.mock('pg-pool', () =>
-      jest.fn().mockImplementation(() => ({ connect: mockConnect }))
-    )
-
-    server = hapi.server()
-    await server.register([
-      {
-        plugin: pino,
-        options: { level: 'silent' }
-      },
-      require('../../plugins/pg'),
-      require('.')
-    ])
-    await server.start()
+    server = require('fastify')()
+    server.register(require('fastify-postgres'))
+    server.register(require('.'))
+    address = await server.listen(5001)
+    server.pg.connect = jest.fn()
   })
 
   beforeEach(() => {
     jest.setTimeout(10e4)
     jest.resetAllMocks()
-    mockConnect.mockResolvedValue(pg)
   })
 
-  afterAll(async () => server.stop())
+  afterAll(async () => server.close())
 
   it('should return server health with DB check', async () => {
-    pg.query.mockResolvedValue({ rowCount: 1 })
-    const response = await axios.get(`${server.info.uri}/healthcheck`)
-    expect(response.status).toEqual(200)
-    expect(response.data).toEqual(
+    client.query.mockResolvedValue({ rowCount: 1 })
+    server.pg.connect.mockResolvedValue(client)
+    const response = await server.inject({
+      method: 'GET',
+      url: `${address}/healthcheck`
+    })
+
+    expect(response.statusCode).toEqual(200)
+    expect(JSON.parse(response.payload)).toEqual(
       expect.objectContaining({
         db: 'ok',
         serverTimestamp: expect.any(String),
@@ -49,17 +40,22 @@ describe('health route', () => {
         version
       })
     )
-    expect(pg.query).toHaveBeenCalledWith('SELECT $1::text as message', [
+
+    expect(client.query).toHaveBeenCalledWith('SELECT $1::text as message', [
       'Hello world!'
     ])
   })
 
   it('should report failure on DB error', async () => {
-    pg.query.mockRejectedValue(new Error('boom!'))
+    client.query.mockRejectedValue(new Error('boom!'))
+    server.pg.connect.mockResolvedValue(client)
+    const response = await server.inject({
+      method: 'GET',
+      url: `${address}/healthcheck`
+    })
 
-    const response = await axios.get(`${server.info.uri}/healthcheck`)
-    expect(response.status).toEqual(200)
-    expect(response.data).toEqual(
+    expect(response.statusCode).toEqual(200)
+    expect(JSON.parse(response.payload)).toEqual(
       expect.objectContaining({
         db: 'fail',
         serverTimestamp: expect.any(String),
@@ -70,11 +66,15 @@ describe('health route', () => {
   })
 
   it('should report failure on empty DB response', async () => {
-    pg.query.mockResolvedValue({})
+    client.query.mockRejectedValue({})
+    server.pg.connect.mockResolvedValue(client)
+    const response = await server.inject({
+      method: 'GET',
+      url: `${address}/healthcheck`
+    })
 
-    const response = await axios.get(`${server.info.uri}/healthcheck`)
-    expect(response.status).toEqual(200)
-    expect(response.data).toEqual(
+    expect(response.statusCode).toEqual(200)
+    expect(JSON.parse(response.payload)).toEqual(
       expect.objectContaining({
         db: 'fail',
         serverTimestamp: expect.any(String),

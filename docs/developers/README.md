@@ -24,7 +24,7 @@ Titus includes just what's needed out of the box. Each kit has a minimal complem
 Kits are managed with [Lerna] so you can add more packages and also manage their interdependencies.
 Titus includes the following kits:
 * [Frontend Kit](developers/packages/titus-frontend/)
-* [Backend Kit](developers/packages/titus-backend-fastify/)
+* [Backend Kit](developers/packages/titus-backend/)
 * [Documentation Kit](developers/packages/titus-starter-docs/)
 
 All kits we provide include:
@@ -52,7 +52,7 @@ Refer to the section [Titus Frontend](developers/packages/titus-frontend/) for m
 
 
 ### Backend Kit
-The backend, __titus-backend-fastify__, is built on [Fastify] server with [Pino], to make logging a treat.
+The backend, __titus-backend__, is built on [Fastify] server with [Pino], to make logging a treat.
 
 We also provide a plugin to instrument your routes with a [node-postgres] toolkit for easier interfacing with PostgreSQL, and another plugin for enabling [Auth0] authentication with [JSON Web Tokens][jwt].
 
@@ -70,7 +70,7 @@ The Titus backend kit consists of the following:
 * [ESLint] code linter
 * [Prettier] code format with [Standard] preset
 
-Refer to the section [Titus Backend](developers/packages/titus-backend-fastify/) for more details.
+Refer to the section [Titus Backend](developers/packages/titus-backend/) for more details.
 
 ### Documentation Kit
 Titus includes a documentation kit, __titus-starter-docs__, so you can document your application.
@@ -110,7 +110,7 @@ Refer to [Configure Authentication] for more details.
 [titus-developers-quote]: ../img/titus-developers-quote.svg
 
 <!-- Internal Links -->
-[Manage the Backend Database]: developers/packages/titus-backend-fastify/?id=manage-the-backend-database
+[Manage the Backend Database]: developers/packages/titus-backend/?id=manage-the-backend-database
 [Configure Authentication]: developers/packages/titus-frontend/?id=configure-authentication
 
 <!-- External Links -->

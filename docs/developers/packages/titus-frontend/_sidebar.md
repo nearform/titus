@@ -10,7 +10,7 @@
             - [Run the Frontend Locally](/developers/packages/titus-frontend/?id=run-the-frontend-locally)
             - [Test and Lint the Frontend](/developers/packages/titus-frontend/?id=test-and-lint-the-frontend)
             - [Build the Application](/developers/packages/titus-frontend/?id=build-the-application)
-        - [Backend Kit](/developers/packages/titus-backend-fastify/)
+        - [Backend Kit](/developers/packages/titus-backend/)
         - [Documentation Kit](/developers/packages/titus-starter-docs/)
     - [Services](/developers/?id=services)
 - [DevOps](/devops/)
