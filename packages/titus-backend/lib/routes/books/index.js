@@ -21,6 +21,7 @@ async function books(server, options) {
           { err },
           `failed to read DB for \`GET /books/${id}\` call`
         )
+        return res.code(500).send({ error: err.message })
       }
       return res.code(404).send({ error: 'Could not find that book' })
     }
@@ -29,7 +30,6 @@ async function books(server, options) {
     method: 'GET',
     url: '/books',
     handler: async (req, res) => {
-      let results = []
       try {
         let sql = 'SELECT * FROM books'
         const params = []
@@ -45,11 +45,12 @@ async function books(server, options) {
           sql += ` WHERE ${where.join(' AND ')}`
         }
         const client = await server.pg.connect()
-        results = (await client.query(sql, params)).rows
+        const results = (await client.query(sql, params)).rows
+        return res.send(results)
       } catch (err) {
         req.log.debug({ err }, 'failed to read DB for `GET /books` call')
+        return res.code(500).send({ error: err.message })
       }
-      return res.send(results)
     }
   })
 }
