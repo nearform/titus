@@ -13,7 +13,7 @@
     "docker:dev:stop": "docker-compose down",
     "lint:all": "lerna run --parallel lint",
     "postinstall": "lerna bootstrap",
-    "start": "npm run docker:dev:start && lerna run --scope titus-backend dev:seed && lerna run --parallel start",
+    "start": "npm run docker:dev:start && lerna run --scope titus-backend db:seed && lerna run --parallel start",
     "start:all": "npm run start",
     "stop:all": "npm run docker:dev:stop",
     "test": "lerna run --parallel test",
