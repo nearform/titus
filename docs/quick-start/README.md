@@ -62,10 +62,12 @@ Congratulations! You are now running Titus locally. You can check the `docker-co
 The application is accessed at `localhost:3000` in a web browser. First access requires you to log in to the system:
 
 ![x](../img/titus-login.png)
+Fig1. Titus Login Page
 
 Enter a username and password. A minimum of 4 characters (including at least one letter or one number) is required for the password. On successful log in, the home page for Titus is displayed:
 
 ![x](../img/titus-home-page.png)
+Fig.2 Titus Home Page
 
 The home page links you to the documentation (here), if you did not start from the Titus site.
 

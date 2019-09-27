@@ -3,10 +3,11 @@
 # DevOps
 ## Overview
 Deployment for Titus is a fully featured, modern, production grade experience. There are a number of ways to look at Titus' deployment tooling. The pipeline can be broken into two types of deployment:
-* Infrastructure - handled via [Taurus] and [Terraform]
+* Infrastructure - handled by [Taurus] and [Terraform]
 * Services - handled by Helm.
 
 ![titus-infrastructure-pipeline](../img/titus-pipeline.svg)
+Fig.1 Titus Infrastructure Pipeline
 
 To keep concerns separated, Titus is deployed to AWS using CircleCI. Its infrastructure configuration is in a repo named [titus-infra-aws] and its service configuration is in [titus-deploy].
 
@@ -39,8 +40,9 @@ Refer to [Deploy Titus on Azure Using Pipelines](devops/azure/) for more details
 Titus includes a fully featured, production-ready CI pipeline. Titus uses CircleCI as its infrastructure of choice for continuous integration. The Titus CI pipeline includes all of the steps needed to build assets, lint and test, push containers, and deploy.
 
 ![titus-ci-pipeline](../img/titus-ci-pipeline.svg)
+Fig.2 Titus CI Pipeline
 
-For more information, refer to the [Build, Test and Deploy Using CI Pipelines](devops/ci-pipeline/).
+For more information, refer to [Build, Test and Deploy Using CI Pipelines](devops/ci-pipeline/).
 
 ## Add a New Helm Chart
 

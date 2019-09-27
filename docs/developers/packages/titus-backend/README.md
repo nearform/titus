@@ -2,17 +2,17 @@
 ## Overview
 Titus backend is a starter [fastify] server with [PostgreSQL][node-postgres] and [Auth0] plugins.
 
-What you implement with Titus backend(fastify) is your choice. We provide an unopinionated, working shell.
+What you implement with Titus backend is your choice. We provide an unopinionated, working shell.
 We provide what is common in our projects: a configurable HTTP Server with JSON logging, health check route and database capabilities.
 
-There is scope for you to add, customise or even replace plugins and features.
+There is scope for you to add, customise and even replace plugins and features.
 
 ### Organisation
 Titus backend is structured as follows:
 
 * `lib/` - contains the server sources
 * `lib/config` - server configuration: reads environment variable values, with default values from the`.env` file
-* `lib/plugins` - fastify plugins for cross-cutting features. Contains PG instrumenter and Auth0 + [jwt] strategy
+* `lib/plugins` - fastify plugins for cross-cutting features. Contains a pg instrumenter and Auth0 + [jwt] strategy
 * `lib/routes` - fastify plugins to declare HTTP routes. The health check route is also here
 * `tools/` - contains tooling, such as database migration tools and scripts
 
@@ -26,9 +26,9 @@ Accessing these routes requires a valid jwt value in the `Authorization` HTTP he
 
 Have a look at `lib/plugins/auth0/auth0.test.js` for some examples.
 
-### Pg Plugin
+### The pg Plugin
 
-The Pg plugin automatically instruments other routes with a [pg][fastify-postgres] so they can issue queries against the database.
+The pg plugin automatically instruments other routes with a [pg][fastify-postgres] so they can issue queries against the database.
 
 Have a look at `lib/plugins/pg/pg.test.js` for some examples.
 
@@ -106,4 +106,4 @@ The following commands can be used with your Titus backend database:
 [faker]: http://marak.github.io/faker.js
 [postgrator]: https://github.com/rickbergfalk/postgrator#readme
 [docker-compose]: https://docs.docker.com/compose
-[config]: https://12factor.net/config
+

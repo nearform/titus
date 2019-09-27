@@ -40,7 +40,7 @@ Because it runs with [webpack-dev-server], it supports hot rebuilding.
 
 The Titus frontend kit consists of the following:
 
-* React application with [Create React App][CRA]
+* React application with [create-react-app]
 * Route management with [react-router]
 * Login component (with optional Auth0 support)
 * [Jest] and [Enzyme] test tools
@@ -136,3 +136,5 @@ Refer to [Configure Authentication] for more details.
 [postgrator]: https://github.com/rickbergfalk/postgrator#readme
 [parity]: https://12factor.net/dev-prod-parity
 [docker-compose]: https://docs.docker.com/compose
+[Standard]: https://standardjs.com/
+[config]: https://12factor.net/config

@@ -4,6 +4,7 @@ To simplify the continuous build, test and deploy tasks, we use [CircleCI]. Our 
 The CI Pipeline is a collection of jobs that can be executed in different workflows. We have two workflows that share a number of jobs; it looks like this:
 
 ![titus-ci-pipeline-overview](../../img/titus-ci-pipeline.svg)
+Fig.1 Titus CI Pipeline Overview
 
 ## The Workflows
 Both workflows define the following jobs that run before anything is deployed:
@@ -21,16 +22,19 @@ A successful build attempts to push images for each applicable package. The `DOC
 ### Autorelease into Preproduction
 To ensure CI conventions are followed, Titus includes default support for staging or preproduction environment. If all the steps above were successful, the step below will run each time a merge or commit happens to the __master__ branch:
 
-- __release-preproduction:__ Using [Helm](), deploy to a preproduction environment running [K8s]()
+- __release-preproduction:__ Using [Helm], deploy to a preproduction environment running [K8s].
 
 ![titus-ci-pipeline-overview](../../img/circle-untagged.png)
+Fig.2 CircleCI Untagged Build - Preproduction
 
 ### Guarded Release into Production
 If your preproduction release has completed and been validated, you can deploy into production. To deploy to production, a tag must be created in Git and pushed to the repo. Generally tags are made off of master, but any tag will start the final step, as follows:
 
-- __release-production:__ Using [Helm](), deploy to a production environment running [K8s]()
+- __release-production:__ Using [Helm], deploy to a production environment running [K8s].
 
 ![titus-ci-pipeline-overview](../../img/circle-tagged.png)
-
+Fig.3 CircleCI Tagged Build - Production
 
 [CircleCI]: https://circleci.com/
+[K8s]: https://kubernetes.io/
+[Helm]: https://helm.sh/

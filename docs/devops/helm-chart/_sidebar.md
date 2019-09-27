@@ -3,7 +3,6 @@
 - [Developers](/developers/)
 - [DevOps](/devops/)
     - [Overview](/devops/?id=overview)
-    - [Customise the Infrastructure](/devops/?id=customise-the-Infrastructure)
     - [Deploy Titus](/devops/?id=Deploy-Titus)
         - [Deploy Titus on AWS Using CircleCI](/devops/?id=Deploy-Titus-on-aws-using-CircleCI)
         - [Deploy Titus on Azure Using Pipelines](/devops/?id=Deploy-titus-on-azure-using-Pipelines)
