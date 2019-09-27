@@ -20,7 +20,7 @@ Developer experience using Titus is first class. We want you as a developer to e
 Titus is well documented, includes modern tooling, for example, [Storybook], and has linting and testing as first-class citizens. Titus supports common-sense inclusions such as quality logging and Docker convenience commands for day-to-day building and working with the stack locally.
 
 ## No Compromise DevOps
-To achieve a rock-solid but easy to configure base, we use [Terraform] in conjunction with [Kubernetes] (K8s) to deploy and manage infrastructure and service needs. We keep deployment configuration simple by using [Taurus], which wraps common Terraform configurations into an easy to use Terraform plugin. Taurus is used in a configuration repository that contains secrets, helm charts, and so on.
+To achieve a rock-solid but easy to configure base, we use [Terraform] in conjunction with [Kubernetes] (K8s) to deploy and manage infrastructure and service needs. We keep deployment configuration simple by using [Taurus], which wraps common Terraform configurations into an easy to use Terraform plugin. Taurus is used in a configuration repository that contains secrets, Helm charts, and so on.
 
 ![titus-pipeline]
 Fig.2 Titus Pipeline

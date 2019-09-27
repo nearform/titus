@@ -1,7 +1,7 @@
 - [Home](/)
 - [Quick start](/quick-start/)
 - [Developers](/developers/)
-- [DevOps](/devops/)
+- [DevOps](/devops/?id=devops)
     - [Overview](/devops/?id=overview)
     - [Deploy Titus](/devops/?id=Deploy-Titus)
         - [Deploy Titus on AWS Using CircleCI](/devops/?id=Deploy-Titus-on-aws-using-CircleCI)
