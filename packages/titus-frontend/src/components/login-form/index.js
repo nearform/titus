@@ -2,16 +2,23 @@ import { Formik, Field, ErrorMessage } from 'formik'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-const LoginForm = ({ login, schema, header, loginError }) => (
+const LoginForm = ({
+  allowChangePassword,
+  login,
+  schema,
+  header,
+  loginError
+}) => (
   <Formik
     initialValues={{
       username: '',
-      password: ''
+      password: '',
+      newPassword: ''
     }}
     validationSchema={schema}
     onSubmit={(values, { resetForm }) => {
-      const { username, password } = values
-      if (login) login({ username, password })
+      const { username, password, newPassword } = values
+      if (login) login({ username, password, newPassword })
       resetForm(values)
     }}
     render={({ handleSubmit, isSubmitting }) => (
@@ -29,6 +36,16 @@ const LoginForm = ({ login, schema, header, loginError }) => (
           placeholder="Password"
           required
         />
+        {allowChangePassword &&
+        loginError &&
+        /temporary password/.test(loginError) ? (
+          <Field
+            type="password"
+            name="newPassword"
+            placeholder="New Password"
+            required
+          />
+        ) : null}
         <ErrorMessage
           name="password"
           className="login__error"
