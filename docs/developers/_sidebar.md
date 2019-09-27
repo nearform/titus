@@ -4,7 +4,7 @@
     - [Overview](/developers/?id=Overview)
     - [Kits](/developers/?id=kits)
         - [Frontend Kit](/developers/packages/titus-frontend/)
-        - [Backend Kit](/developers/packages/titus-backend-fastify/)
+        - [Backend Kit](/developers/packages/titus-backend/)
         - [Documentation Kit](/developers/packages/titus-starter-docs/)
     - [Services](/developers/?id=services)
         - [Database Service](/developers/?id=database-service)
