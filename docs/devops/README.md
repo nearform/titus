@@ -12,7 +12,7 @@ To keep concerns separated, Titus is deployed to AWS using CircleCI. Its infrast
 
 
 ## Deploy Titus
-Titus runs on [Kubernetes] and can be deployed to [Azure], [AWS]. Low-level infrastructure is managed by [Terraform], with service-level infrastructure managed by [Kubernetes].
+Titus runs on [Kubernetes] and can be deployed to [Azure] and  [AWS]. Low-level infrastructure is managed by [Terraform], with service-level infrastructure managed by [Kubernetes].
 
 Titus uses [Taurus], a Terraform plugin that that understands how to set up Kubernetes and deploy different types of infrastructure and service with ease. We wrap __Taurus__ in a configuration repo, __titus-infra-*__ (where the provider's name is appended to the name), which includes:
 
@@ -21,9 +21,6 @@ Titus uses [Taurus], a Terraform plugin that that understands how to set up Kube
 
 How to set up the infrastructure varies from provider to provider, so provider specific guides are listed below.
 **Note:** You need to be proficient with your chosen provider as well as in Terraform.
-
-## Customise the Infrastructure
-**Details required, if necessary.**
 
 
 ### Deploy Titus on AWS Using CircleCI
@@ -38,7 +35,7 @@ Azure documentation will follow when an Azure pipelines file is available.
 Refer to [Deploy Titus on Azure Using Pipelines](devops/azure/) for more details, when available.
 
 
-## Build, Test and Deploy Using CI Pipelines
+## Build, Test and Deploy Using the CI Pipeline
 Titus includes a fully featured, production-ready CI pipeline. Titus uses CircleCI as its infrastructure of choice for continuous integration. The Titus CI pipeline includes all of the steps needed to build assets, lint and test, push containers, and deploy.
 
 ![titus-ci-pipeline](../img/titus-ci-pipeline.svg)
