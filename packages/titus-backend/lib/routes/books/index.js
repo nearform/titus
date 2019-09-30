@@ -10,7 +10,7 @@ async function books(server, options) {
       const { id } = req.params
       try {
         const client = await server.pg.connect()
-        const sql = 'SELECT * FROM books WHERE id=$1'
+        const sql = `SELECT *, to_char(published, 'YYYY-MM-DD') as published FROM books WHERE id=$1`
         const params = [id]
         const results = await client.query(sql, params)
         if (results.rows.length) {
@@ -31,7 +31,7 @@ async function books(server, options) {
     url: '/books',
     handler: async (req, res) => {
       try {
-        let sql = 'SELECT * FROM books'
+        let sql = `SELECT *, to_char(published, 'YYYY-MM-DD') as published FROM books`
         const params = []
         const validWhere = ['author', 'title', 'published']
         const where = []
