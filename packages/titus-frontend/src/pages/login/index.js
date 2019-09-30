@@ -11,8 +11,8 @@ const Login = () => (
           style={{
             width: '100%',
             height: '100%',
-            'margin-bottom': '10vh',
-            'margin-top': '10vh'
+            marginBottom: '10vh',
+            marginTop: '10vh'
           }}
         />
         <Form {...rest} />
