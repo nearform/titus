@@ -1,7 +1,10 @@
 'use strict'
 
-const { version } = require('../../../package')
 const fp = require('fastify-plugin')
+
+const { version } = require('../../../package')
+const { query } = require('../../services/pg')
+
 async function health(server, options) {
   server.register(require('under-pressure'), options.underPressure).route({
     method: 'GET',
@@ -9,10 +12,7 @@ async function health(server, options) {
     handler: async ({ log }) => {
       let dbRes
       try {
-        const client = await server.pg.connect()
-        dbRes = await client.query('SELECT $1::text as message', [
-          'Hello world!'
-        ])
+        dbRes = await query('SELECT $1::text as message', ['Hello world!'])
       } catch (err) {
         // swallow error
         log.debug({ err }, `failed to read DB during health check`)

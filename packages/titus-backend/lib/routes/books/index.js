@@ -1,6 +1,7 @@
 'use strict'
 
 const fp = require('fastify-plugin')
+const { get } = require('../../services/books')
 
 async function books(server, options) {
   server.route({
@@ -9,11 +10,8 @@ async function books(server, options) {
     handler: async (req, res) => {
       const { id } = req.params
       try {
-        const client = await server.pg.connect()
-        const sql = `SELECT *, to_char(published, 'YYYY-MM-DD') as published FROM books WHERE id=$1`
-        const params = [id]
-        const results = await client.query(sql, params)
-        if (results.rows.length) {
+        const results = await get(id)
+        if (results.length) {
           return res.send(results.rows[0])
         }
       } catch (err) {
@@ -31,21 +29,7 @@ async function books(server, options) {
     url: '/books',
     handler: async (req, res) => {
       try {
-        let sql = `SELECT *, to_char(published, 'YYYY-MM-DD') as published FROM books`
-        const params = []
-        const validWhere = ['author', 'title', 'published']
-        const where = []
-        Object.keys(req.query).forEach((key, i) => {
-          if (validWhere.indexOf(key) > -1) {
-            where.push(`${key}=$${i + 1}`)
-            params.push(req.query[key])
-          }
-        })
-        if (where.length) {
-          sql += ` WHERE ${where.join(' AND ')}`
-        }
-        const client = await server.pg.connect()
-        const results = (await client.query(sql, params)).rows
+        const results = await get()
         return res.send(results)
       } catch (err) {
         req.log.debug({ err }, 'failed to read DB for `GET /books` call')

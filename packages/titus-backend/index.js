@@ -2,6 +2,7 @@
 
 const startServer = require('./lib/server')
 const config = require('./lib/config')
+const pg = require('./lib/services/pg')
 
 const main = async () => {
   process.on('unhandledRejection', err => {
@@ -15,9 +16,13 @@ const main = async () => {
   const address = await server.listen(config.fastify)
   server.log.info(`Server running at: ${address}`)
 
+  await pg.connect()
+
   process.on('SIGINT', () => {
-    server.close().then(err => {
-      process.exit(err ? 1 : 0)
+    pg.disconnect().then(() => {
+      server.close().then(err => {
+        process.exit(err ? 1 : 0)
+      })
     })
   })
 }
