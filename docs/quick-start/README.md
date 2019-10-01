@@ -58,6 +58,9 @@ e553c840fbdc        postgres:10.4-alpine          titus-db
 
 Congratulations! You are now running Titus locally. You can check the `docker-compose.yml` file in the root of the repository for specifics of what is running in Docker.
 
+### Configure Hasura
+Hasura provides a GraphQL layer over the PostgreSQL database. To configure it [go to the Hasura console data section](hasura-console) and click the "Track All" button, next to "Untracked tables or views".
+
 ### Log In
 The application is accessed at `localhost:3000` in a web browser. First access requires you to log in to the system:
 
@@ -121,6 +124,7 @@ If you would like more information, select the documentation most relevant to yo
 [Titus]: https://github.com/nearform/titus
 [webpack-dev-server]: https://webpack.js.org/configuration/dev-server
 [Nodemon]: https://nodemon.io
+[hasura-console]: http://localhost:8080/console/data/schema/public
 
 <!-- Internal Links -->
 [DevOps]: devops/
