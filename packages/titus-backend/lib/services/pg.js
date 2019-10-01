@@ -26,9 +26,11 @@ const query = (sql, params = []) => {
   return pool.query(sql, params)
 }
 
+const getPool = () => pool
+
 module.exports = {
   connect,
   disconnect,
-  pool,
+  getPool,
   query
 }
