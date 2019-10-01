@@ -13,6 +13,14 @@ class Dashboard extends Component {
     this.setState({ books, loading: false })
   }
 
+  deleteBooksREST = async () => {
+    this.setState({ loading: true })
+    const response = await fetch('/books', { method: 'DELETE' })
+    const { message } = await response.json()
+    console.log(message)
+    this.setState({ books: false, loading: false })
+  }
+
   loadBooksGraphQL = async () => {
     this.setState({ loading: true })
     const response = await fetch('/graphql', {
@@ -22,10 +30,35 @@ class Dashboard extends Component {
       headers: { 'Content-Type': 'application/json' },
       method: 'POST'
     })
-    const {
-      data: { books }
-    } = await response.json()
-    this.setState({ books, loading: false })
+    const json = await response.json()
+    const { data, errors } = json
+    if (errors) {
+      errors.forEach(({ message }) => {
+        console.error(message)
+      })
+      return this.setState({ loading: false })
+    }
+    this.setState({ books: data.books, loading: false })
+  }
+
+  deleteBooksGraphQL = async () => {
+    this.setState({ loading: true })
+    const response = await fetch('/graphql', {
+      body: JSON.stringify({
+        query: 'mutation { delete_books(where: {}) { affected_rows } }'
+      }),
+      headers: { 'Content-Type': 'application/json' },
+      method: 'POST'
+    })
+    const json = await response.json()
+    const { errors } = json
+    if (errors) {
+      errors.forEach(({ message }) => {
+        console.error(message)
+      })
+      return this.setState({ loading: false })
+    }
+    this.setState({ books: false, loading: false })
   }
 
   render() {
@@ -62,6 +95,14 @@ class Dashboard extends Component {
               <button onClick={this.loadBooksREST}>Load Books via REST</button>
               <button onClick={this.loadBooksGraphQL}>
                 Load Books via GraphQL
+              </button>
+            </div>
+            <div className="books">
+              <button onClick={this.deleteBooksREST}>
+                Delete All Books via REST
+              </button>
+              <button onClick={this.deleteBooksGraphQL}>
+                Delete All Books via GraphQL
               </button>
             </div>
           </div>
