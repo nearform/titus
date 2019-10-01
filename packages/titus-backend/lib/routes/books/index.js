@@ -12,7 +12,7 @@ async function books(server, options) {
       try {
         const results = await get(id)
         if (results.length) {
-          return res.send(results.rows[0])
+          return res.send(results[0])
         }
       } catch (err) {
         req.log.debug(
