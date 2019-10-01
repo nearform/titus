@@ -39,16 +39,14 @@ npx serve -s -l 4000 docs
 This displays the following:
 
 ```sh
-┌──────────────────────────────────────────────────┐
-│                                                  │
-│   Serving!                                       │
-│                                                  │
-│   - Local:            http://localhost:4000      │
-│   - On Your Network:  http://192.168.1.60:4000   │
-│                                                  │
-│   Copied local address to clipboard!             │
-│                                                  │
-└──────────────────────────────────────────────────┘
+
+  Serving!
+
+  - Local:            http://localhost:4000
+  - On Your Network:  http://192.168.1.60:4000
+
+  Copied local address to clipboard!
+  
 ```
 
 The documentation is served on `localhost:4000` in this case.
