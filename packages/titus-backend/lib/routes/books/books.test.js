@@ -89,4 +89,39 @@ describe('books routes', () => {
       expect(pg.query).toHaveBeenCalledWith(`${baseQuery} WHERE id=$1`, ['123'])
     })
   })
+  describe('delete /books', () => {
+    it('should delete all books', async () => {
+      pg.query.mockResolvedValue({ rows: [] })
+      const response = await server.inject({
+        method: 'DELETE',
+        url: `${address}/books`
+      })
+
+      expect(response.statusCode).toEqual(200)
+      expect(Object.keys(JSON.parse(response.payload))).toEqual(['message'])
+      expect(pg.query.mock.calls[0]).toEqual(['DELETE FROM books'])
+    })
+    it('handles delete failure', async () => {
+      pg.query.mockResolvedValue({ rows: [{}] })
+      const response = await server.inject({
+        method: 'DELETE',
+        url: `${address}/books`
+      })
+
+      expect(response.statusCode).toEqual(500)
+      expect(Object.keys(JSON.parse(response.payload))).toEqual(['error'])
+      expect(pg.query.mock.calls[0]).toEqual(['DELETE FROM books'])
+    })
+    it('handles delete error', async () => {
+      pg.query.mockRejectedValue(new Error('error'))
+      const response = await server.inject({
+        method: 'DELETE',
+        url: `${address}/books`
+      })
+
+      expect(response.statusCode).toEqual(500)
+      expect(Object.keys(JSON.parse(response.payload))).toEqual(['error'])
+      expect(pg.query.mock.calls[0]).toEqual(['DELETE FROM books'])
+    })
+  })
 })
