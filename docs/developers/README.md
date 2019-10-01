@@ -1,6 +1,5 @@
-![titus-developers-quote]
-
 # Developers
+
 ## Overview
 A large factor in the success of a project rests in the ability of its developers to work unimpeded. Often, tooling for building and running a given stack locally reduces productivity.
 

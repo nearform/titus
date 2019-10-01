@@ -1,6 +1,5 @@
-![titus-devops-quote]
-
 # DevOps
+
 ## Overview
 Deployment for Titus is a fully featured, modern, production grade experience. There are a number of ways to look at Titus' deployment tooling. The pipeline can be broken into two types of deployment:
 * Infrastructure - handled by [Taurus] and [Terraform]
@@ -59,6 +58,3 @@ Refer to [Add a New Helm Chart](devops/helm-chart/) for more details.
 [AWS]: https://aws.amazon.com
 [Helm]: https://helm.sh
 [Kubernetes]: https://kubernetes.io
-
-<!-- Images -->
-[titus-devops-quote]: ../img/titus-devops-quote.svg
