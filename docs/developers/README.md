@@ -1,6 +1,5 @@
-![titus-developers-quote]
-
 # Developers
+
 ## Overview
 A large factor in the success of a project rests in the ability of its developers to work unimpeded. Often, tooling for building and running a given stack locally reduces productivity.
 
@@ -25,7 +24,6 @@ Kits are managed with [Lerna] so you can add more packages and also manage their
 Titus includes the following kits:
 * [Frontend Kit](developers/packages/titus-frontend/)
 * [Backend Kit](developers/packages/titus-backend/)
-* [Documentation Kit](developers/packages/titus-starter-docs/)
 
 All kits we provide include:
 - [Jest] for testing
@@ -71,15 +69,6 @@ The Titus backend kit consists of the following:
 * [Prettier] code format with [Standard] preset
 
 Refer to the section [Titus Backend](developers/packages/titus-backend/) for more details.
-
-### Documentation Kit
-Titus includes a documentation kit, __titus-starter-docs__, so you can document your application.
-
-This kit is GitHub Pages and CDN (Content Delivery Network) friendly and can be hosted in the folder of a given repo without the need to include dependencies solely to support documentation.
-
-Documents are powered by [docsify] which has no in-repo dependencies, and provides hot reloading when editing the documents.
-
-Refer to the section [Documentation Kit](developers/packages/titus-starter-docs/) for more details.
 
 ## Services
 Your application is likely to depend on both external and cloud services.

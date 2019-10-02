@@ -13,9 +13,7 @@ Fig.1 Titus Feature Overview
 We provide everything you need to start deploying features in a production ready, scalable manner.
 
 ## Developer Experience
-Developer experience using Titus is first class. We want you as a developer to enjoy using Titus so much that it becomes your stack of choice. To ensure we keep to this ideal, our development motto is:
-
-![titus-developer-statement]
+Developer experience using Titus is first class. We want you as a developer to enjoy using Titus so much that it becomes your stack of choice.
 
 Titus is well documented, includes modern tooling, for example, [Storybook], and has linting and testing as first-class citizens. Titus supports common-sense inclusions such as quality logging and Docker convenience commands for day-to-day building and working with the stack locally.
 
@@ -65,6 +63,5 @@ The quickest way to get exploring is to view our Quick Start Guide. It covers fo
 [logo]: img/Accel_Logo_Titus.svg#logo
 [titus-feature-overview]: img/titus-feature-overview.svg
 [titus-deployment-workflow]: img/titus-deployment-workflow.svg
-[titus-developer-statement]: img/titus-developer-statement.svg
 [titus-ci-pipeline]: img/titus-ci-pipeline.svg
 [titus-pipeline]: img/titus-pipeline.svg

@@ -1,6 +1,4 @@
-![quick-start-quote]
-
-# Titus Quick Start Guide
+# Quick Start Guide
 
 Titus is easy to install and run. We encourage developers to install Titus locally themselves - it is easy to navigate, start and stop. Before starting, let's ensure you have all of the prerequisites installed.
 
@@ -129,7 +127,3 @@ If you would like more information, select the documentation most relevant to yo
 [DevOps]: devops/
 [Developers]: developers/
 [DevelopersBe]: developers/?id=backend-kit
-
-
-<!-- Images -->
-[quick-start-quote]: ../img/titus-quick-start-quote.svg
