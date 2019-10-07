@@ -10,7 +10,6 @@
             - [Run the Backend Locally](/developers/packages/titus-backend/?id=run-the-backend-locally)
             - [Test and Lint the Backend](/developers/packages/titus-backend/?id=test-and-lint-the-backend)
             - [Manage the Backend Database](/developers/packages/titus-backend/?id=manage-the-backend-database)
-        - [Documentation Kit](/developers/packages/titus-starter-docs/)
     - [Services](/developers/?id=services)
 - [DevOps](/devops/)
 - [Contribute to Titus](/contributing/)
