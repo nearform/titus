@@ -91,6 +91,45 @@ The following commands can be used with your Titus backend database:
 * `npm run db:migrate` - apply database migration scripts from `tools/migrations/build` with [postgrator]
 * `npm run db:seed` - seed the database with dev data from `tools/migrations/seed_dev` with [postgrator]
 
+## Multi-tenancy with AWS Amplify
+The first step is to add a property to Cognito users, to be able to distinguish their tenancy.
+
+In the Cognito User Pool's settings, under `Attributes`, [you can add a custom attribute](aws-custom-attributes). For example it could be `custom:schema`, which is then `schemaA` or `schemaB`.
+
+You will then need to send the AWS Amplify `accessToken`'s `jwtToken` and `username` from the front-end, for validation by the back-end. e.g.
+```
+import Auth from '@aws-amplify/auth'
+...
+const headers = {}
+const {
+  accessToken: { jwtToken, payload: { username } }
+} = await Auth.currentSession()
+headers.Authorization = `${username}:${jwtToken}`
+const response = await fetch('/foobar', { headers })
+```
+
+[AWS provides instructions](aws-jwt-validation) on how to validate the `jwtToken` in the back-end.
+
+You can then get the user's data to determine which schema to use. e.g.
+```
+const { CognitoIdentityServiceProvider } = require('aws-sdk')
+...
+const cognito = new CognitoIdentityServiceProvider()
+const params = {
+  UserPoolId: AWS_POOL_ID,
+  Username: 'foobar'
+}
+cognito.adminGetUser(params, (err, response) => {
+  if (err) {
+    throw err
+  }
+  const { UserAttributes } = response
+  const schema = UserAttributes.find(a => a.Name === 'custom:schema').Value
+  ...
+})
+```
+
+
 
 [Jest]: https://jestjs.io
 [ESLint]: https://eslint.org
@@ -106,4 +145,6 @@ The following commands can be used with your Titus backend database:
 [faker]: http://marak.github.io/faker.js
 [postgrator]: https://github.com/rickbergfalk/postgrator#readme
 [docker-compose]: https://docs.docker.com/compose
+[aws-custom-attributes]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-attributes.html#user-pool-settings-custom-attributes
+[aws-jwt-validation]: https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html
 
