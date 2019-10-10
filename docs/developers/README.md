@@ -117,7 +117,7 @@ Refer to [Configure Authentication] for more details.
 [Nodemon]: https://nodemon.io
 [node-postgres]: https://node-postgres.com
 [docsify]: https://docsify.js.org
-[Lerna]: https://lernajs.io
+[Lerna]: https://lerna.js.org/
 [webpack-dev-server]: https://webpack.js.org/configuration/dev-server
 [jwt]: https://jwt.io
 [nock]: https://github.com/nock/nock#readme
