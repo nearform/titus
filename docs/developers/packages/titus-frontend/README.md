@@ -64,7 +64,7 @@ To enable it, do the following:
    import Authentication, { Login } from './components/auth-providers/auth0'
    ```
    
-## AWS Amplify Provider
+### AWS Amplify Provider
 
 If you have a user and identity pools configured in AWS Cognito, you can use [AWS Amplify Authentication][aws-amplify-authentication].
 In this case, the entered username and password is validated against the specified user pool.
