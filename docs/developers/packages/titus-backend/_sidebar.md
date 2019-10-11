@@ -10,6 +10,7 @@
             - [Run the Backend Locally](/developers/packages/titus-backend/?id=run-the-backend-locally)
             - [Test and Lint the Backend](/developers/packages/titus-backend/?id=test-and-lint-the-backend)
             - [Manage the Backend Database](/developers/packages/titus-backend/?id=manage-the-backend-database)
+            - [Multi-tenancy with AWS Amplify](/developers/packages/titus-backend/?id=multi-tenancy-with-aws-amplify)
     - [Services](/developers/?id=services)
 - [DevOps](/devops/)
 - [Contribute to Titus](/contributing/)
