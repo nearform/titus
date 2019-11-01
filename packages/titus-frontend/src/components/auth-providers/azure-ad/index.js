@@ -8,7 +8,6 @@ export default class Authentication {
   }
 
   isAuthenticated() {
-    // localStorage.getItem(authContext.CONSTANTS.STORAGE.IDTOKEN)
     const user = authContext.getCachedUser()
     if (user) {
       const { username } = user
