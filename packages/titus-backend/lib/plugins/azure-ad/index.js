@@ -106,7 +106,7 @@ async function azureAD(server, options) {
     const token = authorization.replace('Bearer ', '')
     try {
       const verifiedToken = await verifyJWT(options.azureAD, token)
-      const user = getUser(options.azureAD, verifiedToken)
+      const user = await getUser(options.azureAD, verifiedToken)
       req.user = user
     } catch (err) {
       res.code(400)
