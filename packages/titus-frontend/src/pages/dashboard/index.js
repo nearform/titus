@@ -14,11 +14,17 @@ class Dashboard extends Component {
     }
   }
 
-  testAzureAuth = adIdToken => {
+  testAzureAuth = async adIdToken => {
     const headers = {
       Authorization: `Bearer ${adIdToken}`
     }
-    console.log(headers)
+    try {
+      const response = await fetch('/user', { headers })
+      const json = await response.json()
+      alert(`Azure UPN: ${json.userPrincipalName}`)
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   render() {
