@@ -20,6 +20,8 @@ const config = envSchema({
     .prop('AUTH0_GRANT_TYPE', S.string())
     .prop('JTW_SECRET', S.string().default('3000'))
     .prop('AD_TENANT', S.string())
+    .prop('AD_APP_ID', S.string())
+    .prop('AD_SECRET', S.string())
 })
 
 const isProduction = /^\s$production\s*$/i.test(config.NODE_ENV)
@@ -63,6 +65,8 @@ module.exports = {
     secret: config.JTW_SECRET
   },
   azureAD: {
+    appID: config.AD_APP_ID,
+    secret: config.AD_SECRET,
     tenant: config.AD_TENANT
   }
 }
