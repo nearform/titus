@@ -26,6 +26,14 @@ Accessing these routes requires a valid jwt value in the `Authorization` HTTP he
 
 Have a look at `lib/plugins/auth0/auth0.test.js` for some examples.
 
+### Azure AD Plugin
+
+This adds JWT validation and getting the requesting user through Microsoft Graph, to the routes specified in `lib/config/auth-routes.js`.
+
+It expects to be supplied an `Authorization` header as `Bearer ${IDTOKEN}`.
+
+It requires the `AD_*` env vars to be set in `.env`.
+
 ### The pg Plugin
 
 The pg plugin automatically instruments other routes with a [pg][fastify-postgres] so they can issue queries against the database.
