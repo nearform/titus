@@ -19,6 +19,7 @@ const config = envSchema({
     .prop('AUTH0_AUDIENCE', S.string())
     .prop('AUTH0_GRANT_TYPE', S.string())
     .prop('JTW_SECRET', S.string().default('3000'))
+    .prop('AD_TENANT', S.string())
 })
 
 const isProduction = /^\s$production\s*$/i.test(config.NODE_ENV)
@@ -60,5 +61,8 @@ module.exports = {
   },
   jwt: {
     secret: config.JTW_SECRET
+  },
+  azureAD: {
+    tenant: config.AD_TENANT
   }
 }
