@@ -6,6 +6,8 @@ const jws = require('jws')
 const jwt = require('jsonwebtoken')
 const request = require('request')
 
+const authRoutes = require('../../config/auth-routes')
+
 const get = options =>
   new Promise((resolve, reject) => {
     request.get(options, (error, response, body) => {
@@ -99,10 +101,16 @@ const getUser = async (config, token, cb) => {
 async function azureAD(server, options) {
   server.addHook('onRequest', async (req, res) => {
     const {
-      headers: { authorization = '' }
-      // method,
-      // originalUrl
+      headers: { authorization = '' },
+      method,
+      originalUrl
     } = req.raw
+    const authRoute = authRoutes.find(
+      r => r.method === method && r.regex.test(originalUrl)
+    )
+    if (!authRoute) {
+      return true
+    }
     const token = authorization.replace('Bearer ', '')
     try {
       const verifiedToken = await verifyJWT(options.azureAD, token)

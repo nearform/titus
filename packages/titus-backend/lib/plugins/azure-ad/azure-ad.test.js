@@ -30,6 +30,11 @@ describe('users plugin', () => {
       method: 'GET',
       url: '/user'
     })
+    server.route({
+      handler: async (req, res) => res.send({ foo: 'bar' }),
+      method: 'GET',
+      url: '/test'
+    })
     await server.ready()
   })
 
@@ -132,6 +137,20 @@ describe('users plugin', () => {
     request.post.mockClear()
     jwsSpy.mockClear()
     jwtSpy.mockClear()
+  })
+  it('does not authenticate', async () => {
+    const response = await server.inject({
+      method: 'GET',
+      url: '/test'
+    })
+
+    expect(JSON.parse(response.body)).toEqual({ foo: 'bar' })
+    expect(request.get).not.toHaveBeenCalled()
+    expect(request.post).not.toHaveBeenCalled()
+    expect(jws.decode).not.toHaveBeenCalled()
+    expect(jwt.verify).not.toHaveBeenCalled()
+    request.get.mockClear()
+    request.post.mockClear()
   })
   it('fails, no matching keys', async () => {
     request.get.mockImplementation((props, cb) => {
