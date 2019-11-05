@@ -9,7 +9,7 @@ describe('user route', () => {
     server.addHook('onRequest', async (req, res) => {
       req.user = { foo: 'bar' }
     })
-    await server.listen(5001)
+    await server.ready()
   })
 
   beforeEach(() => {
@@ -22,7 +22,7 @@ describe('user route', () => {
   it('should return user', async () => {
     const response = await server.inject({
       method: 'GET',
-      url: `/user`
+      url: '/user'
     })
 
     expect(JSON.parse(response.payload)).toEqual({ foo: 'bar' })
