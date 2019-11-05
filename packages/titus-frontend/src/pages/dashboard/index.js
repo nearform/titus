@@ -6,6 +6,9 @@ class Dashboard extends Component {
   state = { adIdToken: false }
 
   componentDidMount() {
+    if (!authContext) {
+      return
+    }
     const adIdToken = localStorage.getItem(
       authContext.CONSTANTS.STORAGE.IDTOKEN
     )
