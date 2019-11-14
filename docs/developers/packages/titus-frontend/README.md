@@ -64,7 +64,7 @@ To enable it, do the following:
    import Authentication, { Login } from './components/auth-providers/auth0'
    ```
    
-## AWS Amplify Provider
+### AWS Amplify Provider
 
 If you have a user and identity pools configured in AWS Cognito, you can use [AWS Amplify Authentication][aws-amplify-authentication].
 In this case, the entered username and password is validated against the specified user pool.
@@ -144,6 +144,24 @@ npm run build
 This command produces a new bundle in `build/` folder.
 
 
+## Add Material UI
+
+Google provides a Material React package, so you can easily import their UI elements as components and use them to build up the front-end interface:
+```
+npm install @material-ui/core --save
+```
+For example:
+```
+import Button from '@material-ui/core/Button'
+
+const MyComponent = ({ handleClick }) => (
+  <Button variant='contained' onClick={handleClick}>
+    Hello World
+  </Button>
+)
+```
+For more information, please [read the Material UI documentation](material-ui).
+
 
 [React]: https://reactjs.org
 [CRA]: https://facebook.github.io/create-react-app
@@ -160,3 +178,4 @@ This command produces a new bundle in `build/` folder.
 [webpack-dev-server]: https://webpack.js.org/configuration/dev-server
 [auth0-login]: https://auth0.com/docs/universal-login
 [aws-amplify-authentication]: https://aws-amplify.github.io/docs/js/authentication
+[material-ui]: https://material-ui.com/getting-started/installation/
