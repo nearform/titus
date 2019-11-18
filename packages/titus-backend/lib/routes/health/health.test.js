@@ -3,7 +3,7 @@
 const { version } = require('../../../package')
 
 describe('health route', () => {
-  let server, address
+  let server
   const client = {
     query: jest.fn().mockResolvedValue([])
   }
@@ -12,7 +12,7 @@ describe('health route', () => {
     server = require('fastify')()
     server.register(require('fastify-postgres'))
     server.register(require('.'))
-    address = await server.listen(5001)
+    await server.ready()
     server.pg.connect = jest.fn()
   })
 
@@ -28,7 +28,7 @@ describe('health route', () => {
     server.pg.connect.mockResolvedValue(client)
     const response = await server.inject({
       method: 'GET',
-      url: `${address}/healthcheck`
+      url: '/healthcheck'
     })
 
     expect(response.statusCode).toEqual(200)
@@ -51,7 +51,7 @@ describe('health route', () => {
     server.pg.connect.mockResolvedValue(client)
     const response = await server.inject({
       method: 'GET',
-      url: `${address}/healthcheck`
+      url: '/healthcheck'
     })
 
     expect(response.statusCode).toEqual(200)
@@ -70,7 +70,7 @@ describe('health route', () => {
     server.pg.connect.mockResolvedValue(client)
     const response = await server.inject({
       method: 'GET',
-      url: `${address}/healthcheck`
+      url: '/healthcheck'
     })
 
     expect(response.statusCode).toEqual(200)

@@ -71,11 +71,24 @@ In this case, the entered username and password is validated against the specifi
 
 To enable it, do the following:
 1. Provide AWS details in the **titus-frontend** `.env` file (`REACT_APP_AWS_*` variables)
-1. Change the provider variable in the file `src/app.js`, as follows:
+2. Change the provider variable in the file `src/app.js`, as follows:
   ```js
   // import Authentication, { Login } from './components/auth-providers/in-memory'
   import Authentication, { Login } from './components/auth-providers/aws-amplify'
   ```
+  
+## Azure Active Directory Provider
+
+Instead of showing the user a login form, this redirects them to the specified Azure Active Directory tenant to login. It will then redirect the user back to the React app which will confirm authentication via the localstorage values Azure stores in the web browser.
+
+To enable it, do the following:
+1. Provide Azure AD details in the **titus-frontend** `.env` file (`REACT_APP_AD_*` variables)
+2. Change the provider variable in the file `src/app.js`, as follows:
+  ```js
+  // import Authentication, { Login } from './components/auth-providers/in-memory'
+  import Authentication, { Login } from './components/auth-providers/azure-ad'
+  ```
+3. Change the `render` method in `src/index.js` to the commented out replacement which wraps it in `runWithAdal`.
 
 ## Install the Frontend
 To install Titus frontend, run the following command:
