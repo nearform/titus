@@ -1,17 +1,18 @@
 import React from 'react'
-import { configure, addDecorator } from '@storybook/react'
+import { configure, addDecorator, addParameters } from '@storybook/react'
 import { withOptions } from '@storybook/addon-options'
 import { withInfo } from '@storybook/addon-info'
 import { checkA11y } from '@storybook/addon-a11y'
+import { addReadme } from 'storybook-readme'
 
-import theme from './theme'
+import newTheme from './new-theme'
 
-addDecorator(
-  withOptions({
+addParameters({
+  options: {
     name: 'Titus',
-    theme
-  })
-)
+    theme: newTheme
+  }
+})
 
 addDecorator(
   withInfo({
@@ -21,6 +22,7 @@ addDecorator(
   })
 )
 
+addDecorator(addReadme)
 addDecorator(checkA11y)
 
 const storyWrapper = story => <div className="story-wrapper">{story()}</div>
