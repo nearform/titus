@@ -18,7 +18,7 @@ const config = envSchema({
     .prop('AUTH0_CLIENT_SECRET', S.string())
     .prop('AUTH0_AUDIENCE', S.string())
     .prop('AUTH0_GRANT_TYPE', S.string())
-    .prop('JTW_SECRET', S.string().default('3000'))
+    .prop('JWT_SECRET', S.string().default('3000'))
     .prop('AD_TENANT', S.string())
     .prop('AD_APP_ID', S.string())
     .prop('AD_SECRET', S.string())
@@ -62,7 +62,7 @@ module.exports = {
     grantType: config.AUTH0_GRANT_TYPE
   },
   jwt: {
-    secret: config.JTW_SECRET
+    secret: config.JWT_SECRET
   },
   azureAD: {
     appID: config.AD_APP_ID,
