@@ -67,6 +67,7 @@ The Titus backend kit consists of the following:
 * [Jest], [nock] and [faker] test tools
 * [ESLint] code linter
 * [Prettier] code format with [Standard] preset
+* [Swagger] interactive API documentation, can be accessed on the endpoint /documentation
 
 Refer to the section [Titus Backend](developers/packages/titus-backend/) for more details.
 
@@ -127,3 +128,4 @@ Refer to [Configure Authentication] for more details.
 [docker-compose]: https://docs.docker.com/compose
 [Standard]: https://standardjs.com/
 [config]: https://12factor.net/config
+[Swagger]: https://swagger.io/

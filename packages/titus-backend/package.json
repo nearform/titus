@@ -28,6 +28,7 @@
     "fastify-jwt": "^1.0.0",
     "fastify-plugin": "^1.6.0",
     "fastify-postgres": "^2.0.0",
+    "fastify-swagger": "^2.5.0",
     "fastify-url-data": "^2.3.0",
     "fluent-schema": "^0.7.3",
     "jwk-to-pem": "^2.0.1",

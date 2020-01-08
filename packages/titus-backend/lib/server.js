@@ -16,6 +16,7 @@ const fp = require('fastify-plugin')
 async function plugin(server, config) {
   server
     .register(cors, config.cors)
+    .register(require('fastify-swagger'), require('./config/swagger'))
     .register(autoLoad, {
       dir: path.join(__dirname, 'plugins'),
       options: config
