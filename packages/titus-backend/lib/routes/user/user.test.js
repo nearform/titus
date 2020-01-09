@@ -7,7 +7,7 @@ describe('user route', () => {
     server = require('fastify')()
     server.register(require('.'))
     server.addHook('onRequest', async (req, res) => {
-      req.user = { foo: 'bar' }
+      req.user = { id: 'id-01' }
     })
     await server.ready()
   })
@@ -25,6 +25,6 @@ describe('user route', () => {
       url: '/user'
     })
 
-    expect(JSON.parse(response.payload)).toEqual({ foo: 'bar' })
+    expect(JSON.parse(response.payload)).toEqual({ id: 'id-01' })
   })
 })

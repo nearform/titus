@@ -6,6 +6,29 @@ async function health(server, options) {
   server.register(require('under-pressure'), options.underPressure).route({
     method: 'GET',
     url: '/healthcheck',
+    schema: {
+      tags: ['healthcheck'],
+      response: {
+        200: {
+          description: 'Successful response',
+          type: 'object',
+          properties: {
+            version: { type: 'string' },
+            serverTimestamp: { type: 'string' },
+            status: { type: 'string' },
+            memoryUsage: {
+              type: 'object',
+              properties: {
+                eventLoopDelay: { type: 'string' },
+                rssBytes: { type: 'number' },
+                heapUsed: { type: 'number' }
+              }
+            },
+            db: { type: 'string' }
+          }
+        }
+      }
+    },
     handler: async ({ log }) => {
       let dbRes
       try {

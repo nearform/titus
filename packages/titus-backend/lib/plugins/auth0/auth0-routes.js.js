@@ -29,6 +29,16 @@ async function authRoutes(server, options) {
     .route({
       method: 'POST',
       url: '/login',
+      schema: {
+        tags: ['auth0'],
+        body: {
+          type: 'object',
+          properties: {
+            username: { type: 'string' },
+            password: { type: 'string' }
+          }
+        }
+      },
       handler: async ({ log, body: { username, password } }, reply) => {
         try {
           const { data } = await axios({
@@ -68,6 +78,14 @@ async function authRoutes(server, options) {
     .route({
       method: 'GET',
       url: '/auth',
+      schema: {
+        tags: ['auth0'],
+        security: [
+          {
+            apiKey: []
+          }
+        ]
+      },
       preHandler: server.auth([server.verifyJWT]),
       handler: async ({ log, user }) => {
         return user
