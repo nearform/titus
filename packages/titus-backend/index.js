@@ -10,6 +10,7 @@ const main = async () => {
   })
 
   const server = require('fastify')(config.fastifyInit)
+  server.register(require('fastify-helmet'))
   server.register(startServer, config)
 
   const address = await server.listen(config.fastify)
