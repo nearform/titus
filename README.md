@@ -20,4 +20,4 @@ Titus is a production grade, end-to-end stack for modern web application develop
 [ci-badge]: https://circleci.com/gh/nearform/titus.svg?style=svg&circle-token=ffb218c0396d2d09567299ee18ad345ef414e7d3
 
 [logo-img]: docs/img/Accel_Logo_Titus.svg
-[docs]: https://nearform.github.io/titus
+[docs]: https://nf-titus.netlify.com/#/

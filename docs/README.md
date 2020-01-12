@@ -60,7 +60,7 @@ The quickest way to get exploring is to view our Quick Start Guide. It covers fo
 [Quick Start Guide]: quick-start/
 
 <!-- Images -->
-[logo]: img/Accel_Logo_Titus.svg#logo
+[logo]: img/Accel_Logo_Titus.svg
 [titus-feature-overview]: img/titus-feature-overview.svg
 [titus-deployment-workflow]: img/titus-deployment-workflow.svg
 [titus-ci-pipeline]: img/titus-ci-pipeline.svg
