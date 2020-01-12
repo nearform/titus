@@ -21,7 +21,8 @@ const LoginForm = ({
       if (login) login({ username, password, newPassword })
       resetForm(values)
     }}
-    render={({ handleSubmit, isSubmitting }) => (
+  >
+    {({ handleSubmit, isSubmitting }) => (
       <form noValidate onSubmit={handleSubmit}>
         <h1>{header}</h1>
         <Field type="text" name="username" placeholder="Username" required />
@@ -57,7 +58,7 @@ const LoginForm = ({
         </button>
       </form>
     )}
-  />
+  </Formik>
 )
 
 LoginForm.propTypes = {
