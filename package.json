@@ -17,7 +17,9 @@
     "start:all": "npm run start",
     "stop:all": "npm run docker:dev:stop",
     "test": "lerna run --parallel test",
-    "test:all": "npm run test"
+    "test:all": "npm run test",
+    "lint:staged": "lerna run lint:staged",
+    "test:related": "lerna run test:related"
   },
   "devDependencies": {
     "docsify-cli": "^4.4.0",
@@ -26,7 +28,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lerna run --concurrency 1 --stream lint:staged"
+      "pre-commit": "npm run lint:staged && npm run test:related",
+      "pre-push": "npm run lint:all && npm run test"
     }
   }
 }
