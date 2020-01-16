@@ -50,22 +50,6 @@ jobs:
           root: .
           paths:
             - .
-  lint:
-    <<: *defaults
-    steps:
-      - attach_workspace:
-          at: .
-      - run: npm run lint:all
-  test:
-    <<: *defaults
-    steps:
-      - attach_workspace:
-          at: .
-      - run:
-          name: test
-          command: |
-            npm run create:env
-            npm run test
   lighthouse:
     <<: *defaults
     steps:
@@ -212,16 +196,8 @@ workflows:
   untagged_build:
     jobs:
       - install
-      - lint:
-          requires:
-            - install
-      - test:
-          requires:
-            - install
       - build:
           requires:
-            - test
-            - lint
             - install
       - push-containers:
           requires:
