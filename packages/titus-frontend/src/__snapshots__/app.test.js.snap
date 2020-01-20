@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App /> should render correctly when path is / and is not authenticated 1`] = `
+<DocumentFragment>
+  <div
+    class="loader"
+  />
+</DocumentFragment>
+`;
+
+exports[`<App /> should render correctly when path is /login and is authenticated 1`] = `
+<DocumentFragment>
+  <div
+    class="container"
+  >
+    <img
+      alt="Titus logo"
+      src="img/Accel_Logo_Titus.svg"
+      style="width: 100%; height: 100%; margin-bottom: 10vh; margin-top: 10vh;"
+    />
+    <form
+      novalidate=""
+    >
+      <h1>
+        Note: Any username followed by a password with at least four
+        characters containing at least one letter or number will work.
+      </h1>
+      <input
+        name="username"
+        placeholder="Username"
+        required=""
+        type="text"
+        value=""
+      />
+      <input
+        name="password"
+        placeholder="Password"
+        required=""
+        type="password"
+        value=""
+      />
+      <button
+        class="button"
+        type="submit"
+      >
+        Login
+      </button>
+    </form>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<App /> should render correctly when path is /login and is not authenticated 1`] = `
+<DocumentFragment>
+  <div
+    class="container"
+  >
+    <img
+      alt="Titus logo"
+      src="img/Accel_Logo_Titus.svg"
+      style="width: 100%; height: 100%; margin-bottom: 10vh; margin-top: 10vh;"
+    />
+    <form
+      novalidate=""
+    >
+      <h1>
+        Note: Any username followed by a password with at least four
+        characters containing at least one letter or number will work.
+      </h1>
+      <input
+        name="username"
+        placeholder="Username"
+        required=""
+        type="text"
+        value=""
+      />
+      <input
+        name="password"
+        placeholder="Password"
+        required=""
+        type="password"
+        value=""
+      />
+      <button
+        class="button"
+        type="submit"
+      >
+        Login
+      </button>
+    </form>
+  </div>
+</DocumentFragment>
+`;
