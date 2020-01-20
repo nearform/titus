@@ -41,7 +41,7 @@ jobs:
         run: |
           npm ci
           npm run create:env
-          npm run test
+          npm run test:all
         env:
           CI: true
   lint:

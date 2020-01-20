@@ -1,44 +1,29 @@
 {
-  "name": "titus-backend",
-  "version": "1.0.0-alpha.1",
+  "name": "titus-db-manager",
+  "version": "1.0.0",
   "private": true,
-  "description": "The backend for the Titus project using fastify",
+  "description": "Database stuff for Titus",
   "main": "index.js",
   "scripts": {
     "create:env": "node -r fs -e \"fs.copyFileSync('.env.sample', '.env', fs.constants.COPYFILE_EXCL)\"",
+    "db:up": "docker-compose up",
+    "db:down": "docker-compose down",
+    "db:delete": "docker volume rm titus_titus-pg-data",
+    "db:migrate": "node ./index.js migrate",
+    "db:seed": "node ./index.js seed",
+    "db:truncate": "node ./index.js truncate",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "lint:staged": "lint-staged",
-    "start": "nodemon --config .nodemonrc .",
     "test": "jest --config .jest.json --coverage",
     "test:watch": "jest --config .jest.json --watch --verbose",
     "test:related": "jest --config .jest.json --onlyChanged"
   },
   "dependencies": {
-    "axios": "^0.19.0",
-    "dotenv": "^6.2.0",
-    "dotenv-expand": "^4.2.0",
-    "env-schema": "^1.0.0",
-    "fastify": "^2.7.0",
-    "fastify-auth": "^0.5.0",
-    "fastify-autoload": "^1.0.0",
-    "fastify-cors": "^2.1.3",
-    "fastify-helmet": "^3.0.2",
-    "fastify-jwt": "^1.0.0",
-    "fastify-plugin": "^1.6.0",
-    "fastify-postgres": "^2.0.0",
-    "fastify-swagger": "^2.5.0",
-    "fastify-url-data": "^2.3.0",
-    "fluent-schema": "^0.7.3",
-    "jwk-to-pem": "^2.0.1",
-    "jwks-rsa": "^1.3.0",
-    "jws": "^3.2.2",
-    "nodemon": "^1.18.7",
-    "pg": "^7.8.0",
-    "pg-pool": "^2.0.6",
-    "pg-range": "^1.0.1",
-    "request": "^2.88.0",
-    "under-pressure": "^3.1.0"
+    "dotenv": "^8.2.0",
+    "dotenv-expand": "^5.1.0",
+    "pg": "^7.12.1",
+    "postgrator": "^3.10.2"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
@@ -53,10 +38,13 @@
     "eslint-plugin-standard": "^4.0.0",
     "faker": "^4.1.0",
     "jest": "^24.0.0",
-    "jsonwebtoken": "^8.5.1",
     "lint-staged": "^8.1.4",
-    "nock": "^10.0.6",
     "prettier": "^1.16.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
     "*.js": [

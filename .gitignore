@@ -2,6 +2,7 @@
 
 # dependencies
 node_modules
+coverage
 
 # misc
 .DS_Store
