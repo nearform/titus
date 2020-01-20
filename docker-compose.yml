@@ -13,9 +13,7 @@ services:
       - 5432:5432
     volumes:
       - titus-pg-data:/var/lib/postgresql/data
-      - ./packages/titus-backend/tools/initdb:/docker-entrypoint-initdb.d
-
+      
 volumes:
   titus-pg-data:
-    # run `docker volume create --name titus-pg-data -d local`
-    external: true
+    external: false
