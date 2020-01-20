@@ -2,33 +2,66 @@ name: CI
 on: pull_request
 
 jobs:
-    test:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v1
-              with:
-                  fetch-depth: 1
-            - name: Setup Node.js
-              uses: actions/setup-node@v1
-              with:
-                  node-version: 10.15.0
-            - name: Installing dependencies
-              run: npm install
-            - name: Running create env
-              run: npm run create:env
-            - name: Running tests
-              run: npm run test
-    lint:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v1
-              with:
-                  fetch-depth: 1
-            - name: Setup Node.js
-              uses: actions/setup-node@v1
-              with:
-                  node-version: 10.15.0
-            - name: Installing dependencies
-              run: npm install
-            - name: Running eslint
-              run: npm run lint:all
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [8.x, 10.x, 12.x]
+    steps:
+      - name: Checking out code
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Running build command
+        run: |
+          npm ci
+          npm run create:env
+          npm run build
+        env:
+          CI: true
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [8.x, 10.x, 12.x]
+    steps:
+      - name: Checking out code
+      - uses: actions/checkout@v1
+        with:
+            fetch-depth: 1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Running test command
+        run: |
+          npm ci
+          npm run create:env
+          npm run test
+        env:
+          CI: true
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [8.x, 10.x, 12.x]
+    steps:
+      - name: Checking out code
+      - uses: actions/checkout@v1
+        with:
+            fetch-depth: 1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Running test command
+        run: |
+          npm ci
+          npm run create:env
+          npm run lint:all
+        env:
+          CI: true
