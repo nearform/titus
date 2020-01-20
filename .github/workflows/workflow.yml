@@ -20,7 +20,7 @@ jobs:
         run: |
           npm ci
           npm run create:env
-          npm run build
+          npm run build:all
         env:
           CI: true
   test:
