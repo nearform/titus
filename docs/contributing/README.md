@@ -1,18 +1,17 @@
 # Contribute to Titus
 
 # Code
-To follow...
+Code contributions are accepted back to Titus, please make an issue to discuss your change first.
 
 # Documentation
 We welcome documentation contributions. Our documentation can be viewed live at [nearform.github.io/titus][docs]
 
 ## Run the Documentation Locally
 Our documentation is run by serving the docs folder at a given port.
-If you have node installed, you can use `docsfiy-cli`.
 
 From the root folder on a command console, enter the command:
 ```sh
-npm run doc:serve
+npm run start:docs
 ```
 
 This displays the following:

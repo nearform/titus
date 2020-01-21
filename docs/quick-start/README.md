@@ -33,6 +33,57 @@ npm run create:env
 
 You can read more about configuring the environment in the [Developers][DevelopersBe] section of our documentation.
 
+## Bring up the Database
+Todo
+
+To spin up the database run the command:
+
+```sh
+npm run db:up
+```
+
+The command `docker ps` produces a log of the running set of containers, in our case, the Postgres database. For example:
+
+```sh
+CONTAINER ID        IMAGE                         NAMES
+e553c840fbdc        postgres:10.4-alpine          titus-db
+```
+
+A volume will also be created to handle data:
+
+```sh
+CONTAINER ID        IMAGE                         NAMES
+e553c840fbdc        postgres:10.4-alpine          titus-db
+```
+
+Included with Titus is the functionality for migrating and seeding databases. To see this in action you can run:
+
+```
+npm run db:migrate
+```
+
+```
+npm run db:seed
+```
+
+Should you wish to truncate the database of all data this can be done with the following command:
+
+```
+npm run db:truncate
+```
+
+To spin down the database run:
+
+```
+npm run db:down
+```
+
+and to delete the data volume run:
+
+```
+npm run db:delete
+```
+
 ## Run the Stack
 Titus runs your application locally, leveraging Docker for external services such as a database.
 We take advantage of Lerna shortcuts to start all the packages in sequence.
@@ -47,12 +98,7 @@ npm run start:all
 
 Frontend and backend logs are output to the console if you run the stack with the command above.
 
-The command `docker ps` produces a log of the running set of containers, in our case, the Postgres database. For example:
 
-```sh
-CONTAINER ID        IMAGE                         NAMES
-e553c840fbdc        postgres:10.4-alpine          titus-db
-```
 
 Congratulations! You are now running Titus locally. You can check the `docker-compose.yml` file in the root of the repository for specifics of what is running in Docker.
 
