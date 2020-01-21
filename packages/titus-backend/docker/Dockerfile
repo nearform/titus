@@ -8,7 +8,6 @@ COPY index.js /titus/index.js
 COPY lib /titus/lib
 COPY node_modules /titus/node_modules
 COPY package.json /titus/package.json
-COPY tools /titus/tools
 
 # Start the server
 CMD npm run start
