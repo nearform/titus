@@ -1,0 +1,65 @@
+on:
+  push:
+    branches:
+      - master
+
+name: Deploy containers to Amazon ECS
+
+jobs:
+  deploy:
+    name: Deploy containers
+    runs-on: ubuntu-latest
+    env:
+      ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+      ECR_REPO_FRONTEND: "titus-frontend"
+      ECR_REPO_BACKEND: "titus-backend"
+      IMAGE_TAG: ${{ github.sha }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+    
+    - name: Set up Node 12.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+
+    - name: Install and build packages
+      run: |
+        npm ci
+        npm run create:env
+        npm run build:all
+      env:
+        CI: true  
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+
+    - name: Containerize frontend
+      id: build-frontend
+      run: |
+        cd packages/titus-frontend
+        docker build -t ${ECR_REGISTRY/$ECR_REPO_FRONTEND:$IMAGE_TAG
+
+    - name: Containerize backend
+      id: build-backend
+      run: |
+        cd packages/titus-backend
+        npm prune --production
+        docker build -t ${ECR_REGISTRY/$ECR_REPO_BACKEND:$IMAGE_TAG
+
+    - name: Push Images to Amazon ECR
+      id: push-images
+      run: |
+        docker push ${ECR_REGISTRY/$ECR_REPO_FRONTEND:$IMAGE_TAG
+        docker push $ECR_REGISTRY/$ECR_REPO_BACKEND:$IMAGE_TAG
