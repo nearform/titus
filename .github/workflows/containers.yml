@@ -50,7 +50,7 @@ jobs:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
       run: |
         cd packages/titus-frontend
-        docker build -t $ECR_REGISTRY/$ECR_REPO_FRONTEND:$IMAGE_TAG
+        docker build -t $ECR_REGISTRY/$ECR_REPO_FRONTEND:$IMAGE_TAG -f docker/Dockerfile .
 
     - name: Containerize backend
       env:
@@ -59,10 +59,10 @@ jobs:
       run: |
         cd packages/titus-backend
         npm prune --production
-        docker build -t $ECR_REGISTRY/$ECR_REPO_BACKEND:$IMAGE_TAG
+        docker build -t $ECR_REGISTRY/$ECR_REPO_BACKEND:$IMAGE_TAG -f docker/Dockerfile .
 
     - name: Push Images to Amazon ECR
       id: push-images
       run: |
-        docker push ${ECR_REGISTRY/$ECR_REPO_FRONTEND:$IMAGE_TAG
+        docker push $ECR_REGISTRY/$ECR_REPO_FRONTEND:$IMAGE_TAG
         docker push $ECR_REGISTRY/$ECR_REPO_BACKEND:$IMAGE_TAG
