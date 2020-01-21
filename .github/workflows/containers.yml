@@ -10,7 +10,6 @@ jobs:
     name: Deploy containers
     runs-on: ubuntu-latest
     env:
-      ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
       ECR_REPO_FRONTEND: "titus-frontend"
       ECR_REPO_BACKEND: "titus-backend"
       IMAGE_TAG: ${{ github.sha }}
@@ -47,11 +46,15 @@ jobs:
 
     - name: Containerize frontend
       id: build-frontend
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
       run: |
         cd packages/titus-frontend
         docker build -t ${ECR_REGISTRY/$ECR_REPO_FRONTEND:$IMAGE_TAG
 
     - name: Containerize backend
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
       id: build-backend
       run: |
         cd packages/titus-backend
