@@ -29,6 +29,67 @@ exports[`<Dashboard /> should render correctly 1`] = `
 </DocumentFragment>
 `;
 
+exports[`<Dashboard /> should render correctly 2`] = `
+<DocumentFragment>
+  <div
+    class="container"
+  >
+    <button
+      class="logout button"
+    >
+      LOGOUT
+    </button>
+    <img
+      alt="Titus logo"
+      src="img/Accel_Logo_Titus.svg"
+      style="width: 100%; height: 100%; margin-bottom: 10vh; margin-top: 10vh;"
+    />
+    <p>
+      Develop and Deploy to features quickly using Titus, an Accelerated Development & Deployment Stack. Titus is production ready and can be deployed to all major cloud providers.
+    </p>
+    <a
+      href="https://nf-titus.netlify.com/"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      Check out the docs
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<Dashboard /> should render correctly 3`] = `
+<DocumentFragment>
+  <div
+    class="container"
+  >
+    <button
+      class="logout button"
+    >
+      LOGOUT
+    </button>
+    <img
+      alt="Titus logo"
+      src="img/Accel_Logo_Titus.svg"
+      style="width: 100%; height: 100%; margin-bottom: 10vh; margin-top: 10vh;"
+    />
+    <p>
+      Develop and Deploy to features quickly using Titus, an Accelerated Development & Deployment Stack. Titus is production ready and can be deployed to all major cloud providers.
+    </p>
+    <a
+      href="https://nf-titus.netlify.com/"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      Check out the docs
+    </a>
+    <button>
+      Test Azure Authentication
+    </button>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`<Dashboard /> should trigger button correctly 1`] = `
 <DocumentFragment>
   <div
@@ -54,6 +115,70 @@ exports[`<Dashboard /> should trigger button correctly 1`] = `
     >
       Check out the docs
     </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<Dashboard /> should trigger fetch catch correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="container"
+  >
+    <button
+      class="logout button"
+    >
+      LOGOUT
+    </button>
+    <img
+      alt="Titus logo"
+      src="img/Accel_Logo_Titus.svg"
+      style="width: 100%; height: 100%; margin-bottom: 10vh; margin-top: 10vh;"
+    />
+    <p>
+      Develop and Deploy to features quickly using Titus, an Accelerated Development & Deployment Stack. Titus is production ready and can be deployed to all major cloud providers.
+    </p>
+    <a
+      href="https://nf-titus.netlify.com/"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      Check out the docs
+    </a>
+    <button>
+      Test Azure Authentication
+    </button>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<Dashboard /> should trigger fetch success correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="container"
+  >
+    <button
+      class="logout button"
+    >
+      LOGOUT
+    </button>
+    <img
+      alt="Titus logo"
+      src="img/Accel_Logo_Titus.svg"
+      style="width: 100%; height: 100%; margin-bottom: 10vh; margin-top: 10vh;"
+    />
+    <p>
+      Develop and Deploy to features quickly using Titus, an Accelerated Development & Deployment Stack. Titus is production ready and can be deployed to all major cloud providers.
+    </p>
+    <a
+      href="https://nf-titus.netlify.com/"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      Check out the docs
+    </a>
+    <button>
+      Test Azure Authentication
+    </button>
   </div>
 </DocumentFragment>
 `;

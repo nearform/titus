@@ -24,7 +24,7 @@
     "start": "react-scripts start",
     "storybook": "start-storybook -p 9009 -s public",
     "storybook:build": "build-storybook -s public",
-    "test": "cross-env CI=true react-scripts test --env=jsdom --watchAll=false --coverage",
+    "test": "cross-env CI=true react-scripts test --env=jsdom --watchAll=false --coverage  --colors",
     "test:watch": "react-scripts test --env=jsdom",
     "test:related": "cross-env CI=true react-scripts test --env=jsdom --onlyChanged"
   },
