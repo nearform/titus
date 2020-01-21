@@ -18,6 +18,7 @@
     "lint:staged": "lerna run lint:staged",
     "postinstall": "lerna bootstrap",
     "start:all": "lerna run --parallel start",
+    "start:docs": "docsify serve ./docs",
     "test:all": "lerna run --parallel test",
     "test:related": "lerna run test:related"
   },
