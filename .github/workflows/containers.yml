@@ -9,10 +9,6 @@ jobs:
   deploy:
     name: Deploy containers
     runs-on: ubuntu-latest
-    env:
-      ECR_REPO_FRONTEND: "titus-frontend"
-      ECR_REPO_BACKEND: "titus-backend"
-      IMAGE_TAG: ${{ github.sha }}
 
     steps:
     - name: Checkout code
@@ -48,6 +44,8 @@ jobs:
       id: build-frontend
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPO_FRONTEND: "titus-frontend"
+        IMAGE_TAG: ${{ github.sha }}
       run: |
         cd packages/titus-frontend
         docker build -t $ECR_REGISTRY/$ECR_REPO_FRONTEND:$IMAGE_TAG -f docker/Dockerfile .
@@ -55,16 +53,35 @@ jobs:
     - name: Containerize backend
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPO_BACKEND: "titus-backend"
+        IMAGE_TAG: ${{ github.sha }}
       id: build-backend
       run: |
         cd packages/titus-backend
         npm prune --production
         docker build -t $ECR_REGISTRY/$ECR_REPO_BACKEND:$IMAGE_TAG -f docker/Dockerfile .
 
+    - name: Containerize backend
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPO_DB_MANAGER: "titus-db-manager"
+        IMAGE_TAG: ${{ github.sha }}
+      id: build-db-manager
+      run: |
+        cd packages/titus-db-manager
+        npm prune --production
+        docker build -t $ECR_REGISTRY/$ECR_REPO_DB_MANAGER:$IMAGE_TAG -f docker/Dockerfile .
+
     - name: Push Images to Amazon ECR
       id: push-images
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPO_FRONTEND: "titus-frontend"
+        ECR_REPO_BACKEND: "titus-backend"
+        ECR_REPO_DB_MANAGER: "titus-db-manager"
+        IMAGE_TAG: ${{ github.sha }}
+        
       run: |
         docker push $ECR_REGISTRY/$ECR_REPO_FRONTEND:$IMAGE_TAG
         docker push $ECR_REGISTRY/$ECR_REPO_BACKEND:$IMAGE_TAG
+        docker push $ECR_REGISTRY/$ECR_REPO_DB_MANAGER:$IMAGE_TAG
