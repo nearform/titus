@@ -28,22 +28,6 @@
     "test:watch": "react-scripts test --env=jsdom",
     "test:related": "cross-env CI=true react-scripts test --env=jsdom --onlyChanged"
   },
-  "lint-staged": {
-    "*.{js,css,md}": [
-      "eslint --fix",
-      "prettier --write",
-      "git add"
-    ]
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "src/**/*js",
-      "!**/__snapshots__",
-      "!src/**/*.story.js",
-      "!**/serviceWorker.js",
-      "!src/index.js"
-    ]
-  },
   "devDependencies": {
     "@babel/core": "^7.7.2",
     "@storybook/addon-a11y": "^5.2.6",
@@ -69,7 +53,24 @@
     "react-scripts": "^3.2.0",
     "react-test-renderer": "^16.12.0",
     "serve-handler": "^6.1.2",
-    "storybook-readme": "^5.0.8"
+    "storybook-readme": "^5.0.8",
+    "typescript": "^3.7.5"
+  },
+  "lint-staged": {
+    "*.{js,css,md}": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*js",
+      "!**/__snapshots__",
+      "!src/**/*.story.js",
+      "!**/serviceWorker.js",
+      "!src/index.js"
+    ]
   },
   "proxy": "http://localhost:5000",
   "browserslist": [
