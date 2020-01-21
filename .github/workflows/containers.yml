@@ -63,6 +63,8 @@ jobs:
 
     - name: Push Images to Amazon ECR
       id: push-images
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
       run: |
         docker push $ECR_REGISTRY/$ECR_REPO_FRONTEND:$IMAGE_TAG
         docker push $ECR_REGISTRY/$ECR_REPO_BACKEND:$IMAGE_TAG
