@@ -1,8 +1,8 @@
-import { API_PATH } from './config'
-
 export const log = async msg => {
-  if (API_PATH) {
-    fetch(`${API_PATH}/logs`, {
+  const { REACT_APP_API_PATH } = process.env
+
+  if (REACT_APP_API_PATH) {
+    fetch(`${REACT_APP_API_PATH}/logs`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ msg })

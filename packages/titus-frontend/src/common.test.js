@@ -1,9 +1,8 @@
 import { log } from './common'
-import * as constants from './config'
 
 describe('Common file', () => {
   test('should trigger console.log', () => {
-    constants.API_PATH = undefined
+    process.env = {}
 
     global.console.log = jest.fn()
     log('test message')
@@ -12,7 +11,7 @@ describe('Common file', () => {
   })
 
   test('should trigger fetch', () => {
-    constants.API_PATH = 'url/path'
+    process.env.REACT_APP_API_PATH = 'url/path'
 
     window.fetch = jest.fn().mockImplementation(() => Promise.resolve({}))
     log('message')
@@ -21,8 +20,7 @@ describe('Common file', () => {
   })
 
   test('should trigger fetch and return error', () => {
-    constants.API_PATH = 'url/path'
-
+    process.env.REACT_APP_API_PATH = 'url/path'
     window.fetch = jest.fn().mockImplementation(() => Promise.reject('error'))
     log('message')
 
