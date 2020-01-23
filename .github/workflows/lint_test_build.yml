@@ -1,4 +1,4 @@
-name: CI
+name: Linting, Testing & Building
 on: pull_request
 
 jobs:
@@ -20,7 +20,7 @@ jobs:
         run: |
           npm ci
           npm run create:env
-          npm run build
+          npm run build:all
         env:
           CI: true
   test:
@@ -41,7 +41,7 @@ jobs:
         run: |
           npm ci
           npm run create:env
-          npm run test
+          npm run test:all
         env:
           CI: true
   lint:

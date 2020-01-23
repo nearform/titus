@@ -1,0 +1,9 @@
+{
+  "testEnvironment": "node",
+  "collectCoverageFrom": [
+    "seed/**/*.{js,jsx}",
+    "truncate/**/*.{js,jsx}",
+    "migrate/**/*.{js,jsx}",
+    "!**/node_modules/**"
+  ]
+}

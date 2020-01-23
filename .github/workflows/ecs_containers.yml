@@ -1,0 +1,87 @@
+on:
+  push:
+    branches:
+      - master
+
+name: Deploy containers to Amazon ECS
+
+jobs:
+  deploy:
+    name: Deploy containers
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+    
+    - name: Set up Node 12.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+
+    - name: Install and build packages
+      run: |
+        npm ci
+        npm run create:env
+        npm run build:all
+      env:
+        CI: true  
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+
+    - name: Containerize frontend
+      id: build-frontend
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPO_FRONTEND: "titus-frontend"
+        IMAGE_TAG: ${{ github.sha }}
+      run: |
+        cd packages/titus-frontend
+        docker build -t $ECR_REGISTRY/$ECR_REPO_FRONTEND:$IMAGE_TAG -f docker/Dockerfile .
+
+    - name: Containerize backend
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPO_BACKEND: "titus-backend"
+        IMAGE_TAG: ${{ github.sha }}
+      id: build-backend
+      run: |
+        cd packages/titus-backend
+        npm prune --production
+        docker build -t $ECR_REGISTRY/$ECR_REPO_BACKEND:$IMAGE_TAG -f docker/Dockerfile .
+
+    - name: Containerize db manager
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPO_DB_MANAGER: "titus-db-manager"
+        IMAGE_TAG: ${{ github.sha }}
+      id: build-db-manager
+      run: |
+        cd packages/titus-db-manager
+        npm prune --production
+        docker build -t $ECR_REGISTRY/$ECR_REPO_DB_MANAGER:$IMAGE_TAG -f docker/Dockerfile .
+
+    - name: Push Images to Amazon ECR
+      id: push-images
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPO_FRONTEND: "titus-frontend"
+        ECR_REPO_BACKEND: "titus-backend"
+        ECR_REPO_DB_MANAGER: "titus-db-manager"
+        IMAGE_TAG: ${{ github.sha }}
+        
+      run: |
+        docker push $ECR_REGISTRY/$ECR_REPO_FRONTEND:$IMAGE_TAG
+        docker push $ECR_REGISTRY/$ECR_REPO_BACKEND:$IMAGE_TAG
+        docker push $ECR_REGISTRY/$ECR_REPO_DB_MANAGER:$IMAGE_TAG

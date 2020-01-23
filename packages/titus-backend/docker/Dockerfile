@@ -3,18 +3,11 @@ FROM node:10-alpine
 WORKDIR /titus
 USER root
 
-# Postgresql client is needed to poll db from cli
-RUN apk upgrade && apk add postgresql-client && apk add bash
-
 # Copy the server code
 COPY index.js /titus/index.js
 COPY lib /titus/lib
 COPY node_modules /titus/node_modules
 COPY package.json /titus/package.json
-COPY tools /titus/tools
-
-# Copy the startup script
-COPY docker/start.sh /titus/start.sh
 
 # Start the server
-CMD /titus/start.sh
+CMD npm run start

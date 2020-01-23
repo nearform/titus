@@ -2,6 +2,7 @@
 
 # dependencies
 node_modules
+coverage
 
 # misc
 .DS_Store
@@ -17,3 +18,4 @@ lerna-debug.log
 lighthouse-report.html
 
 .vscode
+.env
