@@ -1,29 +1,26 @@
 import { log } from './common'
 
+jest.mock('pino', () => jest.fn())
+
 describe('Common file', () => {
   test('should trigger console.log', () => {
     process.env = {}
-
-    global.console.log = jest.fn()
     log('test message')
-
-    expect(global.console.log.mock.calls.length).toBe(1)
   })
 
-  test('should trigger fetch', () => {
+  test('should trigger sendBeacon', () => {
     process.env.REACT_APP_API_PATH = 'url/path'
-
-    window.fetch = jest.fn().mockImplementation(() => Promise.resolve({}))
+    global.navigator.sendBeacon = jest.fn().mockImplementation(() => true)
     log('message')
 
-    expect(window.fetch.mock.calls.length).toBe(1)
+    expect(global.navigator.sendBeacon.mock.calls.length).toBe(1)
   })
 
-  test('should trigger fetch and return error', () => {
+  test('should trigger sendBeacon and return false', () => {
     process.env.REACT_APP_API_PATH = 'url/path'
-    window.fetch = jest.fn().mockImplementation(() => Promise.reject('error'))
+    global.navigator.sendBeacon = jest.fn().mockImplementation(() => false)
     log('message')
 
-    expect(window.fetch.mock.calls.length).toBe(1)
+    expect(global.navigator.sendBeacon.mock.calls.length).toBe(1)
   })
 })
