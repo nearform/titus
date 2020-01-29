@@ -1,7 +1,5 @@
 'use strict'
 
-const fp = require('fastify-plugin')
-
 async function log(server, options) {
   server.route({
     method: 'POST',
@@ -20,10 +18,10 @@ async function log(server, options) {
     },
     handler: async (req, res) => {
       const { msg } = req.body
-      req.log.info(msg)
-      return res.code(200)
+      req.log.info('Front-end:', msg)
+      return { message: 'logged successfully' }
     }
   })
 }
 
-module.exports = fp(log)
+module.exports = log

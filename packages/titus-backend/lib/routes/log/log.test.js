@@ -25,7 +25,6 @@ describe('log route', () => {
       }
     })
 
-    expect(response.body).toBe('{}')
     expect(response.statusCode).toEqual(200)
   })
 })
