@@ -1,6 +1,6 @@
 # Titus Backend Kit
 ## Overview
-Titus backend is a starter [fastify] server with [PostgreSQL][node-postgres] and [Auth0] plugins.
+Titus backend is a starter [fastify] server with [node-postgres] and [Auth0] plugins.
 
 What you implement with Titus backend is your choice. We provide an unopinionated, working shell.
 We provide what is common in our projects: a configurable HTTP Server with JSON logging, health check route and database capabilities.
@@ -14,7 +14,11 @@ Titus backend is structured as follows:
 * `lib/config` - server configuration: reads environment variable values, with default values from the`.env` file
 * `lib/plugins` - fastify plugins for cross-cutting features. Contains a pg instrumenter and Auth0 + [jwt] strategy
 * `lib/routes` - fastify plugins to declare HTTP routes. The health check route is also here
-* `tools/` - contains tooling, such as database migration tools and scripts
+
+### Database
+
+There's a separated package for the database, make sure it's running before continuing.
+Have a look at [Titus-db-manager].
 
 ### Auth0 Plugin
 
@@ -56,23 +60,9 @@ npm install
 **Note** The Titus backend is automatically installed if you previously ran `npm install` at root level.
 
 
+## Start the server
+To start Titus backend, run the following command:
 
-## Run the Backend Locally
-To run your application locally, perform the following steps:
-
-1. Edit your configuration
-  ```
-  npm run create:env
-  ```
-
-  This creates a `.env` file in the root directory, based on the `.env.sample` file.
-  These are your configuration values. You can amend the file when running locally, and also override individual variables in your environment.
-
-  You must edit the `.env` file to set the `AUTH0_*` variables with the data from your Auth0 app, if you need to use it for authentication.
-
-1. Make sure PostgreSQL is running and available. If you ran `npm run start:all` at root level, [docker-compose] took care of it.
-
-1. Start the server
   ```
   npm start
   ```
@@ -91,13 +81,6 @@ Use the following commands to test and lint your application:
 * `npm run lint` - apply ESLint / Prettier on sources
 * `npm run lint:fix` - use ESLint / Prettier (with the autofix flag)
 
-
-## Manage the Backend Database
-The following commands can be used with your Titus backend database:
-
-* `npm run db:init` - apply SQL initialisation scripts with `psql` CLI against your database
-* `npm run db:migrate` - apply database migration scripts from `tools/migrations/build` with [postgrator]
-* `npm run db:seed` - seed the database with dev data from `tools/migrations/seed_dev` with [postgrator]
 
 ## Multi-tenancy with AWS Amplify
 The first step is to add a property to Cognito users, to be able to distinguish their tenancy.
@@ -151,8 +134,6 @@ cognito.adminGetUser(params, (err, response) => {
 [jwt]: https://jwt.io
 [nock]: https://github.com/nock/nock#readme
 [faker]: http://marak.github.io/faker.js
-[postgrator]: https://github.com/rickbergfalk/postgrator#readme
-[docker-compose]: https://docs.docker.com/compose
 [aws-custom-attributes]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-attributes.html#user-pool-settings-custom-attributes
 [aws-jwt-validation]: https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html
-
+[Titus-db-manager]: `https://github.com/nearform/titus/tree/master/docs/developers/packages/titus-db-manager`

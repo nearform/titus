@@ -24,6 +24,7 @@ Kits are managed with [Lerna] so you can add more packages and also manage their
 Titus includes the following kits:
 * [Frontend Kit](developers/packages/titus-frontend/)
 * [Backend Kit](developers/packages/titus-backend/)
+* [Database Manager Kit](/developers/packages/titus-db-manager/)
 
 All kits we provide include:
 - [Jest] for testing
@@ -71,6 +72,26 @@ The Titus backend kit consists of the following:
 
 Refer to the section [Titus Backend](developers/packages/titus-backend/) for more details.
 
+
+### Database Manager Kit
+The database, __titus-db-manager__, preconfigured instance of [PostgreSQL] database.
+
+When PostgreSQL is used you can take advantage of migration (powered by [postgrator]), seeding support and truncate.
+
+Locally Titus uses Docker Compose and Docker Volumes to run and manage the database. When running on a cloud provider, the included relational database service is used.
+
+The Titus database manager kit consists of the following:
+
+* [postgrator] SQL migration library
+* [Pino] logger (comes with fastify)
+* PostgreSQL plugin with transaction control at route level
+* [Jest], [nock] and [faker] test tools
+* [ESLint] code linter
+* [Prettier] code format with [Standard] preset
+
+Refer to the section [Titus Backend](developers/packages/titus-db-manager/) for more details.
+
+
 ## Services
 Your application is likely to depend on both external and cloud services.
 Titus comes preconfigured with a database and an authentication service, the minimum we think you need based on our projects.
@@ -82,15 +103,6 @@ Titus packages run as node.js applications on your OS. This plays better with Le
 
 As we use Dockerfile to bundle the packages, it's also possible run them locally using Docker Compose (or Minikube) if you wish.
 
-### Database Service
-Titus includes a preconfigured instance of PostgreSQL.
-
-When PostgreSQL is used with __titus-backend__, you can take advantage of migration (powered by [postgrator]) and seeding support.
-
-Locally Titus uses Docker Compose and Docker Volumes to run and manage the database. When running on a cloud provider, the included relational database service is used.
-
-Refer to the section [Manage the Backend Database] for more details.
-
 ### Authentication Service
 Logging in is usually the first feature you want to see when you run your application. Titus is preconfigured with the Auth0 authentication service.
 
@@ -100,7 +112,6 @@ Refer to [Configure Authentication] for more details.
 [titus-developers-quote]: ../img/titus-developers-quote.svg
 
 <!-- Internal Links -->
-[Manage the Backend Database]: developers/packages/titus-backend/?id=manage-the-backend-database
 [Configure Authentication]: developers/packages/titus-frontend/?id=configure-authentication
 
 <!-- External Links -->

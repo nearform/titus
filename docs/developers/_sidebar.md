@@ -5,6 +5,7 @@
     - [Kits](/developers/?id=kits)
         - [Frontend Kit](/developers/packages/titus-frontend/)
         - [Backend Kit](/developers/packages/titus-backend/)
+        - [Database Manager Kit](/developers/packages/titus-db-manager/)
     - [Services](/developers/?id=services)
         - [Database Service](/developers/?id=database-service)
         - [Authentication Service](/developers/?id=authentication-service)
