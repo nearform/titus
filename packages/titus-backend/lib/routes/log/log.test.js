@@ -24,7 +24,7 @@ describe('log route', () => {
         msg: 'test message'
       }
     })
-
+    expect(JSON.parse(response.body).message).toBe('logged successfully')
     expect(response.statusCode).toEqual(200)
   })
 })

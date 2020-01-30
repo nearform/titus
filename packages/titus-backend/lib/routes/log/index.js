@@ -18,7 +18,7 @@ async function log(server, options) {
     },
     handler: async (req, res) => {
       const { msg } = req.body
-      req.log.info('Front-end:', msg)
+      req.log.info({ front: msg })
       return { message: 'logged successfully' }
     }
   })
