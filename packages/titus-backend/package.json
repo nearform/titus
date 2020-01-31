@@ -5,7 +5,6 @@
   "description": "The backend for the Titus project using fastify",
   "main": "index.js",
   "scripts": {
-    "create:env": "node -r fs -e \"fs.copyFileSync('.env.sample', '.env', fs.constants.COPYFILE_EXCL)\"",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "lint:staged": "lint-staged",

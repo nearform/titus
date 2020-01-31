@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "clean:all": "lerna clean",
-    "create:env": "lerna run --parallel create:env",
+    "clean:all": "node tools/clean-envs.js && lerna clean",
+    "create:envs": "node tools/create-envs.js",
     "build:all": "lerna run --parallel build",
     "db:create-volume": "docker volume create --name titus-pg-data -d local",
     "db:migrate": "lerna run --stream db:migrate",
@@ -32,5 +32,9 @@
       "pre-commit": "npm run lint:staged && npm run test:related",
       "pre-push": "npm run lint:all && npm run test"
     }
+  },
+  "dependencies": {
+    "pino": "^5.16.0",
+    "pino-pretty": "^3.5.0"
   }
 }

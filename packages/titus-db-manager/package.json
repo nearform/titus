@@ -5,7 +5,6 @@
   "description": "Database stuff for Titus",
   "main": "index.js",
   "scripts": {
-    "create:env": "node -r fs -e \"fs.copyFileSync('.env.sample', '.env', fs.constants.COPYFILE_EXCL)\"",
     "db:up": "docker-compose up",
     "db:down": "docker-compose down",
     "db:delete": "docker volume rm titus_titus-pg-data",
