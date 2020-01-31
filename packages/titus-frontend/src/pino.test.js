@@ -1,4 +1,4 @@
-import pino from './pino'
+import { log } from './pino'
 
 jest.mock('pino', () => a => {
   if (a.browser && a.browser.transmit) {
@@ -12,7 +12,7 @@ jest.mock('pino', () => a => {
 
 describe('Common file', () => {
   test('should trigger pino', () => {
-    pino('test message')
+    log('test message')
 
     expect(global.navigator.sendBeacon.mock.calls.length).toBe(1)
   })

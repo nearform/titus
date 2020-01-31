@@ -24,6 +24,6 @@ if (REACT_APP_API_PATH) {
 }
 
 const logger = pino(config)
-const info = msg => logger.info(msg)
 
-export default info
+export const log = msg => logger.info(msg)
+export default logger
