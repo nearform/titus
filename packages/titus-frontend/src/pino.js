@@ -1,6 +1,5 @@
 import pino from 'pino'
 const { REACT_APP_API_PATH } = process.env
-
 const config = {
   browser: {
     asObject: true
@@ -14,9 +13,10 @@ if (REACT_APP_API_PATH) {
       const msg = logEvent.messages[0]
 
       const headers = {
+        'Access-Control-Allow-Origin': '*',
         type: 'application/json'
       }
-      let blob = new Blob([JSON.stringify({ msg })], headers)
+      let blob = new Blob([JSON.stringify({ msg, level })], headers)
 
       navigator.sendBeacon(`${REACT_APP_API_PATH}/log`, blob)
     }
