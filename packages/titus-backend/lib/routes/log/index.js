@@ -5,6 +5,16 @@ async function log(server, options) {
     method: 'POST',
     url: '/log',
     schema: {
+      body: {
+        type: 'object',
+        properties: {
+          msg: { type: 'string' },
+          level: {
+            type: 'string',
+            enum: ['trace', 'debug', 'info', 'warn', 'error', 'fatal']
+          }
+        }
+      },
       tags: ['log'],
       response: {
         200: {
