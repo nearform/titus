@@ -1,12 +1,20 @@
 'use strict'
 
-const fp = require('fastify-plugin')
-
 async function log(server, options) {
   server.route({
     method: 'POST',
     url: '/log',
     schema: {
+      body: {
+        type: 'object',
+        properties: {
+          msg: { type: 'string' },
+          level: {
+            type: 'string',
+            enum: ['trace', 'debug', 'info', 'warn', 'error', 'fatal']
+          }
+        }
+      },
       tags: ['log'],
       response: {
         200: {
@@ -19,11 +27,11 @@ async function log(server, options) {
       }
     },
     handler: async (req, res) => {
-      const { msg } = req.body
-      req.log.info(msg)
-      return res.code(200)
+      const { msg, level = 'info' } = req.body
+      req.log[level]({ front: msg })
+      return { message: 'logged successfully' }
     }
   })
 }
 
-module.exports = fp(log)
+module.exports = log
