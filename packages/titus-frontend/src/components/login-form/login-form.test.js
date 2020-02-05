@@ -8,6 +8,7 @@ describe('LoginForm', () => {
   it('should not submit if username or password are empty', async done => {
     const mockFn = jest.fn()
     const { findAllByText, getByText } = render(<LoginForm login={mockFn} />)
+
     const loginButtons = await findAllByText('Login')
     expect(loginButtons.length).toEqual(1)
     fireEvent.click(getByText('Login'))
@@ -18,15 +19,27 @@ describe('LoginForm', () => {
     }, 1)
   })
 
-  it('should render correctly without paramsr', async () => {
+  it('should not call login with login param empty', async done => {
+    const { findAllByText, getByText } = render(<LoginForm login={false} />)
+
+    const loginButtons = await findAllByText('Login')
+    expect(loginButtons.length).toEqual(1)
+    fireEvent.click(getByText('Login'))
+
+    setTimeout(() => {
+      done()
+    }, 1)
+  })
+
+  it('should render correctly without params', async () => {
     const { asFragment } = render(<LoginForm />)
 
     expect(asFragment()).toMatchSnapshot()
   })
 
-  it('should render correctly with allowChangePassword and loginError', async () => {
+  it('should render correctly with allowChangePassword and loginError temporary password', async () => {
     const { asFragment } = render(
-      <LoginForm allowChangePassword={true} loginError="login error" />
+      <LoginForm allowChangePassword={true} loginError="temporary password" />
     )
 
     expect(asFragment()).toMatchSnapshot()
