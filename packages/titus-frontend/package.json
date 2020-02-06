@@ -16,7 +16,6 @@
   },
   "scripts": {
     "build": "react-scripts build",
-    "create:env": "node -r fs -e \"fs.copyFileSync('.env.sample', '.env', fs.constants.COPYFILE_EXCL)\"",
     "eject": "react-scripts eject",
     "lighthouse": "node lighthouse",
     "lint": "eslint .",
