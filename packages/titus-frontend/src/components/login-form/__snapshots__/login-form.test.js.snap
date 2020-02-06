@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LoginForm should render correctly with allowChangePassword and loginError 1`] = `
+exports[`LoginForm should render correctly with allowChangePassword and loginError temporary password 1`] = `
 <DocumentFragment>
   <form
     novalidate=""
@@ -20,10 +20,17 @@ exports[`LoginForm should render correctly with allowChangePassword and loginErr
       type="password"
       value=""
     />
+    <input
+      name="newPassword"
+      placeholder="New Password"
+      required=""
+      type="password"
+      value=""
+    />
     <div
       class="login__error"
     >
-      login error
+      temporary password
     </div>
     <button
       class="button"
@@ -35,7 +42,7 @@ exports[`LoginForm should render correctly with allowChangePassword and loginErr
 </DocumentFragment>
 `;
 
-exports[`LoginForm should render correctly without paramsr 1`] = `
+exports[`LoginForm should render correctly without params 1`] = `
 <DocumentFragment>
   <form
     novalidate=""
