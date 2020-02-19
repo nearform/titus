@@ -34,8 +34,10 @@ npm run create:env
 You can read more about configuring the environment in the [Developers][DevelopersBe] section of our documentation.
 
 ## Bring up the Database
-Todo
 
+Database can run as stand-alone container or as http server. 
+
+### Stand-alone
 To spin up the database run the command:
 
 ```sh
@@ -83,6 +85,28 @@ and to delete the data volume run:
 ```
 npm run db:delete
 ```
+
+### Run database as http server
+
+You can start a separate http database server with the command
+```sh
+npm run db:server:start
+```
+
+However, if you want to use as fastify plugin you can uss this stub
+
+```js
+const titusDbManager = require('../titus-db-manager/lib/plugin')
+...
+const server = require('fastify')
+server.register(titusDbManager)
+```
+
+#### Routes
+
+- `POST /db/truncate` will run the truncate action
+- `POST /db/seed` will run the seed action
+- `POST /db/migrate` will run the migrations
 
 ## Run the Stack
 Titus runs your application locally, leveraging Docker for external services such as a database.
