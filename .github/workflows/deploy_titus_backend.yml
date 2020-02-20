@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      PROJECT_ID: ${{ secrets.PROJECT_ID }}
+      PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
       SERVICE_NAME: titus-backend
       SERVICE_REGION: europe-west
       CI: true
@@ -29,14 +29,14 @@ jobs:
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
           version: '275.0.0'
-          service_account_email: ${{ secrets.SA_EMAIL }}
-          service_account_key: ${{ secrets.SA_KEY }}
+          service_account_email: ${{ secrets.GCP_SA_EMAIL }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
           service_account_file_name: /tmp/service_account
 
       - name: Add GCP Credentials
         run: |
           echo ::set-env name=GOOGLE_APPLICATION_CREDENTIALS::/tmp/service_account
-          gcloud config set project $PROJECT_ID
+          gcloud config set project $GCP_PROJECT_ID
       - name: Install service dependencies
         run: |
           cd ./packages/titus-backend
@@ -45,4 +45,4 @@ jobs:
       - name: Build & push container
         run: |
           cd ./packages/titus-backend
-          gcloud builds submit -t gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA .
+          gcloud builds submit -t gcr.io/$GCP_PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA .
