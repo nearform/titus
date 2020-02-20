@@ -37,11 +37,6 @@ jobs:
         run: |
           echo ::set-env name=GOOGLE_APPLICATION_CREDENTIALS::/tmp/service_account
           gcloud config set project $PROJECT_ID
-      
-      - name: Install service dependencies
-        run: |
-          cd ./packages/titus-backend
-          npm ci
         
       - name: Build & push container
         run: |

@@ -1,13 +1,11 @@
-FROM node:10-alpine
+FROM node:12-alpine as builder
 
 WORKDIR /service
-USER root
 
-# Copy the server code
-COPY index.js /service/index.js
-COPY lib /service/lib
-COPY node_modules /service/node_modules
-COPY package.json /service/package.json
+COPY package.json package-lock.json ./
+COPY lib ./lib
+COPY index.js ./index.js
 
-# Start the server
-CMD npm run start
+RUN npm ci
+
+CMD ["node", "index.js"]
