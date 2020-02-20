@@ -1,32 +1,13 @@
 'use strict'
 
+const querystring = require('querystring')
 const fp = require('fastify-plugin')
 const jwkToPem = require('jwk-to-pem')
 const jws = require('jws')
 const jwt = require('jsonwebtoken')
-const request = require('request')
+const axios = require('axios')
 
 const authRoutes = require('../../config/auth-routes')
-
-const get = options =>
-  new Promise((resolve, reject) => {
-    request.get(options, (error, response, body) => {
-      if (error) {
-        return reject(error)
-      }
-      return resolve(body)
-    })
-  })
-
-const post = options =>
-  new Promise((resolve, reject) => {
-    request.post(options, (error, response, body) => {
-      if (error) {
-        return reject(error)
-      }
-      return resolve(body)
-    })
-  })
 
 const verifyJWT = async (config, idToken) => {
   const decoded = jws.decode(idToken)
@@ -35,12 +16,12 @@ const verifyJWT = async (config, idToken) => {
     config.tenant,
     '/v2.0/.well-known/openid-configuration'
   ].join('')
-  const metadata = await get({ json: true, url: identityMetadataURL })
+  const metadata = await axios.get({ url: identityMetadataURL })
   const {
     id_token_signing_alg_values_supported: algorithms,
     jwks_uri: jwksUri
   } = metadata
-  const body = await get({ json: true, url: jwksUri })
+  const body = await axios.get({ url: jwksUri })
   let findBy = 'x5t'
   if (!decoded.header.x5t) {
     findBy = 'kid'
@@ -67,15 +48,17 @@ const getUser = async (config, token, cb) => {
     config.tenant,
     '/oauth2/v2.0/token'
   ].join('')
-  const body = await post({
-    json: true,
+  const body = await axios.post({
+    method: 'POST',
+    headers: { 'content-type': 'application/x-www-form-urlencoded' },
+    responseType: 'json',
     url: tokenURL,
-    form: {
+    data: querystring.stringify({
       client_id: config.appID,
       client_secret: config.secret,
       grant_type: 'client_credentials',
       scope: 'https://graph.microsoft.com/.default'
-    }
+    })
   })
   const userProperties = [
     'accountEnabled',
@@ -91,10 +74,10 @@ const getUser = async (config, token, cb) => {
     token.oid,
     `?$select=${userProperties.join(',')}`
   ].join('')
-  return get({
-    auth: { bearer: body.access_token },
-    json: true,
-    url: userURL
+  return axios.get({
+    url: userURL,
+    headers: { Authorization: `Bearer ${body.access_token}` },
+    responseType: 'json'
   })
 }
 
