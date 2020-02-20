@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - gcp-containers
+    paths:
+      - 'packages/titus-backend/*'
 
 jobs:
   deploy-titus-backend:
