@@ -36,7 +36,8 @@ jobs:
       - name: Add GCP Credentials
         run: |
           echo ::set-env name=GOOGLE_APPLICATION_CREDENTIALS::/tmp/service_account
-          gcloud config set project $GCP_PROJECT_ID
+          gcloud config set project $PROJECT_ID
+      
       - name: Install service dependencies
         run: |
           cd ./packages/titus-backend
@@ -45,4 +46,4 @@ jobs:
       - name: Build & push container
         run: |
           cd ./packages/titus-backend
-          gcloud builds submit -t gcr.io/$GCP_PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA .
+          gcloud builds submit -t gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA .
