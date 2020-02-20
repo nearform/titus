@@ -1,14 +1,20 @@
+FROM node:12 as builder
+
+WORKDIR /service
+
+COPY package.json package-lock.json ./
+COPY src ./src
+COPY public ./public
+
+RUN npm ci --only=prod --unsafe-perm
+
+ARG REACT_APP_API_URL
+RUN npm run build
+
 FROM nginx:stable-alpine
 
-# Remove the default Nginx config and add ours
-RUN rm -rf /etc/nginx/nginx.conf /etc/nginx/conf.d/*
-COPY docker/etc/nginx.conf /etc/nginx/nginx.conf
+COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
 
-# Copy the built static assets
-COPY build /usr/share/nginx/titus
+COPY --from=builder /service/build/ /var/www
 
-# Expose the server port
-EXPOSE 80
-
-# Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
