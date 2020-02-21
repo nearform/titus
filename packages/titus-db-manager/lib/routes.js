@@ -9,7 +9,7 @@ const Seed = require('../seed')
 const Migrate = require('../migrate')
 const Truncate = require('../truncate')
 
-const { version } = require('../../../package')
+const { version } = require('../package')
 const fp = require('fastify-plugin')
 async function dbRoutes(server, options) {
   server.route({
