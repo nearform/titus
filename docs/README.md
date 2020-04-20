@@ -18,12 +18,10 @@ Developer experience using Titus is first class. We want you as a developer to e
 Titus is well documented, includes modern tooling, for example, [Storybook], and has linting and testing as first-class citizens. Titus supports common-sense inclusions such as quality logging and Docker convenience commands for day-to-day building and working with the stack locally.
 
 ## No Compromise DevOps
-To achieve a rock-solid but easy to configure base, we use [Terraform] in conjunction with [Kubernetes] (K8s) to deploy and manage infrastructure and service needs. We keep deployment configuration simple by using [Taurus], which wraps common Terraform configurations into an easy to use Terraform plugin. Taurus is used in a configuration repository that contains secrets, Helm charts, and so on.
+Titus comes with a full set of scripted functionality for continuous integration and deployment. This allows you to decide which CI/CD server to use on a case by case basis. By default, Titus makes use of Github Actions as it's Continuous Integration & Deployment server. GCP is used as the default cloud provider.
 
-![titus-pipeline]
+<to-do>
 Fig.2 Titus Pipeline
-
-You can deploy the Titus repository to [AWS] via [CircleCI] and it can be configured with minimal changes to work with [Azure] via [Azure Pipelines]. [Google Cloud Platform][GCP]  support is not included in Taurus yet, but the stack can be deployed there, if you wish to add the infrastructure scripts to support it.
 
 ## Production Grade CI Pipeline
 The primary goal of Titus is to enable you to build your new features straight away. We are passionate about this and therefore use a modern deployment pipeline to ensure you can deliver continuously:
