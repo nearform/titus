@@ -3,9 +3,10 @@ name: Deploy titus-frontend to GCP
 on:
   push:
     branches:
-      - gcp-containers
+      - master
     paths:
-      - 'packages/titus-frontend/*'
+      - 'packages/titus-frontend/**'
+      - '.github/deploy_titus_frontend.yml'
       
 jobs:
   deploy-titus-frontend:
