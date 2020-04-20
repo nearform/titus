@@ -6,7 +6,7 @@ on:
       - master
     paths:
       - 'packages/titus-db-manager/**'
-      - '.github/deploy_titus_db_manager.yml'
+      - '.github/workflows/deploy_titus_db_manager.yml'
 
 jobs:
   deploy-titus-db-manager:

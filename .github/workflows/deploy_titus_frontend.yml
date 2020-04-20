@@ -6,7 +6,7 @@ on:
       - master
     paths:
       - 'packages/titus-frontend/**'
-      - '.github/deploy_titus_frontend.yml'
+      - '.github/workflows/deploy_titus_frontend.yml'
       
 jobs:
   deploy-titus-frontend:
