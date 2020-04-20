@@ -6,11 +6,14 @@
 
 &nbsp;
 
-[![lint-test-build][lint-test-build-badge]][lint-test-build-link]
-[![deploy-frontend][deploy-frontend-badge]][deploy-frontend-link]
-[![deploy-backend][deploy-backend-badge]][deploy-backend-link]
-[![deploy-db-manager][deploy-db-manager-badge]][deploy-db-manager-link]
 [![Lerna][lerna-badge]][lerna-link]
+
+| Workflow Name | Badge |
+| ---- | ----- |
+| Linking, Testing, Building | [![lint-test-build][lint-test-build-badge]][lint-test-build-link] |
+| Frontend Deploy | [![deploy-frontend][deploy-frontend-badge]][deploy-frontend-link] |
+| Backend Deploy | [![deploy-backend][deploy-backend-badge]][deploy-backend-link] |
+| DB Manager Deploy | [![deploy-db-manager][deploy-db-manager-badge]][deploy-db-manager-link] |
 
 Titus is a production grade, end-to-end stack for modern web application development. It includes DevOps and authentication preconfigured. Titus is a reusable kit that deploys your application with minimum effort.
 
