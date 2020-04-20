@@ -8,11 +8,11 @@ const config = envSchema({
     .prop('NODE_ENV', S.string().required())
     .prop('API_HOST', S.string().required())
     .prop('API_PORT', S.string().required())
-    .prop('PGHOST', S.string().required())
-    .prop('PGPORT', S.string().required())
-    .prop('PGUSER', S.string().required())
-    .prop('PGPASSWORD', S.string().required())
-    .prop('PGDATABASE', S.string().required())
+    .prop('PG_HOST', S.string().required())
+    .prop('PG_PORT', S.string().required())
+    .prop('PG_DB', S.string().required())
+    .prop('PG_USER', S.string().required())
+    .prop('PG_PASS', S.string().required())
     .prop('AUTH0_DOMAIN', S.string())
     .prop('AUTH0_CLIENT_ID', S.string())
     .prop('AUTH0_CLIENT_SECRET', S.string())
@@ -26,34 +26,27 @@ const config = envSchema({
 
 const isProduction = /^\s$production\s*$/i.test(config.NODE_ENV)
 
-/**
- * Global configuration, from env variables
- */
+// Global configuration, from env variables
 module.exports = {
   isProduction,
-  // Fastify options: https://www.fastify.io/docs/latest/Server/:
-  fastify: {
+  server: {
     host: config.API_HOST,
-    port: +config.API_PORT
+    port: config.API_PORT
   },
-  fastifyInit: {
+  fastify: {
     logger: true
   },
-  // pg-pool options: https://github.com/brianc/node-pg-pool#create
   pgPlugin: {
-    host: config.PGHOST,
-    port: +config.PGPORT,
-    database: config.PGDATABASE,
-    user: config.PGUSER,
-    password: config.PGPASSWORD,
+    host: config.PG_HOST,
+    port: config.PG_PORT,
+    database: config.PG_DB,
+    user: config.PG_USER,
+    password: config.PG_PASS,
     poolSize: 10,
     idleTimeoutMillis: 30000
   },
-  // under pressure options: https://github.com/fastify/under-pressure
   underPressure: {},
-  // cors options: https://github.com/fastify/fastify-cors
   cors: { origin: !!config.CORS_ORIGIN },
-  // auth0 plugin options: see plugins/auth0/index.js
   auth0: {
     domain: `https://${config.AUTH0_DOMAIN}`,
     clientId: config.AUTH0_CLIENT_ID,
