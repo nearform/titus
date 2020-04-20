@@ -3,9 +3,10 @@ name: Deploy titus-backend to GCP
 on:
   push:
     branches:
-      - gcp-containers
+      - master
     paths:
-      - 'packages/titus-backend/*'
+      - 'packages/titus-backend/**'
+      - '.github/workflows/deploy_titus_backend.yml'
 
 jobs:
   deploy-titus-backend:

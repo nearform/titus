@@ -3,7 +3,10 @@ name: Deploy titus-db-manager to GCP
 on:
   push:
     branches:
-      - gcp-containers
+      - master
+    paths:
+      - 'packages/titus-db-manager/**'
+      - '.github/workflows/deploy_titus_db_manager.yml'
 
 jobs:
   deploy-titus-db-manager:
