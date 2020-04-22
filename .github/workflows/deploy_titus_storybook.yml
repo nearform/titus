@@ -1,0 +1,47 @@
+name: Deploy storybook to GCP
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'packages/titus-frontend/**'
+      - '.github/workflows/deploy_titus_storybook.yml'
+      
+jobs:
+  deploy-titus-frontend:
+    name: Build & Deploy titus storybook
+    runs-on: ubuntu-latest
+
+    env:
+      PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+      SERVICE_NAME: titus-storybook
+      SERVICE_REGION: europe-west
+      CI: true
+
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v1
+
+      - name: Set up Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+
+      - name: Set up GCP CLI
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          version: '275.0.0'
+          service_account_email: ${{ secrets.GCP_SA_EMAIL }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          service_account_file_name: /tmp/service_account
+
+      - name: Add GCP Credentials
+        run: |
+          echo ::set-env name=GOOGLE_APPLICATION_CREDENTIALS::/tmp/service_account
+          gcloud config set project $PROJECT_ID
+        
+      - name: Build & push container
+        run: |
+          cd ./packages/titus-frontend
+          gcloud builds submit -t gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA ./.storybook
