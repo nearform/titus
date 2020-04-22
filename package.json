@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "clean": "lerna clean",
     "clean:all": "node tools/clean-envs.js && lerna clean",
     "create:env": "node tools/create-envs.js",
     "build:all": "lerna run --parallel build",

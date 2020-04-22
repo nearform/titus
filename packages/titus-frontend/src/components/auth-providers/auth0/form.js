@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 /**
  * This form will be used:
  * 1- when user is not authenticated yet, url is /login
- * 2- whn Auth0 invokes it as a callback, with authentication details. Url is /login?#access_token=...
+ * 2- when Auth0 invokes it as a callback, with authentication details. Url is /login?#access_token=...
  */
 export const Form = ({ login, authentication }) => {
   useEffect(() => {
@@ -23,3 +23,5 @@ export const Form = ({ login, authentication }) => {
 Form.propTypes = {
   login: PropTypes.func.isRequired
 }
+
+export default Form

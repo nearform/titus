@@ -1,5 +1,5 @@
 import { create } from '@storybook/theming/create'
-// import { baseFonts, monoFonts } from '@storybook/components'
+// import {baseFonts, monoFonts} from '@storybook/components'
 
 const brand = {
   blue: '#2165e5',
@@ -17,38 +17,6 @@ const brand = {
 // for more information on what can be themed
 
 const oldTheme = {
-  // variables
-  mainBackground: brand.blue,
-  mainBorder: brand.blue,
-  mainBorderColor: brand.blue,
-  mainBorderRadius: 4,
-  mainFill: brand.greyLighter,
-  barFill: brand.white,
-  barSelectedColor: brand.orange,
-  inputFill: brand.blueDark,
-
-  // monoTextFace: monoFonts.fontFamily,
-  // mainTextFace: baseFonts.fontFamily,
-
-  mainTextColor: brand.grey,
-  dimmedTextColor: brand.greyLight,
-  highlightColor: brand.orange,
-  successColor: brand.green,
-  failColor: brand.pink,
-  warnColor: brand.orange,
-  mainTextSize: 14,
-
-  layoutMargin: 10,
-
-  // components
-  brand: { background: brand.blueDark },
-  brandLink: { border: 'none' },
-  storiesNav: { color: brand.white }
-}
-
-// export default oldTheme
-
-export default create({
   base: 'light',
 
   colorPrimary: 'hotpink',
@@ -82,4 +50,36 @@ export default create({
   brandTitle: 'My custom storybook',
   brandUrl: 'https://example.com',
   brandImage: 'https://placehold.it/350x150'
+}
+
+// export default oldTheme
+
+export default create({
+  // variables
+  mainBackground: brand.blue,
+  mainBorder: brand.blue,
+  mainBorderColor: brand.blue,
+  mainBorderRadius: 4,
+  mainFill: brand.greyLighter,
+  barFill: brand.white,
+  barSelectedColor: brand.orange,
+  inputFill: brand.blueDark,
+
+  // monoTextFace: monoFonts.fontFamily,
+  // mainTextFace: baseFonts.fontFamily,
+
+  mainTextColor: brand.grey,
+  dimmedTextColor: brand.greyLight,
+  highlightColor: brand.orange,
+  successColor: brand.green,
+  failColor: brand.pink,
+  warnColor: brand.orange,
+  mainTextSize: 14,
+
+  layoutMargin: 10,
+
+  // components
+  brand: { background: brand.blueDark },
+  brandLink: { border: 'none' },
+  storiesNav: { color: brand.white }
 })
