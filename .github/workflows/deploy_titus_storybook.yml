@@ -44,4 +44,4 @@ jobs:
       - name: Build & push container
         run: |
           cd ./packages/titus-frontend
-          gcloud builds submit -t gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA ./.storybook
+          gcloud builds submit -t gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA -f .storybook/docker/Dockerfile .
