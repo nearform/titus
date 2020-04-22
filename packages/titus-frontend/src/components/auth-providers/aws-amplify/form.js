@@ -22,3 +22,5 @@ Form.propTypes = {
   login: PropTypes.func.isRequired,
   loginError: PropTypes.string
 }
+
+export default Form
