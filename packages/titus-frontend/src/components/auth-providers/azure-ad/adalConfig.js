@@ -1,9 +1,11 @@
 import { AuthenticationContext, adalFetch, withAdalLogin } from 'react-adal'
 
+const { REACT_APP_AD_TENANT, REACT_APP_AD_APP_ID } = process.env
+
 export const adalConfig = {
-  tenant: process.env.REACT_APP_AD_TENANT,
-  clientId: process.env.REACT_APP_AD_APP_ID,
-  endpoints: { api: process.env.REACT_APP_AD_APP_ID },
+  tenant: REACT_APP_AD_TENANT,
+  clientId: REACT_APP_AD_APP_ID,
+  endpoints: { api: REACT_APP_AD_APP_ID },
   cacheLocation: 'localStorage'
 }
 

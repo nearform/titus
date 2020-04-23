@@ -38,7 +38,7 @@ export const AuthProvider = ({ authentication, children, component }) => {
         history.push('/login')
       }
     } catch (err) {
-      this.setState({ logoutError: err.message })
+      setLogoutError(err.message)
     }
   }
 

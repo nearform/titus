@@ -1,20 +1,12 @@
 import React from 'react'
 import { AuthConsumer } from '../../components/authentication/authentication-context'
+import Logo from '../../components/logo'
 
 const Login = () => (
   <AuthConsumer>
     {({ component: Form, ...rest }) => (
       <div className="container">
-        <img
-          alt="Titus logo"
-          src="img/Accel_Logo_Titus.svg"
-          style={{
-            width: '100%',
-            height: '100%',
-            marginBottom: '10vh',
-            marginTop: '10vh'
-          }}
-        />
+        <Logo />
         <Form {...rest} />
       </div>
     )}

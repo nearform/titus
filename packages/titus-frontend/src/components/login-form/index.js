@@ -1,6 +1,6 @@
+import React from 'react'
 import { Formik, Field, ErrorMessage } from 'formik'
 import PropTypes from 'prop-types'
-import React from 'react'
 
 const LoginForm = ({
   allowChangePassword,
@@ -17,8 +17,7 @@ const LoginForm = ({
     }}
     validationSchema={schema}
     onSubmit={(values, { resetForm }) => {
-      const { username, password, newPassword } = values
-      if (login) login({ username, password, newPassword })
+      if (login) login(values)
       resetForm(values)
     }}
   >
@@ -62,13 +61,9 @@ const LoginForm = ({
 )
 
 LoginForm.propTypes = {
-  // Function to call on successful submit
   login: PropTypes.func,
-  // yup schema for form validation
   schema: PropTypes.object,
-  // Title of the form, appears in h1
   header: PropTypes.string,
-  // General form error
   loginError: PropTypes.string
 }
 

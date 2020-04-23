@@ -5,12 +5,12 @@ describe('Adal config', () => {
 
   it('should trigger correctly with process.env', async () => {
     process.env = {
-      REACT_APP_AD_TENANT: 'tenent',
+      REACT_APP_AD_TENANT: 'tenant',
       REACT_APP_AD_APP_ID: 'id'
     }
     const authContext = require('./adalConfig')
 
-    expect(authContext.adalConfig.tenant).toBe('tenent')
+    expect(authContext.adalConfig.tenant).toBe('tenant')
     expect(authContext.adalConfig.clientId).toBe('id')
     expect(authContext.adalConfig.endpoints.api).toBe('id')
 
