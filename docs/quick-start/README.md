@@ -93,7 +93,7 @@ You can start a separate http database server with the command
 npm run db:server:start
 ```
 
-However, if you want to use as fastify plugin you can uss this stub
+However, if you want to use as fastify plugin you can use this stub
 
 ```js
 const titusDbManager = require('../titus-db-manager/lib/plugin')
