@@ -29,7 +29,7 @@
     "storybook": "start-storybook -p 9009 -s public",
     "storybook:build": "build-storybook -s public",
     "test": "cross-env CI=true react-scripts test --env=jest-environment-jsdom-sixteen --watchAll=false --coverage  --colors",
-    "test:watch": "react-scripts test --env=jsdom",
+    "test:watch": "react-scripts test --env=jest-environment-jsdom-sixteen",
     "test:related": "cross-env CI=true react-scripts test --env=jest-environment-jsdom-sixteen --onlyChanged"
   },
   "devDependencies": {

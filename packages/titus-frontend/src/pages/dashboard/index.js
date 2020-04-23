@@ -3,7 +3,7 @@ import { AuthConsumer } from '../../components/authentication/authentication-con
 import { authContext } from '../../components/auth-providers/azure-ad/adalConfig'
 
 const Dashboard = () => {
-  const [adIdToken, setAdIdToken] = useState(false)
+  const [adIdToken, setAdIdToken] = useState(null)
 
   useEffect(() => {
     if (!authContext) {
@@ -41,12 +41,7 @@ const Dashboard = () => {
           </button>
           <img
             alt="Titus logo"
-            style={{
-              width: '100%',
-              height: '100%',
-              marginBottom: '10vh',
-              marginTop: '10vh'
-            }}
+            className="login-logo"
             src="img/Accel_Logo_Titus.svg"
           />
           <p>

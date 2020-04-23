@@ -8,12 +8,7 @@ const Login = () => (
         <img
           alt="Titus logo"
           src="img/Accel_Logo_Titus.svg"
-          style={{
-            width: '100%',
-            height: '100%',
-            marginBottom: '10vh',
-            marginTop: '10vh'
-          }}
+          className="login-logo"
         />
         <Form {...rest} />
       </div>

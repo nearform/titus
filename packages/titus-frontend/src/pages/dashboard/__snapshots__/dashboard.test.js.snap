@@ -12,8 +12,8 @@ exports[`<Dashboard /> should render correctly 1`] = `
     </button>
     <img
       alt="Titus logo"
+      class="login-logo"
       src="img/Accel_Logo_Titus.svg"
-      style="width: 100%; height: 100%; margin-bottom: 10vh; margin-top: 10vh;"
     />
     <p>
       Develop and Deploy to features quickly using Titus, an Accelerated Development & Deployment Stack. Titus is production ready and can be deployed to all major cloud providers.
@@ -41,8 +41,8 @@ exports[`<Dashboard /> should render correctly 2`] = `
     </button>
     <img
       alt="Titus logo"
+      class="login-logo"
       src="img/Accel_Logo_Titus.svg"
-      style="width: 100%; height: 100%; margin-bottom: 10vh; margin-top: 10vh;"
     />
     <p>
       Develop and Deploy to features quickly using Titus, an Accelerated Development & Deployment Stack. Titus is production ready and can be deployed to all major cloud providers.
@@ -70,8 +70,8 @@ exports[`<Dashboard /> should render correctly 3`] = `
     </button>
     <img
       alt="Titus logo"
+      class="login-logo"
       src="img/Accel_Logo_Titus.svg"
-      style="width: 100%; height: 100%; margin-bottom: 10vh; margin-top: 10vh;"
     />
     <p>
       Develop and Deploy to features quickly using Titus, an Accelerated Development & Deployment Stack. Titus is production ready and can be deployed to all major cloud providers.
@@ -102,8 +102,8 @@ exports[`<Dashboard /> should trigger button correctly 1`] = `
     </button>
     <img
       alt="Titus logo"
+      class="login-logo"
       src="img/Accel_Logo_Titus.svg"
-      style="width: 100%; height: 100%; margin-bottom: 10vh; margin-top: 10vh;"
     />
     <p>
       Develop and Deploy to features quickly using Titus, an Accelerated Development & Deployment Stack. Titus is production ready and can be deployed to all major cloud providers.
@@ -131,8 +131,8 @@ exports[`<Dashboard /> should trigger fetch catch correctly 1`] = `
     </button>
     <img
       alt="Titus logo"
+      class="login-logo"
       src="img/Accel_Logo_Titus.svg"
-      style="width: 100%; height: 100%; margin-bottom: 10vh; margin-top: 10vh;"
     />
     <p>
       Develop and Deploy to features quickly using Titus, an Accelerated Development & Deployment Stack. Titus is production ready and can be deployed to all major cloud providers.
@@ -163,8 +163,8 @@ exports[`<Dashboard /> should trigger fetch success correctly 1`] = `
     </button>
     <img
       alt="Titus logo"
+      class="login-logo"
       src="img/Accel_Logo_Titus.svg"
-      style="width: 100%; height: 100%; margin-bottom: 10vh; margin-top: 10vh;"
     />
     <p>
       Develop and Deploy to features quickly using Titus, an Accelerated Development & Deployment Stack. Titus is production ready and can be deployed to all major cloud providers.
@@ -195,8 +195,8 @@ exports[`<Dashboard /> should trigger href correctly 1`] = `
     </button>
     <img
       alt="Titus logo"
+      class="login-logo"
       src="img/Accel_Logo_Titus.svg"
-      style="width: 100%; height: 100%; margin-bottom: 10vh; margin-top: 10vh;"
     />
     <p>
       Develop and Deploy to features quickly using Titus, an Accelerated Development & Deployment Stack. Titus is production ready and can be deployed to all major cloud providers.

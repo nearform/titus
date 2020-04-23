@@ -4,6 +4,7 @@ import { Form } from './form'
 
 describe('<Form />', () => {
   afterEach(cleanup)
+
   it('should render correctly when authentication and login return false', async () => {
     const authentication = {
       parseHash: () => {

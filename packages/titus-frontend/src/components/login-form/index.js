@@ -1,6 +1,6 @@
+import React from 'react'
 import { Formik, Field, ErrorMessage } from 'formik'
 import PropTypes from 'prop-types'
-import React from 'react'
 
 const LoginForm = ({
   allowChangePassword,
@@ -17,8 +17,7 @@ const LoginForm = ({
     }}
     validationSchema={schema}
     onSubmit={(values, { resetForm }) => {
-      const { username, password, newPassword } = values
-      if (login) login({ username, password, newPassword })
+      if (login) login(values)
       resetForm(values)
     }}
   >
