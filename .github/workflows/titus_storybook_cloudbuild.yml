@@ -1,9 +1,11 @@
 steps:
-- name: "gcr.io/cloud-builders/docker"
-  args:
-  - build
-  - "--tag=gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA"
-  - "--file=.storybook/docker/Dockerfile"
-  - .
+  - name: "gcr.io/cloud-builders/docker"
+    env:
+      - SERVICE_NAME: titus-storybook
+    args:
+      - build
+      - "--tag=gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA"
+      - "--file=.storybook/docker/Dockerfile"
+      - .
 images:
-- "gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA"
+  - "gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA"

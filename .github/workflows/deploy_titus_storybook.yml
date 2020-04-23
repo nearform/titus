@@ -16,7 +16,6 @@ jobs:
 
     env:
       PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-      SERVICE_NAME: titus-storybook
       SERVICE_REGION: europe-west
       CI: true
 
