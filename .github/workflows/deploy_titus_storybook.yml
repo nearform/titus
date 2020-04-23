@@ -8,7 +8,7 @@ on:
     paths:
       - 'packages/titus-frontend/**'
       - '.github/workflows/deploy_titus_storybook.yml'
-        
+
 jobs:
   deploy-titus-frontend:
     name: Build & Deploy titus storybook
@@ -44,4 +44,4 @@ jobs:
       - name: Build & push container
         run: |
           cd ./packages/titus-frontend
-          gcloud builds submit --config ../../.github/deployment/titus_storybook_cloudbuild.yml .
+          gcloud builds submit --config ../../.github/deployment/titus_storybook_cloudbuild.yml --substitutions=COMMIT_SHA="$GITHUB_SHA" .
