@@ -1,0 +1,9 @@
+steps:
+- name: "gcr.io/cloud-builders/docker"
+  args:
+  - build
+  - "--tag=gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA"
+  - "--file=.storybook/docker/Dockerfile"
+  - .
+images:
+- "gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA"

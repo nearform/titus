@@ -40,8 +40,8 @@ jobs:
         run: |
           echo ::set-env name=GOOGLE_APPLICATION_CREDENTIALS::/tmp/service_account
           gcloud config set project $PROJECT_ID
-        
+
       - name: Build & push container
         run: |
           cd ./packages/titus-frontend
-          gcloud builds submit -t gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA -f .storybook/docker/Dockerfile .
+          gcloud builds submit --config .github/workflows/titus_storybook_cloudbuild.yml .
