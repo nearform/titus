@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - storybook-gcloud-cloudbuild
     paths:
       - 'packages/titus-frontend/**'
       - '.github/workflows/deploy_titus_storybook.yml'
