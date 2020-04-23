@@ -45,4 +45,4 @@ jobs:
       - name: Build & push container
         run: |
           cd ./packages/titus-frontend
-          gcloud builds submit --config .github/workflows/titus_storybook_cloudbuild.yml .
+          gcloud builds submit --config ../../.github/workflows/titus_storybook_cloudbuild.yml .
