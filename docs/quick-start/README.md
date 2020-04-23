@@ -51,11 +51,11 @@ CONTAINER ID        IMAGE                         NAMES
 e553c840fbdc        postgres:10.4-alpine          titus-db
 ```
 
-A volume will also be created to handle data:
+Running `docker volume ls` we can check a volume was also created to handle Titus Postgres data:
 
 ```sh
-CONTAINER ID        IMAGE                         NAMES
-e553c840fbdc        postgres:10.4-alpine          titus-db
+DRIVER              VOLUME NAME
+local               titus_titus-pg-data
 ```
 
 Included with Titus is the functionality for migrating and seeding databases. To see this in action you can run:
