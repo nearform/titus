@@ -14,7 +14,7 @@
 | Frontend Deploy | [![deploy-frontend][deploy-frontend-badge]][deploy-frontend-link] |
 | Backend Deploy | [![deploy-backend][deploy-backend-badge]][deploy-backend-link] |
 | DB Manager Deploy | [![deploy-db-manager][deploy-db-manager-badge]][deploy-db-manager-link] |
-| Storybook Deploy | [![deploy-db-manager][deploy-db-manager-badge]][deploy-db-manager-link] |
+| Storybook Deploy | [![deploy-storybook][deploy-storybook-badge]][deploy-storybook-link] |
 
 Titus is a production grade, end-to-end stack for modern web application development. It includes DevOps and authentication preconfigured. Titus is a reusable kit that deploys your application with minimum effort.
 
