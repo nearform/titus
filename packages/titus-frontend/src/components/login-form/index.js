@@ -61,13 +61,9 @@ const LoginForm = ({
 )
 
 LoginForm.propTypes = {
-  // Function to call on successful submit
   login: PropTypes.func,
-  // yup schema for form validation
   schema: PropTypes.object,
-  // Title of the form, appears in h1
   header: PropTypes.string,
-  // General form error
   loginError: PropTypes.string
 }
 

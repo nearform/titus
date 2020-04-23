@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Logo /> should render correctly 1`] = `
+<DocumentFragment>
+  <img
+    alt="Titus logo"
+    class="login-logo"
+    src="img/Accel_Logo_Titus.svg"
+  />
+</DocumentFragment>
+`;

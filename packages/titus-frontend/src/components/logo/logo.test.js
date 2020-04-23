@@ -1,13 +1,13 @@
 import React from 'react'
 import { render, cleanup } from '@testing-library/react'
 
-import Loading from '.'
+import Logo from '.'
 
-describe('<Loading />', () => {
+describe('<Logo />', () => {
   afterEach(cleanup)
 
   it('should render correctly', () => {
-    const { asFragment } = render(<Loading />)
+    const { asFragment } = render(<Logo />)
     expect(asFragment()).toMatchSnapshot()
   })
 })

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { AuthConsumer } from '../../components/authentication/authentication-context'
 import { authContext } from '../../components/auth-providers/azure-ad/adalConfig'
+import Logo from '../../components/logo'
 
 const Dashboard = () => {
   const [adIdToken, setAdIdToken] = useState(null)
@@ -39,11 +40,7 @@ const Dashboard = () => {
           <button className="logout button" onClick={logout}>
             LOGOUT
           </button>
-          <img
-            alt="Titus logo"
-            className="login-logo"
-            src="img/Accel_Logo_Titus.svg"
-          />
+          <Logo />
           <p>
             Develop and Deploy to features quickly using Titus, an Accelerated
             Development & Deployment Stack. Titus is production ready and can be
