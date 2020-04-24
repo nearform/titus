@@ -14,6 +14,7 @@
 | Frontend Deploy | [![deploy-frontend][deploy-frontend-badge]][deploy-frontend-link] |
 | Backend Deploy | [![deploy-backend][deploy-backend-badge]][deploy-backend-link] |
 | DB Manager Deploy | [![deploy-db-manager][deploy-db-manager-badge]][deploy-db-manager-link] |
+| Storybook Deploy | [![deploy-storybook][deploy-storybook-badge]][deploy-storybook-link] |
 
 Titus is a production grade, end-to-end stack for modern web application development. It includes DevOps and authentication preconfigured. Titus is a reusable kit that deploys your application with minimum effort.
 
@@ -33,6 +34,9 @@ Titus is a production grade, end-to-end stack for modern web application develop
 
 [deploy-db-manager-link]: https://github.com/nearform/titus/actions?query=workflow%3A%22Deploy+titus-db-manager+to+GCP%22
 [deploy-db-manager-badge]: https://github.com/nearform/titus/workflows/Deploy%20titus-db-manager%20to%20GCP/badge.svg
+
+[deploy-storybook-link]: https://github.com/nearform/titus/actions?query=workflow%3A%22Deploy+storybook+to+GCP%22
+[deploy-storybook-badge]: https://github.com/nearform/titus/workflows/Deploy%20storybook%20to%20GCP/badge.svg
 
 [logo-img]: docs/img/Accel_Logo_Titus.svg
 [docs]: https://nf-titus.netlify.com/#/

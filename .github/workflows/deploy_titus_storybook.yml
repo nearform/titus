@@ -7,7 +7,7 @@ on:
     paths:
       - 'packages/titus-frontend/**'
       - '.github/workflows/deploy_titus_storybook.yml'
-      
+
 jobs:
   deploy-titus-frontend:
     name: Build & Deploy titus storybook
@@ -15,7 +15,6 @@ jobs:
 
     env:
       PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-      SERVICE_NAME: titus-storybook
       SERVICE_REGION: europe-west
       CI: true
 
@@ -40,8 +39,8 @@ jobs:
         run: |
           echo ::set-env name=GOOGLE_APPLICATION_CREDENTIALS::/tmp/service_account
           gcloud config set project $PROJECT_ID
-        
+
       - name: Build & push container
         run: |
           cd ./packages/titus-frontend
-          gcloud builds submit -t gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA -f .storybook/docker/Dockerfile .
+          gcloud builds submit --config ../../.github/deployment/titus_storybook_cloudbuild.yml --substitutions=COMMIT_SHA="$GITHUB_SHA" .
