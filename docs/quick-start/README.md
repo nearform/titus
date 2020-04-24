@@ -51,11 +51,11 @@ CONTAINER ID        IMAGE                         NAMES
 e553c840fbdc        postgres:10.4-alpine          titus-db
 ```
 
-A volume will also be created to handle data:
+Running `docker volume ls` we can check a volume was also created to handle Titus Postgres data:
 
 ```sh
-CONTAINER ID        IMAGE                         NAMES
-e553c840fbdc        postgres:10.4-alpine          titus-db
+DRIVER              VOLUME NAME
+local               titus_titus-pg-data
 ```
 
 Included with Titus is the functionality for migrating and seeding databases. To see this in action you can run:
@@ -93,7 +93,7 @@ You can start a separate http database server with the command
 npm run db:server:start
 ```
 
-However, if you want to use as fastify plugin you can uss this stub
+However, if you want to use as fastify plugin you can use this stub
 
 ```js
 const titusDbManager = require('../titus-db-manager/lib/plugin')
