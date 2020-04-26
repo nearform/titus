@@ -7,6 +7,8 @@
     "auth0-js": "^9.13.2",
     "aws-amplify": "^1.2.4",
     "cross-env": "^7.0.2",
+    "env-schema": "^1.1.0",
+    "fluent-schema": "^0.10.0",
     "formik": "^2.0.4",
     "pino": "^6.2.0",
     "prop-types": "^15.7.2",
@@ -31,7 +33,7 @@
     "test": "cross-env CI=true react-scripts test --env=jest-environment-jsdom-sixteen --watchAll=false --coverage  --colors",
     "test:watch": "react-scripts test --env=jest-environment-jsdom-sixteen",
     "test:related": "cross-env CI=true react-scripts test --env=jest-environment-jsdom-sixteen --onlyChanged",
-    "validate:env": "node -r dotenv/config bin/validateEnv.js"
+    "validate:env": "node bin/validateEnv.js"
   },
   "devDependencies": {
     "@storybook/addon-a11y": "^5.3.18",
