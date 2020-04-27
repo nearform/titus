@@ -1,8 +1,7 @@
 import { WebAuth } from 'auth0-js'
-import config from '../../../config'
 
 export default class Authentication {
-  constructor() {
+  constructor({ config } = {}) {
     this.webAuth = new WebAuth({
       domain: config.auth0.domain,
       clientID: config.auth0.clientId,
@@ -11,6 +10,7 @@ export default class Authentication {
       responseType: 'token id_token',
       scope: 'openid'
     })
+    this.config = config
   }
 
   async login() {
@@ -45,7 +45,7 @@ export default class Authentication {
     // will redirect to login page, and clean Auth0 cookies
     this.webAuth.logout({
       returnTo: `${window.location.origin}/login`,
-      clientID: config.auth0.clientId
+      clientID: this.config.auth0.clientId
     })
   }
 

@@ -13,7 +13,15 @@ WebAuth.mockImplementation(() => mockWeb)
 
 describe('Authorization constructor', () => {
   const storage = {}
-  const authentication = new Authentication()
+  const authentication = new Authentication({
+    config: {
+      auth0: {
+        domain: '',
+        clientId: '',
+        audience: ''
+      }
+    }
+  })
 
   Object.defineProperty(window, 'localStorage', {
     value: {
