@@ -16,6 +16,7 @@ jobs:
     env:
       PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
       SERVICE_REGION: europe-west
+      SERVICE_NAME: titus-storybook
       CI: true
 
     steps:
@@ -30,17 +31,34 @@ jobs:
       - name: Set up GCP CLI
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
-          version: '275.0.0'
+          version: '281.0.0'
           service_account_email: ${{ secrets.GCP_SA_EMAIL }}
           service_account_key: ${{ secrets.GCP_SA_KEY }}
-          service_account_file_name: /tmp/service_account
+          export_default_credentials: true
 
       - name: Add GCP Credentials
         run: |
           echo ::set-env name=GOOGLE_APPLICATION_CREDENTIALS::/tmp/service_account
           gcloud config set project $PROJECT_ID
 
-      - name: Build & push container
+      - name: Configure Docker repository
         run: |
+          gcloud auth configure-docker
+
+      - name: Build container
+        working-directory: ./packages/impa-backend
+        run: |
+          echo "::set-env name=DOCKER_IMAGE::gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA"
           cd ./packages/titus-frontend
-          gcloud builds submit --config ../../.github/deployment/titus_storybook_cloudbuild.yml --substitutions=COMMIT_SHA="$GITHUB_SHA" .
+          docker build \
+            -t $DOCKER_IMAGE \
+            -f .storybook/docker/Dockerfile \
+            .
+
+      - name: Push container
+        run: |
+          docker push $DOCKER_IMAGE
+
+      - name: Run service
+        run: |
+          gcloud run deploy $SERVICE_NAME --image $DOCKER_IMAGE
