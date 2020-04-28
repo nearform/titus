@@ -17,7 +17,7 @@ jobs:
     env:
       PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
       SERVICE_NAME: titus-frontend
-      SERVICE_REGION: europe-west
+      SERVICE_REGION: europe-west1
       CI: true
 
     steps:
