@@ -4,11 +4,30 @@ import history from '../../history'
 import { ROUTES } from '../../constants'
 import InMemory from '../auth-providers/in-memory'
 import Titus from '../auth-providers/titus-backend'
-import { stdTimeFunctions } from 'pino'
+import AzureAd from '../auth-providers/azure-ad'
+import AwsAmplify from '../auth-providers/aws-amplify'
+import Auth0 from '../auth-providers/auth0'
+import config from '../../config'
+
+// AWS, TITUS, MEM, AD, AUTH0
+const AUTH_PROVIDER = process.env.REACT_APP_AUTH_PROVIDER || 'AUTH0'
+const getProvider = providerKey => {
+  switch (AUTH_PROVIDER) {
+    case 'AD':
+      return new AzureAd({ config })
+    case 'TITUS':
+      return new Titus({ config })
+    case 'AWS':
+      return new AwsAmplify({ config })
+    case 'AUTH0':
+      return new Auth0({ config })
+    default:
+      return new InMemory()
+  }
+}
 
 // TODO:: Generate a new auth based off env variables here
-// const authentication = new InMemory()
-const authentication = new Titus()
+const authentication = getProvider(AUTH_PROVIDER)
 
 export const AuthContext = React.createContext({})
 
@@ -57,6 +76,7 @@ export const AuthProvider = ({ children }) => {
     logoutError,
     isAuthenticated,
     user,
+    provider: AUTH_PROVIDER,
     authentication,
     loginMessage: authentication.header
   }

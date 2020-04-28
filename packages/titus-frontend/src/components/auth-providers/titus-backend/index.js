@@ -44,5 +44,3 @@ export default class Authentication {
     return { username: 'Dontknow' }
   }
 }
-
-export { Form as Login } from './form'
