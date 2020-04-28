@@ -1,24 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import { AuthConsumer } from '../../components/authentication/authentication-context'
-import { authContext } from '../../components/auth-providers/azure-ad/adalConfig'
 import Logo from '../../components/logo'
 
-const Dashboard = () => {
+const Dashboard = ({ authentication }) => {
   const [adIdToken, setAdIdToken] = useState(null)
 
   useEffect(() => {
-    if (!authContext) {
+    if (!authentication.authContext) {
       return
     }
 
     const adIdToken = localStorage.getItem(
-      authContext.CONSTANTS.STORAGE.IDTOKEN
+      authentication.authContext.CONSTANTS.STORAGE.IDTOKEN
     )
 
     if (adIdToken) {
       setAdIdToken({ adIdToken })
     }
-  }, [])
+  }, [authentication.authContext])
 
   const testAzureAuth = async () => {
     const headers = {

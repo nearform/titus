@@ -24,7 +24,11 @@ const App = () => (
             <Route
               path="/"
               render={() =>
-                isAuthenticated ? <AsyncDashboard /> : <Redirect to="/login" />
+                isAuthenticated ? (
+                  <AsyncDashboard authentication={authentication} />
+                ) : (
+                  <Redirect to="/login" />
+                )
               }
             />
             {/* INSERT NEW ROUTES HERE */}
