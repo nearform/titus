@@ -57,7 +57,7 @@ In this situation:
 
 To enable it, do the following:
 1. Provide Auth0 details in the **titus-frontend** `.env` file (`REACT_APP_AUTH0_*` variables)
-1. In Auth0 configuration, make sure the `/login` route is allowed in both _Allowed Callback URLs_ and _Allowed Logout URLs_ lists.
+1. In Auth0 configuration, make sure the app Login route (for example `http://localhost:3000/login`) is being allowed in both _Allowed Callback URLs_ and _Allowed Logout URLs_ lists.  
 1. Change the provider variable in the file `src/app.js`, as follows:
    ```js
    // import Authentication, { Login } from './components/auth-providers/in-memory'
