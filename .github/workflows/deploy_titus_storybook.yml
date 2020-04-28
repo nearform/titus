@@ -43,9 +43,8 @@ jobs:
           gcloud auth configure-docker
 
       - name: Build container
-        working-directory: ./packages/impa-backend
+        working-directory: ./packages/titus-frontend
         run: |
-          cd ./packages/titus-frontend
           docker build \
             -t $DOCKER_IMAGE \
             -f .storybook/docker/Dockerfile \
