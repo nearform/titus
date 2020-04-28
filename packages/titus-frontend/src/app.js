@@ -3,7 +3,7 @@ import { Route, Router, Redirect, Switch } from 'react-router-dom'
 import history from './history'
 import Loading from './components/loading'
 import Auth from './components/authentication'
-import Authentication, { Login } from './components/auth-providers/auth0'
+import Authentication, { Login } from './components/auth-providers/in-memory'
 import './styles.css'
 
 const AsyncLogin = lazy(() => import('./pages/login'))
