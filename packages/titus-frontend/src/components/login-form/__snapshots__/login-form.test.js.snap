@@ -2,6 +2,11 @@
 
 exports[`LoginForm should render correctly with allowChangePassword and loginError temporary password 1`] = `
 <DocumentFragment>
+  <img
+    alt="Titus logo"
+    class="login-logo"
+    src="img/Accel_Logo_Titus.svg"
+  />
   <form
     novalidate=""
   >
@@ -36,7 +41,7 @@ exports[`LoginForm should render correctly with allowChangePassword and loginErr
       class="button"
       type="submit"
     >
-      Login
+      Login 
     </button>
   </form>
 </DocumentFragment>
@@ -44,6 +49,11 @@ exports[`LoginForm should render correctly with allowChangePassword and loginErr
 
 exports[`LoginForm should render correctly without params 1`] = `
 <DocumentFragment>
+  <img
+    alt="Titus logo"
+    class="login-logo"
+    src="img/Accel_Logo_Titus.svg"
+  />
   <form
     novalidate=""
   >
@@ -66,7 +76,7 @@ exports[`LoginForm should render correctly without params 1`] = `
       class="button"
       type="submit"
     >
-      Login
+      Login 
     </button>
   </form>
 </DocumentFragment>

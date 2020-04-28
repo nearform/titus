@@ -16,9 +16,9 @@ describe('Authorization constructor', () => {
   const authentication = new Authentication({
     config: {
       auth0: {
-        domain: '',
-        clientId: '',
-        audience: ''
+        domain: 'domain',
+        clientId: 'clientId',
+        audience: 'audience'
       }
     }
   })
