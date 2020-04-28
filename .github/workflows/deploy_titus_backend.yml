@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - deploy-and-run-service-gcp
     paths:
       - 'packages/titus-backend/**'
       - '.github/workflows/deploy_titus_backend.yml'
