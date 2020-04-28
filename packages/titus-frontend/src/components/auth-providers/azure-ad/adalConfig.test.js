@@ -1,4 +1,4 @@
-const authContext = require('./adalConfig')
+import * as authContext from './adalConfig'
 
 describe('Adal config', () => {
   beforeEach(() => {

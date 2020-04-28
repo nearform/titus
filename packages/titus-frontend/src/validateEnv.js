@@ -1,3 +1,5 @@
+'use strict'
+
 const S = require('fluent-schema')
 
 const env = process.env.NODE_ENV || 'development'
