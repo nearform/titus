@@ -1,12 +1,17 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import history from '../../history'
+import { ROUTES } from '../../constants'
+import InMemory from '../auth-providers/in-memory'
+
+// TODO:: Generate a new auth based off env variables here
+const authentication = new InMemory()
 
 export const AuthContext = React.createContext({})
 
 export const AuthConsumer = AuthContext.Consumer
 
-export const AuthProvider = ({ authentication, children, component }) => {
+export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setAuthenticated] = useState(
     authentication.isAuthenticated()
   )
@@ -21,7 +26,7 @@ export const AuthProvider = ({ authentication, children, component }) => {
       if (user) {
         setAuthenticated(authentication.isAuthenticated())
         setUser(user)
-        history.push('/')
+        history.push(ROUTES.DASHBOARD)
       }
     } catch (err) {
       setLoginError(err.message)
@@ -35,7 +40,7 @@ export const AuthProvider = ({ authentication, children, component }) => {
       if (result) {
         setAuthenticated(false)
         setUser(null)
-        history.push('/login')
+        history.push(ROUTES.LOGIN)
       }
     } catch (err) {
       setLogoutError(err.message)
@@ -49,8 +54,8 @@ export const AuthProvider = ({ authentication, children, component }) => {
     logoutError,
     isAuthenticated,
     user,
-    component,
-    authentication
+    authentication,
+    loginMessage: authentication.header
   }
 
   return <AuthContext.Provider value={context}>{children}</AuthContext.Provider>
@@ -58,6 +63,5 @@ export const AuthProvider = ({ authentication, children, component }) => {
 
 AuthProvider.propTypes = {
   children: PropTypes.node,
-  authentication: PropTypes.object,
-  component: PropTypes.func
+  authentication: PropTypes.object
 }

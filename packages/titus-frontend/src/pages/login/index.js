@@ -1,16 +1,10 @@
-import React from 'react'
-import { AuthConsumer } from '../../components/authentication/authentication-context'
-import Logo from '../../components/logo'
+import React, { useContext } from 'react'
+import { AuthContext } from '../../components/authentication/authentication-context'
+import LoginForm from '../../components/login-form'
 
-const Login = () => (
-  <AuthConsumer>
-    {({ component: Form, ...rest }) => (
-      <div className="container">
-        <Logo />
-        <Form {...rest} />
-      </div>
-    )}
-  </AuthConsumer>
-)
+const Login = () => {
+  const { login, loginMessage } = useContext(AuthContext)
+  return <LoginForm login={login} header={loginMessage} />
+}
 
 export default Login
