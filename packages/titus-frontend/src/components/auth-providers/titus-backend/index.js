@@ -1,4 +1,6 @@
 export default class Authentication {
+  header = `Please provide Auth0 account details:`
+
   async login({ username, password }) {
     const response = await fetch('/login', {
       method: 'POST',

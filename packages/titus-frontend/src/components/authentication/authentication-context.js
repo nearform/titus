@@ -3,9 +3,12 @@ import PropTypes from 'prop-types'
 import history from '../../history'
 import { ROUTES } from '../../constants'
 import InMemory from '../auth-providers/in-memory'
+import Titus from '../auth-providers/titus-backend'
+import { stdTimeFunctions } from 'pino'
 
 // TODO:: Generate a new auth based off env variables here
-const authentication = new InMemory()
+// const authentication = new InMemory()
+const authentication = new Titus()
 
 export const AuthContext = React.createContext({})
 
