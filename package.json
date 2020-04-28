@@ -3,40 +3,39 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "clean": "lerna clean",
-    "clean:all": "node tools/clean-envs.js && lerna clean",
-    "create:env": "node tools/create-envs.js",
     "build:all": "lerna run --parallel build",
+    "clean": "lerna clean",
+    "clean:all": "npm run clean:env && npm run clean",
+    "clean:env": "node -e 'require(\"./lib/tools.js\").cleanEnvs()'",
+    "create:env": "node -e 'require(\"./lib/tools.js\").createEnvs()'",
     "db:create-volume": "docker volume create --name titus-pg-data -d local",
+    "db:delete": "lerna run --stream db:delete",
+    "db:down": "lerna run --stream db:down",
     "db:migrate": "lerna run --stream db:migrate",
     "db:seed": "lerna run --stream db:seed",
-    "db:up": "lerna run --stream db:up",
-    "db:down": "lerna run --stream db:down",
-    "db:delete": "lerna run --stream db:delete",
-    "db:truncate": "lerna run --stream db:truncate",
     "db:server:start": "lerna run --stream db:server:start",
+    "db:truncate": "lerna run --stream db:truncate",
+    "db:up": "lerna run --stream db:up",
     "lint:all": "lerna run --parallel lint",
     "lint:fix": "lerna run --parallel lint:fix",
     "lint:staged": "lerna run lint:staged",
     "postinstall": "lerna bootstrap",
     "start:all": "lerna run --parallel start",
     "start:docs": "docsify serve ./docs",
-    "test:all": "lerna run --parallel test",
+    "test": "jest --config .jest.json --coverage",
+    "test:all": "npm run test && lerna run --parallel test",
     "test:related": "lerna run test:related"
   },
   "devDependencies": {
     "docsify-cli": "^4.4.0",
     "husky": "^1.3.1",
-    "lerna": "^3.20.2"
+    "lerna": "^3.20.2",
+    "jest": "^25.4.0"
   },
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint:staged && npm run test:related",
       "pre-push": "npm run lint:all && npm run test"
     }
-  },
-  "dependencies": {
-    "pino": "^5.16.0",
-    "pino-pretty": "^3.5.0"
   }
 }

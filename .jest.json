@@ -1,0 +1,11 @@
+{
+  "testEnvironment": "node",
+  "collectCoverageFrom": [
+    "lib/**/*.{js}",
+    "!**/node_modules/**"
+  ],
+  "testPathIgnorePatterns": [
+    "/node_modules/",
+    "/packages/"
+  ]
+}
