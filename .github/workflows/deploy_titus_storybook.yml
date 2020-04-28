@@ -51,9 +51,11 @@ jobs:
             .
 
       - name: Push container
+        working-directory: ./packages/titus-frontend
         run: |
           docker push $DOCKER_IMAGE
 
       - name: Run service
+        working-directory: ./packages/titus-frontend
         run: |
           gcloud run deploy $SERVICE_NAME --image $DOCKER_IMAGE
