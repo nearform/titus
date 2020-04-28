@@ -9,7 +9,16 @@ jest.mock('@aws-amplify/auth', () => ({
 }))
 
 describe('Authorization constructor', () => {
-  const authentication = new Authentication()
+  const authentication = new Authentication({
+    config: {
+      aws: {
+        region: '',
+        userPoolId: '',
+        userPoolWebClientId: '',
+        identityPoolId: ''
+      }
+    }
+  })
 
   it('should trigger logout correctly', async () => {
     expect(await authentication.logout()).toEqual(true)

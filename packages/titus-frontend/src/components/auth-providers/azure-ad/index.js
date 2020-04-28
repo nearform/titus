@@ -1,14 +1,19 @@
-import { authContext } from './adalConfig'
+import { getAuthContext } from './adalConfig'
 
 export default class Authentication {
+  constructor({ config } = {}) {
+    this.authContext = getAuthContext(config)
+  }
+
   logout() {
     this.user = false
-    authContext.logOut()
+    this.authContext.logOut()
     return true
   }
 
   isAuthenticated() {
-    const user = authContext.getCachedUser()
+    const user = this.authContext.getCachedUser()
+
     if (user) {
       const { username } = user
       this.user = { username }

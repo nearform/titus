@@ -1,17 +1,18 @@
 import Amplify from '@aws-amplify/core'
 import Auth from '@aws-amplify/auth'
-import config from '../../../config'
-
-Amplify.configure({
-  Auth: {
-    identityPoolId: config.aws.identityPoolId,
-    region: config.aws.region,
-    userPoolId: config.aws.userPoolId,
-    userPoolWebClientId: config.aws.userPoolWebClientId
-  }
-})
 
 export default class Authentication {
+  constructor({ config } = {}) {
+    Amplify.configure({
+      Auth: {
+        identityPoolId: config.aws.identityPoolId,
+        region: config.aws.region,
+        userPoolId: config.aws.userPoolId,
+        userPoolWebClientId: config.aws.userPoolWebClientId
+      }
+    })
+  }
+
   user = false
 
   async login({ username, newPassword, password }) {
