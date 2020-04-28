@@ -58,4 +58,4 @@ jobs:
       - name: Run service
         working-directory: ./packages/titus-frontend
         run: |
-          gcloud run deploy $SERVICE_NAME --image $DOCKER_IMAGE --platform managed --region europe-west1
+          gcloud run deploy $SERVICE_NAME --image $DOCKER_IMAGE --platform managed --region europe-west1 --project $PROJECT_ID
