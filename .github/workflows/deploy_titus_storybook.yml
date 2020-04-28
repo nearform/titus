@@ -39,12 +39,12 @@ jobs:
 
       - name: Configure Docker repository
         run: |
+          echo "::set-env name=DOCKER_IMAGE::gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA"
           gcloud auth configure-docker
 
       - name: Build container
         working-directory: ./packages/impa-backend
         run: |
-          echo "::set-env name=DOCKER_IMAGE::gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA"
           cd ./packages/titus-frontend
           docker build \
             -t $DOCKER_IMAGE \
