@@ -18,7 +18,7 @@ jobs:
       PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
       CLOUDRUN_SERVICE_NAME: titus-backend
       CLOUDRUN_SERVICE_REGION: europe-west1
-      DOCKER_IMAGE: gcr.io/$PROJECT_ID/$CLOUDRUN_SERVICE_NAME:$GITHUB_SHA
+      DOCKER_IMAGE: gcr.io/${{ secrets.GCP_PROJECT_ID }}/titus-backend:${{ GITHUB_SHA }}
       CI: true
 
     steps:
@@ -55,7 +55,7 @@ jobs:
       - name: Run service
         working-directory: ./packages/titus-backend
         run: |
-          gcloud run deploy $SERVICE_NAME \
+          gcloud run deploy $CLOUDRUN_SERVICE_NAME \
             --image $DOCKER_IMAGE \
             --region $CLOUDRUN_SERVICE_REGION \
             --project $PROJECT_ID \

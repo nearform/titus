@@ -55,7 +55,7 @@ jobs:
       - name: Run service
         working-directory: ./packages/titus-db-manager
         run: |
-          gcloud run deploy $CLOUDRUN_SERVICE_REGION \
+          gcloud run deploy $CLOUDRUN_SERVICE_NAME \
             --image $DOCKER_IMAGE \
             --region $CLOUDRUN_SERVICE_REGION \
             --project $PROJECT_ID \
