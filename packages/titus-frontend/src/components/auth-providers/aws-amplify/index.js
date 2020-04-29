@@ -15,6 +15,8 @@ export default class Authentication {
 
   user = false
 
+  header = `Please provide AWS Cognito account details:`
+
   async login({ username, newPassword, password }) {
     let user = false
     try {
@@ -50,5 +52,3 @@ export default class Authentication {
     return this.user
   }
 }
-
-export { Form as Login } from './form'

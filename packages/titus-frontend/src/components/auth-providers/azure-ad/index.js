@@ -5,6 +5,12 @@ export default class Authentication {
     this.authContext = getAuthContext(config)
   }
 
+  header = 'Powered by Azure AD'
+
+  // Assuming we won't ever see the Login screen with AD
+  // As we use the directory login and bypass straight to our
+  // private routes
+
   logout() {
     this.user = false
     this.authContext.logOut()
@@ -12,8 +18,7 @@ export default class Authentication {
   }
 
   isAuthenticated() {
-    const user = this.authContext.getCachedUser()
-
+    const user = this.authContext ? this.authContext.getCachedUser() : null
     if (user) {
       const { username } = user
       this.user = { username }
@@ -26,5 +31,3 @@ export default class Authentication {
     return this.user
   }
 }
-
-export const Login = () => null

@@ -32,6 +32,10 @@ a:hover {
   color: var(--midnightBlue);
 }
 
+form {
+  width: 340px;
+}
+
 img {
   height: 50vh;
   max-width: 100%;
@@ -96,7 +100,7 @@ h1 {
   align-items: center;
   display: flex;
   flex-direction: column;
-  max-width: 500px;
+  width: 500px;
 }
 
 .logout {
