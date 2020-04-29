@@ -18,7 +18,7 @@ jobs:
       PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
       CLOUDRUN_SERVICE_NAME: titus-backend
       CLOUDRUN_SERVICE_REGION: europe-west1
-      DOCKER_IMAGE: gcr.io/${{ secrets.GCP_PROJECT_ID }}/titus-backend:$GITHUB_SHA
+      DOCKER_IMAGE: gcr.io/${{ secrets.GCP_PROJECT_ID }}/titus-backend:${{ GITHUB_SHA }}
       CI: true
 
     steps:
