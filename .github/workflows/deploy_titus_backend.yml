@@ -20,7 +20,7 @@ jobs:
       CLOUDRUN_SERVICE_REGION: europe-west1
       DOCKER_IMAGE: gcr.io/${{ secrets.GCP_PROJECT_ID }}/titus-backend:${{ GITHUB_SHA }}
       CI: true
-
+      
     steps:
       - name: Checkout project
         uses: actions/checkout@v1
