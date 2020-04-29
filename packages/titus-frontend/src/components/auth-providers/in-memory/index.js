@@ -1,8 +1,9 @@
+import i18n from '../../../i18n'
+
 export default class Authentication {
   authKey = 'titus-auth-key'
 
-  header = `Note: Any username followed by a password with at least four
-  characters containing at least one letter or number will work.`
+  header = i18n.t('header.memory')
 
   async login({ username }) {
     window.localStorage.setItem(this.authKey, username)

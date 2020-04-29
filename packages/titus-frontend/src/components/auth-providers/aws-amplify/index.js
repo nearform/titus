@@ -1,6 +1,8 @@
 import Amplify from '@aws-amplify/core'
 import Auth from '@aws-amplify/auth'
 
+import i18n from '../../../i18n'
+
 export default class Authentication {
   constructor({ config } = {}) {
     Amplify.configure({
@@ -15,7 +17,7 @@ export default class Authentication {
 
   user = false
 
-  header = `Please provide AWS Cognito account details:`
+  header = i18n.t('header.aws')
   powerMessage = `Powered by AWS Amplify`
 
   async login({ username, newPassword, password }) {
@@ -25,9 +27,7 @@ export default class Authentication {
       if (newPassword) {
         user = await Auth.completeNewPassword(user, newPassword)
       } else if (user.challengeName === 'NEW_PASSWORD_REQUIRED') {
-        throw new Error(
-          'Please enter your temporary password and a new password'
-        )
+        throw new Error(i18n.t('errors.tempPassword'))
       }
       user = await Auth.currentAuthenticatedUser({ bypassCache: false })
     } catch (error) {

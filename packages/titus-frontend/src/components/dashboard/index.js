@@ -1,26 +1,25 @@
-import React, { Fragment } from 'react'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
 import Logo from '../logo'
 
 const Dashboard = ({ logout }) => {
+  const { t } = useTranslation()
+
   return (
-    <Fragment>
+    <>
       <button className="logout button" onClick={logout}>
-        LOGOUT
+        {t('logout')}
       </button>
       <Logo />
-      <p>
-        Develop and Deploy to features quickly using Titus, an Accelerated
-        Development & Deployment Stack. Titus is production ready and can be
-        deployed to all major cloud providers.
-      </p>
+      <p>{t('description')}</p>
       <a
         href="https://nf-titus.netlify.com/"
         rel="noopener noreferrer"
         target="_blank"
       >
-        Check out the docs
+        {t('docs')}
       </a>
-    </Fragment>
+    </>
   )
 }
 // {adIdToken && (

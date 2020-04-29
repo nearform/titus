@@ -1,7 +1,9 @@
 import T from 'prop-types'
 import React, { Fragment } from 'react'
-import { Formik } from 'formik'
-import { loginFormSchema } from '../auth-providers/utils/schemas'
+import { Formik, Field, ErrorMessage } from 'formik'
+import { useTranslation } from 'react-i18next'
+
+import { loginFormSchema } from '../auth-providers/utils'
 import Logo from '../logo'
 import LoginFormInputs from './components/login-form-inputs'
 
@@ -13,9 +15,10 @@ const LoginForm = ({
   powerMessage,
   form
 }) => {
-  let RenderForm = form ? form : LoginFormInputs
+  const { t } = useTranslation()
+
   return (
-    <Fragment>
+    <>
       <Logo />
       <Formik
         initialValues={{
@@ -31,17 +34,51 @@ const LoginForm = ({
       >
         {({ handleSubmit, isSubmitting }) => (
           <form noValidate onSubmit={handleSubmit}>
-            <header>{header}</header>
-            <RenderForm
-              allowChangePassword={allowChangePassword}
-              isSubmitting={isSubmitting}
-              loginError={loginError}
-            />
-            <sub>{powerMessage}</sub>
+            <h1>{header}</h1>
+            {provider !== 'AUTH0' && (
+              <>
+                <Field
+                  type="text"
+                  name="username"
+                  placeholder={t('username')}
+                  required
+                />
+                <ErrorMessage
+                  name="username"
+                  className="login__error"
+                  component="div"
+                />
+                <Field
+                  type="password"
+                  name="password"
+                  placeholder={t('password')}
+                  required
+                />
+                {allowChangePassword &&
+                loginError &&
+                /temporary password/.test(loginError) ? (
+                  <Field
+                    type="password"
+                    name="newPassword"
+                    placeholder={t('newPassword')}
+                    required
+                  />
+                ) : null}
+                <ErrorMessage
+                  name="password"
+                  className="login__error"
+                  component="div"
+                />
+              </>
+            )}
+            {loginError && <div className="login__error">{loginError}</div>}
+            <button className="button" disabled={isSubmitting} type="submit">
+              {`${t('login')} ${provider === 'AUTH0' ? t('withAuth0') : ''}`}
+            </button>
           </form>
         )}
       </Formik>
-    </Fragment>
+    </>
   )
 }
 

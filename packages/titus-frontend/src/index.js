@@ -1,5 +1,8 @@
 import React from 'react'
 import { render } from 'react-dom'
+
+import './i18n'
+
 /*
   Required for `runWithAdal` below:
 
