@@ -18,7 +18,6 @@ jobs:
       PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
       CLOUDRUN_SERVICE_NAME: titus-backend
       CLOUDRUN_SERVICE_REGION: europe-west1
-      DOCKER_IMAGE: gcr.io/${{ secrets.GCP_PROJECT_ID }}/titus-backend:${{ GITHUB_SHA }}
       CI: true
 
     steps:
@@ -40,6 +39,7 @@ jobs:
 
       - name: Configure Docker repository
         run: |
+          echo "::set-env name=DOCKER_IMAGE::gcr.io/$PROJECT_ID/$CLOUDRUN_SERVICE_NAME:$GITHUB_SHA"
           gcloud auth configure-docker
 
       - name: Build container
