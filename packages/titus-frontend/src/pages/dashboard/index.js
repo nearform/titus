@@ -1,65 +1,43 @@
-import React, { useState, useEffect } from 'react'
-import { AuthConsumer } from '../../components/authentication/authentication-context'
-import { authContext } from '../../components/auth-providers/azure-ad/adalConfig'
-import Logo from '../../components/logo'
+import React, { useContext } from 'react'
+import { AuthContext } from '../../components/authentication/authentication-context'
+import Dashboard from '../../components/dashboard'
 
-const Dashboard = () => {
-  const [adIdToken, setAdIdToken] = useState(null)
+// TODO:: Need to do something with this if we are using the AD powered auth
+// import { authContext } from '../../components/auth-providers/azure-ad/adalConfig'
 
-  useEffect(() => {
-    if (!authContext) {
-      return
-    }
+const DashboardContainer = () => {
+  const { logout } = useContext(AuthContext)
+  // const [adIdToken, setAdIdToken] = useState(null)
 
-    const adIdToken = localStorage.getItem(
-      authContext.CONSTANTS.STORAGE.IDTOKEN
-    )
+  // This stuff only happens if the AuthProvider is AD
+  // useEffect(() => {
+  //   if (!authContext) {
+  //     return
+  //   }
 
-    if (adIdToken) {
-      setAdIdToken({ adIdToken })
-    }
-  }, [])
+  //   const adIdToken = localStorage.getItem(
+  //     authContext.CONSTANTS.STORAGE.IDTOKEN
+  //   )
 
-  const testAzureAuth = async () => {
-    const headers = {
-      Authorization: `Bearer ${adIdToken}`
-    }
-    try {
-      const response = await fetch('/user', { headers })
-      const json = await response.json()
-      alert(`Azure UPN: ${json.userPrincipalName}`)
-    } catch (e) {
-      console.log(e)
-    }
-  }
+  //   if (adIdToken) {
+  //     setAdIdToken({ adIdToken })
+  //   }
+  // }, [])
 
-  return (
-    <AuthConsumer>
-      {({ logout }) => (
-        <div className="container">
-          <button className="logout button" onClick={logout}>
-            LOGOUT
-          </button>
-          <Logo />
-          <p>
-            Develop and Deploy to features quickly using Titus, an Accelerated
-            Development & Deployment Stack. Titus is production ready and can be
-            deployed to all major cloud providers.
-          </p>
-          <a
-            href="https://nf-titus.netlify.com/"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Check out the docs
-          </a>
-          {adIdToken && (
-            <button onClick={testAzureAuth}>Test Azure Authentication</button>
-          )}
-        </div>
-      )}
-    </AuthConsumer>
-  )
+  // const testAzureAuth = async () => {
+  //   const headers = {
+  //     Authorization: `Bearer ${adIdToken}`
+  //   }
+  //   try {
+  //     const response = await fetch('/user', { headers })
+  //     const json = await response.json()
+  //     alert(`Azure UPN: ${json.userPrincipalName}`)
+  //   } catch (e) {
+  //     console.log(e)
+  //   }
+  // }
+
+  return <Dashboard logout={logout} />
 }
 
-export default Dashboard
+export default DashboardContainer

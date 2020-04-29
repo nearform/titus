@@ -1,37 +1,12 @@
-import React, { lazy, Suspense } from 'react'
-import { Route, Router, Redirect, Switch } from 'react-router-dom'
-import history from './history'
-import Loading from './components/loading'
-import Auth from './components/authentication'
-import Authentication, { Login } from './components/auth-providers/in-memory'
+import React from 'react'
+import { AuthProvider } from './components/authentication/authentication-context'
+import AppRouter from './router'
 import './styles.css'
 
-const AsyncLogin = lazy(() => import('./pages/login'))
-const AsyncDashboard = lazy(() => import('./pages/dashboard'))
-
-const authentication = new Authentication()
-
 const App = () => (
-  <Suspense fallback={<Loading />}>
-    <Auth authentication={authentication} component={Login}>
-      {isAuthenticated => (
-        <Router history={history}>
-          <Switch>
-            <Route path="/login">
-              <AsyncLogin />
-            </Route>
-            <Route
-              path="/"
-              render={() =>
-                isAuthenticated ? <AsyncDashboard /> : <Redirect to="/login" />
-              }
-            />
-            {/* INSERT NEW ROUTES HERE */}
-          </Switch>
-        </Router>
-      )}
-    </Auth>
-  </Suspense>
+  <AuthProvider>
+    <AppRouter />
+  </AuthProvider>
 )
 
 export default App

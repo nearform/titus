@@ -1,13 +1,14 @@
 import pino from 'pino'
-const { REACT_APP_API_PATH } = process.env
-const config = {
+import config from './config'
+
+const pinoConfig = {
   browser: {
     asObject: true
   }
 }
 
-if (REACT_APP_API_PATH) {
-  config.browser.transmit = {
+if (config.serverUrl) {
+  pinoConfig.browser.transmit = {
     level: 'info',
     send: async (level, logEvent) => {
       const msg = logEvent.messages[0]
@@ -18,12 +19,12 @@ if (REACT_APP_API_PATH) {
       }
       let blob = new Blob([JSON.stringify({ msg, level })], headers)
 
-      navigator.sendBeacon(`${REACT_APP_API_PATH}/log`, blob)
+      navigator.sendBeacon(`${config.serverUrl}/log`, blob)
     }
   }
 }
 
-const logger = pino(config)
+const logger = pino(pinoConfig)
 
 export const log = msg => logger.info(msg)
 export default logger
