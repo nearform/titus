@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - deploy-and-run-service-gcp
     paths:
       - 'packages/titus-db-manager/**'
       - '.github/workflows/deploy_titus_db_manager.yml'
@@ -15,8 +16,9 @@ jobs:
 
     env:
       PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-      SERVICE_NAME: titus-db-manager
-      SERVICE_REGION: europe-west1
+      CLOUDRUN_SERVICE_NAME: titus-db-manager
+      CLOUDRUN_SERVICE_REGION: europe-west1
+      DOCKER_IMAGE: gcr.io/$PROJECT_ID/$CLOUDRUN_SERVICE_NAME:$GITHUB_SHA
       CI: true
 
     steps:
@@ -38,7 +40,6 @@ jobs:
 
       - name: Configure Docker repository
         run: |
-          echo "::set-env name=DOCKER_IMAGE::gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA"
           gcloud auth configure-docker
 
       - name: Build container
@@ -54,8 +55,8 @@ jobs:
       - name: Run service
         working-directory: ./packages/titus-db-manager
         run: |
-          gcloud run deploy $SERVICE_NAME \
+          gcloud run deploy $CLOUDRUN_SERVICE_REGION \
             --image $DOCKER_IMAGE \
-            --region $SERVICE_REGION \
+            --region $CLOUDRUN_SERVICE_REGION \
             --project $PROJECT_ID \
             --platform managed

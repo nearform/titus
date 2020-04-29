@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - deploy-and-run-service-gcp
     paths:
       - 'packages/titus-frontend/**'
       - '.github/workflows/deploy_titus_storybook.yml'
@@ -15,8 +16,9 @@ jobs:
 
     env:
       PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-      SERVICE_REGION: europe-west1
-      SERVICE_NAME: titus-storybook
+      CLOUDRUN_SERVICE_NAME: titus-storybook
+      CLOUDRUN_SERVICE_REGION: europe-west1
+      DOCKER_IMAGE: gcr.io/$PROJECT_ID/$CLOUDRUN_SERVICE_NAME:$GITHUB_SHA
       CI: true
 
     steps:
@@ -38,7 +40,6 @@ jobs:
 
       - name: Configure Docker repository
         run: |
-          echo "::set-env name=DOCKER_IMAGE::gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA"
           gcloud auth configure-docker
 
       - name: Build container
@@ -57,8 +58,8 @@ jobs:
       - name: Run service
         working-directory: ./packages/titus-frontend
         run: |
-          gcloud run deploy $SERVICE_NAME \
+          gcloud run deploy $CLOUDRUN_SERVICE_NAME \
             --image $DOCKER_IMAGE \
-            --region $SERVICE_REGION \
+            --region $CLOUDRUN_SERVICE_REGION \
             --project $PROJECT_ID \
             --platform managed
