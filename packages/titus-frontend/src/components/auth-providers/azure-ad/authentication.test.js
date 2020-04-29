@@ -1,22 +1,22 @@
 import Authentication, { Login } from './index'
-import { authContext } from './adalConfig'
 
 jest.mock('./adalConfig', () => ({
-  authContext: {
+  getAuthContext: jest.fn().mockImplementation(() => ({
     logOut: jest.fn(),
     getCachedUser: jest.fn()
-  }
+  }))
 }))
 
 describe('Authorization constructor', () => {
-  const authentication = new Authentication()
+  const config = { adal: { tenant: 'tenant', clientId: 'id' } }
+  const authentication = new Authentication({ config })
 
   it('should trigger logout correctly', () => {
     expect(authentication.logout()).toBe(true)
   })
 
   it('should trigger isAuthenticated correctly', () => {
-    authContext.getCachedUser.mockImplementation(() => ({
+    authentication.authContext.getCachedUser.mockImplementation(() => ({
       username: 'username'
     }))
 
@@ -28,7 +28,7 @@ describe('Authorization constructor', () => {
   })
 
   it('should trigger isAuthenticated correctly', () => {
-    authContext.getCachedUser.mockImplementation(() => false)
+    authentication.authContext.getCachedUser.mockImplementation(() => false)
     expect(authentication.isAuthenticated()).toBe(false)
   })
 })

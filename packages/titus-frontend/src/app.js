@@ -5,11 +5,12 @@ import Loading from './components/loading'
 import Auth from './components/authentication'
 import Authentication, { Login } from './components/auth-providers/in-memory'
 import './styles.css'
+import config from './config'
 
 const AsyncLogin = lazy(() => import('./pages/login'))
 const AsyncDashboard = lazy(() => import('./pages/dashboard'))
 
-const authentication = new Authentication()
+const authentication = new Authentication({ config })
 
 const App = () => (
   <Suspense fallback={<Loading />}>
@@ -23,7 +24,11 @@ const App = () => (
             <Route
               path="/"
               render={() =>
-                isAuthenticated ? <AsyncDashboard /> : <Redirect to="/login" />
+                isAuthenticated ? (
+                  <AsyncDashboard authentication={authentication} />
+                ) : (
+                  <Redirect to="/login" />
+                )
               }
             />
             {/* INSERT NEW ROUTES HERE */}

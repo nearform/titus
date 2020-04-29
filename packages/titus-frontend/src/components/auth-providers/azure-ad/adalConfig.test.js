@@ -1,21 +1,21 @@
+import * as authContext from './adalConfig'
+
 describe('Adal config', () => {
   beforeEach(() => {
     jest.resetModules()
   })
 
   it('should trigger correctly with process.env', async () => {
-    process.env = {
-      REACT_APP_AD_TENANT: 'tenant',
-      REACT_APP_AD_APP_ID: 'id'
-    }
-    const authContext = require('./adalConfig')
+    const config = { adal: { tenant: 'tenant', clientId: 'id' } }
+    const adalConfig = authContext.getAdalConfig(config)
+    const Auth = authContext.getAuthContext(config)
 
-    expect(authContext.adalConfig.tenant).toBe('tenant')
-    expect(authContext.adalConfig.clientId).toBe('id')
-    expect(authContext.adalConfig.endpoints.api).toBe('id')
+    expect(adalConfig.tenant).toBe('tenant')
+    expect(adalConfig.clientId).toBe('id')
+    expect(adalConfig.endpoints.api).toBe('id')
 
     try {
-      await authContext.adalApiFetch()
+      await authContext.adalApiFetch(Auth, adalConfig)
     } catch (err) {
       expect(err).toEqual({
         message: 'User login is required',
@@ -25,16 +25,13 @@ describe('Adal config', () => {
   })
 
   it('should trigger correctly without process.env', async () => {
-    process.env = {
-      REACT_APP_AD_TENANT: undefined,
-      REACT_APP_AD_APP_ID: undefined
-    }
+    const config = { adal: { tenant: undefined, clientId: undefined } }
+    const adalConfig = authContext.getAdalConfig(config)
+    const Auth = authContext.getAuthContext(config)
 
-    const authContext = require('./adalConfig')
-
-    expect(authContext.adalConfig.clientId).toBe(undefined)
-    expect(authContext.adalConfig.clientId).toBe(undefined)
-    expect(authContext.adalConfig.endpoints.api).toBe(undefined)
-    expect(authContext.authContext).toBe(null)
+    expect(adalConfig.clientId).toBe(undefined)
+    expect(adalConfig.clientId).toBe(undefined)
+    expect(adalConfig.endpoints.api).toBe(undefined)
+    expect(Auth).toBe(null)
   })
 })

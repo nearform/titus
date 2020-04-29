@@ -1,21 +1,16 @@
 import { WebAuth } from 'auth0-js'
 
-const {
-  REACT_APP_AUTH0_DOMAIN: domain,
-  REACT_APP_AUTH0_CLIENT_ID: clientID,
-  REACT_APP_AUTH0_AUDIENCE: audience
-} = process.env
-
 export default class Authentication {
-  constructor() {
+  constructor({ config } = {}) {
     this.webAuth = new WebAuth({
-      domain,
-      clientID,
+      domain: config.auth0.domain,
+      clientID: config.auth0.clientId,
       redirectUri: `${window.location.origin}/login`,
-      audience,
+      audience: config.auth0.audience,
       responseType: 'token id_token',
       scope: 'openid'
     })
+    this.config = config
   }
 
   async login() {
@@ -50,7 +45,7 @@ export default class Authentication {
     // will redirect to login page, and clean Auth0 cookies
     this.webAuth.logout({
       returnTo: `${window.location.origin}/login`,
-      clientID
+      clientID: this.config.auth0.clientId
     })
   }
 

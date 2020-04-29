@@ -1,18 +1,18 @@
 import Amplify from '@aws-amplify/core'
 import Auth from '@aws-amplify/auth'
 
-const {
-  REACT_APP_AWS_REGION: region,
-  REACT_APP_AWS_POOL_ID: userPoolId,
-  REACT_APP_AWS_POOL_CLIENT_ID: userPoolWebClientId,
-  REACT_APP_AWS_IDENTITY_POOL_ID: identityPoolId
-} = process.env
-
-Amplify.configure({
-  Auth: { identityPoolId, region, userPoolId, userPoolWebClientId }
-})
-
 export default class Authentication {
+  constructor({ config } = {}) {
+    Amplify.configure({
+      Auth: {
+        identityPoolId: config.aws.identityPoolId,
+        region: config.aws.region,
+        userPoolId: config.aws.userPoolId,
+        userPoolWebClientId: config.aws.userPoolWebClientId
+      }
+    })
+  }
+
   user = false
 
   async login({ username, newPassword, password }) {
