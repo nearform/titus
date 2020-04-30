@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import history from '../../history'
-import { ROUTES } from '../../constants'
+import { AUTH_PROVIDERS, ROUTES } from '../../constants'
 import InMemory from '../auth-providers/in-memory'
 import Titus from '../auth-providers/titus-backend'
 import AzureAd from '../auth-providers/azure-ad'
@@ -10,17 +10,19 @@ import Auth0 from '../auth-providers/auth0'
 import config from '../../config'
 
 // AWS, TITUS, MEM, AD, AUTH0
-const AUTH_PROVIDER = process.env.REACT_APP_AUTH_PROVIDER || 'AUTH0'
+const AUTH_PROVIDER = process.env.REACT_APP_AUTH_PROVIDER || AUTH_PROVIDERS.MEM
 const getProvider = providerKey => {
   switch (AUTH_PROVIDER) {
-    case 'AD':
+    case AUTH_PROVIDERS.AD:
       return new AzureAd({ config })
-    case 'TITUS':
+    case AUTH_PROVIDERS.TITUS:
       return new Titus({ config })
-    case 'AWS':
+    case AUTH_PROVIDERS.AWS:
       return new AwsAmplify({ config })
-    case 'AUTH0':
+    case AUTH_PROVIDERS['AUTH0']:
       return new Auth0({ config })
+    case AUTH_PROVIDERS.MEM:
+      return new InMemory()
     default:
       return new InMemory()
   }

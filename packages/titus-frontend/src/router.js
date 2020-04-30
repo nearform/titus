@@ -36,9 +36,9 @@ PrivateRoute.propTypes = {
 
 const AppRouter = () => {
   return (
-    <Suspense fallback={<Loading />}>
-      <Router history={history}>
-        <Layout>
+    <Layout>
+      <Suspense fallback={<Loading />}>
+        <Router history={history}>
           <Switch>
             <Route path={ROUTES.LOGIN}>
               <AsyncLogin />
@@ -46,9 +46,9 @@ const AppRouter = () => {
             {/* INSERT NEW ROUTES HERE */}
             <PrivateRoute path={ROUTES.DASHBOARD} component={AsyncDashboard} />
           </Switch>
-        </Layout>
-      </Router>
-    </Suspense>
+        </Router>
+      </Suspense>
+    </Layout>
   )
 }
 

@@ -4,11 +4,11 @@ exports[`<App /> should render correctly when path is / and is not authenticated
 <DocumentFragment>
   <div
     class="container"
-    style="display: none;"
-  />
-  <div
-    class="loader"
-  />
+  >
+    <div
+      class="loader"
+    />
+  </div>
 </DocumentFragment>
 `;
 
