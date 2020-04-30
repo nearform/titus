@@ -25,7 +25,9 @@ exports[`<App /> should render correctly when path is /login and is authenticate
     <form
       novalidate=""
     >
-      <header />
+      <h1>
+        Note: Any username followed by a password with at least four characters containing at least one letter or number will work.
+      </h1>
       <input
         name="username"
         placeholder="Username"
@@ -44,9 +46,8 @@ exports[`<App /> should render correctly when path is /login and is authenticate
         class="button"
         type="submit"
       >
-        Login
+        Login 
       </button>
-      <sub />
     </form>
   </div>
 </DocumentFragment>
@@ -65,7 +66,9 @@ exports[`<App /> should render correctly when path is /login and is not authenti
     <form
       novalidate=""
     >
-      <header />
+      <h1>
+        Note: Any username followed by a password with at least four characters containing at least one letter or number will work.
+      </h1>
       <input
         name="username"
         placeholder="Username"
@@ -84,9 +87,8 @@ exports[`<App /> should render correctly when path is /login and is not authenti
         class="button"
         type="submit"
       >
-        Login
+        Login 
       </button>
-      <sub />
     </form>
   </div>
 </DocumentFragment>
