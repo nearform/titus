@@ -16,6 +16,7 @@ export default class Authentication {
   user = false
 
   header = `Please provide AWS Cognito account details:`
+  powerMessage = `Powered by AWS Amplify`
 
   async login({ username, newPassword, password }) {
     let user = false

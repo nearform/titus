@@ -1,3 +1,4 @@
+import React from 'react'
 import { WebAuth } from 'auth0-js'
 
 export default class Authentication {
@@ -54,6 +55,12 @@ export default class Authentication {
       clientID: this.config.auth0.clientId
     })
   }
+
+  form = ({ isSubmitting }) => (
+    <button className="button" disabled={isSubmitting} type="submit">
+      Login with Auth0
+    </button>
+  )
 
   isAuthenticated() {
     try {

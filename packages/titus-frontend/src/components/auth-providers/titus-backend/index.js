@@ -1,5 +1,6 @@
 export default class Authentication {
   header = `Please provide Auth0 account details:`
+  powerMessage = `Powered by Titus`
 
   async login({ username, password }) {
     const response = await fetch('/login', {

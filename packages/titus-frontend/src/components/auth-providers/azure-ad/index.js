@@ -6,6 +6,7 @@ export default class Authentication {
   }
 
   header = 'Powered by Azure AD'
+  powerMessage = 'Powered by Azure AD'
 
   // Assuming we won't ever see the Login screen with AD
   // As we use the directory login and bypass straight to our
