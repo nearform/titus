@@ -6,7 +6,8 @@ COPY package.json package-lock.json ./
 COPY src ./src
 COPY public ./public
 
-RUN npm ci --only=prod --unsafe-perm
+ENV SKIP_PREFLIGHT_CHECK=true
+RUN npm ci
 
 ARG REACT_APP_API_URL
 RUN npm run build
