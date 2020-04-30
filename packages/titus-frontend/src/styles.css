@@ -164,3 +164,14 @@ h1 {
     transform: rotate(360deg);
   }
 }
+
+.language-selector {
+  width: 150px;
+  height: 30px;
+  right: 100px;
+  position: fixed;
+  top: 18px;
+  background-color: transparent;
+  border: 1px solid lightgray;
+  outline: none;
+}

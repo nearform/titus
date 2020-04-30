@@ -1,3 +1,22 @@
+export const LANGUAGES = [
+  {
+    code: 'en',
+    name: 'English'
+  },
+  {
+    code: 'ro',
+    name: 'Românā'
+  },
+  {
+    code: 'sr',
+    name: 'Српски'
+  },
+  {
+    code: 'pt',
+    name: 'Português'
+  }
+]
+
 export const ROUTES = {
   LOGIN: '/login',
   DASHBOARD: '/'
