@@ -3,9 +3,14 @@ import { AuthContext } from '../../components/authentication/authentication-cont
 import LoginForm from '../../components/login-form'
 
 const Login = () => {
-  const { login, loginMessage, provider, authentication } = useContext(
-    AuthContext
-  )
+  const {
+    login,
+    loginMessage,
+    provider,
+    authentication,
+    form,
+    powerMessage
+  } = useContext(AuthContext)
 
   useEffect(() => {
     if (provider === 'AUTH0') {
@@ -16,7 +21,15 @@ const Login = () => {
     }
   }, [authentication, login, provider])
 
-  return <LoginForm login={login} header={loginMessage} provider={provider} />
+  return (
+    <LoginForm
+      login={login}
+      header={loginMessage}
+      provider={provider}
+      form={form}
+      powerMessage={powerMessage}
+    />
+  )
 }
 
 export default Login

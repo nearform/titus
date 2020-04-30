@@ -1,16 +1,19 @@
 import T from 'prop-types'
 import React, { Fragment } from 'react'
-import { Formik, Field, ErrorMessage } from 'formik'
+import { Formik } from 'formik'
 import { loginFormSchema } from '../auth-providers/utils/schemas'
 import Logo from '../logo'
+import LoginFormInputs from './components/login-form-inputs'
 
 const LoginForm = ({
   allowChangePassword,
   login,
   header,
   loginError,
-  provider
+  powerMessage,
+  form
 }) => {
+  let RenderForm = form ? form : LoginFormInputs
   return (
     <Fragment>
       <Logo />
@@ -28,47 +31,13 @@ const LoginForm = ({
       >
         {({ handleSubmit, isSubmitting }) => (
           <form noValidate onSubmit={handleSubmit}>
-            <h1>{header}</h1>
-            {provider !== 'AUTH0' && (
-              <Fragment>
-                <Field
-                  type="text"
-                  name="username"
-                  placeholder="Username"
-                  required
-                />
-                <ErrorMessage
-                  name="username"
-                  className="login__error"
-                  component="div"
-                />
-                <Field
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  required
-                />
-                {allowChangePassword &&
-                loginError &&
-                /temporary password/.test(loginError) ? (
-                  <Field
-                    type="password"
-                    name="newPassword"
-                    placeholder="New Password"
-                    required
-                  />
-                ) : null}
-                <ErrorMessage
-                  name="password"
-                  className="login__error"
-                  component="div"
-                />
-              </Fragment>
-            )}
-            {loginError && <div className="login__error">{loginError}</div>}
-            <button className="button" disabled={isSubmitting} type="submit">
-              {`Login ${provider === 'AUTH0' ? 'with Auth0' : ''}`}
-            </button>
+            <header>{header}</header>
+            <RenderForm
+              allowChangePassword={allowChangePassword}
+              isSubmitting={isSubmitting}
+              loginError={loginError}
+            />
+            <sub>{powerMessage}</sub>
           </form>
         )}
       </Formik>
@@ -76,11 +45,16 @@ const LoginForm = ({
   )
 }
 
+LoginForm.defaultProps = {
+  form: LoginFormInputs
+}
+
 LoginForm.propTypes = {
   login: T.func,
+  form: T.elementType,
   header: T.string,
-  loginError: T.string,
-  provider: T.string
+  powerMessage: T.string,
+  loginError: T.string
 }
 
 export default LoginForm

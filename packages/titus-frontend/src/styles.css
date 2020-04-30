@@ -23,8 +23,11 @@ body {
   min-height: 100vh;
 }
 
-#docs-root {
+#docs-root,
+#root {
   min-height: 100vh;
+}
+#docs-root {
   background: #333;
 }
 
@@ -46,6 +49,12 @@ img {
   height: 50vh;
   max-width: 100%;
   object-fit: cover;
+}
+
+sub {
+  display: block;
+  margin-top: 1rem;
+  text-align: right;
 }
 
 a:visited {
@@ -126,6 +135,7 @@ h1 {
 .login__error {
   color: var(--red);
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 .login-logo {
