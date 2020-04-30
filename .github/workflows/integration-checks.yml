@@ -1,0 +1,39 @@
+name: Integration Checks
+on: pull_request
+
+jobs:
+  integration-checks:
+    name: 'Linting, Testing, Building'
+    runs-on: ubuntu-latest
+    
+    env:
+      CI: true
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - name: Checking out code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+        
+      - name: Installing Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Installing dependencies
+        run: |
+          npm ci
+          npm run create:env
+
+      - name: Running lint check
+        run: npm run lint:all
+
+      - name: Running tests
+        run: npm run test:all
+
+      - name: Running build check
+        run: npm run build:all
