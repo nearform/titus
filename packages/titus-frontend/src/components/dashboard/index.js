@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { useTranslation } from 'react-i18next'
 import Logo from '../logo'
 import { LANGUAGES } from '../../constants'
@@ -11,7 +11,7 @@ const Dashboard = ({ logout }) => {
   }
 
   return (
-    <>
+    <Fragment>
       <button className="logout button" onClick={logout}>
         {t('logout')}
       </button>
@@ -31,7 +31,7 @@ const Dashboard = ({ logout }) => {
       >
         {t('docs')}
       </a>
-    </>
+    </Fragment>
   )
 }
 // {adIdToken && (
