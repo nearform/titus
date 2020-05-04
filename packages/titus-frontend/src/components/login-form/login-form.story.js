@@ -2,6 +2,7 @@ import React from 'react'
 import Layout from '../layout'
 import docs from './login-form.mdx'
 import LoginForm from './'
+import { MATCH_OPTIONS } from '../../constants'
 
 export default {
   title: 'Login Form',
@@ -21,13 +22,13 @@ Default.story = {
     async puppeteerTest(page) {
       // Default Login Form
       const image = await page.screenshot()
-      expect(image).toMatchImageSnapshot()
+      expect(image).toMatchImageSnapshot(MATCH_OPTIONS)
       // Grab the submit button and hit it
       const button = await page.$('[type="submit"]')
-      button.click()
+      await button.click()
       // Snapshot that a required message should show
       const requiredFields = await page.screenshot()
-      expect(requiredFields).toMatchImageSnapshot()
+      expect(requiredFields).toMatchImageSnapshot(MATCH_OPTIONS)
     }
   }
 }
