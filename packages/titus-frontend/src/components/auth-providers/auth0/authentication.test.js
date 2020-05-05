@@ -11,7 +11,7 @@ const mockWeb = {
 
 WebAuth.mockImplementation(() => mockWeb)
 
-describe('Authorization constructor', () => {
+describe('Authorization constructor auth0', () => {
   const storage = {}
   const authentication = new Authentication({
     config: {

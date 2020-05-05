@@ -1,24 +1,35 @@
 import React, { Fragment } from 'react'
+import { useTranslation } from 'react-i18next'
 import Logo from '../logo'
+import { LANGUAGES } from '../../constants'
 
 const Dashboard = ({ logout }) => {
+  const { t, i18n } = useTranslation()
+
+  const onLanguageChange = e => {
+    i18n.changeLanguage(e.target.value)
+  }
+
   return (
     <Fragment>
       <button className="logout button" onClick={logout}>
-        LOGOUT
+        {t('logout')}
       </button>
+      <select className="language-selector" onChange={onLanguageChange}>
+        {LANGUAGES.map(lng => (
+          <option key={lng.code} value={lng.code}>
+            {lng.name}
+          </option>
+        ))}
+      </select>
       <Logo />
-      <p>
-        Develop and Deploy to features quickly using Titus, an Accelerated
-        Development & Deployment Stack. Titus is production ready and can be
-        deployed to all major cloud providers.
-      </p>
+      <p>{t('description')}</p>
       <a
         href="https://nf-titus.netlify.com/"
         rel="noopener noreferrer"
         target="_blank"
       >
-        Check out the docs
+        {t('docs')}
       </a>
     </Fragment>
   )

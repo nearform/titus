@@ -1,11 +1,12 @@
 import { getAuthContext } from './adalConfig'
+import i18n from '../../../i18n'
 
 export default class Authentication {
   constructor({ config } = {}) {
     this.authContext = getAuthContext(config)
   }
 
-  header = 'Powered by Azure AD'
+  header = i18n.t('header.azure')
   powerMessage = 'Powered by Azure AD'
 
   // Assuming we won't ever see the Login screen with AD

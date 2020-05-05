@@ -25,7 +25,9 @@ exports[`<App /> should render correctly when path is /login and is authenticate
     <form
       novalidate=""
     >
-      <header />
+      <header>
+        Note: Any username followed by a password with at least four characters containing at least one letter and number will work.
+      </header>
       <input
         name="username"
         placeholder="Username"
@@ -65,7 +67,9 @@ exports[`<App /> should render correctly when path is /login and is not authenti
     <form
       novalidate=""
     >
-      <header />
+      <header>
+        Note: Any username followed by a password with at least four characters containing at least one letter and number will work.
+      </header>
       <input
         name="username"
         placeholder="Username"
