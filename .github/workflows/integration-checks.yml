@@ -43,8 +43,8 @@ jobs:
         run: npm run build:all
 
       - name: Persist frontend test artifacts
-        if: ${{ always() }}
+        if: ${{ failure() }}
         uses: actions/upload-artifact@v1
         with:
           name: image-snapshots
-          path: packages/titus-frontend/src/__image_snapshots__
+          path: packages/titus-frontend/src/__image_snapshots__/__image_snapshots__
