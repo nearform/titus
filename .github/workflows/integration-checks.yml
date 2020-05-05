@@ -42,7 +42,7 @@ jobs:
       - name: Running build check
         run: npm run build:all
 
-      - name: Persist test artifacts
+      - name: Persist frontend test artifacts
         if: ${{ always() }}
         uses: actions/upload-artifact@v1
         with:
