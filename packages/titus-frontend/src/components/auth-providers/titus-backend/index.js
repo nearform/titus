@@ -1,5 +1,7 @@
+import i18n from '../../../i18n'
+
 export default class Authentication {
-  header = `Please provide Auth0 account details:`
+  header = i18n.t('header.titus')
   powerMessage = `Powered by Titus`
 
   async login({ username, password }) {

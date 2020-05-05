@@ -1,4 +1,4 @@
-import Authentication, { Login } from './index'
+import Authentication from './index'
 
 jest.mock('./adalConfig', () => ({
   getAuthContext: jest.fn().mockImplementation(() => ({
@@ -30,11 +30,5 @@ describe('Authorization constructor', () => {
   it('should trigger isAuthenticated correctly', () => {
     authentication.authContext.getCachedUser.mockImplementation(() => false)
     expect(authentication.isAuthenticated()).toBe(false)
-  })
-})
-
-describe('Login', () => {
-  it('should trigger Login correctly', () => {
-    expect(Login()).toEqual(null)
   })
 })

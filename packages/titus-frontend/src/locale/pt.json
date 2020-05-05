@@ -1,0 +1,28 @@
+{
+    "logout": "SAIR",
+    "login": "ENTRAR",
+    "withAuth0": "com Auth0",
+    "description": "Desenvolve funcionalidades rapidamente usando Titus, uma ferramenta de Desenvolvimento e Instalação. Titus esta pronto para uso em produção e preparado para instalar nos provedores Cloud mais comuns.",
+    "docs": "Ver a documentação",
+    "username": "Utilizador",
+    "password": "Senha",
+    "newPassword": "Nova Senha",
+    "header": {
+        "memory": "Nota: Use qualquer nome de Utilizador seguido de senha com pelo menos quatro caracteres contendo no mínimo uma letra ou número.",
+        "aws": "Por favor indique os valores de conta AWS Cognito:",
+        "azure": "Suportado por Azure AD",
+        "titus": "Por favor indique os valores de conta Auth0:"
+    },
+    "validation": {
+        "required": {
+            "username": "Utilizador é obrigatório.",
+            "password": "Senha é obrigratório."
+        },
+        "regex": {
+            "password": "A senha tem de conter pelo menos quatro caracteres e no mínimo uma letra ou número."
+        }
+    },
+    "errors": {
+        "tempPassword": "Por favor indique a sua senha temporaria e uma senha nova."
+    }
+}

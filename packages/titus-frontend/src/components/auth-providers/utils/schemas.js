@@ -1,12 +1,14 @@
 import * as yup from 'yup'
 
+import i18n from '../../../i18n'
+
 export const loginFormSchema = yup.object().shape({
-  username: yup.string().required('Username is required.'),
+  username: yup.string().required(i18n.t('validation.required.username')),
   password: yup
     .string()
     .matches(
       /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/i,
-      'Password must be at least 4 characters long and contain at least one letter and one number.'
+      i18n.t('validation.regex.password')
     )
-    .required('Password is required.')
+    .required(i18n.t('validation.required.password'))
 })
