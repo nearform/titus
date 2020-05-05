@@ -48,6 +48,7 @@ async function dbRoutes(server, options) {
       return { success: migrateResult }
     }
   })
+
   server.route({
     method: 'POST',
     url: '/db/truncate',
@@ -95,6 +96,7 @@ async function dbRoutes(server, options) {
       return { success: true }
     }
   })
+
   server.route({
     method: 'GET',
     url: '/db',
