@@ -1,0 +1,42 @@
+{
+    "name": "fastify-gcp-secret-manager",
+    "version": "0.0.1",
+    "description": "Fastify GCP Secret Manager plugin",
+    "main": "index.js",
+    "scripts": {
+      "test": "standard && tap -J test/*.test.js",
+      "test:report": "standard && tap -J --coverage-report=html test/*.test.js",
+      "test:verbose": "standard && tap -J test/*.test.js -Rspec"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/fastify/fastify-gcp-secret-manager.git"
+    },
+    "keywords": [
+      "fastify",
+      "secrets",
+      "gcp",
+      "secret",
+      "manager"
+    ],
+    "author": "Petr Kohut - @petrkohut",
+    "license": "MIT",
+    "bugs": {
+      "url": "https://github.com/fastify/fastify-gcp-secret-manager/issues"
+    },
+    "homepage": "https://github.com/fastify/fastify-gcp-secret-manager#readme",
+    "dependencies": {
+      "fastify-plugin": "^1.5.0"
+    },
+    "devDependencies": {
+      "fastify": "^2.7.1",
+      "@google-cloud/secret-manager": "^3.0.0",
+      "standard": "^13.0.1",
+      "tap": "^12.7.0"
+    },
+    "greenkeeper": {
+      "ignore": [
+        "tap"
+      ]
+    }
+  }
