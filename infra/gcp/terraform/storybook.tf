@@ -1,9 +1,8 @@
-resource "google_cloud_run_service_iam_policy" "storybook_noauth" {
+resource "google_cloud_run_service_iam_member" "storybook_noauth" {
   location = google_cloud_run_service.storybook.location
-  project  = google_cloud_run_service.storybook.project
   service  = google_cloud_run_service.storybook.name
-
-  policy_data = data.google_iam_policy.noauth.policy_data
+  role = "roles/run.invoker"
+  member = "allUsers"
 }
 
 resource "google_cloud_run_service" "storybook" {
@@ -27,7 +26,8 @@ resource "google_cloud_run_service" "storybook" {
   lifecycle {
     ignore_changes = [
       "template[0].spec[0].containers[0].image",
-      "template[0].spec[0].service_account_name"
+      "template[0].spec[0].service_account_name",
+      "template[0].metadata[0].annotations"
     ]
   }
 }

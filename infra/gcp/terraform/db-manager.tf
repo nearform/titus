@@ -1,9 +1,8 @@
-resource "google_cloud_run_service_iam_policy" "db_manager_noauth" {
+resource "google_cloud_run_service_iam_member" "db_manager_noauth" {
   location = google_cloud_run_service.db_manager.location
-  project  = google_cloud_run_service.db_manager.project
   service  = google_cloud_run_service.db_manager.name
-
-  policy_data = data.google_iam_policy.noauth.policy_data
+  role = "roles/run.invoker"
+  member = "allUsers"
 }
 
 resource "google_cloud_run_service" "db_manager" {
@@ -66,7 +65,8 @@ resource "google_cloud_run_service" "db_manager" {
   lifecycle {
     ignore_changes = [
       "template[0].spec[0].containers[0].image",
-      "template[0].spec[0].service_account_name"
+      "template[0].spec[0].service_account_name",
+      "template[0].metadata[0].annotations"
     ]
   }
 }

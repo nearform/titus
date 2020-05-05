@@ -13,11 +13,9 @@ provider "google" {
   zone        = var.zone
 }
 
-data "google_iam_policy" "noauth" {
-  binding {
-    role = "roles/run.invoker"
-    members = [
-      "allUsers",
-    ]
-  }
+provider "google-beta" {
+  credentials = file("key.json")
+  project     = var.gcp_project_id
+  region      = var.region
+  zone        = var.zone
 }

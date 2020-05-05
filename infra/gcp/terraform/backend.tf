@@ -1,9 +1,8 @@
-resource "google_cloud_run_service_iam_policy" "backend_noauth" {
+resource "google_cloud_run_service_iam_member" "backend_noauth" {
   location = google_cloud_run_service.backend.location
-  project  = google_cloud_run_service.backend.project
   service  = google_cloud_run_service.backend.name
-
-  policy_data = data.google_iam_policy.noauth.policy_data
+  role = "roles/run.invoker"
+  member = "allUsers"
 }
 
 resource "google_cloud_run_service" "backend" {
@@ -75,7 +74,8 @@ resource "google_cloud_run_service" "backend" {
   lifecycle {
     ignore_changes = [
       "template[0].spec[0].containers[0].image",
-      "template[0].spec[0].service_account_name"
+      "template[0].spec[0].service_account_name",
+      "template[0].metadata[0].annotations"
     ]
   }
 }
