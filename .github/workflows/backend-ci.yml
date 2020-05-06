@@ -1,0 +1,45 @@
+name: Backend CI
+on:
+  pull_request:
+    paths:
+    - '.github/workflows/backend-ci.yml'
+    - 'packages/titus-backend/**'
+
+jobs:
+  integration-checks:
+    name: 'Linting, Testing'
+    runs-on: ubuntu-latest
+    
+    env:
+      CI: true
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - name: Checking out code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - name: Installing Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Installing dependencies
+        working-directory: packages/titus-backend
+        run: |
+          npm ci
+
+      - name: Running lint check
+        working-directory: packages/titus-backend
+        run: |
+          npm run lint
+
+      - name: Running tests
+        working-directory: packages/titus-backend
+        run: |
+          npm run create:env
+          npm run test
