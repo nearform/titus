@@ -1,0 +1,27 @@
+body {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  max-width: 100%;
+  width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+body .actions {
+  margin-top: 2rem;
+}
+
+.actions > * + * {
+  margin-top: 1rem;
+}
+
+.login-logo {
+  margin: 0;
+  width: 100%;
+}
+
+button[disabled] {
+  background: hsl(0, 0%, 80%);
+  cursor: not-allowed;
+}
