@@ -73,7 +73,7 @@ module.exports = {
   jwt: {
     secret: config.JWT_SECRET
   },
-  gcpSecretManager: {
+  secretManager: {
     test: 'projects/494141678371/secrets/test/versions/latest'
   }
 }

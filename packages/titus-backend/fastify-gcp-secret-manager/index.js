@@ -33,13 +33,13 @@ async function fastifyGCPSecretManager (fastify, options, next) {
     }
 
     if (fastify.secrets[name]) {
-      return next(new Error(`fastify-postgres '${name}' instance name has already been registered`))
+      return next(new Error(`fastify-gcp-secret-manager '${name}' instance name has already been registered`))
     }
 
     fastify.secrets[name] = secrets
   } else {
     if (fastify.secrets) {
-      return next(new Error('fastify-postgres has already been registered'))
+      return next(new Error('fastify-gcp-secret-manager has already been registered'))
     } else {
       fastify.decorate('secrets', secrets)
     }
