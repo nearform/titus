@@ -3,7 +3,7 @@
 ## Quick start
 ```
 cd packages/titus-frontend
-npm i
+npm install
 npm run start || npm run storybook
 ```
 ## Overview
