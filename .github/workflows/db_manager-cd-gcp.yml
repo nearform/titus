@@ -1,4 +1,4 @@
-name: Deploy titus-db-manager to GCP
+name: DB Manager CD to GCP
 
 on:
   push:
