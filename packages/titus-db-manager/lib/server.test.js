@@ -122,6 +122,21 @@ describe('server', () => {
         (err, response) => {
           if (err) throw err
 
+          expect(Postgrator).toHaveBeenCalledWith(
+            expect.objectContaining({
+              database: 'titus',
+              driver: 'pg',
+              host: 'localhost',
+              idleTimeoutMillis: 30000,
+              newline: 'LF',
+              password: 'titus',
+              poolSize: 10,
+              port: 5432,
+              schemaTable: 'schema_migrations',
+              user: 'titus',
+              validateChecksums: true
+            })
+          )
           expect(postgrator.migrate).toHaveBeenCalledTimes(1)
           expect(response.json()).toEqual({
             success: true
