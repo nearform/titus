@@ -48,3 +48,12 @@ jobs:
         with:
           name: image-snapshots
           path: packages/titus-frontend/src/__image_snapshots__/__diff_output__
+
+      - name: Lighthouse check
+       run: |
+          cd packages/titus-frontend
+          npm run build
+          npm install -g @lhci/cli@0.3.x
+          lhci autorun \
+            --collect.staticDistDir=./build \
+            --upload.target=temporary-public-storage || echo "LHCI failed!"
