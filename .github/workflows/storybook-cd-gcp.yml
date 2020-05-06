@@ -1,4 +1,4 @@
-name: Deploy titus-frontend to GCP
+name: Storybook CD to GCP
 
 on:
   push:
@@ -6,16 +6,16 @@ on:
       - master
     paths:
       - 'packages/titus-frontend/**'
-      - '.github/workflows/deploy_titus_frontend.yml'
-      
+      - '.github/workflows/deploy_titus_storybook.yml'
+
 jobs:
   deploy-titus-frontend:
-    name: Build & Deploy titus-frontend
+    name: Build & Deploy titus storybook
     runs-on: ubuntu-latest
 
     env:
       PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-      CLOUDRUN_SERVICE_NAME: titus-frontend
+      CLOUDRUN_SERVICE_NAME: titus-storybook
       CLOUDRUN_SERVICE_REGION: europe-west1
       CI: true
 
@@ -31,7 +31,7 @@ jobs:
       - name: Set up GCP CLI
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
-          version: '275.0.0'
+          version: '281.0.0'
           service_account_email: ${{ secrets.GCP_SA_EMAIL }}
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
@@ -44,7 +44,10 @@ jobs:
       - name: Build container
         working-directory: ./packages/titus-frontend
         run: |
-          docker build -t $DOCKER_IMAGE .
+          docker build \
+            -t $DOCKER_IMAGE \
+            -f .storybook/docker/Dockerfile \
+            .
 
       - name: Push container
         working-directory: ./packages/titus-frontend

@@ -1,0 +1,45 @@
+name: DB Manager CI
+on:
+  pull_request:
+    paths:
+    - '.github/workflows/db-manager-ci.yml'
+    - 'packages/titus-db-manager/**'
+
+jobs:
+  integration-checks:
+    name: 'Linting, Testing'
+    runs-on: ubuntu-latest
+    
+    env:
+      CI: true
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - name: Checking out code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - name: Installing Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Installing dependencies
+        working-directory: packages/titus-db-manager
+        run: |
+          npm ci
+          npm run create:env
+
+      - name: Running lint check
+        working-directory: packages/titus-db-manager
+        run: |
+          npm run lint
+
+      - name: Running tests
+        working-directory: packages/titus-db-manager
+        run: |
+          npm run test
