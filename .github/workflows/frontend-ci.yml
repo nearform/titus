@@ -54,6 +54,14 @@ jobs:
         run: |
           npm run build
 
+      - name: Lighthouse check
+        working-directory: packages/titus-frontend
+        run: |
+          npm install -g @lhci/cli@0.3.x
+          lhci autorun \
+            --collect.staticDistDir=./build \
+            --upload.target=temporary-public-storage || echo "LHCI failed!"
+
       - name: Persist test artifacts
         if: ${{ failure() }}
         uses: actions/upload-artifact@v1
