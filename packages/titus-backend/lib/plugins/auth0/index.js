@@ -7,7 +7,7 @@ async function auth0(server, options) {
     .register(require('fastify-jwt'), {
       secret: options.jwt.secret
     })
-    .decorate('verifyJWT', async function (request, reply) {
+    .decorate('verifyJWT', async function(request, reply) {
       try {
         await request.jwtVerify()
       } catch (err) {
