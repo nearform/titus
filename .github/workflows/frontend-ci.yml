@@ -12,6 +12,7 @@ jobs:
     
     env:
       CI: true
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     strategy:
       matrix:
@@ -60,7 +61,8 @@ jobs:
           npm install -g @lhci/cli@0.3.x
           lhci autorun \
             --collect.staticDistDir=./build \
-            --upload.target=temporary-public-storage || echo "LHCI failed!"
+            --upload.target=temporary-public-storage \
+            --upload.githubToken=$GITHUB_TOKEN || echo "LHCI failed!"
 
       - name: Persist test artifacts
         if: ${{ failure() }}
