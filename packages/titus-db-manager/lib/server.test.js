@@ -18,7 +18,7 @@ jest.mock('postgrator', () => {
   return jest.fn(() => mockPostgrator)
 })
 
-describe('server', () => {
+describe('Server', () => {
   let client
   let postgrator
   const fastify = buildServer()
