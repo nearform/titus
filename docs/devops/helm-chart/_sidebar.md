@@ -4,6 +4,7 @@
 - [DevOps](/devops/?id=devops)
     - [Overview](/devops/?id=overview)
     - [Deploy Titus](/devops/?id=Deploy-Titus)
+        - [Deploy Titus on GCP](/devops/gcp/)
         - [Deploy Titus on AWS Using CircleCI](/devops/?id=Deploy-Titus-on-aws-using-CircleCI)
         - [Deploy Titus on Azure Using Pipelines](/devops/?id=Deploy-titus-on-azure-using-Pipelines)
     - [Build, Test and Deploy Using the CI Pipeline](/devops/?id=ci-pipeline/)

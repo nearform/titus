@@ -12,7 +12,7 @@ To keep concerns separated, Titus is deployed to AWS using CircleCI. Its infrast
 
 
 ## Deploy Titus
-Titus runs on [Kubernetes] and can be deployed to [Azure] and  [AWS]. Low-level infrastructure is managed by [Terraform], with service-level infrastructure managed by [Kubernetes].
+Titus runs on [Kubernetes] and can be deployed to [GCP], [Azure] and  [AWS]. Low-level infrastructure is managed by [Terraform], with service-level infrastructure managed by [Kubernetes].
 
 Titus uses [Taurus], a Terraform plugin that that understands how to set up Kubernetes and deploy different types of infrastructure and service with ease. We wrap __Taurus__ in a configuration repo, __titus-infra-*__ (where the provider's name is appended to the name), which includes:
 
@@ -22,6 +22,11 @@ Titus uses [Taurus], a Terraform plugin that that understands how to set up Kube
 How to set up the infrastructure varies from provider to provider, so provider specific guides are listed below.
 **Note:** You need to be proficient with your chosen provider as well as in Terraform.
 
+
+### Deploy Titus on GCP Using Github Actions
+Services are deployed using [Github Actions] whenever you merge changes to the `master` branch.
+
+Refer to [Deploy Titus on GCP](devops/gcp/) for more details.
 
 ### Deploy Titus on AWS Using CircleCI
 Services are deployed using [CircleCI] which runs [Helm] to handle service updates to the running cluster.
@@ -56,5 +61,7 @@ Refer to [Add a New Helm Chart](devops/helm-chart/) for more details.
 [Terraform]: https://www.terraform.io
 [Azure]: https://azure.microsoft.com
 [AWS]: https://aws.amazon.com
+[GCP]: https://console.cloud.google.com
+[Github Actions]: https://github.com/features/actions
 [Helm]: https://helm.sh
 [Kubernetes]: https://kubernetes.io
