@@ -40,7 +40,9 @@ describe('Server', () => {
           url: '/'
         },
         (err, response) => {
-          if (err) throw err
+          if (err) {
+            return done(err)
+          }
           expect(response.statusCode).toEqual(404)
           done()
         }
@@ -56,7 +58,9 @@ describe('Server', () => {
           url: '/db'
         },
         (err, response) => {
-          if (err) throw err
+          if (err) {
+            return done(err)
+          }
 
           expect(response.json()).toEqual({
             message: 'Titus DB manager v1.0.0'
@@ -76,7 +80,9 @@ describe('Server', () => {
           url: '/db/seed'
         },
         (err, response) => {
-          if (err) throw err
+          if (err) {
+            return done(err)
+          }
 
           expect(client.connect).toHaveBeenCalled()
           expect(client.end).toHaveBeenCalled()
@@ -98,7 +104,9 @@ describe('Server', () => {
           url: '/db/truncate'
         },
         (err, response) => {
-          if (err) throw err
+          if (err) {
+            return done(err)
+          }
 
           expect(client.connect).toHaveBeenCalled()
           expect(client.end).toHaveBeenCalled()
@@ -120,7 +128,9 @@ describe('Server', () => {
           url: '/db/migrate'
         },
         (err, response) => {
-          if (err) throw err
+          if (err) {
+            return done(err)
+          }
 
           expect(Postgrator).toHaveBeenCalledWith(
             expect.objectContaining({

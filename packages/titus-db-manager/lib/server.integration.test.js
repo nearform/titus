@@ -11,7 +11,9 @@ describe('Server Integration', () => {
           url: '/db/truncate'
         },
         (err, response) => {
-          if (err) throw err
+          if (err) {
+            return done(err)
+          }
 
           expect(response.json()).toEqual({
             success: true
@@ -31,7 +33,9 @@ describe('Server Integration', () => {
           url: '/db/migrate'
         },
         (err, response) => {
-          if (err) throw err
+          if (err) {
+            return done(err)
+          }
 
           expect(response.json()).toEqual({
             success: true
@@ -51,7 +55,9 @@ describe('Server Integration', () => {
           url: '/db/seed'
         },
         (err, response) => {
-          if (err) throw err
+          if (err) {
+            return done(err)
+          }
 
           expect(response.json()).toEqual({
             success: true
