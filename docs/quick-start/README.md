@@ -35,7 +35,7 @@ You can read more about configuring the environment in the [Developers][Develope
 
 ## Bring up the Database
 
-Database can run as stand-alone container or as http server. 
+Database can run as stand-alone container or as http server.
 
 ### Stand-alone
 To spin up the database run the command:
@@ -183,7 +183,7 @@ If you would like more information, select the documentation most relevant to yo
 
 - Deep dive into our documentation for [Developers].
 - See our detailed [DevOps] documentation.
-
+- Frontend quick start [guide](developers/packages/titus-frontend/?id=quick-start).
 
 <!-- External Links -->
 [Docker]: https://docs.docker.com/install/#supported-platforms

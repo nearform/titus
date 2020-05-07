@@ -5,6 +5,7 @@
     - [Kits](/developers/?id=kits)
         - [Frontend Kit](/developers/packages/titus-frontend/?id=titus-frontend-kit)
             - [Overview](/developers/packages/titus-frontend/?id=overview)
+            - [Quick Start](/developers/packages/titus-frontend/?id=quick-start)
             - [Configure Authentication](/developers/packages/titus-frontend/?id=configure-authentication)
             - [Install the Frontend](/developers/packages/titus-frontend/?id=install-the-frontend)
             - [Run the Frontend Locally](/developers/packages/titus-frontend/?id=run-the-frontend-locally)
