@@ -52,9 +52,7 @@ describe('auth0 plugin', () => {
       token_type: 'Bearer',
       expires_in: 86400
     }
-    nock(domain)
-      .post('/oauth/token')
-      .reply(200, auth0Response)
+    nock(domain).post('/oauth/token').reply(200, auth0Response)
 
     const response = await server.inject({
       method: 'POST',
@@ -91,9 +89,7 @@ describe('auth0 plugin', () => {
   })
 
   it('reports authenticate failures with http error message', async () => {
-    nock(domain)
-      .post('/oauth/token')
-      .reply(403)
+    nock(domain).post('/oauth/token').reply(403)
 
     const response = await server.inject({
       method: 'POST',
