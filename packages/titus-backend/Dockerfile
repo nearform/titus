@@ -8,4 +8,6 @@ COPY index.js ./index.js
 
 RUN npm ci
 
+USER node
+
 CMD ["node", "index.js"]
