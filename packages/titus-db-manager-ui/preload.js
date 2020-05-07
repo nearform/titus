@@ -16,6 +16,7 @@ const fireAction = async (e) => {
   alert('Finished')
   e.target.removeAttribute('disabled')
 }
+
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
 window.addEventListener('DOMContentLoaded', () => {
