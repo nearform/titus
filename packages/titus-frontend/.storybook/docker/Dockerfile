@@ -4,6 +4,7 @@ WORKDIR /service
 
 COPY package.json package-lock.json ./
 COPY src ./src
+COPY public ./public
 COPY .storybook ./.storybook
 
 RUN npm ci
