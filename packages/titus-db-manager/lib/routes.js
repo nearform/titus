@@ -65,7 +65,7 @@ async function dbRoutes(server) {
       }
     },
     handler: async () => {
-      const client = new Client()
+      const client = new Client(config.pgPlugin)
       await client.connect()
       await Truncate(client)
       client.end()
@@ -89,7 +89,7 @@ async function dbRoutes(server) {
       }
     },
     handler: async () => {
-      const client = new Client()
+      const client = new Client(config.pgPlugin)
       await client.connect()
       await Seed(client)
       client.end()
