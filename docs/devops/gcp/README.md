@@ -1,63 +1,85 @@
 # Deploy Titus on GCP
 
-To set up a [Titus] deployment on an [GCP] environment using [Github Actions], there are several steps to perform.
+To set up a [Titus] deployment on an [GCP] cloud using [Github Actions], there are several steps to be performed.
+
+**Note:** [Terraform] 0.12+ is required for the infrastructure creation.
+
+## Infastructure Stack
+The stack is built with minimum number of services to make Titus work on GCP:
+- Cloudrun services (frontend, backend, db-manager, storybook)
+- CloudSQL PostgreSQL DB
+
+The stack serves only as an example and is expected to be adjusted or changed base on project needs.
+
+**Note:** Cloudrun has few limitations (doesn't support Websockets, etc..) which should be considered before using - [Cloud Run Known Issues](https://cloud.google.com/run/docs/issues).
+
+## Set up a Terraform GCP Service Account
+
+To allow Terraform to provision services on GCP we need to give it a service account with right permissions.
+
+In GCP web console navigate to `IAM & Admin / Service Accounts` and create a new service account with `Project Owner` role. Then create a key from it and download it as `key.json` into `infra/terraform/gcp`.
 
 
-In order to deploy Titus in GCP follow the following steps.
-Note: [Terraform] 0.12+ is required for the infrastructure creation.
+## Configure GCP project variables
 
+In `infra/terraform/gcp/variables.tf` set these variables to match your GCP project:
+- `gcp_project_id`
+- `region`
+- `zone`
 
-## Set up the Service Account
+## Enable GCP APIs
+Titus uses multiple GCP services and for all of them Terraform expects their APIs to be enabled.
 
-This is created by Terraform script in Titus. Open the IAM / Service Account, select the new account and download it as `key.json` into infra/terraform/gcp
-Alternatively, you can create it manually:
+For provisioning Titus on fresh new GCP project these service APIs need to be enabled:
+```
+gcloud auth login
+gcloud config set project <GCP_PROJECT_ID>
 
-* In IAM go to Service Account and create a new one with role of `Project Owner`
-* Copy the provided `key.json` into infra/terraform/gcp and click Done
+gcloud services enable sqladmin.googleapis.com
+gcloud services enable run.googleapis.com
+gcloud services enable iam.googleapis.com
+gcloud services enable secretmanager.googleapis.com
+```
 
+## Provision your infrastruture
 
-## Configure Terraform variables
+From `infra/terraform/gcp` folder run these commands from your terminal:
+```sh
+terraform init
+terraform apply
+```
 
-Edit `infra/terraform/gcp/variables.tf` and change the `gcp_project_id` and optionally set the `region` and `zone`.
+At this point the provisioning of all required GCP services is done.
 
-
-## Create your infrastruture
-
-* In a new shell change directory to `infra/terraform/gcp`.
-* Run `terraform init`
-* Run `terraform apply`: a few errors are expected at this point since you may not have activated GCP API's required for Titus and Terraform.
-* Activate the API's described in each error by following the link in each error and activate the related API. The API's are: `Secret Manager API`, `Cloud SQL Admin API`, `Cloud Run API`, `Identity and Access Management (IAM) API` 
-* Run `terraform apply` again, your resources are now added in the GCP project.
-
-At this point you have finished provisioning your GCP project.
-A GCP provided "Hello World" frontend app is running as your frontend, you can click the link to see it works. 
-
-Next we will deploy all Titus packages to the new GCP infrastruture.
+All Cloudrun services are deployed with default "Hello World" docker image provided by GCP. These images get replaced by Titus images on their first deployment via CD pipeline.
 
 
 ## GitHub configuration
 
- Open your forked repository Settings page and select Secrets.
- Add the following secrets:
+Next we will deploy all Titus packages to the new GCP infrastruture.
 
- *  `GCP_PROJECT_ID`:  Copy value from `key.json` into the secret value
- *  `GCP_SA_EMAIL`: Copy value from `key.json` into the secret value
- *  `GCP_SA_KEY`: run `cat key.json | base64`, copy the value into the secret value
+Open your app repository `Settings / Secrets` and add the following secrets:
+- `GCP_PROJECT_ID`:  Copy value from `key.json` into the secret value
+- `GCP_SA_EMAIL`: Copy value from `key.json` into the secret value
+- `GCP_SA_KEY`: run `cat key.json | base64`, copy the value into the secret value
+
+**Note:** You need to be a repository owner to set Github repository secrets.
 
 ## Deploying
 
-To deploy we use GitHub Actions, these run by default on changes on `master`, to each of Titus packages. 
-To trigger all to deploy you need to make a change in all of them, like for example increasing in each one the package version, then, merge your current changes into your `master` and push to GitHub. Now open the GitHub Actions page to see the workflows running and the deployment logs.
+Deployment of Titus packages by GitHub Actions is controlled by file changes in their folders where only `master` branch changes are followed.
+
+To trigger deployment of all packages (backend/frontend/etc..) we need to make a change in all of their folders and push it to `master` branch. We may for example increase the `package.json` version in each of them.
+
+Deployment progress and logs can be followed in GitHub Actions section of the repository.
 
 ## Verifying your GCP deployment
 
-* Click the Frontend link in it's GCP Console / Cloud Run page to see Titus
-* Click the Storybook link in it's GCP Console / Cloud Run page to see Titus Storybook, login with `admin:admin`
-* Click the Backend link in it's GCP Console / Cloud Run page, then and add `/healthcheck` at the end of the URL. The response is JSON payload that included a "DB" property that indicate the Titus Backend can connect to the provisioned GCP Database
+- Click the Frontend link in it's GCP Console / Cloud Run page to see Titus
+- Click the Storybook link in it's GCP Console / Cloud Run page to see Titus Storybook, login with `admin:admin`
+- Click the Backend link in it's GCP Console / Cloud Run page, then and add `/healthcheck` at the end of the URL. The response is JSON payload that included a "DB" property that indicate the Titus Backend can connect to the provisioned GCP Database
 
 At this point you have Titus running on your GCP account. 
-To update it with new features you only need to merge into repository `master` branch and follow the deployment in Github Actions.
-
 
 [GCP]: https://console.cloud.google.com
 [Github Actions]: https://github.com/features/actions

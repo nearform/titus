@@ -5,8 +5,4 @@
     - [Overview](/devops/?id=overview)
     - [Deploy Titus](/devops/?id=deploy-titus)
         - [Deploy Titus on GCP](/devops/gcp/)
-        - [Deploy Titus on AWS Using CircleCI](/devops/aws/)
-        - [Deploy Titus on Azure Using Pipelines](/devops/Azure/)
-    - [Build, Test and Deploy Using the CI Pipeline](/devops/ci-pipeline/)
-    - [Add a New Helm Chart](/devops/helm-chart/)
 - [Contribute to Titus](/contributing/)
