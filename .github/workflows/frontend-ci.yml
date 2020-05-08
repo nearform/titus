@@ -62,8 +62,7 @@ jobs:
           lhci autorun \
             --collect.staticDistDir=./build \
             --upload.target=temporary-public-storage \
-            --upload.githubAppToken=$LHCI_GITHUB_APP_TOKEN \ 
-            --upload.githubToken=$GITHUB_TOKEN || echo "LHCI failed!"
+            --upload.githubAppToken=$LHCI_GITHUB_APP_TOKEN || echo "LHCI failed!"
 
       - name: Persist test artifacts
         if: ${{ failure() }}
