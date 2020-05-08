@@ -10,11 +10,11 @@ const config = envSchema({
     .prop('HTTP_HOST', S.string().default('localhost'))
     .prop('HTTP_PORT', S.string().required())
     .prop('NODE_ENV', S.string().required())
-    .prop('PGHOST', S.string().required())
-    .prop('PGPORT', S.string().required())
-    .prop('PGUSER', S.string().required())
-    .prop('PGPASSWORD', S.string().required())
-    .prop('PGDATABASE', S.string().required())
+    .prop('PG_HOST', S.string().required())
+    .prop('PG_PORT', S.string().required())
+    .prop('PG_USER', S.string().required())
+    .prop('PG_PASSWORD', S.string().required())
+    .prop('PG_DATABASE', S.string().required())
 })
 
 const isProduction = /^\s$production\s*$/i.test(config.NODE_ENV)
@@ -31,11 +31,11 @@ module.exports = {
   },
   // pg-pool options: https://github.com/brianc/node-pg-pool#create
   pgPlugin: {
-    host: config.PGHOST,
-    port: +config.PGPORT,
-    database: config.PGDATABASE,
-    user: config.PGUSER,
-    password: config.PGPASSWORD,
+    host: config.PG_HOST,
+    port: +config.PG_PORT,
+    database: config.PG_DATABASE,
+    user: config.PG_USER,
+    password: config.PG_PASSWORD,
     poolSize: 10,
     idleTimeoutMillis: 30000
   }
