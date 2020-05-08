@@ -4,7 +4,7 @@ on:
     paths:
     - '.github/workflows/frontend-ci.yml'
     - 'packages/titus-frontend/**'
-      
+
 jobs:
   integration-checks:
     name: 'Linting, Testing, Building'
@@ -61,7 +61,9 @@ jobs:
           npm install -g @lhci/cli@0.3.x
           lhci autorun \
             --collect.staticDistDir=./build \
-            --upload.target=temporary-public-storage || echo "LHCI failed!"
+            --upload.target=temporary-public-storage \
+            --upload.githubAppToken=$LHCI_GITHUB_APP_TOKEN \ 
+            --upload.githubToken=$GITHUB_TOKEN || echo "LHCI failed!"
 
       - name: Persist test artifacts
         if: ${{ failure() }}
