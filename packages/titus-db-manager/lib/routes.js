@@ -11,7 +11,7 @@ const Truncate = require('../truncate')
 
 const { version } = require('../package')
 const fp = require('fastify-plugin')
-async function dbRoutes(server, options) {
+async function dbRoutes(server) {
   server.route({
     method: 'POST',
     url: '/db/migrate',
@@ -27,7 +27,7 @@ async function dbRoutes(server, options) {
         }
       }
     },
-    handler: async request => {
+    handler: async () => {
       const postgratorConfig = Object.assign(
         {
           validateChecksums: true,
@@ -64,7 +64,7 @@ async function dbRoutes(server, options) {
         }
       }
     },
-    handler: async request => {
+    handler: async () => {
       const client = new Client()
       await client.connect()
       await Truncate(client)
@@ -88,7 +88,7 @@ async function dbRoutes(server, options) {
         }
       }
     },
-    handler: async request => {
+    handler: async () => {
       const client = new Client()
       await client.connect()
       await Seed(client)
