@@ -60,8 +60,8 @@ Next we will deploy all Titus packages to the new GCP infrastruture.
 
 Open your app repository `Settings / Secrets` and add the following secrets:
 - `GCP_PROJECT_ID`:  Copy value from `key.json` into the secret value
-- `GCP_SA_EMAIL`: Copy value from `key.json` into the secret value
-- `GCP_SA_KEY`: run `cat key.json | base64`, copy the value into the secret value
+- `GCP_SA_EMAIL`: Copy value from GCP Secret Manager secret `github-actions-service-account-email` into the secret value
+- `GCP_SA_KEY`: Copy value from GCP Secret Manager secret `github-actions-service-account` into the secret value
 
 **Note:** You need to be a repository owner to set Github repository secrets.
 
