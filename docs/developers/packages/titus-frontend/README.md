@@ -1,6 +1,13 @@
-# Titus Frontend Kit
+# Titus Frontend Package
+
+## Quick start
+```
+cd packages/titus-frontend
+npm install
+npm run start || npm run storybook
+```
 ## Overview
-Titus frontend is a [React] application with routing and minimalist login components. This section describes Titus frontend and how to install, configure, run, test and build your frontend application. 
+Titus frontend is a [React] application with routing and minimalist login components. This section describes Titus frontend and how to install, configure, run, test and build your frontend application.
 
 What you implement with Titus frontend is your choice, we provide you with an unopinionated working shell.
 We provide what is common in our projects.
@@ -20,7 +27,12 @@ Titus frontend is structured as follows:
 * `lighthouse/` - runs Google's [Lighthouse] to evaluate your application performance and accessibility
 
 ## Configure Authentication
+Titus can support a variety of authentication providers. By default, it will fallback to an "In memory" provider. This makes no server requests.
+
+To define which authentication provider is active, set the `REACT_APP_AUTH_PROVIDER` variable in `.env`. The keys are below with their corresponding provider.
+
 ### In-memory Authentication Provider
+#### `key: MEM`
 
 By default, titus-frontend does not use a real authentication provider.
 `src/components/auth-provider/in-memory/` allows almost any combination of username and password, and there's no server roundtrip.
@@ -28,7 +40,7 @@ By default, titus-frontend does not use a real authentication provider.
 Once logged in, a token is stored in the local storage, and it grants access to the protected dashboard.
 
 ### Titus-backend Provider
-
+#### `key: TITUS`
 If you have an Auth0 application configured, you can use the titus-backend login endpoint to authenticate users.
 In this case, authentication is performed as follows:
 - provide your valid Auth0 credentials
@@ -39,13 +51,10 @@ In this case, authentication is performed as follows:
 
 To enable it, do the following:
 1. Provide Auth0 details in the **titus-backend** `.env` file (`AUTH0_*` variables)
-1. Update the provider variable used in the file `src/app.js`, as follows:
-   ```js
-   // import Authentication, { Login } from './components/auth-providers/in-memory'
-   import Authentication, { Login } from './components/auth-providers/titus-backend'
-   ```
+1. Set `REACT_APP_AUTH_PROVIDER` to `TITUS` in the **titus-frontend** `.env` file
 
 ### Auth0 Provider
+#### `key: AUTH0`
 
 If you have an Auth0 application configured, you can use [Auth0 Universal Login][auth0-login].
 In this situation:
@@ -57,37 +66,25 @@ In this situation:
 
 To enable it, do the following:
 1. Provide Auth0 details in the **titus-frontend** `.env` file (`REACT_APP_AUTH0_*` variables)
-1. In Auth0 configuration, make sure the app Login route (for example `http://localhost:3000/login`) is being allowed in both _Allowed Callback URLs_ and _Allowed Logout URLs_ lists.  
-1. Change the provider variable in the file `src/app.js`, as follows:
-   ```js
-   // import Authentication, { Login } from './components/auth-providers/in-memory'
-   import Authentication, { Login } from './components/auth-providers/auth0'
-   ```
-   
-### AWS Amplify Provider
+1. In Auth0 configuration, make sure the app Login route (for example `http://localhost:3000/login`) is being allowed in both _Allowed Callback URLs_ and _Allowed Logout URLs_ lists.
+1. Set `REACT_APP_AUTH_PROVIDER` to `AUTH0` in the **titus-frontend** `.env` file
 
+### AWS Amplify Provider
+#### `key: AWS`
 If you have a user and identity pools configured in AWS Cognito, you can use [AWS Amplify Authentication][aws-amplify-authentication].
 In this case, the entered username and password is validated against the specified user pool.
 
 To enable it, do the following:
 1. Provide AWS details in the **titus-frontend** `.env` file (`REACT_APP_AWS_*` variables)
-2. Change the provider variable in the file `src/app.js`, as follows:
-  ```js
-  // import Authentication, { Login } from './components/auth-providers/in-memory'
-  import Authentication, { Login } from './components/auth-providers/aws-amplify'
-  ```
-  
-## Azure Active Directory Provider
+1. Set `REACT_APP_AUTH_PROVIDER` to `AWS` in the **titus-frontend** `.env` file
 
+### Azure Active Directory Provider
+#### `key: AD`
 Instead of showing the user a login form, this redirects them to the specified Azure Active Directory tenant to login. It will then redirect the user back to the React app which will confirm authentication via the localstorage values Azure stores in the web browser.
 
 To enable it, do the following:
 1. Provide Azure AD details in the **titus-frontend** `.env` file (`REACT_APP_AD_*` variables)
-2. Change the provider variable in the file `src/app.js`, as follows:
-  ```js
-  // import Authentication, { Login } from './components/auth-providers/in-memory'
-  import Authentication, { Login } from './components/auth-providers/azure-ad'
-  ```
+1. Set `REACT_APP_AUTH_PROVIDER` to `AD` in the **titus-frontend** `.env` file
 3. Change the `render` method in `src/index.js` to the commented out replacement which wraps it in `runWithAdal`.
 
 ## Install the Frontend
@@ -98,6 +95,89 @@ npm install
 ```
 
 **Note:** The Titus frontend is automatically installed if you previously ran `npm install` at root level.
+
+## Developer workflow
+Unless you are integrating with an API, you _should_ be able to develop the front end in isolation.
+This decouples the front end from the back end.
+
+- Develop visual components for the application "Storybook-first"
+- This promotes a better structure for testing UI in isolation
+- For integration, create page container components that handle passing logic to visuals
+
+## Development with Storybook
+To develop the UI, you'll need to run the Storybook.
+```
+npm run storybook
+```
+
+### CSF
+Titus uses a newer version of Storybook that supports [CSF](https://storybook.js.org/docs/formats/component-story-format/). As of version 5.2, this is the recommended way to write your stories.
+
+### Component docs
+Titus makes use of [`@storybook/addon-docs`](https://www.npmjs.com/package/@storybook/addon-docs) for MDX powered documentation. This means documentation with embedded stories. However, to keep DRY, we write stories in JavaScript and then reference them within an MDX documentation file.
+
+Consider this example where `loading.story.js` contains
+```
+import docs from './loading.mdx'
+export default {
+  title: 'Loader',
+  decorators: [story => <Layout>{story()}</Layout>],
+  parameters: {
+    docs: {
+      page: docs
+    }
+  }
+}
+export const Default = () => <Loader/>
+```
+
+And our docs look like this
+
+```
+## Loader
+
+Loader component for project.
+
+<Preview>
+  <Story id='loader--default'/>
+</Preview>
+```
+`Preview` and `Story` are component provided by the addon. We pass the `id` of the story to the `Story` component to show it. Alternatively, we could import the component and put that within a story too. But, the way we do this makes testing for visual regressions easier.
+
+### Visually testing components
+We use [`@storybook/addon-storyshots`](https://www.npmjs.com/package/@storybook/addon-storyshots) for visually testing UI components. The great thing about this is that it's handled for you out of the box. Every component story has a screenshot generated for it at test. You don't need to write these tests. Storyshots will work out what needs to be screenshotted.
+
+If visual differences are found that go above a defined threshold, the test fails. You are then pointed towards a local file which will show you a visual diff for where a potential regression may have crept in.
+
+Initial screenshots are created by running tests with the `update` flag using `npm run test -- -u`. Do be aware though that this will make all tests pass.
+
+### Behavioural testing components
+We use [`@storybook/addon-storyshots-puppeteer`](https://www.npmjs.com/package/@storybook/addon-storyshots-puppeteer) for testing component behavior. For example, "If I click this, does this happen?". Much like how we visually test components, we can do the same but with the addition of the Puppeteer API. This enables us to do things like, take a screenshot, click a button, take another screenshot. We are alerted of any visual differences where things might not have worked as expected.
+
+Here's a test that tests validation messages appear when trying to log in with no credentials.
+```
+export const Default = () => <LoginForm />
+Default.story = {
+  parameters: {
+    // Can attach these tests to all the stories
+    // via the default export.
+    async puppeteerTest(page) {
+      // Default Login Form
+      const image = await page.screenshot()
+      expect(image).toMatchImageSnapshot()
+      // Grab the submit button and hit it
+      const button = await page.$('[type="submit"]')
+      button.click()
+      // Snapshot that a required message should show
+      const requiredFields = await page.screenshot()
+      expect(requiredFields).toMatchImageSnapshot()
+    }
+  }
+}
+```
+
+### Testing locally
+The CI test procedure will build a static storybook to run tests against. But this will slow things down dramatically for you if working on front end components. To mitigate this, you can run tests against the locally running Storybook as you develop. Use `npm run test:local`.
 
 ## Run the Frontend Locally
 To run your application locally, perform the following steps:
@@ -142,25 +222,6 @@ To package the application, use the following command:
 npm run build
 ```
 This command produces a new bundle in `build/` folder.
-
-
-## Add Material UI
-
-Google provides a Material React package, so you can easily import their UI elements as components and use them to build up the front-end interface:
-```
-npm install @material-ui/core --save
-```
-For example:
-```
-import Button from '@material-ui/core/Button'
-
-const MyComponent = ({ handleClick }) => (
-  <Button variant='contained' onClick={handleClick}>
-    Hello World
-  </Button>
-)
-```
-For more information, please [read the Material UI documentation](material-ui).
 
 
 [React]: https://reactjs.org

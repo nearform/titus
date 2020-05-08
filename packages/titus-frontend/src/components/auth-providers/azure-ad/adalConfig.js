@@ -7,11 +7,13 @@ export const getAdalConfig = config => ({
   cacheLocation: 'localStorage'
 })
 
+export let authContext = null
+
 export const getAuthContext = config => {
   const adalConfigObj = getAdalConfig(config)
-  return adalConfigObj.clientId
-    ? new AuthenticationContext(adalConfigObj)
-    : null
+  const context = new AuthenticationContext(adalConfigObj)
+  authContext = context
+  return adalConfigObj.clientId ? context : null
 }
 
 export const adalApiFetch = (auth, config, fetch, url, options) =>

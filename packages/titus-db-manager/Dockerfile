@@ -16,4 +16,7 @@ COPY lib /titus-db-manager/lib
 # Run npm install
 RUN npm install
 # Run server
+
+USER node
+
 CMD ["npm", "run", "db:server:start"]

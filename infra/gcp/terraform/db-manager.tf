@@ -22,23 +22,23 @@ resource "google_cloud_run_service" "db_manager" {
           value = "8080"
         }
         env {
-          name  = "PGHOST"
+          name  = "PG_HOST"
           value = "/cloudsql/${var.gcp_project_id}:${var.region}:${google_sql_database_instance.main.name}"
         }
         env {
-          name  = "PGPORT"
+          name  = "PG_PORT"
           value = "5432"
         }
         env {
-          name  = "PGDATABASE"
+          name  = "PG_DATABASE"
           value = var.cloudsql_db_name
         }
         env {
-          name  = "PGUSER"
+          name  = "PG_USER"
           value = var.cloudsql_db_user
         }
         env {
-          name  = "PGPASSWORD"
+          name  = "PG_PASSWORD"
           value = var.cloudsql_db_password
         }
         env {
