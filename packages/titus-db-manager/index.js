@@ -28,11 +28,11 @@ const start = async () => {
         newline: 'LF',
         migrationDirectory: `${__dirname}/migrate/migrations`,
         driver: 'pg',
-        host: process.env.PGHOST,
-        port: process.env.PGPORT,
-        database: process.env.PGDATABASE,
-        username: process.env.PGUSER,
-        password: process.env.PGPASSWORD,
+        host: process.env.PG_HOST,
+        port: process.env.PG_PORT,
+        database: process.env.PG_DATABASE,
+        username: process.env.PG_USER,
+        password: process.env.PG_PASSWORD,
         schemaTable: `schema_migrations`
       })
       await Migrate(pg)

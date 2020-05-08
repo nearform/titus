@@ -136,4 +136,4 @@ cognito.adminGetUser(params, (err, response) => {
 [faker]: http://marak.github.io/faker.js
 [aws-custom-attributes]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-attributes.html#user-pool-settings-custom-attributes
 [aws-jwt-validation]: https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html
-[Titus-db-manager]: `https://github.com/nearform/titus/tree/master/docs/developers/packages/titus-db-manager`
+[Titus-db-manager]: /developers/packages/titus-db-manager/

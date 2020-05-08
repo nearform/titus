@@ -1,0 +1,8 @@
+# Ignore everything
+**
+
+# Allow files and directories
+!package.json
+!package-lock.json
+!index.js
+!lib/**
