@@ -25,6 +25,24 @@ resource "google_secret_manager_secret_version" "github_actions_sa" {
   secret_data = google_service_account_key.github_actions.private_key
 }
 
+resource "google_secret_manager_secret" "github_actions_sa_email" {
+  provider = google-beta
+
+  secret_id = "github-actions-service-account-email"
+
+  replication {
+    automatic = true
+  }
+}
+
+resource "google_secret_manager_secret_version" "github_actions_sa_email" {
+  provider = google-beta
+
+  secret = google_secret_manager_secret.github_actions_sa_email.id
+
+  secret_data = google_service_account.github_actions.email
+}
+
 resource "google_storage_bucket_iam_member" "github_actions_us_gcr" {
   bucket = "artifacts.${var.gcp_project_id}.appspot.com"
   role   = "roles/storage.admin"
