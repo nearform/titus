@@ -1,13 +1,13 @@
-import i18n from '../../../i18n'
-
 export default class Authentication {
+  constructor({t} = {}) {
+    this.header = t('header.memory')
+  }
+
   authKey = 'titus-auth-key'
 
-  header = i18n.t('header.memory')
-
-  async login({ username }) {
+  async login({username}) {
     window.localStorage.setItem(this.authKey, username)
-    return { username }
+    return {username}
   }
 
   async logout() {
@@ -20,6 +20,6 @@ export default class Authentication {
   }
 
   getUserData() {
-    return { username: window.localStorage.getItem(this.authKey) }
+    return {username: window.localStorage.getItem(this.authKey)}
   }
 }

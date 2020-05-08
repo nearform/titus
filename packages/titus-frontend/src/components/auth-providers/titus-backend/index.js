@@ -1,8 +1,8 @@
-import i18n from '../../../i18n'
-
 export default class Authentication {
-  header = i18n.t('header.titus')
-  powerMessage = `Powered by Titus`
+  constructor({t} = {}) {
+    this.header = t('header.titus')
+    this.powerMessage = t('powerMessages.titus')
+  }
 
   async login({ username, password }) {
     const response = await fetch('/login', {

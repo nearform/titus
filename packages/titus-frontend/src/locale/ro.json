@@ -8,23 +8,26 @@
   "password": "Parola",
   "newPassword": "Parola noua",
   "header": {
-    "memory":
-      "Nota: Orice nume de utilizator urmat de o parola de cel putin patru caractere, cu cel putin o litera si un numar, va functiona.",
+    "memory": "Nota: Orice nume de utilizator urmat de o parola de cel putin patru caractere, cu cel putin o litera si un numar, va functiona.",
     "aws": "Vă rugăm să furnizați detaliile contului AWS Cognito:",
     "azure": "Dezvoltat cu Azure AD",
-    "titus": "Vă rugăm să furnizați detaliile contului Auth0:",
-    "validation": {
-      "required": {
-        "username": "Nume utilizator este obligatoriu.",
-        "password": "Parola este obligatorie."
-      },
-      "regex": {
-        "password":
-          "Parola trebuie sa contina cel putin patru caractere cu cel putin o litera si un numar"
-      }
+    "titus": "Vă rugăm să furnizați detaliile contului Auth0:"
+  },
+  "powerMessages": {
+    "aws": "Cu sprijinul AWS Amplify",
+    "azure": "Cu sprijinul Azure AD",
+    "titus": "Cu sprijinul Titus"
+  },
+  "validation": {
+    "required": {
+      "username": "Nume utilizator este obligatoriu.",
+      "password": "Parola este obligatorie."
     },
-    "errors": {
-      "tempPassword": "Te rugam sa introduci parola ta temporara si o noua parola"
+    "regex": {
+      "password": "Parola trebuie sa contina cel putin patru caractere cu cel putin o litera si un numar"
     }
+  },
+  "errors": {
+    "tempPassword": "Te rugam sa introduci parola ta temporara si o noua parola"
   }
 }

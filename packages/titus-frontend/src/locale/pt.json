@@ -13,6 +13,11 @@
         "azure": "Suportado por Azure AD",
         "titus": "Por favor indique os valores de conta Auth0:"
     },
+    "powerMessages": {
+        "aws": "Suportado por AWS Amplify",
+        "azure": "Suportado por Azure AD",
+        "titus": "Suportado por Titus"
+    },
     "validation": {
         "required": {
             "username": "Utilizador é obrigatório.",
