@@ -21,8 +21,8 @@ describe('Server Integration', () => {
     `)
   })
 
-  afterAll(async () => {
-    await client.end()
+  afterAll(() => {
+    client.end()
   })
 
   describe('/db/migrate', () => {
