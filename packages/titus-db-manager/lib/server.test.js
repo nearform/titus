@@ -33,128 +33,84 @@ describe('Server', () => {
   })
 
   describe('/', () => {
-    it('returns 404 for root', done => {
-      fastify.inject(
-        {
-          method: 'GET',
-          url: '/'
-        },
-        (err, response) => {
-          if (err) {
-            return done(err)
-          }
-          expect(response.statusCode).toEqual(404)
-          done()
-        }
-      )
+    it('returns 404 for root', async () => {
+      const response = await fastify.inject({
+        method: 'GET',
+        url: '/'
+      })
+      expect(response.statusCode).toEqual(404)
     })
   })
 
   describe('/db', () => {
-    it('returns a message', done => {
-      fastify.inject(
-        {
-          method: 'GET',
-          url: '/db'
-        },
-        (err, response) => {
-          if (err) {
-            return done(err)
-          }
+    it('returns a message', async () => {
+      const response = await fastify.inject({
+        method: 'GET',
+        url: '/db'
+      })
 
-          expect(response.json()).toEqual({
-            message: 'Titus DB manager v1.0.0'
-          })
-
-          done()
-        }
-      )
+      expect(response.json()).toEqual({
+        message: 'Titus DB manager v1.0.0'
+      })
     })
   })
 
   describe('/db/seed', () => {
-    it('runs seed command in DB', done => {
-      fastify.inject(
-        {
-          method: 'POST',
-          url: '/db/seed'
-        },
-        (err, response) => {
-          if (err) {
-            return done(err)
-          }
+    it('runs seed command in DB', async () => {
+      const response = await fastify.inject({
+        method: 'POST',
+        url: '/db/seed'
+      })
 
-          expect(client.connect).toHaveBeenCalled()
-          expect(client.end).toHaveBeenCalled()
-          expect(response.json()).toEqual({
-            success: true
-          })
-
-          done()
-        }
-      )
+      expect(client.connect).toHaveBeenCalled()
+      expect(client.end).toHaveBeenCalled()
+      expect(response.json()).toEqual({
+        success: true
+      })
     })
   })
 
   describe('/db/truncate', () => {
-    it('runs truncate command in DB', done => {
-      fastify.inject(
-        {
-          method: 'POST',
-          url: '/db/truncate'
-        },
-        (err, response) => {
-          if (err) {
-            return done(err)
-          }
+    it('runs truncate command in DB', async () => {
+      const response = await fastify.inject({
+        method: 'POST',
+        url: '/db/truncate'
+      })
 
-          expect(client.connect).toHaveBeenCalled()
-          expect(client.end).toHaveBeenCalled()
-          expect(response.json()).toEqual({
-            success: true
-          })
-
-          done()
-        }
-      )
+      expect(client.connect).toHaveBeenCalled()
+      expect(client.end).toHaveBeenCalled()
+      expect(response.json()).toEqual({
+        success: true
+      })
     })
   })
 
   describe('/db/migrate', () => {
-    it('runs migrate command in DB', done => {
-      fastify.inject(
-        {
-          method: 'POST',
-          url: '/db/migrate'
-        },
-        (err, response) => {
-          if (err) {
-            return done(err)
-          }
+    it('runs migrate command in DB', async () => {
+      const response = await fastify.inject({
+        method: 'POST',
+        url: '/db/migrate'
+      })
 
-          expect(Postgrator).toHaveBeenCalledWith(
-            expect.objectContaining({
-              database: 'titus',
-              driver: 'pg',
-              host: 'localhost',
-              idleTimeoutMillis: 30000,
-              newline: 'LF',
-              password: 'titus',
-              poolSize: 10,
-              port: 5432,
-              schemaTable: 'schema_migrations',
-              user: 'titus',
-              validateChecksums: true
-            })
-          )
-          expect(postgrator.migrate).toHaveBeenCalledTimes(1)
-          expect(response.json()).toEqual({
-            success: true
-          })
-
-          done()
-        }
+      expect(Postgrator).toHaveBeenCalledWith(
+        expect.objectContaining({
+          database: 'titus',
+          driver: 'pg',
+          host: 'localhost',
+          idleTimeoutMillis: 30000,
+          newline: 'LF',
+          password: 'titus',
+          poolSize: 10,
+          port: 5432,
+          schemaTable: 'schema_migrations',
+          user: 'titus',
+          validateChecksums: true
+        })
       )
+      expect(postgrator.migrate).toHaveBeenCalledTimes(1)
+      expect(response.json()).toEqual({
+        success: true
+      })
     })
   })
 })

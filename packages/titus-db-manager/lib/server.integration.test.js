@@ -25,103 +25,60 @@ describe('Server Integration', () => {
   })
 
   describe('/db/migrate', () => {
-    it('runs migrate command in DB', done => {
-      fastify.inject(
-        {
-          method: 'POST',
-          url: '/db/migrate'
-        },
-        (err, response) => {
-          if (err) {
-            return done(err)
-          }
+    it('runs migrate command in DB', async () => {
+      const result = await fastify.inject({
+        method: 'POST',
+        url: '/db/migrate'
+      })
 
-          expect(response.json()).toEqual({
-            success: true
-          })
-
-          done()
-        }
-      )
+      expect(result.json()).toEqual({
+        success: true
+      })
     })
   })
 
   describe('/db/seed', () => {
-    it('runs seed command in DB', done => {
-      fastify.inject(
-        {
-          method: 'POST',
-          url: '/db/seed'
-        },
-        (err, response) => {
-          if (err) {
-            return done(err)
-          }
+    it('runs seed command in DB', async () => {
+      const response = await fastify.inject({
+        method: 'POST',
+        url: '/db/seed'
+      })
 
-          expect(response.json()).toEqual({
-            success: true
-          })
-
-          done()
-        }
-      )
+      expect(response.json()).toEqual({
+        success: true
+      })
     })
   })
 
   describe('/db/truncate', () => {
-    it('fails if migration was not run before truncation', done => {
-      fastify.inject(
-        {
-          method: 'POST',
-          url: '/db/truncate'
-        },
-        (err, response) => {
-          if (err) {
-            return done(err)
-          }
+    it('fails if migration was not run before truncation', async () => {
+      const response = await fastify.inject({
+        method: 'POST',
+        url: '/db/truncate'
+      })
 
-          expect(response.json()).toEqual({
-            statusCode: 500,
-            code: '42P01',
-            error: 'Internal Server Error',
-            message: 'relation "some_table" does not exist'
-          })
-
-          done()
-        }
-      )
+      expect(response.json()).toEqual({
+        statusCode: 500,
+        code: '42P01',
+        error: 'Internal Server Error',
+        message: 'relation "some_table" does not exist'
+      })
     })
 
-    it('runs truncate command in DB', done => {
-      fastify.inject(
-        {
-          method: 'POST',
-          url: '/db/migrate'
-        },
-        err => {
-          if (err) {
-            return done(err)
-          }
+    it('runs truncate command in DB', async () => {
+      await fastify.inject({
+        method: 'POST',
+        url: '/db/migrate'
+      })
 
-          fastify.inject(
-            {
-              method: 'POST',
-              url: '/db/truncate'
-            },
-            (err, response) => {
-              if (err) {
-                return done(err)
-              }
+      const response = await fastify.inject({
+        method: 'POST',
+        url: '/db/truncate'
+      })
 
-              expect(response.json()).toEqual({
-                success: true
-              })
-
-              done()
-            }
-          )
-        }
-      )
+      expect(response.json()).toEqual({
+        success: true
+      })
     })
   })
 })
