@@ -1,9 +1,9 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import {useTranslation} from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 
 import history from '../../history'
-import {AUTH_PROVIDERS, ROUTES} from '../../constants'
+import { AUTH_PROVIDERS, ROUTES } from '../../constants'
 import InMemory from '../auth-providers/in-memory'
 import Titus from '../auth-providers/titus-backend'
 import AzureAd from '../auth-providers/azure-ad'
@@ -13,20 +13,20 @@ import config from '../../config'
 
 // AWS, TITUS, MEM, AD, AUTH0
 const AUTH_PROVIDER = process.env.REACT_APP_AUTH_PROVIDER || AUTH_PROVIDERS.MEM
-const getProvider = (t) => {
+const getProvider = t => {
   switch (AUTH_PROVIDER) {
     case AUTH_PROVIDERS.AD:
-      return new AzureAd({config, t})
+      return new AzureAd({ config, t })
     case AUTH_PROVIDERS.TITUS:
-      return new Titus({config, t})
+      return new Titus({ config, t })
     case AUTH_PROVIDERS.AWS:
-      return new AwsAmplify({config, t})
+      return new AwsAmplify({ config, t })
     case AUTH_PROVIDERS['AUTH0']:
-      return new Auth0({config, t})
+      return new Auth0({ config, t })
     case AUTH_PROVIDERS.MEM:
-      return new InMemory({t})
+      return new InMemory({ t })
     default:
-      return new InMemory({t})
+      return new InMemory({ t })
   }
 }
 
@@ -34,14 +34,14 @@ export const AuthContext = React.createContext({})
 
 export const AuthConsumer = AuthContext.Consumer
 
-export const AuthProvider = ({children}) => {
-  const {t} = useTranslation()
+export const AuthProvider = ({ children }) => {
+  const { t } = useTranslation()
 
   // TODO:: Generate a new auth based off env variables here
   const authentication = getProvider(t)
 
   const [isAuthenticated, setAuthenticated] = useState(
-    authentication.isAuthenticated(),
+    authentication.isAuthenticated()
   )
   const [user, setUser] = useState(authentication.getUserData())
   const [loginError, setLoginError] = useState(null)
@@ -84,7 +84,7 @@ export const AuthProvider = ({children}) => {
     user,
     provider: AUTH_PROVIDER,
     authentication,
-    loginMessage: authentication.header,
+    loginMessage: authentication.header
   }
 
   return <AuthContext.Provider value={context}>{children}</AuthContext.Provider>
@@ -92,5 +92,5 @@ export const AuthProvider = ({children}) => {
 
 AuthProvider.propTypes = {
   children: PropTypes.node,
-  authentication: PropTypes.object,
+  authentication: PropTypes.object
 }

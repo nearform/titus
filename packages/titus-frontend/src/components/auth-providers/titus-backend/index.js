@@ -1,5 +1,5 @@
 export default class Authentication {
-  constructor({t} = {}) {
+  constructor({ t } = {}) {
     this.header = t('header.titus')
     this.powerMessage = t('powerMessages.titus')
   }

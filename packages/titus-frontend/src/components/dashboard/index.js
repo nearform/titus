@@ -19,7 +19,11 @@ const Dashboard = ({ logout }) => {
       </button>
       <select className="language-selector" onChange={onLanguageChange}>
         {LANGUAGES.map(lng => (
-          <option key={lng.code} value={lng.code} selected={lng.code === language ? 'selected' : null}>
+          <option
+            key={lng.code}
+            value={lng.code}
+            selected={lng.code === language ? 'selected' : null}
+          >
             {lng.name}
           </option>
         ))}

@@ -9,7 +9,7 @@ jest.mock('./adalConfig', () => ({
 
 describe('Authorization constructor', () => {
   const config = { adal: { tenant: 'tenant', clientId: 'id' } }
-  const authentication = new Authentication({ config })
+  const authentication = new Authentication({ config, t: () => {} })
 
   it('should trigger logout correctly', () => {
     expect(authentication.logout()).toBe(true)
