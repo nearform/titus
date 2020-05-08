@@ -4,7 +4,7 @@ on:
     paths:
     - '.github/workflows/frontend-ci.yml'
     - 'packages/titus-frontend/**'
-
+      
 jobs:
   integration-checks:
     name: 'Linting, Testing, Building'
