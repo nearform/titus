@@ -15,7 +15,7 @@ describe('Server Integration', () => {
       DROP SCHEMA public CASCADE;
       CREATE SCHEMA public;
 
-      GRANT ALL ON SCHEMA public TO postgres;
+      GRANT ALL ON SCHEMA public TO titus;
       GRANT ALL ON SCHEMA public TO public;
     `)
   })
@@ -39,7 +39,7 @@ describe('Server Integration', () => {
           expect(response.json()).toEqual({
             success: true
           })
-          console.log({ response })
+
           done()
         }
       )
