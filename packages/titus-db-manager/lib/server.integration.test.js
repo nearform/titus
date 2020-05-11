@@ -52,7 +52,7 @@ describe('Server Integration', () => {
   })
 
   describe('/db/truncate', () => {
-    it('fails if migration was not run before truncation', async () => {
+    it('fails if migration did not run before truncation', async () => {
       const response = await fastify.inject({
         method: 'POST',
         url: '/db/truncate'
