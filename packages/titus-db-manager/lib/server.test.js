@@ -56,6 +56,24 @@ describe('Server', () => {
   })
 
   describe('/db/seed', () => {
+    it('returns an error if something fails', async () => {
+      client.connect = jest
+        .fn()
+        .mockRejectedValueOnce(new Error('Database fails to connect'))
+
+      const response = await fastify.inject({
+        method: 'POST',
+        url: '/db/seed'
+      })
+
+      expect(client.connect).toHaveBeenCalled()
+      expect(client.end).toHaveBeenCalled()
+      expect(response.json()).toEqual({
+        success: false,
+        message: 'Database fails to connect'
+      })
+    })
+
     it('runs seed command in DB', async () => {
       const response = await fastify.inject({
         method: 'POST',
@@ -71,6 +89,24 @@ describe('Server', () => {
   })
 
   describe('/db/truncate', () => {
+    it('returns an error if something fails', async () => {
+      client.connect = jest
+        .fn()
+        .mockRejectedValueOnce(new Error('Database fails to connect'))
+
+      const response = await fastify.inject({
+        method: 'POST',
+        url: '/db/truncate'
+      })
+
+      expect(client.connect).toHaveBeenCalled()
+      expect(client.end).toHaveBeenCalled()
+      expect(response.json()).toEqual({
+        success: false,
+        message: 'Database fails to connect'
+      })
+    })
+
     it('runs truncate command in DB', async () => {
       const response = await fastify.inject({
         method: 'POST',
@@ -86,6 +122,38 @@ describe('Server', () => {
   })
 
   describe('/db/migrate', () => {
+    it('returns an error if something fails', async () => {
+      postgrator.migrate = jest
+        .fn()
+        .mockRejectedValueOnce(new Error('Database fails to connect'))
+
+      const response = await fastify.inject({
+        method: 'POST',
+        url: '/db/migrate'
+      })
+
+      expect(Postgrator).toHaveBeenCalledWith(
+        expect.objectContaining({
+          database: 'titus',
+          driver: 'pg',
+          host: 'localhost',
+          idleTimeoutMillis: 30000,
+          newline: 'LF',
+          password: 'titus',
+          poolSize: 10,
+          port: 5432,
+          schemaTable: 'schema_migrations',
+          user: 'titus',
+          validateChecksums: true
+        })
+      )
+      expect(postgrator.migrate).toHaveBeenCalledTimes(1)
+      expect(response.json()).toEqual({
+        success: false,
+        message: 'Database fails to connect'
+      })
+    })
+
     it('runs migrate command in DB', async () => {
       const response = await fastify.inject({
         method: 'POST',

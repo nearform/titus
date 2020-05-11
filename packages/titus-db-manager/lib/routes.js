@@ -22,7 +22,8 @@ async function dbRoutes(server) {
           description: 'Successful response',
           type: 'object',
           properties: {
-            success: { type: 'boolean' }
+            success: { type: 'boolean' },
+            message: { type: 'string' }
           }
         }
       }
@@ -43,9 +44,13 @@ async function dbRoutes(server) {
         },
         config.pgPlugin
       )
-      const pg = await new Postgrator(postgratorConfig)
-      const migrateResult = await Migrate(pg)
-      return { success: migrateResult }
+      try {
+        const pg = await new Postgrator(postgratorConfig)
+        const migrateResult = await Migrate(pg)
+        return { success: migrateResult }
+      } catch (e) {
+        return { success: false, message: e.message }
+      }
     }
   })
 
@@ -59,17 +64,23 @@ async function dbRoutes(server) {
           description: 'Successful response',
           type: 'object',
           properties: {
-            success: { type: 'boolean' }
+            success: { type: 'boolean' },
+            message: { type: 'string' }
           }
         }
       }
     },
     handler: async () => {
       const client = new Client(config.pgPlugin)
-      await client.connect()
-      await Truncate(client)
-      client.end()
-      return { success: true }
+      try {
+        await client.connect()
+        await Truncate(client)
+        return { success: true }
+      } catch (e) {
+        return { success: false, message: e.message }
+      } finally {
+        client.end()
+      }
     }
   })
 
@@ -83,17 +94,23 @@ async function dbRoutes(server) {
           description: 'Successful response',
           type: 'object',
           properties: {
-            success: { type: 'boolean' }
+            success: { type: 'boolean' },
+            message: { type: 'string' }
           }
         }
       }
     },
     handler: async () => {
       const client = new Client(config.pgPlugin)
-      await client.connect()
-      await Seed(client)
-      client.end()
-      return { success: true }
+      try {
+        await client.connect()
+        await Seed(client)
+        return { success: true }
+      } catch (e) {
+        return { success: false, message: e.message }
+      } finally {
+        client.end()
+      }
     }
   })
 

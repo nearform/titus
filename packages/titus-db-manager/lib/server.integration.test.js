@@ -59,9 +59,7 @@ describe('Server Integration', () => {
       })
 
       expect(response.json()).toEqual({
-        statusCode: 500,
-        code: '42P01',
-        error: 'Internal Server Error',
+        success: false,
         message: 'relation "some_table" does not exist'
       })
     })
