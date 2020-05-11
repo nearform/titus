@@ -2,7 +2,7 @@ import Authentication from './index'
 
 describe('Authorization constructor', () => {
   const storage = {}
-  const authentication = new Authentication()
+  const authentication = new Authentication({ t: () => {} })
 
   Object.defineProperty(window, 'localStorage', {
     value: {

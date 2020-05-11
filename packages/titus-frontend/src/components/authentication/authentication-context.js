@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import { useTranslation } from 'react-i18next'
+
 import history from '../../history'
 import { AUTH_PROVIDERS, ROUTES } from '../../constants'
 import InMemory from '../auth-providers/in-memory'
@@ -11,31 +13,33 @@ import config from '../../config'
 
 // AWS, TITUS, MEM, AD, AUTH0
 const AUTH_PROVIDER = process.env.REACT_APP_AUTH_PROVIDER || AUTH_PROVIDERS.MEM
-const getProvider = providerKey => {
+const getProvider = t => {
   switch (AUTH_PROVIDER) {
     case AUTH_PROVIDERS.AD:
-      return new AzureAd({ config })
+      return new AzureAd({ config, t })
     case AUTH_PROVIDERS.TITUS:
-      return new Titus({ config })
+      return new Titus({ config, t })
     case AUTH_PROVIDERS.AWS:
-      return new AwsAmplify({ config })
+      return new AwsAmplify({ config, t })
     case AUTH_PROVIDERS['AUTH0']:
-      return new Auth0({ config })
+      return new Auth0({ config, t })
     case AUTH_PROVIDERS.MEM:
-      return new InMemory()
+      return new InMemory({ t })
     default:
-      return new InMemory()
+      return new InMemory({ t })
   }
 }
-
-// TODO:: Generate a new auth based off env variables here
-const authentication = getProvider(AUTH_PROVIDER)
 
 export const AuthContext = React.createContext({})
 
 export const AuthConsumer = AuthContext.Consumer
 
 export const AuthProvider = ({ children }) => {
+  const { t } = useTranslation()
+
+  // TODO:: Generate a new auth based off env variables here
+  const authentication = getProvider(t)
+
   const [isAuthenticated, setAuthenticated] = useState(
     authentication.isAuthenticated()
   )
