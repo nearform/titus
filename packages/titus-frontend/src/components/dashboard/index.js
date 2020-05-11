@@ -10,6 +10,8 @@ const Dashboard = ({ logout }) => {
     i18n.changeLanguage(e.target.value)
   }
 
+  const language = i18n.language
+
   return (
     <Fragment>
       <button className="logout button" onClick={logout}>
@@ -17,7 +19,11 @@ const Dashboard = ({ logout }) => {
       </button>
       <select className="language-selector" onChange={onLanguageChange}>
         {LANGUAGES.map(lng => (
-          <option key={lng.code} value={lng.code}>
+          <option
+            key={lng.code}
+            value={lng.code}
+            selected={lng.code === language ? 'selected' : null}
+          >
             {lng.name}
           </option>
         ))}

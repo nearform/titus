@@ -17,7 +17,8 @@ describe('Authorization constructor', () => {
         userPoolWebClientId: '',
         identityPoolId: ''
       }
-    }
+    },
+    t: () => {}
   })
 
   it('should trigger logout correctly', async () => {
@@ -92,9 +93,7 @@ describe('Authorization constructor', () => {
         password: 'pass'
       })
     } catch (err) {
-      expect(err).toEqual(
-        new Error('Please enter your temporary password and a new password')
-      )
+      expect(err).toEqual(new Error())
     }
   })
 })

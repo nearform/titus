@@ -1,9 +1,9 @@
-import i18n from '../../../i18n'
-
 export default class Authentication {
-  authKey = 'titus-auth-key'
+  constructor({ t } = {}) {
+    this.header = t('header.memory')
+  }
 
-  header = i18n.t('header.memory')
+  authKey = 'titus-auth-key'
 
   async login({ username }) {
     window.localStorage.setItem(this.authKey, username)
