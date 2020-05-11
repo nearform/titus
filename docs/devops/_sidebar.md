@@ -5,4 +5,5 @@
     - [Overview](/devops/?id=overview)
     - [Deploy Titus](/devops/?id=deploy-titus)
         - [Deploy Titus on GCP](/devops/gcp/)
+    - [Lint, Test and Build](/devops/?id=lint-test-and-build)
 - [Contribute to Titus](/contributing/)
