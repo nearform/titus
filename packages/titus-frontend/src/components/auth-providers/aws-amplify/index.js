@@ -1,10 +1,8 @@
 import Amplify from '@aws-amplify/core'
 import Auth from '@aws-amplify/auth'
 
-import i18n from '../../../i18n'
-
 export default class Authentication {
-  constructor({ config } = {}) {
+  constructor({ config, t } = {}) {
     Amplify.configure({
       Auth: {
         identityPoolId: config.aws.identityPoolId,
@@ -13,12 +11,13 @@ export default class Authentication {
         userPoolWebClientId: config.aws.userPoolWebClientId
       }
     })
+
+    this.header = t('header.aws')
+    this.powerMessage = t('powerMessages.aws')
+    this.t = t
   }
 
   user = false
-
-  header = i18n.t('header.aws')
-  powerMessage = `Powered by AWS Amplify`
 
   async login({ username, newPassword, password }) {
     let user = false
@@ -27,7 +26,7 @@ export default class Authentication {
       if (newPassword) {
         user = await Auth.completeNewPassword(user, newPassword)
       } else if (user.challengeName === 'NEW_PASSWORD_REQUIRED') {
-        throw new Error(i18n.t('errors.tempPassword'))
+        throw new Error(this.t('errors.tempPassword'))
       }
       user = await Auth.currentAuthenticatedUser({ bypassCache: false })
     } catch (error) {

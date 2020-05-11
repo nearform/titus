@@ -14,6 +14,11 @@
     "azure": "Powered by Azure AD",
     "titus": "Please provide Auth0 account details:"
   },
+  "powerMessages": {
+    "aws": "Powered by AWS Amplify",
+    "azure": "Powered by Azure AD",
+    "titus": "Powered by Titus"
+  },
   "validation": {
     "required": {
       "username": "Username is required.",
