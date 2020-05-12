@@ -11,6 +11,7 @@ describe('pg plugin', () => {
 
   beforeAll(async () => {
     server = require('fastify')()
+    server.register(require('fastify-gcp-secret-manager'))
     server.register(require('.'))
 
     // route that will make DB query

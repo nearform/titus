@@ -9,5 +9,5 @@ async function plugin(server, options) {
 }
 
 module.exports = fp(plugin, {
-  dependencies: ['fastify-gcp-secret-manager'],
+  dependencies: ['fastify-gcp-secret-manager']
 })

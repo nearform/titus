@@ -7,6 +7,7 @@ describe('health route', () => {
 
   beforeAll(async () => {
     server = require('fastify')()
+    server.register(require('fastify-gcp-secret-manager'))
     server.register(require('fastify-postgres'))
     server.register(require('.'))
     await server.ready()
