@@ -52,4 +52,6 @@ async function health(server, options) {
   })
 }
 
-module.exports = fp(health)
+module.exports = fp(health, {
+  dependencies: ['fastify-gcp-secret-manager']
+})

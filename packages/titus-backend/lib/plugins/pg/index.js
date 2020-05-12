@@ -8,4 +8,6 @@ async function plugin(server, options) {
   server.register(require('fastify-postgres'), options.pgPlugin)
 }
 
-module.exports = fp(plugin)
+module.exports = fp(plugin, {
+  dependencies: ['fastify-gcp-secret-manager'],
+})
