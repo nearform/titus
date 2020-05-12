@@ -28,7 +28,7 @@ async function dbRoutes(server) {
         }
       }
     },
-    handler: async () => {
+    handler: async req => {
       const postgratorConfig = Object.assign(
         {
           validateChecksums: true,
@@ -49,6 +49,7 @@ async function dbRoutes(server) {
         const migrateResult = await Migrate(pg)
         return { success: migrateResult }
       } catch (e) {
+        req.log.error({ err: e })
         return { success: false, message: e.message }
       }
     }
@@ -70,13 +71,14 @@ async function dbRoutes(server) {
         }
       }
     },
-    handler: async () => {
+    handler: async req => {
       const client = new Client(config.pgPlugin)
       try {
         await client.connect()
         await Truncate(client)
         return { success: true }
       } catch (e) {
+        req.log.error({ err: e })
         return { success: false, message: e.message }
       } finally {
         client.end()
@@ -100,13 +102,14 @@ async function dbRoutes(server) {
         }
       }
     },
-    handler: async () => {
+    handler: async req => {
       const client = new Client(config.pgPlugin)
       try {
         await client.connect()
         await Seed(client)
         return { success: true }
       } catch (e) {
+        req.log.error({ err: e })
         return { success: false, message: e.message }
       } finally {
         client.end()
