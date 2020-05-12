@@ -45,7 +45,7 @@ async function dbRoutes(server) {
         config.pgPlugin
       )
       try {
-        const pg = await new Postgrator(postgratorConfig)
+        const pg = new Postgrator(postgratorConfig)
         const migrateResult = await Migrate(pg)
         return { success: migrateResult }
       } catch (e) {
