@@ -7,3 +7,4 @@ async function secrets(server, options) {
 }
 
 module.exports = fp(secrets)
+module.exports.autoload = false
