@@ -74,6 +74,7 @@ module.exports = {
     secret: config.JWT_SECRET
   },
   secretManager: {
-    test: 'projects/494141678371/secrets/test/versions/latest'
+    test: 'projects/494141678371/secrets/test/versions12/latest',
+    host: 'projects/494141678371/secrets/host/versions/latest'
   }
 }
