@@ -2,6 +2,8 @@
 
 const { version } = require('../../../package')
 
+jest.requireMock('fastify-gcp-secret-manager')
+
 describe('health route', () => {
   let server
 
@@ -17,6 +19,7 @@ describe('health route', () => {
   beforeEach(() => {
     jest.setTimeout(10e4)
     jest.resetAllMocks()
+    jest.resetModules()
   })
 
   afterAll(async () => server.close())

@@ -2,6 +2,8 @@
 
 const faker = require('faker')
 
+jest.requireMock('fastify-gcp-secret-manager')
+
 describe('pg plugin', () => {
   let server, address
   const query = 'SELECT table_schema, table_name FROM information_schema.tables'
@@ -31,6 +33,7 @@ describe('pg plugin', () => {
   beforeEach(() => {
     jest.setTimeout(10e4)
     jest.resetAllMocks()
+    jest.resetModules()
   })
 
   afterAll(async () => server.close())
