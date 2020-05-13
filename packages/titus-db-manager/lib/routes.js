@@ -11,7 +11,7 @@ const Truncate = require('../truncate')
 
 const { version } = require('../package')
 const fp = require('fastify-plugin')
-async function dbRoutes(server, options) {
+async function dbRoutes(server) {
   server.route({
     method: 'POST',
     url: '/db/migrate',
@@ -22,12 +22,13 @@ async function dbRoutes(server, options) {
           description: 'Successful response',
           type: 'object',
           properties: {
-            success: { type: 'boolean' }
+            success: { type: 'boolean' },
+            message: { type: 'string' }
           }
         }
       }
     },
-    handler: async request => {
+    handler: async req => {
       const postgratorConfig = Object.assign(
         {
           validateChecksums: true,
@@ -43,11 +44,17 @@ async function dbRoutes(server, options) {
         },
         config.pgPlugin
       )
-      const pg = await new Postgrator(postgratorConfig)
-      const migrateResult = await Migrate(pg)
-      return { success: migrateResult }
+      try {
+        const pg = new Postgrator(postgratorConfig)
+        const migrateResult = await Migrate(pg)
+        return { success: migrateResult }
+      } catch (e) {
+        req.log.error({ err: e })
+        return { success: false, message: e.message }
+      }
     }
   })
+
   server.route({
     method: 'POST',
     url: '/db/truncate',
@@ -58,17 +65,24 @@ async function dbRoutes(server, options) {
           description: 'Successful response',
           type: 'object',
           properties: {
-            success: { type: 'boolean' }
+            success: { type: 'boolean' },
+            message: { type: 'string' }
           }
         }
       }
     },
-    handler: async request => {
-      const client = new Client()
-      await client.connect()
-      await Truncate(client)
-      client.end()
-      return { success: true }
+    handler: async req => {
+      const client = new Client(config.pgPlugin)
+      try {
+        await client.connect()
+        await Truncate(client)
+        return { success: true }
+      } catch (e) {
+        req.log.error({ err: e })
+        return { success: false, message: e.message }
+      } finally {
+        client.end()
+      }
     }
   })
 
@@ -82,19 +96,27 @@ async function dbRoutes(server, options) {
           description: 'Successful response',
           type: 'object',
           properties: {
-            success: { type: 'boolean' }
+            success: { type: 'boolean' },
+            message: { type: 'string' }
           }
         }
       }
     },
-    handler: async request => {
-      const client = new Client()
-      await client.connect()
-      await Seed(client)
-      client.end()
-      return { success: true }
+    handler: async req => {
+      const client = new Client(config.pgPlugin)
+      try {
+        await client.connect()
+        await Seed(client)
+        return { success: true }
+      } catch (e) {
+        req.log.error({ err: e })
+        return { success: false, message: e.message }
+      } finally {
+        client.end()
+      }
     }
   })
+
   server.route({
     method: 'GET',
     url: '/db',

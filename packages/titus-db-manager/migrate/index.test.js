@@ -1,7 +1,12 @@
-'use strict'
+const migrate = require('.')
 
-describe('server', () => {
-  it('starts a server and register plugins', async () => {
-    expect(true).toBe(true)
+describe('migrate', () => {
+  it('runs postgres migration', async () => {
+    const pg = {
+      migrate: jest.fn().mockResolvedValueOnce(null)
+    }
+    const result = await migrate(pg)
+    expect(result).toBe(true)
+    expect(pg.migrate).toHaveBeenCalledTimes(1)
   })
 })

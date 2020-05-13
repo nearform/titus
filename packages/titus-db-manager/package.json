@@ -12,7 +12,7 @@
     "db:migrate": "node ./index.js migrate",
     "db:seed": "node ./index.js seed",
     "db:truncate": "node ./index.js truncate",
-    "db:server:start": "node ./lib/server.js",
+    "db:server:start": "node ./lib",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "lint:staged": "lint-staged",
