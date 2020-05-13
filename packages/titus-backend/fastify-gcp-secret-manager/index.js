@@ -8,8 +8,7 @@ const S = require('fluent-schema')
 
 const config = envSchema({
   dotenv: true,
-  schema: S.object()
-    .prop('NODE_ENV', S.string().required()),
+  schema: S.object().prop('NODE_ENV', S.string().required())
 })
 
 const isProduction = config.NODE_ENV === 'production'
@@ -17,7 +16,7 @@ let client
 
 async function accessSecretVersion(name) {
   try {
-    const [version] = await client.accessSecretVersion({name})
+    const [version] = await client.accessSecretVersion({ name })
     return version.payload.data.toString('utf8')
   } catch (err) {
     // the error message from GCP SDK should get propagated to user as it contain path to the secret, project ID, etc..
@@ -26,7 +25,7 @@ async function accessSecretVersion(name) {
 }
 
 async function fastifyGCPSecretManager(fastify, options) {
-  const {name, developmentSecrets} = options
+  const { name, developmentSecrets } = options
   delete options.name
   delete options.developmentSecrets
 
@@ -57,7 +56,7 @@ async function fastifyGCPSecretManager(fastify, options) {
 
     if (fastify.secrets[name]) {
       throw new Error(
-        `fastify-gcp-secret-manager '${name}' instance name has already been registered`,
+        `fastify-gcp-secret-manager '${name}' instance name has already been registered`
       )
     }
 
@@ -73,5 +72,5 @@ async function fastifyGCPSecretManager(fastify, options) {
 
 module.exports = fp(fastifyGCPSecretManager, {
   fastify: '2.x',
-  name: 'fastify-gcp-secret-manager',
+  name: 'fastify-gcp-secret-manager'
 })

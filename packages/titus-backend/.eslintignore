@@ -1,3 +1,4 @@
 coverage/*
 node_modules/*
 pgdata/*
+fastify-gcp-secret-manager/node_modules/*
