@@ -26,6 +26,7 @@ const config = envSchema({
     .prop('AD_APP_ID', S.string())
     .prop('AD_SECRET', S.string())
     .prop('CORS_ORIGIN', S.string())
+    .prop('SECRETS_TEST', S.string())
 })
 
 const isProduction = /^\s$production\s*$/i.test(config.NODE_ENV)
@@ -75,5 +76,8 @@ module.exports = {
   },
   secretManager: {
     test: 'projects/494141678371/secrets/test/versions/latest'
+  },
+  developmentSecrets: {
+    test: config.SECRETS_TEST
   }
 }
