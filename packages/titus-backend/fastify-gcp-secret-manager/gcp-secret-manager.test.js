@@ -8,7 +8,6 @@ describe('fastify-gcp-secret-manager', () => {
   beforeEach(async () => {
     jest.resetModules()
     server = require('fastify')()
-    delete process.env.NODE_ENV
   })
 
   afterEach(async () => server.close())
@@ -19,11 +18,8 @@ describe('fastify-gcp-secret-manager', () => {
   })
 
   it('should read secrets from options.developmentSecrets in dev mode', async () => {
-    process.env = {
-      NODE_ENV: 'development'
-    }
-
     server.register(require('.'), {
+      mode: 'development',
       test: 'I am a test secret',
       developmentSecrets: {
         test: 'I am a test secret for development'
