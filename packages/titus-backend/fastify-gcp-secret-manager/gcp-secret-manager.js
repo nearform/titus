@@ -2,7 +2,6 @@
 
 const SecretManagerServiceClient = require('@google-cloud/secret-manager')
   .SecretManagerServiceClient
-const checkName = require('./checkName')
 
 let client
 
@@ -17,9 +16,8 @@ async function accessSecretVersion(name) {
 }
 
 async function fastifyGCPSecretManagerProduction(fastify, options) {
-  const { name } = options
+  const name = options.name
   delete options.name
-  delete options.developmentSecrets
 
   if (!client) {
     client = new SecretManagerServiceClient()
@@ -30,7 +28,25 @@ async function fastifyGCPSecretManagerProduction(fastify, options) {
     secrets[key] = await accessSecretVersion(options[key])
   }
 
-  await checkName(fastify, { name, secrets })
+  if (name) {
+    if (!fastify.secrets) {
+      fastify.decorate('secrets', {})
+    }
+
+    if (fastify.secrets[name]) {
+      throw new Error(
+        `fastify-gcp-secret-manager '${name}' instance name has already been registered`
+      )
+    }
+
+    fastify.secrets[name] = secrets
+  } else {
+    if (fastify.secrets) {
+      throw new Error('fastify-gcp-secret-manager has already been registered')
+    } else {
+      fastify.decorate('secrets', secrets)
+    }
+  }
 }
 
 module.exports = fastifyGCPSecretManagerProduction

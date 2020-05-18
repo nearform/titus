@@ -1,25 +1,21 @@
 'use strict'
 
 const fp = require('fastify-plugin')
+const fastifySecretsEnv = require('fastify-secrets-env')
 
-const setup = {
-  development: require('./development'),
-  production: require('./production')
-}
+const gcpSecretManager = require('./gcp-secret-manager')
 
 async function fastifyGCPSecretManager(fastify, opts) {
   opts = opts || {}
 
-  const mode = opts.mode || 'production'
-
-  delete opts.mode
+  const { mode = 'production', ...restOptions } = opts
 
   switch (mode) {
     case 'production':
-      await setup.production(fastify, opts)
+      await gcpSecretManager(fastify, restOptions)
       break
     case 'development':
-      await setup.development(fastify, opts)
+      await fastify.register(fastifySecretsEnv, restOptions)
       break
     default:
       throw new Error(

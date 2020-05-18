@@ -1,0 +1,28 @@
+{
+  "name": "fastify-secrets-env",
+  "version": "0.0.1",
+  "description": "Fastify Secret Manager plugin for dev mode",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fastify/fastify-secrets-env.git"
+  },
+  "keywords": [
+    "fastify",
+    "secrets",
+    "env",
+    "development"
+  ],
+  "author": "Cristian Kiss - @ckiss",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fastify/fastify-secrets-env/issues"
+  },
+  "homepage": "https://github.com/fastify/fastify-secrets-env#readme",
+  "dependencies": {
+    "fastify-plugin": "^1.5.0"
+  },
+  "devDependencies": {
+    "fastify": "^2.7.1"
+  }
+}
