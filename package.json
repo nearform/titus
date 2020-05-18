@@ -29,8 +29,8 @@
   "devDependencies": {
     "docsify-cli": "^4.4.0",
     "husky": "^4.2.5",
-    "lerna": "^3.20.2",
-    "jest": "^26.0.0"
+    "jest": "^26.0.1",
+    "lerna": "^3.21.0"
   },
   "husky": {
     "hooks": {
