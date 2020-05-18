@@ -1,6 +1,6 @@
 # ![logo]
 
-Develop and deploy your solutions quickly using Titus, an application development and deployment stack. Titus is production ready and can be deployed to all major cloud providers.
+Develop and deploy your solutions quickly using Titus, an application development and deployment stack. Titus is production-ready and can be deployed to all major cloud providers.
 
 # Titus Overview
 Titus is an application development and deployment stack suitable for SaaS solutions. It provides a ready to deploy frontend, backend and database and includes infrastructure and service tooling for continuous integration and deployment.
@@ -10,7 +10,7 @@ Titus helps you create high quality software applications and documentation fast
 ![titus-feature-overview]
 Fig.1 Titus Feature Overview
 
-We provide everything you need to start deploying features in a production ready, scalable manner.
+We provide everything you need to start deploying features in a production-ready, scalable manner.
 
 ## Developer Experience
 Developer experience using Titus is first class. We want you as a developer to enjoy using Titus so much that it becomes your stack of choice.
@@ -18,16 +18,16 @@ Developer experience using Titus is first class. We want you as a developer to e
 Titus is well documented, includes modern tooling, for example, [Storybook], and has linting and testing as first-class citizens. Titus supports common-sense inclusions such as quality logging and Docker convenience commands for day-to-day building and working with the stack locally.
 
 ## No Compromise DevOps
-Titus comes with a full set of scripted functionality for continuous integration and deployment. This allows you to decide which CI/CD server to use on a case by case basis. By default, Titus makes use of Github Actions as it's Continuous Integration & Deployment server. GCP is used as the default cloud provider.
+Titus comes with a full set of scripted functionality for continuous integration and deployment. This allows you to decide which CI/CD server to use on a case by case basis. By default, Titus makes use of GitHub Actions as its Continuous Integration and Deployment server. Google Cloud Platform (GCP) is the default cloud provider.
 
-<to-do>
-Fig.2 Titus Pipeline
+<!---to-do --->
+<!---Fig.2 Titus Pipeline -->
 
 ## Production Grade CI Pipeline
 The primary goal of Titus is to enable you to build your new features straight away. We are passionate about this and therefore use a modern deployment pipeline to ensure you can deliver continuously:
 
 ![titus-ci-pipeline]
-Fig.3 Titus CI Pipeline
+Fig.2 Titus CI Pipeline
 
 ## You Decide the Details
 Perhaps the most important feature of Titus is its simplicity. There are no CSS decisions, no deviation from standard linting rules and no clever frontend framework to get tangled up with.
@@ -41,7 +41,6 @@ The quickest way to get exploring is to view our Quick Start Guide. It covers fo
 
 
 <!-- External Links -->
-[Taurus]: https://nf-taurus.netlify.com
 [CircleCI]: https://circleci.com/product/#features
 [Storybook]: https://storybook.js.org/
 [Terraform]: https://www.terraform.io/

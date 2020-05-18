@@ -1,6 +1,8 @@
 # Titus Frontend Package
 
-## Quick start
+## Quick Start
+
+The following commands are used to quick start the Titus frontend package:
 ```
 cd packages/titus-frontend
 npm install
