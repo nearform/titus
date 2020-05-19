@@ -11,7 +11,7 @@ npm run start || npm run storybook
 ## Overview
 Titus frontend is a [React] application with routing and minimalist login components. This section describes Titus frontend and how to install, configure, run, test and build your frontend application.
 
-What you implement with Titus frontend is your choice, we provide you with an unopinionated working shell.
+What you implement with Titus frontend is your choice; we provide you with an unopinionated working shell.
 We provide what is common in our projects.
 
 There is scope for you to add, customise or even replace features.
@@ -19,19 +19,19 @@ There is scope for you to add, customise or even replace features.
 ### Organisation
 Titus frontend is structured as follows:
 
-* `build/` - your bundled application for production use
-* `public/` - static assets, including: index.html, icons and images
-* `src/index.js` - main entry points and loads your React application and service worker
-* `src/app.js` - your application, load styles and routes (powered by [react-router])
-* `src/serviceWorker.js` - service worker (from [CRA]) that turns your application into a Progressive Web Application
-* `src/components/` - a set of components to implement a login form, an authentication context and various authentication providers
-* `src/page/` - a set of page components asynchronously loaded when declaring routes
-* `lighthouse/` - runs Google's [Lighthouse] to evaluate your application performance and accessibility
+* `build/` - your bundled application for production use.
+* `public/` - static assets, including index.html, icons and images.
+* `src/index.js` - main entry points and loads your React application and service worker.
+* `src/app.js` - your application, load styles and routes (powered by [react-router]).
+* `src/serviceWorker.js` - service worker (from [CRA]) that turns your application into a Progressive Web Application.
+* `src/components/` - a set of components to implement a login form, an authentication context and various authentication providers.
+* `src/page/` - a set of page components asynchronously loaded when declaring routes.
+* `lighthouse/` - runs Google's [Lighthouse] to evaluate your application performance and accessibility.
 
 ## Configure Authentication
-Titus can support a variety of authentication providers. By default, it will fallback to an "In memory" provider. This makes no server requests.
+Titus supports a variety of authentication providers. By default, it fallbacks to an 'in-memory' provider. This makes no server requests.
 
-To define which authentication provider is active, set the `REACT_APP_AUTH_PROVIDER` variable in `.env`. The keys are below with their corresponding provider.
+To define which authentication provider is active, set the `REACT_APP_AUTH_PROVIDER` variable in `.env`. The keys for each provider are listed below.
 
 ### In-memory Authentication Provider
 #### `key: MEM`
@@ -39,55 +39,51 @@ To define which authentication provider is active, set the `REACT_APP_AUTH_PROVI
 By default, titus-frontend does not use a real authentication provider.
 `src/components/auth-provider/in-memory/` allows almost any combination of username and password, and there's no server roundtrip.
 
-Once logged in, a token is stored in the local storage, and it grants access to the protected dashboard.
+Once logged in, a token is stored in the local storage and it grants access to the protected dashboard.
 
 ### Titus-backend Provider
 #### `key: TITUS`
 If you have an Auth0 application configured, you can use the titus-backend login endpoint to authenticate users.
 In this case, authentication is performed as follows:
-- provide your valid Auth0 credentials
-- the credentials are passed to titus-backend
-- titus-backend validates them against Auth0
-- when successful, titus-backend returns authentication data to the provider
-- provider stores the details in local storage, and grants access to dashboard
+- Provide your valid Auth0 credentials. The credentials are passed to titus-backend.
+- titus-backend validates them against Auth0 and returns authentication data to the provider.
+- The provider stores the details in local storage and grants access to dashboard.
 
 To enable it, do the following:
-1. Provide Auth0 details in the **titus-backend** `.env` file (`AUTH0_*` variables)
-1. Set `REACT_APP_AUTH_PROVIDER` to `TITUS` in the **titus-frontend** `.env` file
+1. Provide Auth0 details in the **titus-backend** `.env` file (`AUTH0_*` variables).
+1. Set `REACT_APP_AUTH_PROVIDER` to `TITUS` in the **titus-frontend** `.env` file.
 
 ### Auth0 Provider
 #### `key: AUTH0`
 
 If you have an Auth0 application configured, you can use [Auth0 Universal Login][auth0-login].
 In this situation:
-- click on the **Login Through Auth0** button
-- you are redirected to Auth0 login page
-- provide your credentials
-- you are redirected Titus login page, with authentication data in the URL
-- the provider stores the details in local storage and grants access to dashboard
+- Click on the **Login Through Auth0** button. You are redirected to Auth0 login page.
+- Provide your credentials. You are redirected Titus login page, with authentication data in the URL.
+- The provider stores the details in local storage and grants access to the dashboard.
 
 To enable it, do the following:
-1. Provide Auth0 details in the **titus-frontend** `.env` file (`REACT_APP_AUTH0_*` variables)
-1. In Auth0 configuration, make sure the app Login route (for example `http://localhost:3000/login`) is being allowed in both _Allowed Callback URLs_ and _Allowed Logout URLs_ lists.
-1. Set `REACT_APP_AUTH_PROVIDER` to `AUTH0` in the **titus-frontend** `.env` file
+1. Provide Auth0 details in the **titus-frontend** `.env` file (`REACT_APP_AUTH0_*` variables).
+1. In Auth0 configuration, make sure the app login route (for example, `http://localhost:3000/login`) is allowed in both _Allowed Callback URLs_ and _Allowed Logout URLs_ lists.
+1. Set `REACT_APP_AUTH_PROVIDER` to `AUTH0` in the **titus-frontend** `.env` file.
 
 ### AWS Amplify Provider
 #### `key: AWS`
 If you have a user and identity pools configured in AWS Cognito, you can use [AWS Amplify Authentication][aws-amplify-authentication].
-In this case, the entered username and password is validated against the specified user pool.
+In this case, the entered username and password are validated against the specified user pool.
 
 To enable it, do the following:
-1. Provide AWS details in the **titus-frontend** `.env` file (`REACT_APP_AWS_*` variables)
-1. Set `REACT_APP_AUTH_PROVIDER` to `AWS` in the **titus-frontend** `.env` file
+1. Provide AWS details in the **titus-frontend** `.env` file (`REACT_APP_AWS_*` variables).
+1. Set `REACT_APP_AUTH_PROVIDER` to `AWS` in the **titus-frontend** `.env` file.
 
 ### Azure Active Directory Provider
 #### `key: AD`
-Instead of showing the user a login form, this redirects them to the specified Azure Active Directory tenant to login. It will then redirect the user back to the React app which will confirm authentication via the localstorage values Azure stores in the web browser.
+This redirects the user to the specified Azure Active Directory tenant to login. It then redirects the user back to the React app which confirms authentication via the local storage values Azure stores in the web browser.
 
 To enable it, do the following:
-1. Provide Azure AD details in the **titus-frontend** `.env` file (`REACT_APP_AD_*` variables)
-1. Set `REACT_APP_AUTH_PROVIDER` to `AD` in the **titus-frontend** `.env` file
-3. Change the `render` method in `src/index.js` to the commented out replacement which wraps it in `runWithAdal`.
+1. Provide Azure AD details in the **titus-frontend** `.env` file (`REACT_APP_AD_*` variables).
+1. Set `REACT_APP_AUTH_PROVIDER` to `AD` in the **titus-frontend** `.env` file.
+3. Change the `render` method in `src/index.js` to the commented out replacement that wraps it in `runWithAdal`.
 
 ## Install the Frontend
 To install Titus frontend, run the following command:
@@ -98,27 +94,27 @@ npm install
 
 **Note:** The Titus frontend is automatically installed if you previously ran `npm install` at root level.
 
-## Developer workflow
-Unless you are integrating with an API, you _should_ be able to develop the front end in isolation.
-This decouples the front end from the back end.
+## Developer Workflow
+Unless you are integrating with an API, you _should_ be able to develop the frontend in isolation.
+This decouples the frontend from the backend.
 
-- Develop visual components for the application "Storybook-first"
-- This promotes a better structure for testing UI in isolation
-- For integration, create page container components that handle passing logic to visuals
+- Develop visual components for the application "Storybook-first".
+- This promotes a better structure for testing the UI in isolation.
+- For integration, create page container components that handle passing logic to visuals.
 
 ## Development with Storybook
-To develop the UI, you'll need to run the Storybook.
+To develop the UI, run Storybook as follows:
 ```
 npm run storybook
 ```
 
-### CSF
-Titus uses a newer version of Storybook that supports [CSF](https://storybook.js.org/docs/formats/component-story-format/). As of version 5.2, this is the recommended way to write your stories.
+### Component Story Format(CSF)
+Titus uses a version of Storybook(5.2) that supports [CSF](https://storybook.js.org/docs/formats/component-story-format/). We recommend you write your stories this way.
 
-### Component docs
-Titus makes use of [`@storybook/addon-docs`](https://www.npmjs.com/package/@storybook/addon-docs) for MDX powered documentation. This means documentation with embedded stories. However, to keep DRY, we write stories in JavaScript and then reference them within an MDX documentation file.
+### Component Docs
+Titus uses [`@storybook/addon-docs`](https://www.npmjs.com/package/@storybook/addon-docs) for MDX-powered documentation. This embeds documentation with stories. However, to keep DRY, we write stories in JavaScript and then reference them within an MDX documentation file.
 
-Consider this example where `loading.story.js` contains
+Consider the example below, where `loading.story.js` contains the following:
 ```
 import docs from './loading.mdx'
 export default {
@@ -133,7 +129,7 @@ export default {
 export const Default = () => <Loader/>
 ```
 
-And our docs look like this
+And our documents look like this:
 
 ```
 ## Loader
@@ -144,19 +140,19 @@ Loader component for project.
   <Story id='loader--default'/>
 </Preview>
 ```
-`Preview` and `Story` are component provided by the addon. We pass the `id` of the story to the `Story` component to show it. Alternatively, we could import the component and put that within a story too. But, the way we do this makes testing for visual regressions easier.
+The `Preview` and `Story` components are provided by the addon. We pass the `id` of the story to the `Story` component to show it. This makes visual regression testing easy. Alternatively, we could import the component and put that within a story too. 
 
-### Visually testing components
-We use [`@storybook/addon-storyshots`](https://www.npmjs.com/package/@storybook/addon-storyshots) for visually testing UI components. The great thing about this is that it's handled for you out of the box. Every component story has a screenshot generated for it at test. You don't need to write these tests. Storyshots will work out what needs to be screenshotted.
+### Visually Test Components
+We use [`@storybook/addon-storyshots`](https://www.npmjs.com/package/@storybook/addon-storyshots) to visually test UI components. It is handled for you out of the box. StoryShots generates a screenshot for every component story. You don't need to write these tests. StoryShots works out what screenshots it needs.
 
-If visual differences are found that go above a defined threshold, the test fails. You are then pointed towards a local file which will show you a visual diff for where a potential regression may have crept in.
+If StoryShot finds visual differences above a defined threshold, the test fails. A local file shows the visual differences where potential regressions may have crept in.
 
-Initial screenshots are created by running tests with the `update` flag using `npm run test -- -u`. Do be aware though that this will make all tests pass.
+You can create initial screenshots by running tests with the `update` flag using `npm run test -- -u`. **Note:** Be aware this makes all tests pass.
 
-### Behavioural testing components
-We use [`@storybook/addon-storyshots-puppeteer`](https://www.npmjs.com/package/@storybook/addon-storyshots-puppeteer) for testing component behavior. For example, "If I click this, does this happen?". Much like how we visually test components, we can do the same but with the addition of the Puppeteer API. This enables us to do things like, take a screenshot, click a button, take another screenshot. We are alerted of any visual differences where things might not have worked as expected.
+### Behavioural Test Components
+We use [`@storybook/addon-storyshots-puppeteer`](https://www.npmjs.com/package/@storybook/addon-storyshots-puppeteer) to test component behaviour. For example, "If I click this, does this happen?". It is similar to how we visually test components, but with the addition of the Puppeteer API. This enables us to do things like, take a screenshot, click a button and take another screenshot. We are alerted of any visual differences where things might not have worked as expected.
 
-Here's a test that tests validation messages appear when trying to log in with no credentials.
+Below is a test to check validation messages appear if logging in without credentials:
 ```
 export const Default = () => <LoginForm />
 Default.story = {
@@ -178,8 +174,8 @@ Default.story = {
 }
 ```
 
-### Testing locally
-The CI test procedure will build a static storybook to run tests against. But this will slow things down dramatically for you if working on front end components. To mitigate this, you can run tests against the locally running Storybook as you develop. Use `npm run test:local`.
+### Test Locally
+The CI test procedure builds a static Storybook to run tests against. This dramatically slows your progress if you are working on frontend components. To mitigate this, you can run tests against the locally running Storybook as you develop. Use `npm run test:local`.
 
 ## Run the Frontend Locally
 To run your application locally, perform the following steps:
@@ -205,19 +201,21 @@ To run your application locally, perform the following steps:
 ## Test and Lint the Frontend
 The following commands can be used to test and lint your application:
 
-* `npm test` - run all the tests with code coverage (it's the command CI is using).
-* `npm run test:watch` - start Jest in watch mode: run tests against the modified files (since last commit), and automatically runs them again if you change the code.
-* `npm run lint` - apply ESLint / Prettier on sources
-* `npm run lint:fix` - use ESLint / Prettier (with autofix flag)
-* `npm run lighthouse` - run [Lighthouse] locally with local Chrome and produce a report: `lighthouse-report.html`
-* `npm run storybook` - start [Storybook] locally so you can try out your components: browse http://localhost:9009
-* `npm run storybook:build` - make a static version of all your stories in the `storybook-static/` folder
+| Command | Description |
+| ---- | -------|
+| `npm test` | Run all the tests with code coverage (it's the command CI is using).|
+|`npm run test:watch` | Start Jest in watch mode: run tests against the modified files (since last commit), and automatically runs them again if you change the code.|
+| `npm run lint` | Apply ESLint / Prettier on sources.|
+| `npm run lint:fix` | Use ESLint / Prettier (with autofix flag).|
+| `npm run lighthouse` | Run [Lighthouse] locally with local Chrome and produce a report: `lighthouse-report.html`.|
+| `npm run storybook` | Start [Storybook] locally so you can try out your components: browse http://localhost:9009.|
+| `npm run storybook:build` | Make a static version of all your stories in the `storybook-static/` folder.|
 
 
 ## Build the Application
 
 The application runs locally with transpilation and hot reloading.
-But in production, your application is bundled and optimised, so you can host it as static files.
+In production, your application is bundled and optimised, so you can host it as static files.
 
 To package the application, use the following command:
 ```
