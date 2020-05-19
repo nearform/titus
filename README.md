@@ -16,7 +16,7 @@
 | DB Manager Deploy | [![deploy-db-manager][deploy-db-manager-badge]][deploy-db-manager-link] |
 | Storybook Deploy | [![deploy-storybook][deploy-storybook-badge]][deploy-storybook-link] |
 
-Titus is a production grade, end-to-end stack for modern web application development. It includes DevOps and authentication preconfigured. Titus is a reusable kit that deploys your application with minimum effort.
+Titus is a production grade, end-to-end stack for modern web application development. It includes DevOps and authentication preconfigured. Titus is a reusable set of packages that deploys your application with minimum effort.
 
 - To get the full picture, view our __[Documentation][docs]__
 

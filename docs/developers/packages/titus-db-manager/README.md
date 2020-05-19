@@ -1,51 +1,73 @@
-# Titus Database Manager Kit
+# Titus Database Manager Package
 ## Overview
-Titus Database manager is a starter [PostgreSQL] database.
+The Titus database manager is a starter PostgreSQL database.
 
-What you implement with Titus Database is your choice. We provide an working manager database.
+What you implement with Titus database is your choice. We provide an working manager database.
 We provide what is common in our projects.
 
 There is scope for you to add, customise and even replace plugins and features.
 
-### Organization
-Titus database manager is structured as follows:
+### Organisation
+The Titus database manager is structured as follows:
 
-* `src/index.js` - main entry points and runs the database actions
-* `docker/Dockerfile` - 
-* `migrate/` - contains the sql migration
-* `seed/` - 
-* `truncate/` - contains the action that truncate the database
+* `src/index.js` - main entry points and runs the database actions.
+* `docker/Dockerfile` - contains files to run the database a container.
+* `migrate/` - contains the sql migration.
+* `seed/` - contains files to seed the database.
+* `truncate/` - contains files to truncate the database.
 
-## Install packages
+## Install Packages
 To install Titus Database manager, run the following command:
 
 ```
 npm install
 ```
 
-**Note** The Titus backend is automatically installed if you previously ran `npm install` at root level.
+**Note:** The Titus backend is automatically installed if you previously ran `npm install` at root level.
 
-## Run the database manager
+## Run the Database Manager
 To run your application locally, perform the following steps:
+```sh
+npm run db:up
+```
 
-## Test and Lint the Database manager
+The command `docker ps` produces a log of the running set of containers, in our case, the PostgreSQL database. For example:
+
+```sh
+CONTAINER ID        IMAGE                         NAMES
+e553c840fbdc        postgres:10.4-alpine          titus-db
+```
+
+Use the command `docker volume ls` to list the volume created to handle Titus PostgreSQL data as follows:
+
+```sh
+DRIVER              VOLUME NAME
+local               titus_titus-pg-data
+
+```
+
+## Test and Lint the Database Manager
 Use the following commands to test and lint your application:
 
-* `npm test` - run all the tests with code coverage (this is the command CI uses)
-* `npm run test:watch` - start Jest in watch mode: it runs tests against the modified files (since last commit), and automatically runs them again if you change the code.
-* `npm run lint` - apply ESLint / Prettier on sources
-* `npm run lint:fix` - use ESLint / Prettier (with the autofix flag)
+| Command | Description |
+| ----------- | ----------- |
+|`npm test` | Run all the tests with code coverage. This is the command CI uses, |
+|`npm run test:watch` | Start Jest in watch mode. It runs tests against the modified files (since last commit), and automatically runs them again if you change the code.|
+|`npm run lint` | Apply ESLint / Prettier on sources.|
+|`npm run lint:fix`| Use ESLint / Prettier (with the autofix flag).|
+
 
 ## Manage the Database
-The following commands can be used with your Titus database:
+Use the following commands with your Titus database:
 
-* `npm run db:up` - Builds, (re)creates, starts, and attaches to containers for a service
-* `npm run db:down` - Stops containers and removes containers, networks, volumes, and images created by up
-* `npm run db:delete` - Remove volume. You cannot remove a volume that is in use by a container
-* `npm run db:migrate` - apply database migration scripts from `tools/migrations/build` with [postgrator]
-* `npm run db:seed` - seed the database with dev data from `tools/migrations/seed_dev` with [postgrator]
-* `npm run db:truncate` - apply SQL truncate scripts with `psql` CLI against your database
-
+| Command | Description |
+| ----------- | ----------- |
+|`npm run db:up` | Build, (re)create, start, and attach to containers for a service.|
+|`npm run db:down` | Stop containers and remove containers, networks, volumes, and images.|
+|`npm run db:delete` | Remove volume. You cannot remove a volume that is in use by a container. |
+|`npm run db:migrate` | Apply database migration scripts from `tools/migrations/build` with [postgrator].|
+|`npm run db:seed` | Seed the database with dev data from `tools/migrations/seed_dev` with [postgrator].|
+|`npm run db:truncate` | Apply SQL truncate scripts with `psql` CLI against your database.|
 
 
 

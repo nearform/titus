@@ -2,10 +2,10 @@
 
 Titus is easy to install and run. We encourage developers to install Titus locally themselves - it is easy to navigate, start and stop. Before starting, let's ensure you have all of the prerequisites installed.
 
-You need the latest stable versions of [Node], and [Docker]. Both of these are straightforward to install and do not require any special setup. There are other tools to install for deployment purposes, these are described in the [DevOps] section of this documentation.
+You need the latest stable versions of [Node] and [Docker]. Both of these are straightforward to install and do not require any special setup. There are other tools to install for deployment purposes, these are described in the [DevOps] section of this documentation.
 
 ## Clone the Source Repository
-To start, fork [Titus] on Github. It is easier to maintain your own fork as Titus is designed to diverge. It is unlikely you will need to pull from the source repository again.
+To start, fork [Titus] on GitHub. It is easier to maintain your own fork as Titus is designed to diverge. It is unlikely you will need to pull from the source repository again.
 
 Once you have your fork, clone a copy of it locally:
 
@@ -35,65 +35,26 @@ You can read more about configuring the environment in the [Developers][Develope
 
 ## Bring up the Database
 
-Database can run as stand-alone container or as http server.
+You can run the database as a stand-alone container or as a HTTP server. 
 
-### Stand-alone
+For more information on how to manage the database, refer to [Manage the Database] in the Developer section of this documentation.
+
+### Run the Database as a Stand-alone Container
 To spin up the database run the command:
 
 ```sh
 npm run db:up
 ```
 
-The command `docker ps` produces a log of the running set of containers, in our case, the Postgres database. For example:
 
-```sh
-CONTAINER ID        IMAGE                         NAMES
-e553c840fbdc        postgres:10.4-alpine          titus-db
-```
+### Run the Database as a HTTP Server
 
-Running `docker volume ls` we can check a volume was also created to handle Titus Postgres data:
-
-```sh
-DRIVER              VOLUME NAME
-local               titus_titus-pg-data
-```
-
-Included with Titus is the functionality for migrating and seeding databases. To see this in action you can run:
-
-```
-npm run db:migrate
-```
-
-```
-npm run db:seed
-```
-
-Should you wish to truncate the database of all data this can be done with the following command:
-
-```
-npm run db:truncate
-```
-
-To spin down the database run:
-
-```
-npm run db:down
-```
-
-and to delete the data volume run:
-
-```
-npm run db:delete
-```
-
-### Run database as http server
-
-You can start a separate http database server with the command
+You can start a separate HTTP database server with the command:
 ```sh
 npm run db:server:start
 ```
 
-However, if you want to use as fastify plugin you can use this stub
+However, if you want to use a Fastify plugin you can use this stub:
 
 ```js
 const titusDbManager = require('../titus-db-manager/lib/plugin')
@@ -104,9 +65,9 @@ server.register(titusDbManager)
 
 #### Routes
 
-- `POST /db/truncate` will run the truncate action
-- `POST /db/seed` will run the seed action
-- `POST /db/migrate` will run the migrations
+- `POST /db/truncate` runs the truncate action
+- `POST /db/seed` runs the seed action
+- `POST /db/migrate` runs the migrations
 
 ## Run the Stack
 Titus runs your application locally, leveraging Docker for external services such as a database.
@@ -132,7 +93,7 @@ The application is accessed at `localhost:3000` in a web browser. First access r
 ![x](../img/titus-login.png)
 Fig1. Titus Login Page
 
-Enter a username and password. A minimum of 4 characters (including at least one letter or one number) is required for the password. On successful log in, the home page for Titus is displayed:
+Enter a username and password. A minimum of 4 characters (including at least one letter or one number) is required for the password. On successful login, the home page for Titus is displayed:
 
 ![x](../img/titus-home-page.png)
 Fig.2 Titus Home Page
@@ -144,11 +105,13 @@ The home page links you to the documentation (here), if you did not start from t
 ### Manipulate the Running Stack
 A number of useful commands for manipulating the running Docker stack are included with Titus as easy to run scripts. Use the command format `npm run <command>` in the root directory of the repository. For example:
 
-- `npm run docker:dev:create-volume` - runs `docker volume create` to create a data volume with name `titus-pg-data`
-- `npm run docker:dev:logs` - runs `docker-compose logs` and passes `-f` so they auto-tail
-- `npm run docker:dev:rmi` - runs `docker-compose down` but passes ` --rmi all` to tear down postgres fully
-- `npm run docker:dev:start` - first, runs `docker:dev:create-volume` to create a data volume, then `docker-compose up -d --build` to start Postgres locally in Docker
-- `npm run docker:dev:stop` - Runs `docker-compose down` to spin down the running Postgres
+| Command | Description|
+| ----------- | ----------- |
+|`npm run docker:dev:create-volume` | Runs `docker volume create` to create a data volume with name `titus-pg-data`.|
+|`npm run docker:dev:logs` | Runs `docker-compose logs` and passes `-f` so they auto-tail.|
+|`npm run docker:dev:rmi` | Runs `docker-compose down` but passes ` --rmi all` to tear down PostgreSQL fully.|
+|`npm run docker:dev:start` | First, runs `docker:dev:create-volume` to create a data volume, then `docker-compose up -d --build` to start PostgreSQL locally in Docker.|
+| `npm run docker:dev:stop` | Runs `docker-compose down` to spin down the running PostgreSQL.|
 
 For example, to tear down the system, spin it back up and tail the logs, the commands are:
 
@@ -176,14 +139,14 @@ To lint and test across the stack, use the command format `npm run <command>` in
 - `npm run lint:all`- Runs the `lint` command in each package that has one
 - `npm run test:all`- Runs the `test` command in each package that has one
 
-Both frontend and backend starter kits have linting and testing built in and run green in both cases by default. If any changes break the included rules, the starter kit runs red.
+Both frontend and backend starter packages have linting and testing built in and run green in both cases by default. If any changes break the included rules, the starter package runs red.
 
 ## Next Step
 If you would like more information, select the documentation most relevant to you:
 
 - Deep dive into our documentation for [Developers].
 - See our detailed [DevOps] documentation.
-- Frontend quick start [guide](developers/packages/titus-frontend/?id=quick-start).
+- [Frontend Quick Start](developers/packages/titus-frontend/?id=quick-start).
 
 <!-- External Links -->
 [Docker]: https://docs.docker.com/install/#supported-platforms
@@ -196,4 +159,5 @@ If you would like more information, select the documentation most relevant to yo
 <!-- Internal Links -->
 [DevOps]: devops/
 [Developers]: developers/
-[DevelopersBe]: developers/?id=backend-kit
+[Manage the Database]: developers/packages/titus-db-manager/?id=manage-the-database
+[DevelopersBe]: developers/?id=backend-package
