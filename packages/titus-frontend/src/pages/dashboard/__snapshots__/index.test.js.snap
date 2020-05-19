@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DashboardContainer /> renders without crashing 1`] = `
+<DocumentFragment>
+  <button
+    class="logout button"
+  >
+    logout
+  </button>
+  <select
+    class="language-selector"
+  >
+    <option
+      value="en"
+    >
+      English
+    </option>
+    <option
+      value="ro"
+    >
+      Românā
+    </option>
+    <option
+      value="sr"
+    >
+      Српски
+    </option>
+    <option
+      value="pt"
+    >
+      Português
+    </option>
+  </select>
+  <img
+    alt="Titus logo"
+    class="login-logo"
+    src="img/Accel_Logo_Titus.svg"
+  />
+  <p>
+    description
+  </p>
+  <a
+    href="https://nf-titus.netlify.com/"
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    docs
+  </a>
+</DocumentFragment>
+`;
