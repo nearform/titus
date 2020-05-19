@@ -4,7 +4,7 @@
 Code contributions are accepted back to Titus, please make an issue to discuss your change first.
 
 # Documentation
-We welcome documentation contributions. Our documentation can be viewed live at [nearform.github.io/titus][docs]
+We welcome documentation contributions. Our documentation can be viewed live at [https://nf-titus.netlify.app/#/][docs].
 
 ## Run the Documentation Locally
 Our documentation is run by serving the docs folder at a given port.
@@ -27,7 +27,7 @@ Listening at http://localhost:4000
 The documentation is served on `localhost:4000`.
 
 ### Serve in Other Ways
-Our documentation builds on the fly. All you need to do is serve the docs folder. Any program or cli tool used for serving a folder works - __as long as it can handle hash routing__.
+Our documentation builds on the fly. All you need to do is serve the docs folder. Any program or CLI tool used for serving a folder works - __as long as it can handle hash routing__.
 
 Another popular module to serve files is `serve` on npm. To run, with hash router support, enter the command:
 
@@ -49,5 +49,5 @@ This displays the following:
 ```
 
 The documentation is served on `localhost:4000` in this case.
-
-[docs]:https://nearform.github.io/titus
+<!--- [docs]:nearform.github.io/titus --->
+[docs]:https://nf-titus.netlify.app/#/
