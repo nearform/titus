@@ -5,7 +5,7 @@ const fp = require('fastify-plugin')
 async function secrets(server, options) {
   server.register(require('fastify-gcp-secret-manager'), {
     ...options.secretManager,
-    mode: options.isProduction ? 'production' : 'development',
+    mode: options.isProduction ? 'gcp' : 'local',
     developmentSecrets: options.developmentSecrets
   })
 }

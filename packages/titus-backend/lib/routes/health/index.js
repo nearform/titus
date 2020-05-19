@@ -40,7 +40,6 @@ async function health(server, options) {
         // swallow error
         log.debug({ err }, `failed to read DB during health check`)
       }
-      console.log(server.secrets)
       return {
         version,
         serverTimestamp: new Date(),

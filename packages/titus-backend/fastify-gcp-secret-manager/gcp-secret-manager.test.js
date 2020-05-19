@@ -2,9 +2,6 @@
 
 describe('fastify-gcp-secret-manager', () => {
   let server
-
-  beforeAll(async () => {})
-
   beforeEach(async () => {
     jest.resetModules()
     server = require('fastify')()
@@ -19,7 +16,7 @@ describe('fastify-gcp-secret-manager', () => {
 
   it('should read secrets from options.developmentSecrets in dev mode', async () => {
     server.register(require('.'), {
-      mode: 'development',
+      mode: 'local',
       test: 'I am a test secret',
       developmentSecrets: {
         test: 'I am a test secret for development'
@@ -34,10 +31,6 @@ describe('fastify-gcp-secret-manager', () => {
   })
 
   it('should read secrets from options in production mode', async () => {
-    process.env = {
-      NODE_ENV: 'production'
-    }
-
     jest.mock('@google-cloud/secret-manager', () => ({
       SecretManagerServiceClient: jest.fn().mockImplementation(() => ({
         accessSecretVersion: jest
@@ -47,6 +40,7 @@ describe('fastify-gcp-secret-manager', () => {
     }))
 
     server.register(require('.'), {
+      mode: 'gcp',
       test: 'projects/494141678371/secrets/test/versions/latest'
     })
 
@@ -58,10 +52,6 @@ describe('fastify-gcp-secret-manager', () => {
   })
 
   it('should throw error when secret is not found in production mode', async () => {
-    process.env = {
-      NODE_ENV: 'production'
-    }
-
     jest.mock('@google-cloud/secret-manager', () => ({
       SecretManagerServiceClient: jest.fn().mockImplementation(() => ({
         accessSecretVersion: jest.fn().mockReturnValue(new Error('not found'))
@@ -69,6 +59,7 @@ describe('fastify-gcp-secret-manager', () => {
     }))
 
     server.register(require('.'), {
+      mode: 'gcp',
       test: 'secret'
     })
 
@@ -78,12 +69,8 @@ describe('fastify-gcp-secret-manager', () => {
   })
 
   it('should not register gcp-secret-manager plugin twice', async () => {
-    process.env = {
-      NODE_ENV: 'development'
-    }
-
-    server.register(require('.'))
-    server.register(require('.'))
+    server.register(require('.'), { mode: 'gcp' })
+    server.register(require('.'), { mode: 'gcp' })
 
     await server.listen(5003, err => {
       expect(err.message).toEqual(

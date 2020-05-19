@@ -6,6 +6,7 @@ describe('gcp-secret-manager plugin', () => {
   beforeAll(async () => {
     server = require('fastify')()
     server.register(require('.'), {
+      mode: 'local',
       secretManager: { test: '123' },
       developmentSecrets: { test: '123' }
     })

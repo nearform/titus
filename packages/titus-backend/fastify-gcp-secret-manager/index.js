@@ -8,19 +8,17 @@ const gcpSecretManager = require('./gcp-secret-manager')
 async function fastifyGCPSecretManager(fastify, opts) {
   opts = opts || {}
 
-  const { mode = 'production', ...restOptions } = opts
+  const { mode = 'gcp', ...restOptions } = opts
 
   switch (mode) {
-    case 'production':
+    case 'gcp':
       await gcpSecretManager(fastify, restOptions)
       break
-    case 'development':
+    case 'local':
       await fastify.register(fastifySecretsEnv, restOptions)
       break
     default:
-      throw new Error(
-        "unsupported mode, should be one of ['production', 'development']"
-      )
+      throw new Error("unsupported mode, should be one of ['gcp', 'local']")
   }
 }
 
