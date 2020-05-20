@@ -38,8 +38,8 @@ Make sure to get a `:thumbsup:`, `+1` or `LGTM` from another collaborator before
 
 ## Licensing and Certification
 
-While the Titus project as a whole is distributed under the GPL 3.0
-license, all contributions to the Clinic.js project are submitted *to* the
+While the Titus project as a whole is distributed under the Apache-2.0
+license, all contributions to the Titus project are submitted *to* the
 project under the MIT license. This gives the project maintainers flexibility
 while ensuring that your rights to your contributions do not change.
 
