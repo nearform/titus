@@ -108,7 +108,7 @@ To lint and test across the stack, use the command format `npm run <command>` in
 
 Both frontend and backend starter packages have linting and testing built in and run green in both cases by default. If any changes break the included rules, the starter package runs red.
 
-## Next Step
+## Next Steps
 If you would like more information, select the documentation most relevant to you:
 
 - Deep dive into our documentation for [Developers].
