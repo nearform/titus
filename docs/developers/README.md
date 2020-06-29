@@ -34,7 +34,7 @@ All packages we provide include:
 ### Frontend Package
 The frontend, __titus-frontend__, is a minimal app built on [create-react-app] and [react-router].
 
-We include [yup] for form validation, which powers the included auth components. React components are tested with [Enzyme].
+We include [yup] for form validation, which powers the included auth components. React components are tested with [Testing Library][testing-library].
 Because it runs with [webpack-dev-server], it supports hot rebuilding.
 
 The Titus frontend package consists of the following:
@@ -42,7 +42,7 @@ The Titus frontend package consists of the following:
 * React application with [create-react-app]
 * Route management with [react-router]
 * Login component (with optional Auth0 support)
-* [Jest] and [Enzyme] test tools
+* [Jest] and [Testing Library][testing-library] test tools
 * [ESLint] code linter
 * [Prettier] code format with [Standard] preset
 
@@ -119,7 +119,6 @@ Refer to [Configure Authentication] for more details.
 [react-router]: https://reacttraining.com/react-router/web
 [yup]: https://github.com/jquense/yup#readme
 [Jest]: https://jestjs.io
-[Enzyme]: https://airbnb.io/enzyme
 [ESLint]: https://eslint.org
 [Prettier]: https://prettier.io
 [Hapi]: https://hapijs.com
@@ -140,3 +139,4 @@ Refer to [Configure Authentication] for more details.
 [Standard]: https://standardjs.com/
 [config]: https://12factor.net/config
 [Swagger]: https://swagger.io/
+[testing-library]: https://testing-library.com/docs/react-testing-library/intro
