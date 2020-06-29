@@ -1,5 +1,5 @@
 {
-  "logout": "LOGOUT",
+  "logout": "Logout",
   "login": "Login",
   "withAuth0": "with Auth0",
   "description": "Develop and Deploy to features quickly using Titus, an Accelerated Development & Deployment Stack. Titus is production ready and can be deployed to all major cloud providers.",
@@ -8,8 +8,7 @@
   "password": "Password",
   "newPassword": "New Password",
   "header": {
-    "memory":
-      "Note: Any username followed by a password with at least four characters containing at least one letter and number will work.",
+    "memory": "Note: Any username followed by a password with at least four characters containing at least one letter and number will work.",
     "aws": "Please provide AWS Cognito account details:",
     "azure": "Powered by Azure AD",
     "titus": "Please provide Auth0 account details:"
@@ -25,8 +24,7 @@
       "password": "Password is required."
     },
     "regex": {
-      "password":
-        "Password must be at least 4 characters long and contain at least one letter and one number."
+      "password": "Password must be at least 4 characters long and contain at least one letter and one number."
     }
   },
   "errors": {
