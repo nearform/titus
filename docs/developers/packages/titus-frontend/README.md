@@ -110,7 +110,7 @@ npm run storybook
 ```
 
 ### Component Story Format(CSF)
-Titus uses a version of Storybook(5.2) that supports [CSF](https://storybook.js.org/docs/formats/component-story-format/). We recommend you write your stories this way.
+Titus uses a version of Storybook(5.3) that supports [CSF](https://storybook.js.org/docs/formats/component-story-format/). We recommend you write your stories this way.
 
 ### Component Docs
 Titus uses [`@storybook/addon-docs`](https://www.npmjs.com/package/@storybook/addon-docs) for MDX-powered documentation. This embeds documentation with stories. However, to keep DRY, we write stories in JavaScript and then reference them within an MDX documentation file.
