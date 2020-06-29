@@ -46,6 +46,7 @@ To spin up the database run the command:
 npm run db:up
 ```
 
+ You can check the `docker-compose.yml` file in the root of the repository for specifics of what is running in Docker.
 
 ### Run the Database as a HTTP Server
 
@@ -83,9 +84,7 @@ npm run start:all
 
 Frontend and backend logs are output to the console if you run the stack with the command above.
 
-
-
-Congratulations! You are now running Titus locally. You can check the `docker-compose.yml` file in the root of the repository for specifics of what is running in Docker.
+Congratulations! You are now running Titus locally.
 
 ### Log In
 The application is accessed at `localhost:3000` in a web browser. First access requires you to log in to the system:
@@ -102,38 +101,6 @@ The home page links you to the documentation (here), if you did not start from t
 
 **Note:** You can log out of the system from the home page.
 
-### Manipulate the Running Stack
-A number of useful commands for manipulating the running Docker stack are included with Titus as easy to run scripts. Use the command format `npm run <command>` in the root directory of the repository. For example:
-
-| Command | Description|
-| ----------- | ----------- |
-|`npm run docker:dev:create-volume` | Runs `docker volume create` to create a data volume with name `titus-pg-data`.|
-|`npm run docker:dev:logs` | Runs `docker-compose logs` and passes `-f` so they auto-tail.|
-|`npm run docker:dev:rmi` | Runs `docker-compose down` but passes ` --rmi all` to tear down PostgreSQL fully.|
-|`npm run docker:dev:start` | First, runs `docker:dev:create-volume` to create a data volume, then `docker-compose up -d --build` to start PostgreSQL locally in Docker.|
-| `npm run docker:dev:stop` | Runs `docker-compose down` to spin down the running PostgreSQL.|
-
-For example, to tear down the system, spin it back up and tail the logs, the commands are:
-
-```sh
-npm run docker:dev:rmi
-npm run start:all
-npm run docker:dev:logs
-```
-
-### Stop the Stack
-You can stop the stack with the command:
-
-```sh
-npm run stop:all
-```
-
-This command stops the system, but does not delete the stack containers or volumes. To delete the containers and volumes, run the command:
-
-```sh
-npm run docker:dev:rmi
-```
-
 ### Lint and Test
 To lint and test across the stack, use the command format `npm run <command>` in the root directory of the repository. For example:
 - `npm run lint:all`- Runs the `lint` command in each package that has one
@@ -141,7 +108,7 @@ To lint and test across the stack, use the command format `npm run <command>` in
 
 Both frontend and backend starter packages have linting and testing built in and run green in both cases by default. If any changes break the included rules, the starter package runs red.
 
-## Next Step
+## Next Steps
 If you would like more information, select the documentation most relevant to you:
 
 - Deep dive into our documentation for [Developers].
