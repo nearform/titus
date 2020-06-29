@@ -21,7 +21,7 @@
     "lint:staged": "lerna run lint:staged",
     "postinstall": "lerna bootstrap",
     "start:all": "lerna run --parallel start",
-    "start:docs": "docsify serve ./docs",
+    "start:docs": "docsify serve ./docs --port 4000",
     "test": "jest --config .jest.json --coverage",
     "test:all": "npm run test && lerna run --parallel test",
     "test:related": "lerna run test:related"
