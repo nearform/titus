@@ -46,6 +46,7 @@ To spin up the database run the command:
 npm run db:up
 ```
 
+ You can check the `docker-compose.yml` file in the root of the repository for specifics of what is running in Docker.
 
 ### Run the Database as a HTTP Server
 
@@ -85,7 +86,7 @@ Frontend and backend logs are output to the console if you run the stack with th
 
 
 
-Congratulations! You are now running Titus locally. You can check the `docker-compose.yml` file in the root of the repository for specifics of what is running in Docker.
+Congratulations! You are now running Titus locally.
 
 ### Log In
 The application is accessed at `localhost:3000` in a web browser. First access requires you to log in to the system:
