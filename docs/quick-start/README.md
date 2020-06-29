@@ -84,8 +84,6 @@ npm run start:all
 
 Frontend and backend logs are output to the console if you run the stack with the command above.
 
-
-
 Congratulations! You are now running Titus locally.
 
 ### Log In
