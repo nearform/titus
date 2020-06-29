@@ -20,14 +20,14 @@ There is scope for you to add, customise or even replace features.
 Titus frontend is structured as follows:
 
 * `build/` - your bundled application for production use.
-* `public/` - static assets, including index.html, icons and images.
+* `lighthouse/` - runs Google's [Lighthouse] to evaluate your application performance and accessibility.
 * `src/index.js` - main entry points and loads your React application and service worker.
 * `src/app.js` - your application root, load application wide providers here.
 * `src/router.js` - application routing powered by [react-router].
 * `src/serviceWorker.js` - service worker (from [CRA]) that turns your application into a Progressive Web Application.
 * `src/components/` - a set of components to implement a login form, an authentication context and various authentication providers.
 * `src/page/` - a set of page components asynchronously loaded when declaring routes.
-* `lighthouse/` - runs Google's [Lighthouse] to evaluate your application performance and accessibility.
+* `public/` - static assets, including index.html, icons and images.
 
 ## Configure Authentication
 Titus supports a variety of authentication providers. By default, it fallbacks to an 'in-memory' provider. This makes no server requests.
