@@ -10,7 +10,7 @@
 
 | Workflow Name | Badge |
 | ---- | ----- |
-| Linking, Testing, Building | [![lint-test-build][lint-test-build-badge]][lint-test-build-link] |
+| Linting, Testing, Building | [![lint-test-build][lint-test-build-badge]][lint-test-build-link] |
 | Frontend Deploy | [![deploy-frontend][deploy-frontend-badge]][deploy-frontend-link] |
 | Backend Deploy | [![deploy-backend][deploy-backend-badge]][deploy-backend-link] |
 | DB Manager Deploy | [![deploy-db-manager][deploy-db-manager-badge]][deploy-db-manager-link] |
