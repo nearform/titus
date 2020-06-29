@@ -41,16 +41,10 @@ The quickest way to get exploring is to view our Quick Start Guide. It covers fo
 
 
 <!-- External Links -->
-[CircleCI]: https://circleci.com/product/#features
 [Storybook]: https://storybook.js.org/
-[Terraform]: https://www.terraform.io/
 [Docker]: https://docs.docker.com/install/#supported-platforms
 [Node]: https://nodejs.org/en/
 [npm]: https://www.npmjs.com/get-npm
-[AWS]: https://aws.amazon.com/
-[Azure]: https://azure.microsoft.com
-[Azure Pipelines]: https://azure.microsoft.com/en-us/services/devops/pipelines/
-[GCP]: https://cloud.google.com/
 
 <!-- Internal Links -->
 [Quick Start Guide]: quick-start/
@@ -58,6 +52,4 @@ The quickest way to get exploring is to view our Quick Start Guide. It covers fo
 <!-- Images -->
 [logo]: img/Accel_Logo_Titus.svg
 [titus-feature-overview]: img/titus-feature-overview.svg
-[titus-deployment-workflow]: img/titus-deployment-workflow.svg
 [titus-ci-pipeline]: img/titus-ci-pipeline.svg
-[titus-pipeline]: img/titus-pipeline.svg
