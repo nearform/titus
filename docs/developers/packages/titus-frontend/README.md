@@ -22,7 +22,8 @@ Titus frontend is structured as follows:
 * `build/` - your bundled application for production use.
 * `public/` - static assets, including index.html, icons and images.
 * `src/index.js` - main entry points and loads your React application and service worker.
-* `src/app.js` - your application, load styles and routes (powered by [react-router]).
+* `src/app.js` - your application root, load application wide providers here.
+* `src/router.js` - application routing powered by [react-router].
 * `src/serviceWorker.js` - service worker (from [CRA]) that turns your application into a Progressive Web Application.
 * `src/components/` - a set of components to implement a login form, an authentication context and various authentication providers.
 * `src/page/` - a set of page components asynchronously loaded when declaring routes.
@@ -36,22 +37,22 @@ To define which authentication provider is active, set the `REACT_APP_AUTH_PROVI
 ### In-memory Authentication Provider
 #### `key: MEM`
 
-By default, titus-frontend does not use a real authentication provider.
+By default, `titus-frontend` does not use a real authentication provider.
 `src/components/auth-provider/in-memory/` allows almost any combination of username and password, and there's no server roundtrip.
 
-Once logged in, a token is stored in the local storage and it grants access to the protected dashboard.
+Once logged in, a token is stored in the local storage and it grants access to the protected UI.
 
 ### Titus-backend Provider
 #### `key: TITUS`
-If you have an Auth0 application configured, you can use the titus-backend login endpoint to authenticate users.
+If you have an Auth0 application configured, you can use the `titus-backend` login endpoint to authenticate users.
 In this case, authentication is performed as follows:
-- Provide your valid Auth0 credentials. The credentials are passed to titus-backend.
-- titus-backend validates them against Auth0 and returns authentication data to the provider.
+- Provide your valid Auth0 credentials. The credentials are passed to `titus-backend`.
+- `titus-backend` validates them against Auth0 and returns authentication data to the provider.
 - The provider stores the details in local storage and grants access to dashboard.
 
 To enable it, do the following:
-1. Provide Auth0 details in the **titus-backend** `.env` file (`AUTH0_*` variables).
-1. Set `REACT_APP_AUTH_PROVIDER` to `TITUS` in the **titus-frontend** `.env` file.
+1. Provide Auth0 details in the **`titus-backend`** `.env` file (`AUTH0_*` variables).
+1. Set `REACT_APP_AUTH_PROVIDER` to `TITUS` in the **`titus-frontend`** `.env` file.
 
 ### Auth0 Provider
 #### `key: AUTH0`
@@ -63,9 +64,9 @@ In this situation:
 - The provider stores the details in local storage and grants access to the dashboard.
 
 To enable it, do the following:
-1. Provide Auth0 details in the **titus-frontend** `.env` file (`REACT_APP_AUTH0_*` variables).
+1. Provide Auth0 details in the **`titus-frontend`** `.env` file (`REACT_APP_AUTH0_*` variables).
 1. In Auth0 configuration, make sure the app login route (for example, `http://localhost:3000/login`) is allowed in both _Allowed Callback URLs_ and _Allowed Logout URLs_ lists.
-1. Set `REACT_APP_AUTH_PROVIDER` to `AUTH0` in the **titus-frontend** `.env` file.
+1. Set `REACT_APP_AUTH_PROVIDER` to `AUTH0` in the **`titus-frontend`** `.env` file.
 
 ### AWS Amplify Provider
 #### `key: AWS`
@@ -73,16 +74,16 @@ If you have a user and identity pools configured in AWS Cognito, you can use [AW
 In this case, the entered username and password are validated against the specified user pool.
 
 To enable it, do the following:
-1. Provide AWS details in the **titus-frontend** `.env` file (`REACT_APP_AWS_*` variables).
-1. Set `REACT_APP_AUTH_PROVIDER` to `AWS` in the **titus-frontend** `.env` file.
+1. Provide AWS details in the **`titus-frontend`** `.env` file (`REACT_APP_AWS_*` variables).
+1. Set `REACT_APP_AUTH_PROVIDER` to `AWS` in the **`titus-frontend`** `.env` file.
 
 ### Azure Active Directory Provider
 #### `key: AD`
 This redirects the user to the specified Azure Active Directory tenant to login. It then redirects the user back to the React app which confirms authentication via the local storage values Azure stores in the web browser.
 
 To enable it, do the following:
-1. Provide Azure AD details in the **titus-frontend** `.env` file (`REACT_APP_AD_*` variables).
-1. Set `REACT_APP_AUTH_PROVIDER` to `AD` in the **titus-frontend** `.env` file.
+1. Provide Azure AD details in the **`titus-frontend`** `.env` file (`REACT_APP_AD_*` variables).
+1. Set `REACT_APP_AUTH_PROVIDER` to `AD` in the **`titus-frontend`** `.env` file.
 3. Change the `render` method in `src/index.js` to the commented out replacement that wraps it in `runWithAdal`.
 
 ## Install the Frontend
