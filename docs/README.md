@@ -44,7 +44,6 @@ The quickest way to get exploring is to view our Quick Start Guide. It covers fo
 [CircleCI]: https://circleci.com/product/#features
 [Storybook]: https://storybook.js.org/
 [Terraform]: https://www.terraform.io/
-[Kubernetes]:  https://kubernetes.io/
 [Docker]: https://docs.docker.com/install/#supported-platforms
 [Node]: https://nodejs.org/en/
 [npm]: https://www.npmjs.com/get-npm
