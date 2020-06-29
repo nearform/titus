@@ -139,3 +139,4 @@ cognito.adminGetUser(params, (err, response) => {
 [custom attribute]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-attributes.html#user-pool-settings-custom-attributes
 [validation instructions]: https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html
 [Titus Database Manager]: /developers/packages/titus-db-manager/
+[node-postgres] https://node-postgres.com/

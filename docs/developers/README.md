@@ -9,7 +9,7 @@ With Titus we ensure the developer experience is accelerated and enhanced. Titus
 
 - Including commands for linting, testing, running and stopping your application. Commands to support local manipulation, spinning up and tearing down of the system are also included and documented.
 
-- Including a complete CI solution that builds assets, lints and runs tests, produces production ready containers, and supports deployment via Helm.
+- Including a complete CI solution that builds assets, lints and runs tests and produces production ready containers.
 
 - Letting you select technologies, such as CSS frameworks or data management libraries, of your own choice. Titus is lean and opinionated enough to be reusable and reduce complexity.
 
@@ -59,11 +59,11 @@ We also provide a plugin to instrument your routes with a [node-postgres] toolki
 
 The Titus backend package consists of the following:
 
-* Fastify HTTP server
+* [Fastify] HTTP server
 * [Pino] logger (comes with Fastify)
 * Automatic restart and hot reloading with [Nodemon]
 * [12-Factor App recommendation][config] and reads configuration from environment variables
-* PostgreSQL plugin with transaction control at route level
+* [PostgreSQL plugin][node-postgres] with transaction control at route level
 * Sample source structure for organising Fastify routes and plugin
 * [Jest], [nock] and [faker] test tools
 * [ESLint] code linter
@@ -101,7 +101,7 @@ Titus comes preconfigured with a database and an authentication service, the min
 Production parity is about reducing the gap between development and production and not compromising on development tools.
 Titus packages run as node.js applications on your OS. This plays better with Lerna's symlinks and [webpack-dev-server].
 
-As we use Dockerfile to bundle the packages, it's also possible run them locally using Docker Compose (or Minikube) if you wish.
+As we use Dockerfile to bundle the packages, it's also possible to run them locally using Docker Compose (or Minikube) if you wish.
 
 ### Authentication Service
 Logging in is usually the first feature you want to see when you run your application. Titus is preconfigured with the Auth0 authentication service.
@@ -140,3 +140,4 @@ Refer to [Configure Authentication] for more details.
 [config]: https://12factor.net/config
 [Swagger]: https://swagger.io/
 [testing-library]: https://testing-library.com/docs/react-testing-library/intro
+[PostgreSQL]: https://www.postgresql.org/
