@@ -2,8 +2,15 @@
 
 exports[`<DashboardContainer /> renders without crashing 1`] = `
 <DocumentFragment>
+  <label
+    class="hidden"
+    for="language"
+  >
+    language:
+  </label>
   <select
     class="language-selector"
+    id="language"
   >
     <option
       value="en"

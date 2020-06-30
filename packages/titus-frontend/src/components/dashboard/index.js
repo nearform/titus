@@ -14,7 +14,14 @@ const Dashboard = ({ logout }) => {
 
   return (
     <Fragment>
-      <select className="language-selector" onChange={onLanguageChange}>
+      <label className="hidden" htmlFor="language">
+        {t('language')}:
+      </label>
+      <select
+        id="language"
+        className="language-selector"
+        onChange={onLanguageChange}
+      >
         {LANGUAGES.map(lng => (
           <option
             key={lng.code}

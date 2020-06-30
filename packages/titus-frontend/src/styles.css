@@ -181,3 +181,7 @@ label {
   background-color: transparent;
   border: 1px solid lightgray;
 }
+
+.hidden {
+  visibility: hidden;
+}
