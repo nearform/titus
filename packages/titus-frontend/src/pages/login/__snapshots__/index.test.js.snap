@@ -11,12 +11,8 @@ exports[`<Login /> renders without crashing 1`] = `
     novalidate=""
   >
     <header />
-    <label
-      for="username"
-    >
-      Username:
-    </label>
     <input
+      aria-label="Username:"
       id="username"
       name="username"
       placeholder="Username"
@@ -24,12 +20,8 @@ exports[`<Login /> renders without crashing 1`] = `
       type="text"
       value=""
     />
-    <label
-      for="password"
-    >
-      Password:
-    </label>
     <input
+      aria-label="Password:"
       id="password"
       name="password"
       placeholder="Password"

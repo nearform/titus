@@ -2,13 +2,8 @@
 
 exports[`<DashboardContainer /> renders without crashing 1`] = `
 <DocumentFragment>
-  <label
-    class="hidden"
-    for="language"
-  >
-    language:
-  </label>
   <select
+    aria-label="language:"
     class="language-selector"
     id="language"
   >

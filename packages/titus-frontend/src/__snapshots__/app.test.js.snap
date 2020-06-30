@@ -28,12 +28,8 @@ exports[`<App /> should render correctly when path is /login and is authenticate
       <header>
         Note: Any username followed by a password with at least four characters containing at least one letter and number will work.
       </header>
-      <label
-        for="username"
-      >
-        Username:
-      </label>
       <input
+        aria-label="Username:"
         id="username"
         name="username"
         placeholder="Username"
@@ -41,12 +37,8 @@ exports[`<App /> should render correctly when path is /login and is authenticate
         type="text"
         value=""
       />
-      <label
-        for="password"
-      >
-        Password:
-      </label>
       <input
+        aria-label="Password:"
         id="password"
         name="password"
         placeholder="Password"
@@ -82,12 +74,8 @@ exports[`<App /> should render correctly when path is /login and is not authenti
       <header>
         Note: Any username followed by a password with at least four characters containing at least one letter and number will work.
       </header>
-      <label
-        for="username"
-      >
-        Username:
-      </label>
       <input
+        aria-label="Username:"
         id="username"
         name="username"
         placeholder="Username"
@@ -95,12 +83,8 @@ exports[`<App /> should render correctly when path is /login and is not authenti
         type="text"
         value=""
       />
-      <label
-        for="password"
-      >
-        Password:
-      </label>
       <input
+        aria-label="Password:"
         id="password"
         name="password"
         placeholder="Password"
