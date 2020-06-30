@@ -27,10 +27,10 @@
     "test:related": "lerna run test:related"
   },
   "devDependencies": {
-    "docsify-cli": "^4.4.0",
+    "docsify-cli": "^4.4.1",
     "husky": "^4.2.5",
-    "jest": "^26.0.1",
-    "lerna": "^3.21.0"
+    "jest": "^26.1.0",
+    "lerna": "^3.22.1"
   },
   "husky": {
     "hooks": {
