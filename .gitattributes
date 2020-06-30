@@ -3,3 +3,6 @@
 
 # Require Unix line endings
 * text eol=lf
+
+# Ensure line endings aren't modified for snapshots
+*.png binary
