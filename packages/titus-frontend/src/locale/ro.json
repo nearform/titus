@@ -7,6 +7,7 @@
   "username": "Nume utilizator",
   "password": "Parola",
   "newPassword": "Parola noua",
+  "language": "Limba",
   "header": {
     "memory": "Nota: Orice nume de utilizator urmat de o parola de cel putin patru caractere, cu cel putin o litera si un numar, va functiona.",
     "aws": "Vă rugăm să furnizați detaliile contului AWS Cognito:",

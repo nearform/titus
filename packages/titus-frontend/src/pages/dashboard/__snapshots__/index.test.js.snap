@@ -2,35 +2,32 @@
 
 exports[`<DashboardContainer /> renders without crashing 1`] = `
 <DocumentFragment>
+  <select
+    aria-label="language:"
+    class="language-selector"
+    id="language"
+  >
+    <option
+      value="en"
+    >
+      English 🇬🇧
+    </option>
+    <option
+      value="ro"
+    >
+      Românā 🇷🇴
+    </option>
+    <option
+      value="pt"
+    >
+      Português 🇵🇹
+    </option>
+  </select>
   <button
     class="logout button"
   >
     logout
   </button>
-  <select
-    class="language-selector"
-  >
-    <option
-      value="en"
-    >
-      English
-    </option>
-    <option
-      value="ro"
-    >
-      Românā
-    </option>
-    <option
-      value="sr"
-    >
-      Српски
-    </option>
-    <option
-      value="pt"
-    >
-      Português
-    </option>
-  </select>
   <img
     alt="Titus logo"
     class="login-logo"

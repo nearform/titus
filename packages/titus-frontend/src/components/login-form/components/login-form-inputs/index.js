@@ -8,9 +8,18 @@ const LoginFormInputs = ({ allowChangePassword, isSubmitting, loginError }) => {
 
   return (
     <Fragment>
-      <Field type="text" name="username" placeholder={t('username')} required />
+      <Field
+        type="text"
+        id="username"
+        aria-label={`${t('username')}:`}
+        name="username"
+        placeholder={t('username')}
+        required
+      />
       <ErrorMessage name="username" className="login__error" component="div" />
       <Field
+        id="password"
+        aria-label={`${t('password')}:`}
         type="password"
         name="password"
         placeholder={t('password')}
@@ -19,12 +28,16 @@ const LoginFormInputs = ({ allowChangePassword, isSubmitting, loginError }) => {
       {allowChangePassword &&
       loginError &&
       /Temporary password/.test(loginError) ? (
-        <Field
-          type="password"
-          name="newPassword"
-          placeholder={t('newPassword')}
-          required
-        />
+        <>
+          <Field
+            id="newPassword"
+            aria-label={`${t('newPassword')}:`}
+            type="password"
+            name="newPassword"
+            placeholder={t('newPassword')}
+            required
+          />
+        </>
       ) : null}
       <ErrorMessage name="password" className="login__error" component="div" />
       {loginError &&

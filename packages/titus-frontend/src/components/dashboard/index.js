@@ -14,20 +14,25 @@ const Dashboard = ({ logout }) => {
 
   return (
     <Fragment>
-      <button className="logout button" onClick={logout}>
-        {t('logout')}
-      </button>
-      <select className="language-selector" onChange={onLanguageChange}>
+      <select
+        id="language"
+        aria-label={`${t('language')}:`}
+        className="language-selector"
+        onChange={onLanguageChange}
+      >
         {LANGUAGES.map(lng => (
           <option
             key={lng.code}
             value={lng.code}
-            selected={lng.code === language ? 'selected' : null}
+            defaultValue={lng.code === language ? 'selected' : null}
           >
-            {lng.name}
+            {lng.name} {lng.flag}
           </option>
         ))}
       </select>
+      <button className="logout button" onClick={logout}>
+        {t('logout')}
+      </button>
       <Logo />
       <p>{t('description')}</p>
       <a

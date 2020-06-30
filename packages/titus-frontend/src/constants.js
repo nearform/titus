@@ -1,19 +1,18 @@
 export const LANGUAGES = [
   {
     code: 'en',
-    name: 'English'
+    name: 'English',
+    flag: '🇬🇧'
   },
   {
     code: 'ro',
-    name: 'Românā'
-  },
-  {
-    code: 'sr',
-    name: 'Српски'
+    name: 'Românā',
+    flag: '🇷🇴'
   },
   {
     code: 'pt',
-    name: 'Português'
+    name: 'Português',
+    flag: '🇵🇹'
   }
 ]
 
