@@ -10,7 +10,7 @@
 
 | Workflow Name | Badge |
 | ---- | ----- |
-| Linting, Testing, Building | [![lint-test-build][lint-test-build-badge]][lint-test-build-link] |
+| Frontend CI | [![frontend-ci][frontend-ci-badge]][frontend-ci] |
 | Frontend Deploy | [![deploy-frontend][deploy-frontend-badge]][deploy-frontend-link] |
 | Backend Deploy | [![deploy-backend][deploy-backend-badge]][deploy-backend-link] |
 | DB Manager Deploy | [![deploy-db-manager][deploy-db-manager-badge]][deploy-db-manager-link] |
@@ -23,8 +23,8 @@ Titus is a production grade, end-to-end stack for modern web application develop
 [lerna-link]: https://lernajs.io/
 [lerna-badge]: https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg
 
-[lint-test-build-link]: https://github.com/nearform/titus/actions?query=workflow%3A%22Linting%2C+Testing+%26+Building%22
-[lint-test-build-badge]: https://github.com/nearform/titus/workflows/Linting,%20Testing%20&%20Building/badge.svg
+[frontend-ci]: https://github.com/nearform/titus/actions?query=workflow%3A%22Frontend+CI%22
+[frontend-ci-badge]: https://github.com/nearform/titus/workflows/Frontend%20CI/badge.svg
 
 [deploy-frontend-link]: https://github.com/nearform/titus/actions?query=workflow%3A%22Deploy+titus-frontend+to+GCP%22
 [deploy-frontend-badge]: https://github.com/nearform/titus/workflows/Deploy%20titus-frontend%20to%20GCP/badge.svg
