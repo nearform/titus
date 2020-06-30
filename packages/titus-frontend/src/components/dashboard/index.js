@@ -14,11 +14,9 @@ const Dashboard = ({ logout }) => {
 
   return (
     <Fragment>
-      <label className="hidden" htmlFor="language">
-        {t('language')}:
-      </label>
       <select
         id="language"
+        aria-label={`${t('language')}:`}
         className="language-selector"
         onChange={onLanguageChange}
       >
