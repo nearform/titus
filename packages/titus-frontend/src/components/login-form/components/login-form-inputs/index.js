@@ -8,8 +8,10 @@ const LoginFormInputs = ({ allowChangePassword, isSubmitting, loginError }) => {
 
   return (
     <Fragment>
+      <label htmlFor="username">{t('username')}:</label>
       <Field type="text" name="username" placeholder={t('username')} required />
       <ErrorMessage name="username" className="login__error" component="div" />
+      <label htmlFor="password">{t('password')}:</label>
       <Field
         type="password"
         name="password"

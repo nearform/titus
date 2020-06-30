@@ -11,6 +11,11 @@ exports[`<Login /> renders without crashing 1`] = `
     novalidate=""
   >
     <header />
+    <label
+      for="username"
+    >
+      Username:
+    </label>
     <input
       name="username"
       placeholder="Username"
@@ -18,6 +23,11 @@ exports[`<Login /> renders without crashing 1`] = `
       type="text"
       value=""
     />
+    <label
+      for="password"
+    >
+      Password:
+    </label>
     <input
       name="password"
       placeholder="Password"

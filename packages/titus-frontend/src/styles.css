@@ -41,10 +41,6 @@ a:hover {
   color: var(--midnightBlue);
 }
 
-form {
-  width: 340px;
-}
-
 img {
   max-width: 100%;
 }
@@ -77,6 +73,7 @@ input {
   font-size: 1rem;
   height: 2.5rem;
   line-height: 2.5rem;
+  margin-top: 0.5rem;
   margin-bottom: 1rem;
   text-align: center;
   width: 100%;
@@ -96,6 +93,18 @@ h1 {
   margin-bottom: 1rem;
 }
 
+p,
+header {
+  line-height: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.025rem;
+}
+
+label {
+  font-weight: 600;
+}
+
 #story-root {
   display: flex;
   justify-content: center;
@@ -113,7 +122,8 @@ h1 {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  width: 500px;
+  max-width: 500px;
+  padding: 0 1rem;
 }
 
 .logout {
@@ -170,5 +180,4 @@ h1 {
   top: 18px;
   background-color: transparent;
   border: 1px solid lightgray;
-  outline: none;
 }
