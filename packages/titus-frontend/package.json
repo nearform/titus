@@ -52,6 +52,7 @@
     "@storybook/addon-storyshots": "^5.3.19",
     "@storybook/addon-storyshots-puppeteer": "^5.3.19",
     "@storybook/addons": "^5.3.19",
+    "@storybook/preset-create-react-app": "^3.1.2",
     "@storybook/react": "^5.3.19",
     "@testing-library/react": "^10.4.3",
     "babel-loader": "^8.1.0",
