@@ -82,9 +82,6 @@ ol > li::before {
   }
 }
 
-@media (min-width: 501px) {
-}
-
 .content {
   margin-top: 90px;
 }
