@@ -17,11 +17,12 @@ exports[`<App /> should render correctly when path is /login and is authenticate
   <div
     class="container"
   >
-    <img
+    <svg
       alt="Titus logo"
       class="login-logo"
-      src="img/Accel_Logo_Titus.svg"
-    />
+    >
+      Accel_Logo_Titus.svg
+    </svg>
     <form
       novalidate=""
     >
@@ -63,11 +64,12 @@ exports[`<App /> should render correctly when path is /login and is not authenti
   <div
     class="container"
   >
-    <img
+    <svg
       alt="Titus logo"
       class="login-logo"
-      src="img/Accel_Logo_Titus.svg"
-    />
+    >
+      Accel_Logo_Titus.svg
+    </svg>
     <form
       novalidate=""
     >

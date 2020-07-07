@@ -28,11 +28,12 @@ exports[`<DashboardContainer /> renders without crashing 1`] = `
   >
     logout
   </button>
-  <img
+  <svg
     alt="Titus logo"
     class="login-logo"
-    src="img/Accel_Logo_Titus.svg"
-  />
+  >
+    Accel_Logo_Titus.svg
+  </svg>
   <p>
     description
   </p>
