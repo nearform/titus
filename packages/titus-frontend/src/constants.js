@@ -30,6 +30,6 @@ export const AUTH_PROVIDERS = {
 }
 
 export const MATCH_OPTIONS = {
-  failureThreshold: process.env.CI === 'true' ? 0.08 : 0.015, // Equates to 8% on CI, 1.5% local
+  failureThreshold: 0.015, // Equates to 8% on CI, 1.5% local
   failureThresholdType: 'percent'
 }
