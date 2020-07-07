@@ -29,6 +29,24 @@ Default.story = {
       // Snapshot that a required message should show
       const requiredFields = await page.screenshot()
       expect(requiredFields).toMatchImageSnapshot(MATCH_OPTIONS)
+
+      // Set a username with an invalid password
+      await page.focus('#username')
+      await page.keyboard.type('Foo')
+      await page.focus('#password')
+      await page.keyboard.type('Bar')
+      await button.click()
+      const invalidPassword = await page.screenshot()
+      expect(invalidPassword).toMatchImageSnapshot(MATCH_OPTIONS)
+
+      // Set a valid password
+      await page.focus('#password')
+      await page.keyboard.type('Bar4')
+      await button.click()
+      // Snapshot will just be an empty form as LoginForm
+      // isn't wrapped in routes, pages etc
+      const validPassword = await page.screenshot()
+      expect(validPassword).toMatchImageSnapshot(MATCH_OPTIONS)
     }
   }
 }
