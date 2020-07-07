@@ -3,7 +3,7 @@ import { imageSnapshot } from '@storybook/addon-storyshots-puppeteer'
 
 const getMatchOptions = ({ context: { kind, story }, url }) => {
   return {
-    failureThreshold: 0.2,
+    failureThreshold: 0.01,
     failureThresholdType: 'percent'
   }
 }
