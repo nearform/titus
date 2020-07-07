@@ -1,12 +1,8 @@
 import initStoryshots from '@storybook/addon-storyshots'
 import { imageSnapshot } from '@storybook/addon-storyshots-puppeteer'
+import { MATCH_OPTIONS } from './constants'
 
-const getMatchOptions = ({ context: { kind, story }, url }) => {
-  return {
-    failureThreshold: 0.01,
-    failureThresholdType: 'percent'
-  }
-}
+const getMatchOptions = () => MATCH_OPTIONS
 
 initStoryshots({
   suite: 'Image storyshots',
