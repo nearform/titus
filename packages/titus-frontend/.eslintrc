@@ -1,11 +1,16 @@
 {
-  "extends": ["react-app", "plugin:prettier/recommended"],
-  "plugins": ["prettier"],
+  "extends": [
+    "react-app",
+    "plugin:prettier/recommended",
+    "plugin:jsx-a11y/recommended"
+  ],
+  "plugins": ["prettier", "jsx-a11y"],
   "env": {
     "es6": true,
     "browser": true
   },
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "jsx-a11y/no-onchange": "warn"
   }
 }
