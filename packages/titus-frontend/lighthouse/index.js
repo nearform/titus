@@ -7,7 +7,7 @@ const fs = require('fs')
 const PORT = 3001
 
 const server = http.createServer((request, response) => {
-  return handler(request, response, { public: 'build', renderSingl: true })
+  return handler(request, response, { public: 'build', renderSingle: true })
 })
 
 function launchChromeAndRunLighthouse(url, opts, config = null) {
