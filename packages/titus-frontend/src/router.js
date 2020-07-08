@@ -4,6 +4,7 @@ import { Route, Router, Redirect, Switch } from 'react-router-dom'
 import history from './history'
 import Layout from './components/layout'
 import Loading from './components/loading'
+import ErrorBoundary from './components/error-boundary'
 import { AuthContext } from './components/authentication/authentication-context'
 import { ROUTES } from './constants'
 
@@ -37,17 +38,22 @@ PrivateRoute.propTypes = {
 const AppRouter = () => {
   return (
     <Layout>
-      <Suspense fallback={<Loading />}>
-        <Router history={history}>
-          <Switch>
-            <Route path={ROUTES.LOGIN}>
-              <AsyncLogin />
-            </Route>
-            {/* INSERT NEW ROUTES HERE */}
-            <PrivateRoute path={ROUTES.DASHBOARD} component={AsyncDashboard} />
-          </Switch>
-        </Router>
-      </Suspense>
+      <ErrorBoundary>
+        <Suspense fallback={<Loading />}>
+          <Router history={history}>
+            <Switch>
+              <Route path={ROUTES.LOGIN}>
+                <AsyncLogin />
+              </Route>
+              {/* INSERT NEW ROUTES HERE */}
+              <PrivateRoute
+                path={ROUTES.DASHBOARD}
+                component={AsyncDashboard}
+              />
+            </Switch>
+          </Router>
+        </Suspense>
+      </ErrorBoundary>
     </Layout>
   )
 }

@@ -29,6 +29,7 @@
     }
   },
   "errors": {
-    "tempPassword": "Te rugam sa introduci parola ta temporara si o noua parola"
+    "tempPassword": "Te rugam sa introduci parola ta temporara si o noua parola",
+    "loadingFailed": "Încărcarea a eșuat. Vă rugăm să reîncărcați"
   }
 }
