@@ -29,6 +29,7 @@
     }
   },
   "errors": {
-    "tempPassword": "Por favor indique a sua senha temporaria e uma senha nova."
+    "tempPassword": "Por favor indique a sua senha temporaria e uma senha nova.",
+    "loadingFailed": "Falha no carregamento. Por favor recarregue"
   }
 }

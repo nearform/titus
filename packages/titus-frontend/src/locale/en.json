@@ -29,6 +29,7 @@
     }
   },
   "errors": {
-    "tempPassword": "Please enter your temporary password and a new password"
+    "tempPassword": "Please enter your temporary password and a new password",
+    "loadingFailed": "Loading failed. Please reload"
   }
 }
