@@ -14,7 +14,7 @@ const Dashboard = ({ logout }) => {
 
   return (
     <Fragment>
-      <select
+      <select // eslint-disable-line jsx-a11y/no-onchange
         id="language"
         aria-label={`${t('language')}:`}
         className="language-selector"

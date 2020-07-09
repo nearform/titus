@@ -10,7 +10,6 @@
     "browser": true
   },
   "rules": {
-    "prettier/prettier": "error",
-    "jsx-a11y/no-onchange": "warn"
+    "prettier/prettier": "error"
   }
 }
