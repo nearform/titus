@@ -1,8 +1,8 @@
 'use strict'
 
+const path = require('path')
 const envSchema = require('env-schema')
 const S = require('fluent-schema')
-const path = require('path')
 
 const config = envSchema({
   dotenv: { path: path.join(__dirname, '..', '.env') },

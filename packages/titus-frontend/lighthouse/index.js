@@ -1,8 +1,8 @@
+const http = require('http')
+const fs = require('fs')
 const lighthouse = require('lighthouse')
 const chromeLauncher = require('chrome-launcher')
 const handler = require('serve-handler')
-const http = require('http')
-const fs = require('fs')
 
 const PORT = 3001
 
