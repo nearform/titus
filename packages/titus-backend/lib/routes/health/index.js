@@ -1,6 +1,7 @@
 'use strict'
 
 const fp = require('fastify-plugin')
+
 const { version } = require('../../../package')
 async function health(server, options) {
   server.register(require('under-pressure'), options.underPressure).route({

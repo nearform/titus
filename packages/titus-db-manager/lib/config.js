@@ -1,6 +1,7 @@
 'use strict'
 
 const path = require('path')
+
 const envSchema = require('env-schema')
 const S = require('fluent-schema')
 

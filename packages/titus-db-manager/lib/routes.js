@@ -1,15 +1,16 @@
 'use strict'
 
 const path = require('path')
+
 const { Client } = require('pg')
 const Postgrator = require('postgrator')
-
 const fp = require('fastify-plugin')
+
 const Seed = require('../seed')
 const Migrate = require('../migrate')
 const Truncate = require('../truncate')
-
 const { version } = require('../package')
+
 const config = require('./config')
 async function dbRoutes(server) {
   server.route({

@@ -9,6 +9,11 @@
   },
   "rules": {
     "prettier/prettier": "error",
-    "import/order": "error"
+    "import/order": [
+      "error",
+      {
+        "newlines-between": "always"
+      }
+    ]
   }
 }

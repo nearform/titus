@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+
 import { AuthProvider, AuthConsumer } from './authentication-context'
 
 export const Auth = ({ children, ...rest }) => (

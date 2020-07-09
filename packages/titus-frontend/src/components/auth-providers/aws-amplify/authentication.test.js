@@ -1,4 +1,5 @@
 import Auth from '@aws-amplify/auth'
+
 import Authentication from './index'
 
 jest.mock('@aws-amplify/auth', () => ({
