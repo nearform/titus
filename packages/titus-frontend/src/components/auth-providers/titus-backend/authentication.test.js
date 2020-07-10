@@ -6,39 +6,34 @@ describe('titus-backend auth provider', () => {
   const id_token = 'id_token'
 
   it('should trigger login correctly', async () => {
-    const oldFetch = fetch
-    try {
-      fetch = jest.fn().mockImplementation((url, options) => {
-        return {
-          ok: true,
-          json: () => {
-            return {
-              access_token,
-              id_token,
-              expires_in: 1000
-            }
+    global.fetch = jest.fn().mockImplementation((url, options) => {
+      return {
+        ok: true,
+        json: () => {
+          return {
+            access_token,
+            id_token,
+            expires_in: 1000
           }
         }
-      })
-      const res = await authentication.login({
-        username: 'test',
-        password: 'test'
-      })
-      expect(res).toStrictEqual({ username: 'test' })
-      expect(fetch).toHaveBeenCalledTimes(1)
-      expect(fetch).toHaveBeenCalledWith('/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: 'test', password: 'test' })
-      })
-      expect(localStorage.getItem('access_token')).toBe(access_token)
-      expect(localStorage.getItem('id_token')).toBe(id_token)
-      expect(parseInt(localStorage.getItem('expires_at'))).toBeGreaterThan(
-        900 * 1000 + new Date().getTime()
-      )
-    } finally {
-      fetch = oldFetch
-    }
+      }
+    })
+    const res = await authentication.login({
+      username: 'test',
+      password: 'test'
+    })
+    expect(res).toStrictEqual({ username: 'test' })
+    expect(global.fetch).toHaveBeenCalledTimes(1)
+    expect(global.fetch).toHaveBeenCalledWith('/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: 'test', password: 'test' })
+    })
+    expect(localStorage.getItem('access_token')).toBe(access_token)
+    expect(localStorage.getItem('id_token')).toBe(id_token)
+    expect(parseInt(localStorage.getItem('expires_at'))).toBeGreaterThan(
+      900 * 1000 + new Date().getTime()
+    )
   })
 
   it('should trigger logout correctly', async () => {
