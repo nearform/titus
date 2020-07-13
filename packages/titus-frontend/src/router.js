@@ -1,6 +1,7 @@
 import T from 'prop-types'
 import React, { useContext, lazy, Suspense } from 'react'
 import { Route, Router, Redirect, Switch } from 'react-router-dom'
+
 import history from './history'
 import Layout from './components/layout'
 import Loading from './components/loading'

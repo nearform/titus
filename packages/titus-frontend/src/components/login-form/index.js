@@ -4,6 +4,7 @@ import { Formik } from 'formik'
 
 import { loginFormSchema } from '../auth-providers/utils'
 import Logo from '../logo'
+
 import LoginFormInputs from './components/login-form-inputs'
 
 const LoginForm = ({

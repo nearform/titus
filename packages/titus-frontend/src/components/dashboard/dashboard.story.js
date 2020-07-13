@@ -1,6 +1,9 @@
 import React from 'react'
-import docs from './dashboard.mdx'
+
 import Layout from '../layout'
+
+import docs from './dashboard.mdx'
+
 import Dashboard from './'
 
 export default {

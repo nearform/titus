@@ -1,6 +1,7 @@
 'use strict'
 
 const path = require('path')
+
 const autoLoad = require('fastify-autoload')
 const cors = require('fastify-cors')
 const fp = require('fastify-plugin')

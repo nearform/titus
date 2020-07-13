@@ -1,8 +1,11 @@
 import React from 'react'
+
 import Layout from '../layout'
-import docs from './login-form.mdx'
-import LoginForm from './'
 import { MATCH_OPTIONS } from '../../constants'
+
+import docs from './login-form.mdx'
+
+import LoginForm from './'
 
 export default {
   title: 'Login Form',

@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { AuthProvider } from './components/authentication/authentication-context'
 import AppRouter from './router'
 import './styles.css'

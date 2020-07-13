@@ -1,6 +1,7 @@
 'use strict'
 
 const querystring = require('querystring')
+
 const fp = require('fastify-plugin')
 const jwkToPem = require('jwk-to-pem')
 const jws = require('jws')
