@@ -58,7 +58,7 @@ jobs:
       - name: Lighthouse check
         working-directory: packages/titus-frontend
         run: |
-          npm install -g @lhci/cli@0.3.x
+          npm install -g @lhci/cli@0.4.x
           lhci autorun \
             --upload.target=temporary-public-storage \
             --upload.githubAppToken=$LHCI_GITHUB_APP_TOKEN || echo "LHCI failed!"
