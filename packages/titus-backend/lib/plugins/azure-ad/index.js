@@ -87,10 +87,10 @@ async function azureAD(server, options) {
     const {
       headers: { authorization = '' },
       method,
-      originalUrl
+      url
     } = req.raw
     const authRoute = authRoutes.find(
-      r => r.method === method && r.regex.test(originalUrl)
+      r => r.method === method && r.regex.test(url)
     )
     if (!authRoute) {
       return true
