@@ -37,5 +37,6 @@
       "pre-commit": "npm run lint:staged && npm run test:related",
       "pre-push": "npm run lint:all && npm run test"
     }
-  }
+  },
+  "dependencies": {}
 }

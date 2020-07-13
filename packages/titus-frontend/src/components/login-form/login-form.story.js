@@ -2,7 +2,6 @@ import React from 'react'
 import Layout from '../layout'
 import docs from './login-form.mdx'
 import LoginForm from './'
-import { MATCH_OPTIONS } from '../../constants'
 
 export default {
   title: 'Login Form',
@@ -15,23 +14,7 @@ export default {
 }
 
 export const Default = () => <LoginForm />
-Default.story = {
-  parameters: {
-    // Can attach these tests to all the stories
-    // via the default export.
-    async puppeteerTest(page) {
-      // Default Login Form
-      const image = await page.screenshot()
-      expect(image).toMatchImageSnapshot(MATCH_OPTIONS)
-      // Grab the submit button and hit it
-      const button = await page.$('[type="submit"]')
-      await button.click()
-      // Snapshot that a required message should show
-      const requiredFields = await page.screenshot()
-      expect(requiredFields).toMatchImageSnapshot(MATCH_OPTIONS)
-    }
-  }
-}
+
 export const CustomHeader = () => (
   <LoginForm header="Log in using the details provided to you by email" />
 )
