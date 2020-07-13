@@ -9,7 +9,7 @@ jobs:
   integration-checks:
     name: 'Linting, Testing, Building'
     runs-on: ubuntu-latest
-    
+
     env:
       CI: true
       LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
@@ -60,7 +60,6 @@ jobs:
         run: |
           npm install -g @lhci/cli@0.3.x
           lhci autorun \
-            --collect.staticDistDir=./build \
             --upload.target=temporary-public-storage \
             --upload.githubAppToken=$LHCI_GITHUB_APP_TOKEN || echo "LHCI failed!"
 
