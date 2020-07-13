@@ -10,6 +10,12 @@
     "browser": true
   },
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "import/order": [
+      "error",
+      {
+        "newlines-between": "always"
+      }
+    ]
   }
 }

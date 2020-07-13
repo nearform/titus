@@ -1,5 +1,6 @@
 const { Client } = require('pg')
 const Postgrator = require('postgrator')
+
 const buildServer = require('./build-server')
 
 jest.mock('pg', () => {
