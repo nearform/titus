@@ -20,9 +20,10 @@ jobs:
 
     steps:
       - name: Checking out code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
         with:
           fetch-depth: 1
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Install Linux dependencies
         run: |
