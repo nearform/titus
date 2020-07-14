@@ -1,9 +1,7 @@
 import T from 'prop-types'
-import React, { useContext, lazy, Suspense } from 'react'
+import React, { useContext, lazy } from 'react'
 import { Route, Router, Redirect, Switch } from 'react-router-dom'
 import history from './history'
-import Layout from './components/layout'
-import Loading from './components/loading'
 import { AuthContext } from './components/authentication/authentication-context'
 import { ROUTES } from './constants'
 
@@ -34,22 +32,16 @@ PrivateRoute.propTypes = {
   component: T.oneOfType([T.object, T.func])
 }
 
-const AppRouter = () => {
-  return (
-    <Layout>
-      <Suspense fallback={<Loading />}>
-        <Router history={history}>
-          <Switch>
-            <Route path={ROUTES.LOGIN}>
-              <AsyncLogin />
-            </Route>
-            {/* INSERT NEW ROUTES HERE */}
-            <PrivateRoute path={ROUTES.DASHBOARD} component={AsyncDashboard} />
-          </Switch>
-        </Router>
-      </Suspense>
-    </Layout>
-  )
-}
+const AppRouter = () => (
+  <Router history={history}>
+    <Switch>
+      <Route path={ROUTES.LOGIN}>
+        <AsyncLogin />
+      </Route>
+      {/* INSERT NEW ROUTES HERE */}
+      <PrivateRoute path={ROUTES.DASHBOARD} component={AsyncDashboard} />
+    </Switch>
+  </Router>
+)
 
 export default AppRouter

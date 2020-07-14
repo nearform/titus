@@ -1,20 +1,22 @@
 import React from 'react'
 import {
   render,
+  renderWithRouter,
   cleanup,
   waitFor,
   waitForElementToBeRemoved,
   fireEvent
-} from '@testing-library/react'
-import App from '../../app'
+} from '../../test-utils'
 import Login from './index'
 
 describe('<Login />', () => {
   afterEach(cleanup)
 
   it('renders without crashing', () => {
-    const { asFragment } = render(<Login />)
-    expect(asFragment()).toMatchSnapshot()
+    const { getByLabelText, getByText } = render(<Login />)
+    expect(getByLabelText(/username/i))
+    expect(getByLabelText(/password/i))
+    expect(getByText(/login/i))
   })
 
   it('shows required field errors', async () => {
@@ -22,8 +24,8 @@ describe('<Login />', () => {
 
     fireEvent.click(getByText(/login/i))
     await waitFor(() => {
-      expect(getByText(/username is required/i))
-      expect(getByText(/password is required/i))
+      expect(getByText(/username is required/i)).toBeInTheDocument()
+      expect(getByText(/password is required/i)).toBeInTheDocument()
     })
   })
 
@@ -43,8 +45,10 @@ describe('<Login />', () => {
   })
 
   it('Login is successful', async () => {
-    // Rendering at the app level so that we can see the route change
-    const { getByText, getByLabelText, queryByText } = render(<App />)
+    // Render with routing to detect url change
+    const { getByText, getByLabelText, queryByText } = renderWithRouter(
+      <Login />
+    )
     await waitFor(() => {
       getByText(/login/i)
     })

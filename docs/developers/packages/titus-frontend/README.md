@@ -143,41 +143,6 @@ Loader component for project.
 ```
 The `Preview` and `Story` components are provided by the addon. We pass the `id` of the story to the `Story` component to show it. This makes visual regression testing easy. Alternatively, we could import the component and put that within a story too. 
 
-### Visually Test Components
-We use [`@storybook/addon-storyshots`](https://www.npmjs.com/package/@storybook/addon-storyshots) to visually test UI components. It is handled for you out of the box. StoryShots generates a screenshot for every component story. You don't need to write these tests. StoryShots works out what screenshots it needs.
-
-If StoryShot finds visual differences above a defined threshold, the test fails. A local file shows the visual differences where potential regressions may have crept in.
-
-You can create initial screenshots by running tests with the `update` flag using `npm run test -- -u`. **Note:** Be aware this makes all tests pass.
-
-### Behavioural Test Components
-We use [`@storybook/addon-storyshots-puppeteer`](https://www.npmjs.com/package/@storybook/addon-storyshots-puppeteer) to test component behaviour. For example, "If I click this, does this happen?". It is similar to how we visually test components, but with the addition of the Puppeteer API. This enables us to do things like, take a screenshot, click a button and take another screenshot. We are alerted of any visual differences where things might not have worked as expected.
-
-Below is a test to check validation messages appear if logging in without credentials:
-```
-export const Default = () => <LoginForm />
-Default.story = {
-  parameters: {
-    // Can attach these tests to all the stories
-    // via the default export.
-    async puppeteerTest(page) {
-      // Default Login Form
-      const image = await page.screenshot()
-      expect(image).toMatchImageSnapshot()
-      // Grab the submit button and hit it
-      const button = await page.$('[type="submit"]')
-      button.click()
-      // Snapshot that a required message should show
-      const requiredFields = await page.screenshot()
-      expect(requiredFields).toMatchImageSnapshot()
-    }
-  }
-}
-```
-
-### Test Locally
-The CI test procedure builds a static Storybook to run tests against. This dramatically slows your progress if you are working on frontend components. To mitigate this, you can run tests against the locally running Storybook as you develop. Use `npm run test:local`.
-
 ## Run the Frontend Locally
 To run your application locally, perform the following steps:
 
@@ -212,6 +177,13 @@ The following commands can be used to test and lint your application:
 | `npm run storybook` | Start [Storybook] locally so you can try out your components: browse http://localhost:9009.|
 | `npm run storybook:build` | Make a static version of all your stories in the `storybook-static/` folder.|
 
+### Unit testing
+
+We use Jest for unit testing. These use the `packages/titus-frontend/src/setupTests.js` for setup. Some examples can be found in `packages/titus-frontend/src/components/auth-providers` 
+
+### Integration testing
+
+We using React Testing Library to test for integration testing. These use the `packages/titus-frontend/src/test-utils.js` for setup and to provide helpers for i18n, auth and routing.
 
 ## Build the Application
 
