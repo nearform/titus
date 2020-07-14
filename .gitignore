@@ -15,7 +15,6 @@ yarn-error.log*
 yarn.lock
 
 lerna-debug.log
-lighthouse-report.html
 
 .vscode
 .env
