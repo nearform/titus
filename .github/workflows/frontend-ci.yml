@@ -9,7 +9,7 @@ jobs:
   integration-checks:
     name: 'Linting, Testing, Building'
     runs-on: ubuntu-latest
-    
+
     env:
       CI: true
       LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
@@ -20,9 +20,10 @@ jobs:
 
     steps:
       - name: Checking out code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
         with:
           fetch-depth: 1
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Install Linux dependencies
         run: |
@@ -58,9 +59,8 @@ jobs:
       - name: Lighthouse check
         working-directory: packages/titus-frontend
         run: |
-          npm install -g @lhci/cli@0.3.x
+          npm install -g @lhci/cli@0.4.x
           lhci autorun \
-            --collect.staticDistDir=./build \
             --upload.target=temporary-public-storage \
             --upload.githubAppToken=$LHCI_GITHUB_APP_TOKEN || echo "LHCI failed!"
 
