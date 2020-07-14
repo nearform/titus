@@ -37,7 +37,6 @@ export const AuthConsumer = AuthContext.Consumer
 export const AuthProvider = ({ provider, children }) => {
   const { t } = useTranslation()
 
-  // TODO:: Generate a new auth based off env variables here
   const authentication = provider || getProvider(t)
 
   const [isAuthenticated, setAuthenticated] = useState(
