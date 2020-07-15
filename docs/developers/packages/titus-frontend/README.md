@@ -20,7 +20,6 @@ There is scope for you to add, customise or even replace features.
 Titus frontend is structured as follows:
 
 * `build/` - your bundled application for production use.
-* `lighthouse/` - runs Google's [Lighthouse] to evaluate your application performance and accessibility.
 * `src/index.js` - main entry points and loads your React application and service worker.
 * `src/app.js` - your application root, load application wide providers here.
 * `src/router.js` - application routing powered by [react-router].
@@ -173,7 +172,6 @@ The following commands can be used to test and lint your application:
 |`npm run test:watch` | Start Jest in watch mode: run tests against the modified files (since last commit), and automatically runs them again if you change the code.|
 | `npm run lint` | Apply ESLint / Prettier on sources.|
 | `npm run lint:fix` | Use ESLint / Prettier (with autofix flag).|
-| `npm run lighthouse` | Run [Lighthouse] locally with local Chrome and produce a report: `lighthouse-report.html`.|
 | `npm run storybook` | Start [Storybook] locally so you can try out your components: browse http://localhost:9009.|
 | `npm run storybook:build` | Make a static version of all your stories in the `storybook-static/` folder.|
 
@@ -209,7 +207,6 @@ This command produces a new bundle in `build/` folder.
 [Auth0]: https://auth0.com
 [Lighthouse]: https://developers.google.com/web/tools/lighthouse
 [Storybook]: https://storybook.js.org
-[webpack-dev-server]: https://webpack.js.org/configuration/dev-server
 [auth0-login]: https://auth0.com/docs/universal-login
 [aws-amplify-authentication]: https://aws-amplify.github.io/docs/js/authentication
 [material-ui]: https://material-ui.com/getting-started/installation/
