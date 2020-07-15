@@ -16,9 +16,9 @@ describe('<Login />', () => {
 
   it('renders without crashing', () => {
     const { getByLabelText, getByText } = render(<Login />)
-    expect(getByLabelText(/username/i))
-    expect(getByLabelText(/password/i))
-    expect(getByText(/login/i))
+    expect(getByLabelText(/username/i)).toBeInTheDocument()
+    expect(getByLabelText(/password/i)).toBeInTheDocument()
+    expect(getByText(/login/i)).toBeInTheDocument()
   })
 
   it('shows required field errors', async () => {
@@ -52,7 +52,7 @@ describe('<Login />', () => {
       <Login />
     )
     await waitFor(() => {
-      getByText(/login/i)
+      expect(getByText(/login/i)).toBeInTheDocument()
     })
 
     fireEvent.change(getByLabelText('Username:'), { target: { value: 'Foo' } })
@@ -62,7 +62,7 @@ describe('<Login />', () => {
 
     fireEvent.click(getByText(/login/i))
     await waitFor(() => {
-      getByText(/logout/i)
+      expect(getByText(/logout/i)).toBeInTheDocument()
     })
   })
 })

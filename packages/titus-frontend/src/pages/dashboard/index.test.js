@@ -16,8 +16,8 @@ describe('<DashboardContainer />', () => {
 
   it('renders without crashing', async () => {
     const { getByText } = render(<DashboardContainer />)
-    getByText(/develop and deploy/i)
-    getByText(/logout/i)
+    expect(getByText(/develop and deploy/i)).toBeInTheDocument()
+    expect(getByText(/logout/i)).toBeInTheDocument()
     const docsLink = getByText(/check out the docs/i)
     expect(docsLink.getAttribute('href')).toBe('https://nf-titus.netlify.com/')
   })
@@ -26,9 +26,9 @@ describe('<DashboardContainer />', () => {
     const { getByLabelText, getByText } = render(<DashboardContainer />)
     const languageSelect = getByLabelText('Language:')
     fireEvent.change(languageSelect, { target: { value: 'ro' } })
-    getByText(/iesire/i)
+    expect(getByText(/iesire/i)).toBeInTheDocument()
     fireEvent.change(languageSelect, { target: { value: 'en' } })
-    getByText(/logout/i)
+    expect(getByText(/logout/i)).toBeInTheDocument()
   })
 
   it('logs out when logout is clicked', async () => {
@@ -36,7 +36,7 @@ describe('<DashboardContainer />', () => {
     await waitForElementToBeRemoved(() => getByText('loading'))
     fireEvent.click(getByText(/logout/i))
     await waitFor(() => {
-      getByText(/login/i)
+      expect(getByText(/login/i)).toBeInTheDocument()
     })
   })
 })
