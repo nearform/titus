@@ -27,7 +27,6 @@
     "test:related": "lerna run test:related"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.11.0",
     "docsify-cli": "^4.4.1",
     "husky": "^4.2.5",
     "jest": "^24.9.0",
