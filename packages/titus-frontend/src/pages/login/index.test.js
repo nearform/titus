@@ -9,6 +9,5 @@ describe('<Login />', () => {
   it('renders without crashing', () => {
     const { asFragment } = render(<Login />)
     expect(asFragment()).toMatchSnapshot()
-    expect(true).toBe(true)
   })
 })
