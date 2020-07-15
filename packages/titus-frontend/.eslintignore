@@ -2,7 +2,6 @@ bin/*
 build/*
 coverage/*
 node_modules/*
-storybook-static/*
 src/**/*.css
 src/validateEnv.js
 src/validateEnv.test.js
