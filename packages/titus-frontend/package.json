@@ -54,7 +54,7 @@
     "@storybook/preset-create-react-app": "^3.1.2",
     "@storybook/react": "^5.3.19",
     "@testing-library/react": "^10.4.3",
-    "babel-loader": "^8.1.0",
+    "babel-loader": "^8.0.6",
     "chalk": "^4.1.0",
     "dotenv": "^8.2.0",
     "eslint-config-prettier": "^6.11.0",
