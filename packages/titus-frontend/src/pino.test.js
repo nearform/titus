@@ -23,7 +23,7 @@ describe('Pino file', () => {
   test('should trigger pino log function', () => {
     log('log message')
 
-    // expect(global.navigator.sendBeacon.mock.calls.length).toBe(1)
+    expect(global.navigator.sendBeacon.mock.calls.length).toBe(1)
     expect(infoMessage).toBe('log message')
   })
 
