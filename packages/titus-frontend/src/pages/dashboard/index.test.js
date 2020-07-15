@@ -1,5 +1,4 @@
 import React from 'react'
-
 import {
   renderWithAuthedRouter,
   render,
@@ -7,7 +6,7 @@ import {
   fireEvent,
   waitForElementToBeRemoved,
   waitFor
-} from '../../test-utils'
+} from 'src/test-utils'
 
 import DashboardContainer from './index'
 

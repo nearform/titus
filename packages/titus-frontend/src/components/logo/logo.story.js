@@ -1,6 +1,5 @@
 import React from 'react'
-
-import Layout from '../layout'
+import Layout from 'src/components/layout'
 
 import docs from './logo.mdx'
 

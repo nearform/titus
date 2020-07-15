@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from 'react'
-
-import { AuthContext } from '../../components/authentication/authentication-context'
-import LoginForm from '../../components/login-form'
+import { AuthContext } from 'src/components/authentication/authentication-context'
+import LoginForm from 'src/components/login-form'
 
 const Login = () => {
   const {

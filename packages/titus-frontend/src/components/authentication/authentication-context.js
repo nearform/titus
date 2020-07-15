@@ -1,15 +1,14 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
-
-import history from '../../history'
-import { AUTH_PROVIDERS, ROUTES } from '../../constants'
-import InMemory from '../auth-providers/in-memory'
-import Titus from '../auth-providers/titus-backend'
-import AzureAd from '../auth-providers/azure-ad'
-import AwsAmplify from '../auth-providers/aws-amplify'
-import Auth0 from '../auth-providers/auth0'
-import config from '../../config'
+import history from 'src/history'
+import { AUTH_PROVIDERS, ROUTES } from 'src/constants'
+import InMemory from 'src/components/auth-providers/in-memory'
+import Titus from 'src/components/auth-providers/titus-backend'
+import AzureAd from 'src/components/auth-providers/azure-ad'
+import AwsAmplify from 'src/components/auth-providers/aws-amplify'
+import Auth0 from 'src/components/auth-providers/auth0'
+import config from 'src/config'
 
 // AWS, TITUS, MEM, AD, AUTH0
 const AUTH_PROVIDER = process.env.REACT_APP_AUTH_PROVIDER || AUTH_PROVIDERS.MEM

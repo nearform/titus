@@ -1,10 +1,9 @@
 import React, { useContext } from 'react'
-
-import { AuthContext } from '../../components/authentication/authentication-context'
-import Dashboard from '../../components/dashboard'
+import { AuthContext } from 'src/components/authentication/authentication-context'
+import Dashboard from 'src/components/dashboard'
 
 // TODO:: Need to do something with this if we are using the AD powered auth
-// import { authContext } from '../../components/auth-providers/azure-ad/adalConfig'
+// import { authContext } from 'src/components/auth-providers/azure-ad/adalConfig'
 
 const DashboardContainer = () => {
   const { logout } = useContext(AuthContext)

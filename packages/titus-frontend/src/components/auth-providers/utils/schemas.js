@@ -1,6 +1,5 @@
 import * as yup from 'yup'
-
-import i18n from '../../../i18n'
+import i18n from 'src/i18n'
 
 export const loginFormSchema = yup.object().shape({
   username: yup.string().required(i18n.t('validation.required.username')),

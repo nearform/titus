@@ -1,5 +1,4 @@
 import React from 'react'
-
 import {
   render,
   renderWithRouter,
@@ -7,7 +6,7 @@ import {
   waitFor,
   waitForElementToBeRemoved,
   fireEvent
-} from '../../test-utils'
+} from 'src/test-utils'
 
 import Login from './index'
 

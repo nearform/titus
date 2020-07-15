@@ -1,8 +1,7 @@
 import React, { Fragment } from 'react'
 import { useTranslation } from 'react-i18next'
-
-import Logo from '../logo'
-import { LANGUAGES } from '../../constants'
+import Logo from 'src/components/logo'
+import { LANGUAGES } from 'src/constants'
 
 const Dashboard = ({ logout }) => {
   const { t, i18n } = useTranslation()
