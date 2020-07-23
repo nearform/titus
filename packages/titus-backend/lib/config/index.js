@@ -22,6 +22,7 @@ const config = envSchema({
     .prop('AD_TENANT', S.string())
     .prop('AD_APP_ID', S.string())
     .prop('AD_SECRET', S.string())
+    .prop('CORS_ORIGIN', S.string())
 })
 
 const isProduction = /^\s$production\s*$/i.test(config.NODE_ENV)
