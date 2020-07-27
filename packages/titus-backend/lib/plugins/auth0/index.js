@@ -4,17 +4,8 @@ const fp = require('fastify-plugin')
 
 async function auth0(server, options) {
   server
-    .register(require('fastify-jwt'), {
-      secret: options.jwt.secret
-    })
-    .decorate('verifyJWT', async function (request, reply) {
-      try {
-        await request.jwtVerify()
-      } catch (err) {
-        reply.send(err)
-      }
-    })
-    .register(require('fastify-auth'))
+    .register(require('fastify-auth0-verify'), options.auth0)
+    .register(require('./auth0-routes.js'), options)
 }
 
 module.exports = fp(auth0)

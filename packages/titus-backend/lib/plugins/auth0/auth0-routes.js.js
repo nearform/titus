@@ -54,8 +54,7 @@ async function authRoutes(server, options) {
               audience: options.auth0.audience
             }
           })
-          const token = server.jwt.sign(data)
-          return { token }
+          return data
         } catch (err) {
           const details =
             (err.response &&
@@ -86,7 +85,7 @@ async function authRoutes(server, options) {
           }
         ]
       },
-      preHandler: server.auth([server.verifyJWT]),
+      preHandler: server.authenticate,
       handler: async ({ log, user }) => {
         return user
       }
