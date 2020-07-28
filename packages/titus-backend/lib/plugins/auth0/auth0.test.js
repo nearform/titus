@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken')
 
 describe('auth0 plugin', () => {
   let server, address
-  const domain = 'https://nf-titus.auth0.com/'
+  const domain = 'https://nf-titus.auth0.com'
   const clientId = faker.random.alphaNumeric(32)
   const clientSecret = faker.random.alphaNumeric(53)
   const audience = 'https://test.auth0.com/api/v2/'
@@ -119,11 +119,11 @@ describe('auth0 plugin', () => {
     expect(JSON.parse(response.payload).message).toEqual(invalidTokenMsg)
   })
 
-  it.only('should decode valid JWT', async () => {
+  it('should decode valid JWT', async () => {
     const user = { id: 1, name: 'someone' }
     const encoded = jwt.sign(user, 'That1Super_Secret', {
       audience,
-      issuer: domain
+      issuer: `${domain}/`
     })
 
     const response = await server.inject({
