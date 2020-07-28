@@ -2,10 +2,11 @@
 
 const faker = require('faker')
 const nock = require('nock')
+const jwt = require('jsonwebtoken')
 
 describe('auth0 plugin', () => {
   let server, address
-  const domain = 'https://nf-titus.auth0.com'
+  const domain = 'https://nf-titus.auth0.com/'
   const clientId = faker.random.alphaNumeric(32)
   const clientSecret = faker.random.alphaNumeric(53)
   const audience = 'https://test.auth0.com/api/v2/'
@@ -18,21 +19,15 @@ describe('auth0 plugin', () => {
     server = require('fastify')()
 
     server.register(require('.'), {
-      jwt: {
-        secret: 'That1Super_Secret'
-      }
-    })
-
-    server.register(require('./auth0-routes.js'), {
       auth0: {
         domain,
         clientId,
         clientSecret,
         audience,
-        grantType
+        grantType,
+        secret: 'That1Super_Secret'
       }
     })
-
     address = await server.listen(5002)
   })
 
@@ -62,10 +57,9 @@ describe('auth0 plugin', () => {
         password
       }
     })
-    const signed = server.jwt.sign(auth0Response)
 
     expect(response.statusCode).toEqual(200)
-    expect(JSON.parse(response.payload).token).toEqual(signed)
+    expect(JSON.parse(response.body)).toEqual(auth0Response)
     expect(nock.isDone()).toEqual(true)
   })
 
@@ -114,7 +108,7 @@ describe('auth0 plugin', () => {
   })
 
   it('should deny access with invalid JWT to protected routes', async () => {
-    const invalidTokenMsg = 'Authorization token is invalid: jwt malformed'
+    const invalidTokenMsg = 'Invalid token.'
     const response = await server.inject({
       method: 'GET',
       url: `${address}/auth`,
@@ -125,9 +119,12 @@ describe('auth0 plugin', () => {
     expect(JSON.parse(response.payload).message).toEqual(invalidTokenMsg)
   })
 
-  it('should decode valid JWT', async () => {
+  it.only('should decode valid JWT', async () => {
     const user = { id: 1, name: 'someone' }
-    const encoded = server.jwt.sign(user)
+    const encoded = jwt.sign(user, 'That1Super_Secret', {
+      audience,
+      issuer: domain
+    })
 
     const response = await server.inject({
       method: 'GET',

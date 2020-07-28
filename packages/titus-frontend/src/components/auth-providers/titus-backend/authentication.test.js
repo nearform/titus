@@ -1,9 +1,11 @@
 import Authentication from './index'
 
 describe('titus-backend auth provider', () => {
-  const authentication = new Authentication({ t: () => '' })
+  const authentication = new Authentication({
+    t: () => '',
+    config: { serverUrl: '' }
+  })
   const access_token = 'access_token'
-  const id_token = 'id_token'
 
   it('should trigger login correctly', async () => {
     global.fetch = jest.fn().mockImplementation((url, options) => {
@@ -12,7 +14,6 @@ describe('titus-backend auth provider', () => {
         json: () => {
           return {
             access_token,
-            id_token,
             expires_in: 1000
           }
         }
@@ -30,7 +31,6 @@ describe('titus-backend auth provider', () => {
       body: JSON.stringify({ username: 'test', password: 'test' })
     })
     expect(localStorage.getItem('access_token')).toBe(access_token)
-    expect(localStorage.getItem('id_token')).toBe(id_token)
     expect(parseInt(localStorage.getItem('expires_at'))).toBeGreaterThan(
       900 * 1000 + new Date().getTime()
     )

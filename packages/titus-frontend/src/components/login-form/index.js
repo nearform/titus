@@ -16,6 +16,9 @@ const LoginForm = ({
   form
 }) => {
   let RenderForm = form ? form : LoginFormInputs
+  // validation schema should only be applied for the default form inputs
+  let validationSchema =
+    RenderForm === LoginFormInputs ? loginFormSchema : undefined
   return (
     <Fragment>
       <Logo />
@@ -25,7 +28,7 @@ const LoginForm = ({
           password: '',
           newPassword: ''
         }}
-        validationSchema={loginFormSchema}
+        validationSchema={validationSchema}
         onSubmit={(values, { resetForm }) => {
           if (login) login(values)
           resetForm(values)
