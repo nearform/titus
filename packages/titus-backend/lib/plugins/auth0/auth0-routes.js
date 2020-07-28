@@ -19,7 +19,7 @@ const fp = require('fastify-plugin')
  * @param {String} options.domain       - Auth0 domain (ie: nf-titus.auth0.com)
  * @param {String} options.clientId     - your Auth0 app id
  * @param {String} options.clientSecret - your Auth0 app secret
- * @param {String} options.audience     - optional audienc you'd like to restrict access to
+ * @param {String} options.audience     - optional audience you'd like to restrict access to
  * @param {Object} options.key          - JWKS-rsa plugin options
  * @see https://github.com/auth0/node-jwks-rsa#usage
  */
@@ -54,8 +54,7 @@ async function authRoutes(server, options) {
               audience: options.auth0.audience
             }
           })
-          const token = server.jwt.sign(data)
-          return { token }
+          return data
         } catch (err) {
           const details =
             (err.response &&
@@ -86,7 +85,7 @@ async function authRoutes(server, options) {
           }
         ]
       },
-      preHandler: server.auth([server.verifyJWT]),
+      onRequest: server.authenticate,
       handler: async ({ log, user }) => {
         return user
       }
