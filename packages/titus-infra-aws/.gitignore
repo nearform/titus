@@ -1,0 +1,10 @@
+# MIRA samples specific
+cdk.out/
+/config/default.json
+/config/dev.json
+.ts-build-cache
+*.js
+build/
+.build/
+.cdk.*
+cdk.*

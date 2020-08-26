@@ -1,0 +1,18 @@
+{
+  "app": {
+    "prefix": "nf",
+    "name": "cognito-app"
+  },
+  "dev": {
+    "target": "default"
+  },
+  "accounts": {
+    "default": {
+      "env": {
+        "account": "0000000000000",
+        "region": "eu-west-1"
+      },
+      "profile": "mira-dev"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "core",
+  "version": "1.0.0",
+  "description": "Core infrastructure",
+  "private": true,
+  "scripts": {},
+  "dependencies": {
+    "@aws-cdk/aws-cognito": "1.32.0",
+    "@aws-cdk/aws-ec2": "1.32.0",
+    "@aws-cdk/aws-iam": "1.32.0",
+    "@aws-cdk/aws-rds": "1.32.0",
+    "@aws-cdk/core": "1.32.0",
+    "@types/node": "^10.0.0",
+    "postgrator": "^3.10.2"
+  }
+}
