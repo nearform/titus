@@ -13,6 +13,7 @@ const config = envSchema({
     .prop('PG_DB', S.string().required())
     .prop('PG_USER', S.string().required())
     .prop('PG_PASS', S.string().required())
+    .prop('AUTH_PROVIDER', S.string())
     .prop('AUTH0_DOMAIN', S.string())
     .prop('AUTH0_CLIENT_ID', S.string())
     .prop('AUTH0_CLIENT_SECRET', S.string())
@@ -48,19 +49,22 @@ module.exports = {
   },
   underPressure: {},
   cors: { origin: !!config.CORS_ORIGIN },
-  auth0: {
-    domain: `https://${config.AUTH0_DOMAIN}`,
-    clientId: config.AUTH0_CLIENT_ID,
-    clientSecret: config.AUTH0_CLIENT_SECRET,
-    audience: config.AUTH0_AUDIENCE,
-    grantType: config.AUTH0_GRANT_TYPE
+  auth: {
+    provider: config.AUTH_PROVIDER || 'auth0',
+    azureAD: {
+      appID: config.AD_APP_ID,
+      secret: config.AD_SECRET,
+      tenant: config.AD_TENANT
+    },
+    auth0: {
+      domain: `https://${config.AUTH0_DOMAIN}`,
+      clientId: config.AUTH0_CLIENT_ID,
+      clientSecret: config.AUTH0_CLIENT_SECRET,
+      audience: config.AUTH0_AUDIENCE,
+      grantType: config.AUTH0_GRANT_TYPE
+    }
   },
   jwt: {
     secret: config.JWT_SECRET
-  },
-  azureAD: {
-    appID: config.AD_APP_ID,
-    secret: config.AD_SECRET,
-    tenant: config.AD_TENANT
   }
 }

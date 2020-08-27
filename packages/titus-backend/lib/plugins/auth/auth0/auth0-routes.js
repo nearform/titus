@@ -43,15 +43,15 @@ async function authRoutes(server, options) {
         try {
           const { data } = await axios({
             method: 'POST',
-            url: `${options.auth0.domain}/oauth/token`,
+            url: `${options.auth.auth0.domain}/oauth/token`,
             headers: { 'content-type': 'application/json' },
             data: {
-              grant_type: options.auth0.grantType,
+              grant_type: options.auth.auth0.grantType,
               username,
               password,
-              client_id: options.auth0.clientId,
-              client_secret: options.auth0.clientSecret,
-              audience: options.auth0.audience
+              client_id: options.auth.auth0.clientId,
+              client_secret: options.auth.auth0.clientSecret,
+              audience: options.auth.auth0.audience
             }
           })
           return data
