@@ -1,6 +1,6 @@
 import {resolve} from 'path'
 import {HashedCode, MiraStack, MiraConfig} from 'mira'
-import {Runtime,Function,  SingletonFunction} from '@aws-cdk/aws-lambda'
+import {Runtime, Function, SingletonFunction} from '@aws-cdk/aws-lambda'
 import {FollowMode} from '@aws-cdk/assets'
 import {ISecurityGroup, IVpc, SecurityGroup, Vpc} from '@aws-cdk/aws-ec2'
 import {Construct, Tag, Duration} from '@aws-cdk/core'
@@ -17,6 +17,7 @@ export class Core extends MiraStack {
   readonly ingressSecurityGroup: ISecurityGroup
   readonly egressSecurityGroup: ISecurityGroup
   readonly authentication: Authentication
+  readonly database: Database
 
   constructor(parent: Construct) {
     super(parent, Core.name)
@@ -53,7 +54,7 @@ export class Core extends MiraStack {
     })
 
     /** Create the database */
-    const database = new Database(this, 'Database', {
+    this.database = new Database(this, 'Database', {
       vpc: this.vpc,
       ingressSecurityGroup: this.ingressSecurityGroup
     })
@@ -61,7 +62,7 @@ export class Core extends MiraStack {
     new Migration(this, 'Migration', {
       securityGroup: this.ingressSecurityGroup,
       vpc: this.vpc,
-      secret: database.secret
+      secret: this.database.secret
     })
 
     this.createParameter('Titus/IngressApiGroup', 'API Ingress Security Group', this.ingressSecurityGroup.securityGroupId)
