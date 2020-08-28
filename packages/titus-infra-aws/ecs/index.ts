@@ -1,6 +1,6 @@
 import {MiraStack} from 'mira'
 import {Repository} from '@aws-cdk/aws-ecr'
-import {Construct} from '@aws-cdk/core'
+import {Construct, Duration} from '@aws-cdk/core'
 import {ISecurityGroup, IVpc, Peer, Port} from '@aws-cdk/aws-ec2'
 import {ManagedPolicy, Role, ServicePrincipal} from '@aws-cdk/aws-iam'
 import {ApplicationLoadBalancedFargateService} from "@aws-cdk/aws-ecs-patterns";
@@ -11,15 +11,14 @@ import {
   NetworkMode,
   EcrImage,
   Protocol,
-  AwsLogDriver
+  AwsLogDriver,
 } from '@aws-cdk/aws-ecs'
 
-import { LogGroup } from '@aws-cdk/aws-logs'
+import {LogGroup} from '@aws-cdk/aws-logs'
 
 import {Authentication, Database} from '../core'
 
 interface EcsProps {
-  readonly environment: string
   readonly vpc: IVpc
   readonly authentication: Authentication
   readonly database: Database
@@ -27,8 +26,8 @@ interface EcsProps {
 }
 
 export class Ecs extends MiraStack {
-  public cluster : Cluster
-  public service : ApplicationLoadBalancedFargateService
+  public cluster: Cluster
+  public service: ApplicationLoadBalancedFargateService
 
   constructor(parent: Construct, props: EcsProps) {
     super(parent, Ecs.name)
@@ -63,6 +62,8 @@ export class Ecs extends MiraStack {
         }),
         streamPrefix: 'ecs',
       }),
+      // healthCheck: new MyHealthCheck({path: '/healthcheck', interval: Duration.seconds(60)}),
+      // healthCheck: healthCheckParams,
       environment: {
         NODE_ENV: 'development',
         API_HOST: '0.0.0.0',
@@ -76,7 +77,7 @@ export class Ecs extends MiraStack {
       },
     })
 
-    containerDefinition.addPortMappings({ containerPort: 5000, protocol: Protocol.TCP })
+    containerDefinition.addPortMappings({containerPort: 5000, protocol: Protocol.TCP})
     props.ingressSecurityGroup.addIngressRule(Peer.anyIpv4(), Port.tcp(5000))
 
     this.service = new ApplicationLoadBalancedFargateService(this, 'TitusAlbService', {
@@ -84,6 +85,12 @@ export class Ecs extends MiraStack {
       taskDefinition: taskDefinition,
       assignPublicIp: true,
     })
+
+    this.service.targetGroup.configureHealthCheck({
+      path: "/healthcheck",
+      interval: Duration.seconds(120),
+      unhealthyThresholdCount: 5,
+    });
 
     const scaling = this.service.service.autoScaleTaskCount({maxCapacity: 4, minCapacity: 1})
     scaling.scaleOnCpuUtilization('CpuScaling', {
