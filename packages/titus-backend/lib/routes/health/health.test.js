@@ -4,16 +4,13 @@ const { version } = require('../../../package')
 
 describe('health route', () => {
   let server
-  const client = {
-    query: jest.fn().mockResolvedValue([])
-  }
 
   beforeAll(async () => {
     server = require('fastify')()
     server.register(require('fastify-postgres'))
     server.register(require('.'))
     await server.ready()
-    server.pg.connect = jest.fn()
+    server.pg.query = jest.fn()
   })
 
   beforeEach(() => {
@@ -24,8 +21,7 @@ describe('health route', () => {
   afterAll(async () => server.close())
 
   it('should return server health with DB check', async () => {
-    client.query.mockResolvedValue({ rowCount: 1 })
-    server.pg.connect.mockResolvedValue(client)
+    server.pg.query.mockResolvedValue({ rowCount: 1 })
     const response = await server.inject({
       method: 'GET',
       url: '/healthcheck'
@@ -41,14 +37,13 @@ describe('health route', () => {
       })
     )
 
-    expect(client.query).toHaveBeenCalledWith('SELECT $1::text as message', [
+    expect(server.pg.query).toHaveBeenCalledWith('SELECT $1::text as message', [
       'Hello world!'
     ])
   })
 
   it('should report failure on DB error', async () => {
-    client.query.mockRejectedValue(new Error('boom!'))
-    server.pg.connect.mockResolvedValue(client)
+    server.pg.query.mockRejectedValue(new Error('boom!'))
     const response = await server.inject({
       method: 'GET',
       url: '/healthcheck'
@@ -66,8 +61,7 @@ describe('health route', () => {
   })
 
   it('should report failure on empty DB response', async () => {
-    client.query.mockRejectedValue({})
-    server.pg.connect.mockResolvedValue(client)
+    server.pg.query.mockRejectedValue({})
     const response = await server.inject({
       method: 'GET',
       url: '/healthcheck'
