@@ -8,3 +8,4 @@ build/
 .build/
 .cdk.*
 cdk.*
+output.json

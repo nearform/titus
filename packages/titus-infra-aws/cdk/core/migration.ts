@@ -19,7 +19,7 @@ export class Migration extends Construct {
   constructor(scope: Construct, id: string, props: MigrationProps) {
     super(scope, id)
 
-    const code = new HashedCode(resolve(__dirname, '..', '..', 'titus-db-manager'), {
+    const code = new HashedCode(resolve(__dirname, '..', '..', '..', 'titus-db-manager'), {
       follow: FollowMode.ALWAYS
     })
 

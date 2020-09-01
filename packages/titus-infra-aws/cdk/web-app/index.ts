@@ -2,14 +2,18 @@ import {AutoDeleteBucket, MiraConfig, MiraStack} from 'mira'
 import {
   CloudFrontAllowedMethods,
   CloudFrontWebDistribution,
+  CfnDistribution,
   OriginProtocolPolicy,
   SecurityPolicyProtocol,
-  SSLMethod
+  SSLMethod,
+  ViewerCertificate,
 } from '@aws-cdk/aws-cloudfront'
+
 import {BucketDeployment, Source as S3DeploymentSource} from '@aws-cdk/aws-s3-deployment'
 import {Construct, Duration, Fn} from '@aws-cdk/core'
-import {CustomResource, CustomResourceProvider} from '@aws-cdk/aws-cloudformation'
-import {ITopic, Topic} from '@aws-cdk/aws-sns'
+import targets = require('@aws-cdk/aws-route53-targets/lib');
+import * as acm from '@aws-cdk/aws-certificatemanager';
+import * as route53 from '@aws-cdk/aws-route53';
 
 // From: https://github.com/aws-samples/aws-cdk-examples/blob/master/typescript/static-site/static-site.ts
 
@@ -35,16 +39,35 @@ export class WebApp extends MiraStack {
 
     const distributionDomainName: string = this.getMinimalDeployment(
       siteBucket,
-      props.apiUrl
+      props.apiUrl,
+      props.webAppUrl
     )
     this.addOutput('distributionDomainName', distributionDomainName)
   }
 
-  private getMinimalDeployment(siteBucket: any, apiUrl: string): string {
+  private getMinimalDeployment(siteBucket: any, apiUrl: string, webAppUrl: string): string {
+    const domainName = 'titus.davidefiorello.com'
+
+    const hostedZone = route53.HostedZone.fromLookup(this, 'TitusHostedZone', {
+      domainName: 'davidefiorello.com'
+    })
+
+    const certificateArn = new acm.DnsValidatedCertificate(this, 'SiteCertificate', {
+      domainName,
+      hostedZone,
+      region: 'us-east-1', // Cloudfront only checks this region for certificates.
+    }).certificateArn;
+
     const distribution = new CloudFrontWebDistribution(
       this,
       'Distribution',
       {
+        aliasConfiguration: {
+          acmCertRef: certificateArn,
+          names: [ domainName ],
+          sslMethod: SSLMethod.SNI,
+          securityPolicy: SecurityPolicyProtocol.TLS_V1_1_2016,
+        },
         originConfigs: [
           {
             behaviors: [{isDefaultBehavior: true}],
@@ -79,6 +102,34 @@ export class WebApp extends MiraStack {
               domainName: Fn.select(2, Fn.split('/', apiUrl))
             },
             originPath: '/prod'
+          },
+          {
+            behaviors: [
+              {
+                allowedMethods: CloudFrontAllowedMethods.ALL,
+                defaultTtl: Duration.millis(60 * 1000),
+                forwardedValues: {
+                  headers: [
+                    'Accept',
+                    'Access-Control-Request-Headers',
+                    'Access-Control-Request-Method',
+                    'Authorization',
+                    'Content-Type',
+                    'Origin',
+                    'X-Api-Key'
+                  ],
+                  queryString: true
+                },
+                maxTtl: Duration.millis(120 * 1000),
+                minTtl: Duration.millis(60 * 1000),
+                pathPattern: '/config/v1'
+              }
+            ],
+            customOriginSource: {
+              // Host of the API
+              domainName: Fn.select(2, Fn.split('/', apiUrl))
+            },
+            originPath: '/prod'
           }
         ],
         errorConfigurations: [
@@ -90,6 +141,12 @@ export class WebApp extends MiraStack {
         ]
       }
     )
+
+    new route53.ARecord(this, 'SiteAliasRecord', {
+      recordName: domainName,
+      target: route53.RecordTarget.fromAlias(new targets.CloudFrontTarget(distribution)),
+      zone: hostedZone
+    })
 
     new BucketDeployment(this, 'Deployment', {
       destinationBucket: siteBucket,

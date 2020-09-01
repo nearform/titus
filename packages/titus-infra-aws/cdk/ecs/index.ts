@@ -1,7 +1,7 @@
 import {MiraStack} from 'mira'
 import {Repository} from '@aws-cdk/aws-ecr'
 import {Construct, Duration} from '@aws-cdk/core'
-import {ISecurityGroup, IVpc, Peer, Port} from '@aws-cdk/aws-ec2'
+import {SecurityGroup, IVpc, Peer, Port} from '@aws-cdk/aws-ec2'
 import {ManagedPolicy, Role, ServicePrincipal} from '@aws-cdk/aws-iam'
 import {ApplicationLoadBalancedFargateService} from "@aws-cdk/aws-ecs-patterns";
 import {
@@ -22,7 +22,6 @@ interface EcsProps {
   readonly vpc: IVpc
   readonly authentication: Authentication
   readonly database: Database
-  readonly ingressSecurityGroup: ISecurityGroup
 }
 
 export class Ecs extends MiraStack {
@@ -78,7 +77,10 @@ export class Ecs extends MiraStack {
     })
 
     containerDefinition.addPortMappings({containerPort: 5000, protocol: Protocol.TCP})
-    props.ingressSecurityGroup.addIngressRule(Peer.anyIpv4(), Port.tcp(5000))
+
+    const apiGroupId = this.loadParameter('Titus/ApiSecurityGroup')
+    const apiGroup = SecurityGroup.fromSecurityGroupId(this, 'ApiGroup', apiGroupId.stringValue)
+    apiGroup.addIngressRule(Peer.anyIpv4(), Port.tcp(5000))
 
     this.service = new ApplicationLoadBalancedFargateService(this, 'TitusAlbService', {
       cluster: this.cluster,
@@ -96,5 +98,7 @@ export class Ecs extends MiraStack {
     scaling.scaleOnCpuUtilization('CpuScaling', {
       targetUtilizationPercent: 50
     })
+
+    this.addOutput('LoadBalancerUrl', this.service.loadBalancer.loadBalancerDnsName)
   }
 }

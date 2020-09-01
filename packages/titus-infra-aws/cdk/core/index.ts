@@ -3,7 +3,7 @@ import {HashedCode, MiraStack, MiraConfig} from 'mira'
 import {Runtime, Function, SingletonFunction} from '@aws-cdk/aws-lambda'
 import {FollowMode} from '@aws-cdk/assets'
 import {ISecurityGroup, IVpc, SecurityGroup, Vpc} from '@aws-cdk/aws-ec2'
-import {Construct, Tag, Duration} from '@aws-cdk/core'
+import {Construct, Tag, Duration, Stack} from '@aws-cdk/core'
 import {Authentication} from './authentication'
 import {Database} from './database'
 import {Migration} from './migration'
@@ -17,18 +17,11 @@ export class Core extends MiraStack {
   readonly ingressSecurityGroup: ISecurityGroup
   readonly egressSecurityGroup: ISecurityGroup
   readonly authentication: Authentication
+  // readonly database: Database
   readonly database: Database
 
   constructor(parent: Construct) {
     super(parent, Core.name)
-
-    this.authentication = new Authentication(this, 'Authentication')
-    const {
-      identityPoolRef,
-      userPoolArn,
-      userPoolClientId,
-      userPoolId
-    } = this.authentication
 
     const stackVpc = new StackVpc(this, 'Vpc')
 
@@ -59,17 +52,40 @@ export class Core extends MiraStack {
       ingressSecurityGroup: this.ingressSecurityGroup
     })
 
+    // const apiGroup = new SecurityGroup(this, 'ApiGroup', {vpc: this.vpc})
+    // /** Create the database */
+    // this.database = new Database(this, 'Database', {
+    //   // allowedGroups: [apiGroup],
+    //   vpc: this.vpc
+    // })
+
     new Migration(this, 'Migration', {
       securityGroup: this.ingressSecurityGroup,
       vpc: this.vpc,
       secret: this.database.secret
     })
 
-    this.createParameter('Titus/IngressApiGroup', 'API Ingress Security Group', this.ingressSecurityGroup.securityGroupId)
-    this.createParameter('Titus/EgressApiGroup', 'API Egress Security Group', this.egressSecurityGroup.securityGroupId)
+    this.authentication = new Authentication(this, 'Authentication')
+    const {
+      identityPoolRef,
+      userPoolArn,
+      userPoolClientId,
+      userPoolId
+    } = this.authentication
+
+    this.createParameter('Titus/ApiSecurityGroup', 'API Security Group', this.ingressSecurityGroup.securityGroupId)
+    // this.createParameter('Titus/EgressApiGroup', 'API Egress Security Group', this.egressSecurityGroup.securityGroupId)
     this.createParameter('Titus/IdentityPoolId', 'Identity Pool ID', identityPoolRef)
     this.createParameter('Titus/UserPoolArn', 'User Pool ARN', userPoolArn)
     this.createParameter('Titus/UserPoolId', 'User Pool ID', userPoolId)
     this.createParameter('Titus/WebClientId', 'User Pool Client ID', userPoolClientId)
+
+    this.addOutput('Region', Stack.of(this).region)
+    this.addOutput('IdentityPoolID', identityPoolRef)
+    this.addOutput('UserPoolArn', userPoolArn)
+    this.addOutput('UserPoolId', userPoolId)
+    this.addOutput('WebClientId',userPoolClientId)
+    // this.addOutput('LoadBalancerUrl', ecs.service.loadBalancer.loadBalancerDnsName)
+    // this.addOutput('GatewayApiUrl', api.url)
   }
 }
