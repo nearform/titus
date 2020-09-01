@@ -27,7 +27,7 @@ const LoginFormInputs = ({ allowChangePassword, isSubmitting, loginError }) => {
       />
       {allowChangePassword &&
       loginError &&
-      /Temporary password/.test(loginError) ? (
+      /emporary password/.test(loginError) ? (
         <>
           <Field
             id="newPassword"
