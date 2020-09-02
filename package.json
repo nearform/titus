@@ -24,7 +24,8 @@
     "start:docs": "docsify serve ./docs --port 4000",
     "test": "jest --config .jest.json --coverage",
     "test:all": "npm run test && lerna run --parallel test",
-    "test:related": "lerna run test:related"
+    "test:related": "lerna run test:related",
+    "deploy:aws": "npm run build:all && lerna run deploy:cdk"
   },
   "devDependencies": {
     "docsify-cli": "^4.4.1",

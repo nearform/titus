@@ -16,8 +16,7 @@ export default class MainStack extends MiraServiceStack {
     })
     const api = new TitusApiGateway(this, {alb: ecs.service.loadBalancer, userPoolArn: core.authentication.userPoolArn})
     new WebApp(this, {
-      apiUrl: api.url,
-      webAppUrl: "titus.davidefiorello.com"
+      apiUrl: api.url
     })
   }
 }

@@ -10,7 +10,11 @@
     "default": {
       "env": {
         "account": "0000000000000",
-        "region": "eu-west-1"
+        "region": "eu-west-1",
+        "domainName": "yourdomain.com",
+        "webAppUrl": "www.yourdomain.com",
+        "certificateSslName": "*.yourdomain.com",
+        "awsEcrRepositoryName": "yourbucket-titus-backend"
       },
       "profile": "mira-dev"
     }

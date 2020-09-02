@@ -2,11 +2,8 @@ import {AutoDeleteBucket, MiraConfig, MiraStack} from 'mira'
 import {
   CloudFrontAllowedMethods,
   CloudFrontWebDistribution,
-  CfnDistribution,
-  OriginProtocolPolicy,
   SecurityPolicyProtocol,
-  SSLMethod,
-  ViewerCertificate,
+  SSLMethod
 } from '@aws-cdk/aws-cloudfront'
 
 import {BucketDeployment, Source as S3DeploymentSource} from '@aws-cdk/aws-s3-deployment'
@@ -19,17 +16,17 @@ import * as route53 from '@aws-cdk/aws-route53';
 
 interface WebAppProps {
   readonly apiUrl: string
-  readonly webAppUrl: string
 }
 
 export class WebApp extends MiraStack {
   constructor(parent: Construct, props: WebAppProps) {
     super(parent, WebApp.name)
+    const domainConfig = MiraConfig.getEnvironment(MiraConfig.defaultEnvironmentName)
     /**
      * named resource warning
      */
     const bucketProps = {
-      bucketName: props.webAppUrl,
+      bucketName: (domainConfig.env as unknown as { webAppUrl: string }).webAppUrl,
       publicReadAccess: true,
       websiteIndexDocument: 'index.html',
       websiteErrorDocument: 'error.html'
@@ -39,21 +36,21 @@ export class WebApp extends MiraStack {
 
     const distributionDomainName: string = this.getMinimalDeployment(
       siteBucket,
-      props.apiUrl,
-      props.webAppUrl
+      props.apiUrl
     )
     this.addOutput('distributionDomainName', distributionDomainName)
   }
 
-  private getMinimalDeployment(siteBucket: any, apiUrl: string, webAppUrl: string): string {
-    const domainName = 'titus.davidefiorello.com'
+  private getMinimalDeployment(siteBucket: any, apiUrl: string): string {
+    const domainConfig = MiraConfig.getEnvironment(MiraConfig.defaultEnvironmentName)
+    const certificateSslName = (domainConfig.env as unknown as { certificateSslName: string }).certificateSslName
 
     const hostedZone = route53.HostedZone.fromLookup(this, 'TitusHostedZone', {
-      domainName: 'davidefiorello.com'
+      domainName: (domainConfig.env as unknown as { domainName: string }).domainName
     })
 
     const certificateArn = new acm.DnsValidatedCertificate(this, 'SiteCertificate', {
-      domainName,
+      domainName: certificateSslName,
       hostedZone,
       region: 'us-east-1', // Cloudfront only checks this region for certificates.
     }).certificateArn;
@@ -64,7 +61,7 @@ export class WebApp extends MiraStack {
       {
         aliasConfiguration: {
           acmCertRef: certificateArn,
-          names: [ domainName ],
+          names: [(domainConfig.env as unknown as { webAppUrl: string }).webAppUrl],
           sslMethod: SSLMethod.SNI,
           securityPolicy: SecurityPolicyProtocol.TLS_V1_1_2016,
         },
@@ -143,7 +140,7 @@ export class WebApp extends MiraStack {
     )
 
     new route53.ARecord(this, 'SiteAliasRecord', {
-      recordName: domainName,
+      recordName: (domainConfig.env as unknown as { webAppUrl: string }).webAppUrl,
       target: route53.RecordTarget.fromAlias(new targets.CloudFrontTarget(distribution)),
       zone: hostedZone
     })

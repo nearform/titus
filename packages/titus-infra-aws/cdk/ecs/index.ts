@@ -1,4 +1,4 @@
-import {MiraStack} from 'mira'
+import {MiraConfig, MiraStack} from 'mira'
 import {Repository} from '@aws-cdk/aws-ecr'
 import {Construct, Duration, RemovalPolicy} from '@aws-cdk/core'
 import {IVpc, Peer, Port, SecurityGroup} from '@aws-cdk/aws-ec2'
@@ -22,6 +22,8 @@ export class Ecs extends MiraStack {
 
   constructor(parent: Construct, props: EcsProps) {
     super(parent, Ecs.name)
+    const domainConfig = MiraConfig.getEnvironment(MiraConfig.defaultEnvironmentName)
+
 
     const role = new Role(this, 'TitusTaskExecutionRole', {
       assumedBy: new ServicePrincipal('ecs-tasks.amazonaws.com')
@@ -41,7 +43,7 @@ export class Ecs extends MiraStack {
       networkMode: NetworkMode.AWS_VPC,
     })
 
-    const repo = Repository.fromRepositoryName(this, 'RepositoryFargate', 'codeflyer-titus-backend')
+    const repo = Repository.fromRepositoryName(this, 'RepositoryFargate', (domainConfig.env as unknown as { awsEcrRepositoryName: string }).awsEcrRepositoryName)
     repo.repositoryUriForTag('latest')
 
     // add container to task definition

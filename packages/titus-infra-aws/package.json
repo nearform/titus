@@ -6,8 +6,10 @@
   "private": true,
   "scripts": {
     "build": "tsc",
-    "deploy": "tsc && npx mira deploy --file=cdk/index.js --outputs-file output.json",
-    "undeploy": "tsc && npx mira undeploy --file=cdk/index.js"
+    "validate:deploy": "node scripts/validateDeploy",
+    "deploy:cdk": "tsc && npx mira deploy --file=cdk/index.js --outputs-file output.json",
+    "bootstrap": "npx mira bootstrap",
+    "undeploy:cdk": "tsc && npx mira undeploy --file=cdk/index.js"
   },
   "keywords": [],
   "author": "",
@@ -48,7 +50,8 @@
     "aws-cdk": "1.61.1",
     "aws-sdk": "^2.744.0",
     "change-case": "^4.1.1",
-    "mira": "^1.2.0"
+    "mira": "^1.2.0",
+    "yup": "^0.29.3"
   },
   "jest": {
     "transform": {
