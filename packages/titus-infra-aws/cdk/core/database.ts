@@ -11,7 +11,7 @@ import {
 } from '@aws-cdk/aws-ec2'
 import {Construct, Duration} from '@aws-cdk/core'
 import { ISecret } from '@aws-cdk/aws-secretsmanager'
-import {DatabaseInstance, DatabaseInstanceEngine, StorageType} from '@aws-cdk/aws-rds'
+import {DatabaseInstance, DatabaseInstanceEngine, StorageType, PostgresEngineVersion} from '@aws-cdk/aws-rds'
 
 export interface DbProps {
   readonly ingressSecurityGroup: ISecurityGroup
@@ -36,8 +36,9 @@ export class Database extends Construct {
     const databaseName = 'titus'
 
     this.rdsInstance = new DatabaseInstance(this, 'postgres-rds-instance', {
-      engine: DatabaseInstanceEngine.POSTGRES,
-      engineVersion: '11.5',
+      engine: DatabaseInstanceEngine.postgres({
+        version: PostgresEngineVersion.VER_11_5
+      }),
       instanceType,
       vpc: props.vpc,
       vpcPlacement: {subnetType: SubnetType.PUBLIC},

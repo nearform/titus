@@ -31,14 +31,16 @@ export class TitusApiGateway extends MiraStack {
   constructor(scope: Construct, props: ApiGatewayProps) {
     super(scope, 'TitusApiGateway')
 
+    const corsOptions = {
+      allowOrigins: Cors.ALL_ORIGINS,
+      allowMethods: Cors.ALL_METHODS,
+      allowHeaders: ['Content-Type', 'X-Amz-Date', 'Authorization', 'X-Api-Key', 'X-Amz-Security-Token', 'X-auth-id']
+    }
+
     this.api = new RestApi(scope, 'TitusRestApi', {
       description: 'Titus API',
       // deploy: false,
-      defaultCorsPreflightOptions: {
-        allowOrigins: Cors.ALL_ORIGINS,
-        allowMethods: Cors.ALL_METHODS, // this is also the default
-        // allowHeaders: ['Content-Type', 'X-Amz-Date', 'Authorization', 'X-Api-Key', 'X-Amz-Security-Token', 'X-auth-id']
-      }
+      defaultCorsPreflightOptions: corsOptions
     })
 
     /**
@@ -95,7 +97,9 @@ export class TitusApiGateway extends MiraStack {
         requestParameters: {
           'integration.request.path.proxy': 'method.request.path.proxy'
         },
-      }
+
+      },
+
     })
 
     const auth = new CfnAuthorizer(this, 'APIGatewayAuthorizer', {
@@ -110,16 +114,12 @@ export class TitusApiGateway extends MiraStack {
       anyMethod: true,
       defaultIntegration: integration,
       parent: v1,
+      defaultCorsPreflightOptions: corsOptions,
       defaultMethodOptions: {
         authorizationType: AuthorizationType.COGNITO,
         authorizer: {authorizerId: auth.ref},
         requestParameters: {'method.request.path.proxy': true}
       },
-      defaultCorsPreflightOptions: {
-        allowOrigins: Cors.ALL_ORIGINS,
-        allowMethods: Cors.ALL_METHODS, // this is also the default
-        // allowHeaders: ['Content-Type', 'X-Amz-Date', 'Authorization', 'X-Api-Key', 'X-Amz-Security-Token', 'X-auth-id']
-      }
     })
 
 

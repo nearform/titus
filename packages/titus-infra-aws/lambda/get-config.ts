@@ -1,6 +1,6 @@
-const prefix = 'APP_CONFIG_'
 module.exports = {
   handler: async () => {
+    const prefix = 'APP_CONFIG_'
     try {
       const returnValues = Object.entries(process.env)
         .filter(entry => entry[0].startsWith(prefix))

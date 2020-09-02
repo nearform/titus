@@ -37,6 +37,7 @@ export class Authentication extends Construct {
     this.userPoolArn = userPool.userPoolArn
     this.userPoolId = userPool.userPoolId
 
+
     // // See example here: https://github.com/aws-samples/amazon-cognito-example-for-external-idp/blob/master/cdk/src/customResourceConstructs/cognitoDomainCustomResourceConstruct.ts
     // new CognitoDomainCustomResourceConstruct(this, "CognitoDomain", { Domain: 'mira-login.nearform.com' }, this.userPool)
 

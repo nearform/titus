@@ -1,18 +1,10 @@
 import {MiraStack} from 'mira'
 import {Repository} from '@aws-cdk/aws-ecr'
-import {Construct, Duration} from '@aws-cdk/core'
-import {SecurityGroup, IVpc, Peer, Port} from '@aws-cdk/aws-ec2'
+import {Construct, Duration, RemovalPolicy} from '@aws-cdk/core'
+import {IVpc, Peer, Port, SecurityGroup} from '@aws-cdk/aws-ec2'
 import {ManagedPolicy, Role, ServicePrincipal} from '@aws-cdk/aws-iam'
 import {ApplicationLoadBalancedFargateService} from "@aws-cdk/aws-ecs-patterns";
-import {
-  Cluster,
-  TaskDefinition,
-  Compatibility,
-  NetworkMode,
-  EcrImage,
-  Protocol,
-  AwsLogDriver,
-} from '@aws-cdk/aws-ecs'
+import {AwsLogDriver, Cluster, Compatibility, EcrImage, NetworkMode, Protocol, TaskDefinition,} from '@aws-cdk/aws-ecs'
 
 import {LogGroup} from '@aws-cdk/aws-logs'
 
@@ -58,6 +50,7 @@ export class Ecs extends MiraStack {
       logging: new AwsLogDriver({
         logGroup: new LogGroup(this, 'LogGroup', {
           logGroupName: '/ecs/titus-backend',
+          removalPolicy: RemovalPolicy.DESTROY
         }),
         streamPrefix: 'ecs',
       }),
@@ -67,6 +60,7 @@ export class Ecs extends MiraStack {
         NODE_ENV: 'development',
         API_HOST: '0.0.0.0',
         API_PORT: '5000',
+        CORS_ORIGIN: 'true',
         PG_HOST: props.database.secret.secretValueFromJson('host').toString(),
         PG_PORT: props.database.secret.secretValueFromJson('port').toString(),
         PG_DB: props.database.secret.secretValueFromJson('dbname').toString(),
@@ -99,6 +93,8 @@ export class Ecs extends MiraStack {
       targetUtilizationPercent: 50
     })
 
+
     this.addOutput('LoadBalancerUrl', this.service.loadBalancer.loadBalancerDnsName)
+    this.addOutput('EcsClusterName', this.service.cluster.clusterName)
   }
 }

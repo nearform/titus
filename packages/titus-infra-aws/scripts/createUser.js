@@ -51,8 +51,13 @@ const createUser = async () => {
   const data = {
     username: argv.email,
     password: argv.password,
-    auth,
   }
+
+
+  fs.writeFileSync(path.join(
+    __dirname,
+    `../${argv.email}-test-user.json`
+  ), JSON.stringify(data, null, 2))
 
   console.log(
     `\nsaved the following info in ${path.join(
