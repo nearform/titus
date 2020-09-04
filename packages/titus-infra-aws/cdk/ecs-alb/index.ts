@@ -10,20 +10,19 @@ import {LogGroup} from '@aws-cdk/aws-logs'
 
 import {Authentication, Database} from '../core'
 
-interface EcsProps {
+interface EcsAlbProps {
   readonly vpc: IVpc
   readonly authentication: Authentication
   readonly database: Database
 }
 
-export class Ecs extends MiraStack {
+export class EcsAlb extends MiraStack {
   public cluster: Cluster
   public service: ApplicationLoadBalancedFargateService
 
-  constructor(parent: Construct, props: EcsProps) {
-    super(parent, Ecs.name)
+  constructor(parent: Construct, props: EcsAlbProps) {
+    super(parent, EcsAlb.name)
     const domainConfig = MiraConfig.getEnvironment(MiraConfig.defaultEnvironmentName)
-
 
     const role = new Role(this, 'TitusTaskExecutionRole', {
       assumedBy: new ServicePrincipal('ecs-tasks.amazonaws.com')

@@ -18,18 +18,18 @@ import {LogGroup, RetentionDays} from '@aws-cdk/aws-logs'
 import {resolve} from "path";
 import {Runtime, Function, Code} from "@aws-cdk/aws-lambda";
 
-interface ApiGatewayProps {
+interface ApiGatewayAlbProps {
   alb: ApplicationLoadBalancer,
   userPoolArn: string
 }
 
-export class TitusApiGateway extends MiraStack {
+export class ApiGatewayAlb extends MiraStack {
   public api: RestApi
 
   public url: string
 
-  constructor(scope: Construct, props: ApiGatewayProps) {
-    super(scope, 'TitusApiGateway')
+  constructor(scope: Construct, props: ApiGatewayAlbProps) {
+    super(scope, 'TitusApiGatewayalb')
 
     const corsOptions = {
       allowOrigins: Cors.ALL_ORIGINS,

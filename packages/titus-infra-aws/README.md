@@ -2,6 +2,10 @@
 
 This package allows to deploy easily the titus project on a AWS account.
 
+## Infrastructure schema
+
+https://app.creately.com/diagram/oO8xdP2vjf5
+
 ## Prerequisites
 
 - An AWS administrator account

@@ -1,5 +1,5 @@
 import {Construct} from "@aws-cdk/core";
-import {Vpc, SubnetType, SecurityGroup, ISecurityGroup} from "@aws-cdk/aws-ec2";
+import {Vpc, SecurityGroup, ISecurityGroup} from "@aws-cdk/aws-ec2";
 
 export class StackVpc extends Construct {
   public readonly vpc: Vpc
