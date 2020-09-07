@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import config from '../../config'
 import Logo from '../logo'
 import UserInfo from '../user-info'
+import UserList from '../user-list'
 import { LANGUAGES } from '../../constants'
 
 const Dashboard = ({ logout }) => {
@@ -46,6 +47,7 @@ const Dashboard = ({ logout }) => {
         {t('docs')}
       </a>
       {config.aws.identityPoolId && <UserInfo />}
+      {config.aws.identityPoolId && <UserList />}
     </Fragment>
   )
 }

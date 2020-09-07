@@ -1,8 +1,8 @@
 import {MiraConfig, MiraStack} from 'mira'
 import {Repository} from '@aws-cdk/aws-ecr'
-import {Construct, Duration, RemovalPolicy} from '@aws-cdk/core'
+import {Construct, Duration, RemovalPolicy, Stack} from '@aws-cdk/core'
 import {IVpc, Port} from '@aws-cdk/aws-ec2'
-import {ManagedPolicy, Role, ServicePrincipal} from '@aws-cdk/aws-iam'
+import {ManagedPolicy, Role, ServicePrincipal, Policy, PolicyStatement, Effect} from '@aws-cdk/aws-iam'
 import {NetworkLoadBalancedFargateService} from "@aws-cdk/aws-ecs-patterns";
 import {AwsLogDriver, Cluster, Compatibility, EcrImage, NetworkMode, TaskDefinition, Protocol} from '@aws-cdk/aws-ecs'
 import {Protocol as ElbProtocol} from '@aws-cdk/aws-elasticloadbalancingv2'
@@ -35,6 +35,21 @@ export class EcsNlb extends MiraStack {
     })
     role.addManagedPolicy(ManagedPolicy.fromAwsManagedPolicyName('service-role/AmazonECSTaskExecutionRolePolicy'))
 
+    const taskRole = new Role(this, 'TitusTaskTaskRole', {
+      assumedBy: new ServicePrincipal('ecs-tasks.amazonaws.com')
+    })
+    taskRole.attachInlinePolicy(new Policy(this, 'FargateCognitoPolicy', {
+      statements: [
+        new PolicyStatement(
+          {
+            effect: Effect.ALLOW,
+            actions: ["cognito-idp:ListUsers"],
+            resources: [this.loadParameter('Titus/UserPoolArn').stringValue]
+          }
+        )
+      ]
+    }))
+
     this.cluster = new Cluster(this, 'FargateTitusCluster', {
       clusterName: 'titus-backend-cluster',
       vpc: props.vpc,
@@ -46,6 +61,7 @@ export class EcsNlb extends MiraStack {
       cpu: '256',
       memoryMiB: '512',
       networkMode: NetworkMode.AWS_VPC,
+      taskRole
     })
 
     const repo = Repository.fromRepositoryName(this, 'RepositoryFargate', (domainConfig.env as unknown as { awsEcrRepositoryName: string }).awsEcrRepositoryName)
@@ -71,7 +87,9 @@ export class EcsNlb extends MiraStack {
         PG_DB: props.database.secret.secretValueFromJson('dbname').toString(),
         PG_USER: props.database.secret.secretValueFromJson('username').toString(),
         PG_PASS: props.database.secret.secretValueFromJson('password').toString(),
-        AUTH_PROVIDER: "cognito"
+        AUTH_PROVIDER: "cognito",
+        COGNITO_USER_POOL_ID: this.loadParameter('Titus/UserPoolId').stringValue,
+        COGNITO_REGION: Stack.of(this).region
       },
     })
     containerDefinition.addPortMappings({containerPort: 5000, protocol: Protocol.TCP})

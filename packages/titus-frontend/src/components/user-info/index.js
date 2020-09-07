@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 
 import { AuthContext } from '../authentication/authentication-context'
 
+// This component was created only to test the auth endpoint
 const UserInfo = () => {
   const { t } = useTranslation()
   const { user } = useContext(AuthContext)

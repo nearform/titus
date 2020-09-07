@@ -19,6 +19,8 @@ const config = envSchema({
     .prop('AUTH0_CLIENT_SECRET', S.string())
     .prop('AUTH0_AUDIENCE', S.string())
     .prop('AUTH0_GRANT_TYPE', S.string())
+    .prop('COGNITO_REGION', S.string())
+    .prop('COGNITO_USER_POOL_ID', S.string())
     .prop('JWT_SECRET', S.string().default('3000'))
     .prop('AD_TENANT', S.string())
     .prop('AD_APP_ID', S.string())
@@ -62,6 +64,10 @@ module.exports = {
       clientSecret: config.AUTH0_CLIENT_SECRET,
       audience: config.AUTH0_AUDIENCE,
       grantType: config.AUTH0_GRANT_TYPE
+    },
+    cognito: {
+      region: config.COGNITO_REGION,
+      userPoolId: config.COGNITO_USER_POOL_ID
     }
   },
   jwt: {

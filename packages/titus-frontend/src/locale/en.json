@@ -9,6 +9,7 @@
   "newPassword": "New Password",
   "language": "Language",
   "userInfoTitle": "Logged user information",
+  "userListTitle": "User list",
   "header": {
     "memory": "Note: Any username followed by a password with at least four characters containing at least one letter and number will work.",
     "aws": "Please provide AWS Cognito account details:",
