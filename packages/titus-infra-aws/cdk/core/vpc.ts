@@ -9,30 +9,8 @@ export class StackVpc extends Construct {
   constructor(scope: Construct, id: string) {
     super(scope, id)
 
-     this.vpc = new Vpc(this, `${id}Vpc`)
-    // this.vpc = new Vpc(this, `${id}Vpc`, {
-    //   cidr: '10.0.0.0/16',
-    //   maxAzs: 2,
-    //   natGateways: 1,
-    //   subnetConfiguration: [
-    //     {
-    //       cidrMask: 28,
-    //       name: 'Subnet1',
-    //       subnetType: SubnetType.ISOLATED,
-    //     },
-    //     {
-    //       cidrMask: 24,
-    //       name: 'PublicSubnet',
-    //       subnetType: SubnetType.PUBLIC,
-    //     },
-    //     {
-    //       cidrMask: 26,
-    //       name: 'Privateubnet',
-    //       subnetType: SubnetType.PRIVATE,
-    //     },
-    //   ],
-    // })
-    //
+    this.vpc = new Vpc(this, `${id}Vpc`)
+
     this.ingressSecurityGroup = new SecurityGroup(
       this,
       'ingress-security-group',

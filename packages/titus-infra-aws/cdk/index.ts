@@ -9,6 +9,8 @@ import {ApiGatewayAlb} from './api-gw-alb'
 
 import {WebApp} from './web-app'
 
+// The deploy is done on a Network Load Balancer, set `alb` to deploy on an application load balancer
+// The ALB version is not protected, the balancer is accessible directly. DON'T USE IN PRODUCTION
 const DEPLOY_TYPE = 'nlb'
 
 export default class MainStack extends MiraServiceStack {
@@ -46,7 +48,7 @@ export default class MainStack extends MiraServiceStack {
       })
     }
     new WebApp(this, {
-      apiUrl: api.url
+      apiUrl: api.url,
     })
   }
 }

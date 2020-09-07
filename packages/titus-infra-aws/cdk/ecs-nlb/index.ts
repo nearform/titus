@@ -1,10 +1,11 @@
 import {MiraConfig, MiraStack} from 'mira'
 import {Repository} from '@aws-cdk/aws-ecr'
-import {Construct, RemovalPolicy} from '@aws-cdk/core'
-import {IVpc, Peer, Port, SecurityGroup} from '@aws-cdk/aws-ec2'
+import {Construct, Duration, RemovalPolicy} from '@aws-cdk/core'
+import {IVpc, Port} from '@aws-cdk/aws-ec2'
 import {ManagedPolicy, Role, ServicePrincipal} from '@aws-cdk/aws-iam'
 import {NetworkLoadBalancedFargateService} from "@aws-cdk/aws-ecs-patterns";
-import {AwsLogDriver, Cluster, Compatibility, EcrImage, NetworkMode, Protocol, TaskDefinition,} from '@aws-cdk/aws-ecs'
+import {AwsLogDriver, Cluster, Compatibility, EcrImage, NetworkMode, TaskDefinition, Protocol} from '@aws-cdk/aws-ecs'
+import {Protocol as ElbProtocol} from '@aws-cdk/aws-elasticloadbalancingv2'
 
 import {LogGroup} from '@aws-cdk/aws-logs'
 
@@ -50,7 +51,7 @@ export class EcsNlb extends MiraStack {
     const repo = Repository.fromRepositoryName(this, 'RepositoryFargate', (domainConfig.env as unknown as { awsEcrRepositoryName: string }).awsEcrRepositoryName)
     repo.repositoryUriForTag('latest')
 
-    // add container to task definition
+    // Define the task for fargate
     const containerDefinition = taskDefinition.addContainer('titus-backend-container', {
       image: new EcrImage(repo, 'latest'),
       logging: new AwsLogDriver({
@@ -75,16 +76,25 @@ export class EcsNlb extends MiraStack {
     })
     containerDefinition.addPortMappings({containerPort: 5000, protocol: Protocol.TCP})
 
-    const apiGroupId = this.loadParameter('Titus/ApiSecurityGroup')
-    const apiGroup = SecurityGroup.fromSecurityGroupId(this, 'ApiGroup', apiGroupId.stringValue)
-    apiGroup.addIngressRule(Peer.anyIpv4(), Port.tcp(5000))
-
     this.service = new NetworkLoadBalancedFargateService(this, 'TitusFargateNlbService', {
       cluster: this.cluster,
       taskDefinition: taskDefinition,
-      assignPublicIp: true,
+      // Set `assignPublicIp` to true to make the fargate task available publicly.
+      // Can be useful to test the instance directly. DON'T SET TO TRUE IN PRODUCTION
+      assignPublicIp: false,
       publicLoadBalancer: false,
     })
+
+    /**
+     * Set the healthcheck configuration.
+     * In the NLB the protocol should be specified, the default is `TCP`.
+     */
+    this.service.targetGroup.configureHealthCheck({
+      protocol: ElbProtocol.HTTP,
+      port: '5000',
+      path: "/healthcheck",
+      interval: Duration.seconds(30)
+    });
 
     /*
      * The NetworkLoadBalancedFargateService doesn't create the inbound rules that allow the balancer to access the fargate service
@@ -95,7 +105,7 @@ export class EcsNlb extends MiraStack {
      * https://github.com/aws/aws-cdk/issues/1490
      * https://github.com/aws/aws-cdk/issues/5928
      */
-    this.service.service.connections.allowFromAnyIpv4( Port.tcp(80) );
+    this.service.service.connections.allowFromAnyIpv4( Port.tcp(5000) );
 
     const scaling = this.service.service.autoScaleTaskCount({maxCapacity: 4, minCapacity: 1})
     scaling.scaleOnCpuUtilization('CpuScaling', {

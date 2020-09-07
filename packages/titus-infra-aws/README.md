@@ -175,3 +175,9 @@ A file `output.json` is created in the root and contains the information of the 
 }
 ```
 
+## Create a user
+A CLI tool is available to create a user in the current cognito deploy
+
+```
+node scripts/createUser.js --email davide.fiorello@nearform.com --password YOUR_PASSWORD
+```

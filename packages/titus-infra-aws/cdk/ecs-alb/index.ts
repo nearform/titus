@@ -73,10 +73,10 @@ export class EcsAlb extends MiraStack {
 
     containerDefinition.addPortMappings({containerPort: 5000, protocol: Protocol.TCP})
 
-    const apiGroupId = this.loadParameter('Titus/ApiSecurityGroup')
-    const apiGroup = SecurityGroup.fromSecurityGroupId(this, 'ApiGroup', apiGroupId.stringValue)
-    apiGroup.addIngressRule(Peer.anyIpv4(), Port.tcp(5000))
-
+    // const apiGroupId = this.loadParameter('Titus/ApiSecurityGroup')
+    // const apiGroup = SecurityGroup.fromSecurityGroupId(this, 'ApiGroup', apiGroupId.stringValue)
+    // apiGroup.addIngressRule(Peer.anyIpv4(), Port.tcp(5000))
+    //
     this.service = new ApplicationLoadBalancedFargateService(this, 'TitusAlbService', {
       cluster: this.cluster,
       taskDefinition: taskDefinition,
