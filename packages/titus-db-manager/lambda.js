@@ -1,4 +1,7 @@
+'use strict'
+
 const AWS = require('aws-sdk')
+const logger = require('pino')()
 
 async function getSecret(secretName) {
   return new Promise((resolve, reject) => {
@@ -26,20 +29,15 @@ const start = require('./migration-start')
 module.exports = {
   handler: async () => {
     try {
-      console.log('Migration Lambda Start')
+      logger.info('Migration Lambda Start')
 
-      console.log('Retrieve the secrets from ', process.env.SECRET_ARN)
+      logger.info('Retrieve the secrets from ', process.env.SECRET_ARN)
       const credentials = await getSecret(process.env.SECRET_ARN)
-      console.log('Credentials: ', {
-        ...credentials,
-        password: '*************'
-      })
-
       await start('migrate', credentials)
-      console.log('Migration done successful')
+      logger.info('Migration done successful')
     } catch (e) {
-      console.log('Migration failed')
-      console.error(e)
+      logger.errot('Migration failed')
+      logger.error(e)
     }
   }
 }

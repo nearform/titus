@@ -90,6 +90,13 @@ aws ecr create-repository --repository-name myrepo-titus-backend
 ```
 
 Tu publish, from the `titus-backend` root directory
+
+Login in ECR:
+
+```
+aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin YOUR_ACCOUNT_NUMBER.dkr.ecr.YOUR_REGION.amazonaws.com
+```
+
 ```
 docker build -t AWS_ECR_REPOSITORY_NAME .
 docker tag AWS_ECR_REPOSITORY_NAME:latest YOUR_ACCOUNT_NUMBER.dkr.ecr.YOUR_REGION.amazonaws.com/AWS_ECR_REPOSITORY_NAME:latest

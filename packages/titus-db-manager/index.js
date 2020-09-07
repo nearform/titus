@@ -1,4 +1,7 @@
+'use strict'
+
 require('dotenv-expand')(require('dotenv').config())
+const logger = require('pino')()
 
 const start = require('./migration-start')
 const credentials = {
@@ -9,4 +12,13 @@ const credentials = {
   password: process.env.PG_PASSWORD
 }
 
-module.exports = start(process.argv[2] || 'migrate', credentials)
+async function run() {
+  try {
+    await start(process.argv[2] || 'migrate', credentials)
+  } catch (err) {
+    logger.error('An Error has occurred, stopping', err)
+    process.exit(1)
+  }
+}
+
+run()

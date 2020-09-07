@@ -1,7 +1,6 @@
 'use strict'
 
 const { Unauthorized } = require('http-errors')
-const jwt = require('jsonwebtoken')
 const fp = require('fastify-plugin')
 
 const errorMessages = {
@@ -16,23 +15,19 @@ const errorMessages = {
     'Please provide at least one of the "domain" or "secret" options.'
 }
 
-function jwtDecode(headers, options = {}) {
-  if (!headers || !headers.authorization) {
-    throw new Unauthorized(errorMessages.missingHeader)
-  }
-
-  const authorization = headers.authorization
-
-  if (!authorization.match(/^Bearer\s+/)) {
-    throw new Unauthorized(errorMessages.badHeaderFormat)
-  }
-
-  return jwt.decode(authorization.split(/\s+/)[1].trim(), options)
-}
-
-async function authenticate(request, reply) {
+async function authenticate(request) {
   try {
-    request.user = request.jwtDecode(request.headers)
+    if (!request.headers || !request.headers.authorization) {
+      throw new Unauthorized(errorMessages.missingHeader)
+    }
+
+    const authorization = request.headers.authorization
+
+    if (!authorization.match(/^Bearer\s+/)) {
+      throw new Unauthorized(errorMessages.badHeaderFormat)
+    }
+
+    request.user = this.jwt.decode(authorization.split(/\s+/)[1].trim())
   } catch (e) {
     if (e.statusCode) {
       throw e
@@ -44,7 +39,6 @@ async function authenticate(request, reply) {
 
 async function cognito(server, options) {
   server.decorate('authenticate', authenticate)
-  server.decorateRequest('jwtDecode', jwtDecode)
   server.register(require('./cognito-routes'), options)
 }
 
