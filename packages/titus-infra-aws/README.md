@@ -152,7 +152,7 @@ Will force the cluster to refresh the services at the last version.
 If your region never had a CDK deploy prepare with:
 
 ```
-npx cdk bootstrap
+cdk bootstrap aws://YOUR_ACCOUNT_NUMBER/YOUR_REGION
 ```
 
 ### Deploy
@@ -188,3 +188,50 @@ A CLI tool is available to create a user in the current cognito deploy
 ```
 node scripts/createUser.js --email davide.fiorello@nearform.com --password YOUR_PASSWORD
 ```
+
+
+## Pipeline
+The deploy can be automated on AWS adding the deploy of the pipeline.
+
+Init he pipeline:
+
+```
+mira cicd
+```
+
+The command will create a role with the permission to deploy the infrastructure and the codepipeline service.
+
+At the end of the deploy the output will show:
+
+```
+ ✅  Nf-TitusApp-Cicd
+
+Outputs:
+Nf-TitusApp-Cicd.RepositoryName = Nf-TitusApp-Repository
+Nf-TitusApp-Cicd.GitUserName = APKA5I....
+```
+
+The value in `Nf-TitusApp-Cicd.RepositoryName` define the repository created for the deploy.
+
+In this case will be:
+
+```
+https://git-codecommit.eu-west-2.amazonaws.com/v1/repos/Nf-TitusApp-Repository
+```
+
+According with the value in the config file `"branchName": "master",` the pipeline will run every time a push on `master` is done in the repository.
+
+### Buildspec.yaml
+
+Copy the `buildspec.sample.yaml` to `buildspec.yaml` and set the proper `DEPLOYER_ROLE_ARN` value.
+The ARN required is the one created by the permission step in the `mira cicd` command.
+
+With `Nf-TitusApp` as a prefix will be:
+`arn:aws:iam::YOUR_ACCOUNT_NUMBER:role/Nf-TitusApp-DeployProjectRole-staging`
+
+### Run the pipeline
+
+Push the `master` branch to the `codecommit` repo, and the pipeline will run.
+
+
+

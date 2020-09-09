@@ -9,5 +9,6 @@
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "rootDir": "."
-  }
+  },
+  "exclude": ["cdk.out"]
 }

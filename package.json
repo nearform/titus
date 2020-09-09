@@ -25,7 +25,7 @@
     "test": "jest --config .jest.json --coverage",
     "test:all": "npm run test && lerna run --parallel test",
     "test:related": "lerna run test:related",
-    "deploy:aws": "npm run build:all && lerna run deploy:cdk"
+    "deploy:ci": "lerna run deploy:ci"
   },
   "devDependencies": {
     "docsify-cli": "^4.4.1",
