@@ -35,21 +35,6 @@ export class EcsNlb extends MiraStack {
     })
     role.addManagedPolicy(ManagedPolicy.fromAwsManagedPolicyName('service-role/AmazonECSTaskExecutionRolePolicy'))
 
-    const taskRole = new Role(this, 'TitusTaskTaskRole', {
-      assumedBy: new ServicePrincipal('ecs-tasks.amazonaws.com')
-    })
-    taskRole.attachInlinePolicy(new Policy(this, 'FargateCognitoPolicy', {
-      statements: [
-        new PolicyStatement(
-          {
-            effect: Effect.ALLOW,
-            actions: ["cognito-idp:ListUsers"],
-            resources: [this.loadParameter('Titus/UserPoolArn').stringValue]
-          }
-        )
-      ]
-    }))
-
     this.cluster = new Cluster(this, 'FargateTitusCluster', {
       clusterName: 'titus-backend-cluster',
       vpc: props.vpc,
@@ -60,9 +45,16 @@ export class EcsNlb extends MiraStack {
       executionRole: role,
       cpu: '256',
       memoryMiB: '512',
-      networkMode: NetworkMode.AWS_VPC,
-      taskRole
+      networkMode: NetworkMode.AWS_VPC
     })
+
+    taskDefinition.addToTaskRolePolicy(new PolicyStatement(
+      {
+        effect: Effect.ALLOW,
+        actions: ["cognito-idp:ListUsers"],
+        resources: [this.loadParameter('Titus/UserPoolArn').stringValue]
+      }
+    ))
 
     const repo = Repository.fromRepositoryName(this, 'RepositoryFargate', (domainConfig.env as unknown as { awsEcrRepositoryName: string }).awsEcrRepositoryName)
     repo.repositoryUriForTag('latest')

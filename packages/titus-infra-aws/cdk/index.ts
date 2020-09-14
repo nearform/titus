@@ -20,7 +20,7 @@ export default class MainStack extends MiraServiceStack {
     const core = new Core(this)
 
     let api
-    if(DEPLOY_TYPE === 'nlb') {
+    if (DEPLOY_TYPE === 'nlb') {
       const ecs = new EcsNlb(this, {
         vpc: core.vpc,
         authentication: core.authentication,

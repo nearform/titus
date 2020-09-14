@@ -17,7 +17,6 @@ export class Core extends MiraStack {
   readonly ingressSecurityGroup: ISecurityGroup
   readonly egressSecurityGroup: ISecurityGroup
   readonly authentication: Authentication
-  // readonly database: Database
   readonly database: Database
 
   constructor(parent: Construct) {
