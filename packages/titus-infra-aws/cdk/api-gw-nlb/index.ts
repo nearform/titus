@@ -69,13 +69,13 @@ export class ApiGatewayNlb extends MiraStack {
            *   identityPoolId: 'xxxxxxx',
            *   region: 'xxxxxxx',
            *   userPoolId: 'xxxxxxx',
-           *   userPoolWebClientId: 'xxxxxxx'
+           *   userPoolWebClientId: 'xxxxxxx',
            * }
            */
           APP_CONFIG_identityPoolId: this.loadParameter('Titus/IdentityPoolId').stringValue,
           APP_CONFIG_region: Stack.of(this).region,
           APP_CONFIG_userPoolId: this.loadParameter('Titus/UserPoolId').stringValue,
-          APP_CONFIG_userPoolWebClientId: this.loadParameter('Titus/WebClientId').stringValue,
+          APP_CONFIG_userPoolWebClientId: this.loadParameter('Titus/WebClientId').stringValue
         },
         handler: 'get-config.handler',
         runtime: Runtime.NODEJS_12_X,

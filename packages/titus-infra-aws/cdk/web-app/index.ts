@@ -34,14 +34,14 @@ export class WebApp extends MiraStack {
 
     const siteBucket = new AutoDeleteBucket(this, 'SiteBucket', bucketProps)
 
-    const distributionDomainName: string = this.getMinimalDeployment(
+    const distributionDomainName: string = this.getFullDeployment(
       siteBucket,
       props.apiUrl
     )
     this.addOutput('distributionDomainName', distributionDomainName)
   }
 
-  private getMinimalDeployment(siteBucket: any, apiUrl: string): string {
+  private getFullDeployment(siteBucket: any, apiUrl: string): string {
     const domainConfig = MiraConfig.getEnvironment(MiraConfig.defaultEnvironmentName)
     const certificateSslName = (domainConfig.env as unknown as { certificateSslName: string }).certificateSslName
 
@@ -104,7 +104,7 @@ export class WebApp extends MiraStack {
             behaviors: [
               {
                 allowedMethods: CloudFrontAllowedMethods.ALL,
-                defaultTtl: Duration.millis(60 * 1000),
+                defaultTtl: Duration.minutes(1),
                 forwardedValues: {
                   headers: [
                     'Accept',
@@ -117,8 +117,8 @@ export class WebApp extends MiraStack {
                   ],
                   queryString: true
                 },
-                maxTtl: Duration.millis(120 * 1000),
-                minTtl: Duration.millis(60 * 1000),
+                maxTtl: Duration.minutes(2),
+                minTtl: Duration.minutes(1),
                 pathPattern: '/config/v1'
               }
             ],

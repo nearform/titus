@@ -7,10 +7,10 @@
   "scripts": {
     "build": "tsc",
     "validate:deploy": "node scripts/validateDeploy",
-    "deploy:cdk": "tsc && npx mira deploy --file=cdk/index.js --outputs-file output.json",
-    "deploy:ci": "tsc && npx mira deploy --file=cdk/index.js --outputs-file output.json",
+    "deploy": "tsc && npm run validate:deploy && npx mira deploy --file=cdk/index.js --outputs-file output.json",
+    "deploy:ci": "tsc && npm run validate:deploy && npx mira deploy --file=cdk/index.js --outputs-file output.json",
     "bootstrap": "npx mira bootstrap",
-    "undeploy:cdk": "tsc && npx mira undeploy --file=cdk/index.js"
+    "undeploy": "tsc && npx mira undeploy --file=cdk/index.js"
   },
   "keywords": [],
   "author": "",

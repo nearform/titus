@@ -129,7 +129,7 @@ Verify the status of the certificate here: https://console.aws.amazon.com/acm/ho
 `
     throw new Error(errorMessage)
   }
-  console.log('Certificate found on region eu-east-1')
+  console.log('Certificate found on region us-east-1')
 }
 
 async function run() {
@@ -148,6 +148,7 @@ async function run() {
 
   } catch (e) {
     console.log(e.message)
+    process.exit(1)
   }
 }
 

@@ -125,8 +125,47 @@ export default class CustomPermissions extends DeploymentPermissions {
       actions: [
         "ssm:PutParameter",
         "ssm:DeleteParameter",
+        "ssm:GetParameters",
         "ssm:AddTagsToResource",
         "ssm:RemoveTagsFromResource"
+      ],
+      resources: [
+        `*`
+      ]
+    }))
+
+    this.role.addToPolicy(new PolicyStatement({
+      actions: [
+        "lambda:*",
+      ],
+      resources: [
+        `*`
+      ]
+    }))
+    this.role.addToPolicy(new PolicyStatement({
+      actions: [
+        "logs::*",
+      ],
+      resources: [
+        `*`
+      ]
+    }))
+    this.role.addToPolicy(new PolicyStatement({
+      actions: [
+        "ecs:*",
+        "elasticloadbalancing:CreateListener",
+        "elasticloadbalancing:CreateLoadBalancer",
+        "elasticloadbalancing:CreateRule",
+        "elasticloadbalancing:CreateTargetGroup",
+        "elasticloadbalancing:DeleteListener",
+        "elasticloadbalancing:DeleteLoadBalancer",
+        "elasticloadbalancing:DeleteRule",
+        "elasticloadbalancing:DeleteTargetGroup",
+        "elasticloadbalancing:DescribeListeners",
+        "elasticloadbalancing:DescribeLoadBalancers",
+        "elasticloadbalancing:DescribeRules",
+        "elasticloadbalancing:DescribeTargetGroups",
+        "elasticloadbalancing:AddTags"
       ],
       resources: [
         `*`
@@ -137,7 +176,7 @@ export default class CustomPermissions extends DeploymentPermissions {
         "route53:ListHostedZonesByName"
       ],
       resources: [
-        `*`
+        `arn:aws:iam:${account.env.region}:${account.env.account}:${baseProject}-*`
       ]
     }))
 
