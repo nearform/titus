@@ -1,7 +1,6 @@
 import {
   IVpc,
   Port,
-  SecurityGroup,
   Peer,
   InstanceClass,
   InstanceType,

@@ -1,14 +1,11 @@
-import {resolve} from 'path'
-import {HashedCode, MiraStack, MiraConfig} from 'mira'
-import {Runtime, Function, SingletonFunction} from '@aws-cdk/aws-lambda'
-import {FollowMode} from '@aws-cdk/assets'
-import {ISecurityGroup, IVpc, SecurityGroup, Vpc} from '@aws-cdk/aws-ec2'
-import {Construct, Tag, Duration, Stack} from '@aws-cdk/core'
+import { MiraStack} from 'mira'
+import {ISecurityGroup, IVpc} from '@aws-cdk/aws-ec2'
+import {Construct, Tag, Stack} from '@aws-cdk/core'
+
 import {Authentication} from './authentication'
 import {Database} from './database'
 import {Migration} from './migration'
-import {StackVpc} from './vpc'
-
+import {Vpc} from './vpc'
 export * from './authentication'
 export * from './database'
 
@@ -22,7 +19,7 @@ export class Core extends MiraStack {
   constructor(parent: Construct) {
     super(parent, Core.name)
 
-    const stackVpc = new StackVpc(this, 'Vpc')
+    const stackVpc = new Vpc(this, 'Vpc')
 
     this.vpc = stackVpc.vpc
     this.ingressSecurityGroup = stackVpc.ingressSecurityGroup
@@ -45,18 +42,10 @@ export class Core extends MiraStack {
       includeResourceTypes: ['AWS::EC2::EIP']
     })
 
-    /** Create the database */
     this.database = new Database(this, 'Database', {
       vpc: this.vpc,
       ingressSecurityGroup: this.ingressSecurityGroup
     })
-
-    // const apiGroup = new SecurityGroup(this, 'ApiGroup', {vpc: this.vpc})
-    // /** Create the database */
-    // this.database = new Database(this, 'Database', {
-    //   // allowedGroups: [apiGroup],
-    //   vpc: this.vpc
-    // })
 
     new Migration(this, 'Migration', {
       securityGroup: this.ingressSecurityGroup,
@@ -73,7 +62,6 @@ export class Core extends MiraStack {
     } = this.authentication
 
     this.createParameter('Titus/ApiSecurityGroup', 'API Security Group', this.ingressSecurityGroup.securityGroupId)
-    // this.createParameter('Titus/EgressApiGroup', 'API Egress Security Group', this.egressSecurityGroup.securityGroupId)
     this.createParameter('Titus/IdentityPoolId', 'Identity Pool ID', identityPoolRef)
     this.createParameter('Titus/UserPoolArn', 'User Pool ARN', userPoolArn)
     this.createParameter('Titus/UserPoolId', 'User Pool ID', userPoolId)
@@ -83,8 +71,6 @@ export class Core extends MiraStack {
     this.addOutput('IdentityPoolID', identityPoolRef)
     this.addOutput('UserPoolArn', userPoolArn)
     this.addOutput('UserPoolId', userPoolId)
-    this.addOutput('WebClientId',userPoolClientId)
-    // this.addOutput('LoadBalancerUrl', ecs.service.loadBalancer.loadBalancerDnsName)
-    // this.addOutput('GatewayApiUrl', api.url)
+    this.addOutput('WebClientId', userPoolClientId)
   }
 }

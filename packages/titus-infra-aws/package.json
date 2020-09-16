@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "build": "tsc",
+    "test": "TAP=true jest",
     "validate:deploy": "node scripts/validateDeploy",
     "deploy": "tsc && npm run validate:deploy && npx mira deploy --file=cdk/index.js --outputs-file output.json",
     "deploy:ci": "tsc && npm run validate:deploy && npx mira deploy --file=cdk/index.js --outputs-file output.json",
