@@ -1,0 +1,53 @@
+{
+  "app": {
+    "prefix": "nf",
+    "name": "titus"
+  },
+  "dev": {
+    "target": "default"
+  },
+  "accounts": {
+    "default": {
+      "env": {
+        "account": "0000000000000",
+        "region": "eu-west-1",
+        "domainName": "yourdomain.com",
+        "webAppUrl": "www.yourdomain.com",
+        "certificateSslName": "*.yourdomain.com",
+        "awsEcrRepositoryName": "yourbucket-titus-backend"
+      },
+      "profile": "mira-dev"
+    },
+    "cicd": {
+      "env": {
+        "account": "0000000000000",
+        "region": "eu-west-1"
+      },
+      "profile": "default"
+    },
+    "staging": {
+      "env": {
+        "account": "0000000000000",
+        "region": "eu-west-1"
+      },
+      "profile": "default"
+    }
+  },
+  "cicd": {
+    "target": "cicd",
+    "buildspecFile": "packages/titus-infra-aws/pipeline/buildspec.yaml",
+    "permissionsFile": "pipeline/permissions.js",
+    "provider": "codecommit",
+    "repositoryUrl": "https://git-codecommit.eu-west-2.amazonaws.com/v1/repos/titus-deploy",
+    "branchName": "master",
+    "codeCommitUserPublicKey": "ssh-rsa PUBLIC KEY HERE",
+    "stages": [
+      {
+        "target": "staging",
+        "withDomain": false,
+        "requireManualApproval": false
+      }
+    ]
+  }
+}
+
