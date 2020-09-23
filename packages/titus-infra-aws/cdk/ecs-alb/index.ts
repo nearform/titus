@@ -1,7 +1,7 @@
 import {MiraConfig, MiraStack} from 'mira'
 import {Repository} from '@aws-cdk/aws-ecr'
 import {Construct, Duration, RemovalPolicy} from '@aws-cdk/core'
-import {IVpc, Peer, Port, SecurityGroup} from '@aws-cdk/aws-ec2'
+import {IVpc} from '@aws-cdk/aws-ec2'
 import {ManagedPolicy, Role, ServicePrincipal} from '@aws-cdk/aws-iam'
 import {ApplicationLoadBalancedFargateService} from "@aws-cdk/aws-ecs-patterns";
 import {AwsLogDriver, Cluster, Compatibility, EcrImage, NetworkMode, Protocol, TaskDefinition,} from '@aws-cdk/aws-ecs'
@@ -55,8 +55,6 @@ export class EcsAlb extends MiraStack {
         }),
         streamPrefix: 'ecs',
       }),
-      // healthCheck: new MyHealthCheck({path: '/healthcheck', interval: Duration.seconds(60)}),
-      // healthCheck: healthCheckParams,
       environment: {
         NODE_ENV: 'development',
         API_HOST: '0.0.0.0',
@@ -73,10 +71,6 @@ export class EcsAlb extends MiraStack {
 
     containerDefinition.addPortMappings({containerPort: 5000, protocol: Protocol.TCP})
 
-    // const apiGroupId = this.loadParameter('Titus/ApiSecurityGroup')
-    // const apiGroup = SecurityGroup.fromSecurityGroupId(this, 'ApiGroup', apiGroupId.stringValue)
-    // apiGroup.addIngressRule(Peer.anyIpv4(), Port.tcp(5000))
-    //
     this.service = new ApplicationLoadBalancedFargateService(this, 'TitusAlbService', {
       cluster: this.cluster,
       taskDefinition: taskDefinition,

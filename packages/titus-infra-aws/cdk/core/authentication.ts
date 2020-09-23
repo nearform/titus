@@ -173,11 +173,6 @@ export class Authentication extends Construct {
       }
     ]
 
-    // internalCfn.smsConfiguration = {
-    //   externalId: "${var.project_name}_role_external_id",
-    //   snsCallerArn: "${aws_iam_role.sns_role.arn}"
-    // }
-
     internalCfn.smsVerificationMessage = 'Your verification code is {####}'
     internalCfn.emailVerificationMessage = 'Your verification code is {####}'
     internalCfn.emailVerificationSubject = 'Your verification code'

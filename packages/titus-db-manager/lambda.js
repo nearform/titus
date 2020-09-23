@@ -3,7 +3,7 @@
 const AWS = require('aws-sdk')
 const logger = require('pino')()
 
-async function getSecret(secretName) {
+function getSecret(secretName) {
   return new Promise((resolve, reject) => {
     const client = new AWS.SecretsManager()
     client.getSecretValue({ SecretId: secretName }, function (err, data) {
