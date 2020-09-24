@@ -8,7 +8,7 @@ const jws = require('jws')
 const jwt = require('jsonwebtoken')
 const axios = require('axios')
 
-const authRoutes = require('../../config/auth-routes')
+const authRoutes = require('../../../config/auth-routes')
 
 const verifyJWT = async (config, idToken) => {
   const decoded = jws.decode(idToken)
@@ -97,8 +97,8 @@ async function azureAD(server, options) {
     }
     const token = authorization.replace('Bearer ', '')
     try {
-      const verifiedToken = await verifyJWT(options.azureAD, token)
-      const user = await getUser(options.azureAD, verifiedToken)
+      const verifiedToken = await verifyJWT(options.auth.azureAD, token)
+      const user = await getUser(options.auth.azureAD, verifiedToken)
       req.user = user
     } catch (err) {
       res.code(400)

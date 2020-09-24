@@ -2,6 +2,7 @@ const config = {
   serverUrl: process.env.REACT_APP_API_PATH,
   env: process.env.NODE_ENV,
   publicUrl: process.env.PUBLIC_URL,
+  remoteAwsConfigPath: process.env.REACT_APP_REMOTE_AWS_CONFIG_PATH,
 
   adal: {
     tenant: process.env.REACT_APP_AD_TENANT,

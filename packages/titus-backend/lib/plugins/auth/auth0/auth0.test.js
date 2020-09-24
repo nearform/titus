@@ -19,13 +19,16 @@ describe('auth0 plugin', () => {
     server = require('fastify')()
 
     server.register(require('.'), {
-      auth0: {
-        domain,
-        clientId,
-        clientSecret,
-        audience,
-        grantType,
-        secret: 'That1Super_Secret'
+      auth: {
+        provider: 'auth0',
+        auth0: {
+          domain,
+          clientId,
+          clientSecret,
+          audience,
+          grantType,
+          secret: 'That1Super_Secret'
+        }
       }
     })
     address = await server.listen(5002)
@@ -123,7 +126,7 @@ describe('auth0 plugin', () => {
     const user = { id: 1, name: 'someone' }
     const encoded = jwt.sign(user, 'That1Super_Secret', {
       audience,
-      issuer: `${domain}/`
+      issuer: `${domain}`
     })
 
     const response = await server.inject({

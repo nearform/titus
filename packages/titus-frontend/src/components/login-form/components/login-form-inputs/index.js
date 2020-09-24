@@ -27,7 +27,7 @@ const LoginFormInputs = ({ allowChangePassword, isSubmitting, loginError }) => {
       />
       {allowChangePassword &&
       loginError &&
-      /Temporary password/.test(loginError) ? (
+      /Temporary password/i.test(loginError) ? (
         <>
           <Field
             id="newPassword"
@@ -42,7 +42,7 @@ const LoginFormInputs = ({ allowChangePassword, isSubmitting, loginError }) => {
       <ErrorMessage name="password" className="login__error" component="div" />
       {loginError &&
         !allowChangePassword &&
-        !/Temporary password/.test(loginError) && (
+        !/Temporary password/i.test(loginError) && (
           <div className="login__error">{loginError}</div>
         )}
       <button className="button" disabled={isSubmitting} type="submit">
