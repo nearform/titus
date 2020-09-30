@@ -1,4 +1,4 @@
-# Titus Aws Cdk Deploy
+# Titus Aws Cdk Deploy with Mira
 
 This package allows to deploy easily the titus project on a AWS account.
 
