@@ -21,12 +21,11 @@ interface WebAppProps {
 export class WebApp extends MiraStack {
   constructor(parent: Construct, props: WebAppProps) {
     super(parent, WebApp.name)
-    const domainConfig = MiraConfig.getEnvironment(MiraConfig.defaultEnvironmentName)
+
     /**
      * named resource warning
      */
     const bucketProps = {
-      bucketName: (domainConfig.env as unknown as { webAppUrl: string }).webAppUrl,
       publicReadAccess: true,
       websiteIndexDocument: 'index.html',
       websiteErrorDocument: 'error.html'
