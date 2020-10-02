@@ -7,9 +7,10 @@
   "scripts": {
     "build": "tsc",
     "test": "TAP=true jest",
-    "validate:deploy": "node scripts/validateDeploy",
+    "validate:deploy": "node scripts/validateDeploy $ENVIRONMENT",
     "deploy": "tsc && npm run validate:deploy && npx mira deploy --file=cdk/index.js --outputs-file output.json",
-    "deploy:ci": "tsc && npm run validate:deploy && npx mira deploy --file=cdk/index.js --outputs-file output.json",
+    "copy-config-ci": "cp config/default-pipeline.json config/default.json",
+    "deploy:ci": "tsc && npm run copy-config-ci && npm run validate:deploy && npx mira deploy --file=cdk/index.js --outputs-file output.json —require-approval never",
     "bootstrap": "npx mira bootstrap",
     "undeploy": "tsc && npx mira undeploy --file=cdk/index.js"
   },
