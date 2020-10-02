@@ -16,7 +16,7 @@
         "certificateSslName": "titus.davidefiorello.com",
         "awsEcrRepositoryName": "codeflyer-titus-backend"
       },
-      "profile": "titus-deploy"
+      "profile": "default"
     },
     "cicd": {
       "env": {

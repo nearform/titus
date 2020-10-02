@@ -21,13 +21,13 @@ phases:
   build:
     commands:
       - echo Deploy started on `date`
-      - echo "Assuming role $DEPLOYER_ROLE_ARN ..."
-      - CREDS=$(aws sts assume-role --role-arn $DEPLOYER_ROLE_ARN --role-session-name my-sls-session --out json)
-      - echo $CREDS > temp_creds.json
-      - export AWS_ACCESS_KEY_ID=$(node -p "require('./temp_creds.json').Credentials.AccessKeyId")
-      - export AWS_SECRET_ACCESS_KEY=$(node -p "require('./temp_creds.json').Credentials.SecretAccessKey")
-      - export AWS_SESSION_TOKEN=$(node -p "require('./temp_creds.json').Credentials.SessionToken")
-      - aws sts get-caller-identity
+#      - echo "Assuming role $DEPLOYER_ROLE_ARN ..."
+#      - CREDS=$(aws sts assume-role --role-arn $DEPLOYER_ROLE_ARN --role-session-name default --out json)
+#      - echo $CREDS > temp_creds.json
+#      - export AWS_ACCESS_KEY_ID=$(node -p "require('./temp_creds.json').Credentials.AccessKeyId")
+#      - export AWS_SECRET_ACCESS_KEY=$(node -p "require('./temp_creds.json').Credentials.SecretAccessKey")
+#      - export AWS_SESSION_TOKEN=$(node -p "require('./temp_creds.json').Credentials.SessionToken")
+#      - aws sts get-caller-identity
       - npm run build:all
       - npm run deploy:ci
   post_build:
