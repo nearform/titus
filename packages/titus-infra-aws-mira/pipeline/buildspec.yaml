@@ -29,7 +29,7 @@ phases:
       - export AWS_SESSION_TOKEN=$(node -p "require('./temp_creds.json').Credentials.SessionToken")
       - aws sts get-caller-identity
       - npm run build:all
-      - npm run deploy:ci -- --env=$ENVIRONMENT
+      - npm run deploy:ci
   post_build:
     commands:
       - echo Build completed on `date`
