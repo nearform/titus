@@ -5,7 +5,7 @@ env:
   variables:
     HUSKY_SKIP_INSTALL: 1
     NODE_ENV: development
-    DEPLOYER_ROLE_ARN: arn:aws:iam::912147919779:role/Nf-TitusApp2-DeployProjectRole-staging
+    DEPLOYER_ROLE_ARN: arn:aws:iam::912147919779:role/Nf-TitusApp3-DeployProjectRole-staging
 
 phases:
   install:

@@ -39,7 +39,7 @@
   },
   "cicd": {
     "target": "cicd",
-    "buildspecFile": "packages/titus-infra-aws/pipeline/buildspec.yaml",
+    "buildspecFile": "packages/titus-infra-aws-mira/pipeline/buildspec.yaml",
     "permissionsFile": "pipeline/permissions.js",
     "provider": "codecommit",
     "repositoryUrl": "https://git-codecommit.eu-west-2.amazonaws.com/v1/repos/titus-repo-deploy",
