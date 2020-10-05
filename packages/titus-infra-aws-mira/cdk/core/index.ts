@@ -47,11 +47,11 @@ export class Core extends MiraStack {
       ingressSecurityGroup: this.ingressSecurityGroup
     })
 
-    new Migration(this, 'Migration', {
-      securityGroup: this.ingressSecurityGroup,
-      vpc: this.vpc,
-      secret: this.database.secret
-    })
+    // new Migration(this, 'Migration', {
+    //   securityGroup: this.ingressSecurityGroup,
+    //   vpc: this.vpc,
+    //   secret: this.database.secret
+    // })
 
     this.authentication = new Authentication(this, 'Authentication')
     const {
