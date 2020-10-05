@@ -106,6 +106,10 @@
         "cloudfront:GetDistribution",
         "cloudfront:TagResource",
         "cloudfront:UpdateDistribution",
+        "ec2:AssociateRouteTable",
+        "ec2:AttachInternetGateway",
+        "ec2:AuthorizeSecurityGroupEgress",
+        "ec2:AuthorizeSecurityGroupIngress",
         "ec2:AllocateAddress",
         "ec2:CreateInternetGateway",
         "ec2:CreateNatGateway",
@@ -197,10 +201,6 @@
         }
       },
       "Action": [
-        "ec2:AssociateRouteTable",
-        "ec2:AttachInternetGateway",
-        "ec2:AuthorizeSecurityGroupEgress",
-        "ec2:AuthorizeSecurityGroupIngress",
         "ec2:DeleteInternetGateway",
         "ec2:DeleteNatGateway",
         "ec2:DeleteRoute",
