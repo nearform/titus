@@ -26,6 +26,7 @@
     "test:all": "npm run test && lerna run --parallel test",
     "test:related": "lerna run test:related",
     "deploy:ci": "lerna run deploy:ci",
+    "prepare:deploy:ci": "lerna run prepare:deploy:ci",
     "deploy": "lerna run deploy"
   },
   "devDependencies": {
