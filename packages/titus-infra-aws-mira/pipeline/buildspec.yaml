@@ -28,7 +28,7 @@ phases:
 #      - aws sts get-caller-identity
       - npm run build:all
       - npm run prepare:deploy:ci
-      - npx mira deploy  --env=$ENVIRONMENT --file=cdk/index.js --role "$ROLE_ARN"
+      - npm run deploy:ci
   post_build:
     commands:
       - echo Build completed on `date`

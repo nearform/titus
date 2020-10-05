@@ -11,7 +11,7 @@
     "deploy": "tsc && npm run validate:deploy && npx mira deploy --file=cdk/index.js --outputs-file output.json —-require-approval never",
     "copy-config-ci": "cp config/default-pipeline.json config/default.json",
     "prepare:deploy:ci": "tsc && npm run copy-config-ci",
-    "deploy:ci": "npm run prepare:deploy:ci && npx mira deploy  --env=$ENVIRONMENT --file=cdk/index.js --outputs-file output.json --role $DEPLOYER_ROLE_ARN",
+    "deploy:ci": "mira deploy --env=$ENVIRONMENT --file=cdk/index.js --role $ROLE_ARN",
     "bootstrap": "npx mira bootstrap",
     "undeploy": "tsc && npx mira undeploy --file=cdk/index.js"
   },
