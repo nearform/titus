@@ -4,8 +4,6 @@ env:
   shell: bash
   variables:
     HUSKY_SKIP_INSTALL: 1
-    NODE_ENV: development
-    DEPLOYER_ROLE_ARN: arn:aws:iam::912147919779:role/Nf-TitusApp3-DeployProjectRole-staging
 
 phases:
   install:
@@ -29,7 +27,8 @@ phases:
 #      - export AWS_SESSION_TOKEN=$(node -p "require('./temp_creds.json').Credentials.SessionToken")
 #      - aws sts get-caller-identity
       - npm run build:all
-      - npm run deploy:ci
+      - npm run prepare:deploy:ci
+      - npx mira deploy  --env=$ENVIRONMENT --file=cdk/index.js --role "$ROLE_ARN"
   post_build:
     commands:
       - echo Build completed on `date`

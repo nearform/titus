@@ -43,7 +43,7 @@
     "permissionsFile": "pipeline/permissions.js",
     "provider": "codecommit",
     "repositoryUrl": "https://git-codecommit.eu-west-2.amazonaws.com/v1/repos/titus-repo-deploy",
-    "branchName": "release/*",
+    "branchName": "release/pipeline",
     "codeCommitUserPublicKey": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDTUASlk9fbr/E7vD2MMp6eQAhv4b7cSvi9JsGMw5NhoPJQIr/QYIWg0u3zvahlNk7By3GbPjRs51ufjJkT+qRMwPxjK5LcRuPxkdahAiw3mGjU9UI4F4byb0XZJ/RVqvepdcnVOye3SOWhcFICZzKSgKziOGvFAfexPxUyAmJfdR11fN9rFm0GUpiSKZX/7qb1Fh+NhdaoSQtfhQj1nfCbtYDueg4tQNXYArOvSzoODLhx088Lmj084NYenkLkugtFJq4ZvdlIS8Ve6mBawnVk1oxEG6ad49IHofomz2NmrWhAy/+2SMQ7dGczItrdfIL4iUMOQ+6Cs5bTsknkyPIeDK+bZDt7DCLUBQGcE4fA7zCnv5O4ElkEn8uJQHsMOuSSEElcF74Z0GKrXbPZ5V+yi7a7C5jGjiF0Km/nmFoodCvZ0fL2wwuL6DvAmgR1gXAMMED9H+2V1GRFvRfURC7RpOtGpUnwr0o6dgeT3UCrj20BGGEjBB3yfyvGMxdSAHk=",
     "stages": [
       {
