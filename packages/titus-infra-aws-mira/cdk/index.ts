@@ -12,17 +12,17 @@ export class MainStack extends MiraServiceStack {
 
     const core = new Core(this)
 
-    const ecs = new EcsNlb(this, {
-      vpc: core.vpc,
-      authentication: core.authentication,
-      database: core.database
-    })
-
-    const api = new ApiGatewayNlb(this, {
-      vpc: core.vpc,
-      nlb: ecs.service.loadBalancer,
-      userPoolArn: core.authentication.userPoolArn
-    })
+    // const ecs = new EcsNlb(this, {
+    //   vpc: core.vpc,
+    //   authentication: core.authentication,
+    //   database: core.database
+    // })
+    //
+    // const api = new ApiGatewayNlb(this, {
+    //   vpc: core.vpc,
+    //   nlb: ecs.service.loadBalancer,
+    //   userPoolArn: core.authentication.userPoolArn
+    // })
     //
     // new WebApp(this, {
     //   apiUrl: api.url,

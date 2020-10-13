@@ -1,4 +1,4 @@
-const {handler} = require('./get-config')
+import {handler} from './get-config'
 
 describe('Lambda/get-config', () => {
   it('Return the config based on ENV', async () => {

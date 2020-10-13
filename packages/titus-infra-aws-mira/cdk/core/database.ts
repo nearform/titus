@@ -48,10 +48,12 @@ export class Database extends Construct {
       storageType: StorageType.GP2,
       backupRetention: Duration.days(3),
       deletionProtection: false,
-      masterUsername,
       databaseName,
       port: 5432,
       securityGroups: [props.ingressSecurityGroup],
+      credentials: {
+        username: masterUsername
+      }
     })
 
     if (!this.rdsInstance.secret) {
