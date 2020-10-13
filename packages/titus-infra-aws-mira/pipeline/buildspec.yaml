@@ -10,8 +10,8 @@ phases:
     runtime-versions:
       nodejs: 12
     commands:
-      - npm install
-      - npm run postinstall
+#      - npm install
+#      - npm run postinstall
   pre_build:
     commands:
 #      - npm test test
@@ -19,9 +19,18 @@ phases:
   build:
     commands:
       - echo Deploy started on `date`
-      - npm run build:all
-      - npm run prepare:deploy:ci
-      - cd packages/titus-infra-aws-mira && npx mira deploy --env=$ENVIRONMENT --file=cdk/index.js --role $ROLE_ARN --require-approval=never
+      - echo "Assuming role $ROLE_ARN ..."
+      - env
+#      - CREDS=$(aws sts assume-role --role-arn $ROLE_ARN --role-session-name default --out json)
+#      - echo $CREDS > temp_creds.json
+#      - export AWS_ACCESS_KEY_ID=$(node -p "require('./temp_creds.json').Credentials.AccessKeyId")
+#      - export AWS_SECRET_ACCESS_KEY=$(node -p "require('./temp_creds.json').Credentials.SecretAccessKey")
+#      - export AWS_SESSION_TOKEN=$(node -p "require('./temp_creds.json').Credentials.SessionToken")
+#      - aws sts get-caller-identity
+#      - aws ecr get-login-password --region ${region} | docker login --username AWS --password-stdin ${account}.dkr.ecr.${region}.amazonaws.com`
+#      - npm run build:all
+#      - npm run prepare:deploy:ci
+#      - cd packages/titus-infra-aws-mira && npx mira deploy --env=$ENVIRONMENT --file=cdk/index.js --role $ROLE_ARN --require-approval=never
   post_build:
     commands:
       - echo Build completed on `date`
