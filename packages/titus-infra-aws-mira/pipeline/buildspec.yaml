@@ -11,8 +11,8 @@ phases:
       docker: 19
       nodejs: 12
     commands:
-      - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://127.0.0.1:2375 --storage-driver=overlay2
-      - timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
+#      - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://127.0.0.1:2375 --storage-driver=overlay2
+#      - timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
       - npm install
       - npm run postinstall
   pre_build:
