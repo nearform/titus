@@ -21,7 +21,7 @@ phases:
       - echo Deploy started on `date`
       - npm run build:all
       - npm run prepare:deploy:ci
-      - cd packages/titus-infra-aws-mira && npx mira deploy --env=$ENVIRONMENT --file=cdk/index.js --require-approval=never
+      - cd packages/titus-infra-aws-mira && npx mira deploy --env=$ENVIRONMENT --file=cdk/index.js --role $ROLE_ARN --require-approval=never
   post_build:
     commands:
       - echo Build completed on `date`
