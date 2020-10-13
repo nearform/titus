@@ -23,10 +23,10 @@ export class MainStack extends MiraServiceStack {
       nlb: ecs.service.loadBalancer,
       userPoolArn: core.authentication.userPoolArn
     })
-    //
-    // new WebApp(this, {
-    //   apiUrl: api.url,
-    // })
+
+    new WebApp(this, {
+      apiUrl: api.url,
+    })
   }
 }
 
