@@ -10,8 +10,8 @@ phases:
     runtime-versions:
       nodejs: 12
     commands:
-#      - npm install
-#      - npm run postinstall
+      - npm install
+      - npm run postinstall
   pre_build:
     commands:
 #      - npm test test
@@ -20,6 +20,8 @@ phases:
     commands:
       - echo Deploy started on `date`
       - echo "Assuming role $ROLE_ARN ..."
+      - npm run build:all
+      - npm run prepare:deploy:ci
       - env
       - CREDS=$(aws sts assume-role --role-arn $ROLE_ARN --role-session-name default --out json)
       - echo $CREDS > temp_creds.json
@@ -32,8 +34,6 @@ phases:
       - export ECR_REPOSITORY_NAME=$(node -p "require('./packages/titus-infra-aws-mira/config/default.json').accounts.${ENVIRONMENT}.env.awsEcrRepositoryName")
       - aws ecr get-login-password --region ${ECR_REGION} | docker login --username AWS --password-stdin ${ECR_ACCOUNT}.dkr.ecr.${ECR_REGION}.amazonaws.com
 #      -
-#      - npm run build:all
-#      - npm run prepare:deploy:ci
 #      - cd packages/titus-infra-aws-mira && npx mira deploy --env=$ENVIRONMENT --file=cdk/index.js --role $ROLE_ARN --require-approval=never
   post_build:
     commands:
