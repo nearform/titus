@@ -19,17 +19,9 @@ phases:
   build:
     commands:
       - echo Deploy started on `date`
-#      - echo "Assuming role $DEPLOYER_ROLE_ARN ..."
-#      - CREDS=$(aws sts assume-role --role-arn $DEPLOYER_ROLE_ARN --role-session-name default --out json)
-#      - echo $CREDS > temp_creds.json
-#      - export AWS_ACCESS_KEY_ID=$(node -p "require('./temp_creds.json').Credentials.AccessKeyId")
-#      - export AWS_SECRET_ACCESS_KEY=$(node -p "require('./temp_creds.json').Credentials.SecretAccessKey")
-#      - export AWS_SESSION_TOKEN=$(node -p "require('./temp_creds.json').Credentials.SessionToken")
-#      - aws sts get-caller-identity
       - npm run build:all
       - npm run prepare:deploy:ci
-#      - cd packages/titus-infra-aws-mira && npm run deploy:ci
-      - cd packages/titus-infra-aws-mira && npx mira deploy --env=$ENVIRONMENT --file=cdk/index.js --role $ROLE_ARN --require-approval=never
+      - cd packages/titus-infra-aws-mira && npx mira deploy --env=$ENVIRONMENT --file=cdk/index.js --require-approval=never
   post_build:
     commands:
       - echo Build completed on `date`
