@@ -9,6 +9,7 @@ phases:
   install:
     runtime-versions:
       nodejs: 12
+      docker: 19
     commands:
       - npm install
       - npm run postinstall
