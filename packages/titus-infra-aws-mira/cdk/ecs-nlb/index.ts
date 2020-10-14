@@ -36,7 +36,7 @@ export class EcsNlb extends MiraStack {
     role.addManagedPolicy(ManagedPolicy.fromAwsManagedPolicyName('service-role/AmazonECSTaskExecutionRolePolicy'))
 
     this.cluster = new Cluster(this, 'FargateTitusCluster', {
-      clusterName: 'titus-backend-cluster',
+      clusterName: MiraConfig.calculateSharedResourceName('ecs-cluster'),
       vpc: props.vpc,
     })
 
