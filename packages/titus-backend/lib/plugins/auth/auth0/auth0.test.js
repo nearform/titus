@@ -126,7 +126,7 @@ describe('auth0 plugin', () => {
     const user = { id: 1, name: 'someone' }
     const encoded = jwt.sign(user, 'That1Super_Secret', {
       audience,
-      issuer: `${domain}`
+      issuer: `${domain}/`
     })
 
     const response = await server.inject({
