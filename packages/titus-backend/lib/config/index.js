@@ -26,7 +26,8 @@ const config = envSchema({
     .prop('AD_APP_ID', S.string())
     .prop('AD_SECRET', S.string())
     .prop('CORS_ORIGIN', S.string())
-    .prop('SECRETS_TEST', S.string())
+    .prop('SECRETS_STRATEGY', S.string())
+    .prop('SECRETS_PG_PASS', S.string())
 })
 
 const isProduction = /^\s$production\s*$/i.test(config.NODE_ENV)
@@ -46,7 +47,6 @@ module.exports = {
     port: config.PG_PORT,
     database: config.PG_DB,
     user: config.PG_USER,
-    password: config.PG_PASS,
     poolSize: 10,
     idleTimeoutMillis: 30000
   },
@@ -74,10 +74,10 @@ module.exports = {
   jwt: {
     secret: config.JWT_SECRET
   },
-  secretManager: {
-    test: 'projects/494141678371/secrets/test/versions/latest'
-  },
-  developmentSecrets: {
-    test: config.SECRETS_TEST
+  secrets: {
+    strategy: config.SECRETS_STRATEGY
+    secrets: {
+      dbPassword: config.SECRETS_PG_PASS
+    }
   }
 }

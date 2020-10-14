@@ -1,7 +1,7 @@
 {
-  "name": "fastify-secrets-env",
+  "name": "fastify-secrets-core",
   "version": "0.0.1",
-  "description": "Fastify Secrets from env variables",
+  "description": "Plugin to simplify development of fastify-secrets plugins",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -10,17 +10,16 @@
   "keywords": [
     "fastify",
     "secrets",
-    "env",
     "development"
   ],
-  "author": "Cristian Kiss - @ckiss",
+  "author": "Paolo Chiodi - @paolochiodi",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/fastify/fastify-secrets/issues"
   },
   "homepage": "https://github.com/fastify/fastify-secrets#readme",
   "dependencies": {
-    "fastify-secrets-core": "../fastify-secrets-core"
+    "fastify-plugin": "^1.5.0"
   },
   "devDependencies": {
     "fastify": "^2.7.1"

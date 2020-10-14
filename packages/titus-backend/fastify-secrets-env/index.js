@@ -1,41 +1,18 @@
 'use strict'
-const fp = require('fastify-plugin')
 
-async function fastifySecretsEnv(fastify, options) {
-  const { name, developmentSecrets, ...restOptions } = options
+const { buildPlugin } = require('fastify-secrets-core')
 
-  const secrets = {}
-  for (const key in restOptions) {
-    if (developmentSecrets[key]) {
-      secrets[key] = developmentSecrets[key]
-    } else {
-      // if development secret is not set it will throw an error
-      throw new Error(`Development secret not found: ${key}`)
-    }
-  }
-
-  if (name) {
-    if (!fastify.secrets) {
-      fastify.decorate('secrets', {})
+class Client {
+  async get(key) {
+    if (!(env in process.env)) {
+      throw new Error(`Secret not found: ${key}`)
     }
 
-    if (fastify.secrets[name]) {
-      throw new Error(
-        `fastify-secrets-env '${name}' instance name has already been registered`
-      )
-    }
-
-    fastify.secrets[name] = secrets
-  } else {
-    if (fastify.secrets) {
-      throw new Error('fastify-secrets-env has already been registered')
-    } else {
-      fastify.decorate('secrets', secrets)
-    }
+    return process.env[key]
   }
 }
 
-module.exports = fp(fastifySecretsEnv, {
+module.exports = buildPlugin(client, {
   fastify: '2.x',
   name: 'fastify-secrets-env'
 })

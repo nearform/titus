@@ -1,7 +1,7 @@
 {
-  "name": "fastify-secrets-env",
+  "name": "fastify-gcp-secret-manager",
   "version": "0.0.1",
-  "description": "Fastify Secrets from env variables",
+  "description": "Fastify Secret Manager from gcp secrets manager",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -10,16 +10,18 @@
   "keywords": [
     "fastify",
     "secrets",
-    "env",
-    "development"
+    "gcp",
+    "secret",
+    "manager"
   ],
-  "author": "Cristian Kiss - @ckiss",
+  "author": "Petr Kohut - @petrkohut",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/fastify/fastify-secrets/issues"
   },
   "homepage": "https://github.com/fastify/fastify-secrets#readme",
   "dependencies": {
+    "@google-cloud/secret-manager": "^3.0.0",
     "fastify-secrets-core": "../fastify-secrets-core"
   },
   "devDependencies": {
