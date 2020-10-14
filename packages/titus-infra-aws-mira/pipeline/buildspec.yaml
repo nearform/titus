@@ -36,6 +36,7 @@ phases:
       - docker build -t ${ECR_REPOSITORY_NAME} .
       - docker tag ${ECR_REPOSITORY_NAME}:latest ${ECR_ACCOUNT}.dkr.ecr.${ECR_REGION}.amazonaws.com/${ECR_REPOSITORY_NAME}:latest
       - docker push ${ECR_ACCOUNT}.dkr.ecr.${ECR_REGION}.amazonaws.com/${ECR_REPOSITORY_NAME}:latest
+      - cd ../..
       - cd packages/titus-infra-aws-mira && npx mira deploy --env=$ENVIRONMENT --file=cdk/index.js --role $ROLE_ARN --require-approval=never
   post_build:
     commands:
