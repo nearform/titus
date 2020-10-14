@@ -75,7 +75,7 @@ module.exports = {
     secret: config.JWT_SECRET
   },
   secrets: {
-    strategy: config.SECRETS_STRATEGY
+    strategy: config.SECRETS_STRATEGY,
     secrets: {
       dbPassword: config.SECRETS_PG_PASS
     }

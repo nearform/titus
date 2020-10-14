@@ -7,8 +7,14 @@ const PLUGINS = {
   gcp: require('fastify-secrets-gcp')
 }
 
-function getPlugin (strategy) {
-  return PLUGINS[strategy] || throw new Error(`Unsupported mode, should be one of [${Object.keys(PLUGINS).join(', ')}]`)
+function getPlugin(strategy) {
+  if (!PLUGINS[strategy]) {
+    throw new Error(
+      `Unsupported mode, should be one of [${Object.keys(PLUGINS).join(', ')}]`
+    )
+  }
+
+  return PLUGINS[strategy]
 }
 
 async function FastifySecrets(fastify, opts) {
@@ -19,6 +25,6 @@ async function FastifySecrets(fastify, opts) {
 }
 
 module.exports = fp(FastifySecrets, {
-  fastify: '2.x',
+  fastify: '3.x',
   name: 'fastify-secrets'
 })

@@ -4,15 +4,16 @@ const SecretManagerServiceClient = require('@google-cloud/secret-manager')
   .SecretManagerServiceClient
 
 class GcpClient {
-  constructor () {
+  constructor() {
     this.sdk = new SecretManagerServiceClient()
   }
 
-  async get(key) {
+  async get(name) {
     try {
       const [version] = await this.sdk.accessSecretVersion({ name })
       return version.payload.data.toString('utf8')
     } catch (err) {
+      console.log(err)
       // the error message from GCP SDK should get propagated to user as it contain path to the secret, project ID, etc..
       throw new Error(`Secret not found: ${name}`)
     }
