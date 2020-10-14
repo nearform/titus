@@ -10,5 +10,5 @@
     "resolveJsonModule": true,
     "rootDir": "."
   },
-  "exclude": ["cdk.out"]
+  "exclude": ["cdk.out", "mira.old"]
 }
