@@ -15,6 +15,7 @@ jobs:
 
     env:
       PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+      DOCKER_REGISTRY_HOST: europe-west1-docker.pkg.dev
       CLOUDRUN_SERVICE_NAME: titus-storybook
       CLOUDRUN_SERVICE_REGION: europe-west1
       CI: true
@@ -30,7 +31,7 @@ jobs:
         with:
           node-version: 12.x
 
-      - name: Set up GCP CLI
+      - name: Set up gcloud CLI
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
           version: latest
@@ -40,8 +41,10 @@ jobs:
 
       - name: Configure Docker repository
         run: |
-          echo "DOCKER_IMAGE=gcr.io/$PROJECT_ID/$CLOUDRUN_SERVICE_NAME:$GITHUB_SHA" >> $GITHUB_ENV
-          gcloud auth configure-docker
+          gcloud components install beta
+          gcloud beta auth configure-docker $DOCKER_REGISTRY_HOST
+
+          echo "DOCKER_IMAGE=$DOCKER_REGISTRY_HOST/$PROJECT_ID/titus/storybook:$GITHUB_SHA" >> $GITHUB_ENV
 
       - name: Build container
         working-directory: ./packages/titus-frontend
