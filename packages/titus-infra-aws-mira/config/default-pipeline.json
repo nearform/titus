@@ -60,12 +60,14 @@
       {
         "target": "staging",
         "withDomain": false,
-        "requireManualApproval": false
+        "requireManualApproval": false,
+        "privileged": true
       },
       {
         "target": "production",
         "withDomain": false,
-        "requireManualApproval": true
+        "requireManualApproval": true,
+        "privileged": true
       }
     ]
   }
