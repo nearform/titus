@@ -1,7 +1,10 @@
+'use strict'
+
+const logger = require('pino')()
+
 const migrate = async pg => {
   await pg.migrate()
-
-  console.log('Database migrated')
+  logger.info('Database migrated')
   return true
 }
 

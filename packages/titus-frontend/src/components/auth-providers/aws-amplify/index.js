@@ -1,15 +1,20 @@
 import Amplify from '@aws-amplify/core'
 import Auth from '@aws-amplify/auth'
+import jwtDecode from 'jwt-decode'
 
 export default class Authentication {
+  authConfig = null
+
   constructor({ config, t } = {}) {
+    this.authConfig = {
+      identityPoolId: config.aws.identityPoolId,
+      region: config.aws.region,
+      userPoolId: config.aws.userPoolId,
+      userPoolWebClientId: config.aws.userPoolWebClientId
+    }
+
     Amplify.configure({
-      Auth: {
-        identityPoolId: config.aws.identityPoolId,
-        region: config.aws.region,
-        userPoolId: config.aws.userPoolId,
-        userPoolWebClientId: config.aws.userPoolWebClientId
-      }
+      Auth: this.authConfig
     })
 
     this.header = t('header.aws')
@@ -44,11 +49,31 @@ export default class Authentication {
 
   isAuthenticated() {
     const regex = /^CognitoIdentityServiceProvider/
-    const awsKeys = Object.keys(localStorage).filter(e => regex.test(e))
-    return awsKeys.length > 0
+    const awsKey = Object.keys(localStorage)
+      .filter(
+        e => regex.test(e) && e.includes(this.authConfig.userPoolWebClientId)
+      )
+      .find(entry => entry.endsWith('.idToken'))
+    return !!awsKey
   }
 
   getUserData() {
-    return this.user
+    const regex = /^CognitoIdentityServiceProvider/
+    const awsKey = Object.keys(localStorage)
+      .filter(
+        e => regex.test(e) && e.includes(this.authConfig.userPoolWebClientId)
+      )
+      .find(entry => entry.endsWith('.idToken'))
+
+    const idToken = localStorage.getItem(awsKey)
+    if (!idToken) {
+      return this.user || false
+    }
+    const decodedToken = jwtDecode(idToken)
+    return {
+      username: decodedToken['cognito:username'],
+      email: decodedToken.email,
+      idToken
+    }
   }
 }

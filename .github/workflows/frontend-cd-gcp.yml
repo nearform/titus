@@ -6,7 +6,7 @@ on:
       - master
     paths:
       - 'packages/titus-frontend/**'
-      - '.github/workflows/deploy_titus_frontend.yml'
+      - '.github/workflows/frontend-cd-gcp.yml'
       
 jobs:
   deploy-titus-frontend:
@@ -15,31 +15,36 @@ jobs:
 
     env:
       PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+      DOCKER_REGISTRY_HOST: europe-west1-docker.pkg.dev
       CLOUDRUN_SERVICE_NAME: titus-frontend
       CLOUDRUN_SERVICE_REGION: europe-west1
       CI: true
 
     steps:
       - name: Checkout project
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
 
       - name: Set up Node
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
 
-      - name: Set up GCP CLI
+      - name: Set up gcloud CLI
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
-          version: '275.0.0'
+          version: latest
           service_account_email: ${{ secrets.GCP_SA_EMAIL }}
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
 
       - name: Configure Docker repository
         run: |
-          echo "::set-env name=DOCKER_IMAGE::gcr.io/$PROJECT_ID/$CLOUDRUN_SERVICE_NAME:$GITHUB_SHA"
-          gcloud auth configure-docker
+          gcloud components install beta
+          gcloud beta auth configure-docker $DOCKER_REGISTRY_HOST
+
+          echo "DOCKER_IMAGE=$DOCKER_REGISTRY_HOST/$PROJECT_ID/titus/frontend:$GITHUB_SHA" >> $GITHUB_ENV
 
       - name: Build container
         working-directory: ./packages/titus-frontend

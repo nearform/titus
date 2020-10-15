@@ -1,57 +1,24 @@
+'use strict'
+
 require('dotenv-expand')(require('dotenv').config())
+const logger = require('pino')()
 
-const Postgrator = require('postgrator')
-const { Client } = require('pg')
+const start = require('./migration-start')
+const credentials = {
+  host: process.env.PG_HOST,
+  port: process.env.PG_PORT,
+  database: process.env.PG_DATABASE,
+  username: process.env.PG_USER,
+  password: process.env.PG_PASSWORD
+}
 
-const Seed = require('./seed')
-const Migrate = require('./migrate')
-const Truncate = require('./truncate')
-
-const start = async () => {
-  console.log(`Starting titus-db-manager tool`)
-
-  const action = process.argv[2] || 'migrate'
-  const valid =
-    action === 'migrate' || action === 'seed' || action === 'truncate'
-
-  if (!valid) {
-    console.log(`${action} is not a valid action, stopping`)
-    return
-  }
-
-  console.log(`Running: ${action}`)
-
+async function run() {
   try {
-    if (action === 'migrate') {
-      const pg = await new Postgrator({
-        validateChecksums: true,
-        newline: 'LF',
-        migrationDirectory: `${__dirname}/migrate/migrations`,
-        driver: 'pg',
-        host: process.env.PG_HOST,
-        port: process.env.PG_PORT,
-        database: process.env.PG_DATABASE,
-        username: process.env.PG_USER,
-        password: process.env.PG_PASSWORD,
-        schemaTable: `schema_migrations`
-      })
-      await Migrate(pg)
-    } else {
-      const client = new Client()
-      await client.connect()
-
-      if (action === 'seed') {
-        await Seed(client)
-      } else if (action === 'truncate') {
-        await Truncate(client)
-      }
-
-      client.end()
-    }
+    await start(process.argv[2] || 'migrate', credentials)
   } catch (err) {
-    console.error('An Error has occurred, stopping', err)
-    process.exit()
+    logger.error('An Error has occurred, stopping', err)
+    process.exit(1)
   }
 }
 
-module.exports = start()
+run()

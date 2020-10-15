@@ -33,8 +33,7 @@ async function health(server, options) {
     handler: async ({ log }) => {
       let dbRes
       try {
-        const client = await server.pg.connect()
-        dbRes = await client.query('SELECT $1::text as message', [
+        dbRes = await server.pg.query('SELECT $1::text as message', [
           'Hello world!'
         ])
       } catch (err) {

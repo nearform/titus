@@ -19,13 +19,16 @@ describe('auth0 plugin', () => {
     server = require('fastify')()
 
     server.register(require('.'), {
-      auth0: {
-        domain,
-        clientId,
-        clientSecret,
-        audience,
-        grantType,
-        secret: 'That1Super_Secret'
+      auth: {
+        provider: 'auth0',
+        auth0: {
+          domain,
+          clientId,
+          clientSecret,
+          audience,
+          grantType,
+          secret: 'That1Super_Secret'
+        }
       }
     })
     address = await server.listen(5002)

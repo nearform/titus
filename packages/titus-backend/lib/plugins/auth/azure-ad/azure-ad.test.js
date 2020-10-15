@@ -18,10 +18,13 @@ describe('users plugin', () => {
   beforeAll(async () => {
     server = fastify()
     const config = {
-      azureAD: {
-        appID: 'appID',
-        secret: 'secret',
-        tenant: 'tenant'
+      auth: {
+        provider: 'azureAD',
+        azureAD: {
+          appID: 'appID',
+          secret: 'secret',
+          tenant: 'tenant'
+        }
       }
     }
     server.register(files, config)
