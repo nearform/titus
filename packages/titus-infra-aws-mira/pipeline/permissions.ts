@@ -49,9 +49,19 @@ export default class CustomPermissions extends DeploymentPermissions {
             "ecr:InitiateLayerUpload",
             "ecr:ListImages",
             "ecr:PutImage",
-            "ecr:UploadLayerPart"
+            "ecr:UploadLayerPart",
+            "ecs:ListServices",
           ],
           resources: [`arn:aws:ecr:${account.env.region}:${account.env.account}:repository/${repositoryName}`]
+        },
+      ))
+
+      this.role.addToPolicy(new PolicyStatement(
+        {
+          actions: [
+            "ecs:UpdateService",
+          ],
+          resources: [`arn:aws:ecr:${account.env.region}:${account.env.account}:services/${MiraConfig.calculateSharedResourceName('ecs-cluster')}*`]
         },
       ))
 

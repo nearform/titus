@@ -13,6 +13,7 @@
     "prepare:deploy:ci": "tsc && npm run copy-config-ci",
     "deploy:ci": "mira deploy --env=$ENVIRONMENT --file=cdk/index.js --role $ROLE_ARN",
     "bootstrap": "npx mira bootstrap",
+    "cicd": "npm run prepare:deploy:ci && mira cicd",
     "undeploy": "tsc && npx mira undeploy --file=cdk/index.js"
   },
   "keywords": [],

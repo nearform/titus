@@ -1,7 +1,7 @@
 {
   "app": {
     "prefix": "nf",
-    "name": "titus-app3"
+    "name": "titus-app"
   },
   "dev": {
     "target": "default"
@@ -11,10 +11,10 @@
       "env": {
         "account": "912147919779",
         "region": "eu-west-2",
-        "domainName": "davidefiorello.com",
-        "webAppUrl": "titus-dev.davidefiorello.com",
-        "certificateSslName": "titus-dev.davidefiorello.com",
-        "awsEcrRepositoryName": "codeflyer-titus-backend"
+        "domainName": "mira-nf.com",
+        "webAppUrl": "titus-dev.mira-nf.com",
+        "certificateSslName": "titus-dev.mira-nf.com",
+        "awsEcrRepositoryName": "mira-nf--titus-backend"
       },
       "profile": "default"
     },
@@ -29,10 +29,10 @@
       "env": {
         "account": "912147919779",
         "region": "eu-west-2",
-        "domainName": "davidefiorello.com",
-        "webAppUrl": "titus-stage.davidefiorello.com",
-        "certificateSslName": "titus-stage.davidefiorello.com",
-        "awsEcrRepositoryName": "codeflyer-titus-backend"
+        "domainName": "mira-nf.com",
+        "webAppUrl": "titus-stage.mira-nf.com",
+        "certificateSslName": "titus-stage.mira-nf.com",
+        "awsEcrRepositoryName": "mira-nf--titus-backend"
       },
       "profile": "default"
     },
@@ -40,10 +40,10 @@
       "env": {
         "account": "912147919779",
         "region": "eu-west-2",
-        "domainName": "davidefiorello.com",
-        "webAppUrl": "titus.davidefiorello.com",
-        "certificateSslName": "titus.davidefiorello.com",
-        "awsEcrRepositoryName": "codeflyer-titus-backend"
+        "domainName": "mira-nf.com",
+        "webAppUrl": "titus.mira-nf.com",
+        "certificateSslName": "titus.mira-nf.com",
+        "awsEcrRepositoryName": "mira-nf--titus-backend"
       },
       "profile": "default"
     }
@@ -53,8 +53,7 @@
     "buildspecFile": "packages/titus-infra-aws-mira/pipeline/buildspec.yaml",
     "permissionsFile": "pipeline/permissions.js",
     "provider": "codecommit",
-    "repositoryUrl": "https://git-codecommit.eu-west-2.amazonaws.com/v1/repos/Nf-TitusApp3-Repository",
-    "branchName": "release/pipeline",
+    "branchName": "master",
     "codeCommitUserPublicKey": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDTUASlk9fbr/E7vD2MMp6eQAhv4b7cSvi9JsGMw5NhoPJQIr/QYIWg0u3zvahlNk7By3GbPjRs51ufjJkT+qRMwPxjK5LcRuPxkdahAiw3mGjU9UI4F4byb0XZJ/RVqvepdcnVOye3SOWhcFICZzKSgKziOGvFAfexPxUyAmJfdR11fN9rFm0GUpiSKZX/7qb1Fh+NhdaoSQtfhQj1nfCbtYDueg4tQNXYArOvSzoODLhx088Lmj084NYenkLkugtFJq4ZvdlIS8Ve6mBawnVk1oxEG6ad49IHofomz2NmrWhAy/+2SMQ7dGczItrdfIL4iUMOQ+6Cs5bTsknkyPIeDK+bZDt7DCLUBQGcE4fA7zCnv5O4ElkEn8uJQHsMOuSSEElcF74Z0GKrXbPZ5V+yi7a7C5jGjiF0Km/nmFoodCvZ0fL2wwuL6DvAmgR1gXAMMED9H+2V1GRFvRfURC7RpOtGpUnwr0o6dgeT3UCrj20BGGEjBB3yfyvGMxdSAHk=",
     "stages": [
       {
