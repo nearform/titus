@@ -6,7 +6,7 @@ on:
       - master
     paths:
       - 'packages/titus-frontend/**'
-      - '.github/workflows/deploy_titus_storybook.yml'
+      - '.github/workflows/storybook-cd-gcp.yml'
 
 jobs:
   deploy-titus-frontend:
@@ -21,7 +21,9 @@ jobs:
 
     steps:
       - name: Checkout project
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
 
       - name: Set up Node
         uses: actions/setup-node@v1
@@ -31,14 +33,14 @@ jobs:
       - name: Set up GCP CLI
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
-          version: '281.0.0'
+          version: latest
           service_account_email: ${{ secrets.GCP_SA_EMAIL }}
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
 
       - name: Configure Docker repository
         run: |
-          echo "::set-env name=DOCKER_IMAGE::gcr.io/$PROJECT_ID/$CLOUDRUN_SERVICE_NAME:$GITHUB_SHA"
+          echo "DOCKER_IMAGE=gcr.io/$PROJECT_ID/$CLOUDRUN_SERVICE_NAME:$GITHUB_SHA" >> $GITHUB_ENV
           gcloud auth configure-docker
 
       - name: Build container
