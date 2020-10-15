@@ -34,6 +34,37 @@ export default class CustomPermissions extends DeploymentPermissions {
       ))
     })
 
+    const repositoryName = (account.env as unknown as { awsEcrRepositoryName: string }).awsEcrRepositoryName
+
+    if (repositoryName) {
+      this.role.addToPolicy(new PolicyStatement(
+        {
+          actions: [
+            "ecr:BatchGetImage",
+            "ecr:BatchCheckLayerAvailability",
+            "ecr:CompleteLayerUpload",
+            "ecr:DescribeImages",
+            "ecr:DescribeRepositories",
+            "ecr:GetDownloadUrlForLayer",
+            "ecr:InitiateLayerUpload",
+            "ecr:ListImages",
+            "ecr:PutImage",
+            "ecr:UploadLayerPart"
+          ],
+          resources: [`arn:aws:ecr:${account.env.region}:${account.env.account}:repository/${repositoryName}`]
+        },
+      ))
+
+      this.role.addToPolicy(new PolicyStatement(
+        {
+          actions: [
+            "ecr:GetAuthorizationToken"
+          ],
+          resources: ['*']
+        },
+      ))
+    }
+
     new CfnOutput((this as unknown) as Construct, 'DeployRoleArn', {
       value: this.role.roleArn
     })
