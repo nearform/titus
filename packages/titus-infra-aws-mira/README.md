@@ -219,7 +219,7 @@ node scripts/createUser.js --email davide.fiorello@nearform.com --password YOUR_
 ## Pipeline
 The deploy can be automated on AWS adding the deploy of the pipeline.
 
-### Update the config file
+### Update the Config File
 
 Update the values in the `default-pipeline.json` config file:
 
@@ -289,4 +289,3 @@ The steps for the pipeline are defined in the `./pipeline/buildspec.yaml` file.
 ### Run the pipeline
 
 Push the `master` branch to the `codecommit` repo, and the pipeline will run.
-
