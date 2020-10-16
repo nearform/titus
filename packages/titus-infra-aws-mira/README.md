@@ -280,7 +280,7 @@ According with the value in the config file `"branchName": "master",` the pipeli
 
 In the config directory there are 2 files that are required to ovveride the deployment values in the pipeline.
 
-NODE_ENV definition in the command `NODE_ENV=$ENVIRONMENT npx mira deploy...` will define which environemnt will be deployed by the pipeline.  
+The NODE_ENV definition in the command `NODE_ENV=$ENVIRONMENT npx mira deploy...` will define which environment will be deployed by the pipeline.  
 
 ### Defining Steps for the Pipeline
 
