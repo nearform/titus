@@ -266,7 +266,7 @@ Nf-TitusApp-Cicd.RepositoryName = Nf-TitusApp-Repository
 Nf-TitusApp-Cicd.GitUserName = APKA5I....
 ```
 
-The value in `Nf-TitusApp-Cicd.RepositoryName` define the repository created for the deploy.
+The value in `Nf-TitusApp-Cicd.RepositoryName` defines the repository created for the deploy.
 
 In this case will be:
 
