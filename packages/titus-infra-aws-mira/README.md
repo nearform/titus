@@ -276,7 +276,7 @@ https://git-codecommit.YOUR_REGION.amazonaws.com/v1/repos/Nf-TitusApp-Repository
 
 According with the value in the config file `"branchName": "master",` the pipeline will run every time a push on `master` is done in the repository.
 
-### staging.json and production.json
+### Setting Environment-Specific Deployment Values
 
 In the config directory there are 2 files that are required to ovveride the deployment values in the pipeline.
 
@@ -289,6 +289,5 @@ The steps for the pipeline are defined in the `./pipeline/buildspec.yaml` file.
 ### Run the pipeline
 
 Push the `master` branch to the `codecommit` repo, and the pipeline will run.
-
 
 
