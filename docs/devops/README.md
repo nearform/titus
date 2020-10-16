@@ -8,7 +8,7 @@ Deployment for Titus is a fully featured, modern, production grade experience ha
 An example deployment of Titus to [GCP] is provided. For simplicity, we use a CD pipeline workflow which follows master branch changes and does an automatic deployment. There is a working examples of a CD pipeline in the `.github/workflows` folder.
 
 ### Deploy Titus on AWS with Mira
-An example deployment of Titus to [AWS] is provided. The deployment is done using [Mira] and [Cdk]. A full description of the deployment process can be find in the [titus-infra-aws-mira] package.
+An example deployment of Titus to [AWS] is provided. The deployment is done using [Mira] and [CDK]. A full description of the deployment process can be found in the [titus-infra-aws-mira] package.
 
 
 **Note:** CD workflow pipelines are expected to be adjusted or completely changed to fulfill project needs.
