@@ -282,14 +282,13 @@ In the config directory there are 2 files that are required to ovveride the depl
 
 NODE_ENV definition in the command `NODE_ENV=$ENVIRONMENT npx mira deploy...` will define which environemnt will be deployed by the pipeline.  
 
-### Buildspec.yaml
+### Defining Steps for the Pipeline
 
 The steps for the pipeline are defined in the `./pipeline/buildspec.yaml` file.
 
 ### Run the pipeline
 
 Push the `master` branch to the `codecommit` repo, and the pipeline will run.
-
 
 
 
