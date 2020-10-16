@@ -5,6 +5,7 @@ To set up a [Titus] deployment on an [GCP] cloud using [Github Actions], there a
 **Note:** [Terraform] 0.12+ is required for the infrastructure creation.
 
 ## Infrastructure Stack
+
 The stack is built with minimum number of services to make Titus work on GCP:
 - Cloudrun services (frontend, backend, db-manager, storybook)
 - CloudSQL (PostgreSQL DB)
@@ -28,6 +29,7 @@ Create a `infra/terraform/gcp/config.auto.tfvars` file and fill it with adjusted
 - `zone`
 
 ## Enable GCP APIs
+
 Titus uses multiple GCP services and for all of them Terraform expects their APIs to be enabled.
 
 For provisioning Titus on fresh new GCP project these service APIs need to be enabled:
