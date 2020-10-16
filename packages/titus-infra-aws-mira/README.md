@@ -1,4 +1,4 @@
-# Titus Aws Cdk Deploy with Mira
+# Titus AWS CDK Deploy with Mira
 
 This package allows to deploy easily the titus project on a AWS account.
 
@@ -219,7 +219,7 @@ node scripts/createUser.js --email davide.fiorello@nearform.com --password YOUR_
 ## Pipeline
 The deploy can be automated on AWS adding the deploy of the pipeline.
 
-### Update the config file
+### Update the Config File
 
 Update the values in the `default-pipeline.json` config file:
 
@@ -276,20 +276,16 @@ https://git-codecommit.YOUR_REGION.amazonaws.com/v1/repos/Nf-TitusApp-Repository
 
 According with the value in the config file `"branchName": "master",` the pipeline will run every time a push on `master` is done in the repository.
 
-### staging.json and production.json
+### Setting Environment-Specific Deployment Values
 
 In the config directory there are 2 files that are required to ovveride the deployment values in the pipeline.
 
 NODE_ENV definition in the command `NODE_ENV=$ENVIRONMENT npx mira deploy...` will define which environemnt will be deployed by the pipeline.  
 
-### Buildspec.yaml
+### Defining Steps for the Pipeline
 
 The steps for the pipeline are defined in the `./pipeline/buildspec.yaml` file.
 
 ### Run the pipeline
 
 Push the `master` branch to the `codecommit` repo, and the pipeline will run.
-
-
-
-
