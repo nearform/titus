@@ -256,7 +256,7 @@ npm run cicd
 
 The command will create a role with the permission to deploy the infrastructure and the codepipeline service.
 
-At the end of the deploy the output will show:
+At the end of the deployment, the output will show:
 
 ```
  ✅  Nf-TitusApp-Cicd
