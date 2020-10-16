@@ -268,7 +268,7 @@ Nf-TitusApp-Cicd.GitUserName = APKA5I....
 
 The value in `Nf-TitusApp-Cicd.RepositoryName` defines the repository created for the deploy.
 
-In this case will be:
+In this case, it will be:
 
 ```
 https://git-codecommit.YOUR_REGION.amazonaws.com/v1/repos/Nf-TitusApp-Repository
