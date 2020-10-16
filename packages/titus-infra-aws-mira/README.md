@@ -1,4 +1,4 @@
-# Titus Aws Cdk Deploy with Mira
+# Titus AWS CDK Deploy with Mira
 
 This package allows to deploy easily the titus project on a AWS account.
 
@@ -289,5 +289,4 @@ The steps for the pipeline are defined in the `./pipeline/buildspec.yaml` file.
 ### Run the pipeline
 
 Push the `master` branch to the `codecommit` repo, and the pipeline will run.
-
 
