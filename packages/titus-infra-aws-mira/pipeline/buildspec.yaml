@@ -37,7 +37,7 @@ phases:
       - docker push ${ECR_ACCOUNT}.dkr.ecr.${ECR_REGION}.amazonaws.com/${ECR_REPOSITORY_NAME}:latest
       - cd ../..
       - cd packages/titus-infra-aws-mira && NODE_ENV=$ENVIRONMENT npx mira deploy --env=$ENVIRONMENT --file=cdk/index.js --role $ROLE_ARN --require-approval=never
-      - export ECS_CLUSTER=Nf-TitusApp3-$ENVIRONMENT-ecs-cluster
+      - export ECS_CLUSTER=Nf-TitusApp-$ENVIRONMENT-ecs-cluster
       - export ECS_SERVICE_ARN=$(aws ecs list-services --cluster $ECS_CLUSTER --region $ECR_REGION --query 'serviceArns[0]' --output text)
       - export ECS_SERVICE_NAME=$(aws ecs describe-services --cluster $ECS_CLUSTER --region $ECR_REGION --services $ECS_SERVICE_ARN --query 'services[0].serviceName' --output text)
       - aws ecs update-service --service $ECS_SERVICE_NAME --cluster $ECS_CLUSTER --force-new-deployment --region $ECR_REGION

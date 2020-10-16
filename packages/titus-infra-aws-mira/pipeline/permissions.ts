@@ -49,8 +49,7 @@ export default class CustomPermissions extends DeploymentPermissions {
             "ecr:InitiateLayerUpload",
             "ecr:ListImages",
             "ecr:PutImage",
-            "ecr:UploadLayerPart",
-            "ecs:ListServices",
+            "ecr:UploadLayerPart"
           ],
           resources: [`arn:aws:ecr:${account.env.region}:${account.env.account}:repository/${repositoryName}`]
         },
@@ -61,14 +60,15 @@ export default class CustomPermissions extends DeploymentPermissions {
           actions: [
             "ecs:UpdateService",
           ],
-          resources: [`arn:aws:ecr:${account.env.region}:${account.env.account}:services/${MiraConfig.calculateSharedResourceName('ecs-cluster')}*`]
+          resources: [`arn:aws:ecs:${account.env.region}:${account.env.account}:service/${MiraConfig.calculateSharedResourceName('ecs-cluster')}*`]
         },
       ))
 
       this.role.addToPolicy(new PolicyStatement(
         {
           actions: [
-            "ecr:GetAuthorizationToken"
+            "ecr:GetAuthorizationToken",
+            "ecs:ListServices"
           ],
           resources: ['*']
         },
