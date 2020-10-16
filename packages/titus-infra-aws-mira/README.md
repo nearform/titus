@@ -216,9 +216,9 @@ node scripts/createUser.js --email davide.fiorello@nearform.com --password YOUR_
 ```
 
 
-## Pipeline
-The deploy can be automated on AWS adding the deploy of the pipeline.
-
+## Deploy Titus with AWS CodePipeline
+The deployment of Titus using Mira can be automated using AWS CodePipeline. 
+ 
 ### Update the Config File
 
 Update the values in the `default-pipeline.json` config file:
@@ -246,7 +246,10 @@ Update the values in the `default-pipeline.json` config file:
       }
     ]
   }
+
+
 ```
+https://github.com/nearform/mira/tree/master/docs/config
 
 Init the pipeline:
 

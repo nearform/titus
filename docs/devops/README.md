@@ -18,7 +18,7 @@ Titus includes a fully featured, production-ready CI pipeline. Titus uses GitHub
 
 [GCP]: https://console.cloud.google.com
 [AWS]: https://aws.amazon.com/
-[Mira]: https://nf-mira.netlify.app
+[Mira]: https://github.com/nearform/mira
 [CDK]: https://aws.amazon.com/cdk/
 [titus-infra-aws-mira]: https://github.com/nearform/titus/tree/master/packages/titus-infra-aws-mira
 [GitHub Actions]: https://github.com/features/actions
