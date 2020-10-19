@@ -1,7 +1,7 @@
 {
   "app": {
     "prefix": "nf",
-    "name": "titus"
+    "name": "titus-app"
   },
   "dev": {
     "target": "default"
@@ -9,45 +9,65 @@
   "accounts": {
     "default": {
       "env": {
-        "account": "0000000000000",
-        "region": "eu-west-1",
-        "domainName": "yourdomain.com",
-        "webAppUrl": "www.yourdomain.com",
-        "certificateSslName": "*.yourdomain.com",
-        "awsEcrRepositoryName": "yourbucket-titus-backend"
+        "account": "123456789",
+        "region": "eu-central-1",
+        "domainName": "nf-mira.com",
+        "webAppUrl": "titus-dev.nf-mira.com",
+        "certificateSslName": "*.nf-mira.com",
+        "awsEcrRepositoryName": "nf-mira-titus-backend"
       },
-      "profile": "mira-dev"
+      "profile": "default"
     },
     "cicd": {
       "env": {
-        "account": "0000000000000",
-        "region": "eu-west-1"
+        "account": "123456789",
+        "region": "eu-central-1"
       },
       "profile": "default"
     },
     "staging": {
       "env": {
-        "account": "0000000000000",
-        "region": "eu-west-1"
+        "account": "123456789",
+        "region": "eu-central-1",
+        "domainName": "nf-mira.com",
+        "webAppUrl": "titus-stage.nf-mira.com",
+        "certificateSslName": "*.nf-mira.com",
+        "awsEcrRepositoryName": "nf-mira-titus-backend"
+      },
+      "profile": "default"
+    },
+    "production": {
+      "env": {
+        "account": "123456789",
+        "region": "eu-central-1",
+        "domainName": "nf-mira.com",
+        "webAppUrl": "titus.nf-mira.com",
+        "certificateSslName": "*.nf-mira.com",
+        "awsEcrRepositoryName": "nf-mira-titus-backend"
       },
       "profile": "default"
     }
   },
   "cicd": {
     "target": "cicd",
-    "buildspecFile": "packages/titus-infra-aws/pipeline/buildspec.yaml",
+    "buildspecFile": "packages/titus-infra-aws-mira/pipeline/buildspec.yaml",
     "permissionsFile": "pipeline/permissions.js",
     "provider": "codecommit",
-    "repositoryUrl": "https://git-codecommit.eu-west-2.amazonaws.com/v1/repos/titus-deploy",
     "branchName": "master",
-    "codeCommitUserPublicKey": "ssh-rsa PUBLIC KEY HERE",
+    "codeCommitUserPublicKey": "ssh-rsa SET THE PUBLICK KEY HERE",
     "stages": [
       {
         "target": "staging",
         "withDomain": false,
-        "requireManualApproval": false
+        "requireManualApproval": false,
+        "privileged": true
+      },
+      {
+        "target": "production",
+        "withDomain": false,
+        "requireManualApproval": true,
+        "privileged": true
       }
     ]
   }
 }
-

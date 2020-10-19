@@ -133,7 +133,7 @@ aws ecs list-services --cluster titus-backend-cluster
 - A domain managed in AWS Route53
 
 ## Config file
-A config file named `default.json` should be placed in `config` folder
+A config file named `default.json` should be placed in `config` folder. The `defaut.sample.json` can be used as starting point.
 
 ```
 {

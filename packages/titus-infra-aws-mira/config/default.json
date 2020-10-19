@@ -9,41 +9,41 @@
   "accounts": {
     "default": {
       "env": {
-        "account": "912147919779",
-        "region": "eu-west-2",
-        "domainName": "mira-nf.com",
-        "webAppUrl": "titus-dev.mira-nf.com",
-        "certificateSslName": "titus-dev.mira-nf.com",
-        "awsEcrRepositoryName": "mira-nf--titus-backend"
+        "account": "123456789",
+        "region": "eu-central-1",
+        "domainName": "nf-mira.com",
+        "webAppUrl": "titus-dev.nf-mira.com",
+        "certificateSslName": "*.nf-mira.com",
+        "awsEcrRepositoryName": "nf-mira-titus-backend"
       },
       "profile": "default"
     },
     "cicd": {
       "env": {
-        "account": "912147919779",
-        "region": "eu-west-2"
+        "account": "123456789",
+        "region": "eu-central-1"
       },
       "profile": "default"
     },
     "staging": {
       "env": {
-        "account": "912147919779",
-        "region": "eu-west-2",
-        "domainName": "mira-nf.com",
-        "webAppUrl": "titus-stage.mira-nf.com",
-        "certificateSslName": "titus-stage.mira-nf.com",
-        "awsEcrRepositoryName": "mira-nf--titus-backend"
+        "account": "123456789",
+        "region": "eu-central-1",
+        "domainName": "nf-mira.com",
+        "webAppUrl": "titus-stage.nf-mira.com",
+        "certificateSslName": "*.nf-mira.com",
+        "awsEcrRepositoryName": "nf-mira-titus-backend"
       },
       "profile": "default"
     },
     "production": {
       "env": {
-        "account": "912147919779",
-        "region": "eu-west-2",
-        "domainName": "mira-nf.com",
-        "webAppUrl": "titus.mira-nf.com",
-        "certificateSslName": "titus.mira-nf.com",
-        "awsEcrRepositoryName": "mira-nf--titus-backend"
+        "account": "123456789",
+        "region": "eu-central-1",
+        "domainName": "nf-mira.com",
+        "webAppUrl": "titus.nf-mira.com",
+        "certificateSslName": "*.nf-mira.com",
+        "awsEcrRepositoryName": "nf-mira-titus-backend"
       },
       "profile": "default"
     }
@@ -54,7 +54,7 @@
     "permissionsFile": "pipeline/permissions.js",
     "provider": "codecommit",
     "branchName": "master",
-    "codeCommitUserPublicKey": "ssh-rsa YOUR_PUBLIC_CODE_COMMIT_KEY",
+    "codeCommitUserPublicKey": "ssh-rsa SET THE PUBLICK KEY HERE",
     "stages": [
       {
         "target": "staging",
