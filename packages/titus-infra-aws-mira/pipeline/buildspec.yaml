@@ -26,6 +26,7 @@ phases:
       - export AWS_ACCESS_KEY_ID=$(node -p "require('./temp_creds.json').Credentials.AccessKeyId")
       - export AWS_SECRET_ACCESS_KEY=$(node -p "require('./temp_creds.json').Credentials.SecretAccessKey")
       - export AWS_SESSION_TOKEN=$(node -p "require('./temp_creds.json').Credentials.SessionToken")
+      - rm temp_creds.json
       - npm run prepare:deploy:ci
       - export ECR_ACCOUNT=$(node -p "require('./packages/titus-infra-aws-mira/config/default.json').accounts.${ENVIRONMENT}.env.account")
       - export ECR_REGION=$(node -p "require('./packages/titus-infra-aws-mira/config/default.json').accounts.${ENVIRONMENT}.env.region")
@@ -41,6 +42,9 @@ phases:
       - export ECS_SERVICE_ARN=$(aws ecs list-services --cluster $ECS_CLUSTER --region $ECR_REGION --query 'serviceArns[0]' --output text)
       - export ECS_SERVICE_NAME=$(aws ecs describe-services --cluster $ECS_CLUSTER --region $ECR_REGION --services $ECS_SERVICE_ARN --query 'services[0].serviceName' --output text)
       - aws ecs update-service --service $ECS_SERVICE_NAME --cluster $ECS_CLUSTER --force-new-deployment --region $ECR_REGION
+      - unset AWS_SECRET_ACCESS_KEY
+      - unset AWS_SESSION_TOKEN
+      - unset AWS_ACCESS_KEY_ID
   post_build:
     commands:
       - echo Build completed on `date`
