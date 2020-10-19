@@ -259,7 +259,7 @@ npm run cicd
 
 The command will create a role with the permission to deploy the infrastructure and the codepipeline service.
 
-At the end of the deploy the output will show:
+At the end of the deployment, the output will show:
 
 ```
  ✅  Nf-TitusApp-Cicd
@@ -269,9 +269,9 @@ Nf-TitusApp-Cicd.RepositoryName = Nf-TitusApp-Repository
 Nf-TitusApp-Cicd.GitUserName = APKA5I....
 ```
 
-The value in `Nf-TitusApp-Cicd.RepositoryName` define the repository created for the deploy.
+The value in `Nf-TitusApp-Cicd.RepositoryName` defines the repository created for the deploy.
 
-In this case will be:
+In this case, it will be:
 
 ```
 https://git-codecommit.YOUR_REGION.amazonaws.com/v1/repos/Nf-TitusApp-Repository
@@ -283,7 +283,7 @@ According with the value in the config file `"branchName": "master",` the pipeli
 
 In the config directory there are 2 files that are required to ovveride the deployment values in the pipeline.
 
-NODE_ENV definition in the command `NODE_ENV=$ENVIRONMENT npx mira deploy...` will define which environemnt will be deployed by the pipeline.  
+The NODE_ENV definition in the command `NODE_ENV=$ENVIRONMENT npx mira deploy...` will define which environment will be deployed by the pipeline.  
 
 ### Defining Steps for the Pipeline
 
