@@ -56,7 +56,7 @@ export class EcsAlb extends MiraStack {
         streamPrefix: 'ecs',
       }),
       environment: {
-        NODE_ENV: 'development',
+        NODE_ENV: 'production',
         API_HOST: '0.0.0.0',
         API_PORT: '5000',
         CORS_ORIGIN: 'true',
