@@ -9,41 +9,44 @@
   "accounts": {
     "default": {
       "env": {
-        "account": "123456789",
+        "account": "123123123123",
         "region": "eu-central-1",
-        "domainName": "nf-mira.com",
-        "webAppUrl": "titus-dev.nf-mira.com",
-        "certificateSslName": "*.nf-mira.com",
-        "awsEcrRepositoryName": "nf-mira-titus-backend"
+        "domainName": "nf-titus.com",
+        "webAppUrl": "titus-dev.nf-titus.com",
+        "certificateSslName": "*.nf-titus.com",
+        "awsEcrRepositoryName": "nf-titus-titus-backend",
+        "migrationUUID": "22761128-12b1-11eb-adc1-0242ac120002"
       },
       "profile": "default"
     },
     "cicd": {
       "env": {
-        "account": "123456789",
+        "account": "123123123123",
         "region": "eu-central-1"
       },
       "profile": "default"
     },
     "staging": {
       "env": {
-        "account": "123456789",
+        "account": "123123123123",
         "region": "eu-central-1",
-        "domainName": "nf-mira.com",
-        "webAppUrl": "titus-stage.nf-mira.com",
-        "certificateSslName": "*.nf-mira.com",
-        "awsEcrRepositoryName": "nf-mira-titus-backend"
+        "domainName": "nf-titus.com",
+        "webAppUrl": "titus-stage.nf-titus.com",
+        "certificateSslName": "*.nf-titus.com",
+        "awsEcrRepositoryName": "nf-titus-titus-backend",
+        "migrationUUID": "3073adee-12b1-11eb-adc1-0242ac120002"
       },
       "profile": "default"
     },
     "production": {
       "env": {
-        "account": "123456789",
+        "account": "123123123123",
         "region": "eu-central-1",
-        "domainName": "nf-mira.com",
-        "webAppUrl": "titus.nf-mira.com",
-        "certificateSslName": "*.nf-mira.com",
-        "awsEcrRepositoryName": "nf-mira-titus-backend"
+        "domainName": "nf-titus.com",
+        "webAppUrl": "titus.nf-titus.com",
+        "certificateSslName": "*.nf-titus.com",
+        "awsEcrRepositoryName": "nf-titus-titus-backend",
+        "migrationUUID": "447069b8-12b1-11eb-adc1-0242ac120002"
       },
       "profile": "default"
     }
@@ -53,8 +56,8 @@
     "buildspecFile": "packages/titus-infra-aws-mira/pipeline/buildspec.yaml",
     "permissionsFile": "pipeline/permissions.js",
     "provider": "codecommit",
-    "branchName": "master",
-    "codeCommitUserPublicKey": "ssh-rsa SET THE PUBLICK KEY HERE",
+    "branchName": "feature/mira-pipeline",
+    "codeCommitUserPublicKey": "ssh-rsa PUBLICK_KEY_HERE",
     "stages": [
       {
         "target": "staging",

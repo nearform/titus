@@ -7,7 +7,7 @@ import {
 } from '@aws-cdk/aws-cognito'
 import { Effect, FederatedPrincipal, PolicyStatement, Role } from '@aws-cdk/aws-iam'
 import { Construct, Stack } from '@aws-cdk/core'
-
+import {MiraConfig} from 'mira'
 // Encapsulate UserPool configuration
 
 // Cognito example: https://github.com/aws-samples/amazon-cognito-example-for-external-idp/blob/master/cdk/src/cdk.ts

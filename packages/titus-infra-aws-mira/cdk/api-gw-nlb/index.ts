@@ -1,4 +1,4 @@
-import {MiraStack} from "mira";
+import {MiraConfig, MiraStack} from "mira";
 import {Construct, Duration, RemovalPolicy, Stack} from '@aws-cdk/core'
 import {
   AuthorizationType,
@@ -72,10 +72,10 @@ export class ApiGatewayNlb extends MiraStack {
            *   userPoolWebClientId: 'xxxxxxx',
            * }
            */
-          APP_CONFIG_identityPoolId: this.loadParameter('Titus/IdentityPoolId').stringValue,
+          APP_CONFIG_identityPoolId: this.loadParameter(`Titus-${MiraConfig.getEnvironment().name}/IdentityPoolId`).stringValue,
           APP_CONFIG_region: Stack.of(this).region,
-          APP_CONFIG_userPoolId: this.loadParameter('Titus/UserPoolId').stringValue,
-          APP_CONFIG_userPoolWebClientId: this.loadParameter('Titus/WebClientId').stringValue
+          APP_CONFIG_userPoolId: this.loadParameter(`Titus-${MiraConfig.getEnvironment().name}/UserPoolId`).stringValue,
+          APP_CONFIG_userPoolWebClientId: this.loadParameter(`Titus-${MiraConfig.getEnvironment().name}/WebClientId`).stringValue
         },
         handler: 'get-config.handler',
         runtime: Runtime.NODEJS_12_X,

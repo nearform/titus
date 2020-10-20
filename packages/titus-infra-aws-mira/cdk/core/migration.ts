@@ -18,6 +18,7 @@ export class Migration extends Construct {
 
   constructor(scope: Construct, id: string, props: MigrationProps) {
     super(scope, id)
+    const domainConfig = MiraConfig.getEnvironment(MiraConfig.defaultEnvironmentName)
 
     const code = new HashedCode(resolve(__dirname, '..', '..', '..', 'titus-db-manager'), {
       follow: FollowMode.ALWAYS
@@ -31,8 +32,8 @@ export class Migration extends Construct {
       },
       handler: 'lambda.handler',
       runtime: Runtime.NODEJS_12_X,
-      timeout: Duration.minutes(1),
-      uuid: 'dd5f8bfa-7a30-4d48-bfac-4ddcda9c5fb3',
+      timeout: Duration.minutes(5),
+      uuid: (domainConfig.env as unknown as { migrationUUID: string }).migrationUUID,
       vpc: props.vpc
     })
 
