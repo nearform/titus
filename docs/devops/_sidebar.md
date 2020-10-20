@@ -6,5 +6,4 @@
     - [Deploy Titus](/devops/?id=deploy-titus)
         - [Deploy on GCP](/devops/gcp/)
         - [Deploy on AWS with Mira](https://github.com/nearform/titus/tree/master/packages/titus-infra-aws-mira)
-    - [Lint, Test and Build](/devops/?id=lint-test-and-build)
 - [Contribute to Titus](/contributing/)
