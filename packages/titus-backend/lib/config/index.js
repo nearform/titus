@@ -12,7 +12,6 @@ const config = envSchema({
     .prop('PG_PORT', S.string().required())
     .prop('PG_DB', S.string().required())
     .prop('PG_USER', S.string().required())
-    .prop('PG_PASS', S.string().required())
     .prop('AUTH_PROVIDER', S.string())
     .prop('AUTH0_DOMAIN', S.string())
     .prop('AUTH0_CLIENT_ID', S.string())
@@ -25,7 +24,8 @@ const config = envSchema({
     .prop('AD_TENANT', S.string())
     .prop('AD_APP_ID', S.string())
     .prop('AD_SECRET', S.string())
-    .prop('CORS_ORIGIN', S.string())
+    .prop('SECRETS_STRATEGY', S.string())
+    .prop('SECRETS_PG_PASS', S.string().required())
 })
 
 const isProduction = /^\s$production\s*$/i.test(config.NODE_ENV)
@@ -45,7 +45,6 @@ module.exports = {
     port: config.PG_PORT,
     database: config.PG_DB,
     user: config.PG_USER,
-    password: config.PG_PASS,
     poolSize: 10,
     idleTimeoutMillis: 30000
   },
@@ -72,5 +71,11 @@ module.exports = {
   },
   jwt: {
     secret: config.JWT_SECRET
+  },
+  secretsManager: {
+    strategy: config.SECRETS_STRATEGY,
+    secrets: {
+      dbPassword: config.SECRETS_PG_PASS
+    }
   }
 }

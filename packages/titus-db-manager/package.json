@@ -26,6 +26,8 @@
     "env-schema": "^1.1.0",
     "fastify": "^3.0.0",
     "fastify-plugin": "^2.0.0",
+    "fastify-secrets-env": "^1.0.0",
+    "fastify-secrets-gcp": "^1.0.0",
     "fluent-schema": "^1.0.4",
     "pg": "^8.2.1",
     "pino": "^6.6.0",

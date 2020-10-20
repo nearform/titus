@@ -32,7 +32,7 @@ const start = async (action, credentials) => {
     })
     await Migrate(pg)
   } else {
-    const client = new Client()
+    const client = new Client(credentials)
     await client.connect()
 
     if (action === 'seed') {

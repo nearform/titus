@@ -4,11 +4,17 @@ const buildServer = require('./build-server')
 const config = require('./config')
 
 describe('Server Integration', () => {
-  const fastify = buildServer()
+  let fastify
   let client
 
   beforeAll(async () => {
-    client = new Client(config.pgPlugin)
+    fastify = buildServer()
+    await fastify.ready()
+
+    client = new Client({
+      ...config.pgPlugin,
+      password: fastify.secrets.dbPassword
+    })
     await client.connect()
   })
 

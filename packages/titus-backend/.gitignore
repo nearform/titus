@@ -62,3 +62,6 @@ typings/
 
 # postgres data files
 pgdata
+
+# gcp service account key
+key.json

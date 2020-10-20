@@ -2,18 +2,36 @@
 
 require('dotenv-expand')(require('dotenv').config())
 const logger = require('pino')()
+const { Client: ClientGcp } = require('fastify-secrets-gcp')
+const { Client: ClientEnv } = require('fastify-secrets-env')
 
 const start = require('./migration-start')
-const credentials = {
-  host: process.env.PG_HOST,
-  port: process.env.PG_PORT,
-  database: process.env.PG_DATABASE,
-  username: process.env.PG_USER,
-  password: process.env.PG_PASSWORD
+
+function getClient() {
+  if (!process.env.SECRETS_STRATEGY || process.env.SECRETS_STRATEGY === 'env') {
+    return new ClientEnv()
+  }
+
+  if (process.env.SECRETS_STRATEGY === 'gcp') {
+    return new ClientGcp()
+  }
+
+  throw new Error('Unsupported secrets manager strategy')
 }
 
 async function run() {
   try {
+    const client = getClient()
+    const password = await client.get(process.env.SECRETS_PG_PASS)
+
+    const credentials = {
+      host: process.env.PG_HOST,
+      port: process.env.PG_PORT,
+      database: process.env.PG_DATABASE,
+      user: process.env.PG_USER,
+      password
+    }
+
     await start(process.argv[2] || 'migrate', credentials)
   } catch (err) {
     logger.error('An Error has occurred, stopping', err)
