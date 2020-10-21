@@ -281,7 +281,7 @@ According with the value in the config file `"branchName": "master",` the pipeli
 
 ### Setting Environment-Specific Deployment Values
 
-In the config directory there are 2 files that are required to ovveride the deployment values in the pipeline.
+In the config directory there are 2 files that can be used to override the deployment values in the pipeline: staging.json and production.json.
 
 The NODE_ENV definition in the command `NODE_ENV=$ENVIRONMENT npx mira deploy...` will define which environment will be deployed by the pipeline.  
 
