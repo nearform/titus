@@ -3,8 +3,16 @@ import React, { useState, useEffect } from 'react'
 import Loading from '../loading'
 import config from '../../config'
 
+const RemoteAwsConfigContainer = ({ children }) => {
+  if (!config.remoteAwsConfigPath) {
+    return <>{children}</>
+  }
+
+  return <RemoteAwsConfig>{children}</RemoteAwsConfig>
+}
+
 const RemoteAwsConfig = ({ children }) => {
-  const [isInit, setIsInit] = useState(!config.remoteAwsConfigPath)
+  const [isInit, setIsInit] = useState(false)
   const [error, setError] = useState()
   useEffect(() => {
     async function fetchConfig() {
@@ -45,4 +53,4 @@ const RemoteAwsConfig = ({ children }) => {
   return !isInit ? <Loading /> : <>{children}</>
 }
 
-export default RemoteAwsConfig
+export default RemoteAwsConfigContainer

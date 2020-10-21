@@ -10,7 +10,6 @@ async function plugin(server, config) {
   server
     .register(cors, config.cors)
     .register(require('fastify-swagger'), require('./config/swagger'))
-    .register(require('fastify-jwt'), { secret: config.jwt.secret })
     .register(autoLoad, {
       dir: path.join(__dirname, 'plugins'),
       options: config

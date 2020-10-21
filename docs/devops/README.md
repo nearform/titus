@@ -1,7 +1,7 @@
 # DevOps
 
 ## Overview
-Deployment for Titus is a fully featured, modern, production grade experience handled by [GitHub Actions]
+Deployment for Titus is a fully featured, modern, production grade experience handled by [GitHub Actions] by default.
 
 ## Deploy Titus
 ### Deploy Titus on GCP
@@ -12,9 +12,6 @@ An example deployment of Titus to [AWS] is provided. The deployment is done usin
 
 
 **Note:** CD workflow pipelines are expected to be adjusted or completely changed to fulfill project needs.
-
-## Lint, Test and Build
-Titus includes a fully featured, production-ready CI pipeline. Titus uses GitHub Actions as for continuous integration. The Titus CI pipeline includes all of the steps needed to lint, test and build assets.
 
 [GCP]: https://console.cloud.google.com
 [AWS]: https://aws.amazon.com/

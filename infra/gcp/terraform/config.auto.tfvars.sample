@@ -1,0 +1,10 @@
+gcp_project_id = "upheld-dragon-268810" # Nearform GCP org - Titus
+region = "europe-west1"
+zone = "europe-west1-b"
+
+cloudsql_db_instance_name = "titus"
+cloudsql_tier = "db-custom-1-3840" # where 1 means 1 CPU and 3840 means 3,75GB RAM
+cloudsql_db_name = "titus"
+cloudsql_db_user = "titus"
+
+artifact_registry_repository_name = "titus"
