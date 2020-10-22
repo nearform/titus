@@ -1,5 +1,6 @@
 'use strict'
 
+const fp = require('fastify-plugin')
 const faker = require('faker')
 
 describe('pg plugin', () => {
@@ -8,9 +9,19 @@ describe('pg plugin', () => {
   const client = {
     query: jest.fn().mockResolvedValue([])
   }
+  const STUB_PLUGIN = fp(
+    async server => {
+      server.decorate('secrets', {
+        dbPassword: process.env.PG_PASS
+      })
+    },
+    { name: 'secrets-manager' }
+  )
 
   beforeAll(async () => {
     server = require('fastify')()
+    // stub the secrets-manager plugin pg depends on
+    server.register(STUB_PLUGIN)
     server.register(require('.'))
 
     // route that will make DB query

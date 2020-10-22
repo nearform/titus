@@ -56,7 +56,7 @@ export class EcsAlb extends MiraStack {
         streamPrefix: 'ecs',
       }),
       environment: {
-        NODE_ENV: 'development',
+        NODE_ENV: 'production',
         API_HOST: '0.0.0.0',
         API_PORT: '5000',
         CORS_ORIGIN: 'true',
@@ -65,6 +65,8 @@ export class EcsAlb extends MiraStack {
         PG_DB: props.database.secret.secretValueFromJson('dbname').toString(),
         PG_USER: props.database.secret.secretValueFromJson('username').toString(),
         PG_PASS: props.database.secret.secretValueFromJson('password').toString(),
+        SECRETS_STRATEGY: 'env',
+        SECRETS_PG_PASS: 'PG_PASS',
         AUTH_PROVIDER: "cognito"
       },
     })

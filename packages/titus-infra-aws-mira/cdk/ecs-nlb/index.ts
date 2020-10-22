@@ -70,7 +70,7 @@ export class EcsNlb extends MiraStack {
         streamPrefix: 'ecs',
       }),
       environment: {
-        NODE_ENV: 'development',
+        NODE_ENV: 'production',
         API_HOST: '0.0.0.0',
         API_PORT: '5000',
         CORS_ORIGIN: 'true',
@@ -79,6 +79,8 @@ export class EcsNlb extends MiraStack {
         PG_DB: props.database.secret.secretValueFromJson('dbname').toString(),
         PG_USER: props.database.secret.secretValueFromJson('username').toString(),
         PG_PASS: props.database.secret.secretValueFromJson('password').toString(),
+        SECRETS_STRATEGY: 'env',
+        SECRETS_PG_PASS: 'PG_PASS',
         AUTH_PROVIDER: "cognito",
         COGNITO_USER_POOL_ID: this.loadParameter('Titus/UserPoolId').stringValue,
         COGNITO_REGION: Stack.of(this).region
