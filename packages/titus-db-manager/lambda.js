@@ -34,6 +34,7 @@ module.exports = {
       logger.info('Retrieve the secrets from ', process.env.SECRET_ARN)
       const credentials = await getSecret(process.env.SECRET_ARN)
       await start('migrate', credentials)
+      await start('seed', credentials)
       logger.info('Migration done successful')
     } catch (e) {
       logger.errot('Migration failed')

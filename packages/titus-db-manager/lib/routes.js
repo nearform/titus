@@ -43,7 +43,10 @@ async function dbRoutes(server) {
           driver: 'pg',
           schemaTable: `schema_migrations`
         },
-        config.pgPlugin
+        config.pgPlugin,
+        {
+          password: server.secrets.dbPassword
+        }
       )
       try {
         const pg = new Postgrator(postgratorConfig)
@@ -73,7 +76,10 @@ async function dbRoutes(server) {
       }
     },
     handler: async req => {
-      const client = new Client(config.pgPlugin)
+      const client = new Client({
+        ...config.pgPlugin,
+        password: server.secrets.dbPassword
+      })
       try {
         await client.connect()
         await Truncate(client)
@@ -104,7 +110,10 @@ async function dbRoutes(server) {
       }
     },
     handler: async req => {
-      const client = new Client(config.pgPlugin)
+      const client = new Client({
+        ...config.pgPlugin,
+        password: server.secrets.dbPassword
+      })
       try {
         await client.connect()
         await Seed(client)

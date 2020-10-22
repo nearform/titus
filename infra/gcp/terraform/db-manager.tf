@@ -41,8 +41,12 @@ resource "google_cloud_run_service" "db_manager" {
           value = var.cloudsql_db_user
         }
         env {
-          name  = "PG_PASSWORD"
-          value = random_password.db_password.result
+          name  = "SECRETS_STRATEGY"
+          value = "gcp"
+        }
+        env {
+          name  = "SECRETS_PG_PASS"
+          value = "${google_secret_manager_secret.db_password.id}/versions/latest"
         }
         env {
           name  = "NODE_ENV"

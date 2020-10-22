@@ -14,8 +14,9 @@ const config = envSchema({
     .prop('PG_HOST', S.string().required())
     .prop('PG_PORT', S.string().required())
     .prop('PG_USER', S.string().required())
-    .prop('PG_PASSWORD', S.string().required())
     .prop('PG_DATABASE', S.string().required())
+    .prop('SECRETS_STRATEGY', S.string())
+    .prop('SECRETS_PG_PASS', S.string().required())
 })
 
 const isProduction = /^\s$production\s*$/i.test(config.NODE_ENV)
@@ -36,8 +37,13 @@ module.exports = {
     port: +config.PG_PORT,
     database: config.PG_DATABASE,
     user: config.PG_USER,
-    password: config.PG_PASSWORD,
     poolSize: 10,
     idleTimeoutMillis: 30000
+  },
+  secretsManager: {
+    strategy: config.SECRETS_STRATEGY,
+    secrets: {
+      dbPassword: config.SECRETS_PG_PASS
+    }
   }
 }
