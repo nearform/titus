@@ -2,7 +2,7 @@
 
 [![Logo][logo-img]][docs]
 
-&nbsp;&nbsp;
+&nbsp;
 
 Your are browsing the repository for **titus-backend**. All documentation for titus is stored in a central location. Including for this repo.
 
