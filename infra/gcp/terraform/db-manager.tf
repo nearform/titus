@@ -1,3 +1,14 @@
+resource "google_service_account" "db_manager" {
+  account_id   = "db-manager"
+  display_name = "db_manager"
+}
+
+resource "google_secret_manager_secret_iam_member" "db_manager_db_pass" {
+  secret_id = google_secret_manager_secret.db_password.secret_id
+  role = "roles/secretmanager.secretAccessor"
+  member = "serviceAccount:${google_service_account.db_manager.email}"
+}
+
 resource "google_cloud_run_service_iam_member" "db_manager_noauth" {
   location = google_cloud_run_service.db_manager.location
   service  = google_cloud_run_service.db_manager.name
@@ -11,6 +22,7 @@ resource "google_cloud_run_service" "db_manager" {
 
   template {
     spec {
+      service_account_name = google_service_account.db_manager.email
       containers {
         image = "gcr.io/cloudrun/hello"
         ports {
@@ -72,7 +84,6 @@ resource "google_cloud_run_service" "db_manager" {
   lifecycle {
     ignore_changes = [
       template[0].spec[0].containers[0].image,
-      template[0].spec[0].service_account_name,
       template[0].metadata[0].annotations
     ]
   }
