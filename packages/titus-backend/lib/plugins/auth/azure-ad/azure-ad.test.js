@@ -27,8 +27,9 @@ describe('users plugin', () => {
         }
       }
     }
-    server.register(files, config)
+    await server.register(files, config)
     server.route({
+      onRequest: [server.authenticate],
       handler: async (req, res) => res.send(req.user),
       method: 'GET',
       url: '/user'

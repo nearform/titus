@@ -4,17 +4,17 @@ const axios = require('axios')
 const fp = require('fastify-plugin')
 
 /**
- * Registers an JSON Web Token authentication stratgy (named 'jwt')
+ * Registers an JSON Web Token authentication strategy (named 'jwt')
  * and a login route to authenticate users against Auth0.
  * You need to make sure you configure your auth0 tenant correctly.
  *
  * - add the "Password" grant to your app
  *   (app "Settings" tab -> advance settings at the bottom -> "Grant Types" -> tick "Password")
- * - add a default directoty connection into your tenant https://manage.auth0.com/#/tenant
+ * - add a default directory connection into your tenant https://manage.auth0.com/#/tenant
  *   (click on "connections" in the menu to see your connections)
  *
  * @async
- * @param {Fastify.Server} server       - in which stratgy and routes are registered
+ * @param {Fastify.Server} server       - in which strategy and routes are registered
  * @param {Object} options              - plugin options:
  * @param {String} options.domain       - Auth0 domain (ie: nf-titus.auth0.com)
  * @param {String} options.clientId     - your Auth0 app id

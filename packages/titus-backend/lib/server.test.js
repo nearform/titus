@@ -5,6 +5,6 @@ describe('server', () => {
     const server = { register: jest.fn() }
     server.register.mockReturnValue(server)
     require('./server')(server, require('./config'))
-    expect(server.register).toHaveBeenCalledTimes(4)
+    expect(server.register).toHaveBeenCalledTimes(5)
   })
 })

@@ -103,8 +103,8 @@ Titus packages run as node.js applications on your OS. This plays better with Le
 
 As we use Dockerfile to bundle the packages, it's also possible to run them locally using Docker Compose (or Minikube) if you wish.
 
-### Authentication Service
-Logging in is usually the first feature you want to see when you run your application. Titus is preconfigured with the Auth0 authentication service.
+### Authentication and Authorization Services
+Authentication and Authorization are usually high priority features for a web application - allowing users to sign-in and access resources with appropriate privileges.  Titus includes configurations for third party authentication services, [Auth0](Auth0), [Amazon Cognito](cognito) and [Azure Active Directory](AzureAD) - and adopts [Casbin](casbin) to integrate these services with policies around roles and permissions.
 
 Refer to [Configure Authentication] for more details.
 
@@ -115,29 +115,32 @@ Refer to [Configure Authentication] for more details.
 [Configure Authentication]: developers/packages/titus-frontend/?id=configure-authentication
 
 <!-- External Links -->
-[create-react-app]: https://facebook.github.io/create-react-app
-[react-router]: https://reacttraining.com/react-router/web
-[yup]: https://github.com/jquense/yup#readme
-[Jest]: https://jestjs.io
-[ESLint]: https://eslint.org
-[Prettier]: https://prettier.io
-[Hapi]: https://hapijs.com
-[Fastify]: https://fastify.io
-[Pino]: http://getpino.io
 [Auth0]: https://auth0.com
-[Nodemon]: https://nodemon.io
-[node-postgres]: https://node-postgres.com
-[docsify]: https://docsify.js.org
-[Lerna]: https://lerna.js.org/
-[webpack-dev-server]: https://webpack.js.org/configuration/dev-server
-[jwt]: https://jwt.io
-[nock]: https://github.com/nock/nock#readme
-[faker]: http://marak.github.io/faker.js
-[Postgrator]: https://github.com/rickbergfalk/postgrator#readme
-[parity]: https://12factor.net/dev-prod-parity
-[docker-compose]: https://docs.docker.com/compose
-[Standard]: https://standardjs.com/
+[AzureAD]: https://azure.microsoft.com/en-gb/services/active-directory/
+[cognito]: https://aws.amazon.com/cognito/
 [config]: https://12factor.net/config
+[create-react-app]: https://facebook.github.io/create-react-app
+[docker-compose]: https://docs.docker.com/compose
+[docsify]: https://docsify.js.org
+[ESLint]: https://eslint.org
+[faker]: http://marak.github.io/faker.js
+[Fastify]: https://fastify.io
+[Hapi]: https://hapijs.com
+[Jest]: https://jestjs.io
+[jwt]: https://jwt.io
+[Lerna]: https://lerna.js.org/
+[nock]: https://github.com/nock/nock#readme
+[node-postgres]: https://node-postgres.com
+[Nodemon]: https://nodemon.io
+[parity]: https://12factor.net/dev-prod-parity
+[Pino]: http://getpino.io
+[Postgrator]: https://github.com/rickbergfalk/postgrator#readme
+[PostgreSQL]: https://www.postgresql.org/
+[Prettier]: https://prettier.io
+[react-router]: https://reacttraining.com/react-router/web
+[Standard]: https://standardjs.com/
 [Swagger]: https://swagger.io/
 [testing-library]: https://testing-library.com/docs/react-testing-library/intro
-[PostgreSQL]: https://www.postgresql.org/
+[webpack-dev-server]: https://webpack.js.org/configuration/dev-server
+[yup]: https://github.com/jquense/yup#readme
+

@@ -1,6 +1,8 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { AuthContext } from 'components/authentication/authentication-context'
+
+import config from '../../lib/config'
 
 // This component was created only to test the Cognito user list endpoint
 const UserList = () => {
@@ -8,42 +10,58 @@ const UserList = () => {
   const { user } = useContext(AuthContext)
   const [userList, setUserList] = useState([])
 
-  useEffect(() => {
-    async function run() {
-      const response = await fetch('/api/v1/userlist', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${user.idToken}`
-        }
-      })
+  const listUsers = useCallback(async () => {
+    const response = await fetch(`${config.serverUrl}/userlist`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${user.idToken}`
+      }
+    })
 
-      setUserList(await response.json())
-    }
-
-    run()
+    setUserList(await response.json())
   }, [user])
 
+  useEffect(() => {
+    listUsers()
+  }, [listUsers])
+
   return (
-    userList.length && (
-      <div style={{ marginTop: '50px' }}>
-        <h1>{t('userListTitle')}</h1>
-        <div>
-          {userList.map(user => (
-            <div key={user.username} style={{ marginBottom: '10px' }}>
-              <strong>Email: </strong> {user.email} <br />
-              <strong>User: </strong> {user.username}
-              <br />
-              <strong>Enabled: </strong> {user.enabled}
-              <br />
-              <strong>Status: </strong> {user.status}
-              <br />
-              <strong>CreatedAt: </strong> {user.createdAt}
-            </div>
+    <div style={{ marginTop: 20 }}>
+      <h1>{t('userListTitle')}</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Enabled</th>
+            <th>Status</th>
+            <th>Created At</th>
+          </tr>
+        </thead>
+        <tbody>
+          {userList.map(u => (
+            <tr key={u.username}>
+              <td>{u.email}</td>
+              <td>{u.username}</td>
+              <td>
+                {u.enabled ? (
+                  <span role="img" aria-label="enabled">
+                    ✔️
+                  </span>
+                ) : (
+                  <span role="img" aria-label="disabled">
+                    ❌
+                  </span>
+                )}
+              </td>
+              <td>{u.status}</td>
+              <td>{new Date(u.createdAt).toLocaleString()}</td>
+            </tr>
           ))}
-        </div>
-      </div>
-    )
+        </tbody>
+      </table>
+    </div>
   )
 }
 

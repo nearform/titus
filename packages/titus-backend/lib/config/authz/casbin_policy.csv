@@ -1,0 +1,3 @@
+# RBAC policy - the role_admin has admin access
+# users are added to the roles at runtime
+p, role_admin, admin, access

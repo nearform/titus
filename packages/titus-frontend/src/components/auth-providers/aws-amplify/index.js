@@ -38,7 +38,8 @@ export default class Authentication {
       throw new Error(error.message)
     }
     this.user = user
-    return { username: user.username }
+
+    return this.getUserData()
   }
 
   async logout() {
@@ -59,13 +60,19 @@ export default class Authentication {
 
   getUserData() {
     const regex = /^CognitoIdentityServiceProvider/
-    const awsKey = Object.keys(localStorage)
+    const awsIdTokenKey = Object.keys(localStorage)
       .filter(
         e => regex.test(e) && e.includes(this.authConfig.userPoolWebClientId)
       )
       .find(entry => entry.endsWith('.idToken'))
 
-    const idToken = localStorage.getItem(awsKey)
+    const awsAccessTokenKey = Object.keys(localStorage)
+      .filter(
+        e => regex.test(e) && e.includes(this.authConfig.userPoolWebClientId)
+      )
+      .find(entry => entry.endsWith('.accessToken'))
+    const idToken = localStorage.getItem(awsIdTokenKey)
+    const accessToken = localStorage.getItem(awsAccessTokenKey)
     if (!idToken) {
       return this.user || false
     }
@@ -73,7 +80,8 @@ export default class Authentication {
     return {
       username: decodedToken['cognito:username'],
       email: decodedToken.email,
-      idToken
+      idToken,
+      accessToken
     }
   }
 }

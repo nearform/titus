@@ -2,6 +2,7 @@
 
 const { Unauthorized } = require('http-errors')
 const fp = require('fastify-plugin')
+const jwt = require('jsonwebtoken')
 
 const errorMessages = {
   badHeaderFormat: 'Authorization header should be in format: Bearer [token].',
@@ -15,6 +16,9 @@ const errorMessages = {
     'Please provide at least one of the "domain" or "secret" options.'
 }
 
+/**
+ * Simple authentication routine which does not verify the token
+ */
 async function authenticate(request) {
   try {
     if (!request.headers || !request.headers.authorization) {
@@ -27,7 +31,7 @@ async function authenticate(request) {
       throw new Unauthorized(errorMessages.badHeaderFormat)
     }
 
-    request.user = this.jwt.decode(authorization.split(/\s+/)[1].trim())
+    request.user = jwt.decode(authorization.split(/\s+/)[1].trim())
   } catch (e) {
     if (e.statusCode) {
       throw e
