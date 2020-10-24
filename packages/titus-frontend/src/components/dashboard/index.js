@@ -57,8 +57,8 @@ const Dashboard = ({ logout }) => {
         >
           {t('docs')}
         </a>
-        {config.aws.identityPoolId && <UserInfo />}
-        {config.aws.identityPoolId && <UserList />}
+        {config.aws.userPoolId && <UserInfo />}
+        {config.aws.userPoolId && <UserList />}
       </div>
     </>
   )

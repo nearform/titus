@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import config from '../../config'
 import { AuthContext } from '../authentication/authentication-context'
 
 // This component was created only to test the auth endpoint
@@ -11,7 +12,7 @@ const UserInfo = () => {
 
   useEffect(() => {
     async function run() {
-      const response = await fetch('/api/v1/auth', {
+      const response = await fetch(`${config.serverUrl}/auth`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -27,7 +28,7 @@ const UserInfo = () => {
 
   return (
     loggedUser && (
-      <div style={{ marginTop: '50px' }}>
+      <div style={{ marginTop: 20 }}>
         <h1>{t('userInfoTitle')}</h1>
         <div>
           {Object.entries(loggedUser).map(([key, value]) => (

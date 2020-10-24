@@ -38,7 +38,8 @@ export default class Authentication {
       throw new Error(error.message)
     }
     this.user = user
-    return { username: user.username }
+
+    return this.getUserData()
   }
 
   async logout() {
