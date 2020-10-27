@@ -62,11 +62,11 @@ export class Core extends MiraStack {
     } = this.authentication
 
     // the ${MiraConfig.getEnvironment().name} is added to avoid name confict. This will be solved with the mira version 1.4.1
-    this.createParameter(`Titus-${MiraConfig.getEnvironment().name}/ApiSecurityGroup`, 'API Security Group', this.ingressSecurityGroup.securityGroupId)
-    this.createParameter(`Titus-${MiraConfig.getEnvironment().name}/IdentityPoolId`, 'Identity Pool ID', identityPoolRef)
-    this.createParameter(`Titus-${MiraConfig.getEnvironment().name}/UserPoolArn`, 'User Pool ARN', userPoolArn)
-    this.createParameter(`Titus-${MiraConfig.getEnvironment().name}/UserPoolId`, 'User Pool ID', userPoolId)
-    this.createParameter(`Titus-${MiraConfig.getEnvironment().name}/WebClientId`, 'User Pool Client ID', userPoolClientId)
+    this.createParameter(`Titus/ApiSecurityGroup`, 'API Security Group', this.ingressSecurityGroup.securityGroupId)
+    this.createParameter(`Titus/IdentityPoolId`, 'Identity Pool ID', identityPoolRef)
+    this.createParameter(`Titus/UserPoolArn`, 'User Pool ARN', userPoolArn)
+    this.createParameter(`Titus/UserPoolId`, 'User Pool ID', userPoolId)
+    this.createParameter(`Titus/WebClientId`, 'User Pool Client ID', userPoolClientId)
 
     this.addOutput('Region', Stack.of(this).region)
     this.addOutput('IdentityPoolID', identityPoolRef)

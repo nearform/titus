@@ -52,7 +52,7 @@ export class EcsNlb extends MiraStack {
       {
         effect: Effect.ALLOW,
         actions: ["cognito-idp:ListUsers"],
-        resources: [this.loadParameter(`Titus-${MiraConfig.getEnvironment().name}/UserPoolArn`).stringValue]
+        resources: [this.loadParameter(`Titus/UserPoolArn`).stringValue]
       }
     ))
 
@@ -80,7 +80,7 @@ export class EcsNlb extends MiraStack {
         PG_USER: props.database.secret.secretValueFromJson('username').toString(),
         PG_PASS: props.database.secret.secretValueFromJson('password').toString(),
         AUTH_PROVIDER: "cognito",
-        COGNITO_USER_POOL_ID: this.loadParameter(`Titus-${MiraConfig.getEnvironment().name}/UserPoolId`).stringValue,
+        COGNITO_USER_POOL_ID: this.loadParameter(`Titus/UserPoolId`).stringValue,
         COGNITO_REGION: Stack.of(this).region
       },
     })
