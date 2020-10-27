@@ -23,12 +23,10 @@ phases:
     commands:
       - echo Deploy started on `date`
       - ./packages/titus-infra-aws-mira/pipeline/pipeline.sh checkEnvironment
-      - ./packages/titus-infra-aws-mira/pipeline/pipeline.sh prepareCredentials
-      - npm run prepare:deploy:ci
+      - ./packages/titus-infra-aws-mira/pipeline/pipeline.sh prepareCI
       - ./packages/titus-infra-aws-mira/pipeline/pipeline.sh buildAndPushDockerImage
       - ./packages/titus-infra-aws-mira/pipeline/pipeline.sh deploy
       - ./packages/titus-infra-aws-mira/pipeline/pipeline.sh refreshFargate
-      - ./packages/titus-infra-aws-mira/pipeline/pipeline.sh cleanupCredentials
   post_build:
     commands:
       - echo Build completed on `date`

@@ -67,14 +67,7 @@ export default class CustomPermissions extends DeploymentPermissions {
       this.role.addToPolicy(new PolicyStatement(
         {
           actions: [
-            "ecs:ListServices"
-          ],
-          resources: [`arn:aws:ecs:${account.env.region}:${account.env.account}:*`]
-        },
-      ))
-      this.role.addToPolicy(new PolicyStatement(
-        {
-          actions: [
+            "ecs:ListServices",
             "ecr:GetAuthorizationToken",
           ],
           resources: [`*`]

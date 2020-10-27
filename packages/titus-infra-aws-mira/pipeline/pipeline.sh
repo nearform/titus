@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 function checkEnvironment() {
   echo 'Check environment'
   if test -z $ROLE_ARN; then
@@ -28,8 +30,6 @@ function prepareCredentials() {
   export AWS_SECRET_ACCESS_KEY=$(node -p "require('./temp_creds.json').Credentials.SecretAccessKey")
   export AWS_SESSION_TOKEN=$(node -p "require('./temp_creds.json').Credentials.SessionToken")
   rm temp_creds.json
-
-  exit
 }
 
 function prepareEcrEnv() {
@@ -40,7 +40,14 @@ function prepareEcrEnv() {
 }
 
 function prepareEcsEnv() {
-  echo "Export values for ECR"
+  echo "Export values for ECS"
+  export ECS_CLUSTER=Nf-TitusApp-$ENVIRONMENT-ecs-cluster
+  export ECS_SERVICE_ARN=$(aws ecs list-services --cluster $ECS_CLUSTER --region $ECR_REGION --query 'serviceArns[0]' --output text)
+  export ECS_SERVICE_NAME=$(aws ecs describe-services --cluster $ECS_CLUSTER --region $ECR_REGION --services $ECS_SERVICE_ARN --query 'services[0].serviceName' --output text)
+}
+
+function prepareCI() {
+  echo "Export values for ECS"
   export ECS_CLUSTER=Nf-TitusApp-$ENVIRONMENT-ecs-cluster
   export ECS_SERVICE_ARN=$(aws ecs list-services --cluster $ECS_CLUSTER --region $ECR_REGION --query 'serviceArns[0]' --output text)
   export ECS_SERVICE_NAME=$(aws ecs describe-services --cluster $ECS_CLUSTER --region $ECR_REGION --services $ECS_SERVICE_ARN --query 'services[0].serviceName' --output text)
@@ -98,20 +105,26 @@ case "$1" in
 
 checkEnvironment)
   ;;
-prepareCredentials)
+prepareCI)
+  echo "Prepare CI"
   prepareCredentials
-  ;;
-cleanupCredentials)
+  npm run prepare:deploy:ci
   cleanupCredentials
   ;;
 buildAndPushDockerImage)
+  echo "Build and push docker image"
+  prepareCredentials
   prepareEcrEnv
   buildAndPushDockerImage
+  cleanupCredentials
   ;;
 refreshFargate)
+  echo "Refresh fargate"
+  prepareCredentials
   prepareEcrEnv
   prepareEcsEnv
   refreshFargate
+  cleanupCredentials
   ;;
 deploy)
   deploy
