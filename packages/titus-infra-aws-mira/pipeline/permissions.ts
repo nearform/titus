@@ -60,17 +60,24 @@ export default class CustomPermissions extends DeploymentPermissions {
           actions: [
             "ecs:UpdateService",
           ],
-          resources: [`arn:aws:ecs:${account.env.region}:${account.env.account}:service/${MiraConfig.calculateSharedResourceName('ecs-cluster')}*`]
+          resources: [this.getECSResourceArn()]
         },
       ))
 
       this.role.addToPolicy(new PolicyStatement(
         {
           actions: [
-            "ecr:GetAuthorizationToken",
             "ecs:ListServices"
           ],
-          resources: ['*']
+          resources: [`arn:aws:ecs:${account.env.region}:${account.env.account}:*`]
+        },
+      ))
+      this.role.addToPolicy(new PolicyStatement(
+        {
+          actions: [
+            "ecr:GetAuthorizationToken",
+          ],
+          resources: [`arn:aws:ecr:${account.env.region}:${account.env.account}:*`]
         },
       ))
     }
@@ -78,5 +85,10 @@ export default class CustomPermissions extends DeploymentPermissions {
     new CfnOutput((this as unknown) as Construct, 'DeployRoleArn', {
       value: this.role.roleArn
     })
+  }
+
+  getECSResourceArn(): string {
+    const account = MiraConfig.getEnvironment()
+    return `arn:aws:ecs:${account.env.region}:${account.env.account}:service/${MiraConfig.calculateSharedResourceName('ecs-cluster')}*`
   }
 }
