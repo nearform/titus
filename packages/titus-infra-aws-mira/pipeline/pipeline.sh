@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function checkEnvironement() {
+function checkEnvironment() {
   echo 'Check environment'
   if test -z $ROLE_ARN; then
     echo "The env variable '\$ROLE_ARN' is not defined"
@@ -79,7 +79,15 @@ function refreshFargate() {
   exit
 }
 
-checkEnvironement
+function deploy() {
+  echo "Deploy"
+  cd packages/titus-infra-aws-mira
+  NODE_ENV=$ENVIRONMENT npx mira deploy --env=$ENVIRONMENT --file=cdk/index.js --role $ROLE_ARN --require-approval=never
+  cd ../..
+  exit
+}
+
+checkEnvironment
 
 if [ $# -lt 1 ]; then
   help
@@ -88,7 +96,7 @@ fi
 
 case "$1" in
 
-checkEnvironement)
+checkEnvironment)
   ;;
 prepareCredentials)
   prepareCredentials
@@ -104,6 +112,9 @@ refreshFargate)
   prepareEcrEnv
   prepareEcsEnv
   refreshFargate
+  ;;
+deploy)
+  deploy
   ;;
 *)
   echo "Command not valid"

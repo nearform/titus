@@ -22,11 +22,11 @@ phases:
   build:
     commands:
       - echo Deploy started on `date`
-      - ./packages/titus-infra-aws-mira/pipeline/pipeline.sh checkEnvironement
+      - ./packages/titus-infra-aws-mira/pipeline/pipeline.sh checkEnvironment
       - ./packages/titus-infra-aws-mira/pipeline/pipeline.sh prepareCredentials
       - npm run prepare:deploy:ci
       - ./packages/titus-infra-aws-mira/pipeline/pipeline.sh buildAndPushDockerImage
-      - cd packages/titus-infra-aws-mira && NODE_ENV=$ENVIRONMENT npx mira deploy --env=$ENVIRONMENT --file=cdk/index.js --role $ROLE_ARN --require-approval=never
+      - ./packages/titus-infra-aws-mira/pipeline/pipeline.sh deploy
       - ./packages/titus-infra-aws-mira/pipeline/pipeline.sh refreshFargate
       - ./packages/titus-infra-aws-mira/pipeline/pipeline.sh cleanupCredentials
   post_build:

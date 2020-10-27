@@ -77,7 +77,7 @@ export default class CustomPermissions extends DeploymentPermissions {
           actions: [
             "ecr:GetAuthorizationToken",
           ],
-          resources: [`arn:aws:ecr:${account.env.region}:${account.env.account}:*`]
+          resources: [`*`]
         },
       ))
     }
