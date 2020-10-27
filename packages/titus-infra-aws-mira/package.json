@@ -54,8 +54,9 @@
     "aws-cdk": "1.67.0",
     "aws-sdk": "^2.744.0",
     "change-case": "^4.1.1",
+    "generate-password": "^1.5.1",
     "handlebars": "^4.7.6",
-    "mira": "1.4.0",
+    "mira": "1.4.1",
     "yup": "^0.29.3"
   },
   "jest": {
