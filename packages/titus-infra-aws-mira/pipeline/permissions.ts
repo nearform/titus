@@ -51,7 +51,7 @@ export default class CustomPermissions extends DeploymentPermissions {
             "ecr:PutImage",
             "ecr:UploadLayerPart"
           ],
-          resources: [`arn:aws:ecr:${account.env.region}:${account.env.account}:repository/${repositoryName}`]
+          resources: [this.getECRRepositoryArn(repositoryName)]
         },
       ))
 
@@ -78,6 +78,11 @@ export default class CustomPermissions extends DeploymentPermissions {
     new CfnOutput((this as unknown) as Construct, 'DeployRoleArn', {
       value: this.role.roleArn
     })
+  }
+
+  getECRRepositoryArn(repositoryName: string): string {
+    const account = MiraConfig.getEnvironment()
+    return `arn:aws:ecr:${account.env.region}:${account.env.account}:repository/${repositoryName}`
   }
 
   getECSResourceArn(): string {
