@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 
 import Loading from '../loading'
-import config from '../../config'
+
+import config from '~/config'
 
 const RemoteAwsConfigContainer = ({ children }) => {
   if (!config.remoteAwsConfigPath) {

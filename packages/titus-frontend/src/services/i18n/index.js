@@ -3,7 +3,8 @@ import detector from 'i18next-browser-languagedetector'
 import { initReactI18next } from 'react-i18next'
 
 import locale from './locale'
-import { LANGUAGES } from './constants'
+
+import { LANGUAGES } from '~/constants'
 
 const resources = {
   en: {

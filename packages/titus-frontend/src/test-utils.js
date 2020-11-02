@@ -9,10 +9,10 @@ import { createMemoryHistory } from 'history'
 import { Router } from 'react-router-dom'
 import '@testing-library/jest-dom'
 
-import locale from './locale'
-import { LANGUAGES } from './constants'
-import { AuthProvider } from './components/authentication/authentication-context'
-import AppRouter from './router'
+import locale from '~/services/i18n/locale'
+import { LANGUAGES } from '~/constants'
+import { AuthProvider } from '~/components/authentication/authentication-context'
+import { AppRouter } from '~/router'
 
 const resources = {
   en: {

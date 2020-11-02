@@ -1,13 +1,15 @@
 import T from 'prop-types'
 import React, { useContext, lazy } from 'react'
 import { Route, Router, Redirect, Switch } from 'react-router-dom'
+import { createBrowserHistory } from 'history'
 
-import history from './history'
-import { AuthContext } from './components/authentication/authentication-context'
-import { ROUTES } from './constants'
+import { AuthContext } from '~/components/authentication/authentication-context'
+import { ROUTES } from '~/constants'
 
-const AsyncLogin = lazy(() => import('./pages/login'))
-const AsyncDashboard = lazy(() => import('./pages/dashboard'))
+const AsyncLogin = lazy(() => import('~/pages/login'))
+const AsyncDashboard = lazy(() => import('~/pages/dashboard'))
+
+const history = createBrowserHistory()
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const { isAuthenticated } = useContext(AuthContext)
@@ -45,4 +47,4 @@ const AppRouter = () => (
   </Router>
 )
 
-export default AppRouter
+export { AppRouter, history }

@@ -1,11 +1,12 @@
 import React, { Fragment } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import config from '../../config'
 import Logo from '../logo'
 import UserInfo from '../user-info'
 import UserList from '../user-list'
-import { LANGUAGES } from '../../constants'
+
+import { LANGUAGES } from '~/constants'
+import config from '~/config'
 
 const Dashboard = ({ logout }) => {
   const { t, i18n } = useTranslation()

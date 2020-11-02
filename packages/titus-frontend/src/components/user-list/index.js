@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { AuthContext } from '../authentication/authentication-context'
+import { AuthContext } from '~/components/authentication/authentication-context'
 
 // This component was created only to test the Cognito user list endpoint
 const UserList = () => {

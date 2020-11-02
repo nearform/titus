@@ -1,3 +1,12 @@
+const aliases = require('../aliases.config')
+const path = require('path')
+
+const aliasesStoryBook = {}
+
+Object.keys(aliases).map(alias => {
+  aliasesStoryBook[alias] = path.resolve(__dirname, '../' + aliases[alias])
+})
+
 module.exports = {
   stories: ['../src/**/*.story.(js|mdx)'],
   addons: [
@@ -14,5 +23,15 @@ module.exports = {
     '@storybook/addon-options/register',
     '@storybook/preset-create-react-app',
     'storybook-readme/register'
-  ]
+  ],
+  webpackFinal: config => ({
+    ...config,
+    resolve: {
+      ...config.resolve,
+      alias: {
+        ...config.resolve.alias,
+        ...aliasesStoryBook
+      }
+    }
+  })
 }

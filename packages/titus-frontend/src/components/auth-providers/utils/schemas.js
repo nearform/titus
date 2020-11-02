@@ -1,7 +1,7 @@
 import * as yup from 'yup'
 
-import { AUTH_PROVIDERS } from '../../../constants'
-import i18n from '../../../i18n'
+import { AUTH_PROVIDERS } from '~/constants'
+import i18n from '~/services/i18n'
 
 let password
 if (process.env.REACT_APP_AUTH_PROVIDER === AUTH_PROVIDERS.MEM) {
