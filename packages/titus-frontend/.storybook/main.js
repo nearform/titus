@@ -1,7 +1,7 @@
 module.exports = {
-  stories: ['../src/**/*.story.(js|mdx)'],
+  stories: ['../src/**/*.story.@(js|mdx)'],
   addons: [
-    '@storybook/addon-a11y/register',
+    '@storybook/addon-a11y',
     {
       name: '@storybook/addon-docs',
       options: {
@@ -11,7 +11,6 @@ module.exports = {
     '@storybook/addon-actions/register',
     '@storybook/addon-links/register',
     '@storybook/addon-knobs/register',
-    '@storybook/addon-options/register',
     '@storybook/preset-create-react-app',
     'storybook-readme/register'
   ]
