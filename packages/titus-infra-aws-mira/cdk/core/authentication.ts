@@ -31,7 +31,8 @@ export class Authentication extends Construct {
       signInAliases: {
         email: true
       },
-      userPoolName: stackName
+      userPoolName: stackName,
+      signInCaseSensitive: false
     })
 
     this.userPoolArn = userPool.userPoolArn
