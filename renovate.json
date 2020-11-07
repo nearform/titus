@@ -1,5 +1,7 @@
 {
-  "extends": [
-    "config:base"
-  ]
+  "extends": ["config:base", ":preserveSemverRanges"],
+  "labels": ["renovate"],
+  "automerge": true,
+  "automergeType": "branch",
+  "dependencyDashboard": true
 }
