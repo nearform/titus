@@ -3,7 +3,6 @@ import React from 'react'
 import {
   renderWithAuthedRouter,
   render,
-  cleanup,
   fireEvent,
   waitForElementToBeRemoved,
   waitFor
@@ -12,8 +11,6 @@ import {
 import DashboardContainer from './index'
 
 describe('<DashboardContainer />', () => {
-  afterEach(cleanup)
-
   it('renders without crashing', async () => {
     const { getByText } = render(<DashboardContainer />)
     expect(getByText(/develop and deploy/i)).toBeInTheDocument()

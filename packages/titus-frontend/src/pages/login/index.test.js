@@ -3,7 +3,6 @@ import React from 'react'
 import {
   render,
   renderWithRouter,
-  cleanup,
   waitFor,
   waitForElementToBeRemoved,
   fireEvent
@@ -12,8 +11,6 @@ import {
 import Login from './index'
 
 describe('<Login />', () => {
-  afterEach(cleanup)
-
   it('renders without crashing', () => {
     const { getByLabelText, getByText } = render(<Login />)
     expect(getByLabelText(/username/i)).toBeInTheDocument()
