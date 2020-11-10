@@ -1,9 +1,13 @@
 name: Frontend CI
 on:
+  push:
+    paths:
+      - '.github/workflows/frontend-ci.yml'
+      - 'packages/titus-frontend/**'
   pull_request:
     paths:
-    - '.github/workflows/frontend-ci.yml'
-    - 'packages/titus-frontend/**'
+      - '.github/workflows/frontend-ci.yml'
+      - 'packages/titus-frontend/**'
 
 jobs:
   integration-checks:

@@ -1,9 +1,13 @@
 name: DB Manager CI
 on:
+  push:
+    paths:
+      - '.github/workflows/db-manager-ci.yml'
+      - 'packages/titus-db-manager/**'
   pull_request:
     paths:
-    - '.github/workflows/db-manager-ci.yml'
-    - 'packages/titus-db-manager/**'
+      - '.github/workflows/db-manager-ci.yml'
+      - 'packages/titus-db-manager/**'
 
 jobs:
   integration-checks:
@@ -18,10 +22,10 @@ jobs:
           POSTGRES_PASSWORD: titus
           POSTGRES_DB: titus
         ports:
-        - 5432:5432
+          - 5432:5432
         # needed because the postgres container does not provide a healthcheck
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-    
+
     env:
       CI: true
 
