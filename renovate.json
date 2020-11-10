@@ -3,5 +3,11 @@
   "labels": ["renovate"],
   "automerge": true,
   "automergeType": "branch",
-  "dependencyDashboard": true
+  "dependencyDashboard": true,
+  "packageRules": [
+    {
+      "updateTypes": ["major"],
+      "automergeType": "pr"
+    }
+  ]
 }
