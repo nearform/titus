@@ -22,7 +22,7 @@
     "@types/jest": "^26.0.0",
     "@types/mkdirp": "^1.0.0",
     "@types/node": "^10.0.0",
-    "jest": "^24.9.0",
+    "jest": "^26.0.0",
     "mkdirp": "^1.0.4",
     "parcel-bundler": "1.x",
     "ts-jest": "^24.3.0",
