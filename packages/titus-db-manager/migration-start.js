@@ -1,5 +1,7 @@
 'use strict'
 
+const path = require('path')
+
 const Postgrator = require('postgrator')
 const { Client } = require('pg')
 const logger = require('pino')()
@@ -25,7 +27,7 @@ const start = async (action, credentials) => {
     const pg = await new Postgrator({
       validateChecksums: true,
       newline: 'LF',
-      migrationDirectory: `${__dirname}/migrate/migrations`,
+      migrationDirectory: path.join(__dirname, '/migrate/migrations'),
       driver: 'pg',
       ...credentials,
       schemaTable: `schema_migrations`
