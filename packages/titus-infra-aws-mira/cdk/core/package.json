@@ -5,11 +5,11 @@
   "private": true,
   "scripts": {},
   "dependencies": {
-    "@aws-cdk/aws-cognito": "1.72.0",
-    "@aws-cdk/aws-ec2": "1.72.0",
-    "@aws-cdk/aws-iam": "1.72.0",
-    "@aws-cdk/aws-rds": "1.72.0",
-    "@aws-cdk/core": "1.72.0",
+    "@aws-cdk/aws-cognito": "1.73.0",
+    "@aws-cdk/aws-ec2": "1.73.0",
+    "@aws-cdk/aws-iam": "1.73.0",
+    "@aws-cdk/aws-rds": "1.73.0",
+    "@aws-cdk/core": "1.73.0",
     "@types/node": "^10.0.0",
     "postgrator": "^4.0.0"
   }
