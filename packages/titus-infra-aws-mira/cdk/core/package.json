@@ -11,6 +11,6 @@
     "@aws-cdk/aws-rds": "1.72.0",
     "@aws-cdk/core": "1.72.0",
     "@types/node": "^10.0.0",
-    "postgrator": "^3.10.2"
+    "postgrator": "^4.0.0"
   }
 }
