@@ -1,5 +1,6 @@
 {
-  "extends": ["config:base", ":preserveSemverRanges"],
+  "extends": ["config:base"],
+  "rangeStrategy": "bump",
   "labels": ["renovate"],
   "automerge": true,
   "automergeType": "branch",
