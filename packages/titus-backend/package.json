@@ -26,7 +26,7 @@
     "fastify-autoload": "^3.0.2",
     "fastify-cors": "^4.1.0",
     "fastify-helmet": "^5.0.0",
-    "fastify-plugin": "^2.0.0",
+    "fastify-plugin": "^3.0.0",
     "fastify-postgres": "^3.1.0",
     "fastify-swagger": "^3.4.0",
     "fastify-secrets-env": "^1.0.1",
