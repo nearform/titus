@@ -15,7 +15,7 @@
     "test:related": "jest --config .jest.json --onlyChanged"
   },
   "dependencies": {
-    "aws-sdk": "^2.776.0",
+    "aws-sdk": "^2.791.0",
     "axios": "^0.21.0",
     "dotenv": "^8.2.0",
     "dotenv-expand": "^5.1.0",
