@@ -24,7 +24,7 @@
     "dotenv": "^8.2.0",
     "dotenv-expand": "^5.1.0",
     "env-schema": "^2.0.1",
-    "fastify": "^3.0.0",
+    "fastify": "^3.8.0",
     "fastify-plugin": "^3.0.0",
     "fastify-secrets-env": "^1.0.1",
     "fastify-secrets-gcp": "^1.0.1",
