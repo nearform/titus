@@ -32,7 +32,7 @@
     "fastify-secrets-env": "^1.0.1",
     "fastify-secrets-gcp": "^1.0.1",
     "fastify-url-data": "^3.0.3",
-    "fluent-schema": "^1.0.4",
+    "fluent-schema": "^1.0.5",
     "jwk-to-pem": "^2.0.4",
     "jwks-rsa": "^1.8.1",
     "jws": "^4.0.0",
