@@ -34,7 +34,7 @@
     "fastify-url-data": "^3.0.3",
     "fluent-schema": "^1.0.5",
     "jwk-to-pem": "^2.0.4",
-    "jwks-rsa": "^1.8.1",
+    "jwks-rsa": "^1.11.0",
     "jws": "^4.0.0",
     "nodemon": "^2.0.4",
     "pg": "^8.4.1",
