@@ -9,3 +9,4 @@ async function auth0(server, options) {
 }
 
 module.exports = fp(auth0)
+module.exports.autoload = false

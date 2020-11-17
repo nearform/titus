@@ -9,7 +9,7 @@ const authProviders = {
 }
 
 async function auth(server, options) {
-  server.register(authProviders[options.auth.provider || 'auth0'], options)
+  server.register(authProviders[options.auth.provider], options)
 }
 
 module.exports = fp(auth)
