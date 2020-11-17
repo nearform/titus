@@ -108,3 +108,4 @@ async function azureAD(server, options) {
 }
 
 module.exports = fp(azureAD)
+module.exports.autoload = false

@@ -43,3 +43,4 @@ async function cognito(server, options) {
 }
 
 module.exports = fp(cognito)
+module.exports.autoload = false
