@@ -1,5 +1,6 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
 
 import config from '../../config'
 import Logo from '../logo'
@@ -17,38 +18,49 @@ const Dashboard = ({ logout }) => {
   const language = i18n.language
 
   return (
-    <Fragment>
-      <select // eslint-disable-line jsx-a11y/no-onchange
-        id="language"
-        aria-label={`${t('language')}:`}
-        className="language-selector"
-        onChange={onLanguageChange}
-      >
-        {LANGUAGES.map(lng => (
-          <option
-            key={lng.code}
-            value={lng.code}
-            defaultValue={lng.code === language ? 'selected' : null}
-          >
-            {lng.name} {lng.flag}
-          </option>
-        ))}
-      </select>
-      <button className="logout button" onClick={logout}>
-        {t('logout')}
-      </button>
-      <Logo />
-      <p>{t('description')}</p>
-      <a
-        href="https://nf-titus.netlify.com/"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        {t('docs')}
-      </a>
-      {config.aws.identityPoolId && <UserInfo />}
-      {config.aws.identityPoolId && <UserList />}
-    </Fragment>
+    <>
+      <div className="navbar">
+        <select // eslint-disable-line jsx-a11y/no-onchange
+          id="language"
+          aria-label={`${t('language')}:`}
+          className="language-selector"
+          onChange={onLanguageChange}
+        >
+          {LANGUAGES.map(lng => (
+            <option
+              key={lng.code}
+              value={lng.code}
+              defaultValue={lng.code === language ? 'selected' : null}
+            >
+              {lng.name} {lng.flag}
+            </option>
+          ))}
+        </select>
+        {config.enableAdmin && (
+          <Link to="/admin">
+            <button component="button" className="admin button">
+              {t('admin')}
+            </button>
+          </Link>
+        )}
+        <button className="logout button" onClick={logout}>
+          {t('logout')}
+        </button>
+      </div>
+      <div className="container">
+        <Logo />
+        <p>{t('description')}</p>
+        <a
+          href="https://nf-titus.netlify.com/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          {t('docs')}
+        </a>
+        {config.aws.identityPoolId && <UserInfo />}
+        {config.aws.identityPoolId && <UserList />}
+      </div>
+    </>
   )
 }
 // {adIdToken && (

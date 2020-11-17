@@ -15,6 +15,7 @@
     "test:related": "jest --config .jest.json --onlyChanged"
   },
   "dependencies": {
+    "@nearform/brokeneck-fastify": "^1.0.0-spinal.2",
     "aws-sdk": "^2.805.0",
     "axios": "^0.21.0",
     "dotenv": "^8.2.0",

@@ -27,15 +27,15 @@ describe('Authorization constructor auth0', () => {
   Object.defineProperty(window, 'localStorage', {
     value: {
       setItem: (key, value) => (storage[key] = value),
-      getItem: key => {
-        return JSON.stringify(storage[key])
-      },
+      getItem: key => storage[key],
       removeItem: key => delete storage[key]
     }
   })
 
   it('should trigger getUserData correctly', () => {
-    expect(authentication.getUserData()).toEqual({ username: 'Dontknow' })
+    storage['id_token'] = 'some token'
+
+    expect(authentication.getUserData()).toEqual({ idToken: 'some token' })
   })
 
   it('should trigger logout correctly', () => {

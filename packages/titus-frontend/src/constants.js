@@ -18,7 +18,8 @@ export const LANGUAGES = [
 
 export const ROUTES = {
   LOGIN: '/login',
-  DASHBOARD: '/'
+  DASHBOARD: '/',
+  ADMIN: '/admin'
 }
 
 export const AUTH_PROVIDERS = {
