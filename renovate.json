@@ -9,6 +9,10 @@
     {
       "updateTypes": ["major"],
       "automergeType": "pr"
+    },
+    {
+      "extends": "monorepo:aws-cdk",
+      "allowedVersions": "1.67.0"
     }
   ]
 }
