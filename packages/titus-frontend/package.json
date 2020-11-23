@@ -3,7 +3,7 @@
   "version": "1.0.0-alpha.1",
   "private": true,
   "dependencies": {
-    "@babel/core": "^7.12.7",
+    "@babel/core": "^7.12.8",
     "auth0-js": "^9.14.0",
     "aws-amplify": "^3.3.10",
     "cross-env": "^7.0.2",
