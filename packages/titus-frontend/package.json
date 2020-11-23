@@ -5,7 +5,7 @@
   "dependencies": {
     "@babel/core": "^7.12.7",
     "auth0-js": "^9.14.0",
-    "aws-amplify": "^3.3.9",
+    "aws-amplify": "^3.3.10",
     "cross-env": "^7.0.2",
     "env-schema": "^2.0.1",
     "fluent-schema": "^1.0.5",
