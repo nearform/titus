@@ -3,6 +3,7 @@
 require('dotenv-expand')(require('dotenv').config())
 const logger = require('pino')()
 const { Client: ClientGcp } = require('fastify-secrets-gcp')
+const { Client: ClientAws } = require('fastify-secrets-aws')
 const { Client: ClientEnv } = require('fastify-secrets-env')
 
 const start = require('./migration-start')
@@ -14,6 +15,10 @@ function getClient() {
 
   if (process.env.SECRETS_STRATEGY === 'gcp') {
     return new ClientGcp()
+  }
+
+  if (process.env.SECRETS_STRATEGY === 'aws') {
+    return new ClientAws()
   }
 
   throw new Error('Unsupported secrets manager strategy')
