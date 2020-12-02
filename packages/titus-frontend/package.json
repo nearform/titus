@@ -8,7 +8,7 @@
     "aws-amplify": "^3.3.11",
     "cross-env": "^7.0.3",
     "env-schema": "^2.0.1",
-    "fluent-schema": "^1.0.5",
+    "fluent-schema": "^1.0.6",
     "formik": "^2.2.5",
     "i18next": "^19.8.4",
     "i18next-browser-languagedetector": "^6.0.1",
