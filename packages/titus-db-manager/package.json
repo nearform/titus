@@ -29,7 +29,7 @@
     "fastify-secrets-aws": "^1.0.0",
     "fastify-secrets-env": "^1.0.1",
     "fastify-secrets-gcp": "^1.0.1",
-    "fluent-schema": "^1.0.6",
+    "fluent-schema": "^1.1.0",
     "pg": "^8.5.1",
     "pino": "^6.7.0",
     "postgrator": "^4.1.1"
