@@ -4,6 +4,11 @@
 
 &nbsp;
 
+<h2 align="center"> 🚀 A rocket powered jet pack super charged starter kit. 🛠️</h2>
+<p align="center"><em>From 0 to react front-end, fastify-backend, authentication, with tests, and cloud-ready in about an hour.</em></p>
+
+---
+
 &nbsp;
 
 [![Lerna][lerna-badge]][lerna-link]
