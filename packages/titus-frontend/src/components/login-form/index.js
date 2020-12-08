@@ -1,5 +1,5 @@
 import T from 'prop-types'
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Formik } from 'formik'
 
 import { loginFormSchema } from '../auth-providers/utils'
@@ -20,7 +20,7 @@ const LoginForm = ({
   let validationSchema =
     RenderForm === LoginFormInputs ? loginFormSchema : undefined
   return (
-    <Fragment>
+    <div className="container">
       <Logo />
       <Formik
         initialValues={{
@@ -46,7 +46,7 @@ const LoginForm = ({
           </form>
         )}
       </Formik>
-    </Fragment>
+    </div>
   )
 }
 

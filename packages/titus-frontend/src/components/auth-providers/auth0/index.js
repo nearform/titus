@@ -3,7 +3,7 @@ import { WebAuth } from 'auth0-js'
 
 export default class Authentication {
   constructor({ config } = {}) {
-    if (config.auth0.domain && config.auth0.clientId && config.auth0.audience) {
+    if (config.auth0.domain && config.auth0.clientId) {
       this.webAuth = new WebAuth({
         domain: config.auth0.domain,
         clientID: config.auth0.clientId,
@@ -74,6 +74,6 @@ export default class Authentication {
   }
 
   getUserData() {
-    return { username: 'Dontknow' }
+    return { idToken: localStorage.getItem('id_token') }
   }
 }

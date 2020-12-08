@@ -75,7 +75,6 @@ input {
   line-height: 2.5rem;
   margin-top: 0.5rem;
   margin-bottom: 1rem;
-  text-align: center;
   width: 100%;
 }
 
@@ -93,8 +92,7 @@ h1 {
   margin-bottom: 1rem;
 }
 
-p,
-header {
+p {
   line-height: 1.5rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -117,6 +115,14 @@ label {
   flex-direction: column;
 }
 
+.navbar {
+  text-align: right;
+}
+
+.navbar > * + * {
+  margin-left: 10px;
+}
+
 .container {
   align-items: center;
   display: flex;
@@ -124,18 +130,18 @@ label {
   margin: 0 auto;
   max-width: 500px;
   padding: 0 1rem;
+  flex: 1;
 }
 
-.logout {
+.logout,
+.admin {
   background: transparent;
   color: var(--blue);
-  position: fixed;
-  right: 10px;
-  top: 10px;
   width: auto;
 }
 
-.logout:hover {
+.logout:hover,
+.admin:hover {
   background: var(--blue);
   color: var(--white);
 }
@@ -175,9 +181,6 @@ label {
 .language-selector {
   width: 150px;
   height: 30px;
-  right: 100px;
-  position: fixed;
-  top: 18px;
   background-color: transparent;
   border: 1px solid lightgray;
 }
