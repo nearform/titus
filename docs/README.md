@@ -1,6 +1,33 @@
 # ![logo]
 
-Develop and deploy your solutions quickly using Titus, an application development and deployment stack. Titus is production-ready and can be deployed to all major cloud providers.
+<h2 align="center"> 🚀 A rocket powered jet pack super charged starter kit. 🛠️</h2>
+<p align="center"><em>From 0 to react front-end, fastify-backend, authentication, with tests, and cloud-ready in about an hour.</em></p>
+
+---
+
+## Create Fullstack App
+
+Titus is an adrenaline booster shot for development velocity.
+It facilitates an immediate ramp-up of development velocity for new projects by eliminating the heavy burden of researching and choosing tooling.
+The Titus project believes that **the precious development resources spent during the initial phase of a new project are best spent implementing user facing features that have tangible impact on a project.**
+
+Titus is a starter kit that provides just enough to start a new project using modern open source tools:
+* React front-end (no CSS or component framework included... byoCSS)
+* Node.js back-end with [Fastify]
+* authentication support (Auth0, AWS Cognito, or Azure Active Directory)
+* front and backend test suites with [Jest] and [Storybook]
+* easily deployed to major cloud providers
+* one page included out of the box allowing for plug-and-play
+
+Titus has a single goal: **give a project just enough to get start without getting in the way**.
+
+The tooling provided with Titus has been chosen by a diverse group of highly experienced developers.
+The motto is, the best tooling is the tooling that just works.
+There will be newer, hotter, and interesting features in other tooling.
+However Titus tooling is production proven to eliminate unforeseen surprises, incompatibilities, and shortcomings.
+The team behind Titus values fresh perspectives and continuous improvement.
+Those values are reflected in the tooling choices and changes over time.
+Titus should be the best today and evolve to be the best tomorrow.
 
 ## Overview
 Titus is an application development and deployment stack suitable for SaaS solutions. It provides a ready to deploy frontend, backend and database and includes infrastructure and service tooling for continuous integration and deployment.
@@ -40,6 +67,8 @@ The quickest way to get exploring is to view our Quick Start Guide. It covers fo
 [Docker]: https://docs.docker.com/install/#supported-platforms
 [Node]: https://nodejs.org/en/
 [npm]: https://www.npmjs.com/get-npm
+[Jest]: https://jestjs.io/
+[Fastify]: https://www.fastify.io/
 
 <!-- Internal Links -->
 [Quick Start Guide]: quick-start/
