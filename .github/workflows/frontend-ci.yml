@@ -38,13 +38,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-          registry-url: https://npm.pkg.github.com
-          scope: '@nearform'
 
       - name: Installing dependencies
         working-directory: packages/titus-frontend
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.BROKENECK_NPM_TOKEN }}
         run: |
           npm ci
           npm run create:env
