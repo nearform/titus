@@ -18,7 +18,7 @@
     "db:up": "lerna run --stream db:up",
     "lint:all": "lerna run --parallel lint",
     "lint:fix": "lerna run --parallel lint:fix",
-    "lint:staged": "lerna run lint:staged",
+    "lint:staged": "lerna run lint:staged --concurrency 1",
     "postinstall": "lerna bootstrap && husky install",
     "start:all": "lerna run --parallel start",
     "start:docs": "docsify serve ./docs --port 4000",
