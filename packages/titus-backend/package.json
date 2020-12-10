@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@nearform/brokeneck-fastify": "^1.0.0-spinal.3",
-    "aws-sdk": "^2.807.0",
+    "aws-sdk": "^2.808.0",
     "axios": "^0.21.0",
     "dotenv": "^8.2.0",
     "dotenv-expand": "^5.1.0",
