@@ -1,4 +1,4 @@
-import Authentication from './index'
+import Authentication from '.'
 
 describe('Authorization constructor', () => {
   const storage = {}

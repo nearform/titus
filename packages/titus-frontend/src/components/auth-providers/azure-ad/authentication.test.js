@@ -1,4 +1,4 @@
-import Authentication from './index'
+import Authentication from '.'
 
 jest.mock('./adalConfig', () => ({
   getAuthContext: jest.fn().mockImplementation(() => ({

@@ -1,16 +1,14 @@
-import React from 'react'
-import { render } from 'react-dom'
-
-import './i18n'
-
 /*
   Required for `runWithAdal` below:
 
   import { runWithAdal } from 'react-adal'
-  import { authContext } from './components/auth-providers/azure-ad/adalConfig'
+  import { authContext } from 'components/auth-providers/azure-ad/adalConfig'
 */
-import App from './app'
-import { register as registerServiceWorker } from './serviceWorker'
+import React from 'react'
+import { render } from 'react-dom'
+import 'lib/i18n'
+import App from 'app'
+import { register as registerServiceWorker } from 'serviceWorker'
 
 render(<App />, document.getElementById('root'))
 

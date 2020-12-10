@@ -6,13 +6,12 @@ import { render } from '@testing-library/react'
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import { createMemoryHistory } from 'history'
-import { Router } from 'react-router-dom'
+import { BrowserRouter, Router } from 'react-router-dom'
 import '@testing-library/jest-dom'
-
-import locale from './locale'
-import { LANGUAGES } from './constants'
-import { AuthProvider } from './components/authentication/authentication-context'
-import AppRouter from './router'
+import locale from 'lib/locale'
+import { LANGUAGES } from 'lib/constants'
+import AppRouter from 'lib/router'
+import { AuthProvider } from 'components/authentication/authentication-context'
 
 const resources = {
   en: {
@@ -69,11 +68,13 @@ const AllTheProviders = ({ children, isAuthenticated }) => (
 // Needs to test using aysnc and await waitForElementToBeRemoved(() => getByText('loading'))
 const renderWithRouter = (ui, isAuthenticated = false) => {
   const Wrapper = ({ children }) => (
-    <AllTheProviders isAuthenticated={isAuthenticated}>
-      <Suspense fallback={<div>loading</div>}>
-        <AppRouter>{children}</AppRouter>
-      </Suspense>
-    </AllTheProviders>
+    <BrowserRouter>
+      <AllTheProviders isAuthenticated={isAuthenticated}>
+        <Suspense fallback={<div>loading</div>}>
+          <AppRouter>{children}</AppRouter>
+        </Suspense>
+      </AllTheProviders>
+    </BrowserRouter>
   )
   return {
     ...render(ui, { wrapper: Wrapper })
@@ -90,9 +91,9 @@ const renderWithMockRouter = (
   } = {}
 ) => {
   const Wrapper = ({ children }) => (
-    <AllTheProviders>
-      <Router history={history}>{children}</Router>
-    </AllTheProviders>
+    <Router history={history}>
+      <AllTheProviders>{children}</AllTheProviders>
+    </Router>
   )
   return {
     ...render(ui, { wrapper: Wrapper })
