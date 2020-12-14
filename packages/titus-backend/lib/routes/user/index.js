@@ -3,7 +3,7 @@
 async function user(server, options) {
   server.route({
     method: 'GET',
-    url: '/user',
+    url: '/',
     schema: {
       tags: ['user'],
       security: [
