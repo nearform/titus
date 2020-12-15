@@ -4,6 +4,8 @@
   "labels": ["renovate"],
   "automerge": true,
   "automergeType": "branch",
+  "prCreation": "not-pending",
+  "stabilityDays": 7,
   "dependencyDashboard": true,
   "packageRules": [
     {
