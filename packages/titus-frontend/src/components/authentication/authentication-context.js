@@ -1,15 +1,14 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
-
-import history from '../../history'
-import { AUTH_PROVIDERS, ROUTES } from '../../constants'
-import InMemory from '../auth-providers/in-memory'
-import Titus from '../auth-providers/titus-backend'
-import AzureAd from '../auth-providers/azure-ad'
-import AwsAmplify from '../auth-providers/aws-amplify'
-import Auth0 from '../auth-providers/auth0'
-import config from '../../config'
+import { useHistory } from 'react-router-dom'
+import { AUTH_PROVIDERS, ROUTES } from 'lib/constants'
+import InMemory from 'components/auth-providers/in-memory'
+import Titus from 'components/auth-providers/titus-backend'
+import AzureAd from 'components/auth-providers/azure-ad'
+import AwsAmplify from 'components/auth-providers/aws-amplify'
+import Auth0 from 'components/auth-providers/auth0'
+import config from 'lib/config'
 
 // AWS, TITUS, MEM, AD, AUTH0
 const AUTH_PROVIDER = process.env.REACT_APP_AUTH_PROVIDER || AUTH_PROVIDERS.MEM
@@ -36,6 +35,7 @@ export const AuthConsumer = AuthContext.Consumer
 
 export const AuthProvider = ({ provider, children }) => {
   const { t } = useTranslation()
+  const history = useHistory()
 
   const authentication = provider || getProvider(t)
 

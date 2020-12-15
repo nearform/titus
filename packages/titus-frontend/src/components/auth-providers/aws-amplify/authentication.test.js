@@ -1,6 +1,6 @@
 import Auth from '@aws-amplify/auth'
 
-import Authentication from './index'
+import Authentication from '.'
 
 jest.mock('@aws-amplify/auth', () => ({
   signIn: jest.fn(),

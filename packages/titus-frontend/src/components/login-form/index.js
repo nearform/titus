@@ -1,9 +1,8 @@
 import T from 'prop-types'
 import React from 'react'
 import { Formik } from 'formik'
-
-import { loginFormSchema } from '../auth-providers/utils'
-import Logo from '../logo'
+import { loginFormSchema } from 'components/auth-providers/utils'
+import Logo from 'components/logo'
 
 import LoginFormInputs from './components/login-form-inputs'
 

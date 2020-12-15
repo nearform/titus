@@ -1,14 +1,12 @@
 import T from 'prop-types'
 import React, { useContext, lazy } from 'react'
-import { Route, Router, Redirect, Switch } from 'react-router-dom'
+import { Route, Redirect, Switch } from 'react-router-dom'
+import { AuthContext } from 'components/authentication/authentication-context'
+import { ROUTES } from 'lib/constants'
+import config from 'lib/config'
 
-import history from './history'
-import { AuthContext } from './components/authentication/authentication-context'
-import { ROUTES } from './constants'
-import config from './config'
-
-const AsyncLogin = lazy(() => import('./pages/login'))
-const AsyncDashboard = lazy(() => import('./pages/dashboard'))
+const AsyncLogin = lazy(() => import('pages/login'))
+const AsyncDashboard = lazy(() => import('pages/dashboard'))
 
 const PrivateRoute = ({ component: Component, componentProps, ...rest }) => {
   const { isAuthenticated } = useContext(AuthContext)
@@ -61,19 +59,17 @@ const AppRouter = () => {
   const { user } = useContext(AuthContext)
 
   return (
-    <Router history={history}>
-      <Switch>
-        <Route path={ROUTES.LOGIN}>
-          <AsyncLogin />
-        </Route>
-        <PrivateRoute
-          path={ROUTES.DASHBOARD}
-          exact={true}
-          component={AsyncDashboard}
-        />
-        {renderAdmin(user)}
-      </Switch>
-    </Router>
+    <Switch>
+      <Route path={ROUTES.LOGIN}>
+        <AsyncLogin />
+      </Route>
+      <PrivateRoute
+        path={ROUTES.DASHBOARD}
+        exact={true}
+        component={AsyncDashboard}
+      />
+      {renderAdmin(user)}
+    </Switch>
   )
 }
 

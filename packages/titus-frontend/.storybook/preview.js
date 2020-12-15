@@ -16,4 +16,4 @@ addDecorator(addReadme)
 const storyWrapper = story => <div className="story-wrapper">{story()}</div>
 addDecorator(storyWrapper)
 
-import '../src/styles.css'
+import 'styles.css'

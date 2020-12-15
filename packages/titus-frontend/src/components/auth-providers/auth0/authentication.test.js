@@ -1,6 +1,6 @@
 import { WebAuth } from 'auth0-js'
 
-import Authentication from './index'
+import Authentication from '.'
 
 jest.mock('auth0-js')
 

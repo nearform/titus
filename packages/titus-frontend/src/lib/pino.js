@@ -1,6 +1,5 @@
 import pino from 'pino'
-
-import config from './config'
+import config from 'lib/config'
 
 const pinoConfig = {
   browser: {

@@ -1,14 +1,13 @@
 import React from 'react'
-
 import {
   render,
   renderWithRouter,
   waitFor,
   waitForElementToBeRemoved,
   fireEvent
-} from '../../test-utils'
+} from 'lib/test-utils'
 
-import Login from './index'
+import Login from '.'
 
 describe('<Login />', () => {
   it('renders without crashing', () => {
