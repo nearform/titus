@@ -20,7 +20,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [12.x, 14.x]
 
     steps:
       - name: Checking out code
