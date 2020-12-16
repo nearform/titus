@@ -12,9 +12,10 @@ jobs:
   deploy-titus-backend:
     name: Build & Deploy titus-backend
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
-        node-version: ['12.x', '14.x']
+        node-version: ['14.x']
 
     env:
       PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
