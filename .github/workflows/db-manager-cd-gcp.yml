@@ -20,6 +20,10 @@ jobs:
       CLOUDRUN_SERVICE_REGION: europe-west1
       CI: true
 
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x]
+
     steps:
       - name: Checkout project
         uses: actions/checkout@v2
@@ -29,7 +33,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v2
         with:
-          node-version: 12.x
+          node-version: ${{ matrix.node-version }}
 
       - name: Set up gcloud CLI
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master

@@ -12,6 +12,9 @@ jobs:
   deploy-titus-backend:
     name: Build & Deploy titus-backend
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ['12.x', '14.x']
 
     env:
       PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
@@ -29,7 +32,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v2
         with:
-          node-version: 12.x
+          node-version: ${{ matrix.node-version }}
 
       - name: Set up gcloud CLI
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
