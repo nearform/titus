@@ -13,10 +13,6 @@ jobs:
     name: Build & Deploy titus-backend
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: ['14.x']
-
     env:
       PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
       DOCKER_REGISTRY_HOST: europe-west1-docker.pkg.dev
@@ -33,7 +29,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 14.x
 
       - name: Set up gcloud CLI
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
