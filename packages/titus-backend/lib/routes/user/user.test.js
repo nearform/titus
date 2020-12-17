@@ -22,7 +22,7 @@ describe('user route', () => {
   it('should return user', async () => {
     const response = await server.inject({
       method: 'GET',
-      url: '/user'
+      url: '/'
     })
 
     expect(JSON.parse(response.payload)).toEqual({ id: 'id-01' })
