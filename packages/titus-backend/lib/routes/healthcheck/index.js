@@ -1,12 +1,10 @@
 'use strict'
 
-const fp = require('fastify-plugin')
-
 const { version } = require('../../../package')
 async function health(server, options) {
   server.register(require('under-pressure'), options.underPressure).route({
     method: 'GET',
-    url: '/healthcheck',
+    url: '/',
     schema: {
       tags: ['healthcheck'],
       response: {
@@ -51,4 +49,4 @@ async function health(server, options) {
   })
 }
 
-module.exports = fp(health)
+module.exports = health
