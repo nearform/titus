@@ -20,7 +20,7 @@ describe('log route', () => {
     jest.spyOn(server.log, 'info')
     const response = await server.inject({
       method: 'POST',
-      url: '/log',
+      url: '/',
       body: {
         msg: 'test message'
       }
@@ -34,7 +34,7 @@ describe('log route', () => {
     jest.spyOn(server.log, 'warn')
     const response = await server.inject({
       method: 'POST',
-      url: '/log',
+      url: '/',
       body: {
         msg: 'test warn message',
         level: 'warn'
@@ -49,7 +49,7 @@ describe('log route', () => {
     jest.spyOn(server.log, 'error')
     const response = await server.inject({
       method: 'POST',
-      url: '/log',
+      url: '/',
       body: {
         msg: 'test error message',
         level: 'error'
