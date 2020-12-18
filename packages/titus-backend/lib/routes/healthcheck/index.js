@@ -1,7 +1,7 @@
 'use strict'
 
 const { version } = require('../../../package')
-async function health(server, options) {
+async function healthcheck(server, options) {
   server.register(require('under-pressure'), options.underPressure).route({
     method: 'GET',
     url: '/',
@@ -49,4 +49,4 @@ async function health(server, options) {
   })
 }
 
-module.exports = health
+module.exports = healthcheck
