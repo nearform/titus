@@ -24,7 +24,7 @@ describe('health route', () => {
     server.pg.query.mockResolvedValue({ rowCount: 1 })
     const response = await server.inject({
       method: 'GET',
-      url: '/healthcheck'
+      url: '/'
     })
 
     expect(response.statusCode).toEqual(200)
@@ -46,7 +46,7 @@ describe('health route', () => {
     server.pg.query.mockRejectedValue(new Error('boom!'))
     const response = await server.inject({
       method: 'GET',
-      url: '/healthcheck'
+      url: '/'
     })
 
     expect(response.statusCode).toEqual(200)
@@ -64,7 +64,7 @@ describe('health route', () => {
     server.pg.query.mockRejectedValue({})
     const response = await server.inject({
       method: 'GET',
-      url: '/healthcheck'
+      url: '/'
     })
 
     expect(response.statusCode).toEqual(200)
