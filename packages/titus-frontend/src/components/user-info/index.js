@@ -1,8 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-
-import config from '../../config'
-import { AuthContext } from '../authentication/authentication-context'
+import { AuthContext } from 'components/authentication/authentication-context'
+import config from 'lib/config'
 
 // This component was created only to test the auth endpoint
 const UserInfo = () => {

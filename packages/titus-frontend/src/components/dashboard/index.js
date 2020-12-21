@@ -1,12 +1,11 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-
-import config from '../../config'
-import Logo from '../logo'
-import UserInfo from '../user-info'
-import UserList from '../user-list'
-import { LANGUAGES } from '../../constants'
+import config from 'lib/config'
+import Logo from 'components/logo'
+import UserInfo from 'components/user-info'
+import UserList from 'components/user-list'
+import { LANGUAGES } from 'lib/constants'
 
 const Dashboard = ({ logout }) => {
   const { t, i18n } = useTranslation()

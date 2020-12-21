@@ -1,11 +1,9 @@
 'use strict'
 
-const fp = require('fastify-plugin')
-
 async function user(server, options) {
   server.route({
     method: 'GET',
-    url: '/user',
+    url: '/',
     schema: {
       tags: ['user'],
       security: [
@@ -36,4 +34,4 @@ async function user(server, options) {
   })
 }
 
-module.exports = fp(user)
+module.exports = user

@@ -7,7 +7,7 @@ on:
     paths:
       - 'packages/titus-frontend/**'
       - '.github/workflows/frontend-cd-gcp.yml'
-      
+
 jobs:
   deploy-titus-frontend:
     name: Build & Deploy titus-frontend
@@ -27,9 +27,9 @@ jobs:
           fetch-depth: 1
 
       - name: Set up Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
-          node-version: 12.x
+          node-version: 14.x
 
       - name: Set up gcloud CLI
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master

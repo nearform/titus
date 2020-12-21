@@ -1,4 +1,4 @@
-import Authentication from './index'
+import Authentication from '.'
 
 describe('titus-backend auth provider', () => {
   const authentication = new Authentication({

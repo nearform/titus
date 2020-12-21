@@ -1,14 +1,13 @@
 import React from 'react'
-
 import {
   renderWithAuthedRouter,
   render,
   fireEvent,
   waitForElementToBeRemoved,
   waitFor
-} from '../../test-utils'
+} from 'lib/test-utils'
 
-import DashboardContainer from './index'
+import DashboardContainer from '.'
 
 describe('<DashboardContainer />', () => {
   it('renders without crashing', async () => {

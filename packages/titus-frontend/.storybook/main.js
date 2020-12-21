@@ -1,3 +1,4 @@
+const path = require('path')
 module.exports = {
   stories: ['../src/**/*.story.@(js|mdx)'],
   addons: [
@@ -13,5 +14,12 @@ module.exports = {
     '@storybook/addon-knobs/register',
     '@storybook/preset-create-react-app',
     'storybook-readme/register'
-  ]
+  ],
+  webpackFinal: async config => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '.storybook': path.resolve(__dirname)
+    }
+    return config
+  }
 }

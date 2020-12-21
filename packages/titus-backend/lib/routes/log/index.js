@@ -3,7 +3,7 @@
 async function log(server, options) {
   server.route({
     method: 'POST',
-    url: '/log',
+    url: '/',
     schema: {
       body: {
         type: 'object',
