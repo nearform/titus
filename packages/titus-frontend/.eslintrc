@@ -10,6 +10,7 @@
     "browser": true
   },
   "rules": {
+    "import/no-anonymous-default-export": "off",
     "import/order": [
       "error",
       {

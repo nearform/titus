@@ -24,8 +24,10 @@ describe('Pino file', () => {
   test('should trigger pino log function', () => {
     log('log message')
 
-    expect(global.navigator.sendBeacon.mock.calls.length).toBe(1)
-    expect(infoMessage).toBe('log message')
+    setTimeout(() => {
+      expect(global.navigator.sendBeacon.mock.calls.length).toBe(1)
+      expect(infoMessage).toBe('log message')
+    }, 300)
   })
 
   test('should trigger pino default with warn', () => {
