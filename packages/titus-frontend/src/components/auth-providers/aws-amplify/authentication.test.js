@@ -59,6 +59,9 @@ describe('Authorization constructor', () => {
 
   it('should trigger login with newPassword correctly', async () => {
     Auth.signIn.mockImplementation(() => ({}))
+    Auth.currentAuthenticatedUser.mockImplementation(() => ({
+      username: 'username'
+    }))
     Auth.completeNewPassword.mockImplementation(() => ({
       username: 'username'
     }))
