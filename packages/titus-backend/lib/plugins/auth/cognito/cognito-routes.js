@@ -2,7 +2,7 @@
 
 const fp = require('fastify-plugin')
 const AWS = require('aws-sdk')
-const { Forbidden } = require('http-errors')
+// const { Forbidden } = require('http-errors')
 
 async function authRoutes(server, options) {
   const cognito = new AWS.CognitoIdentityServiceProvider({
@@ -56,35 +56,6 @@ async function authRoutes(server, options) {
         enabled: user.Enabled,
         status: user.UserStatus
       }))
-    }
-  })
-
-  server.route({
-    method: 'DELETE',
-    url: '/user/:username',
-    schema: {
-      tags: ['cognito'],
-      security: [
-        {
-          apiKey: []
-        }
-      ]
-    },
-    onRequest: [
-      server.authenticate,
-      async request => {
-        if (!(await server.casbin.enforce(request.user, 'user', 'delete'))) {
-          throw new Forbidden('Cannot delete user')
-        }
-      }
-    ],
-    handler: request => {
-      return cognito
-        .adminDeleteUser({
-          UserPoolId: options.auth.cognito.userPoolId,
-          Username: request.params.username
-        })
-        .promise()
     }
   })
 }

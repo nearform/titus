@@ -25,26 +25,6 @@ const UserList = () => {
     listUsers()
   }, [listUsers])
 
-  async function handleDelete(username) {
-    if (!window.confirm(`Are you sure you want to delete ${username}?`)) {
-      return
-    }
-
-    const response = await fetch(`${config.serverUrl}/user/${username}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${user.idToken}`
-      }
-    })
-
-    if (response.ok) {
-      return listUsers()
-    }
-
-    window.alert(`There was an error deleting user ${username}`)
-  }
-
   return (
     <div style={{ marginTop: 20 }}>
       <h1>{t('userListTitle')}</h1>
@@ -56,7 +36,6 @@ const UserList = () => {
             <th>Enabled</th>
             <th>Status</th>
             <th>Created At</th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -77,14 +56,6 @@ const UserList = () => {
               </td>
               <td>{u.status}</td>
               <td>{new Date(u.createdAt).toLocaleString()}</td>
-              <td>
-                <button
-                  onClick={() => handleDelete(u.username)}
-                  disabled={u.username === user.username}
-                >
-                  delete
-                </button>
-              </td>
             </tr>
           ))}
         </tbody>
