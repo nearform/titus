@@ -2,7 +2,6 @@
 
 const fp = require('fastify-plugin')
 const AWS = require('aws-sdk')
-// const { Forbidden } = require('http-errors')
 
 async function authRoutes(server, options) {
   const cognito = new AWS.CognitoIdentityServiceProvider({

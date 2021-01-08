@@ -1,3 +1,4 @@
 # allow the delete action on objects of type user 
 # only to subjects in the admin cognito group
-p, (r.sub['cognito:groups'] || []).includes('admin'), user, delete
+# p, (r.sub['cognito:groups'] || []).includes('admin'), user, delete
+p, r.sub.isAdmin==true, admin, access

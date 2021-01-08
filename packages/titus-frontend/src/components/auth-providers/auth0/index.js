@@ -20,7 +20,7 @@ export default class Authentication {
 
   async login() {
     if (this.isAuthenticated()) {
-      return { username: 'Dontknow ' }
+      return this.getUserData()
     }
     // will redirect to Auth0 website, which will then redirect to /login with auth details in url
     if (this.webAuth) this.webAuth.authorize()
@@ -74,6 +74,9 @@ export default class Authentication {
   }
 
   getUserData() {
-    return { idToken: localStorage.getItem('id_token') }
+    return {
+      idToken: localStorage.getItem('id_token'),
+      accessToken: localStorage.getItem('access_token')
+    }
   }
 }

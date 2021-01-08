@@ -74,7 +74,8 @@ export default class Authentication {
     return {
       username: decodedToken['cognito:username'],
       email: decodedToken.email,
-      idToken
+      idToken,
+      accessToken: idToken // essentially the same for AWS for our purposes here
     }
   }
 }
