@@ -83,6 +83,7 @@ const getUser = async (config, token, cb) => {
 }
 
 async function azureAD(server, options) {
+  server.register(require('./azure-ad-routes'), options)
   server.addHook('onRequest', async (req, res) => {
     const {
       headers: { authorization = '' },

@@ -10,7 +10,6 @@ const authProviders = {
 
 async function auth(server, options) {
   server.register(authProviders[options.auth.provider], options)
-  server.register(require('./authzcheck'), options)
 }
 
 module.exports = fp(auth)

@@ -21,7 +21,10 @@ export default class Authentication {
     const user = this.authContext ? this.authContext.getCachedUser() : null
     if (user) {
       const { username } = user
-      this.user = { username }
+      this.user = {
+        username,
+        idToken: localStorage.getItem('adal.idtoken')
+      }
       return true
     }
     return false

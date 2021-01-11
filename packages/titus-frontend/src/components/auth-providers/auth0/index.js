@@ -10,7 +10,7 @@ export default class Authentication {
         redirectUri: `${window.location.origin}/login`,
         audience: config.auth0.audience,
         responseType: 'token id_token',
-        scope: 'openid'
+        scope: 'openid email profile'
       })
     }
     this.config = config

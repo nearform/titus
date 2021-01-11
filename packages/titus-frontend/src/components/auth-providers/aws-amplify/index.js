@@ -60,13 +60,19 @@ export default class Authentication {
 
   getUserData() {
     const regex = /^CognitoIdentityServiceProvider/
-    const awsKey = Object.keys(localStorage)
+    const awsIdTokenKey = Object.keys(localStorage)
       .filter(
         e => regex.test(e) && e.includes(this.authConfig.userPoolWebClientId)
       )
       .find(entry => entry.endsWith('.idToken'))
 
-    const idToken = localStorage.getItem(awsKey)
+    const awsAccessTokenKey = Object.keys(localStorage)
+      .filter(
+        e => regex.test(e) && e.includes(this.authConfig.userPoolWebClientId)
+      )
+      .find(entry => entry.endsWith('.accessToken'))
+    const idToken = localStorage.getItem(awsIdTokenKey)
+    const accessToken = localStorage.getItem(awsAccessTokenKey)
     if (!idToken) {
       return this.user || false
     }
@@ -75,7 +81,7 @@ export default class Authentication {
       username: decodedToken['cognito:username'],
       email: decodedToken.email,
       idToken,
-      accessToken: idToken // essentially the same for AWS for our purposes here
+      accessToken
     }
   }
 }

@@ -7,11 +7,12 @@ const AuthzCheck = () => {
   const checkAuthz = async user => {
     console.log(user)
     const headers = {
-      Authorization: `Bearer ${user.accessToken}`
+      Authorization: `Bearer ${user.accessToken}`,
+      'X-authz-id': user.idToken
     }
     try {
       setIsAuthorizedAdmin('checking...')
-      const response = await fetch('/admin-authzcheck', { headers })
+      const response = await fetch('/authzcheck', { headers })
       const json = await response.json()
       if (json.isAdmin) {
         setIsAuthorizedAdmin('confirmed authorized admin')
@@ -26,9 +27,8 @@ const AuthzCheck = () => {
 
   return (
     <div style={{ marginTop: 20 }}>
-      <button onClick={() => checkAuthz(user)}>
-        Authorization Check ({isAuthorizedAdmin})
-      </button>
+      <h1>Authorization Check</h1>
+      <button onClick={() => checkAuthz(user)}>{isAuthorizedAdmin}</button>
     </div>
   )
 }
