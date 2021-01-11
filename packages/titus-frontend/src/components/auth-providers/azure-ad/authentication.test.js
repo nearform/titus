@@ -8,8 +8,17 @@ jest.mock('./adalConfig', () => ({
 }))
 
 describe('Authorization constructor', () => {
+  const storage = {}
   const config = { adal: { tenant: 'tenant', clientId: 'id' } }
   const authentication = new Authentication({ config, t: () => {} })
+
+  Object.defineProperty(window, 'localStorage', {
+    value: {
+      setItem: (key, value) => (storage[key] = value),
+      getItem: key => storage[key],
+      removeItem: key => delete storage[key]
+    }
+  })
 
   it('should trigger logout correctly', () => {
     expect(authentication.logout()).toBe(true)
@@ -24,7 +33,12 @@ describe('Authorization constructor', () => {
   })
 
   it('should trigger getUserData correctly', () => {
-    expect(authentication.getUserData()).toEqual({ username: 'username' })
+    storage['adal.idtoken'] = 'some token'
+    authentication.isAuthenticated()
+    expect(authentication.getUserData()).toEqual({
+      username: 'username',
+      idToken: 'some token'
+    })
   })
 
   it('should trigger isAuthenticated correctly', () => {
