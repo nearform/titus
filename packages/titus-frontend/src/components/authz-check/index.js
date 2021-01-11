@@ -5,7 +5,6 @@ const AuthzCheck = () => {
   const { user } = useContext(AuthContext)
   const [isAuthorizedAdmin, setIsAuthorizedAdmin] = useState('not checked')
   const checkAuthz = async user => {
-    console.log(user)
     const headers = {
       Authorization: `Bearer ${user.accessToken}`,
       'X-authz-id': user.idToken

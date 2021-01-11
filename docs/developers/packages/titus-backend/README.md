@@ -38,6 +38,13 @@ It expects to be supplied an `Authorization` header as `Bearer ${IDTOKEN}`.
 
 It requires the `AD_*` env vars to be set in `.env`.
 
+### Amazon Cognito Plugin
+
+[Amazon Cognito](cognito) is the AWS Authentication service. Titus provides this plugin to define routes for login and methods to perform JWT validation of requests. 
+
+Configure Cognito with `AUTH_PROVIDER=cognito` in `.env` and relevant values for `COGNITO_USER_POOL_ID`
+`COGNITO_REGION`
+
 ### The pg Plugin
 
 The pg plugin automatically instruments other routes with a [pg][fastify-postgres] so they can issue queries against the database.
@@ -48,6 +55,19 @@ Have a look at `lib/plugins/pg/pg.test.js` for some examples.
 
 The `GET /healthcheck` endpoint is intended for your production cluster. Your backend is ready to use when
 it returns your application version and server timestamp. It also runs a dummy query against the database to ensure it's available.
+
+
+## Configure Authorization
+Titus provides authorization capabilities via Casbin, an access control system with configurable policies and models that allow you to control which resources in your application a user can access. 
+
+### Authz Check Routes
+Each of the Authentication service configurations included with Titus (Auth0, Cognito and AzureAD) provide the endpoint `/authzcheck` to illustrate the function of authorization with Casbin policies. These simple examples accept a standard JWT as an `idToken` as provided by the auth service and decode the token, extracting the user's email to match to any defined by the comma-separated value for `CHECK_AUTHZ_ADMIN_USERS` in `.env`
+
+This is a simple example to illustrate integration with Casbin. Your real-world app will require specific authz policies - Casbin supports a range of capabilities via _watchers_ and _adaptors_. 
+
+For more information check this useful introduction to [Access Control in Node.js with Fastify and Casbin](casbin-introduction) and the [official Casbin docs](casbin)
+
+
 
 
 ## Install the Backend
@@ -124,19 +144,26 @@ cognito.adminGetUser(params, (err, response) => {
 
 
 
-[Jest]: https://jestjs.io
-[ESLint]: https://eslint.org
-[Prettier]: https://prettier.io
-[Standard]: https://standardjs.com
-[fastify]: https://fastify.io
-[Pino]: http://getpino.io
+
+
+
 [Auth0]: https://auth0.com
-[Nodemon]: https://nodemon.io
+[casbin]: https://casbin.org
+[casbin-introduction]: https://www.nearform.com/blog/access-control-node-js-fastify-and-casbin/
+[cognito]: https://aws.amazon.com/cognito/
+[custom attribute]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-attributes.html#user-pool-settings-custom-attributes
+[ESLint]: https://eslint.org
+[faker]: http://marak.github.io/faker.js
 [fastify-postgres]: https://github.com/fastify/fastify-postgres
+[fastify]: https://fastify.io
+[Jest]: https://jestjs.io
 [jwt]: https://jwt.io
 [nock]: https://github.com/nock/nock#readme
-[faker]: http://marak.github.io/faker.js
-[custom attribute]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-attributes.html#user-pool-settings-custom-attributes
-[validation instructions]: https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html
-[Titus Database Manager]: /developers/packages/titus-db-manager/
 [node-postgres]: https://node-postgres.com/
+[Nodemon]: https://nodemon.io
+[Pino]: http://getpino.io
+[Prettier]: https://prettier.io
+[Standard]: https://standardjs.com
+[Titus Database Manager]: /developers/packages/titus-db-manager/
+[validation instructions]: https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html
+
