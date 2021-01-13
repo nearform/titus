@@ -2,8 +2,6 @@
 
 const axios = require('axios')
 const fp = require('fastify-plugin')
-const { Forbidden } = require('http-errors')
-const jwt = require('jsonwebtoken')
 
 /**
  * Registers an JSON Web Token authentication strategy (named 'jwt')
@@ -92,45 +90,6 @@ async function authRoutes(server, options) {
         return user
       }
     })
-
-  // this is a sample to check the signed-in user's permission to access this resource via casbin policies based on configuration in the OAuth provider
-  // a real-world example would have more context around the user account and roles/scopes/permissions and policies
-  server.route({
-    method: 'GET',
-    url: '/authzcheck',
-    schema: {
-      tags: ['authz'],
-      security: [
-        {
-          apiKey: []
-        }
-      ]
-    },
-    onRequest: [
-      server.authenticate,
-      async (request, res) => {
-        // TODO: mechanism to determine auth0 users role
-        // depending on how this is managed - you could get associated user data from auth0 user management API like https://auth0.com/docs/api/management/v2#!/Users/get_user_roles
-        // or set this up to be included in the token via Auth0 rules https://auth0.com/docs/rules
-        // for now we are faking it with env var matched email addresses
-        const authzId = request.headers['x-authz-id']
-        const authzUserData = jwt.decode(authzId)
-        const adminUsers = process.env.CHECK_AUTHZ_ADMIN_USERS || ''
-        const isAdmin = adminUsers.split(',').includes(authzUserData.email)
-
-        // Here's where the actual policy check goes ahead
-        if (!(await server.casbin.enforce({ isAdmin }, 'admin', 'access'))) {
-          throw new Forbidden('Cannot access admin')
-        }
-      }
-    ],
-    handler: async req => {
-      return {
-        isAdmin: true,
-        user: req.user
-      }
-    }
-  })
 }
 
 module.exports = fp(authRoutes)

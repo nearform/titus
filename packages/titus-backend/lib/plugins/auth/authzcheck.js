@@ -19,11 +19,8 @@ async function authRoutes(server, options) {
       ]
     },
     onRequest: [
-      // server.authenticate, // (NOT REQUIRED for AD)
+      server.authenticate,
       async (request, res) => {
-        // TODO: mechanism to determine azure ad user's users role
-        // for now we are faking it with env var matched email addresses
-
         const authzId = request.headers['x-authz-id']
         const authzUserData = jwt.decode(authzId)
         const adminUsers = process.env.CHECK_AUTHZ_ADMIN_USERS || ''

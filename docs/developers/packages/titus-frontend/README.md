@@ -89,7 +89,7 @@ To enable it, do the following:
 ## Authorization example
 _Authentication_ (above) allows your app to verify the identity of your users, while _Authorization_ allows you to manage which resources in your app a user can access.  **`titus-frontend`** provides a an example authz request in `src/components/authz-check` that requests a privileged resource from the backend. 
 
-Refer to **`titus-backend`** [Configure Authorization] where policies specific to your application. 
+Refer to **`titus-backend`** [Configure Authorization](ConfigureAuthorization) for policies specific to your application. 
 
 ## Install the Frontend
 To install Titus frontend, run the following command:
@@ -203,7 +203,7 @@ This command produces a new bundle in `build/` folder.
 
 
 <!-- Internal Links -->
-[Configure Authorization]: developers/packages/titus-backend/?id=configure-authorization
+[ConfigureAuthorization]: developers/packages/titus-backend/?id=configure-authorization
 
 
 [auth0-login]: https://auth0.com/docs/universal-login
