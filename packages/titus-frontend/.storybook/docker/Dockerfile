@@ -2,7 +2,7 @@ FROM node:14 as builder
 
 WORKDIR /service
 
-COPY package.json package-lock.json ./
+COPY package.json package-lock.json jsconfig.json .eslintrc .eslintignore .prettierrc ./
 COPY src ./src
 COPY public ./public
 COPY .storybook ./.storybook
