@@ -4,6 +4,10 @@
 # Allow files and directories
 !package.json
 !package-lock.json
+!jsconfig.json
+!.eslintrc
+!.eslintignore
+!.prettierrc
 !src/**
 !public/**
 !.storybook/**
