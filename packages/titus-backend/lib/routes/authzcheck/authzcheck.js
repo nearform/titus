@@ -6,13 +6,12 @@ const jwt = require('jsonwebtoken')
 
 async function authRoutes(server, options) {
   // add users to the admin role
-  server.addHook('onReady', async function () {
-    const adminUsers = process.env.CHECK_AUTHZ_ADMIN_USERS || ''
-    const policies = adminUsers
-      .split(',')
-      .map(u => server.casbin.addRoleForUser(u, 'role_admin'))
-    await Promise.all(policies)
-  })
+
+  const adminUsers = process.env.CHECK_AUTHZ_ADMIN_USERS || ''
+  const policies = adminUsers
+    .split(',')
+    .map(u => server.casbin.addRoleForUser(u, 'role_admin'))
+  await Promise.all(policies)
 
   // this is a sample to check the signed-in user's permission to access this resource via casbin policies based on configuration in the OAuth provider
   // a real-world example would have more context around the user account and roles/scopes/permissions and policies
@@ -49,4 +48,7 @@ async function authRoutes(server, options) {
     }
   })
 }
-module.exports = fp(authRoutes)
+module.exports = fp(authRoutes, {
+  name: 'authzcheck',
+  dependencies: ['fastify-casbin']
+})
