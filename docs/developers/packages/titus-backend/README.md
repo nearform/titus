@@ -63,7 +63,7 @@ Titus provides authorization capabilities via Casbin, an access control system w
 ### Authz Check Routes
 Each of the Authentication service configurations included with Titus (Auth0, Cognito and AzureAD) provide the endpoint `/authzcheck` to illustrate the function of authorization with Casbin policies. These simple examples accept a standard JWT as an `idToken` as provided by the auth service and decode the token, extracting the user's email to match to any defined by the comma-separated value for `CHECK_AUTHZ_ADMIN_USERS` in `.env`
 
-This is a simple example to illustrate integration with Casbin. Your real-world app will require specific authz policies - Casbin supports a range of capabilities via _watchers_ and _adaptors_. 
+This is a simple example to illustrate integration with Casbin. Your real-world app will require specific authz policies - Casbin supports a range of capabilities via _watchers_ and _adapters_. 
 
 For more information check this useful introduction to [Access Control in Node.js with Fastify and Casbin](casbin-introduction) and the [official Casbin docs](casbin)
 
@@ -166,4 +166,3 @@ cognito.adminGetUser(params, (err, response) => {
 [Standard]: https://standardjs.com
 [Titus Database Manager]: /developers/packages/titus-db-manager/
 [validation instructions]: https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html
-
