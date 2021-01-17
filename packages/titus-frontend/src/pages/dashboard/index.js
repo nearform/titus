@@ -7,9 +7,9 @@ import Dashboard from 'components/dashboard'
 
 const DashboardContainer = () => {
   const { logout } = useContext(AuthContext)
-  // const [adIdToken, setAdIdToken] = useState(null)
 
   // This stuff only happens if the AuthProvider is AD
+  // const [adIdToken, setAdIdToken] = useState(null)
   // useEffect(() => {
   //   if (!authContext) {
   //     return
@@ -20,7 +20,7 @@ const DashboardContainer = () => {
   //   )
 
   //   if (adIdToken) {
-  //     setAdIdToken({ adIdToken })
+  //     setAdIdToken(adIdToken)
   //   }
   // }, [])
 

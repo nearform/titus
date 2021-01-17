@@ -1,8 +1,13 @@
 'use strict'
+
 const fp = require('fastify-plugin')
 const AWS = require('aws-sdk')
 
 async function authRoutes(server, options) {
+  const cognito = new AWS.CognitoIdentityServiceProvider({
+    region: options.auth.cognito.region
+  })
+
   server.route({
     method: 'GET',
     url: '/auth',
@@ -35,15 +40,9 @@ async function authRoutes(server, options) {
     },
     onRequest: server.authenticate,
     handler: async () => {
-      const cognitoIdentityServiceProvider = new AWS.CognitoIdentityServiceProvider(
-        {
-          region: options.auth.cognito.region
-        }
-      )
-
-      const result = await cognitoIdentityServiceProvider
+      const result = await cognito
         .listUsers({
-          UserPoolId: options.auth.cognito.userPoolId /* required */
+          UserPoolId: options.auth.cognito.userPoolId
         })
         .promise()
 

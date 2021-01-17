@@ -5,6 +5,7 @@ import config from 'lib/config'
 import Logo from 'components/logo'
 import UserInfo from 'components/user-info'
 import UserList from 'components/user-list'
+import AuthzCheck from 'components/authz-check'
 import { LANGUAGES } from 'lib/constants'
 
 const Dashboard = ({ logout }) => {
@@ -56,8 +57,9 @@ const Dashboard = ({ logout }) => {
         >
           {t('docs')}
         </a>
-        {config.aws.identityPoolId && <UserInfo />}
-        {config.aws.identityPoolId && <UserList />}
+        <AuthzCheck />
+        {config.aws.userPoolId && <UserInfo />}
+        {config.aws.userPoolId && <UserList />}
       </div>
     </>
   )

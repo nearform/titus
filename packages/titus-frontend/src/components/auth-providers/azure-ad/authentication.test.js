@@ -24,7 +24,15 @@ describe('Authorization constructor', () => {
   })
 
   it('should trigger getUserData correctly', () => {
-    expect(authentication.getUserData()).toEqual({ username: 'username' })
+    authentication.authContext.getCachedUser.mockImplementation(() => ({
+      username: 'username'
+    }))
+    window.localStorage.setItem('adal.idtoken', 'some token')
+    authentication.isAuthenticated()
+    expect(authentication.getUserData()).toEqual({
+      username: 'username',
+      idToken: 'some token'
+    })
   })
 
   it('should trigger isAuthenticated correctly', () => {

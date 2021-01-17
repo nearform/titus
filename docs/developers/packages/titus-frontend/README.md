@@ -85,6 +85,12 @@ To enable it, do the following:
 1. Set `REACT_APP_AUTH_PROVIDER` to `AD` in the **`titus-frontend`** `.env` file.
 3. Change the `render` method in `src/index.js` to the commented out replacement that wraps it in `runWithAdal`.
 
+
+## Authorization example
+_Authentication_ (above) allows your app to verify the identity of your users, while _Authorization_ allows you to manage which resources in your app a user can access.  **`titus-frontend`** provides a an example authz request in `src/components/authz-check` that requests a privileged resource from the backend. 
+
+Refer to **`titus-backend`** [Configure Authorization](ConfigureAuthorization) for policies specific to your application. 
+
 ## Install the Frontend
 To install Titus frontend, run the following command:
 
@@ -195,18 +201,23 @@ npm run build
 This command produces a new bundle in `build/` folder.
 
 
-[React]: https://reactjs.org
+
+<!-- Internal Links -->
+[ConfigureAuthorization]: developers/packages/titus-backend/?id=configure-authorization
+
+
+[auth0-login]: https://auth0.com/docs/universal-login
+[Auth0]: https://auth0.com
+[aws-amplify-authentication]: https://aws-amplify.github.io/docs/js/authentication
 [CRA]: https://facebook.github.io/create-react-app
-[react-router]: https://reacttraining.com/react-router/web
-[yup]: https://github.com/jquense/yup#readme
-[Jest]: https://jestjs.io
 [Enzyme]: https://airbnb.io/enzyme
 [ESLint]: https://eslint.org
-[Prettier]: https://prettier.io
-[Standard]: https://standardjs.com/
-[Auth0]: https://auth0.com
+[Jest]: https://jestjs.io
 [Lighthouse]: https://developers.google.com/web/tools/lighthouse
-[Storybook]: https://storybook.js.org
-[auth0-login]: https://auth0.com/docs/universal-login
-[aws-amplify-authentication]: https://aws-amplify.github.io/docs/js/authentication
 [material-ui]: https://material-ui.com/getting-started/installation/
+[Prettier]: https://prettier.io
+[react-router]: https://reacttraining.com/react-router/web
+[React]: https://reactjs.org
+[Standard]: https://standardjs.com/
+[Storybook]: https://storybook.js.org
+[yup]: https://github.com/jquense/yup#readme

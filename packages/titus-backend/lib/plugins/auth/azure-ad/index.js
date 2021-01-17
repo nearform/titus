@@ -83,7 +83,7 @@ const getUser = async (config, token, cb) => {
 }
 
 async function azureAD(server, options) {
-  server.addHook('onRequest', async (req, res) => {
+  async function authenticate(req, res) {
     const {
       headers: { authorization = '' },
       method,
@@ -104,7 +104,9 @@ async function azureAD(server, options) {
       res.code(400)
       throw err
     }
-  })
+  }
+
+  server.decorate('authenticate', authenticate, options)
 }
 
 module.exports = fp(azureAD)

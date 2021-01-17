@@ -34,8 +34,12 @@ describe('Authorization constructor auth0', () => {
 
   it('should trigger getUserData correctly', () => {
     storage['id_token'] = 'some token'
+    storage['access_token'] = 'some access token'
 
-    expect(authentication.getUserData()).toEqual({ idToken: 'some token' })
+    expect(authentication.getUserData()).toEqual({
+      idToken: 'some token',
+      accessToken: 'some access token'
+    })
   })
 
   it('should trigger logout correctly', () => {
@@ -48,10 +52,15 @@ describe('Authorization constructor auth0', () => {
   it('should trigger login correctly', async () => {
     let tomorrow = new Date()
     tomorrow.setDate(tomorrow.getDate() + 1)
+    storage['id_token'] = 'some token'
+    storage['access_token'] = 'some access token'
 
     storage['expires_at'] = tomorrow.getTime()
 
-    expect(await authentication.login()).toEqual({ username: 'Dontknow ' })
+    expect(await authentication.login()).toEqual({
+      idToken: 'some token',
+      accessToken: 'some access token'
+    })
   })
 
   it('should trigger login correctly', async () => {
