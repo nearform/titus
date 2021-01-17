@@ -88,7 +88,7 @@ module.exports = {
     }
   },
   casbin: {
-    modelPath: path.join(__dirname, 'authz/casbin_model.conf'),
+    model: path.join(__dirname, 'authz/casbin_model.conf'),
     adapter: path.join(__dirname, 'authz/casbin_policy.csv')
   }
 }
