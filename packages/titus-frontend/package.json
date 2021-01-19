@@ -53,7 +53,7 @@
     "@storybook/addons": "^6.1.14",
     "@storybook/preset-create-react-app": "^3.1.5",
     "@storybook/react": "^6.1.14",
-    "@testing-library/jest-dom": "^5.11.8",
+    "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "chalk": "^4.1.0",
     "dotenv": "^8.2.0",
