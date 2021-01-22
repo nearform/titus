@@ -22,7 +22,7 @@
     "dotenv": "^8.2.0",
     "dotenv-expand": "^5.1.0",
     "env-schema": "^2.0.1",
-    "fastify": "^3.9.2",
+    "fastify": "^3.10.1",
     "fastify-auth": "^1.0.1",
     "fastify-auth0-verify": "^0.4.2",
     "fastify-autoload": "^3.4.0",
