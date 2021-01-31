@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@babel/core": "^7.12.10",
-    "@material-ui/core": "^4.11.2",
+    "@material-ui/core": "^4.11.3",
     "@material-ui/lab": "^4.0.0-alpha.57",
     "@nearform/brokeneck-react": "^1.0.0-spinal.8",
     "auth0-js": "^9.14.2",
