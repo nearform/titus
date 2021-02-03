@@ -33,6 +33,7 @@ const config = envSchema({
     .prop('AD_SECRET', S.string())
     .prop('SECRETS_STRATEGY', S.string())
     .prop('SECRETS_PG_PASS', S.string().required())
+    .prop('HEALTHCHECK_URL', S.string().default('/healthcheck'))
 })
 
 const isProduction = /^\s$production\s*$/i.test(config.NODE_ENV)
@@ -56,7 +57,24 @@ module.exports = {
     poolSize: 10,
     idleTimeoutMillis: 30000
   },
-  underPressure: {},
+  underPressure: {
+    exposeStatusRoute: {
+      url: config.HEALTHCHECK_URL,
+      routeResponseSchemaOpts: {
+        version: { type: 'string' },
+        serverTimestamp: { type: 'string' },
+        memoryUsage: {
+          type: 'object',
+          properties: {
+            eventLoopDelay: { type: 'string' },
+            rssBytes: { type: 'number' },
+            heapUsed: { type: 'number' }
+          }
+        },
+        db: { type: 'string' }
+      }
+    }
+  },
   cors: { origin: !!config.CORS_ORIGIN, credentials: true },
   auth: {
     provider: config.AUTH_PROVIDER || 'auth0',
