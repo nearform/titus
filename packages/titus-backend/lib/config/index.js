@@ -58,6 +58,9 @@ module.exports = {
     idleTimeoutMillis: 30000
   },
   underPressure: {
+    maxHeapUsedBytes: 768 * 1024 * 1024, // arbitrary, 768 MB of RAM
+    maxRssBytes: 1024 * 1024 * 1024, // arbitrary, 1 GB of RAM
+    maxEventLoopUtilization: 0.98,
     exposeStatusRoute: {
       url: config.HEALTHCHECK_URL,
       routeResponseSchemaOpts: {
