@@ -3,7 +3,7 @@
 const path = require('path')
 
 const envSchema = require('env-schema')
-const S = require('fluent-schema')
+const S = require('fluent-json-schema')
 
 const config = envSchema({
   dotenv: true,
@@ -36,6 +36,19 @@ const config = envSchema({
     .prop('HEALTHCHECK_URL', S.string().default('/healthcheck'))
 })
 
+const routeResponseSchemaOpts = S.object()
+  .prop('version', S.string())
+  .prop('serverTimestamp', S.string())
+  .prop('db', S.string())
+  .prop(
+    'memoryUsage',
+    S.object()
+      .prop('eventLoopDelay', S.string())
+      .prop('rssBytes', S.string())
+      .prop('heapUsed', S.string())
+  )
+  .valueOf().properties
+
 const isProduction = /^\s$production\s*$/i.test(config.NODE_ENV)
 
 // Global configuration, from env variables
@@ -63,19 +76,7 @@ module.exports = {
     maxEventLoopUtilization: 0.98,
     exposeStatusRoute: {
       url: config.HEALTHCHECK_URL,
-      routeResponseSchemaOpts: {
-        version: { type: 'string' },
-        serverTimestamp: { type: 'string' },
-        memoryUsage: {
-          type: 'object',
-          properties: {
-            eventLoopDelay: { type: 'string' },
-            rssBytes: { type: 'number' },
-            heapUsed: { type: 'number' }
-          }
-        },
-        db: { type: 'string' }
-      }
+      routeResponseSchemaOpts
     }
   },
   cors: { origin: !!config.CORS_ORIGIN, credentials: true },

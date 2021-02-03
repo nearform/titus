@@ -28,7 +28,7 @@ async function healthCheck(server, options, next) {
   server.register(require('under-pressure'), parent => {
     return {
       ...options.underPressure,
-      healthCheck: async () => runCheck(parent)
+      healthCheck: () => runCheck(parent)
     }
   })
 
