@@ -1,5 +1,8 @@
 'use strict'
 
+const fp = require('fastify-plugin')
+
+const config = require('../../config')
 const { version } = require('../../../package')
 
 describe('health route', () => {
@@ -7,10 +10,16 @@ describe('health route', () => {
 
   beforeAll(async () => {
     server = require('fastify')()
-    server.register(require('fastify-postgres'))
-    server.register(require('.'))
+    server.register(
+      fp(
+        async server => {
+          server.decorate('pg', { query: jest.fn() })
+        },
+        { name: 'pg' }
+      )
+    )
+    server.register(require('.'), config)
     await server.ready()
-    server.pg.query = jest.fn()
   })
 
   beforeEach(() => {
@@ -24,7 +33,7 @@ describe('health route', () => {
     server.pg.query.mockResolvedValue({ rowCount: 1 })
     const response = await server.inject({
       method: 'GET',
-      url: '/'
+      url: '/healthcheck'
     })
 
     expect(response.statusCode).toEqual(200)
@@ -46,7 +55,7 @@ describe('health route', () => {
     server.pg.query.mockRejectedValue(new Error('boom!'))
     const response = await server.inject({
       method: 'GET',
-      url: '/'
+      url: '/healthcheck'
     })
 
     expect(response.statusCode).toEqual(200)
@@ -64,7 +73,7 @@ describe('health route', () => {
     server.pg.query.mockRejectedValue({})
     const response = await server.inject({
       method: 'GET',
-      url: '/'
+      url: '/healthcheck'
     })
 
     expect(response.statusCode).toEqual(200)
