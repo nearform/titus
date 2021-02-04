@@ -34,6 +34,9 @@ const config = envSchema({
     .prop('SECRETS_STRATEGY', S.string())
     .prop('SECRETS_PG_PASS', S.string().required())
     .prop('HEALTHCHECK_URL', S.string().default('/healthcheck'))
+    .prop('HEALTHCHECK_MAX_HEAP_USER', S.number().default(768 * 1024 * 1024)) // arbitrary, 768 MB of RAM
+    .prop('HEALTHCHECK_MAX_RSS', S.number().default(1024 * 1024 * 1024)) // arbitrary, 1 GB of RAM
+    .prop('HEALTHCHECK_MAX_EVENT_LOOP_UTILIZATION', S.number().default(0.98))
 })
 
 const routeResponseSchemaOpts = S.object()
@@ -71,9 +74,9 @@ module.exports = {
     idleTimeoutMillis: 30000
   },
   underPressure: {
-    maxHeapUsedBytes: 768 * 1024 * 1024, // arbitrary, 768 MB of RAM
-    maxRssBytes: 1024 * 1024 * 1024, // arbitrary, 1 GB of RAM
-    maxEventLoopUtilization: 0.98,
+    maxHeapUsedBytes: config.HEALTHCHECK_MAX_HEAP_USER,
+    maxRssBytes: config.HEALTHCHECK_MAX_RSS,
+    maxEventLoopUtilization: config.HEALTHCHECK_MAX_EVENT_LOOP_UTILIZATION,
     exposeStatusRoute: {
       url: config.HEALTHCHECK_URL,
       routeResponseSchemaOpts
