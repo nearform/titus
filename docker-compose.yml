@@ -4,7 +4,7 @@ services:
 
   titus-db:
     container_name: titus-db
-    image: postgres:10.4-alpine
+    image: postgres:10.16-alpine
     environment:
       - POSTGRES_USER=titus
       - POSTGRES_PASSWORD=titus
