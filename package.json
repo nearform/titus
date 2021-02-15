@@ -22,8 +22,7 @@
     "postinstall": "lerna bootstrap",
     "start:all": "lerna run --parallel start",
     "start:docs": "docsify serve ./docs --port 4000",
-    "test": "jest --config .jest.json --coverage",
-    "test:all": "npm run test && lerna run --parallel test",
+    "test:all": "lerna run --parallel test",
     "test:related": "lerna run test:related",
     "deploy:ci": "lerna run deploy:ci",
     "deploy": "lerna run deploy"
@@ -31,13 +30,12 @@
   "devDependencies": {
     "docsify-cli": "^4.4.2",
     "husky": "^4.3.8",
-    "jest": "26.6.3",
     "lerna": "^3.22.1"
   },
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint:staged && npm run test:related",
-      "pre-push": "npm run lint:all && npm run test"
+      "pre-push": "npm run lint:all"
     }
   }
 }
