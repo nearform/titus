@@ -14,7 +14,7 @@
     },
     {
       "extends": "monorepo:aws-cdk",
-      "allowedVersions": "1.67.0"
+      "allowedVersions": "1.89.0"
     }
   ]
 }
