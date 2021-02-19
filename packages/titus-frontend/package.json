@@ -10,7 +10,7 @@
     "auth0-js": "^9.14.3",
     "aws-amplify": "^3.3.14",
     "cross-env": "^7.0.3",
-    "env-schema": "^2.0.1",
+    "env-schema": "^2.1.0",
     "fluent-schema": "^1.1.0",
     "formik": "^2.2.6",
     "i18next": "^19.8.7",
