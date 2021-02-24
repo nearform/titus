@@ -25,7 +25,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.2",
     "regenerator-runtime": "^0.13.7",
-    "yup": "^0.32.8"
+    "yup": "^0.32.9"
   },
   "scripts": {
     "create:env": "node -r fs -e \"fs.copyFileSync('.env.sample', '.env', fs.constants.COPYFILE_EXCL)\"",
