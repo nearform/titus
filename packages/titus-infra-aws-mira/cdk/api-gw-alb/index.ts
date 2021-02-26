@@ -73,7 +73,7 @@ export class ApiGatewayAlb extends MiraStack {
           APP_CONFIG_userPoolWebClientId: this.loadParameter('Titus/WebClientId').stringValue,
         },
         handler: 'get-config.handler',
-        runtime: Runtime.NODEJS_12_X,
+        runtime: Runtime.NODEJS_14_X,
         timeout: Duration.minutes(1)
       })
     )
