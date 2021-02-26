@@ -10,7 +10,7 @@
     "@aws-cdk/aws-iam": "1.89.0",
     "@aws-cdk/aws-rds": "1.89.0",
     "@aws-cdk/core": "1.89.0",
-    "@types/node": "^10.17.51",
+    "@types/node": "^10.17.54",
     "postgrator": "^4.1.1"
   }
 }
