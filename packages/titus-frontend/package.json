@@ -10,7 +10,7 @@
     "auth0-js": "^9.14.3",
     "aws-amplify": "^3.3.14",
     "cross-env": "^7.0.3",
-    "env-schema": "^2.0.1",
+    "env-schema": "^2.1.0",
     "fluent-schema": "^1.1.0",
     "formik": "^2.2.6",
     "i18next": "^19.8.7",
@@ -25,7 +25,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.2",
     "regenerator-runtime": "^0.13.7",
-    "yup": "^0.32.8"
+    "yup": "^0.32.9"
   },
   "scripts": {
     "create:env": "node -r fs -e \"fs.copyFileSync('.env.sample', '.env', fs.constants.COPYFILE_EXCL)\"",
@@ -45,14 +45,14 @@
     "postinstall": "patch-package"
   },
   "devDependencies": {
-    "@storybook/addon-a11y": "^6.1.17",
-    "@storybook/addon-actions": "^6.1.17",
-    "@storybook/addon-docs": "^6.1.17",
-    "@storybook/addon-knobs": "^6.1.17",
-    "@storybook/addon-links": "^6.1.17",
-    "@storybook/addons": "^6.1.17",
-    "@storybook/preset-create-react-app": "^3.1.5",
-    "@storybook/react": "^6.1.17",
+    "@storybook/addon-a11y": "^6.1.18",
+    "@storybook/addon-actions": "^6.1.18",
+    "@storybook/addon-docs": "^6.1.18",
+    "@storybook/addon-knobs": "^6.1.18",
+    "@storybook/addon-links": "^6.1.18",
+    "@storybook/addons": "^6.1.18",
+    "@storybook/preset-create-react-app": "^3.1.6",
+    "@storybook/react": "^6.1.18",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "chalk": "^4.1.0",
