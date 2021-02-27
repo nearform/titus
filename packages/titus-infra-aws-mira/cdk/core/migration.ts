@@ -30,7 +30,7 @@ export class Migration extends Construct {
         SECRET_ARN: props.secret.secretArn
       },
       handler: 'lambda.handler',
-      runtime: Runtime.NODEJS_12_X,
+      runtime: Runtime.NODEJS_14_X,
       timeout: Duration.minutes(1),
       uuid: 'dd5f8bfa-7a30-4d48-bfac-4ddcda9c5fb3',
       vpc: props.vpc

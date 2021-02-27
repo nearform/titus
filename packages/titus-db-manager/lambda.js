@@ -37,7 +37,7 @@ module.exports = {
       await start('seed', credentials)
       logger.info('Migration done successful')
     } catch (e) {
-      logger.errot('Migration failed')
+      logger.error('Migration failed')
       logger.error(e)
     }
   }

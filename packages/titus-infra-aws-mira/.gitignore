@@ -3,7 +3,10 @@ cdk.out/
 /config/default.json
 /config/dev.json
 .ts-build-cache
-*.js
+/cdk/**/*.js
+/config/**/*.js
+/pipeline/**/*.js
+/lambda/**/*.js
 build/
 .build/
 .cdk.*
