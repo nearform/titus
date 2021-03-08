@@ -9,16 +9,16 @@ const fp = require('fastify-plugin')
 
 async function plugin(server, config) {
   server
-    .register(swagger, require('./config/swagger'))
     // swagger must be registered before helmet
-    .register(helmet, ({ swaggerCSP }) => ({
+    .register(swagger, require('./config/swagger'))
+    .register(helmet, instance => ({
       contentSecurityPolicy: {
         directives: {
           ...helmet.contentSecurityPolicy.getDefaultDirectives(),
           'form-action': [`'self'`],
           'img-src': [`'self'`, 'data:', 'validator.swagger.io'],
-          'script-src': [`'self'`].concat(swaggerCSP.script),
-          'style-src': [`'self'`, 'https:'].concat(swaggerCSP.style)
+          'script-src': [`'self'`].concat(instance.swaggerCSP.script),
+          'style-src': [`'self'`, 'https:'].concat(instance.swaggerCSP.style)
         }
       }
     }))
