@@ -1,12 +1,6 @@
 name: Backend CD to GCP
 
-on:
-  push:
-    branches:
-      - master
-    paths:
-      - 'packages/titus-backend/**'
-      - '.github/workflows/backend-cd-gcp.yml'
+on: [push, pull_request]
 
 jobs:
   deploy-titus-backend:

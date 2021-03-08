@@ -1,13 +1,6 @@
 name: DB Manager CI
-on:
-  push:
-    paths:
-      - '.github/workflows/db-manager-ci.yml'
-      - 'packages/titus-db-manager/**'
-  pull_request:
-    paths:
-      - '.github/workflows/db-manager-ci.yml'
-      - 'packages/titus-db-manager/**'
+
+on: [push, pull_request]
 
 jobs:
   integration-checks:

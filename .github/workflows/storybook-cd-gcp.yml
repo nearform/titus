@@ -1,12 +1,6 @@
 name: Storybook CD to GCP
 
-on:
-  push:
-    branches:
-      - master
-    paths:
-      - 'packages/titus-frontend/**'
-      - '.github/workflows/storybook-cd-gcp.yml'
+on: [push, pull_request]
 
 jobs:
   deploy-titus-frontend:

@@ -1,12 +1,6 @@
 name: DB Manager CD to GCP
 
-on:
-  push:
-    branches:
-      - master
-    paths:
-      - 'packages/titus-db-manager/**'
-      - '.github/workflows/db-manager-cd-gcp.yml'
+on: [push, pull_request]
 
 jobs:
   deploy-titus-db-manager:

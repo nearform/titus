@@ -1,13 +1,6 @@
 name: Backend CI
-on:
-  push:
-    paths:
-      - '.github/workflows/backend-ci.yml'
-      - 'packages/titus-backend/**'
-  pull_request:
-    paths:
-      - '.github/workflows/backend-ci.yml'
-      - 'packages/titus-backend/**'
+
+on: [push, pull_request]
 
 jobs:
   integration-checks:

@@ -1,12 +1,6 @@
 name: Frontend CD to GCP
 
-on:
-  push:
-    branches:
-      - master
-    paths:
-      - 'packages/titus-frontend/**'
-      - '.github/workflows/frontend-cd-gcp.yml'
+on: [push, pull_request]
 
 jobs:
   deploy-titus-frontend:
