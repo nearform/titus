@@ -1,4 +1,5 @@
 {
+    "name": "titus-lib",
     "scripts": {
         "test": "jest --config .jest.json --coverage"
     },
