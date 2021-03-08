@@ -110,10 +110,17 @@ The home page links you to the documentation (here), if you did not start from t
 
 ### Lint and Test
 
-For new installs, you will need to build the frontend before `test:all`.
+---
+**NOTE**
 
-- `cd packages/titus-frontend npm run build`
-- ` cd ../..`
+For new installs, you will need to build the frontend before `test:all`. To build the project, run the command:
+
+
+```bash
+npm run build:all
+```
+---
+
 
 To lint and test across the stack, use the command format `npm run <command>` in the root directory of the repository. For example:
 
