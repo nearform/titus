@@ -16,7 +16,18 @@ process.on('unhandledRejection', err => {
 
 const main = async () => {
   const server = fastify(config.fastify)
-  server.register(helmet)
+  server.register(require('fastify-swagger'), require('./lib/config/swagger'))
+  server.register(helmet, instance => ({
+    contentSecurityPolicy: {
+      directives: {
+        ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+        'form-action': [`'self'`],
+        'img-src': [`'self'`, 'data:', 'validator.swagger.io'],
+        'script-src': [`'self'`].concat(instance.swaggerCSP.script),
+        'style-src': [`'self'`, 'https:'].concat(instance.swaggerCSP.style)
+      }
+    }
+  }))
   server.register(startServer, config)
 
   await server.listen(config.server)

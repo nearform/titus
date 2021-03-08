@@ -8,7 +8,6 @@ const fp = require('fastify-plugin')
 async function plugin(server, config) {
   server
     .register(require('fastify-cors'), config.cors)
-    .register(require('fastify-swagger'), require('./config/swagger'))
     .register(require('fastify-casbin'), config.casbin)
     .register(autoLoad, {
       dir: path.join(__dirname, 'plugins'),
