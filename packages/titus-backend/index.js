@@ -3,7 +3,6 @@
 'use strict'
 
 const fastify = require('fastify')
-const helmet = require('fastify-helmet')
 
 const startServer = require('./lib/server')
 const config = require('./lib/config')
@@ -16,7 +15,6 @@ process.on('unhandledRejection', err => {
 
 const main = async () => {
   const server = fastify(config.fastify)
-  server.register(helmet)
   server.register(startServer, config)
 
   await server.listen(config.server)
