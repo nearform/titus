@@ -1,47 +1,29 @@
 'use strict'
 
-const { Unauthorized } = require('http-errors')
 const fp = require('fastify-plugin')
-const jwt = require('jsonwebtoken')
+const buildGetJwks = require('get-jwks')
 
-const errorMessages = {
-  badHeaderFormat: 'Authorization header should be in format: Bearer [token].',
-  expiredToken: 'Expired token.',
-  invalidAlgorithm: 'Unsupported token.',
-  invalidToken: 'Invalid token.',
-  jwksHttpError: 'Unable to get the JWS due to a HTTP error',
-  missingHeader: 'Missing Authorization HTTP header.',
-  missingKey: 'No matching key found in the set.',
-  missingOptions:
-    'Please provide at least one of the "domain" or "secret" options.'
-}
-
-/**
- * Simple authentication routine which does not verify the token
- */
-async function authenticate(request) {
-  try {
-    if (!request.headers || !request.headers.authorization) {
-      throw new Unauthorized(errorMessages.missingHeader)
-    }
-
-    const authorization = request.headers.authorization
-
-    if (!authorization.match(/^Bearer\s+/)) {
-      throw new Unauthorized(errorMessages.badHeaderFormat)
-    }
-
-    request.user = jwt.decode(authorization.split(/\s+/)[1].trim())
-  } catch (e) {
-    if (e.statusCode) {
-      throw e
-    }
-
-    throw new Unauthorized(e.message)
-  }
+function authenticate(request) {
+  return request.jwtVerify()
 }
 
 async function cognito(server, options) {
+  const getJwks = buildGetJwks()
+
+  server.register(require('fastify-jwt'), {
+    decode: { complete: true },
+    secret: (_, token, callback) => {
+      const {
+        header: { kid, alg },
+        payload: { iss }
+      } = token
+
+      getJwks
+        .getPublicKey({ kid, domain: iss, alg })
+        .then(publicKey => callback(null, publicKey), callback)
+    }
+  })
+
   server.decorate('authenticate', authenticate)
   server.register(require('./cognito-routes'), options)
 }
