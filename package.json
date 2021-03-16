@@ -28,7 +28,7 @@
     "deploy": "lerna run deploy"
   },
   "devDependencies": {
-    "docsify-cli": "^4.4.2",
+    "docsify-cli": "^4.4.3",
     "husky": "^4.3.8",
     "lerna": "^4.0.0"
   },
