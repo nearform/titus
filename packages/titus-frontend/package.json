@@ -14,7 +14,7 @@
     "fluent-schema": "^1.1.0",
     "formik": "^2.2.6",
     "i18next": "^19.9.2",
-    "i18next-browser-languagedetector": "^6.0.1",
+    "i18next-browser-languagedetector": "^6.1.0",
     "jwt-decode": "^3.1.2",
     "pino": "^6.11.2",
     "prop-types": "^15.7.2",
