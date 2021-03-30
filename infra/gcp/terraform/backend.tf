@@ -3,6 +3,14 @@ resource "google_service_account" "backend" {
   display_name = "backend"
 }
 
+resource "google_project_iam_binding" "backend_iam" {
+  depends_on = [google_service_account.backend]
+  role    = "roles/cloudsql.client"
+  members = [
+    "serviceAccount:${google_service_account.backend.email}"
+  ]
+}
+
 resource "google_secret_manager_secret_iam_member" "backend_db_pass" {
   secret_id = google_secret_manager_secret.db_password.secret_id
   role = "roles/secretmanager.secretAccessor"
