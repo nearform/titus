@@ -42,9 +42,14 @@ gcloud services enable run.googleapis.com
 gcloud services enable iam.googleapis.com
 gcloud services enable secretmanager.googleapis.com
 gcloud services enable artifactregistry.googleapis.com
+gcloud services enable cloudresourcemanager.googleapis.com
 ```
 
 ## Provision infrastruture
+
+To allow Terraform to provision services on GCP we need to give it a bucket to store it's state.
+
+In GCP web console navigate to `Cloud Storage` and create a new bucket with the `Create Bucket` option. Set a unique name for the bucket and adjust `infra/gcp/terraform/main.tf`.
 
 From `infra/gcp/terraform` folder run these commands from your terminal:
 ```sh
