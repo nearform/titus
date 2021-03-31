@@ -38,7 +38,7 @@
     "fastify-swagger": "^4.4.2",
     "fastify-url-data": "^3.0.3",
     "fluent-json-schema": "^2.0.4",
-    "get-jwks": "^3.0.0",
+    "get-jwks": "^4.1.0",
     "jwk-to-pem": "^2.0.4",
     "jwks-rsa": "^2.0.1",
     "jws": "^4.0.0",
