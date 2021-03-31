@@ -3,14 +3,6 @@ resource "google_service_account" "db_manager" {
   display_name = "db_manager"
 }
 
-resource "google_project_iam_binding" "db_manager_iam" {
-  depends_on = [google_service_account.db_manager]
-  role    = "roles/cloudsql.client"
-  members = [
-    "serviceAccount:${google_service_account.db_manager.email}"
-  ]
-}
-
 resource "google_secret_manager_secret_iam_member" "db_manager_db_pass" {
   secret_id = google_secret_manager_secret.db_password.secret_id
   role = "roles/secretmanager.secretAccessor"
