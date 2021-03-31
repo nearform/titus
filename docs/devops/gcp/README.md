@@ -47,7 +47,7 @@ gcloud services enable cloudresourcemanager.googleapis.com
 
 ## Provision infrastruture
 
-To allow Terraform to provision services on GCP we need to give it a bucket to store it's state.
+To allow Terraform to provision services on GCP we need to give it a bucket to store its state.
 
 In GCP web console navigate to `Cloud Storage` and create a new bucket with the `Create Bucket` option. Set a unique name for the bucket and adjust `infra/gcp/terraform/main.tf`.
 
