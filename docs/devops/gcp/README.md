@@ -18,12 +18,12 @@ The stack serves only as an example and is expected to be adjusted or changed ba
 
 To allow Terraform to provision services on GCP we need to give it a service account with right permissions.
 
-In GCP web console navigate to `IAM & Admin / Service Accounts` and create a new service account with `Project Owner` role. Then create a key from it and download it as `key.json` into `infra/terraform/gcp`.
+In GCP web console navigate to `IAM & Admin / Service Accounts` and create a new service account with `Project Owner` role. Then create a key from it and download it as `key.json` into `infra/gcp/terraform`.
 
 
 ## Configure GCP project variables
 
-Create a `infra/terraform/gcp/config.auto.tfvars` file and fill it with adjusted content of `infra/terraform/gcp/config.auto.tfvars.sample`. You must set these variables to match your GCP project:
+Create a `infra/gcp/terraform/config.auto.tfvars` file and fill it with adjusted content of `infra/gcp/terraform/config.auto.tfvars.sample`. You must set these variables to match your GCP project:
 - `gcp_project_id`
 - `region`
 - `zone`
@@ -42,11 +42,16 @@ gcloud services enable run.googleapis.com
 gcloud services enable iam.googleapis.com
 gcloud services enable secretmanager.googleapis.com
 gcloud services enable artifactregistry.googleapis.com
+gcloud services enable cloudresourcemanager.googleapis.com
 ```
 
 ## Provision infrastruture
 
-From `infra/terraform/gcp` folder run these commands from your terminal:
+To allow Terraform to provision services on GCP we need to give it a bucket to store its state.
+
+In GCP web console navigate to `Cloud Storage` and create a new bucket with the `Create Bucket` option. Set a unique name for the bucket and adjust `infra/gcp/terraform/main.tf`.
+
+From `infra/gcp/terraform` folder run these commands from your terminal:
 ```sh
 terraform init
 terraform apply
