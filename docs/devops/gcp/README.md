@@ -20,6 +20,12 @@ To allow Terraform to provision services on GCP we need to give it a service acc
 
 In GCP web console navigate to `IAM & Admin / Service Accounts` and create a new service account with `Project Owner` role. Then create a key from it and download it as `key.json` into `infra/gcp/terraform`.
 
+Or using gcloud
+```
+gcloud iam service-accounts create $IAM-ACCOUNT
+gcloud iam service-accounts keys create key.json --iam-account=$IAM-ACCOUNT
+```
+
 
 ## Configure GCP project variables
 
@@ -50,6 +56,12 @@ gcloud services enable cloudresourcemanager.googleapis.com
 To allow Terraform to provision services on GCP we need to give it a bucket to store its state.
 
 In GCP web console navigate to `Cloud Storage` and create a new bucket with the `Create Bucket` option. Set a unique name for the bucket and adjust `infra/gcp/terraform/main.tf`.
+
+Or using gcloud and gsutil
+```
+gsutil mb $BUCKET
+gcloud iam service-accounts add-iam-policy-binding $IAM_ACCOUNT --role="roles/owner"
+```
 
 From `infra/gcp/terraform` folder run these commands from your terminal:
 ```sh
