@@ -23,7 +23,7 @@
     "dotenv-expand": "^5.1.0",
     "env-schema": "^3.0.1",
     "fastify": "^3.14.2",
-    "fastify-auth": "^1.0.1",
+    "fastify-auth": "^1.1.0",
     "fastify-auth0-verify": "^0.4.2",
     "fastify-autoload": "^3.7.0",
     "fastify-casbin": "^2.0.0",
