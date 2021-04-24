@@ -31,7 +31,7 @@
     "fastify-secrets-gcp": "^1.0.1",
     "fluent-schema": "^1.1.0",
     "pg": "^8.6.0",
-    "pino": "^6.11.2",
+    "pino": "^6.11.3",
     "postgrator": "^4.1.1"
   },
   "devDependencies": {
