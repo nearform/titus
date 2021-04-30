@@ -40,7 +40,7 @@
     "fluent-json-schema": "^2.0.4",
     "get-jwks": "^4.2.0",
     "jwk-to-pem": "^2.0.5",
-    "jwks-rsa": "^2.0.2",
+    "jwks-rsa": "^2.0.3",
     "jws": "^4.0.0",
     "nodemon": "^2.0.7",
     "pg": "^8.6.0",
