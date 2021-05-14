@@ -64,7 +64,7 @@
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-promise": "^5.1.0",
     "jest-environment-jsdom-sixteen": "^1.0.3",
-    "lint-staged": "^10.5.4",
+    "lint-staged": "^11.0.0",
     "prettier": "^2.2.1",
     "storybook-readme": "^5.0.9",
     "typescript": "^4.2.4"
