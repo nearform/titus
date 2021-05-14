@@ -18,7 +18,7 @@
     "@nearform/brokeneck-fastify": "^1.0.0-spinal.8",
     "aws-sdk": "^2.810.0",
     "axios": "^0.21.1",
-    "casbin": "^5.6.1",
+    "casbin": "^5.6.3",
     "dotenv": "^8.2.0",
     "dotenv-expand": "^5.1.0",
     "env-schema": "^3.0.1",
