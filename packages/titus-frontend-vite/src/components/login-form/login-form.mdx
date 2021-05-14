@@ -1,0 +1,40 @@
+import { Story } from '@storybook/addon-docs/blocks'
+import { StyledPreview as Preview } from '.storybook/decorator-components'
+
+## Login Form
+
+Login Form component. Uses [`Formik`](https://jaredpalmer.com/formik). This means it can be passed validation schemas.
+
+<Preview>
+  <Story id="login-form--default" />
+</Preview>
+
+You can pass a `header` message that is displayed above the form.
+
+<Preview>
+  <Story id="login-form--custom-header" />
+</Preview>
+
+You can also pass a "Powered by" style message to be displayed beneath the form.
+
+<Preview>
+  <Story id="login-form--custom-header" />
+</Preview>
+
+Allow password change.
+
+<Preview>
+  <Story id="login-form--allow-password-change" />
+</Preview>
+
+Display login errors.
+
+<Preview>
+  <Story id="login-form--login-error" />
+</Preview>
+
+Allow for custom form rendering.
+
+<Preview>
+  <Story id="login-form--render-props-form" />
+</Preview>

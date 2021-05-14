@@ -1,0 +1,186 @@
+:root {
+  --blue: #2165e5;
+  --midnightBlue: #194caa;
+  --sand4: #6d6d68;
+  --sand2: #a8a4a3;
+  --brunchPink: #fd7a9e;
+  --white: #fff;
+  --red: #ee0000;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background: var(--white);
+  color: var(--sand4);
+  font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue',
+    Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-weight: 300;
+  margin: 0;
+  min-height: 100vh;
+}
+
+#docs-root,
+#root {
+  min-height: 100vh;
+}
+#docs-root {
+  background: #333;
+}
+
+a {
+  color: var(--blue);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  color: var(--midnightBlue);
+}
+
+img {
+  max-width: 100%;
+}
+
+sub {
+  display: block;
+  margin-top: 1rem;
+  text-align: right;
+}
+
+a:visited {
+  color: var(--brunchPink);
+}
+
+.button {
+  background: var(--blue);
+  border: 0;
+  color: var(--white);
+  cursor: pointer;
+  font-weight: bold;
+  height: 44px;
+  padding: 8px 12px;
+  text-transform: uppercase;
+  transition: background 0.2s ease;
+  width: 100%;
+}
+
+input {
+  border: 0;
+  font-size: 1rem;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+input::placeholder {
+  color: var(--sand2);
+  text-align: center;
+}
+
+button:hover {
+  background: var(--midnightBlue);
+}
+
+h1 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+p {
+  line-height: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.025rem;
+}
+
+label {
+  font-weight: 600;
+}
+
+#story-root {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex: 1;
+}
+
+.story-wrapper > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar {
+  text-align: right;
+}
+
+.navbar > * + * {
+  margin-left: 10px;
+}
+
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 500px;
+  padding: 0 1rem;
+  flex: 1;
+}
+
+.logout,
+.admin {
+  background: transparent;
+  color: var(--blue);
+  width: auto;
+}
+
+.logout:hover,
+.admin:hover {
+  background: var(--blue);
+  color: var(--white);
+}
+
+.login__error {
+  color: var(--red);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.login-logo {
+  width: 100%;
+  margin-bottom: 10vh;
+  margin-top: 10vh;
+}
+
+.loader {
+  animation: spin 1s infinite linear;
+  border: 5px solid var(--blue);
+  border-radius: 100%;
+  border-right-color: transparent;
+  height: 50px;
+  left: 50%;
+  margin-left: -25px;
+  margin-top: -25px;
+  position: fixed;
+  top: 50%;
+  width: 50px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.language-selector {
+  width: 150px;
+  height: 30px;
+  background-color: transparent;
+  border: 1px solid lightgray;
+}
