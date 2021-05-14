@@ -25,17 +25,12 @@
     "test:all": "lerna run --parallel test",
     "test:related": "lerna run test:related",
     "deploy:ci": "lerna run deploy:ci",
-    "deploy": "lerna run deploy"
+    "deploy": "lerna run deploy",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "docsify-cli": "^4.4.3",
     "husky": "^6.0.0",
     "lerna": "^4.0.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint:staged && npm run test:related",
-      "pre-push": "npm run lint:all"
-    }
   }
 }
