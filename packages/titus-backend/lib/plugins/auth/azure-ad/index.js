@@ -112,8 +112,6 @@ async function azureAD(server, options) {
     }
   }
 
-  server.decorate('authenticate', authenticate, options)
-
   server.route({
     method: 'GET',
     url: '/userlist',
@@ -130,6 +128,8 @@ async function azureAD(server, options) {
       return user || 'NO USER'
     }
   })
+  
+  server.decorate('authenticate', authenticate)
 }
 
 module.exports = fp(azureAD)
