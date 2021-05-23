@@ -106,7 +106,7 @@ async function azureAD(server, options) {
     }
   }
 
-  server.decorate('authenticate', authenticate, options)
+  server.decorate('authenticate', authenticate)
 }
 
 module.exports = fp(azureAD)
