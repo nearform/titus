@@ -128,7 +128,7 @@ async function azureAD(server, options) {
       return user || 'NO USER'
     }
   })
-  
+
   server.decorate('authenticate', authenticate)
 }
 
