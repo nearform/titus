@@ -44,39 +44,46 @@ describe('users plugin', () => {
 
   afterAll(async () => server.close())
 
+  beforeEach(() => {
+    axios.mockClear()
+  })
+
   it('should get a user', async () => {
     const userMock = { foo: 'bar' }
-    axios.get.mockImplementation(props => {
-      return new Promise((resolve, reject) => {
+
+    axios.mockImplementation(props => {
+      const url = typeof props === 'string' ? props : props.url
+
+      return new Promise(resolve => {
         let response = false
-        if (/well-known/.test(props.url)) {
+
+        if (/well-known/.test(url)) {
           response = {
             id_token_signing_alg_values_supported: ['foobar'],
             jwks_uri: 'barfoo'
           }
         }
-        if (props.url === 'barfoo') {
+        if (url === 'barfoo') {
           response = { keys: [{ x5t: 234 }] }
         }
-        if (/users\/oid1234/.test(props.url)) {
+        if (/users\/oid1234/.test(url)) {
           response = userMock
         }
-        return resolve(response)
-      })
-    })
-    axios.post.mockImplementation(props => {
-      return new Promise((resolve, reject) => {
-        let response = false
-        if (/\/tenant\/oauth2/.test(props.url)) {
+
+        if (/\/tenant\/oauth2/.test(url)) {
           response = { access_token: 'foobar123' }
         }
-        return resolve(response)
+
+        return resolve({ data: response })
       })
     })
+
     const jwsSpy = jest
       .spyOn(jws, 'decode')
       .mockReturnValue({ header: { x5t: 234 } })
+
     const jwtMock = { oid: 'oid1234' }
+
     const jwtSpy = jest
       .spyOn(jwt, 'verify')
       .mockImplementation((token, pem, props, cb) => cb(null, jwtMock))
@@ -88,42 +95,37 @@ describe('users plugin', () => {
     })
 
     expect(JSON.parse(response.body)).toEqual(userMock)
-    expect(axios.get).toHaveBeenCalledTimes(3)
-    expect(axios.post).toHaveBeenCalledTimes(1)
+    expect(axios).toHaveBeenCalledTimes(4)
     expect(jws.decode).toHaveBeenCalled()
     expect(jwt.verify).toHaveBeenCalled()
-    axios.get.mockClear()
-    axios.post.mockClear()
+
     jwsSpy.mockClear()
     jwtSpy.mockClear()
   })
+
   it('should get a user, using kid', async () => {
     const userMock = { foo: 'bar' }
-    axios.get.mockImplementation(props => {
+    axios.mockImplementation(props => {
+      const url = typeof props === 'string' ? props : props.url
+
       return new Promise((resolve, reject) => {
         let response = false
-        if (/well-known/.test(props.url)) {
+        if (/well-known/.test(url)) {
           response = {
             id_token_signing_alg_values_supported: ['foobar'],
             jwks_uri: 'barfoo'
           }
         }
-        if (props.url === 'barfoo') {
+        if (url === 'barfoo') {
           response = { keys: [{ kid: 123 }] }
         }
-        if (/users\/oid1234/.test(props.url)) {
+        if (/users\/oid1234/.test(url)) {
           response = userMock
         }
-        return resolve(response)
-      })
-    })
-    axios.post.mockImplementation(props => {
-      return new Promise((resolve, reject) => {
-        let response = false
-        if (/\/tenant\/oauth2/.test(props.url)) {
+        if (/\/tenant\/oauth2/.test(url)) {
           response = { access_token: 'foobar123' }
         }
-        return resolve(response)
+        return resolve({ data: response })
       })
     })
     const jwsSpy = jest
@@ -141,8 +143,7 @@ describe('users plugin', () => {
     })
 
     expect(JSON.parse(response.body)).toEqual(userMock)
-    expect(axios.get).toHaveBeenCalledTimes(3)
-    expect(axios.post).toHaveBeenCalledTimes(1)
+    expect(axios).toHaveBeenCalledTimes(4)
     expect(jws.decode).toHaveBeenCalled()
     expect(jwt.verify).toHaveBeenCalled()
     axios.get.mockClear()
@@ -150,6 +151,7 @@ describe('users plugin', () => {
     jwsSpy.mockClear()
     jwtSpy.mockClear()
   })
+
   it('does not authenticate', async () => {
     const response = await server.inject({
       method: 'GET',
@@ -157,29 +159,30 @@ describe('users plugin', () => {
     })
 
     expect(JSON.parse(response.body)).toEqual({ foo: 'bar' })
-    expect(axios.get).not.toHaveBeenCalled()
-    expect(axios.post).not.toHaveBeenCalled()
+    expect(axios).not.toHaveBeenCalled()
     expect(jws.decode).not.toHaveBeenCalled()
     expect(jwt.verify).not.toHaveBeenCalled()
-    axios.get.mockClear()
-    axios.post.mockClear()
   })
+
   it('fails, no matching keys', async () => {
-    axios.get.mockImplementation((props, cb) => {
-      return new Promise((resolve, reject) => {
+    axios.mockImplementation(props => {
+      const url = typeof props === 'string' ? props : props.url
+
+      return new Promise(resolve => {
         let response = false
-        if (/well-known/.test(props.url)) {
+        if (/well-known/.test(url)) {
           response = {
             id_token_signing_alg_values_supported: ['foobar'],
             jwks_uri: 'barfoo'
           }
         }
-        if (props.url === 'barfoo') {
+        if (url === 'barfoo') {
           response = { keys: [{ kid: 123, x5t: 123 }] }
         }
-        return resolve(response)
+        return resolve({ data: response })
       })
     })
+
     const jwsSpy = jest
       .spyOn(jws, 'decode')
       .mockReturnValue({ header: { kid: 123, x5t: 234 } })
@@ -193,31 +196,33 @@ describe('users plugin', () => {
 
     const parsedResponse = JSON.parse(response.body)
     expect(parsedResponse.statusCode).toEqual(400)
-    expect(axios.get).toHaveBeenCalledTimes(2)
-    expect(axios.post).not.toHaveBeenCalled()
+    expect(axios).toHaveBeenCalledTimes(2)
     expect(jws.decode).toHaveBeenCalled()
     expect(jwt.verify).not.toHaveBeenCalled()
-    axios.get.mockClear()
-    axios.post.mockClear()
+
     jwsSpy.mockClear()
     jwtSpy.mockClear()
   })
+
   it('fails verification', async () => {
-    axios.get.mockImplementation(props => {
+    axios.mockImplementation(props => {
+      const url = typeof props === 'string' ? props : props.url
+
       return new Promise((resolve, reject) => {
         let response = false
-        if (/well-known/.test(props.url)) {
+        if (/well-known/.test(url)) {
           response = {
             id_token_signing_alg_values_supported: ['foobar'],
             jwks_uri: 'barfoo'
           }
         }
-        if (props.url === 'barfoo') {
+        if (url === 'barfoo') {
           response = { keys: [{ x5t: 234 }] }
         }
-        return resolve(response)
+        return resolve({ data: response })
       })
     })
+
     const jwsSpy = jest
       .spyOn(jws, 'decode')
       .mockReturnValue({ header: { x5t: 234 } })
@@ -233,20 +238,21 @@ describe('users plugin', () => {
 
     const parsedResponse = JSON.parse(response.body)
     expect(parsedResponse.statusCode).toEqual(400)
-    expect(axios.get).toHaveBeenCalledTimes(2)
-    expect(axios.post).not.toHaveBeenCalled()
+    expect(axios).toHaveBeenCalledTimes(2)
     expect(jws.decode).toHaveBeenCalled()
     expect(jwt.verify).toHaveBeenCalled()
-    axios.get.mockClear()
-    axios.post.mockClear()
+
     jwsSpy.mockClear()
     jwtSpy.mockClear()
   })
+
   it('fails, well-known url down', async () => {
-    axios.get.mockImplementation((props, cb) => {
+    axios.mockImplementation(props => {
+      const url = typeof props === 'string' ? props : props.url
+
       return new Promise((resolve, reject) => {
         let error = null
-        if (/well-known/.test(props.url)) {
+        if (/well-known/.test(url)) {
           error = new Error('error')
         }
         return reject(error)
@@ -265,34 +271,34 @@ describe('users plugin', () => {
 
     const parsedResponse = JSON.parse(response.body)
     expect(parsedResponse.statusCode).toEqual(400)
-    expect(axios.get).toHaveBeenCalledTimes(1)
-    expect(axios.post).not.toHaveBeenCalled()
+    expect(axios).toHaveBeenCalledTimes(1)
     expect(jws.decode).toHaveBeenCalled()
     expect(jwt.verify).not.toHaveBeenCalled()
-    axios.get.mockClear()
-    axios.post.mockClear()
+
     jwsSpy.mockClear()
     jwtSpy.mockClear()
   })
+
   it('fails, graph url down', async () => {
-    axios.get.mockImplementation((props, cb) => {
+    axios.mockImplementation(props => {
+      const url = typeof props === 'string' ? props : props.url
+
       return new Promise((resolve, reject) => {
+        if (/graph.microsoft.com/.test(url)) {
+          return reject(new Error('errorr'))
+        }
+
         let response = false
-        if (/well-known/.test(props.url)) {
+        if (/well-known/.test(url)) {
           response = {
             id_token_signing_alg_values_supported: ['foobar'],
             jwks_uri: 'barfoo'
           }
         }
-        if (props.url === 'barfoo') {
+        if (url === 'barfoo') {
           response = { keys: [{ kid: 123 }] }
         }
-        return resolve(response)
-      })
-    })
-    axios.post.mockImplementation((props, cb) => {
-      return new Promise((resolve, reject) => {
-        return reject(new Error('error'))
+        return resolve({ data: response })
       })
     })
     const jwsSpy = jest
@@ -311,12 +317,10 @@ describe('users plugin', () => {
 
     const parsedResponse = JSON.parse(response.body)
     expect(parsedResponse.statusCode).toEqual(400)
-    expect(axios.get).toHaveBeenCalledTimes(2)
-    expect(axios.post).toHaveBeenCalledTimes(1)
+    expect(axios).toHaveBeenCalledTimes(4)
     expect(jws.decode).toHaveBeenCalled()
     expect(jwt.verify).toHaveBeenCalled()
-    axios.get.mockClear()
-    axios.post.mockClear()
+
     jwsSpy.mockClear()
     jwtSpy.mockClear()
   })

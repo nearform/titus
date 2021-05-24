@@ -17,24 +17,25 @@ const verifyJWT = async (config, idToken) => {
     config.tenant,
     '/v2.0/.well-known/openid-configuration'
   ].join('')
-  const metadata = await axios.get({ url: identityMetadataURL })
+
+  const { data: metadata } = await axios(identityMetadataURL)
   const {
     id_token_signing_alg_values_supported: algorithms,
     jwks_uri: jwksUri
   } = metadata
-  const body = await axios.get({ url: jwksUri })
-  let findBy = 'x5t'
-  if (!decoded.header.x5t) {
-    findBy = 'kid'
-  }
+
+  const { data: body } = await axios(jwksUri)
+
+  const findBy = decoded.header.x5t ? 'x5t' : 'kid'
+
   const key = body.keys.find(k => k[findBy] === decoded.header[findBy])
+
   if (!key) {
     throw new Error('No matching key')
   }
-  const pem = jwkToPem(key)
-  const props = { algorithms }
+
   return new Promise((resolve, reject) => {
-    jwt.verify(idToken, pem, props, (error, token) => {
+    jwt.verify(idToken, jwkToPem(key), { algorithms }, (error, token) => {
       if (error) {
         return reject(error)
       }
@@ -43,13 +44,14 @@ const verifyJWT = async (config, idToken) => {
   })
 }
 
-const getUser = async (config, token, cb) => {
+const getUser = async (config, token) => {
   const tokenURL = [
     'https://login.microsoftonline.com/',
     config.tenant,
     '/oauth2/v2.0/token'
   ].join('')
-  const body = await axios.post({
+
+  const { data: body } = await axios({
     method: 'POST',
     headers: { 'content-type': 'application/x-www-form-urlencoded' },
     responseType: 'json',
@@ -61,6 +63,7 @@ const getUser = async (config, token, cb) => {
       scope: 'https://graph.microsoft.com/.default'
     })
   })
+
   const userProperties = [
     'accountEnabled',
     'givenName',
@@ -75,7 +78,8 @@ const getUser = async (config, token, cb) => {
     token.oid,
     `?$select=${userProperties.join(',')}`
   ].join('')
-  return axios.get({
+
+  return axios({
     url: userURL,
     headers: { Authorization: `Bearer ${body.access_token}` },
     responseType: 'json'
@@ -95,16 +99,35 @@ async function azureAD(server, options) {
     if (!authRoute) {
       return true
     }
+
     const token = authorization.replace('Bearer ', '')
+
     try {
       const verifiedToken = await verifyJWT(options.auth.azureAD, token)
-      const user = await getUser(options.auth.azureAD, verifiedToken)
+      const { data: user } = await getUser(options.auth.azureAD, verifiedToken)
       req.user = user
     } catch (err) {
       res.code(400)
       throw err
     }
   }
+
+  server.route({
+    method: 'GET',
+    url: '/userlist',
+    onRequest: server.authenticate,
+    // not supported in azure, return empty array
+    handler: async () => []
+  })
+
+  server.route({
+    method: 'GET',
+    url: '/auth',
+    onRequest: server.authenticate,
+    handler: async ({ user }) => {
+      return user || 'NO USER'
+    }
+  })
 
   server.decorate('authenticate', authenticate)
 }
