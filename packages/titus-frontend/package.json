@@ -12,7 +12,7 @@
     "cross-env": "^7.0.3",
     "env-schema": "^3.0.1",
     "fluent-schema": "^1.1.0",
-    "formik": "^2.2.6",
+    "formik": "^2.2.8",
     "i18next": "^20.2.2",
     "i18next-browser-languagedetector": "^6.1.1",
     "jwt-decode": "^3.1.2",
