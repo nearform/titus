@@ -1,13 +1,15 @@
 How to create your pipelines using Azure and AzureDevOps
 
 Requirements:
-- Azure account, a Resource Group and Owner permissions for it created within the account.
+- Azure account, a Resource Group and Owner permissions for it.
 - Azure CLI client installed
 - Terraform 0.15 or older
 
-Pipeline Instructions:
+INSTRUCTIONS:
 
-Do az login with your credentials to make sure you'll be able to run Terraform against your Resource Group.
+Do "az login" and use your credentials to make sure you'll be able to run Terraform against your Resource Group.
+
+Sometimes the az login takes some time to finish, wait for the output showing the account details (containing tenantId, ...)
 
 AZUREDEVOPS
 

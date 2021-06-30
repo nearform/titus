@@ -20,5 +20,5 @@ output "db_user" {
 
 output "db_password" {
   description = "Database password"
-  value       = azurerm_key_vault_secret.titus-db-password.value
+  value       = "You can extract it from the keyvault or the terraform.tfstate file"
 }
