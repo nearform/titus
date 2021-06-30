@@ -5,7 +5,7 @@ output "fontend_fqdn" {
 
 output "backend_fqdn" {
   description = "Backend FQDN"
-  value       = azurerm_container_group.titus-frontend-containergroup.fqdn
+  value       = azurerm_container_group.titus-backend-containergroup.fqdn
 }
 
 output "db_host" {
