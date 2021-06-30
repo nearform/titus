@@ -28,7 +28,7 @@ resource "azurerm_container_group" "titus-backend-containergroup" {
     environment_variables = {
       "API_HOST"    = "0.0.0.0"
       "API_PORT"    = "8080"
-      "CORS_ORIGIN" = azurerm_container_group.titus-frontend-containergroup.fqdn
+      #"CORS_ORIGIN" = azurerm_container_group.titus-frontend-containergroup.fqdn
       "PG_HOST"     = azurerm_postgresql_server.titus-db-server.fqdn
       "PG_PORT"     = "5432"
       "PG_DB"       = azurerm_postgresql_database.titus-db.name
