@@ -21,7 +21,7 @@
     "@aws-cdk/aws-ecr": "1.89.0",
     "@types/jest": "^26.0.23",
     "@types/mkdirp": "^1.0.1",
-    "@types/node": "^14.17.3",
+    "@types/node": "^14.17.4",
     "jest": "^27.0.4",
     "mkdirp": "^1.0.4",
     "parcel-bundler": "1.x",
