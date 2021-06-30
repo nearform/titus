@@ -34,7 +34,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          cd $(imageRepository) && \
+          cd packages/$(imageRepository) && \
           docker build -t build .
           docker tag build $(containerRegistry)/$(imageRepository):$(tag)
           docker images
