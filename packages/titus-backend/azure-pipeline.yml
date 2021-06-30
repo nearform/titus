@@ -5,7 +5,7 @@
 trigger:
   branches:
     include:
-      - '*'
+      - 'azure-pipelines'
 
 variables:
   # Container registry service connection established during pipeline creation
