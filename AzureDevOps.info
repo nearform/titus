@@ -19,36 +19,51 @@ Once created, click on "Repos", Import a Repo, Git, URL: https://github.com/near
 
 Then clone it into your local machine, this way you'll be able to trigger the pipelines with your commits and work on your own repo.
 
-Under packages > titus-xxxxx > azure-pipeline.yml, change the resource group name for your own and push the changes to your branch.
+Under packages > titus-xxxxx > azure-pipeline.yml, change the branches trigger (you can use '*' for all), resource group name for your own and push the changes to your branch.
 
 TERRAFORM
+
+Go to infra > azure > terraform
 
 For the first run, since there is no container registry, make sure backend, frontend and db-manager tf files are usign the helloworld image.
 
 Change the TF variables to use your own resource group id, name and location and Apply the TF plan.
 
-Once done, check if all the resources required have been created.
+Run:
+terraform init
+terraform plan -var-file sample-input.tfvars -out tfplan.out
+terraform apply "tfplan.out"
+
+It will take 7-10 mins to finish, you can get some details at the end of the execution, like the frontend or backend endpoint.
+
+You can go to the next step while terraform creates everything. Once done, check if all the resources required have been created.
 
 AZUREDEVOPS
+
+Create service connector for the resource group, call it "titusrgconnector" and make sure it uses your subscription and your resource group.
+Project settings (Bottom left) > service connection > Azure Resource Manager > Service Principal
+
+Create service connector for titus container registry, call it "tituscrconnector" and make sure it uses your subscription and the tituscr container registry.
+Project settings (Bottom left) > service connection > Docker Registry > Azure Container Registry
+If tituscr still not present, wait a couple of minutes for terraform to create it.
 
 Go to Pipelines, New Pipeline, Select at the bottom "Classic Editor", select Azure Repos Git, your project and branch.
 
 Configuration as Code, YAML, and Apply.
 
-Apply the name you want, i.e. titus-backend-cicd and in the YAML file path go to packages, titus-backend, azure-pipeline.yaml.
+Apply the name you want, i.e. titus-backend-cicd and in the YAML file path go to packages > titus-backend > azure-pipeline.yaml.
 
-Save it (do not queue it, it will fail).
+Save it and queue it, then Save and Run
 
-Create service connector for titus container registry, call it "tituscrconnector" and make sure it uses your subscription and the tituscr container registry.
-Project settings (Bottom left) > service connection > Docker Registry > Azure Container Registry
+Open pipeline, wait for the output and if all works as expected you can create the other 2 pipelines using the same steps.
 
-Create service connector for the resource group, call it "titusrgconnector" and make sure it uses your subscription and your resource group.
-Project settings (Bottom left) > service connection > Azure Resource Manager > Service Principal
-
-Go back to the pipeline and run it, if all works as expected you can create the other 2 pipelines using the same steps
+Wait for all 3 pipelines to finish building their first image (and restarting the containers).
 
 TERRAFORM
 
-Replace images in TF, plan and apply again to use the newer image for each package.
+Replace images in TF backend, frontend and db-manager tf files, plan and apply again to use the newer image for each package.
+
+terraform plan -var-file sample-input.tfvars -out tfplan.out
+terraform apply "tfplan.out"
 
 The pipeline will deploy the latest image from now on, no need to re run terraform.
