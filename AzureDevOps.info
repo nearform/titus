@@ -1,0 +1,52 @@
+How to create your pipelines using Azure and AzureDevOps
+
+Requirements:
+- Azure account, a Resource Group and Owner permissions for it created within the account.
+- Azure CLI client installed
+- Terraform 0.15 or older
+
+Pipeline Instructions:
+
+Do az login with your credentials to make sure you'll be able to run Terraform against your Resource Group.
+
+AZUREDEVOPS
+
+Go to AzureDevOps (https://dev.azure.com/), sign in,  create new project (top right), private, put a name and leave everything else as default.
+
+Once created, click on "Repos", Import a Repo, Git, URL: https://github.com/nearform/titus and wait until it is imported.
+
+Then clone it into your local machine, this way you'll be able to trigger the pipelines with your commits and work on your own repo.
+
+Under packages > titus-xxxxx > azure-pipeline.yml, change the resource group name for your own and push the changes to your branch.
+
+TERRAFORM
+
+For the first run, since there is no container registry, make sure backend, frontend and db-manager tf files are usign the helloworld image.
+
+Change the TF variables to use your own resource group id, name and location and Apply the TF plan.
+
+Once done, check if all the resources required have been created.
+
+AZUREDEVOPS
+
+Go to Pipelines, New Pipeline, Select at the bottom "Classic Editor", select Azure Repos Git, your project and branch.
+
+Configuration as Code, YAML, and Apply.
+
+Apply the name you want, i.e. titus-backend-cicd and in the YAML file path go to packages, titus-backend, azure-pipeline.yaml.
+
+Save it (do not queue it, it will fail).
+
+Create service connector for titus container registry, call it "tituscrconnector" and make sure it uses your subscription and the tituscr container registry.
+Project settings (Bottom left) > service connection > Docker Registry > Azure Container Registry
+
+Create service connector for the resource group, call it "titusrgconnector" and make sure it uses your subscription and your resource group.
+Project settings (Bottom left) > service connection > Azure Resource Manager > Service Principal
+
+Go back to the pipeline and run it, if all works as expected you can create the other 2 pipelines using the same steps
+
+TERRAFORM
+
+Replace images in TF, plan and apply again to use the newer image for each package.
+
+The pipeline will deploy the latest image from now on, no need to re run terraform.
