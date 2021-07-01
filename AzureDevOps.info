@@ -27,6 +27,7 @@ terraform apply "tfplan.out"
 It will take 7-10 mins to finish, you can get some details at the end of the execution, like the frontend or backend endpoint (titus is not there yet, don't expect anything other than helloworld).
 
 You can go to the next step while terraform creates everything. Once done, check if all the resources required have been created.
+You will get the FQDN for each resource in the terraform output.
 
 
 AZUREDEVOPS
@@ -50,7 +51,7 @@ Go to Pipelines, New Pipeline, Select Github (YAML), "All repositories", search 
 Click in Continue, and clicking in the name in the editor you can rename it.
 Instead of Run, just Save it.
 
-Do a commit against one of the branches that triggers the pipeline to confirm it is working as expected.
+Do a commit against one of the branches and files/folders that triggers the pipeline to confirm it is working as expected.
 
 Open pipeline, wait for the output and if all works as expected you can create the other 2 pipelines using the same steps.
 
