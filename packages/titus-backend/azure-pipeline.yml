@@ -5,7 +5,10 @@
 trigger:
   branches:
     include:
-      - 'azure-pipelines'
+      - '*'
+  paths:
+    include:
+      - packages/titus-backend/*
 
 variables:
   # Container registry service connection established during pipeline creation

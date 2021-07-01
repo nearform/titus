@@ -50,11 +50,9 @@ Go to Pipelines, New Pipeline, Select Github (YAML), "All repositories", search 
 Click in Continue, and clicking in the name in the editor you can rename it.
 Instead of Run, just Save it.
 
-Do a commit against one of the brnaches that triggers the pipeline to confirm it is working as expected.
+Do a commit against one of the branches that triggers the pipeline to confirm it is working as expected.
 
 Open pipeline, wait for the output and if all works as expected you can create the other 2 pipelines using the same steps.
-
-Wait for all 3 pipelines to finish building their first image (and restarting the containers).
 
 TERRAFORM
 

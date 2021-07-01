@@ -6,6 +6,9 @@ trigger:
   branches:
     include:
       - '*'
+  paths:
+    include:
+      - packages/titus-frontend/*
 
 variables:
   # Container registry service connection established during pipeline creation
