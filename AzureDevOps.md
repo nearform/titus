@@ -67,7 +67,7 @@ You can go to the next step while terraform creates everything. Once done, check
 
 Go to AzureDevOps (https://dev.azure.com/), sign in,  create new project (top right), private, put a name and leave everything else as default.
 
-**Service Connectors allow the pipeline to connect and admin Azure resources within you subscription, like the Container Registry (to login and push the images) or Container Instances (to restart and pull newwer versions of the artifacts/images)**
+**Service Connectors allow the pipeline to connect to Azure and manage Azure resources within you subscription, like the Container Registry (to login and push the images) or Container Instances (to restart and pull newwer versions of the artifacts/images)**
 
 Create service connector for the resource group, call it "titusrgconnector" and make sure it uses your subscription and your resource group.
 ```bash
@@ -85,7 +85,8 @@ Go to Pipelines, New Pipeline, Select Github (YAML), "All repositories", search 
 Click in Continue, and clicking in the name in the editor you can rename it.
 Instead of Run, just Save it (wait until "Terraform apply ..." has finished to run any pipeline).
 
-To run a pipeline, do a commit against one of the branches (default is *) and files/folders (any file under packages/titus-*) that triggers the pipeline to confirm it is working as expected. 
+To run a pipeline, do a commit against one of the branches (default is all branches) and files/folders (any file under packages/titus-*) that triggers the pipeline to confirm it is working as expected.
+**Triggers for each pipeline are defined at the top of each pipeline yaml file.**
 To confirm all works as expected, do the commit and push, open pipeline, wait for the output and if all works as expected you can create the other 2 pipelines using the same steps.
 
 ### TERRAFORM - Update the container images to use the ones built by the pipelines 
