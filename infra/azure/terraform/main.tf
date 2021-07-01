@@ -27,10 +27,3 @@ output "tenant_id" {
 output "subscription_id" {
   value = data.azurerm_client_config.current.subscription_id
 }
-
-#resource "random_string" "suffix" {
-#  length      = 6
-#  min_numeric = 6
-#  upper       = false
-#  special     = false
-#}

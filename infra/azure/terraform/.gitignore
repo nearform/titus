@@ -1,3 +1,5 @@
 .terraform
+.terraform.lock.hcl
 config.auto.tfvars
 key.json
+input-tfvars.tf

@@ -15,8 +15,8 @@ resource "azurerm_container_group" "titus-db-manager-containergroup" {
 
   container {
     name   = "titus-db-manager-${random_string.suffix.result}"
-    image  = "microsoft/aci-helloworld:latest"
-    #image  = "${var.artifact_registry_repository_name}.azurecr.io/titus-db-manager:latest"
+    #image  = "microsoft/aci-helloworld:latest"
+    image  = "${var.artifact_registry_repository_name}.azurecr.io/titus-db-manager:latest"
     cpu    = "0.5"
     memory = "1.5"
 
