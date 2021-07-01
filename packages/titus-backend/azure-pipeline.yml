@@ -2,6 +2,7 @@
 # Build and push an image to Azure Container Registry
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
+# Filtering branches and files/folders to trigger the pipeline
 trigger:
   branches:
     include:
