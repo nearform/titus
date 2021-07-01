@@ -8,7 +8,7 @@
     "@material-ui/lab": "^4.0.0-alpha.58",
     "@nearform/brokeneck-react": "^1.0.0-spinal.8",
     "auth0-js": "^9.16.2",
-    "aws-amplify": "^4.1.0",
+    "aws-amplify": "^4.1.2",
     "cross-env": "^7.0.3",
     "env-schema": "^3.0.1",
     "fluent-schema": "^1.1.0",
