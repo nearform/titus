@@ -11,21 +11,11 @@ Do "az login" and use your credentials to make sure you'll be able to run Terraf
 
 Sometimes the az login takes some time to finish, wait for the output showing the account details (containing tenantId, ...)
 
-AZUREDEVOPS
-
-Go to AzureDevOps (https://dev.azure.com/), sign in,  create new project (top right), private, put a name and leave everything else as default.
-
-Once created, click on "Repos", Import a Repo, Git, URL: https://github.com/nearform/titus and wait until it is imported.
-
-Then clone it into your local machine, this way you'll be able to trigger the pipelines with your commits and work on your own repo.
-
-Under packages > titus-xxxxx > azure-pipeline.yml, change the branches trigger (you can use '*' for all), resource group name for your own and push the changes to your branch.
-
 TERRAFORM
 
 Go to infra > azure > terraform
 
-For the first run, since there is no container registry, make sure backend, frontend and db-manager tf files are usign the helloworld image.
+For the first run, since there is no container registry, make sure backend, frontend and db-manager tf files are using the helloworld image.
 
 Change the TF variables to use your own resource group id, name and location and Apply the TF plan.
 
@@ -34,11 +24,20 @@ terraform init
 terraform plan -var-file sample-input.tfvars -out tfplan.out
 terraform apply "tfplan.out"
 
-It will take 7-10 mins to finish, you can get some details at the end of the execution, like the frontend or backend endpoint.
+It will take 7-10 mins to finish, you can get some details at the end of the execution, like the frontend or backend endpoint (titus is not there yet, don't expect anything other than helloworld).
 
 You can go to the next step while terraform creates everything. Once done, check if all the resources required have been created.
 
+
 AZUREDEVOPS
+
+Go to AzureDevOps (https://dev.azure.com/), sign in,  create new project (top right), private, put a name and leave everything else as default.
+
+[If you want to work with your own repo:
+Once created, click on "Repos", Import a Repo, Git, URL: https://github.com/nearform/titus and wait until it is imported.
+Then clone it into your local machine, this way you'll be able to trigger the pipelines with your commits and work on your own repo.
+Under packages > titus-xxxxx > azure-pipeline.yml, change the branches trigger (you can use '*' for all), resource group name for your own and push the changes to your branch.
+]
 
 Create service connector for the resource group, call it "titusrgconnector" and make sure it uses your subscription and your resource group.
 Project settings (Bottom left) > service connection > Azure Resource Manager > Service Principal
@@ -47,13 +46,11 @@ Create service connector for titus container registry, call it "tituscrconnector
 Project settings (Bottom left) > service connection > Docker Registry > Azure Container Registry
 If tituscr still not present, wait a couple of minutes for terraform to create it.
 
-Go to Pipelines, New Pipeline, Select at the bottom "Classic Editor", select Azure Repos Git, your project and branch.
+Go to Pipelines, New Pipeline, Select Github (YAML), "All repositories", search for titus and select it, "Existing Azure Pipelines YAML file" (at the bottom), select the branch and the file.
+Click in Continue, and clicking in the name in the editor you can rename it.
+Instead of Run, just Save it.
 
-Configuration as Code, YAML, and Apply.
-
-Apply the name you want, i.e. titus-backend-cicd and in the YAML file path go to packages > titus-backend > azure-pipeline.yaml.
-
-Save it and queue it, then Save and Run
+Do a commit against one of the brnaches that triggers the pipeline to confirm it is working as expected.
 
 Open pipeline, wait for the output and if all works as expected you can create the other 2 pipelines using the same steps.
 
