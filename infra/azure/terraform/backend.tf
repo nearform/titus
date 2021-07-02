@@ -34,9 +34,9 @@ resource "azurerm_container_group" "titus-backend-containergroup" {
       "PG_DB"       = azurerm_postgresql_database.titus-db.name
       "PG_USER"     = "${var.db_user}@${azurerm_postgresql_server.titus-db-server.name}"
       "PG_PASS"     = azurerm_key_vault_secret.titus-db-password.value
-      "SECRETS_STRATEGY" = "azure"
-      "SECRETS_PG_PASS" = azurerm_key_vault_secret.titus-db-password.value
-      "JWT_SECRET"  = "1234abcd"
+      #"SECRETS_STRATEGY" = "azure"
+      "SECRETS_PG_PASS" = "PG_PASS"
+      "JWT_SECRET"  = azurerm_key_vault_secret.titus-jwt-secret.value
       "NODE_ENV"    = "development"
       "AUTH0_DOMAIN" = "dummy"
     }

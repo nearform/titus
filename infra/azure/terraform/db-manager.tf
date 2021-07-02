@@ -21,20 +21,21 @@ resource "azurerm_container_group" "titus-db-manager-containergroup" {
     memory = "1.5"
 
     ports {
-      port     = "8080"
+      port     = "3002"
       protocol = "TCP"
     }
 
     environment_variables = {
       "HTTP_HOST"    = "0.0.0.0"
-      "HTTP_PORT"    = "8080"
+      "HTTP_PORT"    = "3002"
       "PG_HOST"     = azurerm_postgresql_server.titus-db-server.fqdn
       "PG_PORT"     = "5432"
       "PG_DATABASE" = azurerm_postgresql_database.titus-db.name
       "PG_USER"     = "${var.db_user}@${azurerm_postgresql_server.titus-db-server.name}"
       "PG_PASSWORD"     = azurerm_key_vault_secret.titus-db-password.value
-      "SECRETS_STRATEGY" = "azure"
-      "SECRETS_PG_PASS" = azurerm_key_vault_secret.titus-db-password.value
+      "SECRETS_STRATEGY" = "env"
+      "SECRETS_PG_PASS" = "PG_PASSWORD"
+      "JWT_SECRET"  = azurerm_key_vault_secret.titus-jwt-secret.value
       "NODE_ENV"    = "development"
       "AUTH0_DOMAIN" = "dummy"
     }
