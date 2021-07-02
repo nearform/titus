@@ -47,6 +47,18 @@ resource "azurerm_container_group" "titus-backend-containergroup" {
   }
 }
 
+resource "azurerm_dns_a_record" "titus-backend-dns" {
+  name                = "backend-ip"
+  zone_name           = azurerm_dns_zone.titus-dns-public.name
+  resource_group_name = var.resource_group_name
+  ttl                 = 300
+  records             = [azurerm_container_group.titus-backend-containergroup.ip_address]
+}
 
-
-
+resource "azurerm_dns_cname_record" "titus-backend-dns-cname" {
+  name                = "backend"
+  zone_name           = azurerm_dns_zone.titus-dns-public.name
+  resource_group_name = var.resource_group_name
+  ttl                 = 300
+  record             = azurerm_container_group.titus-backend-containergroup.fqdn
+}

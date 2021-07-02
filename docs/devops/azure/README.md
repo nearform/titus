@@ -39,9 +39,9 @@ Go to infra > azure > terraform
 
 ```
 # Get this information from your Azure account manager
-resource_group_id = "7d149fba-****-****-****-************"
+resource_group_id = "**********-****-****-****-************"
 resource_group_name = "**********************"
-location = "West Europe"
+location = "***** ******"
 
 # Default values for the postgres DB
 db_user = "titus"

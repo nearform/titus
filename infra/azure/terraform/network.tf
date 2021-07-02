@@ -1,7 +1,7 @@
 # create virtual network
 resource "azurerm_virtual_network" "titus-vnet" {
     name = "titus-vnet"
-    address_space = ["10.0.0.0/16"]
+    address_space = [var.titus_network_range]
     location = var.location
     resource_group_name = var.resource_group_name
 } 
@@ -10,7 +10,7 @@ resource "azurerm_subnet" "titus-subnet" {
   name                 = "titus-subnet"
   resource_group_name  = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.titus-vnet.name
-  address_prefixes     = ["10.0.1.0/24"]
+  address_prefixes     = [var.titus_subnet_range]
 
   delegation {
     name = "delegation"
@@ -35,4 +35,9 @@ resource "azurerm_network_profile" "titus-net-profile" {
       subnet_id = azurerm_subnet.titus-subnet.id
     }
   }
+}
+
+resource "azurerm_dns_zone" "titus-dns-public" {
+  name                = "${var.titus_domain_name}.com"
+  resource_group_name = var.resource_group_name
 }

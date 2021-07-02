@@ -36,13 +36,24 @@ resource "azurerm_container_group" "titus-frontend-containergroup" {
       "REACT_APP_ADMIN_API_PATH" = "http://${azurerm_container_group.titus-backend-containergroup.ip_address}:8080/graphql"
     }
   }
-  
 
   tags = {
     environment = "titus-azure"
   }
 }
 
+resource "azurerm_dns_a_record" "titus-frontend-dns" {
+  name                = "frontend-ip"
+  zone_name           = azurerm_dns_zone.titus-dns-public.name
+  resource_group_name = var.resource_group_name
+  ttl                 = 300
+  records             = [azurerm_container_group.titus-frontend-containergroup.ip_address]
+}
 
-
-
+resource "azurerm_dns_cname_record" "titus-frontend-dns-cname" {
+  name                = "frontend"
+  zone_name           = azurerm_dns_zone.titus-dns-public.name
+  resource_group_name = var.resource_group_name
+  ttl                 = 300
+  record             = azurerm_container_group.titus-frontend-containergroup.fqdn
+}
