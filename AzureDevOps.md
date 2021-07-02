@@ -67,7 +67,7 @@ You can go to the next step while terraform creates everything. Once done, check
 
 Go to AzureDevOps (https://dev.azure.com/), sign in,  create new project (top right), private, put a name and leave everything else as default.
 
-**Service Connectors allow the pipeline to connect to Azure and manage Azure resources within you subscription, like the Container Registry (to login and push the images) or Container Instances (to restart and pull newwer versions of the artifacts/images)**
+**Service Connectors allow the pipeline to connect to Azure and manage Azure resources within your subscription, like the Container Registry (to login and push the images) or Container Instances (to restart and pull newwer versions of the artifacts/images)**
 
 Create service connector for the resource group, call it "titusrgconnector" and make sure it uses your subscription and your resource group.
 ```bash
