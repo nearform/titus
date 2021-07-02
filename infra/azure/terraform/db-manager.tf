@@ -42,8 +42,6 @@ resource "azurerm_container_group" "titus-db-manager-containergroup" {
     }
   }
 
-  tags = {
-    environment = "titus-azure"
-  }
+  tags = var.tags
 }
 

@@ -9,3 +9,8 @@ db_user = "titus"
 db_instance_name = "titus"
 
 artifact_registry_repository_name = "tituscr"
+
+tags = {
+    "environment": "development"
+    "project": "titus"
+    }

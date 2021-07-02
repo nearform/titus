@@ -10,3 +10,5 @@ variable "db_instance_name" {}
 
 variable "artifact_registry_repository_name" {}
 
+variable "tags" {}
+

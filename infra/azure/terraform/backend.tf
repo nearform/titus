@@ -42,9 +42,7 @@ resource "azurerm_container_group" "titus-backend-containergroup" {
     }
   }
 
-  tags = {
-    environment = "titus-azure"
-  }
+  tags = var.tags
 }
 
 resource "azurerm_dns_a_record" "titus-backend-dns" {

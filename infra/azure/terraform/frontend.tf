@@ -32,14 +32,12 @@ resource "azurerm_container_group" "titus-frontend-containergroup" {
       # Set auth provider
       # AD, AUTH0, AWS, MEM, TITUS
       "REACT_APP_AUTH_PROVIDER" = "MEM"
-      "REACT_APP_API_PATH" = "http://${azurerm_container_group.titus-backend-containergroup.ip_address}:8080"
-      "REACT_APP_ADMIN_API_PATH" = "http://${azurerm_container_group.titus-backend-containergroup.ip_address}:8080/graphql"
+      "REACT_APP_API_PATH" = "http://${azurerm_container_group.titus-backend-containergroup.fqdn}:8080"
+      "REACT_APP_ADMIN_API_PATH" = "http://${azurerm_container_group.titus-backend-containergroup.fqdn}:8080/graphql"
     }
   }
 
-  tags = {
-    environment = "titus-azure"
-  }
+  tags = var.tags
 }
 
 resource "azurerm_dns_a_record" "titus-frontend-dns" {
