@@ -2,22 +2,24 @@
 
 To set up a [Titus] deployment on an [Azure] cloud using [Azure DevOps], there are few steps to be performed.
 
-**Requirements:** 
+## Requirements:
 - Azure account, a Resource Group and Owner permissions for it.
-- Azure Storage Account to use as a backend for  terraform and store the terraform state file, plus a container called tfstate in it and access to it.
+- Azure Storage Account to use as a backend for terraform and store the terraform state file, plus a container called tfstate in it and network access to it from your local machine.
 - Azure CLI client installed.
 - Terraform 0.15 or newer.
+
 
 ## Infrastructure Stack
 
 The stack is built with minimum number of services to make Titus work on Azure:
-- [titus-vnet]: Azure network and subnet inside of it.
-- [titus-postgresql-server-XXXXXX] - Postgres SQL server and a "titus" DB in it.
-- [tituskeyvault]: to store the DB password.
-- [tituscr]: Azure Container Registry to store the container images.
-- [titus-backend]: Container Instances for the backend. (default helloworld image on first run)
-- [titus-frontend]: Container Instances for the frontend. (default helloworld image on first run)
-- [titus-db-manager]: Container Instances for the db-manager. (default helloworld image on first run)
+- **titus-vnet**: Azure network and subnet inside of it.
+- **titus-postgresql-server-XXXXXX**: Postgres SQL server and a "titus" DB in it.
+- **tituskeyvault**: to store the DB password.
+- **tituscr**: Azure Container Registry to store the container images.
+- **titus-backend**: Container Instances for the backend. (default helloworld image on first run)
+- **titus-frontend**: Container Instances for the frontend. (default helloworld image on first run)
+- **titus-db-manager**: Container Instances for the db-manager. (default helloworld image on first run)
+
 
 ## Terraform and Azure account
 
@@ -49,11 +51,11 @@ db_instance_name = "titus"
 artifact_registry_repository_name = "tituscr"
 ```
 
-[For the first run, since there is no container registry, make sure backend, frontend and db-manager tf files are using the helloworld image. The other image will be enabled after the pipelines are executed for the first time.]
+**For the first run, since there is no container registry, make sure backend, frontend and db-manager tf files are using the helloworld image. The other image will be enabled after the pipelines are executed for the first time.**
 
 ```
-    #name   = "titus-backend-${random_string.suffix.result}"
     image  = "microsoft/aci-helloworld:latest"
+    #image  = "${var.artifact_registry_repository_name}.azurecr.io/titus-backend:latest"
 ```
 
 Run:
@@ -65,7 +67,7 @@ terraform apply "tfplan.out"
 
 It will take 7-10 mins to finish, you can get some details at the end of the execution, like the frontend or backend endpoint.
 
-[Titus is not there yet, don't expect anything other than helloworld images. These images get replaced by Titus images after they are built using the pipelines.
+Titus is not there yet, don't expect anything other than helloworld images. These images get replaced by Titus images after they are built using the pipelines.
 
 **You will get the FQDN for each resource in the terraform output.**
 
@@ -74,14 +76,14 @@ It will take 7-10 mins to finish, you can get some details at the end of the exe
 
 Go to AzureDevOps (https://dev.azure.com/), sign in,  create new project (top right), private, put a name and leave everything else as default.
 
-[Service Connectors allow the pipeline to connect to Azure and manage Azure resources within your subscription, like the Container Registry (to login and push the images) or Container Instances (to restart and pull newwer versions of the artifacts/images)]
+**Service Connectors allow the pipeline to connect to Azure and manage Azure resources within your subscription, like the Container Registry (to login and push the images) or Container Instances (to restart and pull newwer versions of the artifacts/images)**
 
-Create service connector for the resource group, call it **"titusrgconnector"** and make sure it uses your subscription and your resource group.
+Create service connector for the resource group, call it **titusrgconnector** and make sure it uses your subscription and your resource group.
 ```
 Project settings (Bottom left) > service connection > Azure Resource Manager > Service Principal
 ```
 
-Create service connector for titus container registry, call it **"tituscrconnector"** and make sure it uses your subscription and the tituscr container registry.
+Create service connector for titus container registry, call it **tituscrconnector** and make sure it uses your subscription and the tituscr container registry.
 ```
 Project settings (Bottom left) > service connection > Docker Registry > Azure Container Registry
 ```
@@ -100,6 +102,12 @@ To confirm all works as expected, do the commit and push, open the pipeline buil
 
 Replace the helloworld images by the ones from the tituscr container registry in backend.tf, frontend.tf and db-manager.tf files, plan and apply again to use the newer image for each package.
 
+```
+    #image  = "microsoft/aci-helloworld:latest"
+    image  = "${var.artifact_registry_repository_name}.azurecr.io/titus-backend:latest"
+```
+
+Run:
 ```
 terraform plan -var-file input.tfvars -out tfplan.out
 terraform apply "tfplan.out"
