@@ -25,6 +25,7 @@ resource "azurerm_key_vault" "titus-key-vault" {
     key_permissions = [
       "create",
       "get",
+      "list"
     ]
 
     secret_permissions = [
@@ -32,7 +33,8 @@ resource "azurerm_key_vault" "titus-key-vault" {
       "get",
       "delete",
       "purge",
-      "recover"
+      "recover",
+      "list"
     ]
   }
 }
