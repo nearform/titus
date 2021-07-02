@@ -7,6 +7,15 @@ terraform {
   }
 }
 
+terraform {
+  backend "azurerm" {
+    resource_group_name  = "DevOps_BenchTesting_MA_Jun21"
+    storage_account_name = "titusazure2"
+    container_name       = "tfstate"
+    key                  = "terraform.tfstate"
+  }
+}
+
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
   features {}
