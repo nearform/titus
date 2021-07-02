@@ -1,0 +1,9 @@
+region           = "eu-west-1"
+environment      = "dev"
+default_name     = "titus"
+website          = {}
+cors_rule        = []
+lifecycle_enable = false
+lifecycle_id     = ""
+obj_expiration   = ""
+domain_name      = ""
