@@ -1,5 +1,5 @@
-resource_group_id = "********-****-****-****-************"
-resource_group_name = "********************************"
+resource_group_id = "7d149fba-cc81-4bab-8461-ea09919d78cd"
+resource_group_name = "DevOps_BenchTesting_MA_Jun21"
 location = "West Europe"
 titus_domain_name = "titus-dev1"
 titus_network_range = "10.0.0.0/16"

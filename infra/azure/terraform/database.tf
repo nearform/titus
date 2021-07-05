@@ -18,7 +18,6 @@ resource "azurerm_postgresql_server" "titus-db-server" {
   auto_grow_enabled            = true
 
   administrator_login          = var.db_user
-  #administrator_login_password = "H@Sh1CoR3!"
   administrator_login_password = azurerm_key_vault_secret.titus-db-password.value
   version                      = "11"
   ssl_enforcement_enabled      = false
