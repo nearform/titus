@@ -35,7 +35,6 @@ variable "artifact_registry_repository_name" {
 }
 
 variable "tags" {
-    type = object
     default = {
         "environment": "development"
         "project": "titus"
