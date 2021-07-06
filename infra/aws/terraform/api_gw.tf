@@ -65,6 +65,10 @@ resource "aws_api_gateway_integration_response" "config" {
   resource_id = aws_api_gateway_rest_api.main.root_resource_id
   http_method = aws_api_gateway_method.config.http_method
   status_code = "200"
+
+  depends_on = [
+    aws_api_gateway_integration.config
+  ]
 }
 
 # #########################################
@@ -112,6 +116,10 @@ resource "aws_api_gateway_integration_response" "api" {
   resource_id = aws_api_gateway_rest_api.main.root_resource_id
   http_method = aws_api_gateway_method.api.http_method
   status_code = "200"
+
+  depends_on = [
+    aws_api_gateway_integration.api
+  ]
 }
 
 resource "aws_api_gateway_authorizer" "main" {
@@ -137,6 +145,10 @@ resource "aws_api_gateway_deployment" "live" {
   lifecycle {
     create_before_destroy = true
   }
+
+  depends_on = [
+    aws_api_gateway_integration.api
+  ]
 }
 
 resource "aws_api_gateway_account" "gw" {

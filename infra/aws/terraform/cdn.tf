@@ -28,26 +28,26 @@ resource "aws_cloudfront_distribution" "this" {
       origin_ssl_protocols   = ["TLSv1", "TLSv1.1"]
     }
   }
-
+  
   origin {
     domain_name = format("s3-content.%s.%s.vittle.ai.s3.amazonaws.com", var.region, var.environment)
     origin_path = "/static-content"
     origin_id   = format("S3-content.%s.%s.vittle.ai/static-content", var.region, var.environment)
   }
 
-  default_cache_behavior {
-    allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
-    cached_methods   = ["GET", "HEAD", "OPTIONS"]
-    target_origin_id = aws_api_gateway_rest_api.main.id
+   default_cache_behavior {
+     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
+     cached_methods   = ["GET", "HEAD", "OPTIONS"]
+     target_origin_id = aws_api_gateway_rest_api.main.id
 
-    forwarded_values {
-      query_string = true
-      headers      = ["Accept", "Authorization", "CloudFront-Forwarded-Proto", "Host", "Origin"]
+     forwarded_values {
+       query_string = true
+       headers      = ["Accept", "Authorization", "CloudFront-Forwarded-Proto", "Host", "Origin"]
 
-      cookies {
-        forward = "all"
-      }
-    }
+       cookies {
+         forward = "all"
+       }
+     }
 
     viewer_protocol_policy = "redirect-to-https" #if api-gw is supporting TLS
     min_ttl                = 0
@@ -83,4 +83,9 @@ resource "aws_cloudfront_distribution" "this" {
     ssl_support_method       = "sni-only"
     minimum_protocol_version = "TLSv1.2_2019"
   }
+
+  depends_on = [
+    aws_api_gateway_integration.config,
+    aws_api_gateway_integration.api
+  ]
 }

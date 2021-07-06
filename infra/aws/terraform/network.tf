@@ -6,6 +6,8 @@ resource "aws_vpc" "main" {
 
 }
 
+data "aws_availability_zones" "available" {}
+
 resource "aws_subnet" "this" {
   for_each = {
     "pub1" : "10.0.1.0/24",
@@ -17,6 +19,11 @@ resource "aws_subnet" "this" {
   }
   vpc_id     = aws_vpc.main.id
   cidr_block = each.value
+  availability_zone = "${data.aws_availability_zones.available.names[substr("${each.key}", -1, -1)]}"
+
+  tags = {
+    "Name": "${var.default_name}-${each.key}"
+  }
 }
 
 resource "aws_db_subnet_group" "this" {
