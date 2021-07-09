@@ -15,8 +15,8 @@ resource "azurerm_container_group" "titus-frontend-containergroup" {
 
   container {
     name   = "titus-frontend-${random_string.suffix.result}"
-    #image  = "microsoft/aci-helloworld:latest"
-    image  = "${var.artifact_registry_repository_name}.azurecr.io/titus-frontend:latest"
+    image  = "microsoft/aci-helloworld:latest"
+    #image  = "${var.artifact_registry_repository_name}.azurecr.io/titus-frontend:latest"
     cpu    = "0.5"
     memory = "1.5"
 
