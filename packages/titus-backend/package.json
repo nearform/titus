@@ -62,7 +62,7 @@
     "jest": "^27.0.6",
     "jsonwebtoken": "^8.5.1",
     "lint-staged": "^11.0.0",
-    "nock": "^13.1.0",
+    "nock": "^13.1.1",
     "prettier": "^2.3.2"
   },
   "lint-staged": {
