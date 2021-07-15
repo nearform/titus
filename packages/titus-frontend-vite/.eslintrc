@@ -1,0 +1,21 @@
+{
+  "extends": [
+    "react-app",
+    "plugin:prettier/recommended",
+    "plugin:jsx-a11y/recommended"
+  ],
+  "plugins": ["prettier", "jsx-a11y"],
+  "env": {
+    "es6": true,
+    "browser": true
+  },
+  "rules": {
+    "import/no-anonymous-default-export": "off",
+    "import/order": [
+      "error",
+      {
+        "newlines-between": "always"
+      }
+    ]
+  }
+}

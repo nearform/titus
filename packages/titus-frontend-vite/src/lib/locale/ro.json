@@ -1,0 +1,35 @@
+{
+  "logout": "IESIRE",
+  "login": "Autentificare",
+  "withAuth0": "cu Auth0",
+  "description": "Dezvoltați și implementați în funcții rapid folosind Titus, o stivă de dezvoltare și implementare accelerată. Titus este gata de producție și poate fi implementat tuturor furnizorilor de cloud majori.",
+  "docs": "Citeste documentatia",
+  "username": "Nume utilizator",
+  "password": "Parola",
+  "newPassword": "Parola noua",
+  "language": "Limba",
+  "header": {
+    "memory": "Nota: Orice nume de utilizator urmat de o parola de cel putin patru caractere, cu cel putin o litera si un numar, va functiona.",
+    "aws": "Vă rugăm să furnizați detaliile contului AWS Cognito:",
+    "azure": "Dezvoltat cu Azure AD",
+    "titus": "Vă rugăm să furnizați detaliile contului Auth0:"
+  },
+  "powerMessages": {
+    "aws": "Cu sprijinul AWS Amplify",
+    "azure": "Cu sprijinul Azure AD",
+    "titus": "Cu sprijinul Titus"
+  },
+  "validation": {
+    "required": {
+      "username": "Nume utilizator este obligatoriu.",
+      "password": "Parola este obligatorie."
+    },
+    "regex": {
+      "password": "Parola trebuie sa contina cel putin patru caractere cu cel putin o litera si un numar"
+    }
+  },
+  "errors": {
+    "tempPassword": "Te rugam sa introduci parola ta temporara si o noua parola",
+    "loadingFailed": "Încărcarea a eșuat. Vă rugăm să reîncărcați"
+  }
+}

@@ -1,0 +1,2 @@
+# empty robots.txt to ensure the index.html page isn't fallen back to when crawled
+# please update as necessary to suit your project requirements
