@@ -37,7 +37,7 @@
     "fastify-secrets-gcp": "^1.0.1",
     "fastify-swagger": "^4.8.2",
     "fastify-url-data": "^3.0.3",
-    "fluent-json-schema": "^3.0.0",
+    "fluent-json-schema": "^3.0.1",
     "get-jwks": "^4.2.0",
     "jwk-to-pem": "^2.0.5",
     "jwks-rsa": "^2.0.3",
