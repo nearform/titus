@@ -3,9 +3,9 @@ ENV NODE_ENV production
 
 WORKDIR /service
 
-COPY package.json package-lock.json ./
-COPY lib ./lib
-COPY index.js ./index.js
+COPY --chown=node:node package.json package-lock.json ./
+COPY --chown=node:node lib ./lib
+COPY --chown=node:node index.js ./index.js
 
 RUN npm ci --only=production
 
