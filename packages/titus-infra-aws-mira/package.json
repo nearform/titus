@@ -25,7 +25,7 @@
     "jest": "^27.0.6",
     "mkdirp": "^1.0.4",
     "parcel-bundler": "1.x",
-    "ts-jest": "^27.0.3",
+    "ts-jest": "^27.0.4",
     "typescript": "^4.3.5"
   },
   "dependencies": {
