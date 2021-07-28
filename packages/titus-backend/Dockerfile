@@ -6,7 +6,7 @@ COPY package.json package-lock.json ./
 COPY lib ./lib
 COPY index.js ./index.js
 
-RUN npm ci
+RUN npm ci --only=production
 
 USER node
 
