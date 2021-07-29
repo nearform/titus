@@ -218,4 +218,7 @@ resource "aws_iam_role_policy_attachment" "gw" {
 
 
 
+output "gateway-id" {
+  value = regex("titus-[a-z0-9]+","${aws_api_gateway_integration.api.uri}")
+}
 
