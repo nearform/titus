@@ -75,7 +75,7 @@ This stack contains the CloudFront configuration, the DNS creation and the stora
 - [Route 53](https://docs.aws.amazon.com/route53)
 - [Certificate manager](https://docs.aws.amazon.com/acm)
 
-## Deploy with Mira
+## Deploy with Terraform
 
 ### Prerequisites
 
