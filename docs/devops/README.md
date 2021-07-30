@@ -21,5 +21,5 @@ An example deployment of Titus to [AWS] is provided. The deployment is done usin
 [Mira]: https://nf-mira.netlify.app
 [Cdk]: https://aws.amazon.com/cdk/
 [titus-infra-aws-mira]: https://github.com/nearform/titus/tree/master/packages/titus-infra-aws-mira
-[infra/aws]: https://github.com/nearform/titus/tree/aws_update/docs/devops/aws/terraform
+[infra/aws]: https://github.com/nearform/titus/tree/aws_update/docs/devops/aws
 [GitHub Actions]: https://github.com/features/actions

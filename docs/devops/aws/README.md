@@ -82,6 +82,7 @@ This stack contains the CloudFront configuration, the DNS creation and the stora
 - An AWS administrator account
 
 Install Terraform 1.0.0 and the aws cli. Navigate to the infra/aws folder and run
+```
 ```terraform plan
 ```terraform apply
 
