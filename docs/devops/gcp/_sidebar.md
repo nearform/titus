@@ -12,4 +12,6 @@
             - [GitHub configuration](/devops/gcp/?id=github-configuration)
             - [Deploying](/devops/gcp/?id=deploying)
             - [Verifying GCP deployment](/devops/gcp/?id=verifying-gcp-deployment)
+        - [Deploy on AWS with Mira](https://github.com/nearform/titus/tree/master/packages/titus-infra-aws-mira)
+        - [Deploy Titus on Azure](/devops/azure/?id=Deploy-Titus-on-Azure)
 - [Contribute to Titus](/contributing/)
