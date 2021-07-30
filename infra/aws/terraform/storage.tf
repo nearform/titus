@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "this" {
-  bucket        = var.default_name
+  bucket        = "${var.default_name}-${random_string.suffix.result}"
   force_destroy = false
 
   dynamic "website" {

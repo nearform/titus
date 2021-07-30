@@ -6,7 +6,7 @@ resource "aws_cognito_user_pool" "user_pool" {
 resource "aws_cognito_user_pool_client" "user_pool_client" {
   name                         = format("%s-user-pool-client", var.default_name)
   user_pool_id                 = aws_cognito_user_pool.user_pool.id
-  allowed_oauth_flows          = ["client_credentials"]
+  #allowed_oauth_flows          = ["client_credentials"]
   callback_urls                = ["http://localhost"]
   default_redirect_uri         = "http://localhost"
   allowed_oauth_scopes         = aws_cognito_resource_server.resource_server.scope_identifiers
@@ -26,7 +26,7 @@ resource "aws_cognito_resource_server" "resource_server" {
 }
 
 resource "aws_cognito_user_pool_domain" "main" {
-  domain          = format("%s-login.%s", var.default_name, var.domain_name)
+  domain          = "${var.default_name}-${random_string.suffix.result}-login"
   user_pool_id    = aws_cognito_user_pool.user_pool.id
   certificate_arn = "" # Certificate ARN
 }
