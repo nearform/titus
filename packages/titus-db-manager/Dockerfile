@@ -1,23 +1,19 @@
 FROM node:14-alpine
+RUN apk add bash dumb-init
+ENV NODE_ENV production
 
 WORKDIR /titus-db-manager
-USER root
-# install utils and deps
-RUN apk add bash
-# Copy the server code
-COPY index.js /titus-db-manager/index.js
-COPY migration-start.js /titus-db-manager/migration-start.js
-COPY seed /titus-db-manager/seed
-COPY migrate /titus-db-manager/migrate
-COPY truncate /titus-db-manager/truncate
-# COPY node_modules /titus-db-manger/node_modules
-COPY package.json /titus-db-manager/package.json
-COPY lib /titus-db-manager/lib
 
-# Run npm install
-RUN npm install
-# Run server
+COPY --chown=node:node index.js /titus-db-manager/index.js
+COPY --chown=node:node migration-start.js /titus-db-manager/migration-start.js
+COPY --chown=node:node seed /titus-db-manager/seed
+COPY --chown=node:node migrate /titus-db-manager/migrate
+COPY --chown=node:node truncate /titus-db-manager/truncate
+COPY --chown=node:node package.json package-lock.json ./
+COPY --chown=node:node lib /titus-db-manager/lib
+
+RUN npm ci --only=production
 
 USER node
 
-CMD ["npm", "run", "db:server:start"]
+CMD ["dumb-init", "node", "./lib"]
