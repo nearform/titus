@@ -19,8 +19,9 @@ resource "aws_ecs_task_definition" "titus" {
   #container_definitions = format("[%s]", local.api_json_map)
   container_definitions = jsonencode([
     {
-      name      = "titus"
-      image     = "711655675495.dkr.ecr.eu-west-1.amazonaws.com/damian-titus-backend:3b406043-24b7-4cbb-b5cd-0303dca66a8f"
+      name = var.default_name
+      #image     = "711655675495.dkr.ecr.eu-west-1.amazonaws.com/damian-titus-backend:3b406043-24b7-4cbb-b5cd-0303dca66a8f"
+      image     = format("%s:latest", aws_ecr_repository.this.repository_url)
       cpu       = 512
       memory    = 1024
       essential = true
@@ -28,6 +29,56 @@ resource "aws_ecs_task_definition" "titus" {
         {
           containerPort = 8080
           hostPort      = 8080
+        }
+      ]
+      environment = [
+        {
+          name  = "API_HOST"
+          value = "0.0.0.0"
+        },
+        {
+          name  = "API_PORT"
+          value = "8080"
+        },
+        # {
+        #   name  = "CORS_ORIGIN"
+        #   value = google_cloud_run_service.frontend.status.0.url
+        # },
+        {
+          name  = "PG_HOST"
+          value = aws_db_instance.this.address,
+        },
+        {
+          name  = "PG_PORT"
+          value = "5432"
+        },
+        {
+          name  = "PG_DB"
+          value = "asd"
+        },
+        {
+          name  = "PG_USER"
+          value = var.db_user
+        },
+        {
+          name  = "SECRETS_STRATEGY"
+          value = "gcp"
+        },
+        # {
+        #   name  = "SECRETS_PG_PASS"
+        #   value = "${google_secret_manager_secret.db_password.id}/versions/latest"
+        # },
+        {
+          name  = "JWT_SECRET"
+          value = "1234abcd"
+        },
+        {
+          name  = "NODE_ENV"
+          value = var.environment
+        },
+        {
+          name  = "AUTH0_DOMAIN"
+          value = "dummy"
         }
       ]
     }
@@ -124,10 +175,10 @@ resource "aws_iam_role_policy_attachment" "ecs_task_policy" {
 # Load Balancer
 ########################################################################
 resource "aws_lb" "this" {
-  name                             = var.default_name
-  load_balancer_type               = "network"
-  internal                         = true
-  subnets                          = [aws_subnet.this["dmz1"].id, aws_subnet.this["dmz2"].id]
+  name               = var.default_name
+  load_balancer_type = "network"
+  internal           = true
+  subnets            = [aws_subnet.this["dmz1"].id, aws_subnet.this["dmz2"].id]
   #Security groups are not supported for load balancers with type 'network'
   #security_groups                  = [aws_security_group.this.id]
   enable_cross_zone_load_balancing = true

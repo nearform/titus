@@ -1,8 +1,8 @@
 resource "aws_cloudfront_distribution" "this" {
   default_cache_behavior {
-    allowed_methods        = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
-    cached_methods         = ["HEAD", "GET", "OPTIONS"]
-    compress               = "true"
+    allowed_methods = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
+    cached_methods  = ["HEAD", "GET", "OPTIONS"]
+    compress        = "true"
     forwarded_values {
       query_string = true
       headers      = ["Accept", "Authorization", "CloudFront-Forwarded-Proto", "Host", "Origin"]
@@ -15,7 +15,7 @@ resource "aws_cloudfront_distribution" "this" {
     max_ttl                = "0"
     min_ttl                = "0"
     smooth_streaming       = "false"
-    target_origin_id       = regex("titus-[a-z0-9]+.elb.[a-z-0-9]+.amazonaws.com","${aws_api_gateway_integration.api.uri}")
+    target_origin_id       = regex(format("%s-[a-z0-9]+.elb.[a-z-0-9]+.amazonaws.com", var.default_name), "${aws_api_gateway_integration.api.uri}")
     viewer_protocol_policy = "allow-all"
   }
 
@@ -24,8 +24,8 @@ resource "aws_cloudfront_distribution" "this" {
   is_ipv6_enabled = "true"
 
   origin {
-    domain_name = regex("titus-[a-z0-9]+.elb.[a-z-0-9]+.amazonaws.com","${aws_api_gateway_integration.api.uri}")
-    origin_id   = regex("titus-[a-z0-9]+.elb.[a-z-0-9]+.amazonaws.com","${aws_api_gateway_integration.api.uri}")
+    domain_name = regex(format("%s-[a-z0-9]+.elb.[a-z-0-9]+.amazonaws.com", var.default_name), "${aws_api_gateway_integration.api.uri}")
+    origin_id   = regex(format("%s-[a-z0-9]+.elb.[a-z-0-9]+.amazonaws.com", var.default_name), "${aws_api_gateway_integration.api.uri}")
     origin_path = "/api"
 
     custom_origin_config {

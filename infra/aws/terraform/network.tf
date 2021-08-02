@@ -3,6 +3,9 @@ resource "aws_vpc" "main" {
   instance_tenancy     = "default"
   enable_dns_hostnames = true
   enable_dns_support   = true
+  tags = {
+    name = format("%s-vpc", var.default_name)
+  }
 
 }
 
@@ -17,12 +20,12 @@ resource "aws_subnet" "this" {
     "priv1" : "10.0.21.0/24",
     "priv2" : "10.0.22.0/24",
   }
-  vpc_id     = aws_vpc.main.id
-  cidr_block = each.value
-  availability_zone = "${data.aws_availability_zones.available.names[substr("${each.key}", -1, -1)]}"
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = each.value
+  availability_zone = data.aws_availability_zones.available.names[substr("${each.key}", -1, -1)]
 
   tags = {
-    "Name": "${var.default_name}-${each.key}"
+    "Name" : "${var.default_name}-${each.key}"
   }
 }
 

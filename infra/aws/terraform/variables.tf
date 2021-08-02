@@ -9,3 +9,6 @@ variable "lifecycle_enable" {}
 variable "lifecycle_id" {}
 variable "obj_expiration" {}
 variable "domain_name" {}
+
+variable "db_user" {}
+variable "db_password" {}
