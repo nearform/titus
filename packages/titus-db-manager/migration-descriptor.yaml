@@ -1,0 +1,41 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: titus-db-migrate
+  labels:
+    app: titus-db-migrate
+spec:
+  backoffLimit: 1
+  template:
+    metadata:
+      labels:
+        app: titus-db-migrate
+    spec:
+      containers:
+      - name: titus-db-migrate
+        image: titus-db-manager:latest
+        imagePullPolicy: Never
+        command: ["npm"]
+        args: ["run", "db:migrate"]
+        env:
+        - name: PG_HOST
+          value: localhost
+        - name: PG_PORT
+          value: "5432"
+        - name: PG_DB
+          value: titus
+        - name: PG_USER
+          value: titus
+        - name: PG_PASS
+          value: titus
+        - name: API_PORT
+          value: "5000"
+        - name: API_HOST
+          value: localhost
+        - name: SECRETS_PG_PASS
+          value: PG_PASS
+        - name: SECRETS_STRATEGY
+          value: env
+        - name: AUTH_PROVIDER
+          value: cognito
+      restartPolicy: Never

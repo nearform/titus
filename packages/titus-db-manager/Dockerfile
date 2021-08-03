@@ -6,6 +6,7 @@ USER root
 RUN apk add bash
 # Copy the server code
 COPY index.js /titus-db-manager/index.js
+COPY migration-start.js /titus-db-manager/migration-start.js
 COPY seed /titus-db-manager/seed
 COPY migrate /titus-db-manager/migrate
 COPY truncate /titus-db-manager/truncate

@@ -1,0 +1,46 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: titus-db-migrate
+  labels:
+    {{- include "..labels" . | nindent 4 }}
+spec:
+  backoffLimit: 1
+  template:
+    metadata:
+      labels:
+        app: titus-db-migrate
+    spec:
+      containers:
+      - name: titus-db-migrate
+        image: "localhost/titus-db-manager:latest"
+        imagePullPolicy: IfNotPresent
+        command: ["npm"]
+        args: ["run", "db:migrate"]
+        env:
+          - name: NODE_ENV
+            value: production
+          - name: API_HOST
+            value: {{ .Values.backend.apiHost | quote }}
+          - name: API_PORT
+            value: {{ .Values.backend.apiPort | quote }}
+          - name: SECRETS_STRATEGY
+            value: env
+          - name: AUTH_PROVIDER
+            value: {{ .Values.backend.authProvider | quote }}
+          - name: PG_HOST
+            value: {{ template "titus.database.host" . }}
+          - name: PG_PORT
+            value: {{ template "titus.database.port" . }}
+          - name: PG_DB
+            value: {{ .Values.postgresql.postgresqlDatabase | quote }}
+          - name: PG_USER
+            value: {{ .Values.postgresql.postgresqlUsername | quote }}
+          - name: SECRETS_PG_PASS
+            value: PG_PASS
+          - name: PG_PASS
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "titus.database.secretName" . }}
+                key: postgresql-password
+      restartPolicy: Never
