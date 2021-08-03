@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: localhost/titus
+  repository: titus
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
+  tag: latest
 
 imagePullSecrets: []
 nameOverride: ""
@@ -150,7 +150,7 @@ externalDatabase:
   ## @param externalDatabase.database External Database database name
   ##
   database: titus
-  ## @param externalDatabase.existingSecret Use an existing secret for external db password. Must contain the keys `redmine-password` or `mariadb-password` depending on the DB type
+  ## @param externalDatabase.existingSecret Use an existing secret for external db password. Must contain the keys `postgres-password`
   ##
   # existingSecret: my-secret
   existingSecret: "postgresql"
