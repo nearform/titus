@@ -42,17 +42,43 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: API_HOST
+              value: {{ .Values.backend.apiHost | quote }}
+            - name: API_PORT
+              value: {{ .Values.backend.apiPort | quote }}
+            - name: SECRETS_STRATEGY
+              value: env
+            - name: AUTH_PROVIDER
+              value: {{ .Values.backend.authProvider | quote }}
+            - name: PG_HOST
+              value: {{ template "titus.database.host" . }}
+            - name: PG_PORT
+              value: {{ template "titus.database.port" . }}
+            - name: PG_DB
+              value: {{ .Values.postgresql.postgresqlDatabase | quote }}
+            - name: PG_USER
+              value: {{ .Values.postgresql.postgresqlUsername | quote }}
+            - name: SECRETS_PG_PASS
+              value: PG_PASS
+            - name: PG_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "titus.database.secretName" . }}
+                  key: postgresql-password
           ports:
             - name: http
               containerPort: 80
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /
+              path: /authzcheck
               port: http
           readinessProbe:
             httpGet:
-              path: /
+              path: /authzcheck
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}

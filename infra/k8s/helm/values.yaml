@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: titus
+  repository: "titus"
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: latest
@@ -41,13 +41,18 @@ service:
   port: 80
 
 ingress:
-  enabled: false
+  enabled: true
   annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
     - host: titus.local
-      paths: []
+      paths: 
+        - path: /
+          backend: 
+            serviceName: titus.local
+            servicePort: 80
+
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:

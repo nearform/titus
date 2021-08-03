@@ -3,7 +3,7 @@ FROM node:14-alpine
 WORKDIR /titus-db-manager
 USER root
 # install utils and deps
-RUN apk add bash
+RUN apk add bash postgresql-client
 # Copy the server code
 COPY index.js /titus-db-manager/index.js
 COPY migration-start.js /titus-db-manager/migration-start.js

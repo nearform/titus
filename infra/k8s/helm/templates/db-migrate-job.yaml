@@ -5,16 +5,36 @@ metadata:
   labels:
     {{- include "..labels" . | nindent 4 }}
 spec:
-  backoffLimit: 1
+  backoffLimit: 0
   template:
     metadata:
       labels:
         app: titus-db-migrate
     spec:
+      initContainers:
+      - name: wait-for-db
+        image: "actions/pg_isready"
+        imagePullPolicy: IfNotPresent
+        command: ["sh", "-c", "until pg_isready; do echo Waiting for postgres; sleep 2; done;"]
+        env:
+          - name: PGHOST
+            value: {{ template "titus.database.host" . }}
+          - name: PGPORT
+            value: {{ template "titus.database.port" . }}
+          - name: PGDATABASE
+            value: {{ .Values.postgresql.postgresqlDatabase | quote }}
+          - name: PGUSER
+            value: {{ .Values.postgresql.postgresqlUsername | quote }}
+          - name: PGPASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "titus.database.secretName" . }}
+                key: postgresql-password
       containers:
       - name: titus-db-migrate
         image: "titus-db-manager:latest"
         imagePullPolicy: IfNotPresent
+        #command: ["until pg_isready -d $PG_DB -h $PG_HOST -p $PG_PORT -U $PG_USER; do echo Waiting for postgres; sleep 2; done;"]
         command: ["npm"]
         args: ["run", "db:migrate"]
         env:
