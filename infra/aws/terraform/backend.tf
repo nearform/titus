@@ -31,6 +31,14 @@ resource "aws_ecs_task_definition" "titus" {
           hostPort      = 8080
         }
       ]
+      logConfiguration = {
+        logDriver = "awslogs",
+        options: {
+          "awslogs-group": aws_cloudwatch_log_group.this.name,
+          "awslogs-region": var.region,
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
       environment = [
         {
           name  = "API_HOST"
@@ -54,7 +62,7 @@ resource "aws_ecs_task_definition" "titus" {
         },
         {
           name  = "PG_DB"
-          value = "asd"
+          value = aws_db_instance.this.name
         },
         {
           name  = "PG_USER"
@@ -62,12 +70,12 @@ resource "aws_ecs_task_definition" "titus" {
         },
         {
           name  = "SECRETS_STRATEGY"
-          value = "gcp"
+          value = "aws"
         },
-        # {
-        #   name  = "SECRETS_PG_PASS"
-        #   value = "${google_secret_manager_secret.db_password.id}/versions/latest"
-        # },
+        {
+          name  = "SECRETS_PG_PASS"
+          value = aws_secretsmanager_secret.db_password.id
+        },
         {
           name  = "JWT_SECRET"
           value = "1234abcd"
@@ -91,7 +99,7 @@ resource "aws_ecs_service" "titus" {
   launch_type     = "FARGATE"
   task_definition = aws_ecs_task_definition.titus.arn
   desired_count   = 1
-
+  force_new_deployment = true
   network_configuration {
     security_groups = [aws_security_group.this.id]
     subnets         = [aws_subnet.this["dmz1"].id, aws_subnet.this["dmz2"].id]
