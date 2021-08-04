@@ -5,7 +5,7 @@ const SECRETS_PLUGINS = {
   gcp: require('fastify-secrets-gcp'),
   aws: require('fastify-secrets-aws'),
   env: require('fastify-secrets-env'),
-  azr: require('fastify-secrets-azure')
+  azure: require('fastify-secrets-azure')
 }
 
 const config = require('./config')
@@ -26,6 +26,15 @@ async function secretsManager(server) {
         SECRETS_PLUGINS
       ).join(', ')}`
     )
+  }
+
+  if (options.secretsManager.strategy === 'azure') {
+    // add required options
+    const [vaultName, secretName] =
+      options.secretsManager.secrets.dbPassword.split('|')
+    options.secretsManager.secrets.dbPassword = secretName
+    options.secretsManager.clientOptions = { vaultName }
+    console.log(options.secretsManager)
   }
   server.register(plugin, config.secretsManager)
 }
