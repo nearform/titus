@@ -29,4 +29,5 @@ resource "aws_db_instance" "this" {
   password             = random_password.db_password.result
   db_subnet_group_name = aws_db_subnet_group.this.name
   skip_final_snapshot  = true
+  vpc_security_group_ids = [ aws_security_group.this.id ]
 }

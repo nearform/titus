@@ -81,14 +81,17 @@ This stack contains the CloudFront configuration, the DNS creation and the stora
 
 - An AWS administrator account
 
-Install Terraform 1.0.0 and the aws cli. Navigate to the infra/aws folder and run
+Terraform will use the profile named `titus` in your AWS credential files. Either create an entry on your `~/.aws/credentials` file named `[titus]` or configure a `[profile titus]` in your `~/.aws/config` file.
+
+Install Terraform `>= 1.0.0` and the aws cli. Navigate to the infra/aws folder and run
+
 ```
-```terraform plan
-```terraform apply
+$ terraform plan -out "titus.tfplan"
+$ terraform apply "titus.tfplan"
+```
 
+### Destroy
 
-
-
-
-
-
+```
+$ terraform destroy
+```
