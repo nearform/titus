@@ -37,7 +37,7 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  type: ClusterIP
+  type: NodePort
   port: 80
 
 ingress:
@@ -85,7 +85,7 @@ affinity: {}
 
 backend:
   apiPort: 5000
-  apiHost: localhost
+  apiHost: "0.0.0.0"
   authProvider: cognito
 
 postgresql:

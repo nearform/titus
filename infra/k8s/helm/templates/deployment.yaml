@@ -70,15 +70,15 @@ spec:
                   key: postgresql-password
           ports:
             - name: http
-              containerPort: 80
+              containerPort: {{ .Values.backend.apiPort }}
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /authzcheck
+              path: /healthcheck
               port: http
           readinessProbe:
             httpGet:
-              path: /authzcheck
+              path: /healthcheck
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
