@@ -33,7 +33,5 @@
     "husky": "^7.0.1",
     "lerna": "^3.22.1"
   },
-  "dependencies": {
-    "fastify-secrets-azure": "^1.0.0"
-  }
+  "dependencies": {}
 }
