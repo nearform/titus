@@ -45,6 +45,5 @@ module.exports = {
     secrets: {
       dbPassword: config.SECRETS_PG_PASS
     }
-
   }
 }

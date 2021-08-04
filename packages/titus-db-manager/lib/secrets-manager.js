@@ -28,13 +28,13 @@ async function secretsManager(server) {
     )
   }
 
-  if (options.secretsManager.strategy === 'azure') {
+  if (config.secretsManager.strategy === 'azure') {
     // add required options
     const [vaultName, secretName] =
-      options.secretsManager.secrets.dbPassword.split('|')
-    options.secretsManager.secrets.dbPassword = secretName
-    options.secretsManager.clientOptions = { vaultName }
-    console.log(options.secretsManager)
+      config.secretsManager.secrets.dbPassword.split('|')
+    config.secretsManager.secrets.dbPassword = secretName
+    config.secretsManager.clientOptions = { vaultName }
+    console.log(config.secretsManager)
   }
   server.register(plugin, config.secretsManager)
 }
