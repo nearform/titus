@@ -32,7 +32,6 @@ async function secretsManager(server, options) {
       options.secretsManager.secrets.dbPassword.split('|')
     options.secretsManager.secrets.dbPassword = secretName
     options.secretsManager.clientOptions = { vaultName }
-    console.log(options.secretsManager)
   }
   server.register(plugin, options.secretsManager)
 }
