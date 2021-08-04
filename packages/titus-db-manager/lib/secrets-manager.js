@@ -4,7 +4,8 @@ const fp = require('fastify-plugin')
 const SECRETS_PLUGINS = {
   gcp: require('fastify-secrets-gcp'),
   aws: require('fastify-secrets-aws'),
-  env: require('fastify-secrets-env')
+  env: require('fastify-secrets-env'),
+  azr: require('fastify-secrets-azure')
 }
 
 const config = require('./config')
