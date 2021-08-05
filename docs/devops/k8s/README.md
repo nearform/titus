@@ -69,7 +69,7 @@ By default the frontend is trying to connect the backend at localhost:5000. If y
 $ REACT_APP_API_PATH="http://titus-backend.localhost" docker build -t titus-frontend:latest .
 ```
 
-You have to enable ingress for the frontend and backend sercice to get it up and running as expected.
+You have to enable ingress for the frontend and backend service to get it up and running as expected inside the values.yaml.
 ```yaml
 frontend:
   ingress:
@@ -81,6 +81,19 @@ backend:
 ```
 
 By default the ingress settings configure titus-frontend.localhost and titus-backend.localhost subdomains listen for.
+
+For Database use the helm chart deploy postgresql subchart by default and creates a secret for you. If you want to use your own (external) database and/or your own already existing secret for the db password you can config that in the values.yaml as well.
+
+```yaml
+externalDatabase:
+  host: "postgresql.example.com"
+  port: 5432
+  user: titus
+  password: ""
+  database: titus
+  existingSecret: "titus-db-password"
+```
+
 
 ## Verifying Kubernetes deployment
 
