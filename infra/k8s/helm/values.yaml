@@ -4,13 +4,8 @@
 
 replicaCount: 1
 
-image:
-  repository: "titus"
-  pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: latest
-
 imagePullSecrets: []
+pullPolicy: IfNotPresent
 nameOverride: ""
 fullnameOverride: ""
 
@@ -28,47 +23,11 @@ podAnnotations: {}
 podSecurityContext: {}
   # fsGroup: 2000
 
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+nodeSelector: {}
 
-service:
-  type: ClusterIP
-  port: 80
+tolerations: []
 
-ingress:
-  enabled: false
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-  hosts:
-    - host: titus.local
-      paths: 
-        - path: /
-          backend: 
-            serviceName: titus.local
-            servicePort: 80
-
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
-
-resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+affinity: {}
 
 autoscaling:
   enabled: false
@@ -77,16 +36,95 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}
-
 backend:
-  apiPort: 5000
-  apiHost: "0.0.0.0"
+  image:
+    repository: "titus-backend"
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: latest
+  service:
+    type: ClusterIP
+    port: 5000
+  port: 5000
+  host: "0.0.0.0"
   authProvider: cognito
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+  resources: {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+  ingress:
+    enabled: false
+    annotations: {}
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    hosts:
+      - host: titus-backend.localhost
+        paths: 
+          - path: /
+            backend: 
+              serviceName: titus-backend
+              servicePort: 5000
+    tls: []
+    #  - secretName: chart-example-tls
+    #    hosts:
+    #      - chart-example.local
+
+frontend:
+  image:
+    repository: "titus-frontend"
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: latest
+  service:
+    type: ClusterIP
+    port: 8080
+  port: 8080
+  host: "0.0.0.0"
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+  resources: {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+  ingress:
+    enabled: false
+    annotations: {}
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    hosts:
+      - host: titus-frontend.localhost
+        paths: 
+          - path: /
+            backend: 
+              serviceName: titus-frontend
+              servicePort: 8080
+    tls: []
+    #  - secretName: chart-example-tls
+    #    hosts:
+    #      - chart-example.local
 
 postgresql:
   ## @param postgresql.enabled Whether to deploy a PostgreSQL server to satisfy the database requirements

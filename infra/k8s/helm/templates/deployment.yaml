@@ -20,7 +20,7 @@ spec:
       labels:
         {{- include "..selectorLabels" . | nindent 8 }}
     spec:
-      {{- with .Values.imagePullSecrets }}
+      {{- with .Values.PullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
@@ -37,18 +37,29 @@ spec:
           securityContext:
             runAsUser: 0
       containers:
-        - name: {{ .Chart.Name }}
+        - name: "{{ .Chart.Name }}-frontend"
           securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+            {{- toYaml .Values.frontend.securityContext | nindent 12 }}
+          image: "{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.frontend.port }}
+              protocol: TCP
+          resources:
+            {{- toYaml .Values.frontend.resources | nindent 12 }}
+        - name: "{{ .Chart.Name }}-backend"
+          securityContext:
+            {{- toYaml .Values.backend.securityContext | nindent 12 }}
+          image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.pullPolicy }}
           env:
             - name: NODE_ENV
               value: production
             - name: API_HOST
-              value: {{ .Values.backend.apiHost | quote }}
+              value: {{ .Values.backend.host | quote }}
             - name: API_PORT
-              value: {{ .Values.backend.apiPort | quote }}
+              value: {{ .Values.backend.port | quote }}
             - name: SECRETS_STRATEGY
               value: env
             - name: AUTH_PROVIDER
@@ -70,7 +81,7 @@ spec:
                   key: postgresql-password
           ports:
             - name: http
-              containerPort: {{ .Values.backend.apiPort }}
+              containerPort: {{ .Values.backend.port }}
               protocol: TCP
           livenessProbe:
             httpGet:
@@ -81,7 +92,7 @@ spec:
               path: /healthcheck
               port: http
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            {{- toYaml .Values.backend.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
