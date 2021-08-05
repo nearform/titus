@@ -7,4 +7,5 @@
         - [Deploy on GCP](/devops/gcp/)
         - [Deploy on AWS with Mira](https://github.com/nearform/titus/tree/master/packages/titus-infra-aws-mira)
         - [Deploy Titus on Azure](/devops/azure/?id=Deploy-Titus-on-Azure)
+        - [Deploy Titus on Kubernetes](/devops/k8s/?id=Deploy-Titus-on-Kubernetes)
 - [Contribute to Titus](/contributing/)

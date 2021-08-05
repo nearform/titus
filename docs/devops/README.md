@@ -13,6 +13,9 @@ An example deployment of Titus to [AWS] is provided. The deployment is done usin
 ### Deploy Titus on Azure with Terraform and Azure DevOps pipelines
 An example deployment of Titus to [Azure] is provided. The deployment is done using Terraform to build the infrastructure and Azure DevOps pipelines to configure CI and CD. Working examples of the pipelines can be found in the file azure-pipeline.yml located under each package folder.
 
+### Deploy Titus on Kubernetes using kinD and Helm
+We provide a helm chart to deploy titus easily on a Kubernetes cluster. In our example we will use kinD but you can choose any Kubernetes cluster locally or remotely you want.
+
 **Note:** CD workflow pipelines are expected to be adjusted or completely changed to fulfill project needs.
 
 
