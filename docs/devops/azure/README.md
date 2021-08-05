@@ -32,6 +32,19 @@ Use your credentials to make sure you'll be able to run Terraform against your A
 
 Sometimes the az login takes some time to finish, wait for the output showing the account details (containing tenantId, ...)
 
+### Register Provider
+
+Be sure that the following Resource Providers have been enabled in your subscription
+- `Microsoft.KeyVault`
+- `Microsoft.ContainerRegistry`
+- `Microsoft.ContainerInstance`
+
+You can enable with `az` cli command
+```
+$ az provider register --namespace 'Microsoft.KeyVault'
+$ az provider register --namespace 'Microsoft.ContainerRegistry'
+$ az provider register --namespace 'Microsoft.ContainerInstance'
+```
 
 ## Provision infrastruture with Terraform
 
@@ -39,7 +52,7 @@ Go to infra > azure > terraform
 
 ```
 # Get this information from your Azure account manager
-resource_group_id = "**********-****-****-****-************"
+subscription_id = "**********-****-****-****-************"
 resource_group_name = "**********************"
 location = "***** ******"
 
@@ -60,9 +73,9 @@ artifact_registry_repository_name = "tituscr"
 
 Run:
 ```
-terraform init
-terraform plan -var-file input.tfvars -out tfplan.out
-terraform apply "tfplan.out"
+$ terraform init
+$ terraform plan -var-file input.tfvars -out tfplan.out
+$ terraform apply "tfplan.out"
 ```
 
 It will take 7-10 mins to finish, you can get some details at the end of the execution, like the frontend or backend endpoint.

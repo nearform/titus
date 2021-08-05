@@ -1,4 +1,4 @@
-resource_group_id = "********-****-****-****-************"
+subscription_id = "********-****-****-****-************"
 resource_group_name = "********************************"
 location = "West Europe"
 titus_domain_name = "titus-dev1"

@@ -9,8 +9,8 @@ terraform {
 
 terraform {
   backend "azurerm" {
-    resource_group_name  = "***********************"
-    storage_account_name = "YOUR STORAGE ACCOUNT"
+    resource_group_name  = "titus-rg"
+    storage_account_name = "titusonazure"
     container_name       = "tfstate"
     key                  = "terraform.tfstate"
   }
@@ -19,7 +19,7 @@ terraform {
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
   features {}
-  subscription_id = var.resource_group_id
+  subscription_id = var.subscription_id
   skip_provider_registration = true
 }
 

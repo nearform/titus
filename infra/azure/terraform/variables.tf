@@ -1,4 +1,4 @@
-variable "resource_group_id" {
+variable "subscription_id" {
     type    = string
 }
 variable "resource_group_name" {
