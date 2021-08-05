@@ -102,6 +102,10 @@ externalDatabase:
 
 If you decide to use your own secret please make sure it contains at least the keys named 'postgresql-password' for the unprevileged user titus and postgresql-postgres-password for root user.
 
+If you fully configured the chart and you are happy let's deploy Titus
+```bash
+$ cd infra/k8s/helm && helm upgrade -i -n titus --create-namespace --kubeconfig {PATH_TO_YOUR_KUBECONFIG} titus .
+```
 
 ## Verifying Kubernetes deployment
 
@@ -111,7 +115,19 @@ If you decide to use your own secret please make sure it contains at least the k
 $ curl -kL http://titus-backend.localhost/healthcheck
 ```
 
-At this point you have Titus running on your Azure account. 
+## Cleanup Kubernetes deployment
+
+If you don't want anymore Titus to be deployed to you cluster just let helm delete your deployment
+```bash
+$ helm delete -n titus titus
+```
+
+Helm will not delete persistsnce volumes. If you are sure you dont want your database data and configuration anymore you have to delete it manually via kubectl
+
+To delete you fully kinD cluster ust type
+```bash
+$ kind delete cluster --name dev
+```
 
 [Helm]: https://helm.sh/
 [Kubernetes]: https://kubernetes.io/
