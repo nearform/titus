@@ -85,14 +85,22 @@ By default the ingress settings configure titus-frontend.localhost and titus-bac
 For Database use the helm chart deploy postgresql subchart by default and creates a secret for you. If you want to use your own (external) database and/or your own already existing secret for the db password you can config that in the values.yaml as well.
 
 ```yaml
+postgresql:
+  enabled: true
+  postgresqlUsername: titus
+  postgresqlPassword: ""
+  postgresqlDatabase: titus
+  existingSecret: ""
 externalDatabase:
   host: "postgresql.example.com"
   port: 5432
   user: titus
   password: ""
   database: titus
-  existingSecret: "titus-db-password"
+  existingSecret: "titus-postgresql"
 ```
+
+If you decide to use your own secret please make sure it contains at least the keys named 'postgresql-password' for the unprevileged user titus and postgresql-postgres-password for root user.
 
 
 ## Verifying Kubernetes deployment
