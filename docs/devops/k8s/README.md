@@ -119,7 +119,7 @@ $ curl -kL http://titus-backend.localhost/healthcheck
 
 If you don't want anymore Titus to be deployed to you cluster just let helm delete your deployment
 ```bash
-$ helm delete -n titus titus
+$ helm delete -n titus --kubeconfig {PATH_TO_YOUR_KUBECONFIG} titus
 ```
 
 Helm will not delete persistsnce volumes. If you are sure you dont want your database data and configuration anymore you have to delete it manually via kubectl
