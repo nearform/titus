@@ -14,4 +14,5 @@
             - [Update the Container images](/devops/k8s/?id=update-the-container-images)
             - [Config and Deploy](/devops/k8s/?id=config-and-deploy)
             - [Verifying Kubernetes deployment](/devops/k8s/?id=verifying-Kubernetes-deployment)
+            - [Cleanup Kubernetes deployment](/devops/k8s/?id=cleanup-Kubernetes-deployment)
 - [Contribute to Titus](/contributing/)
