@@ -126,7 +126,7 @@ Helm will not delete persistsnce volumes. If you are sure you dont want your dat
 
 To delete you fully kinD cluster ust type
 ```bash
-$ kind delete cluster --name dev
+$ kind delete cluster
 ```
 
 [Helm]: https://helm.sh/
