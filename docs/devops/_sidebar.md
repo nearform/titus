@@ -5,6 +5,6 @@
     - [Overview](/devops/?id=overview)
     - [Deploy Titus](/devops/?id=deploy-titus)
         - [Deploy on GCP](/devops/gcp/)
-        - [Deploy on AWS with Mira](https://github.com/nearform/titus/tree/master/packages/titus-infra-aws-mira)
-        - [Deploy Titus on Azure](/devops/azure/?id=Deploy-Titus-on-Azure)
+        - [Deploy on AWS](/devops/aws/)
+        - [Deploy on Azure](/devops/azure/?id=Deploy-Titus-on-Azure)
 - [Contribute to Titus](/contributing/)
