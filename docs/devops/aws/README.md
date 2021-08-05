@@ -1,4 +1,4 @@
-# Titus Aws Cdk Deploy with Terraform
+# Titus AWS Deploy with Terraform
 
 This package allows to deploy easily the titus project on a AWS account.
 
