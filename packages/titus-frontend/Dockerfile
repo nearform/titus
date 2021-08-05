@@ -9,7 +9,7 @@ COPY public ./public
 ENV SKIP_PREFLIGHT_CHECK=true
 RUN npm ci
 
-ARG REACT_APP_API_URL
+ARG REACT_APP_API_PATH
 RUN npm run build
 
 FROM nginx:stable-alpine
