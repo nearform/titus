@@ -6,5 +6,5 @@
   - [Explore Titus](?id=explore-titus)
 - [Quick Start Guide](/quick-start/)
 - [Developers](/developers/)
-- [DevOps](/devops/)
+- [DevOps](/devops/?id=DevOps)
 - [Contribute to Titus](/contributing/)

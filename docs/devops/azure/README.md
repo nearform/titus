@@ -4,9 +4,9 @@ To set up a [Titus] deployment on an [Azure] cloud using [Azure DevOps], there a
 
 ## Requirements:
 - Azure account, a Resource Group and Owner permissions for it.
-- Azure Storage Account to use as a backend for terraform and store the terraform state file, plus a container called tfstate in it and network access to it from your local machine.
+- (Optional) Azure Storage Account to use as a backend for terraform and store the terraform state file, plus a container called tfstate in it and network access to it from your local machine.
 - Azure CLI client installed.
-- Terraform 0.15 or newer.
+- Terraform 1.0.0 or newer.
 
 
 ## Infrastructure Stack
@@ -32,6 +32,19 @@ Use your credentials to make sure you'll be able to run Terraform against your A
 
 Sometimes the az login takes some time to finish, wait for the output showing the account details (containing tenantId, ...)
 
+### Register Provider
+
+Be sure that the following Resource Providers have been enabled in your subscription
+- `Microsoft.KeyVault`
+- `Microsoft.ContainerRegistry`
+- `Microsoft.ContainerInstance`
+
+You can enable with `az` cli command
+```
+az provider register --namespace 'Microsoft.KeyVault'
+az provider register --namespace 'Microsoft.ContainerRegistry'
+az provider register --namespace 'Microsoft.ContainerInstance'
+```
 
 ## Provision infrastruture with Terraform
 
@@ -39,7 +52,7 @@ Go to infra > azure > terraform
 
 ```
 # Get this information from your Azure account manager
-resource_group_id = "**********-****-****-****-************"
+subscription_id = "**********-****-****-****-************"
 resource_group_name = "**********************"
 location = "***** ******"
 
