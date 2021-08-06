@@ -8,5 +8,5 @@ Your are browsing the repository for **titus-backend**. All documentation for ti
 
 - Get the whole picture by viewing our **[Documentation][docs]**
 
-[docs]: https://nearform.github.io/titus
+[docs]: https://nf-titus.netlify.app/
 [logo-img]: ../../docs/img/Accel_Logo_Titus.svg
