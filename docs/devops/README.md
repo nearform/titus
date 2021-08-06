@@ -24,6 +24,6 @@ An example deployment of Titus to [Azure] is provided. The deployment is done us
 [Mira]: https://nf-mira.netlify.app
 [Cdk]: https://aws.amazon.com/cdk/
 [titus-infra-aws-mira]: https://github.com/nearform/titus/tree/master/packages/titus-infra-aws-mira
-[infra/aws]: https://github.com/nearform/titus/tree/aws_update/docs/devops/aws
+[infra/aws]: /devops/aws/
 [Azure]: https://portal.azure.com/
 [GitHub Actions]: https://github.com/features/actions
