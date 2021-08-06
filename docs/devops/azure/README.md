@@ -4,9 +4,9 @@ To set up a [Titus] deployment on an [Azure] cloud using [Azure DevOps], there a
 
 ## Requirements:
 - Azure account, a Resource Group and Owner permissions for it.
-- Azure Storage Account to use as a backend for terraform and store the terraform state file, plus a container called tfstate in it and network access to it from your local machine.
+- (Optional) Azure Storage Account to use as a backend for terraform and store the terraform state file, plus a container called tfstate in it and network access to it from your local machine.
 - Azure CLI client installed.
-- Terraform 0.15 or newer.
+- Terraform 1.0.0 or newer.
 
 
 ## Infrastructure Stack
@@ -41,9 +41,9 @@ Be sure that the following Resource Providers have been enabled in your subscrip
 
 You can enable with `az` cli command
 ```
-$ az provider register --namespace 'Microsoft.KeyVault'
-$ az provider register --namespace 'Microsoft.ContainerRegistry'
-$ az provider register --namespace 'Microsoft.ContainerInstance'
+az provider register --namespace 'Microsoft.KeyVault'
+az provider register --namespace 'Microsoft.ContainerRegistry'
+az provider register --namespace 'Microsoft.ContainerInstance'
 ```
 
 ## Provision infrastruture with Terraform
@@ -73,9 +73,9 @@ artifact_registry_repository_name = "tituscr"
 
 Run:
 ```
-$ terraform init
-$ terraform plan -var-file input.tfvars -out tfplan.out
-$ terraform apply "tfplan.out"
+terraform init
+terraform plan -var-file input.tfvars -out tfplan.out
+terraform apply "tfplan.out"
 ```
 
 It will take 7-10 mins to finish, you can get some details at the end of the execution, like the frontend or backend endpoint.

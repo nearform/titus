@@ -50,13 +50,6 @@ This stack contains the base resource required by the application
 This stack contains the Ecs/Fargate infrastructure
 
 - [Ecs](https://docs.aws.amazon.com/ecs/)
-- [Network Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing)
-- [Ec2 Autoscaling](https://docs.aws.amazon.com/autoscaling/)
-
-#### Ecs
-This stack contains the Ecs/Fargate infrastructure
-
-- [Ecs](https://docs.aws.amazon.com/ecs/)
 - [Ecr](https://docs.aws.amazon.com/ecr/)
 - [Network Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing)
 - [Ec2 Autoscaling](https://docs.aws.amazon.com/autoscaling/)
@@ -86,12 +79,12 @@ Terraform will use the profile named `titus` in your AWS credential files. Eithe
 Install Terraform `>= 1.0.0` and the aws cli. Navigate to the infra/aws folder and run
 
 ```
-$ terraform plan -out "titus.tfplan"
-$ terraform apply "titus.tfplan"
+terraform plan -out "titus.tfplan"
+terraform apply "titus.tfplan"
 ```
 
 ### Destroy
 
 ```
-$ terraform destroy
+terraform destroy
 ```
