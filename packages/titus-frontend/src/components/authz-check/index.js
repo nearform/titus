@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react'
 import { AuthContext } from 'components/authentication/authentication-context'
 
+import config from '../../lib/config'
+
 const AuthzCheck = () => {
   const { user } = useContext(AuthContext)
   const [isAuthorizedAdmin, setIsAuthorizedAdmin] = useState('not checked')
@@ -11,7 +13,9 @@ const AuthzCheck = () => {
     }
     try {
       setIsAuthorizedAdmin('checking...')
-      const response = await fetch('/authzcheck', { headers })
+      const response = await fetch(`${config.serverUrl}/authzcheck`, {
+        headers
+      })
       const json = await response.json()
       if (json.isAdmin) {
         setIsAuthorizedAdmin('confirmed authorized admin')

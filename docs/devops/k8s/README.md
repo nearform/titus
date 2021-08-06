@@ -1,4 +1,4 @@
-# Deploy Titus on Kubernetes
+# Deploy on Kubernetes
 
 To set up a [Titus] deployment on an [Kubernetes] using [Helm] and [kinD], there are few steps to be performed.
 
@@ -44,6 +44,9 @@ nodes:
 
 ```
 
+This is not mandatory to expose your services and let the frontend work as expected by requesting the backend service at it's external URL.
+Instead of using a ingress controler you can switch your services from ClusterIP to NodePort as described below.
+
 
 ## Update the Container images
 
@@ -54,7 +57,7 @@ For simplicity let's build and upload all images to kinD itself.
 ```bash
 $ cd packages/titus-backend && docker build -t titus-backend:latest .
 $ cd packages/titus-db-manager && docker build -t titus-db-manager:latest .
-$ cd packages/titus-frontend && docker build -t titus-frontend:latest .
+$ REACT_APP_API_PATH="http://titus-backend.localhost" cd packages/titus-frontend && docker build -t titus-frontend:latest .
 ```
 ```bash
 $ kind load docker-image titus-backend:latest 
@@ -64,12 +67,9 @@ $ kind load docker-image titus-db-manager:latest
 
 ## Config and Deploy
 
-By default the frontend is trying to connect the backend at localhost:5000. If you want to change that Settings you need to define an environment variable at docker build time.
-```bash
-$ REACT_APP_API_PATH="http://titus-backend.localhost" docker build -t titus-frontend:latest .
-```
+If you want to expose your services for testing porposes you can just switch from clusterIP to NodePort inside values.yaml
 
-You have to enable ingress for the frontend and backend service to get it up and running as expected inside the values.yaml.
+You can enable ingress for the frontend and backend service to expose your services for production use inside the values.yaml. Be sure you already have installed an ingress controller.
 ```yaml
 frontend:
   ingress:
@@ -80,7 +80,7 @@ backend:
     enabled: true
 ```
 
-By default the ingress settings configure titus-frontend.localhost and titus-backend.localhost subdomains listen for.
+By default the ingress settings configure titus-frontend.localhost and titus-backend.localhost subdomains listen for. Make sur your frontend image was build with the right backend API url configured.
 
 For Database use the helm chart deploy postgresql subchart by default and creates a secret for you. If you want to use your own (external) database and/or your own already existing secret for the db password you can config that in the values.yaml as well.
 
@@ -104,7 +104,7 @@ If you decide to use your own secret please make sure it contains at least the k
 
 If you fully configured the chart and you are happy let's deploy Titus
 ```bash
-$ cd infra/k8s/helm && helm upgrade -i -n titus --create-namespace --kubeconfig {PATH_TO_YOUR_KUBECONFIG} titus .
+$ cd infra/k8s/helm && helm upgrade -i -n titus --create-namespace --kubeconfig {PATH_TO_YOUR_KUBECONFIG} -f values.yaml titus .
 ```
 
 ## Verifying Kubernetes deployment

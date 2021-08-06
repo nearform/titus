@@ -34,7 +34,6 @@ spec:
       - name: titus-db-migrate
         image: "titus-db-manager:latest"
         imagePullPolicy: IfNotPresent
-        #command: ["until pg_isready -d $PG_DB -h $PG_HOST -p $PG_PORT -U $PG_USER; do echo Waiting for postgres; sleep 2; done;"]
         command: ["npm"]
         args: ["run", "db:migrate"]
         env:
