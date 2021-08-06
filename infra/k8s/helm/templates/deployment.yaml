@@ -74,6 +74,8 @@ spec:
               value: {{ .Values.postgresql.postgresqlUsername | quote }}
             - name: SECRETS_PG_PASS
               value: PG_PASS
+            - name: CORS_ORIGIN
+              value: "true"
             - name: PG_PASS
               valueFrom:
                 secretKeyRef:

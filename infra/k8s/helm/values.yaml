@@ -90,9 +90,9 @@ frontend:
     tag: latest
   service:
     type: ClusterIP
-    port: 5001
+    port: 8080
     nodePort: 35001
-  port: 5001
+  port: 8080
   host: "0.0.0.0"
   securityContext: {}
     # capabilities:
@@ -122,7 +122,7 @@ frontend:
           - path: /
             backend: 
               serviceName: titus-frontend
-              servicePort: 5001
+              servicePort: 8080
     tls: []
     #  - secretName: chart-example-tls
     #    hosts:
