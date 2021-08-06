@@ -7,4 +7,5 @@
         - [Deploy on GCP](/devops/gcp/)
         - [Deploy on AWS](/devops/aws/)
         - [Deploy on Azure](/devops/azure/?id=Deploy-Titus-on-Azure)
+        - [Deploy on Kubernetes](/devops/k8s/?id=Deploy-on-Kubernetes)
 - [Contribute to Titus](/contributing/)

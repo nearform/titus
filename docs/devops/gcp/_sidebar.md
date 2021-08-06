@@ -14,4 +14,5 @@
             - [Verifying GCP deployment](/devops/gcp/?id=verifying-gcp-deployment)
         - [Deploy on AWS](/devops/aws/?id=titus-aws-deploy-with-terraform)
         - [Deploy on Azure](/devops/azure/?id=Deploy-Titus-on-Azure)
+        - [Deploy on Kubernetes](/devops/k8s/?id=Deploy-on-Kubernetes)
 - [Contribute to Titus](/contributing/)

@@ -1,0 +1,109 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "..fullname" . }}
+  labels:
+    {{- include "..labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "..selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "..selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.PullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "..serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: titus-migrations
+          image: "groundnuty/k8s-wait-for:1.3"
+          imagePullPolicy: IfNotPresent
+          args:
+            - "job"
+            - "titus-db-migrate"
+          securityContext:
+            runAsUser: 0
+      containers:
+        - name: "{{ .Chart.Name }}-frontend"
+          securityContext:
+            {{- toYaml .Values.frontend.securityContext | nindent 12 }}
+          image: "{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.frontend.port }}
+              protocol: TCP
+          resources:
+            {{- toYaml .Values.frontend.resources | nindent 12 }}
+        - name: "{{ .Chart.Name }}-backend"
+          securityContext:
+            {{- toYaml .Values.backend.securityContext | nindent 12 }}
+          image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.pullPolicy }}
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: API_HOST
+              value: {{ .Values.backend.host | quote }}
+            - name: API_PORT
+              value: {{ .Values.backend.port | quote }}
+            - name: SECRETS_STRATEGY
+              value: env
+            - name: AUTH_PROVIDER
+              value: {{ .Values.backend.authProvider | quote }}
+            - name: PG_HOST
+              value: {{ template "titus.database.host" . }}
+            - name: PG_PORT
+              value: {{ template "titus.database.port" . }}
+            - name: PG_DB
+              value: {{ .Values.postgresql.postgresqlDatabase | quote }}
+            - name: PG_USER
+              value: {{ .Values.postgresql.postgresqlUsername | quote }}
+            - name: SECRETS_PG_PASS
+              value: PG_PASS
+            - name: CORS_ORIGIN
+              value: "true"
+            - name: PG_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "titus.database.secretName" . }}
+                  key: postgresql-password
+          ports:
+            - name: http
+              containerPort: {{ .Values.backend.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /healthcheck
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /healthcheck
+              port: http
+          resources:
+            {{- toYaml .Values.backend.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

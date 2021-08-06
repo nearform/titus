@@ -2,14 +2,13 @@ FROM node:14 as builder
 
 WORKDIR /service
 
-COPY package.json package-lock.json jsconfig.json .eslintrc .eslintignore .prettierrc ./
+COPY package.json package-lock.json jsconfig.json .eslintrc .eslintignore .prettierrc .env ./
 COPY src ./src
 COPY public ./public
 
 ENV SKIP_PREFLIGHT_CHECK=true
 RUN npm ci
 
-ARG REACT_APP_API_URL
 RUN npm run build
 
 FROM nginx:stable-alpine

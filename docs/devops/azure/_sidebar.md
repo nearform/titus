@@ -14,4 +14,5 @@
             - [Create the pipelines in Azure DevOps](/devops/azure/?id=create-the-pipelines-in-azure-devops)
             - [Update the Container images](/devops/azure/?id=update-the-container-images)
             - [Verifying Azure deployment](/devops/azure/?id=verifying-azure-deployment)
+        - [Deploy on Kubernetes](/devops/k8s/?id=Deploy-on-Kubernetes)
 - [Contribute to Titus](/contributing/)

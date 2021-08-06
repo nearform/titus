@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: titus-test
+  name: titus-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: titus-test
+  template:
+    metadata:
+      labels:
+        app: titus-test
+    spec:
+      initContainers:
+      - name: "titus-test-init"
+        image: "groundnuty/k8s-wait-for:1.3"
+        imagePullPolicy: IfNotPresent
+        args:
+        - "job"
+        - "titus-db-migrate" # since the number is going to change from release to release the name is going to need to be dynamic
+      containers:
+      - image: titus:latest
+        imagePullPolicy: Never
+        name: titus
+        env:
+        - name: PG_HOST
+          value: localhost
+        - name: PG_PORT
+          value: "5432"
+        - name: PG_DB
+          value: titus
+        - name: PG_USER
+          value: titus
+        - name: PG_PASS
+          value: titus
+        - name: API_PORT
+          value: "5000"
+        - name: API_HOST
+          value: localhost
+        - name: SECRETS_PG_PASS
+          value: PG_PASS
+        - name: SECRETS_STRATEGY
+          value: env
+        - name: AUTH_PROVIDER
+          value: cognito
