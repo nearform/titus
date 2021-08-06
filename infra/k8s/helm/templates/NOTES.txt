@@ -18,7 +18,6 @@
   export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app.kubernetes.io/name={{ include "..name" . }},app.kubernetes.io/instance={{ .Release.Name }}" -o jsonpath="{.items[0].metadata.name}")
   export FRONTEND_PORT=$(kubectl get pod --namespace {{ .Release.Namespace }} $POD_NAME -o jsonpath="{.spec.containers[0].ports[0].containerPort}")
   export BACKEND_PORT=$(kubectl get pod --namespace {{ .Release.Namespace }} $POD_NAME -o jsonpath="{.spec.containers[1].ports[0].containerPort}")
-  echo "Visit http://127.0.0.1:8080 to use your application"
-  kubectl --namespace {{ .Release.Namespace }} port-forward $POD_NAME 8080:$FRONTEND_PORT
-  kubectl --namespace {{ .Release.Namespace }} port-forward $POD_NAME 8081:$BACKEND_PORT
+  kubectl --namespace {{ .Release.Namespace }} port-forward $POD_NAME 5001:$FRONTEND_PORT 5000:$BACKEND_PORT
+  echo "Visit http://127.0.0.1:5001 to use your application"
 {{- end }}

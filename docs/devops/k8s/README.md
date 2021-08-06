@@ -57,7 +57,7 @@ For simplicity let's build and upload all images to kinD itself.
 ```bash
 $ cd packages/titus-backend && docker build -t titus-backend:latest .
 $ cd packages/titus-db-manager && docker build -t titus-db-manager:latest .
-$ REACT_APP_API_PATH="http://titus-backend.localhost" cd packages/titus-frontend && docker build -t titus-frontend:latest .
+$ cd packages/titus-frontend && cp .env.sample .env && docker build -t titus-frontend:latest .
 ```
 ```bash
 $ kind load docker-image titus-backend:latest 
