@@ -122,7 +122,7 @@ frontend:
           - path: /
             backend: 
               serviceName: titus-frontend
-              servicePort: 8080
+              servicePort: 5001
     tls: []
     #  - secretName: chart-example-tls
     #    hosts:
