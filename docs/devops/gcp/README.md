@@ -2,7 +2,7 @@
 
 To set up a [Titus] deployment on an [GCP] cloud using [Github Actions], there are few steps to be performed.
 
-**Note:** [Terraform] 0.14 is required for the infrastructure creation.
+**Note:** This code supports [Terraform] 1.0.0 and above.
 
 ## Infrastructure Stack
 
