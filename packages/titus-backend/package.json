@@ -36,7 +36,7 @@
     "fastify-secrets-azure": "^1.0.0",
     "fastify-secrets-env": "^1.0.1",
     "fastify-secrets-gcp": "^1.0.1",
-    "fastify-swagger": "^4.8.3",
+    "fastify-swagger": "^4.8.4",
     "fastify-url-data": "^3.0.3",
     "fluent-json-schema": "^3.0.1",
     "get-jwks": "^4.2.0",
