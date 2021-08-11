@@ -29,7 +29,7 @@ describe('validateEnv file', () => {
       require('./validateEnv').validate()
     } catch (err) {
       expect(err.message).toEqual(
-        "must have required property 'REACT_APP_API_PATH'"
+        "env must have required property 'REACT_APP_API_PATH'"
       )
     }
   })
