@@ -56,15 +56,6 @@ jobs:
         run: |
           docker push $DOCKER_IMAGE
 
-      # - name: Run service
-      #   working-directory: ./packages/titus-frontend
-      #   run: |
-      #     gcloud run deploy $CLOUDRUN_SERVICE_NAME \
-      #       --image $DOCKER_IMAGE \
-      #       --region $CLOUDRUN_SERVICE_REGION \
-      #       --project $PROJECT_ID \
-      #       --platform managed
-
       - name: Run service
         uses: google-github-actions/deploy-cloudrun@v0.6.0
         with:
