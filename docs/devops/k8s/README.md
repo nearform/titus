@@ -89,8 +89,7 @@ before you can use external secret store you need to prepare your kubernetes clu
 ```bash
 $ helm repo add secrets-store-csi-driver https://raw.githubusercontent.com/kubernetes-sigs/secrets-store-csi-driver/master/charts
 $ helm upgrade -i -n csi --create-namespace csi-secrets-store secrets-store-csi-driver/secrets-store-csi-driver \
-  --set syncSecret.enabled=true \
-  --set enableSecretRotation=true
+  --set syncSecret.enabled=true
 ```
 
 ### Install Vault
