@@ -66,6 +66,34 @@ backend:
     # requests:
     #   cpu: 100m
     #   memory: 128Mi
+  
+  secrets:
+    - secretName: auth0-client-secret
+      type: Opaque
+      labels: {}
+      secretKeys: 
+        - key: secret
+    - secretName: ad-secret
+      type: Opaque
+      labels: {}
+      secretKeys: 
+        - key: secret
+    - secretName: db-password
+      type: Opaque
+      labels: {}
+      secretKeys: 
+        - key: postgresql-password
+        - key: postgresql-postgres-password
+      
+  csi:
+    enabled: false
+    spc:
+      type: vault 
+      name: titus-backend-secrets
+      address: http://vault.vault:8200
+      role: backend 
+      secretPathPrefix: secret/data/   
+
   ingress:
     enabled: false
     annotations: {}

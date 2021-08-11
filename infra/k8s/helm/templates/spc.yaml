@@ -1,0 +1,36 @@
+{{- if .Values.backend.csi.enabled }}
+{{- with .Values.backend.csi.spc }}
+kind: SecretProviderClass
+apiVersion: secrets-store.csi.x-k8s.io/v1alpha1
+metadata:
+  name: {{ .name | quote  }}
+spec:
+  provider: {{ .type | quote  }}
+  secretObjects:
+    {{- range $.Values.backend.secrets }}
+    - data:
+      {{- $secretName := .secretName }}
+      {{- range .secretKeys }}
+      - key: {{ .key | quote }}
+        objectName: {{ print $secretName .key | quote }}
+      {{- end }}
+      labels: {{- toYaml .labels | nindent 8}}
+      secretName: {{ .secretName | quote }}
+      type: {{ .type | quote  }}
+    {{- end }}
+  parameters:
+    roleName: {{ .role }}
+    vaultAddress: {{ .address | quote  }}
+    objects: |
+      {{- range $.Values.backend.secrets }}
+      {{- if eq $.Values.backend.csi.spc.type "vault" }}
+      {{- $secretName := .secretName }}
+      {{- range .secretKeys }}
+      - objectName: {{ print $secretName .key | quote  }}
+        secretPath: {{ print $.Values.backend.csi.spc.secretPathPrefix $secretName | quote  }}
+        secretKey: {{ .key | quote  }}
+      {{- end }}
+      {{- end }}
+      {{- end }}
+{{- end }}
+{{- end }}

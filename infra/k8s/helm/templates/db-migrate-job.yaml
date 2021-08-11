@@ -11,6 +11,7 @@ spec:
       labels:
         app: titus-db-migrate
     spec:
+      #serviceAccountName: {{ include "..serviceAccountName" . }}
       initContainers:
       - name: wait-for-db
         image: "actions/pg_isready"
