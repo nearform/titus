@@ -4,7 +4,6 @@ To set up a [Titus] deployment on an [Kubernetes] using [Helm] and [kinD], there
 
 ## Requirements:
 - Helm installed locally.
-- A local running kinD cluster with a custom configuration, including ingress controller and port mappings.
 - Kubectl command line tool installed.
 - Docker installed locally to build the images.
 - Hashicorp Vault (Optional)
@@ -22,52 +21,14 @@ The stack is built with minimum number of services to make Titus work on Azure:
 - **vault-csi-provider**: CSI secrets store provider to provide vault secrets in Kubernetes (Optional)
 
 
-## Helm and KinD
-
-You can find instructions on how to install helm and kinD on you specific opertion system at [Install Helm](https://helm.sh/docs/helm/helm_install/) and [Install kinD](https://kind.sigs.k8s.io/docs/user/quick-start/).
-
-If you not already enabled and run an ingress controller inside your kinD cluster you can use the following config ([Ingress for kinD](https://kind.sigs.k8s.io/docs/user/ingress/)).
-```yaml
-kind: Cluster
-apiVersion: kind.x-k8s.io/v1alpha4
-nodes:
-- role: control-plane
-  kubeadmConfigPatches:
-  - |
-    kind: InitConfiguration
-    nodeRegistration:
-      kubeletExtraArgs:
-        node-labels: "ingress-ready=true"
-  extraPortMappings:
-  - containerPort: 80
-    hostPort: 80
-    protocol: TCP
-  - containerPort: 443
-    hostPort: 443
-    protocol: TCP
-
-```
-
-This is not mandatory to expose your services and let the frontend work as expected by requesting the backend service at it's external URL.
-Instead of using a ingress controler you can switch your services from ClusterIP to NodePort as described below.
-
-
 ## Update the Container images
-
-If you use kinD you need to upload your custom docker images to the cluster or provide an docker registry. 
-
-For simplicity let's build and upload all images to kinD itself.
 
 ```bash
 $ cd packages/titus-backend && docker build -t titus-backend:latest .
 $ cd packages/titus-db-manager && docker build -t titus-db-manager:latest .
 $ cd packages/titus-frontend && cp .env.sample .env && docker build -t titus-frontend:latest .
 ```
-```bash
-$ kind load docker-image titus-backend:latest 
-$ kind load docker-image titus-frontend:latest 
-$ kind load docker-image titus-db-manager:latest 
-```
+
 
 ## Config and Deploy
 
@@ -200,13 +161,8 @@ $ helm delete -n titus --kubeconfig {PATH_TO_YOUR_KUBECONFIG} titus
 
 Helm will not delete persistence volumes automaticaly. If you are sure you dont want your database data and configuration anymore you have to delete it manually via kubectl
 
-To delete you fully kinD cluster ust type
-```bash
-$ kind delete cluster 
-```
 
 [Helm]: https://helm.sh/
 [Kubernetes]: https://kubernetes.io/
 [Titus]: https://github.com/nearform/titus
-[kinD]: https://kind.sigs.k8s.io/
 [Secret Store CSI Driver]: https://github.com/kubernetes-sigs/secrets-store-csi-driver
