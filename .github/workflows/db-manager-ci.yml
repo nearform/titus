@@ -1,8 +1,6 @@
 name: DB Manager CI
 on:
   push:
-    branches:
-      - fix/gcp_cicd
     paths:
       - '.github/workflows/db-manager-ci.yml'
       - 'packages/titus-db-manager/**'

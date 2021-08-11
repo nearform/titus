@@ -1,8 +1,6 @@
 name: Frontend CI
 on:
   push:
-    branches:
-      - fix/gcp_cicd
     paths:
       - '.github/workflows/frontend-ci.yml'
       - 'packages/titus-frontend/**'

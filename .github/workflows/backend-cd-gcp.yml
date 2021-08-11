@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - fix/gcp_cicd
     paths:
       - 'packages/titus-backend/**'
       - '.github/workflows/backend-cd-gcp.yml'
