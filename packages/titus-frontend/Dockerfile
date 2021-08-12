@@ -6,6 +6,9 @@ COPY package.json package-lock.json jsconfig.json .eslintrc .eslintignore .prett
 COPY src ./src
 COPY public ./public
 
+ARG REACT_APP_API_PATH=http://localhost:5000
+ARG REACT_APP_ADMIN_API_PATH=$REACT_APP_API_PATH/graphql
+
 ENV SKIP_PREFLIGHT_CHECK=true
 RUN npm ci
 
