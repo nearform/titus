@@ -13,6 +13,14 @@ resource "google_cloud_run_service" "frontend" {
     spec {
       containers {
         image = "gcr.io/cloudrun/hello"
+        env {
+          name  = "REACT_APP_API_PATH"
+          value = "https://titus-backend-ik2t63iiyq-ew.a.run.app"
+        }
+        env {
+          name  = "REACT_APP_ADMIN_API_PATH"
+          value = "https://titus-backend-ik2t63iiyq-ew.a.run.app/graphql"
+        }
       }
     }
   }

@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - fix/frontend-cd
     paths:
       - 'packages/titus-frontend/**'
       - '.github/workflows/frontend-cd-gcp.yml'
