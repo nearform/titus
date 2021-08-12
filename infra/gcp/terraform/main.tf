@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">= 1.0.0"
+  required_version = ">= 1.0.4"
   backend "gcs" {
     credentials = "key.json"
     bucket      = "titus-terraform-state"
