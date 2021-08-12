@@ -51,7 +51,6 @@ jobs:
         run: |
           cp .env.sample .env
           docker build -t $DOCKER_IMAGE --build-arg REACT_APP_API_PATH=${{ secrets.TITUS_BACKEND_API_URL }} .
-
       - name: Push container
         working-directory: ./packages/titus-frontend
         run: |
