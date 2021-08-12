@@ -49,6 +49,7 @@ jobs:
       - name: Build container
         working-directory: ./packages/titus-frontend
         run: |
+          cp .env.sample .env
           docker build -t $DOCKER_IMAGE .
 
       - name: Push container
