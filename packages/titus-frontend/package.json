@@ -37,10 +37,10 @@
     "start": "npm run validate:env && react-scripts start",
     "storybook": "start-storybook -p 9009 -s public",
     "storybook:build": "build-storybook -s public",
-    "test": "cross-env CI=true react-scripts test --env=jest-environment-jsdom-sixteen --watchAll=false --coverage  --colors",
-    "test:local": "cross-env CI=false react-scripts test --env=jest-environment-jsdom-sixteen --watchAll=false --coverage  --colors",
-    "test:watch": "react-scripts test --env=jest-environment-jsdom-sixteen",
-    "test:related": "cross-env CI=true react-scripts test --env=jest-environment-jsdom-sixteen --onlyChanged",
+    "test": "cross-env CI=true react-scripts test --watchAll=false --coverage  --colors",
+    "test:local": "cross-env CI=false react-scripts test --watchAll=false --coverage  --colors",
+    "test:watch": "react-scripts test",
+    "test:related": "cross-env CI=true react-scripts test --onlyChanged",
     "validate:env": "node bin/validateEnv.js"
   },
   "devDependencies": {
@@ -63,7 +63,6 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-promise": "^5.1.0",
-    "jest-environment-jsdom-sixteen": "^1.0.3",
     "lint-staged": "^11.1.2",
     "prettier": "^2.3.2",
     "storybook-readme": "^5.0.9",
