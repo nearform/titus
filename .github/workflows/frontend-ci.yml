@@ -74,3 +74,11 @@ jobs:
         with:
           name: image-snapshots
           path: packages/titus-frontend/src/__image_snapshots__/__diff_output__
+
+  automerge:
+    needs: integration-checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: fastify/github-action-merge-dependabot@v2.4.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
