@@ -35,7 +35,7 @@ A DNS entry is created in Route53 and a certificate is assigned to the endpoint 
 The stack is split in 4 nested stack:
 
 - Core
-- Ecs
+- Ecs (Alternatively this can be deployed on EKS)
 - ApiGateway
 - WebApp
 
@@ -87,4 +87,16 @@ terraform apply "titus.tfplan"
 
 ```
 terraform destroy
+```
+### Set up on EKS
+
+Navigate to the terraform-eks folder
+```
+terraform plan -out "titus.tfplan"
+terraform apply "titus.tfplan"
+aws eks update-kubeconfig --name example --region eu-west-1
+```
+Navigate to the k8s folder
+```
+helm apply
 ```
