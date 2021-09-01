@@ -94,9 +94,9 @@ Navigate to the terraform-eks folder
 ```
 terraform plan -out "titus.tfplan"
 terraform apply "titus.tfplan"
-aws eks update-kubeconfig --name example --region eu-west-1
+aws eks update-kubeconfig --name example --region eu-west-1 --profile titus
 ```
 Navigate to the k8s folder
 ```
-helm apply
+helm upgrade -i -n titus --create-namespace --kubeconfig ~/.kube/config -f values.yaml titus .
 ```
