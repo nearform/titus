@@ -162,12 +162,6 @@ dbmanager:
     name: "titus-db-manager"
     # Overrides the image tag whose default is the chart appVersion.
     tag: latest
-  service:
-    type: ClusterIP
-    port: 8080
-    nodePort: 35001
-  port: 8080
-  host: "0.0.0.0"
   securityContext: {}
     # capabilities:
     #   drop:
@@ -185,18 +179,6 @@ dbmanager:
     #   memory: 128Mi
     # requests:
     #   cpu: 100m
-  ingress:
-    enabled: false
-    annotations: {}
-      # kubernetes.io/ingress.class: nginx
-      # kubernetes.io/tls-acme: "true"
-    hosts:
-      - host: titus-frontend.localhost
-        paths: 
-          - path: /
-            backend: 
-              serviceName: titus-frontend
-              servicePort: 8080
     tls: []
     #  - secretName: chart-example-tls
     #    hosts:
