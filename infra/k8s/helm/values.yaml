@@ -8,6 +8,7 @@ imagePullSecrets: []
 pullPolicy: IfNotPresent
 nameOverride: ""
 fullnameOverride: ""
+repository: "nearform"
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -38,7 +39,7 @@ autoscaling:
 
 backend:
   image:
-    repository: "titus-backend"
+    name: "titus-backend"
     # Overrides the image tag whose default is the chart appVersion.
     tag: latest
   service:
@@ -113,7 +114,7 @@ backend:
 
 frontend:
   image:
-    repository: "titus-frontend"
+    name: "titus-frontend"
     # Overrides the image tag whose default is the chart appVersion.
     tag: latest
   service:
@@ -151,6 +152,33 @@ frontend:
             backend: 
               serviceName: titus-frontend
               servicePort: 8080
+    tls: []
+    #  - secretName: chart-example-tls
+    #    hosts:
+    #      - chart-example.local
+
+dbmanager:
+  image:
+    name: "titus-db-manager"
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: latest
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+  resources: {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
     tls: []
     #  - secretName: chart-example-tls
     #    hosts:
