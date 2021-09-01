@@ -46,7 +46,7 @@ spec:
         - name: "{{ .Chart.Name }}-frontend"
           securityContext:
             {{- toYaml .Values.frontend.securityContext | nindent 12 }}
-          image: "{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.repository }}/{{ .Values.frontend.image.name }}:{{ .Values.frontend.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.pullPolicy }}
           ports:
             - name: http
@@ -57,7 +57,7 @@ spec:
         - name: "{{ .Chart.Name }}-backend"
           securityContext:
             {{- toYaml .Values.backend.securityContext | nindent 12 }}
-          image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.repository }}/{{ .Values.backend.image.name }}:{{ .Values.backend.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.pullPolicy }}
           env:
             - name: NODE_ENV

@@ -33,7 +33,7 @@ spec:
                 key: postgresql-password
       containers:
       - name: titus-db-migrate
-        image: "titus-db-manager:latest"
+        image: "{{ .Values.repository }}/{{ .Values.dbmanager.image.name }}:{{ .Values.dbmanager.image.tag }}"
         imagePullPolicy: IfNotPresent
         command: ["npm"]
         args: ["run", "db:migrate"]
