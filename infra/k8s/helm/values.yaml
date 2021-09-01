@@ -179,10 +179,6 @@ dbmanager:
     #   memory: 128Mi
     # requests:
     #   cpu: 100m
-    tls: []
-    #  - secretName: chart-example-tls
-    #    hosts:
-    #      - chart-example.local
 
 postgresql:
   ## @param postgresql.enabled Whether to deploy a PostgreSQL server to satisfy the database requirements
