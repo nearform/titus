@@ -94,9 +94,16 @@ Navigate to the terraform-eks folder
 ```
 terraform plan -out "titus.tfplan"
 terraform apply "titus.tfplan"
-aws eks update-kubeconfig --name example --region eu-west-1 --profile titus
+aws eks update-kubeconfig --name my-cluster --region eu-west-1 --profile titus
+#set up ingress config
+helm repo add incubator https://charts.helm.sh/incubator
+helm install ingress incubator/aws-alb-ingress-controller \
+  --set autoDiscoverAwsRegion=true \
+  --set autoDiscoverAwsVpcID=true \
+  --set clusterName=my-cluster
 ```
 Navigate to the k8s folder
 ```
 helm upgrade -i -n titus --create-namespace --kubeconfig ~/.kube/config -f values.yaml titus .
 ```
+Add the titus-frontend.local to your hosts file with the ingress ip
