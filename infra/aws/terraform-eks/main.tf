@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">= 1.0.4"
+  required_version = ">= 0.13.0"
 
   #  backend "s3" {
   #    profile        = "titus"
