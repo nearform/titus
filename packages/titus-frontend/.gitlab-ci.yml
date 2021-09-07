@@ -21,6 +21,7 @@ publish:
     - docker info
     - docker --version
   script:
+    - echo -n $BASE64_ENV_FILE | base64 -d > .env
     - docker build -t $DOCKER_REGISTRY/$APP_NAME:$CI_PIPELINE_IID .
     - docker push $DOCKER_REGISTRY/$APP_NAME:$CI_PIPELINE_IID
 
