@@ -17,7 +17,6 @@ const config = envSchema({
     .prop('PG_PORT', S.string().required())
     .prop('PG_DB', S.string().required())
     .prop('PG_USER', S.string().required())
-    .prop('CORS_ORIGIN', S.string())
     .prop('AUTH_PROVIDER', S.string())
     .prop('AUTH0_DOMAIN', S.string())
     .prop('AUTH0_CLIENT_ID', S.string())
