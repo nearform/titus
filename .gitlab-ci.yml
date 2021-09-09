@@ -1,0 +1,7 @@
+
+image: ubuntu:18.04
+
+include:
+  - "packages/titus-backend/.gitlab-ci.yml"
+  - "packages/titus-frontend/.gitlab-ci.yml"
+  - "packages/titus-db-manager/.gitlab-ci.yml"
