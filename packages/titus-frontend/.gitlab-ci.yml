@@ -1,11 +1,12 @@
 # Simple example of CI to build a Docker container and push it to Amazon ECR
 variables:
-  DOCKER_REGISTRY: ${ecr-registry}
+  DOCKER_REGISTRY: ${ECR_REGISTRY}
   AWS_DEFAULT_REGION: eu-west-1
   APP_NAME: titus-frontend
   DOCKER_HOST: tcp://docker:2375
   DOCKER_DRIVER: overlay2
   DOCKER_TLS_CERTDIR: ""
+  WORKING_DIRECTORY: packages/titus-frontend
 
 publish:
   stage: build
@@ -16,11 +17,12 @@ publish:
   before_script:
     - apk add --no-cache curl jq python3 py3-pip
     - pip install awscli
-    - aws ecr get-login-password | docker login --username AWS --password-stdin $DOCKER_REGISTRY
+    - docker login -u AWS -p $(aws ecr get-login-password --region $AWS_DEFAULT_REGION) $DOCKER_REGISTRY
     - aws --version
     - docker info
     - docker --version
   script:
+    - cd $WORKING_DIRECTORY
     - echo -n $BASE64_ENV_FILE | base64 -d > .env
     - docker build -t $DOCKER_REGISTRY/$APP_NAME:$CI_PIPELINE_IID .
     - docker push $DOCKER_REGISTRY/$APP_NAME:$CI_PIPELINE_IID
