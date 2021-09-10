@@ -17,12 +17,12 @@ provider "kubernetes" {
 
 
 locals {
-  cluster_name = "my-cluster"
+  cluster_name = format("titus-%s-cluster", var.environment)
 }
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "2.47.0"
+  version = "3.7.0"
 
   name                 = "k8s-vpc"
   cidr                 = "172.16.0.0/16"
