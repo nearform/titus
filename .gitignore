@@ -20,3 +20,8 @@ lerna-debug.log
 
 .vscode
 .env
+
+# infra
+
+infra/**/.terraform*
+infra/**/*.tfvars

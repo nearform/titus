@@ -141,8 +141,11 @@ frontend:
     # requests:
     #   cpu: 100m
   ingress:
-    enabled: false
-    annotations: {}
+    enabled: true
+    annotations: 
+      kubernetes.io/ingress.class: alb
+      alb.ingress.kubernetes.io/scheme: internet-facing
+      alb.ingress.kubernetes.io/target-type: ip 
       # kubernetes.io/ingress.class: nginx
       # kubernetes.io/tls-acme: "true"
     hosts:

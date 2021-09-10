@@ -35,7 +35,7 @@ A DNS entry is created in Route53 and a certificate is assigned to the endpoint 
 The stack is split in 4 nested stack:
 
 - Core
-- Ecs
+- Ecs (Alternatively this can be deployed on EKS)
 - ApiGateway
 - WebApp
 
@@ -88,3 +88,22 @@ terraform apply "titus.tfplan"
 ```
 terraform destroy
 ```
+### Set up on EKS
+
+Navigate to the terraform-eks folder
+```
+terraform plan -out "titus.tfplan"
+terraform apply "titus.tfplan"
+aws eks update-kubeconfig --name my-cluster --region eu-west-1 --profile titus
+#set up ingress config
+helm repo add incubator https://charts.helm.sh/incubator
+helm install ingress incubator/aws-alb-ingress-controller \
+  --set autoDiscoverAwsRegion=true \
+  --set autoDiscoverAwsVpcID=true \
+  --set clusterName=my-cluster
+```
+Navigate to the k8s folder
+```
+helm upgrade -i -n titus --create-namespace --kubeconfig ~/.kube/config -f values.yaml titus .
+```
+Add the titus-frontend.local to your hosts file with the ingress ip
