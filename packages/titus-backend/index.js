@@ -2,7 +2,8 @@
 
 'use strict'
 
-const fastify = require('fastify')
+const Fastify = require('fastify')
+const closeWithGrace = require('close-with-grace')
 
 const startServer = require('./lib/server')
 const config = require('./lib/config')
@@ -14,26 +15,32 @@ process.on('unhandledRejection', err => {
 })
 
 const main = async () => {
-  const server = fastify(config.fastify)
+  const server = Fastify(config.fastify)
   server.register(startServer, config)
 
-  await server.listen(config.server)
+  const closeListeners = closeWithGrace(
+    { delay: 2000 },
+    async function ({ signal, manual, err }) {
+      if (err) {
+        server.log.error(err)
+      }
 
-  for (const signal of ['SIGINT', 'SIGTERM']) {
-    // Use once so that double signals are handled.
-    process.once(signal, () => {
-      server.log.info({ signal }, 'closing application')
-      server
-        .close()
-        .then(() => {
-          server.log.info({ signal }, 'application closed')
-          process.exit(0)
-        })
-        .catch(err => {
-          server.log.error({ err }, 'Error closing the application')
-          process.exit(1)
-        })
-    })
+      server.log.info({ signal, manual }, 'closing application')
+
+      await server.close()
+    }
+  )
+
+  server.addHook('onClose', async (instance, done) => {
+    closeListeners.uninstall()
+    done()
+  })
+
+  try {
+    await server.listen(config.server)
+  } catch (err) {
+    server.log.error(err)
+    process.exit(1)
   }
 }
 
