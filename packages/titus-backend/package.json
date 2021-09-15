@@ -19,6 +19,7 @@
     "aws-sdk": "^2.810.0",
     "axios": "^0.21.1",
     "casbin": "^5.11.1",
+    "close-with-grace": "^1.1.0",
     "dotenv": "^10.0.0",
     "dotenv-expand": "^5.1.0",
     "env-schema": "^3.2.0",
