@@ -1,5 +1,6 @@
 import fp from 'fastify-plugin'
 import buildGetJwks from 'get-jwks'
+import fastifyJwt from 'fastify-jwt'
 
 function authenticate(request) {
   return request.jwtVerify()
@@ -8,7 +9,7 @@ function authenticate(request) {
 async function cognito(server, options) {
   const getJwks = buildGetJwks()
 
-  server.register(require('fastify-jwt'), {
+  server.register(fastifyJwt, {
     decode: { complete: true },
     secret: (_, token, callback) => {
       const {
