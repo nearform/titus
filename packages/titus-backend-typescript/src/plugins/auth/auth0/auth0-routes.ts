@@ -22,6 +22,14 @@ import fp from 'fastify-plugin'
  * @see https://github.com/auth0/node-jwks-rsa#usage
  */
 
+interface IJWTPayload {
+  access_token: string
+  refresh_token: string
+  id_token: string
+  token_type: string
+  expires_in: number
+}
+
 async function authRoutes(server, { auth }) {
   server
     .route({
@@ -39,7 +47,7 @@ async function authRoutes(server, { auth }) {
       },
       handler: async ({ log, body: { username, password } }, reply) => {
         try {
-          const { data } = await axios({
+          const { data } = await axios.request<IJWTPayload>({
             method: 'POST',
             url: `${auth.auth0.domain}/oauth/token`,
             headers: { 'content-type': 'application/json' },

@@ -5,7 +5,6 @@ ENV NODE_ENV production
 WORKDIR /service
 
 COPY --chown=node:node package.json package-lock.json ./
-COPY --chown=node:node lib ./lib
 COPY --chown=node:node dist ./dist
 
 RUN npm ci --only=production

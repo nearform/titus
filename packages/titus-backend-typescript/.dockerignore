@@ -5,4 +5,4 @@
 !package.json
 !package-lock.json
 !index.js
-!lib/**
+!dist/**

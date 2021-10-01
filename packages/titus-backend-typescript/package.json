@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "build": "tsc",
     "postbuild": "cpy '**/*' '!**/*.ts' ../dist/ --cwd=lib/ --no-overwrite --parents",
+    "prepare": "tsc",
     "lint:fix": "eslint . --fix",
     "lint:staged": "lint-staged",
     "start": "nodemon --config .nodemonrc .",

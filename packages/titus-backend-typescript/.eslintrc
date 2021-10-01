@@ -14,6 +14,8 @@
       {
         "newlines-between": "always"
       }
-    ]
+    ],
+    "@typescript-eslint/camelcase": "off",
+    "camelcase": "off"
   }
 }

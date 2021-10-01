@@ -3,8 +3,8 @@
 import Fastify from 'fastify'
 import closeWithGrace from 'close-with-grace'
 
-import startServer from './lib/server'
-import config from './lib/config'
+import startServer from './server'
+import config from './config'
 
 // Crash on unhandledRejection
 process.on('unhandledRejection', (err) => {
