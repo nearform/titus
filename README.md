@@ -39,7 +39,3 @@ Titus is a production grade, end-to-end stack for modern web application develop
 [deploy-storybook-badge]: https://github.com/nearform/titus/workflows/Deploy%20storybook%20to%20GCP/badge.svg
 [logo-img]: docs/img/Accel_Logo_Titus.svg
 [docs]: https://nf-titus.netlify.com/#/
-
-## Before you start
-
-before you start using, you should decide whether to use typescript or plain javascript on the backend and remove the other package. Without this lerna commands might fail-for example running `start:all` will fail because you will have two processes listening on the same port.
