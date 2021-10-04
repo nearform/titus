@@ -2,69 +2,50 @@ import path from 'path'
 
 import envSchema from 'env-schema'
 import S from 'fluent-json-schema'
+import { Static, Type } from '@sinclair/typebox'
 
-const envJsonSchema = S.object()
-  .prop('NODE_ENV', S.string().required())
-  .prop('API_HOST', S.string().required())
-  .prop('API_PORT', S.string().required())
-  .prop('CORS_ORIGIN', S.string())
-  .prop('ENABLE_ADMIN', S.boolean())
-  .prop('PG_HOST', S.string().required())
-  .prop('PG_PORT', S.string().required())
-  .prop('PG_DB', S.string().required())
-  .prop('PG_USER', S.string().required())
-  .prop('AUTH_PROVIDER', S.string())
-  .prop('AUTH0_DOMAIN', S.string())
-  .prop('AUTH0_CLIENT_ID', S.string())
-  .prop('AUTH0_CLIENT_SECRET', S.string())
-  .prop('AUTH0_AUDIENCE', S.string())
-  .prop('AUTH0_GRANT_TYPE', S.string())
-  .prop('AUTH0_CONNECTION', S.string())
-  .prop('COGNITO_REGION', S.string())
-  .prop('COGNITO_USER_POOL_ID', S.string())
-  .prop('JWT_SECRET', S.string().default('3000'))
-  .prop('AD_TENANT', S.string())
-  .prop('AD_APP_ID', S.string())
-  .prop('AD_SECRET', S.string())
-  .prop('SECRETS_STRATEGY', S.string())
-  .prop('SECRETS_PG_PASS', S.string().required())
-  .prop('HEALTHCHECK_URL', S.string().default('/healthcheck'))
-  .prop('HEALTHCHECK_MAX_HEAP_USER', S.number().default(768 * 1024 * 1024)) // arbitrary, 768 MB of RAM
-  .prop('HEALTHCHECK_MAX_RSS', S.number().default(1024 * 1024 * 1024)) // arbitrary, 1 GB of RAM
-  .prop('HEALTHCHECK_MAX_EVENT_LOOP_UTILIZATION', S.number().default(0.98))
+const envJsonSchema = Type.Strict(
+  Type.Object({
+    NODE_ENV: Type.String(),
+    API_HOST: Type.String(),
+    API_PORT: Type.String(),
+    CORS_ORIGIN: Type.Optional(Type.String()),
+    ENABLE_ADMIN: Type.Optional(Type.Boolean()),
+    PG_HOST: Type.String(),
+    PG_PORT: Type.String(),
+    PG_DB: Type.String(),
+    PG_USER: Type.String(),
+    AUTH_PROVIDER: Type.Optional(Type.String()),
+    AUTH0_DOMAIN: Type.Optional(Type.String()),
+    AUTH0_CLIENT_ID: Type.Optional(Type.String()),
+    AUTH0_CLIENT_SECRET: Type.Optional(Type.String()),
+    AUTH0_AUDIENCE: Type.Optional(Type.String()),
+    AUTH0_GRANT_TYPE: Type.Optional(Type.String()),
+    AUTH0_CONNECTION: Type.Optional(Type.String()),
+    COGNITO_REGION: Type.Optional(Type.String()),
+    COGNITO_USER_POOL_ID: Type.Optional(Type.String()),
+    JWT_SECRET: Type.String({ default: '3000' }),
+    AD_TENANT: Type.Optional(Type.String()),
+    AD_APP_ID: Type.Optional(Type.String()),
+    AD_SECRET: Type.Optional(Type.String()),
+    SECRETS_STRATEGY: Type.Optional(Type.String()),
+    SECRETS_PG_PASS: Type.String(),
+    HEALTHCHECK_URL: Type.String({
+      default: '/healthcheck'
+    }),
+    HEALTHCHECK_MAX_HEAP_USER: Type.Number({
+      default: 768 * 1024 * 1024
+    }), // arbitrary, 768 MB of RA,
+    HEALTHCHECK_MAX_RSS: Type.Number({
+      default: 1024 * 1024 * 1024
+    }), // arbitrary, 1 GB of RA,
+    HEALTHCHECK_MAX_EVENT_LOOP_UTILIZATION: Type.Number({
+      default: 0.98
+    })
+  })
+)
 
-interface IEnv {
-  AD_APP_ID?: string
-  AD_SECRET?: string
-  AD_TENANT?: string
-  API_HOST: string
-  API_PORT: string
-  AUTH0_AUDIENCE?: string
-  AUTH0_CLIENT_ID?: string
-  AUTH0_CLIENT_SECRET?: string
-  AUTH0_CONNECTION?: string
-  AUTH0_DOMAIN?: string
-  AUTH0_GRANT_TYPE?: string
-  AUTH_PROVIDER?: string
-  COGNITO_REGION?: string
-  COGNITO_USER_POOL_ID?: string
-  CORS_ORIGIN?: string
-  ENABLE_ADMIN?: boolean
-  HEALTHCHECK_MAX_EVENT_LOOP_UTILIZATION?: number
-  HEALTHCHECK_MAX_HEAP_USER?: number
-  HEALTHCHECK_MAX_RSS?: number
-  HEALTHCHECK_URL?: string
-  JWT_SECRET?: string
-  NODE_ENV: string
-  PG_DB: string
-  PG_HOST: string
-  PG_PORT: string
-  PG_USER: string
-  SECRETS_PG_PASS: string
-  SECRETS_STRATEGY?: string
-}
-
-const config = envSchema<IEnv>({
+const config = envSchema<Static<typeof envJsonSchema>>({
   dotenv: true,
   schema: envJsonSchema
 })
