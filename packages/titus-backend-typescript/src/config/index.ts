@@ -1,7 +1,6 @@
 import path from 'path'
 
 import envSchema from 'env-schema'
-import S from 'fluent-json-schema'
 import { Static, Type } from '@sinclair/typebox'
 
 const envJsonSchema = Type.Strict(
@@ -50,19 +49,19 @@ const config = envSchema<Static<typeof envJsonSchema>>({
   schema: envJsonSchema
 })
 
-const routeResponseSchemaOpts = S.object()
-  .prop('version', S.string())
-  .prop('serverTimestamp', S.string())
-  .prop('db', S.string())
-  .prop(
-    'memoryUsage',
-    S.object()
-      .prop('eventLoopDelay', S.string())
-      .prop('rssBytes', S.string())
-      .prop('heapUsed', S.string())
-  )
-  // @ts-expect-error
-  .valueOf().properties
+const routeResponseSchemaOpts = Type.Strict(
+  Type.Object({
+    version: Type.String(),
+    serverTimestamp: Type.String(),
+    db: Type.String(),
+
+    memoryUsage: Type.Object({
+      eventLoopDelay: Type.String(),
+      rssBytes: Type.String(),
+      heapUsed: Type.String()
+    })
+  })
+).properties
 
 const isProduction = /^\s$production\s*$/i.test(config.NODE_ENV)
 
