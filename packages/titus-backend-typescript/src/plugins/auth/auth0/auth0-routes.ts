@@ -1,5 +1,7 @@
 import axios from 'axios'
 import fp from 'fastify-plugin'
+import { Type, Static } from '@sinclair/typebox'
+import { FastifyInstance } from 'fastify'
 
 /**
  * Registers an JSON Web Token authentication strategy (named 'jwt')
@@ -30,21 +32,19 @@ interface IJWTPayload {
   expires_in: number
 }
 
-async function authRoutes(server, { auth }) {
+const responseJsonSchema = Type.Object({
+  username: Type.String(),
+  password: Type.String()
+})
+
+async function authRoutes(server: FastifyInstance, { auth }) {
   server
-    .route({
+    .route<{
+      Body: Static<typeof responseJsonSchema>
+    }>({
       method: 'POST',
       url: '/login',
-      schema: {
-        tags: ['auth0'],
-        body: {
-          type: 'object',
-          properties: {
-            username: { type: 'string' },
-            password: { type: 'string' }
-          }
-        }
-      },
+      schema: responseJsonSchema,
       handler: async ({ log, body: { username, password } }, reply) => {
         try {
           const { data } = await axios.request<IJWTPayload>({
@@ -91,6 +91,7 @@ async function authRoutes(server, { auth }) {
           }
         ]
       },
+      // @ts-expect-error
       onRequest: server.authenticate,
       handler: async ({ log, user }) => user
     })
