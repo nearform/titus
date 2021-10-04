@@ -1,9 +1,15 @@
+import { FastifyPluginAsync } from 'fastify'
 import fp from 'fastify-plugin'
+import fastifyAuth0Verify from 'fastify-auth0-verify'
 
-async function auth0(server, options) {
+import auth0Routes from './auth0-routes'
+
+const auth0: FastifyPluginAsync<{
+  auth
+}> = async (server, options) => {
   server
-    .register(require('fastify-auth0-verify'), options.auth.auth0)
-    .register(require('./auth0-routes'), options)
+    .register(fastifyAuth0Verify, options.auth.auth0)
+    .register(auth0Routes, options)
 }
 
 export default fp(auth0)

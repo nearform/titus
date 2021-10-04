@@ -1,15 +1,22 @@
 import pgRange from 'pg-range'
 import fp from 'fastify-plugin'
-pgRange.install(require('pg'))
+import pg from 'pg'
+import { FastifyPluginAsync } from 'fastify'
+import fastifyPostgres from 'fastify-postgres'
 
-async function plugin(server, { pgPlugin }) {
-  server.register(require('fastify-postgres'), {
+pgRange.install(pg)
+
+const pgPlugin: FastifyPluginAsync<{
+  pgPlugin
+}> = async (server, { pgPlugin }) => {
+  server.register(fastifyPostgres, {
     ...pgPlugin,
+    // @ts-expect-error
     password: server.secrets.dbPassword
   })
 }
 
-export default fp(plugin, {
+export default fp(pgPlugin, {
   name: 'pg',
   dependencies: ['secrets-manager']
 })

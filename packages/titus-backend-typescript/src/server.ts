@@ -4,11 +4,23 @@ import helmet from 'fastify-helmet'
 import swagger from 'fastify-swagger'
 import autoLoad from 'fastify-autoload'
 import fp from 'fastify-plugin'
+import { FastifyPluginAsync } from 'fastify'
+import fastifyCors from 'fastify-cors'
+import brokeneckFastify from '@nearform/brokeneck-fastify'
+import casbin from 'fastify-casbin'
 
-async function plugin(server, config) {
+import swaggerConfig from './config/swagger'
+
+const plugin: FastifyPluginAsync<{
+  cors
+  casbin
+  auth
+  enableAdmin: boolean
+}> = async (server, config) => {
+  // @ts-expect-error
   server
     // swagger must be registered before helmet
-    .register(swagger, require('./config/swagger'))
+    .register(swagger, swaggerConfig)
     .register(helmet, ({ swaggerCSP }) => ({
       contentSecurityPolicy: {
         directives: {
@@ -20,8 +32,8 @@ async function plugin(server, config) {
         }
       }
     }))
-    .register(require('fastify-cors'), config.cors)
-    .register(require('fastify-casbin'), config.casbin)
+    .register(fastifyCors, config.cors)
+    .register(casbin, config.casbin)
     .register(autoLoad, {
       dir: path.join(__dirname, 'plugins'),
       options: config
@@ -32,7 +44,7 @@ async function plugin(server, config) {
     })
 
   if (config.enableAdmin) {
-    await server.register(require('@nearform/brokeneck-fastify'), config.auth)
+    await server.register(brokeneckFastify, config.auth)
   }
 }
 

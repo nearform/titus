@@ -1,4 +1,5 @@
 import fp from 'fastify-plugin'
+import underPressurePlugin from 'under-pressure'
 
 import { version } from '../../../package.json'
 
@@ -23,7 +24,7 @@ async function runCheck(server) {
 }
 
 async function healthCheck(server, { underPressure }, next) {
-  server.register(require('under-pressure'), (parent) => ({
+  server.register(underPressurePlugin, (parent) => ({
     ...underPressure,
     healthCheck: () => runCheck(parent)
   }))

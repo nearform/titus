@@ -1,4 +1,4 @@
-const swagger = {
+const swaggerConfig = {
   routePrefix: '/documentation',
   exposeRoute: true,
   swagger: {
@@ -19,4 +19,4 @@ const swagger = {
   }
 }
 
-module.exports = swagger
+export default swaggerConfig
