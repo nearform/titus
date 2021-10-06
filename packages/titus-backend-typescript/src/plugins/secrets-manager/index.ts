@@ -14,7 +14,7 @@ const SECRETS_PLUGINS = {
   azure
 }
 
-function getPlugin(options) {
+function getPlugin(options: typeof configOptions): FastifyPluginAsync {
   if (!options.secretsManager.strategy) {
     return SECRETS_PLUGINS.env
   }

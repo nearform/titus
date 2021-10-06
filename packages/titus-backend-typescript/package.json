@@ -54,6 +54,7 @@
     "under-pressure": "^5.7.0"
   },
   "devDependencies": {
+    "@types/faker": "^5.5.8",
     "@types/http-errors": "^1.8.1",
     "@types/jest": "^27.0.2",
     "@types/jwk-to-pem": "^2.0.1",

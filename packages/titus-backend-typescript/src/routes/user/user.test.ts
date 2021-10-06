@@ -1,5 +1,7 @@
+import { FastifyInstance } from 'fastify'
+
 describe('user route', () => {
-  let server
+  let server: FastifyInstance
 
   beforeAll(async () => {
     server = require('fastify')()

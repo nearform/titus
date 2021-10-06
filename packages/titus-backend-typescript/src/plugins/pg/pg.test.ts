@@ -1,9 +1,10 @@
 import fp from 'fastify-plugin'
 import faker from 'faker'
+import { FastifyInstance } from 'fastify'
 
 describe('pg plugin', () => {
-  let server
-  let address
+  let server: FastifyInstance
+  let address: string
   const query = 'SELECT table_schema, table_name FROM information_schema.tables'
   const client = {
     query: jest.fn().mockResolvedValue([])
@@ -47,6 +48,7 @@ describe('pg plugin', () => {
   it('should instrument request with fastify-postgres', async () => {
     const result = faker.lorem.word()
     client.query.mockResolvedValue(result)
+    // @ts-expect-error
     server.pg.connect.mockResolvedValue(client)
     const response = await server.inject({
       method: 'GET',
