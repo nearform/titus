@@ -8,10 +8,12 @@ import axios from 'axios'
 
 import { authRoutes } from '../../../config/auth-routes'
 
-const verifyJWT = async (
-  { tenant },
-  idToken
-): Promise<JwtPayload & { oid: any }> => {
+type VerifyJWT = (
+  options: { tenant: string },
+  idToken: string
+) => Promise<JwtPayload & { oid: any }>
+
+const verifyJWT: VerifyJWT = async ({ tenant }, idToken) => {
   const decoded = jws.decode(idToken)
   const identityMetadataURL = [
     'https://login.microsoftonline.com/',
