@@ -106,7 +106,7 @@ describe('users plugin', () => {
     axios.mockImplementation((props) => {
       const url = typeof props === 'string' ? props : props.url
 
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         let response = false
         if (/well-known/.test(url)) {
           response = {
@@ -206,7 +206,7 @@ describe('users plugin', () => {
     axios.mockImplementation((props) => {
       const url = typeof props === 'string' ? props : props.url
 
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         let response = false
         if (/well-known/.test(url)) {
           response = {

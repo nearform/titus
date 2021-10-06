@@ -1,6 +1,12 @@
 {
   "parser": "@typescript-eslint/parser",
-  "extends": ["standard", "prettier"],
+  "extends": [
+    "standard",
+    "prettier",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "ignorePatterns": ["dist/**"],
   "plugins": ["prettier", "jest"],
   "env": {
     "es6": true,
@@ -16,6 +22,9 @@
       }
     ],
     "@typescript-eslint/camelcase": "off",
-    "camelcase": "off"
+    "camelcase": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/no-unused-vars": ["error", { "args": "after-used" }]
   }
 }

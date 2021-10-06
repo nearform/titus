@@ -1,13 +1,16 @@
 import fp from 'fastify-plugin'
+import fastify from 'fastify'
 
 import config from '../../config'
 import { version } from '../../../package.json'
+
+import runCheckPlugin from '.'
 
 describe('health route', () => {
   let server
 
   beforeAll(async () => {
-    server = require('fastify')()
+    server = fastify()
     server.register(
       fp(
         async (server) => {
@@ -16,7 +19,7 @@ describe('health route', () => {
         { name: 'pg' }
       )
     )
-    server.register(require('.'), config)
+    server.register(runCheckPlugin, config)
     await server.ready()
   })
 

@@ -1,4 +1,6 @@
-async function log(server, options) {
+import { FastifyPluginAsync } from 'fastify'
+
+const log: FastifyPluginAsync = async (server) => {
   server.route({
     method: 'POST',
     url: '/',
@@ -24,8 +26,8 @@ async function log(server, options) {
         }
       }
     },
-    handler: async (req, res) => {
-      const { msg, level = 'info' } = req.body
+    handler: async (req) => {
+      const { msg, level = 'info' } = req.body as any
       req.log[level]({ front: msg })
       return { message: 'logged successfully' }
     }

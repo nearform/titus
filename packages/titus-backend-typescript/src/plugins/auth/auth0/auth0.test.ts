@@ -1,6 +1,9 @@
 import faker from 'faker'
 import nock from 'nock'
 import jwt from 'jsonwebtoken'
+import fastify from 'fastify'
+
+import auth0Plugin from '.'
 
 describe('auth0 plugin', () => {
   let server
@@ -15,9 +18,9 @@ describe('auth0 plugin', () => {
   const password = faker.internet.password()
 
   beforeAll(async () => {
-    server = require('fastify')()
+    server = fastify()
 
-    server.register(require('.'), {
+    server.register(auth0Plugin, {
       auth: {
         provider: 'auth0',
         auth0: {

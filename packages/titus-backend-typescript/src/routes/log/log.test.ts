@@ -1,9 +1,13 @@
+import fastify from 'fastify'
+
+import logPlugin from '.'
+
 describe('log route', () => {
   let server
 
   beforeAll(async () => {
-    server = require('fastify')()
-    server.register(require('.'))
+    server = fastify()
+    server.register(logPlugin)
     await server.ready()
   })
 

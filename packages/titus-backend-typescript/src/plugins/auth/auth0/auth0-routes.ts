@@ -97,7 +97,7 @@ const authRoutes: FastifyPluginAsync<typeof ConfigOptions> = async (
         ]
       },
       onRequest: server.authenticate,
-      handler: async ({ log, user }) => user
+      handler: async ({ user }) => user
     })
 }
 

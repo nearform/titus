@@ -1,8 +1,15 @@
+import { FastifyPluginAsync, onRequestHookHandler } from 'fastify'
 import fp from 'fastify-plugin'
 import { Forbidden } from 'http-errors'
 import jwt from 'jsonwebtoken'
 
-async function authz(server, options) {
+declare module 'fastify' {
+  export interface FastifyInstance {
+    authorizeAdminAccess: onRequestHookHandler
+  }
+}
+
+const authz: FastifyPluginAsync = async (server) => {
   // add users to the casbin policy with admin role from the email addresses defined in .env
   const adminUsers = process.env.CHECK_AUTHZ_ADMIN_USERS || ''
   const policies = adminUsers

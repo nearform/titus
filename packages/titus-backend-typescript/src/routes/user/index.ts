@@ -1,4 +1,6 @@
-async function user(server, options) {
+import { FastifyPluginAsync } from 'fastify'
+
+const user: FastifyPluginAsync = async (server) => {
   server.route({
     method: 'GET',
     url: '/',
@@ -26,7 +28,7 @@ async function user(server, options) {
         }
       }
     },
-    handler: async (req, res) => req.user
+    handler: async (req) => req.user
   })
 }
 

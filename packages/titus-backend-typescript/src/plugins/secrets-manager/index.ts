@@ -22,6 +22,14 @@ function getPlugin(options: typeof configOptions): FastifyPluginAsync {
   return SECRETS_PLUGINS[options.secretsManager.strategy]
 }
 
+declare module 'fastify' {
+  interface FastifyInstance {
+    secrets: {
+      dbPassword: string
+    }
+  }
+}
+
 const secretsManager: FastifyPluginAsync<typeof configOptions> = async (
   server,
   options

@@ -1,4 +1,4 @@
-import { FastifyInstance } from 'fastify'
+import { FastifyInstance, FastifyPluginAsync } from 'fastify'
 import fp from 'fastify-plugin'
 import underPressurePlugin from 'under-pressure'
 
@@ -24,7 +24,12 @@ async function runCheck(server: FastifyInstance) {
   }
 }
 
-async function healthCheck(server, { underPressure }, next) {
+// @ts-expect-error TODO
+const healthCheck: FastifyPluginAsync = async (
+  server,
+  { underPressure },
+  next
+) => {
   server.register(underPressurePlugin, (parent) => ({
     ...underPressure,
     healthCheck: () => runCheck(parent)

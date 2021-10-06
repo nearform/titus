@@ -1,6 +1,7 @@
+import { FastifyPluginAsync } from 'fastify'
 import fp from 'fastify-plugin'
 
-async function authRoutes(server, options) {
+const authRoutes: FastifyPluginAsync = async (server) => {
   // this is a sample to check the signed-in user's permission to access this resource via casbin policies based on configuration in the OAuth provider
   // a real-world example would have more context around the user account and roles/scopes/permissions and policies
   server.route({

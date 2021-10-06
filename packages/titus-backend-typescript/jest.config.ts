@@ -1,4 +1,4 @@
-const { jsWithTs: tsjPreset } = require('ts-jest/presets')
+import { jsWithTs as tsjPreset } from 'ts-jest/presets'
 
 export default {
   testEnvironment: 'node',

@@ -4,14 +4,17 @@ import pg from 'pg'
 import { FastifyPluginAsync } from 'fastify'
 import fastifyPostgres from 'fastify-postgres'
 
+import configOptions from '../../config'
+
 pgRange.install(pg)
 
-const pgPlugin: FastifyPluginAsync<{
-  pgPlugin
-}> = async (server, { pgPlugin }) => {
+const pgPlugin: FastifyPluginAsync<typeof configOptions> = async (
+  server,
+  { pgPlugin }
+) => {
   server.register(fastifyPostgres, {
     ...pgPlugin,
-    // @ts-expect-error
+
     password: server.secrets.dbPassword
   })
 }

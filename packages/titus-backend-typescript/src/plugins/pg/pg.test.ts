@@ -1,7 +1,8 @@
 import fp from 'fastify-plugin'
 import faker from 'faker'
-import { FastifyInstance } from 'fastify'
+import fastify, { FastifyInstance } from 'fastify'
 
+import pgPlugin from '.'
 describe('pg plugin', () => {
   let server: FastifyInstance
   let address: string
@@ -19,10 +20,10 @@ describe('pg plugin', () => {
   )
 
   beforeAll(async () => {
-    server = require('fastify')()
+    server = fastify()
     // stub the secrets-manager plugin pg depends on
     server.register(STUB_PLUGIN)
-    server.register(require('.'))
+    server.register(pgPlugin)
 
     // route that will make DB query
     server.route({
@@ -48,7 +49,7 @@ describe('pg plugin', () => {
   it('should instrument request with fastify-postgres', async () => {
     const result = faker.lorem.word()
     client.query.mockResolvedValue(result)
-    // @ts-expect-error
+    // @ts-expect-error this is now mocked
     server.pg.connect.mockResolvedValue(client)
     const response = await server.inject({
       method: 'GET',

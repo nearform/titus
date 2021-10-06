@@ -1,12 +1,13 @@
-import { FastifyInstance } from 'fastify'
+import fastify, { FastifyInstance } from 'fastify'
 
+import userPlugin from '.'
 describe('user route', () => {
   let server: FastifyInstance
 
   beforeAll(async () => {
-    server = require('fastify')()
-    server.register(require('.'))
-    server.addHook('onRequest', async (req, res) => {
+    server = fastify()
+    server.register(userPlugin)
+    server.addHook('onRequest', async (req) => {
       req.user = { id: 'id-01' }
     })
     await server.ready()

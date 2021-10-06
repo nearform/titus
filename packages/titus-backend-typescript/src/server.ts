@@ -12,11 +12,11 @@ import casbin from 'fastify-casbin'
 import swaggerConfig from './config/swagger'
 import configOptions from './config'
 
-const plugin: FastifyPluginAsync<typeof configOptions> = async (
+const serverPlugin: FastifyPluginAsync<typeof configOptions> = async (
   server,
   config
 ) => {
-  // @ts-expect-error
+  // @ts-expect-error TODO fix
   server
     // swagger must be registered before helmet
     .register(swagger, swaggerConfig)
@@ -47,4 +47,4 @@ const plugin: FastifyPluginAsync<typeof configOptions> = async (
   }
 }
 
-export default fp(plugin)
+export default fp(serverPlugin)
