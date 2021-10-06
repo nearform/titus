@@ -5,6 +5,8 @@ import aws from 'fastify-secrets-aws'
 import env from 'fastify-secrets-env'
 import azure from 'fastify-secrets-azure'
 
+import { configOptions } from '../../config'
+
 const SECRETS_PLUGINS = {
   gcp,
   aws,
@@ -20,9 +22,10 @@ function getPlugin(options) {
   return SECRETS_PLUGINS[options.secretsManager.strategy]
 }
 
-const secretsManager: FastifyPluginAsync<{
-  secretsManager
-}> = async (server, options) => {
+const secretsManager: FastifyPluginAsync<typeof configOptions> = async (
+  server,
+  options
+) => {
   const plugin = getPlugin(options)
   if (!plugin) {
     throw new Error(

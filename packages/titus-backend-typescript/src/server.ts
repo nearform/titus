@@ -10,13 +10,12 @@ import brokeneckFastify from '@nearform/brokeneck-fastify'
 import casbin from 'fastify-casbin'
 
 import swaggerConfig from './config/swagger'
+import configOptions from './config'
 
-const plugin: FastifyPluginAsync<{
-  cors
-  casbin
-  auth
-  enableAdmin: boolean
-}> = async (server, config) => {
+const plugin: FastifyPluginAsync<typeof configOptions> = async (
+  server,
+  config
+) => {
   // @ts-expect-error
   server
     // swagger must be registered before helmet

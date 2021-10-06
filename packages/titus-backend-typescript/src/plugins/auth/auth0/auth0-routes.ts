@@ -1,7 +1,9 @@
 import axios from 'axios'
 import fp from 'fastify-plugin'
 import { Type, Static } from '@sinclair/typebox'
-import { FastifyInstance } from 'fastify'
+import { FastifyInstance, FastifyPluginAsync } from 'fastify'
+
+import ConfigOptions from '../../../config'
 
 /**
  * Registers an JSON Web Token authentication strategy (named 'jwt')
@@ -37,7 +39,10 @@ const responseJsonSchema = Type.Object({
   password: Type.String()
 })
 
-async function authRoutes(server: FastifyInstance, { auth }) {
+const authRoutes: FastifyPluginAsync<typeof ConfigOptions> = async (
+  server: FastifyInstance,
+  { auth }
+) => {
   server
     .route<{
       Body: Static<typeof responseJsonSchema>
@@ -91,7 +96,6 @@ async function authRoutes(server: FastifyInstance, { auth }) {
           }
         ]
       },
-      // @ts-expect-error
       onRequest: server.authenticate,
       handler: async ({ log, user }) => user
     })

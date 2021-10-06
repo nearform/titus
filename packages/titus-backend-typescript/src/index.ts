@@ -43,7 +43,7 @@ const main = async () => {
   })
 
   try {
-    await server.listen(config.server as any as { port: number; host?: string })
+    await server.listen(config.server)
   } catch (err) {
     server.log.error(err)
     process.exit(1)

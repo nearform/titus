@@ -2,16 +2,19 @@ import path from 'path'
 
 import envSchema from 'env-schema'
 import { Static, Type } from '@sinclair/typebox'
+import { PostgresPluginOptions } from 'fastify-postgres'
+import { PoolConfig } from 'pg'
+import underPressurePlugin from 'under-pressure'
 
 const envJsonSchema = Type.Strict(
   Type.Object({
     NODE_ENV: Type.String(),
     API_HOST: Type.String(),
-    API_PORT: Type.String(),
+    API_PORT: Type.Number(),
     CORS_ORIGIN: Type.Optional(Type.String()),
-    ENABLE_ADMIN: Type.Optional(Type.Boolean()),
+    ENABLE_ADMIN: Type.Boolean(),
     PG_HOST: Type.String(),
-    PG_PORT: Type.String(),
+    PG_PORT: Type.Number(),
     PG_DB: Type.String(),
     PG_USER: Type.String(),
     AUTH_PROVIDER: Type.Optional(Type.String()),
@@ -66,7 +69,7 @@ const routeResponseSchemaOpts = Type.Strict(
 const isProduction = /^\s$production\s*$/i.test(config.NODE_ENV)
 
 // Global configuration, from env variables
-export default {
+export const configOptions = {
   isProduction,
   server: {
     host: config.API_HOST,
@@ -83,7 +86,7 @@ export default {
     user: config.PG_USER,
     poolSize: 10,
     idleTimeoutMillis: 30000
-  },
+  } as PostgresPluginOptions & PoolConfig,
   underPressure: {
     maxHeapUsedBytes: config.HEALTHCHECK_MAX_HEAP_USER,
     maxRssBytes: config.HEALTHCHECK_MAX_RSS,
@@ -92,7 +95,7 @@ export default {
       url: config.HEALTHCHECK_URL,
       routeResponseSchemaOpts
     }
-  },
+  } as underPressurePlugin.UnderPressureOptions,
   cors: { origin: !!config.CORS_ORIGIN, credentials: true },
   auth: {
     provider: config.AUTH_PROVIDER || 'auth0',
@@ -121,10 +124,13 @@ export default {
     strategy: config.SECRETS_STRATEGY,
     secrets: {
       dbPassword: config.SECRETS_PG_PASS
-    }
+    },
+    clientOptions: null as any
   },
   casbin: {
     model: path.join(__dirname, 'authz/casbin_model.conf'),
     adapter: path.join(__dirname, 'authz/casbin_policy.csv')
   }
 }
+
+export default configOptions
