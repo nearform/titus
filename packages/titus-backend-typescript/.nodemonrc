@@ -1,5 +1,5 @@
 {
   "watch": ["lib", ".env"],
   "ext": "ts,json",
-  "exec": "ts-node ./index.ts" 
+  "exec": "ts-node ./src/index.ts" 
 }
