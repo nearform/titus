@@ -8,7 +8,7 @@
     "create:env": "node -r fs -e \"fs.copyFileSync('.env.sample', '.env', fs.constants.COPYFILE_EXCL)\"",
     "lint": "eslint .",
     "build": "tsc",
-    "postbuild": "cpy '**/*' '!**/*.ts' ../dist/ --cwd=lib/ --no-overwrite --parents",
+    "postbuild": "cpy '**/*' '!**/*.ts' ../dist/ --cwd=src/ --no-overwrite --parents",
     "prepare": "tsc",
     "lint:fix": "eslint . --fix",
     "lint:staged": "lint-staged",
