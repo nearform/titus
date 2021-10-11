@@ -1,5 +1,8 @@
 {
-  "watch": ["src", ".env"],
+  "watch": [
+    "src",
+    ".env"
+  ],
   "ext": "ts,json",
-  "exec": "ts-node ./src/index.ts" 
+  "exec": "ts-node-transpile-only ./src/index.ts"
 }
