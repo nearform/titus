@@ -17,7 +17,7 @@
   "dependencies": {
     "@nearform/brokeneck-fastify": "^1.0.0-spinal.8",
     "aws-sdk": "^2.810.0",
-    "axios": "^0.22.0",
+    "axios": "^0.23.0",
     "casbin": "^5.11.1",
     "close-with-grace": "^1.1.0",
     "dotenv": "^10.0.0",
@@ -25,7 +25,7 @@
     "env-schema": "^3.2.0",
     "fastify": "^3.20.1",
     "fastify-auth": "^1.1.0",
-    "fastify-auth0-verify": "^0.5.2",
+    "fastify-auth0-verify": "^0.6.0",
     "fastify-autoload": "^3.8.0",
     "fastify-casbin": "^2.0.0",
     "fastify-cors": "^6.0.2",
