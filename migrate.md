@@ -20,3 +20,10 @@ find the command to update:
   - which uses lerna
 
 
+lerna clean -> rimraf node_modules/ (for each package) root excluded
+
+
+
+todo fix:
+hint: The '.husky/pre-commit' hook was ignored because it's not set as executable.
+hint: You can disable this warning with `git config advice.ignoredHook false`.

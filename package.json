@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build:all": "lerna run --parallel build",
-    "clean": "lerna clean",
+    "clean": "npm run clean --workspaces",
     "clean:all": "npm run clean:env && npm run clean",
     "clean:env": "node bin/cleanEnv.js",
     "create:env": "node bin/createEnv.js",
@@ -32,7 +32,8 @@
   "devDependencies": {
     "docsify-cli": "^4.4.3",
     "husky": "^7.0.1",
-    "lerna": "^3.22.1"
+    "lerna": "^3.22.1",
+    "rimraf": "^3.0.2"
   },
   "workspaces": [
     "packages/*",

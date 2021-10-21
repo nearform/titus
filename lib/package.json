@@ -1,7 +1,7 @@
 {
     "name": "titus-lib",
     "scripts": {
-        "echo": "echo 'lib'",
+        "clean": "rimraf node_modules/",
         "test": "jest --config .jest.json --coverage"
     },
     "devDependencies": {

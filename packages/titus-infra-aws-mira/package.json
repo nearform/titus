@@ -5,6 +5,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
+    "clean": "rimraf node_modules/",
     "build": "tsc",
     "test": "TAP=true jest",
     "validate:deploy": "node scripts/validateDeploy",
