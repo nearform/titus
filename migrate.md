@@ -21,6 +21,7 @@ find the command to update:
 
 
 lerna clean -> rimraf node_modules/ (for each package) root excluded
+lerna bootstrap -> just remove it (npm install/ci does the job)
 
 
 
