@@ -2,6 +2,8 @@ Ref
   https://github.com/npm/rfcs/issues/190
 
 
+run by default run on the cwd
+
 rm -rf **/node_modules
 rm -rf **/package-lock.json
 
@@ -22,7 +24,7 @@ find the command to update:
 
 lerna clean -> rimraf node_modules/ (for each package) root excluded
 lerna bootstrap -> just remove it (npm install/ci does the job)
-
+lerna run -> npm run xxx --workspaces --if-present or npm run xxx -w <project id>
 
 
 todo fix:
