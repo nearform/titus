@@ -1,6 +1,7 @@
 {
     "name": "titus-lib",
     "scripts": {
+        "echo": "echo 'lib'",
         "test": "jest --config .jest.json --coverage"
     },
     "devDependencies": {

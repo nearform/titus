@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "lint:staged": "lint-staged",
+    "echo": "cat car",
     "start": "nodemon --config .nodemonrc .",
     "test": "jest --config .jest.json --coverage",
     "test:watch": "jest --config .jest.json --watch --verbose",

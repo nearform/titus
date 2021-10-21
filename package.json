@@ -16,6 +16,7 @@
     "db:server:start": "lerna run --stream db:server:start",
     "db:truncate": "lerna run --stream db:truncate",
     "db:up": "lerna run --stream db:up",
+    "echo:all": "lerna run --parallel echo",
     "lint:all": "lerna run --parallel lint",
     "lint:fix": "lerna run --parallel lint:fix",
     "lint:staged": "lerna run lint:staged --concurrency 1",
@@ -32,5 +33,9 @@
     "docsify-cli": "^4.4.3",
     "husky": "^7.0.1",
     "lerna": "^3.22.1"
-  }
+  },
+  "workspaces": [
+    "packages/*",
+    "lib"
+  ]
 }
