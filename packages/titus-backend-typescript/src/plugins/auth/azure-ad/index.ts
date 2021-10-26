@@ -5,6 +5,7 @@ import jwkToPem from 'jwk-to-pem'
 import jws from 'jws'
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import axios from 'axios'
+import { FastifyPluginAsync, FastifyRequest, FastifyReply } from 'fastify'
 
 import { authRoutes } from '../../../config/auth-routes'
 
@@ -93,12 +94,12 @@ const getUser = async ({ tenant, appID, secret }, { oid }) => {
   })
 }
 
-async function azureAD(server, { auth }) {
-  async function authenticate(req, res) {
+const azureAD: FastifyPluginAsync<{ auth: any }> = async (server, { auth }) => {
+  async function authenticate(req: FastifyRequest, res: FastifyReply) {
     const {
       headers: { authorization = '' },
       method,
-      url
+      url = ''
     } = req.raw
     const authRoute = authRoutes.find(
       (r) => r.method === method && r.regex.test(url)
