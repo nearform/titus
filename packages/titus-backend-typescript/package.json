@@ -3,7 +3,7 @@
   "version": "1.0.0-alpha.1",
   "private": true,
   "description": "The backend for the Titus project using fastify",
-  "main": "dist/index.js",
+  "main": "src/index.js",
   "scripts": {
     "create:env": "node -r fs -e \"fs.copyFileSync('.env.sample', '.env', fs.constants.COPYFILE_EXCL)\"",
     "lint": "eslint .",
