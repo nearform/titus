@@ -16,7 +16,7 @@ git clone https://github.com/<your-fork>/titus.git
 
 ## Choose Typescript or plain JS
 
-There are two backend packages-`titus-backend` and `titus-backend-typescript`. Before you can start developing you must decide if you want to write plain javascript or typescript and delete the one you don't need. If you don't do this it may cause other lerna commands to fail.
+There are two backend packages-`titus-backend` and `titus-backend-typescript`. Before you can start developing you must decide if you want to write plain javascript or typescript and delete the one you don't need. By default, the plain javascript backend is started when `npm run start:all` is called. If you wish to use the typescript backend, you should edit the `lerna.json` config file and remove the leading `!`.
 
 ## Install Dependencies
 
