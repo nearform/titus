@@ -1,7 +1,7 @@
 import axios from 'axios'
 import fp from 'fastify-plugin'
 import { Type, Static } from '@sinclair/typebox'
-import { FastifyInstance, FastifyPluginAsync } from 'fastify'
+import { FastifyPluginAsync } from 'fastify'
 
 import ConfigOptions from '../../../config'
 
@@ -40,7 +40,7 @@ const responseJsonSchema = Type.Object({
 })
 
 const authRoutes: FastifyPluginAsync<typeof ConfigOptions> = async (
-  server: FastifyInstance,
+  server,
   { auth }
 ) => {
   server
