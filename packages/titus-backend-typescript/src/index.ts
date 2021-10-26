@@ -22,11 +22,7 @@ const main = async () => {
       signal,
       manual,
       err
-    }: {
-      signal?
-      manual?: any
-      err?: Error | undefined
-    }) => {
+    }:{ err?: Error, signal?: Signals, manual?: boolean }) => {
       if (err) {
         server.log.error(err)
       }
