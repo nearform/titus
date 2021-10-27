@@ -24,6 +24,7 @@ Packages are managed with [Lerna] so you can add more packages and also manage t
 Titus includes the following packages:
 * [Frontend Package](developers/packages/titus-frontend/)
 * [Backend Package](developers/packages/titus-backend/)
+* [Backend Package with Typescript](developers/packages/titus-backend-typescript/)
 * [Database Manager Package](/developers/packages/titus-db-manager/)
 
 All packages we provide include:
