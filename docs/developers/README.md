@@ -22,10 +22,10 @@ Titus includes just what's needed out of the box. Each package has a minimal com
 
 Packages are managed with [Lerna] so you can add more packages and also manage their interdependencies.
 Titus includes the following packages:
-* [Frontend Package](developers/packages/titus-frontend/)
-* [Backend Package](developers/packages/titus-backend/)
-* [Backend Package with Typescript](developers/packages/titus-backend-typescript/)
-* [Database Manager Package](/developers/packages/titus-db-manager/)
+* [Frontend Package](packages/titus-frontend/)
+* [Backend Package](packages/titus-backend/)
+* [Backend Package with Typescript](packages/titus-backend-typescript/)
+* [Database Manager Package](packages/titus-db-manager/)
 
 All packages we provide include:
 - [Jest] for testing
@@ -71,7 +71,7 @@ The Titus backend package consists of the following:
 * [Prettier] code format with [Standard] preset
 * [Swagger] interactive API documentation, can be accessed on the endpoint /documentation
 
-Refer to the section [Titus Backend](developers/packages/titus-backend/) for more details.
+Refer to the section [Titus Backend](packages/titus-backend/) for more details.
 
 
 ### Database Manager Package
@@ -90,7 +90,7 @@ The Titus database manager package consists of the following:
 * [ESLint] code linter
 * [Prettier] code format with [Standard] preset
 
-Refer to the section [Titus Backend](developers/packages/titus-db-manager/) for more details.
+Refer to the section [Titus Backend](packages/titus-db-manager/) for more details.
 
 
 ## Services
@@ -113,7 +113,7 @@ Refer to [Configure Authentication] for more details.
 [titus-developers-quote]: ../img/titus-developers-quote.svg
 
 <!-- Internal Links -->
-[Configure Authentication]: developers/packages/titus-frontend/?id=configure-authentication
+[Configure Authentication]: packages/titus-frontend/?id=configure-authentication
 
 <!-- External Links -->
 [Auth0]: https://auth0.com

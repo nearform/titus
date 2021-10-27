@@ -164,6 +164,6 @@ cognito.adminGetUser(params, (err, response) => {
 [Pino]: http://getpino.io
 [Prettier]: https://prettier.io
 [Standard]: https://standardjs.com
-[Titus Database Manager]: /developers/packages/titus-db-manager/
-[titus-backend-typescript]: /developers/packages/titus-backend-typescript/
+[Titus Database Manager]: /docs/developers/packages/titus-db-manager/
+[titus-backend-typescript]: /docs/developers/packages/titus-backend-typescript/
 [validation instructions]: https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html
