@@ -27,4 +27,4 @@ You can also run the following command in the root directory of the project:
 npm run build:all
 ```
 
-[titus-backend]: /docs/developers/packages/titus-backend/
+[titus-backend]: ../titus-backend/
