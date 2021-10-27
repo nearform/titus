@@ -139,7 +139,7 @@ If you would like more information, select the documentation most relevant to yo
 
 - Deep dive into our documentation for [Developers].
 - See our detailed [DevOps] documentation.
-- [Frontend Quick Start](/docs/developers/packages/titus-frontend/?id=quick-start).
+- [Frontend Quick Start](developers/packages/titus-frontend/?id=quick-start).
 
 <!-- External Links -->
 
@@ -152,7 +152,7 @@ If you would like more information, select the documentation most relevant to yo
 
 <!-- Internal Links -->
 
-[devops]: /docs/devops/
-[developers]: /docs/developers/
-[manage the database]: /docs/developers/packages/titus-db-manager/?id=manage-the-database
-[developersbe]: /docs/developers/?id=backend-package
+[devops]: devops/
+[developers]: developers/
+[manage the database]: developers/packages/titus-db-manager/?id=manage-the-database
+[developersbe]: developers/?id=backend-package
