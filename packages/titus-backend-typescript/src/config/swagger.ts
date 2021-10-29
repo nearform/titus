@@ -1,11 +1,16 @@
+import { SwaggerOptions } from 'fastify-swagger'
+
+import { version } from '../../package.json'
+
 const swaggerConfig = {
+  staticCSP: true,
   routePrefix: '/documentation',
   exposeRoute: true,
   swagger: {
     info: {
-      title: 'Titus swagger',
-      description:
-        'The documentation of backend for the Titus project using fastify'
+      title: 'GXP API Swagger',
+      description: 'The documentation for the GXP API microservice.',
+      version
     },
     consumes: ['application/json'],
     produces: ['application/json'],
@@ -17,6 +22,6 @@ const swaggerConfig = {
       }
     }
   }
-}
+} as SwaggerOptions
 
 export default swaggerConfig
