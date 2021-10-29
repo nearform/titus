@@ -6,6 +6,8 @@ import { PostgresPluginOptions } from 'fastify-postgres'
 import { PoolConfig } from 'pg'
 import underPressurePlugin from 'under-pressure'
 
+import swaggerConfig from './swagger'
+
 const envJsonSchema = Type.Strict(
   Type.Object({
     NODE_ENV: Type.String(),
@@ -130,7 +132,8 @@ export const configOptions = {
   casbin: {
     model: path.join(__dirname, 'authz/casbin_model.conf'),
     adapter: path.join(__dirname, 'authz/casbin_policy.csv')
-  }
+  },
+  swagger: swaggerConfig
 }
 
 export default configOptions

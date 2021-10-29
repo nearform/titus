@@ -9,7 +9,6 @@ import fastifyCors from 'fastify-cors'
 import brokeneckFastify from '@nearform/brokeneck-fastify'
 import casbin from 'fastify-casbin'
 
-import swaggerConfig from './config/swagger'
 import configOptions from './config'
 
 const serverPlugin: FastifyPluginAsync<typeof configOptions> = async (
@@ -19,7 +18,7 @@ const serverPlugin: FastifyPluginAsync<typeof configOptions> = async (
   // @ts-expect-error TODO fix
   server
     // swagger must be registered before helmet
-    .register(swagger, swaggerConfig)
+    .register(swagger, config.swagger)
     .register(helmet, ({ swaggerCSP }) => ({
       contentSecurityPolicy: {
         directives: {
