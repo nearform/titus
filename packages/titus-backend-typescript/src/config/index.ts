@@ -127,7 +127,7 @@ export const configOptions = {
     secrets: {
       dbPassword: config.SECRETS_PG_PASS
     },
-    clientOptions: null as any
+    clientOptions: null as null | { vaultName: string }
   },
   casbin: {
     model: path.join(__dirname, 'authz/casbin_model.conf'),
