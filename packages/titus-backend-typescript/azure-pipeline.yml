@@ -1,0 +1,53 @@
+# Docker
+# Build and push an image to Azure Container Registry
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+# Filtering branches and files/folders to trigger the pipeline
+trigger:
+  branches:
+    include:
+      - '*'
+  paths:
+    include:
+      - packages/titus-backend/*
+
+variables:
+  # Container registry service connection established during pipeline creation
+  resourceGroup: 'DevOps_BenchTesting_MA_Jun21'
+  dockerRegistryServiceConnection: 'tituscrconnector'
+  resourceGroupConnector: 'titusrgconnector'
+  imageRepository: 'titus-backend'
+  containerRegistry: 'tituscr.azurecr.io'
+  tag: 'latest'
+
+stages:
+  - stage: Build
+    displayName: Build and push stage
+    jobs:
+      - job: Build
+        displayName: Build
+        pool:
+          vmImage: 'ubuntu-latest'
+        steps:
+          - task: Docker@2
+            inputs:
+              containerRegistry: '$(dockerRegistryServiceConnection)'
+              command: 'login'
+            displayName: 'Container Login'
+          - task: Bash@3
+            inputs:
+              targetType: 'inline'
+              script: |
+                cd packages/$(imageRepository) && \
+                docker build -t build .
+                docker tag build $(containerRegistry)/$(imageRepository):$(tag)
+                docker images
+                docker push $(containerRegistry)/$(imageRepository):$(tag)
+          - task: AzureCLI@2
+            inputs:
+              azureSubscription: $(resourceGroupConnector)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                az account show
+                az container restart -n $(imageRepository) -g $(resourceGroup)

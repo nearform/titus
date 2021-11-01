@@ -14,6 +14,10 @@ Once you have your fork, clone a copy of it locally:
 git clone https://github.com/<your-fork>/titus.git
 ```
 
+## Choose Typescript or plain JS
+
+There are two backend packages-`titus-backend` and `titus-backend-typescript`. Before you can start developing you must decide if you want to write plain javascript or typescript and delete the one you don't need. By default, the plain javascript backend is started when `npm run start:all` is called. If you wish to use the typescript backend, you should edit the `lerna.json` config file and remove the leading `!`.
+
 ## Install Dependencies
 
 Change directory to the root folder of the project, and run the following npm command:
@@ -111,16 +115,16 @@ The home page links you to the documentation (here), if you did not start from t
 ### Lint and Test
 
 ---
+
 **NOTE**
 
 For new installs, you will need to build the frontend before `test:all`. To build the project, run the command:
 
-
 ```bash
 npm run build:all
 ```
----
 
+---
 
 To lint and test across the stack, use the command format `npm run <command>` in the root directory of the repository. For example:
 

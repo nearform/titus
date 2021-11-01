@@ -1,6 +1,6 @@
 # Titus Backend Package
 ## Overview
-Titus backend is a starter [fastify] server with [node-postgres] and [Auth0] plugins.
+Titus backend is a starter [fastify] server with [node-postgres] and [Auth0] plugins. If you're using the Typescript backend, please also read the supplemental notes for [titus-backend-typescript]
 
 What you implement with Titus backend is your choice. We provide an unopinionated, working shell.
 We provide what is common in our projects: a configurable HTTP Server with JSON logging, health check route and database capabilities.
@@ -165,4 +165,5 @@ cognito.adminGetUser(params, (err, response) => {
 [Prettier]: https://prettier.io
 [Standard]: https://standardjs.com
 [Titus Database Manager]: /developers/packages/titus-db-manager/
+[titus-backend-typescript]: /developers/packages/titus-backend-typescript/
 [validation instructions]: https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html

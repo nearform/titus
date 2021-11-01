@@ -12,6 +12,7 @@
             - [Test and Lint the Frontend](/developers/packages/titus-frontend/?id=test-and-lint-the-frontend)
             - [Build the Application](/developers/packages/titus-frontend/?id=build-the-application)
         - [Backend Package](/developers/packages/titus-backend/)
+        - [Typescript Backend Package](/developers/packages/titus-backend-typescript/)
         - [Database Manager Package](/developers/packages/titus-db-manager/)
     - [Services](/developers/?id=services)
 - [DevOps](/devops/)
