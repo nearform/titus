@@ -1,7 +1,13 @@
 import fp from 'fastify-plugin'
 import AWS from 'aws-sdk'
+import { FastifyPluginAsync } from 'fastify'
 
-async function authRoutes(server, { auth }) {
+import { configOptions } from '../../../config'
+
+const authRoutes: FastifyPluginAsync<typeof configOptions> = async (
+  server,
+  { auth }
+) => {
   const cognito = new AWS.CognitoIdentityServiceProvider({
     region: auth.cognito.region
   })
@@ -36,11 +42,13 @@ async function authRoutes(server, { auth }) {
     },
     onRequest: server.authenticate,
     handler: async () => {
-      const result = await cognito
-        .listUsers({
-          UserPoolId: auth.cognito.userPoolId
-        })
-        .promise()
+      const result = auth?.cognito?.userPoolId
+        ? await cognito
+            .listUsers({
+              UserPoolId: auth.cognito.userPoolId
+            })
+            .promise()
+        : await cognito.listUsers().promise()
 
       return result.Users?.map((user) => ({
         username: user.Username,
