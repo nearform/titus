@@ -8,13 +8,17 @@ import axios from 'axios'
 import { FastifyPluginAsync, FastifyRequest, FastifyReply } from 'fastify'
 
 import { authRoutes } from '../../../config/auth-routes'
+import configOptions from '../../../config'
 
 type VerifyJWT = (
-  options: { tenant: string },
+  options: { tenant?: string },
   idToken: string
 ) => Promise<JwtPayload & { oid: any }>
 
 const verifyJWT: VerifyJWT = async ({ tenant }, idToken) => {
+  if (!tenant) {
+    throw new Error('No tenant configured')
+  }
   const decoded = jws.decode(idToken)
   const identityMetadataURL = [
     'https://login.microsoftonline.com/',
@@ -94,7 +98,10 @@ const getUser = async ({ tenant, appID, secret }, { oid }) => {
   })
 }
 
-const azureAD: FastifyPluginAsync<{ auth: any }> = async (server, { auth }) => {
+const azureAD: FastifyPluginAsync<typeof configOptions> = async (
+  server,
+  { auth }
+) => {
   async function authenticate(req: FastifyRequest, res: FastifyReply) {
     const {
       headers: { authorization = '' },
