@@ -22,21 +22,21 @@ const start = async (action, credentials) => {
   }
 
   logger.info(`Running: ${action}`)
+  const client = new Client(credentials)
+  await client.connect()
 
   if (action === 'migrate') {
     const pg = await new Postgrator({
       validateChecksums: true,
       newline: 'LF',
-      migrationDirectory: path.join(__dirname, '/migrate/migrations'),
+      migrationPattern: path.join(__dirname, '/migrate/migrations/*.sql'),
       driver: 'pg',
       ...credentials,
-      schemaTable: `schema_migrations`
+      schemaTable: `schema_migrations`,
+      execQuery: query => client.query(query)
     })
     await Migrate(pg)
   } else {
-    const client = new Client(credentials)
-    await client.connect()
-
     if (action === 'seed') {
       await Seed(client)
     } else if (action === 'truncate') {

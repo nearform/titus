@@ -33,7 +33,7 @@
     "fluent-schema": "^1.1.0",
     "pg": "^8.7.1",
     "pino": "^7.0.1",
-    "postgrator": "^4.2.0"
+    "postgrator": "^5.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",

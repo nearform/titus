@@ -30,18 +30,23 @@ async function dbRoutes(server) {
       }
     },
     handler: async req => {
+      const client = new Client({
+        ...config.pgPlugin,
+        password: server.secrets.dbPassword
+      })
       const postgratorConfig = Object.assign(
         {
           validateChecksums: true,
           newline: 'LF',
-          migrationDirectory: path.join(
+          migrationPattern: path.join(
             __dirname,
             '..',
             'migrate',
-            'migrations'
+            'migrations/*.sql'
           ),
           driver: 'pg',
-          schemaTable: `schema_migrations`
+          schemaTable: `schema_migrations`,
+          execQuery: query => client.query(query)
         },
         config.pgPlugin,
         {
@@ -49,12 +54,16 @@ async function dbRoutes(server) {
         }
       )
       try {
+        await client.connect()
+
         const pg = new Postgrator(postgratorConfig)
         const migrateResult = await Migrate(pg)
         return { success: migrateResult }
       } catch (e) {
         req.log.error({ err: e })
         return { success: false, message: e.message }
+      } finally {
+        client.end()
       }
     }
   })
