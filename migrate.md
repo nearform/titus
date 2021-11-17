@@ -25,7 +25,8 @@ find the command to update:
 lerna clean -> rimraf node_modules/ (for each package) root excluded
 lerna bootstrap -> just remove it (npm install/ci does the job)
 lerna run -> npm run xxx --workspaces --if-present or npm run xxx -w <project id>
-
+lerna run parallel -> npm install npm-run-all --save-dev
+  it requires to list all the packages to run in parallel (the -ws flag is sequential)
 
 todo fix:
 hint: The '.husky/pre-commit' hook was ignored because it's not set as executable.
