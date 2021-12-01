@@ -5,6 +5,6 @@
     },
     "devDependencies": {
         "chalk": "^4.1.2",
-        "jest": "27.4.0"
+        "jest": "27.4.2"
     }
 }
