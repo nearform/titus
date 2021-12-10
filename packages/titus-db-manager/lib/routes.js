@@ -11,13 +11,35 @@ const Migrate = require('../migrate')
 const Truncate = require('../truncate')
 const { version } = require('../package')
 
+const inputSchema = {
+  oneOf: [
+    { type: 'null' },
+    {
+      description: 'Optional schema to process',
+      type: 'object',
+      properties: {
+        schema: {
+          type: 'string',
+          minLength: 1,
+          maxLength: 64
+        }
+      }
+    }
+  ]
+}
+
 const config = require('./config')
 async function dbRoutes(server) {
+  server.decorateRequest('pgSchema', function pgSchema() {
+    return (this.body && this.body.schema) || 'public'
+  })
+
   server.route({
     method: 'POST',
     url: '/db/migrate',
     schema: {
       tags: ['db'],
+      body: inputSchema,
       response: {
         200: {
           description: 'Successful response',
@@ -34,6 +56,7 @@ async function dbRoutes(server) {
         ...config.pgPlugin,
         password: server.secrets.dbPassword
       })
+      const pgSchema = req.pgSchema()
       const postgratorConfig = Object.assign(
         {
           validateChecksums: true,
@@ -45,7 +68,8 @@ async function dbRoutes(server) {
             'migrations/*.sql'
           ),
           driver: 'pg',
-          schemaTable: `schema_migrations`,
+          schemaTable: `${pgSchema}.schema_migrations`,
+          currentSchema: pgSchema,
           execQuery: query => client.query(query)
         },
         config.pgPlugin,
@@ -73,6 +97,7 @@ async function dbRoutes(server) {
     url: '/db/truncate',
     schema: {
       tags: ['db'],
+      body: inputSchema,
       response: {
         200: {
           description: 'Successful response',
@@ -91,7 +116,7 @@ async function dbRoutes(server) {
       })
       try {
         await client.connect()
-        await Truncate(client, { logger: req.log })
+        await Truncate(client, { schema: req.pgSchema(), logger: req.log })
         return { success: true }
       } catch (e) {
         req.log.error({ err: e })
@@ -107,6 +132,7 @@ async function dbRoutes(server) {
     url: '/db/seed',
     schema: {
       tags: ['db'],
+      body: inputSchema,
       response: {
         200: {
           description: 'Successful response',
@@ -125,7 +151,7 @@ async function dbRoutes(server) {
       })
       try {
         await client.connect()
-        await Seed(client, { logger: req.log })
+        await Seed(client, { schema: req.pgSchema(), logger: req.log })
         return { success: true }
       } catch (e) {
         req.log.error({ err: e })

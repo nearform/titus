@@ -6,6 +6,7 @@ describe('truncate', () => {
       query: jest.fn().mockResolvedValueOnce(null)
     }
     const result = await truncate(pg, {
+      schema: 'foo',
       logger: {
         info: jest.fn()
       }
@@ -13,7 +14,7 @@ describe('truncate', () => {
     expect(result).toBe(true)
     expect(pg.query).toHaveBeenCalledWith(`
     TRUNCATE TABLE
-      some_table
+      foo.some_table
     RESTART IDENTITY;
   `)
   })

@@ -1,9 +1,9 @@
 'use strict'
 
-module.exports = async function truncate(pg, { logger }) {
+module.exports = async function truncate(pg, { schema, logger }) {
   await pg.query(`
     TRUNCATE TABLE
-      some_table
+      ${schema}.some_table
     RESTART IDENTITY;
   `)
   logger.info('Database truncated')

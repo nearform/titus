@@ -38,7 +38,6 @@ async function run() {
     }
 
     const action = process.argv[2] || 'migrate'
-    // default PG schema https://www.postgresql.org/docs/current/ddl-schemas.html#DDL-SCHEMAS-PUBLIC
     const schema = process.argv[3] || 'public'
     const customDir = process.argv[4] || '/migrations'
 
