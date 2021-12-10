@@ -37,9 +37,18 @@ async function run() {
       password
     }
 
-    await start(process.argv[2] || 'migrate', credentials)
+    const action = process.argv[2] || 'migrate'
+    // default PG schema https://www.postgresql.org/docs/current/ddl-schemas.html#DDL-SCHEMAS-PUBLIC
+    const schema = process.argv[3] || 'public'
+    const customDir = process.argv[4] || '/migrations'
+
+    await start(action, credentials, {
+      logger,
+      schema,
+      dir: customDir
+    })
   } catch (err) {
-    logger.error('An Error has occurred, stopping', err)
+    logger.error(err, 'An Error has occurred, stopping')
     process.exit(1)
   }
 }

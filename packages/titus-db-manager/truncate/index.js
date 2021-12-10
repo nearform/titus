@@ -1,11 +1,11 @@
-const truncate = async pg => {
+'use strict'
+
+module.exports = async function truncate(pg, { logger }) {
   await pg.query(`
     TRUNCATE TABLE
       some_table
     RESTART IDENTITY;
   `)
-
-  console.log('Database truncated')
+  logger.info('Database truncated')
+  return true
 }
-
-module.exports = truncate

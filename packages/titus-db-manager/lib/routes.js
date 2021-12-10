@@ -57,7 +57,7 @@ async function dbRoutes(server) {
         await client.connect()
 
         const pg = new Postgrator(postgratorConfig)
-        const migrateResult = await Migrate(pg)
+        const migrateResult = await Migrate(pg, { logger: req.log })
         return { success: migrateResult }
       } catch (e) {
         req.log.error({ err: e })
@@ -91,7 +91,7 @@ async function dbRoutes(server) {
       })
       try {
         await client.connect()
-        await Truncate(client)
+        await Truncate(client, { logger: req.log })
         return { success: true }
       } catch (e) {
         req.log.error({ err: e })
@@ -125,7 +125,7 @@ async function dbRoutes(server) {
       })
       try {
         await client.connect()
-        await Seed(client)
+        await Seed(client, { logger: req.log })
         return { success: true }
       } catch (e) {
         req.log.error({ err: e })
