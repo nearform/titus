@@ -37,14 +37,16 @@ async function run() {
       password
     }
 
-    const action = process.argv[2] || 'migrate'
-    const schema = process.argv[3] || 'public'
-    const customDir = process.argv[4] || '/migrations'
+    const [
+      action = 'migrate',
+      schema = 'public',
+      migrationsLoadDir = '/migrations'
+    ] = process.argv.slice(2)
 
     await start(action, credentials, {
       logger,
       schema,
-      dir: customDir
+      dir: migrationsLoadDir
     })
   } catch (err) {
     logger.error(err, 'An Error has occurred, stopping')

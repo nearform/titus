@@ -5,28 +5,19 @@ const path = require('path')
 const { Client } = require('pg')
 const Postgrator = require('postgrator')
 const fp = require('fastify-plugin')
+const S = require('fluent-schema')
 
 const Seed = require('../seed')
 const Migrate = require('../migrate')
 const Truncate = require('../truncate')
 const { version } = require('../package')
 
-const inputSchema = {
-  oneOf: [
-    { type: 'null' },
-    {
-      description: 'Optional schema to process',
-      type: 'object',
-      properties: {
-        schema: {
-          type: 'string',
-          minLength: 1,
-          maxLength: 64
-        }
-      }
-    }
-  ]
-}
+const inputSchema = S.oneOf([
+  S.type('null'),
+  S.object()
+    .description('Optional schema to process')
+    .prop('schema', S.string().minLength(1))
+])
 
 const config = require('./config')
 async function dbRoutes(server) {
