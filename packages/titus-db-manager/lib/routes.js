@@ -13,7 +13,7 @@ const Truncate = require('../truncate')
 const { version } = require('../package')
 
 const inputSchema = S.oneOf([
-  S.type('null'),
+  S.null(),
   S.object()
     .description('Optional schema to process')
     .prop('schema', S.string().minLength(1))
