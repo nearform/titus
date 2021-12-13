@@ -71,15 +71,15 @@ Use the following commands with your Titus database:
 
 ### Database `schema`
 
-Optionally, you can provide to the `db:migrate` two extra positional arguments:
+Optionally, you can provide to the `db:migrate` command two extra positional arguments:
 
 ```bash
 npm run db:migrate [schema] [directory]
 # eg: npm run db:migrate titus-app /titus-app
 ```
 
-- schema: the database's schema to migrate. Default is [`public`](https://www.postgresql.org/docs/current/ddl-schemas.html#DDL-SCHEMAS-PUBLIC).
-- migrations' directory: where the migration scripts are located. Default `/migrations`
+- `schema`: the database schema to migrate. Default is [`public`](https://www.postgresql.org/docs/current/ddl-schemas.html#DDL-SCHEMAS-PUBLIC).
+- `migrations`: directory where the migration scripts are located. Default `/migrations`
 
 [Jest]: https://jestjs.io
 [ESLint]: https://eslint.org
