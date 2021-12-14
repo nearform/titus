@@ -37,9 +37,19 @@ async function run() {
       password
     }
 
-    await start(process.argv[2] || 'migrate', credentials)
+    const [
+      action = 'migrate',
+      schema = 'public',
+      migrationsLoadDir = '/migrations'
+    ] = process.argv.slice(2)
+
+    await start(action, credentials, {
+      logger,
+      schema,
+      dir: migrationsLoadDir
+    })
   } catch (err) {
-    logger.error('An Error has occurred, stopping', err)
+    logger.error(err, 'An Error has occurred, stopping')
     process.exit(1)
   }
 }

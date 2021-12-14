@@ -1,5 +1,6 @@
-const seed = async pg => {
-  console.log('Database seeded')
-}
+'use strict'
 
-module.exports = seed
+module.exports = async function seed(pg, { logger }) {
+  logger.info('Database seeded')
+  return true
+}

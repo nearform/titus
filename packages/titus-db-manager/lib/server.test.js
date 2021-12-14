@@ -135,6 +135,7 @@ describe('Server', () => {
 
       expect(Postgrator).toHaveBeenCalledWith(
         expect.objectContaining({
+          currentSchema: 'public',
           database: 'titus',
           driver: 'pg',
           host: 'localhost',
@@ -143,7 +144,7 @@ describe('Server', () => {
           password: 'titus',
           poolSize: 10,
           port: 5432,
-          schemaTable: 'schema_migrations',
+          schemaTable: 'public.schema_migrations',
           user: 'titus',
           validateChecksums: true
         })
@@ -163,6 +164,7 @@ describe('Server', () => {
 
       expect(Postgrator).toHaveBeenCalledWith(
         expect.objectContaining({
+          currentSchema: 'public',
           database: 'titus',
           driver: 'pg',
           host: 'localhost',
@@ -171,7 +173,7 @@ describe('Server', () => {
           password: 'titus',
           poolSize: 10,
           port: 5432,
-          schemaTable: 'schema_migrations',
+          schemaTable: 'public.schema_migrations',
           user: 'titus',
           validateChecksums: true
         })

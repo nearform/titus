@@ -67,7 +67,7 @@ describe('Server Integration', () => {
 
       expect(response.json()).toEqual({
         success: false,
-        message: 'relation "some_table" does not exist'
+        message: 'relation "public.some_table" does not exist'
       })
     })
 
@@ -84,6 +84,36 @@ describe('Server Integration', () => {
 
       expect(response.json()).toEqual({
         success: true
+      })
+    })
+  })
+
+  describe('custom postgres schema', () => {
+    it('migrate and truncated different schemas', async () => {
+      await fastify.inject({
+        method: 'POST',
+        url: '/db/migrate'
+      })
+
+      await fastify.inject({
+        method: 'POST',
+        url: '/db/migrate',
+        payload: {
+          schema: 'test-schema'
+        }
+      })
+
+      await fastify.inject({
+        method: 'POST',
+        url: '/db/truncate'
+      })
+
+      await fastify.inject({
+        method: 'POST',
+        url: '/db/truncate',
+        payload: {
+          schema: 'test-schema'
+        }
       })
     })
   })

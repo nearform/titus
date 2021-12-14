@@ -69,7 +69,17 @@ Use the following commands with your Titus database:
 |`npm run db:seed` | Seed the database with dev data from `tools/migrations/seed_dev` with [postgrator].|
 |`npm run db:truncate` | Apply SQL truncate scripts with `psql` CLI against your database.|
 
+### Database `schema`
 
+Optionally, you can provide to the `db:migrate` command two extra positional arguments:
+
+```bash
+npm run db:migrate [schema] [directory]
+# eg: npm run db:migrate titus-app /titus-app
+```
+
+- `schema`: the database schema to migrate. Default is [`public`](https://www.postgresql.org/docs/current/ddl-schemas.html#DDL-SCHEMAS-PUBLIC).
+- `migrations`: directory where the migration scripts are located. Default `/migrations`
 
 [Jest]: https://jestjs.io
 [ESLint]: https://eslint.org
