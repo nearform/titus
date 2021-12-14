@@ -20,7 +20,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x]
+        node-version: [12, 14, 16]
 
     steps:
       - name: Checking out code
@@ -78,7 +78,10 @@ jobs:
   automerge:
     needs: integration-checks
     runs-on: ubuntu-latest
+    permissions:
+     pull-requests: write
+     contents: write       
     steps:
-      - uses: fastify/github-action-merge-dependabot@v3.0.2
+      - uses: fastify/github-action-merge-dependabot@v3
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
