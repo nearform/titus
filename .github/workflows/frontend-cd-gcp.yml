@@ -18,7 +18,6 @@ jobs:
       DOCKER_REGISTRY_HOST: europe-west1-docker.pkg.dev
       CLOUDRUN_SERVICE_NAME: titus-frontend
       CLOUDRUN_SERVICE_REGION: europe-west1
-      CI: true
 
     steps:
       - name: Checkout project
@@ -29,7 +28,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v2
         with:
-          node-version: 14.x
+          node-version-file: '.nvmrc'
 
       - name: Set up gcloud CLI
         uses: google-github-actions/setup-gcloud@master
