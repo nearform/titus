@@ -1,7 +1,0 @@
-{
-  "testEnvironment": "node",
-  "collectCoverageFrom": [
-    "lib/**/*.{js,jsx}",
-    "!**/node_modules/**"
-  ]
-}

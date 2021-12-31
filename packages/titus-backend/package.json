@@ -10,9 +10,9 @@
     "lint:fix": "eslint . --fix",
     "lint:staged": "lint-staged",
     "start": "nodemon --config .nodemonrc .",
-    "test": "jest --config .jest.json --coverage",
-    "test:watch": "jest --config .jest.json --watch --verbose",
-    "test:related": "jest --config .jest.json --onlyChanged"
+    "test": "jest",
+    "test:watch": "jest --watch --verbose",
+    "test:related": "jest --onlyChanged"
   },
   "dependencies": {
     "@nearform/brokeneck-fastify": "^1.0.0-spinal.8",
