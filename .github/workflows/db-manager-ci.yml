@@ -23,15 +23,7 @@ jobs:
           POSTGRES_DB: titus
         ports:
           - 5432:5432
-        # needed because the postgres container does not provide a healthcheck
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-
-    env:
-      CI: true
-
-    strategy:
-      matrix:
-        node-version: [12, 14, 16]
 
     steps:
       - name: Checking out code
@@ -39,10 +31,9 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Installing Node ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+      - uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version-file: '.nvmrc'
 
       - name: Installing dependencies
         working-directory: packages/titus-db-manager

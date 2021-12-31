@@ -1,4 +1,4 @@
-FROM node:14-alpine as builder
+FROM node:16-alpine as builder
 RUN apk add dumb-init
 ENV NODE_ENV production
 
