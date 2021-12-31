@@ -111,7 +111,7 @@ describe('auth0 plugin', () => {
   })
 
   it('should deny access with invalid JWT to protected routes', async () => {
-    const invalidTokenMsg = 'Invalid token.'
+    const invalidTokenMsg = 'The token is malformed.'
     const response = await server.inject({
       method: 'GET',
       url: `${address}/auth`,
