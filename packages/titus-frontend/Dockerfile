@@ -7,8 +7,8 @@ COPY --chown=node:node package.json package-lock.json jsconfig.json .eslintrc .e
 COPY --chown=node:node src src
 COPY --chown=node:node public public
 RUN apk upgrade --available && \
-    rm -rf /var/cache/apk/* && \
-    npm ci && \
+    rm -rf /var/cache/apk/*
+RUN npm ci && \
     npm run build
 
 FROM nginx:stable-alpine

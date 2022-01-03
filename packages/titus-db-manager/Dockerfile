@@ -8,7 +8,7 @@ COPY --chown=node:node migrate migrate
 COPY --chown=node:node truncate truncate
 RUN apk upgrade --available && \
     apk add dumb-init && \
-    rm -rf /var/cache/apk/* && \
-    npm ci --only=production
+    rm -rf /var/cache/apk/*
+RUN npm ci --only=production
 USER node
 CMD ["dumb-init", "node", "./lib"]

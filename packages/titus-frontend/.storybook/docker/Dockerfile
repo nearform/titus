@@ -5,8 +5,8 @@ COPY --chown=node:node src src
 COPY --chown=node:node public public
 COPY --chown=node:node .storybook .storybook
 RUN apk upgrade --available && \
-    rm -rf /var/cache/apk/* && \
-    npm ci && \
+    rm -rf /var/cache/apk/*
+RUN npm ci && \
     npm run storybook:build
 
 FROM nginx:stable-alpine
