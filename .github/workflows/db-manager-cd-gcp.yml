@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - feature/optimize-docker-images
     paths:
       - 'packages/titus-db-manager/**'
       - '.github/workflows/db-manager-cd-gcp.yml'
@@ -50,16 +51,16 @@ jobs:
         run: |
           docker build -t $DOCKER_IMAGE .
 
-      - name: Push container
-        working-directory: ./packages/titus-db-manager
-        run: |
-          docker push $DOCKER_IMAGE
+      # - name: Push container
+      #   working-directory: ./packages/titus-db-manager
+      #   run: |
+      #     docker push $DOCKER_IMAGE
 
-      - name: Run service
-        uses: google-github-actions/deploy-cloudrun@v0.7.0
-        with:
-          service: ${{ env.CLOUDRUN_SERVICE_NAME }}
-          image: ${{ env.DOCKER_IMAGE }}
-          credentials: ${{ secrets.GCP_SA_KEY }}
-          region: ${{ env.CLOUDRUN_SERVICE_REGION }}
-          project_id: ${{ env.PROJECT_ID }}
+      # - name: Run service
+      #   uses: google-github-actions/deploy-cloudrun@v0.7.0
+      #   with:
+      #     service: ${{ env.CLOUDRUN_SERVICE_NAME }}
+      #     image: ${{ env.DOCKER_IMAGE }}
+      #     credentials: ${{ secrets.GCP_SA_KEY }}
+      #     region: ${{ env.CLOUDRUN_SERVICE_REGION }}
+      #     project_id: ${{ env.PROJECT_ID }}
