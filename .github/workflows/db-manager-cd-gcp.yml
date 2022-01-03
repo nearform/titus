@@ -50,8 +50,7 @@ jobs:
 
       - name: Build container
         working-directory: ./packages/titus-db-manager
-        run: |
-          docker build -t $DOCKER_IMAGE .
+        run: docker build -t $DOCKER_IMAGE .
 
       - name: Scan image for vulnerabilities
         run: /usr/local/bin/grype $DOCKER_IMAGE | tee /tmp/vuln-scan-titus-db-manager.txt
@@ -65,8 +64,7 @@ jobs:
 
       - name: Push container
         working-directory: ./packages/titus-db-manager
-        run: |
-          docker push $DOCKER_IMAGE
+        run: docker push $DOCKER_IMAGE
 
       - name: Run service
         uses: google-github-actions/deploy-cloudrun@v0.7.0
