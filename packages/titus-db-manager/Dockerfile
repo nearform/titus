@@ -1,4 +1,4 @@
-FROM node:16.13.1-alpine3.14
+FROM node:16-alpine
 ENV NODE_ENV production
 WORKDIR /titus-db-manager
 COPY --chown=node:node package.json package-lock.json index.js migration-start.js ./

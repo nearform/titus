@@ -1,4 +1,4 @@
-FROM node:16.13.1-alpine3.14 as builder
+FROM node:16-alpine as builder
 ARG REACT_APP_API_PATH=http://localhost:5000
 ARG REACT_APP_ADMIN_API_PATH=$REACT_APP_API_PATH/graphql
 ENV SKIP_PREFLIGHT_CHECK=true

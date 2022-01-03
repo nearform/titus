@@ -1,4 +1,4 @@
-FROM node:16.13.1-alpine3.14 as builder
+FROM node:16-alpine as builder
 WORKDIR /service
 COPY --chown=node:node package.json package-lock.json jsconfig.json .eslintrc .eslintignore .prettierrc ./
 COPY --chown=node:node src src

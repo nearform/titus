@@ -1,4 +1,4 @@
-FROM node:16.13.1-alpine3.14 as builder
+FROM node:16-alpine as builder
 ENV NODE_ENV production
 WORKDIR /service
 COPY --chown=node:node package.json package-lock.json index.js ./
