@@ -1,19 +1,14 @@
-FROM node:16-alpine
-RUN apk add bash dumb-init
+FROM node:16.13.1-alpine3.14
 ENV NODE_ENV production
-
 WORKDIR /titus-db-manager
-
-COPY --chown=node:node index.js /titus-db-manager/index.js
-COPY --chown=node:node migration-start.js /titus-db-manager/migration-start.js
-COPY --chown=node:node seed /titus-db-manager/seed
-COPY --chown=node:node migrate /titus-db-manager/migrate
-COPY --chown=node:node truncate /titus-db-manager/truncate
-COPY --chown=node:node package.json package-lock.json ./
-COPY --chown=node:node lib /titus-db-manager/lib
-
-RUN npm ci --only=production
-
+COPY --chown=node:node package.json package-lock.json index.js migration-start.js ./
+COPY --chown=node:node lib lib
+COPY --chown=node:node seed seed
+COPY --chown=node:node migrate migrate
+COPY --chown=node:node truncate truncate
+RUN apk upgrade --available && \
+    apk add dumb-init && \
+    rm -rf /var/cache/apk/* && \
+    npm ci --only=production
 USER node
-
 CMD ["dumb-init", "node", "./lib"]
