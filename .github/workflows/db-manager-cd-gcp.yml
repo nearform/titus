@@ -46,10 +46,23 @@ jobs:
 
           echo "DOCKER_IMAGE=$DOCKER_REGISTRY_HOST/$PROJECT_ID/titus/db-manager:$GITHUB_SHA" >> $GITHUB_ENV
 
+      - name: Install Grype tool (vulnerability scan)
+        run: curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
+
       - name: Build container
         working-directory: ./packages/titus-db-manager
         run: |
           docker build -t $DOCKER_IMAGE .
+
+      - name: Scan image for vulnerabilities
+        run: /usr/local/bin/grype $DOCKER_IMAGE | tee /tmp/vuln-scan-titus-db-manager.txt
+
+      - name: Publish image scan results
+        uses: actions/upload-artifact@v2
+        with:
+          name: vuln-scan-titus-db-manager.txt
+          path: /tmp/vuln-scan-titus-db-manager.txt
+          retention-days: 15
 
       # - name: Push container
       #   working-directory: ./packages/titus-db-manager
