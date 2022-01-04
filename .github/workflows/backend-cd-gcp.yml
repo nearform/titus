@@ -14,7 +14,7 @@ env:
 
 jobs:
   build-titus-backend:
-    name: Build & Deploy titus-backend
+    name: Build titus-backend
     runs-on: ubuntu-latest
 
     env:
@@ -64,7 +64,7 @@ jobs:
 
   docker-scan:
     needs: build-titus-backend
-    uses: nearform/titus/.github/workflows/grype.yml@17fe88d0bdec2a2c42fa885085b4d91787084e5e
+    uses: nearform/titus/.github/workflows/grype.yml@feature/optimize-docker-images
     with:
       docker-image: $DOCKER_SAVE_ARTIFACT
       scan-report: titus-backend
