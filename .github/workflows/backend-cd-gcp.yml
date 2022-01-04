@@ -73,7 +73,7 @@ jobs:
     needs: build-titus-backend
     uses: nearform/titus/.github/workflows/grype.yml@feature/optimize-docker-images
     with:
-      docker-image: $DOCKER_SAVE_ARTIFACT
+      docker-image: ${{ env.DOCKER_SAVE_ARTIFACT }}
       scan-report: titus-backend
 
   deploy-titus-backend:
@@ -85,7 +85,7 @@ jobs:
       - name: Download Docker image from artifacts store
         uses: actions/download-artifact@v2
         with:
-          name: $DOCKER_SAVE_ARTIFACT
+          name: ${{ env.DOCKER_SAVE_ARTIFACT }}
           path: /tmp
 
       - name: Load frontend image
@@ -109,4 +109,4 @@ jobs:
       - name: Delete Docker artifacts
         uses: geekyeggo/delete-artifact@v1
         with:
-          name: $DOCKER_SAVE_ARTIFACT   
+          name: ${{ env.DOCKER_SAVE_ARTIFACT }}   
