@@ -52,6 +52,11 @@ jobs:
         working-directory: ./packages/titus-backend
         run: docker build -t $DOCKER_IMAGE .
 
+      - name: Debug envvar
+        run: |
+          echo "The DOCKER_SAVE_ARTIFACT envvar value is (method 1): ${{env.DOCKER_SAVE_ARTIFACT}}"
+          echo "The DOCKER_SAVE_ARTIFACT envvar value is (method 2): $DOCKER_SAVE_ARTIFACT"
+
       - name: Export Docker image
         run: docker save $DOCKER_IMAGE > /tmp/$DOCKER_SAVE_ARTIFACT
 
