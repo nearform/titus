@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - feature/optimize-docker-images
     paths:
       - 'packages/titus-backend/**'
       - '.github/workflows/backend-cd-gcp.yml'
@@ -84,18 +83,18 @@ jobs:
       - name: Load Docker image
         run: docker load --input /tmp/$DOCKER_SAVE_ARTIFACT
 
-      # - name: Push container
-      #   working-directory: ./packages/titus-backend
-      #   run: docker push $DOCKER_IMAGE
+      - name: Push container
+        working-directory: ./packages/titus-backend
+        run: docker push $DOCKER_IMAGE
 
-      # - name: Run service
-      #   uses: google-github-actions/deploy-cloudrun@v0.7.0
-      #   with:
-      #     service: ${{ env.CLOUDRUN_SERVICE_NAME }}
-      #     image: ${{ env.DOCKER_IMAGE }}
-      #     credentials: ${{ secrets.GCP_SA_KEY }}
-      #     region: ${{ env.CLOUDRUN_SERVICE_REGION }}
-      #     project_id: ${{ env.PROJECT_ID }}
+      - name: Run service
+        uses: google-github-actions/deploy-cloudrun@v0.7.0
+        with:
+          service: ${{ env.CLOUDRUN_SERVICE_NAME }}
+          image: ${{ env.DOCKER_IMAGE }}
+          credentials: ${{ secrets.GCP_SA_KEY }}
+          region: ${{ env.CLOUDRUN_SERVICE_REGION }}
+          project_id: ${{ env.PROJECT_ID }}
 
       - name: Delete Docker artifacts
         uses: geekyeggo/delete-artifact@v1
