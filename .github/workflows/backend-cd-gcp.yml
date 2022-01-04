@@ -53,20 +53,20 @@ jobs:
         run: docker build -t $DOCKER_IMAGE .
 
       - name: Export Docker image
-        run: docker save $DOCKER_IMAGE > /tmp/${{ env.DOCKER_SAVE_ARTIFACT }}
+        run: docker save $DOCKER_IMAGE > /tmp/$DOCKER_SAVE_ARTIFACT
 
       - name: Store Docker image as artifact
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ env.DOCKER_SAVE_ARTIFACT }}
-          path: /tmp/${{ env.DOCKER_SAVE_ARTIFACT }}
+          name: $DOCKER_SAVE_ARTIFACT
+          path: /tmp/$DOCKER_SAVE_ARTIFACT
           retention-days: 1
 
   docker-scan:
     needs: build-titus-backend
     uses: nearform/titus/.github/workflows/grype.yml@17fe88d0bdec2a2c42fa885085b4d91787084e5e
     with:
-      docker-image: ${{ env.DOCKER_SAVE_ARTIFACT }}
+      docker-image: $DOCKER_SAVE_ARTIFACT
       scan-report: titus-backend
 
   deploy-titus-backend:
@@ -78,12 +78,12 @@ jobs:
       - name: Download Docker image from artifacts store
         uses: actions/download-artifact@v2
         with:
-          name: ${{ env.DOCKER_SAVE_ARTIFACT }}
+          name: $DOCKER_SAVE_ARTIFACT
           path: /tmp
 
       - name: Load frontend image
         run: |
-          docker load --input /tmp/${{ env.DOCKER_SAVE_ARTIFACT }}
+          docker load --input /tmp/$DOCKER_SAVE_ARTIFACT
           docker image ls
 
       # - name: Push container
@@ -102,4 +102,4 @@ jobs:
       - name: Delete Docker artifacts
         uses: geekyeggo/delete-artifact@v1
         with:
-          name: ${{ env.DOCKER_SAVE_ARTIFACT }}   
+          name: $DOCKER_SAVE_ARTIFACT   
