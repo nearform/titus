@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master
-      - feature/optimize-docker-image
+      - feature/optimize-docker-images
     paths:
       - 'packages/titus-backend/**'
       - '.github/workflows/backend-cd-gcp.yml'
