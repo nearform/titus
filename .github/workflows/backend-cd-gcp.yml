@@ -10,6 +10,9 @@ on:
       - 'packages/titus-backend/**'
       - '.github/workflows/backend-cd-gcp.yml'
 
+env:
+  DOCKER_SAVE_ARTIFACT: docker-save.tar
+
 jobs:
   build-titus-backend:
     name: Build & Deploy titus-backend
@@ -51,20 +54,20 @@ jobs:
         run: docker build -t $DOCKER_IMAGE .
 
       - name: Export Docker image
-        run: docker save $DOCKER_IMAGE > /tmp/docker-save.tar
+        run: docker save $DOCKER_IMAGE > /tmp/${{ env.DOCKER_SAVE_ARTIFACT }}
 
-      - name: Store api image as artifact
+      - name: Store Docker image as artifact
         uses: actions/upload-artifact@v2
         with:
-          name: docker-save.tar
-          path: /tmp/docker-save.tar
+          name: ${{ env.DOCKER_SAVE_ARTIFACT }}
+          path: /tmp/${{ env.DOCKER_SAVE_ARTIFACT }}
           retention-days: 1
 
   docker-scan:
     needs: build-titus-backend
     uses: nearform/titus/.github/workflows/grype.yml@17fe88d0bdec2a2c42fa885085b4d91787084e5e
     with:
-      docker-image: docker-save.tar
+      docker-image: ${{ env.DOCKER_SAVE_ARTIFACT }}
       scan-report: titus-backend
 
   deploy-titus-backend:
@@ -73,6 +76,17 @@ jobs:
     needs: docker-scan
 
     steps:
+      - name: Download Docker image from artifacts store
+        uses: actions/download-artifact@v2
+        with:
+          name: ${{ env.DOCKER_SAVE_ARTIFACT }}
+          path: /tmp
+
+      - name: Load frontend image
+        run: |
+          docker load --input /tmp/${{ env.DOCKER_SAVE_ARTIFACT }}
+          docker image ls
+
       # - name: Push container
       #   working-directory: ./packages/titus-backend
       #   run: docker push $DOCKER_IMAGE
@@ -89,4 +103,4 @@ jobs:
       - name: Delete Docker artifacts
         uses: geekyeggo/delete-artifact@v1
         with:
-          name: docker-save.tar   
+          name: ${{ env.DOCKER_SAVE_ARTIFACT }}   
