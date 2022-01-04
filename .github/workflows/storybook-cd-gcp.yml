@@ -1,4 +1,4 @@
-name: Storybook CD to GCP
+name: 'Storybook CD to GCP'
 
 on:
   push:
@@ -10,17 +10,15 @@ on:
 
 env:
   DOCKER_SAVE_ARTIFACT: docker-save.tar
+  DOCKER_REGISTRY_HOST: europe-west1-docker.pkg.dev
+  CLOUDRUN_SERVICE_NAME: titus-backend
+  CLOUDRUN_SERVICE_REGION: europe-west1
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
 
 jobs:
   build-titus-storybook:
     name: Build titus-storybook
     runs-on: ubuntu-latest
-
-    env:
-      PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-      DOCKER_REGISTRY_HOST: europe-west1-docker.pkg.dev
-      CLOUDRUN_SERVICE_NAME: titus-storybook
-      CLOUDRUN_SERVICE_REGION: europe-west1
 
     steps:
       - name: Checkout project
@@ -41,15 +39,11 @@ jobs:
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
 
-      - name: Configure Docker repository
+      - name: Configure Docker registry
         run: |
           gcloud components install beta
           gcloud beta auth configure-docker $DOCKER_REGISTRY_HOST
-
           echo "DOCKER_IMAGE=$DOCKER_REGISTRY_HOST/$PROJECT_ID/titus/storybook:$GITHUB_SHA" >> $GITHUB_ENV
-
-      - name: Install Grype tool (vulnerability scan)
-        run: curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
 
       - name: Build container
         working-directory: ./packages/titus-frontend
@@ -78,6 +72,20 @@ jobs:
     needs: docker-scan
 
     steps:
+      - name: Set up gcloud CLI
+        uses: google-github-actions/setup-gcloud@master
+        with:
+          version: latest
+          service_account_email: ${{ secrets.GCP_SA_EMAIL }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+
+      - name: Configure Docker registry
+        run: |
+          gcloud components install beta
+          gcloud beta auth configure-docker $DOCKER_REGISTRY_HOST
+          echo "DOCKER_IMAGE=$DOCKER_REGISTRY_HOST/$PROJECT_ID/titus/storybook:$GITHUB_SHA" >> $GITHUB_ENV
+
       - name: Download Docker image from artifacts store
         uses: actions/download-artifact@v2
         with:
@@ -87,8 +95,7 @@ jobs:
       - name: Load Docker image
         run: docker load --input /tmp/$DOCKER_SAVE_ARTIFACT
 
-      - name: Push container
-        working-directory: ./packages/titus-frontend
+      - name: Push Docker image
         run: docker push $DOCKER_IMAGE
 
       - name: Run service
@@ -101,6 +108,7 @@ jobs:
           project_id: ${{ env.PROJECT_ID }}
 
       - name: Delete Docker artifacts
+        if: always()
         uses: geekyeggo/delete-artifact@v1
         with:
           name: ${{ env.DOCKER_SAVE_ARTIFACT }}
