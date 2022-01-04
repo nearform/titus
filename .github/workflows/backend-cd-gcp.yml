@@ -54,7 +54,7 @@ jobs:
 
       - name: Debug envvar
         run: |
-          echo "The DOCKER_SAVE_ARTIFACT envvar value is (method 1): ${{env.DOCKER_SAVE_ARTIFACT}}"
+          echo "The DOCKER_SAVE_ARTIFACT envvar value is (method 1): ${{ env.DOCKER_SAVE_ARTIFACT }}"
           echo "The DOCKER_SAVE_ARTIFACT envvar value is (method 2): $DOCKER_SAVE_ARTIFACT"
 
       - name: Export Docker image
@@ -65,8 +65,8 @@ jobs:
       - name: Store Docker image as artifact
         uses: actions/upload-artifact@v2
         with:
-          name: $DOCKER_SAVE_ARTIFACT
-          path: /tmp/$DOCKER_SAVE_ARTIFACT
+          name: ${{ env.DOCKER_SAVE_ARTIFACT }}
+          path: /tmp/${{ env.DOCKER_SAVE_ARTIFACT }}
           retention-days: 1
 
   docker-scan:
