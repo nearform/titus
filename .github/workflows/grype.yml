@@ -1,0 +1,48 @@
+name: Docker image vulnerability scan with Grype
+
+on:
+  workflow_call:
+    inputs:
+      docker-image:
+        required: true
+        type: string
+      scan-report:
+        required: true
+        type: string
+      grype-version:
+        required: false
+        type: string
+        default: '0.28.0'
+
+jobs:
+  grype_scan:
+    name: Grype scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Docker image from artifacts store
+        uses: actions/download-artifact@v2
+        with:
+          name: ${{ inputs.docker-image }}
+          path: /tmp
+
+      - name: Install Grype tool
+        run: |
+          cd /tmp
+          curl -sSfL https://github.com/anchore/grype/releases/download/v${{ inputs.grype-version }}/grype_${{ inputs.grype-version }}_linux_amd64.tar.gz -o grype_${{ inputs.grype-version }}_linux_amd64.tar.gz
+          tar xzvf grype_${{ inputs.grype-version }}_linux_amd64.tar.gz
+          chmod +x grype
+          mv -v grype /usr/local/bin/
+          echo -n "Installed "
+          /usr/local/bin/grype version | grep -i "^version"
+          echo "Download the latest vulnerability database..."
+          /usr/local/bin/grype db update -v
+
+      - name: Scan image for vulnerabilities
+        run: /usr/local/bin/grype /tmp/${{ inputs.docker-image }} | tee /tmp/vuln-scan-${{ inputs.scan-report }}.txt
+
+      - name: Publish image scan results
+        uses: actions/upload-artifact@v2
+        with:
+          name: vuln-scan-${{ inputs.scan-report }}.txt
+          path: /tmp/vuln-scan-${{ inputs.scan-report }}.txt
+          retention-days: 15
