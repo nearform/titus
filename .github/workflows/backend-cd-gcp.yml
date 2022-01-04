@@ -1,6 +1,7 @@
 name: Backend CD to GCP
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
