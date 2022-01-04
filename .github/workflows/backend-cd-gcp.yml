@@ -8,6 +8,7 @@ on:
     paths:
       - 'packages/titus-backend/**'
       - '.github/workflows/backend-cd-gcp.yml'
+      - '.github/workflows/grype.yml'
 
 env:
   DOCKER_SAVE_ARTIFACT: docker-save.tar

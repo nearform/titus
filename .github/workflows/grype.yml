@@ -14,6 +14,9 @@ jobs:
   grype_scan:
     name: Grype scan
     runs-on: ubuntu-latest
+    container:
+      image: anchore/grype:latest
+
     steps:
       - name: Download Docker image from artifacts store
         uses: actions/download-artifact@v2
@@ -21,11 +24,8 @@ jobs:
           name: ${{ inputs.docker-image }}
           path: /tmp
 
-      - name: Install Grype tool
-        run: curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
-
       - name: Scan image for vulnerabilities
-        run: /usr/local/bin/grype /tmp/${{ inputs.docker-image }} | tee /tmp/vuln-scan-${{ inputs.scan-report }}.txt
+        run: /tmp/${{ inputs.docker-image }} | tee /tmp/vuln-scan-${{ inputs.scan-report }}.txt
 
       - name: Publish image scan results
         uses: actions/upload-artifact@v2
