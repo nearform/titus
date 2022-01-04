@@ -39,7 +39,7 @@ jobs:
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
 
-      - name: Configure Docker repository
+      - name: Configure Docker registry
         run: |
           gcloud components install beta
           gcloud beta auth configure-docker $DOCKER_REGISTRY_HOST
@@ -108,6 +108,7 @@ jobs:
           project_id: ${{ env.PROJECT_ID }}
 
       - name: Delete Docker artifacts
+        if: always()
         uses: geekyeggo/delete-artifact@v1
         with:
           name: ${{ env.DOCKER_SAVE_ARTIFACT }}
