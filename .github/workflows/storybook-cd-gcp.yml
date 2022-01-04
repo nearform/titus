@@ -4,13 +4,17 @@ on:
   push:
     branches:
       - master
+      - feature/optimize-docker-images
     paths:
       - 'packages/titus-frontend/**'
       - '.github/workflows/storybook-cd-gcp.yml'
 
+env:
+  DOCKER_SAVE_ARTIFACT: docker-save.tar
+
 jobs:
-  deploy-titus-frontend:
-    name: Build & Deploy titus storybook
+  build-titus-storybook:
+    name: Build titus-storybook
     runs-on: ubuntu-latest
 
     env:
@@ -52,25 +56,52 @@ jobs:
         working-directory: ./packages/titus-frontend
         run: docker build -t $DOCKER_IMAGE -f .storybook/docker/Dockerfile .
 
-      - name: Scan image for vulnerabilities
-        run: /usr/local/bin/grype $DOCKER_IMAGE | tee /tmp/vuln-scan-titus-storybook.txt
+      - name: Export Docker image
+        run: docker save $DOCKER_IMAGE > /tmp/$DOCKER_SAVE_ARTIFACT
 
-      - name: Publish image scan results
+      - name: Store Docker image as artifact
         uses: actions/upload-artifact@v2
         with:
-          name: vuln-scan-titus-storybook.txt
-          path: /tmp/vuln-scan-titus-storybook.txt
-          retention-days: 15
+          name: ${{ env.DOCKER_SAVE_ARTIFACT }}
+          path: /tmp/${{ env.DOCKER_SAVE_ARTIFACT }}
+          retention-days: 1
 
-      - name: Push container
-        working-directory: ./packages/titus-frontend
-        run: docker push $DOCKER_IMAGE
+  docker-scan:
+    needs: build-titus-storybook
+    uses: nearform/titus/.github/workflows/grype.yml@feature/optimize-docker-images
+    with:
+      docker-image: docker-save.tar
+      scan-report: titus-storybook
 
-      - name: Run service
-        uses: google-github-actions/deploy-cloudrun@v0.7.0
+  deploy-titus-storybook:
+    name: Deploy titus-storybook
+    runs-on: ubuntu-latest
+    needs: docker-scan
+
+    steps:
+      - name: Download Docker image from artifacts store
+        uses: actions/download-artifact@v2
         with:
-          service: ${{ env.CLOUDRUN_SERVICE_NAME }}
-          image: ${{ env.DOCKER_IMAGE }}
-          credentials: ${{ secrets.GCP_SA_KEY }}
-          region: ${{ env.CLOUDRUN_SERVICE_REGION }}
-          project_id: ${{ env.PROJECT_ID }}
+          name: ${{ env.DOCKER_SAVE_ARTIFACT }}
+          path: /tmp
+
+      - name: Load Docker image
+        run: docker load --input /tmp/$DOCKER_SAVE_ARTIFACT
+
+      # - name: Push container
+      #   working-directory: ./packages/titus-frontend
+      #   run: docker push $DOCKER_IMAGE
+
+      # - name: Run service
+      #   uses: google-github-actions/deploy-cloudrun@v0.7.0
+      #   with:
+      #     service: ${{ env.CLOUDRUN_SERVICE_NAME }}
+      #     image: ${{ env.DOCKER_IMAGE }}
+      #     credentials: ${{ secrets.GCP_SA_KEY }}
+      #     region: ${{ env.CLOUDRUN_SERVICE_REGION }}
+      #     project_id: ${{ env.PROJECT_ID }}
+
+      - name: Delete Docker artifacts
+        uses: geekyeggo/delete-artifact@v1
+        with:
+          name: ${{ env.DOCKER_SAVE_ARTIFACT }}

@@ -8,7 +8,6 @@ on:
     paths:
       - 'packages/titus-backend/**'
       - '.github/workflows/backend-cd-gcp.yml'
-      - '.github/workflows/grype.yml'
 
 env:
   DOCKER_SAVE_ARTIFACT: docker-save.tar
@@ -82,10 +81,8 @@ jobs:
           name: ${{ env.DOCKER_SAVE_ARTIFACT }}
           path: /tmp
 
-      - name: Load frontend image
-        run: |
-          docker load --input /tmp/$DOCKER_SAVE_ARTIFACT
-          docker image ls
+      - name: Load Docker image
+        run: docker load --input /tmp/$DOCKER_SAVE_ARTIFACT
 
       # - name: Push container
       #   working-directory: ./packages/titus-backend
@@ -103,4 +100,4 @@ jobs:
       - name: Delete Docker artifacts
         uses: geekyeggo/delete-artifact@v1
         with:
-          name: ${{ env.DOCKER_SAVE_ARTIFACT }}   
+          name: ${{ env.DOCKER_SAVE_ARTIFACT }}
