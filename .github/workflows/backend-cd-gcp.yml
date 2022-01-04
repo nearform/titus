@@ -66,7 +66,7 @@ jobs:
     needs: build-titus-backend
     uses: nearform/titus/.github/workflows/grype.yml@feature/optimize-docker-images
     with:
-      docker-image: ${{ env.DOCKER_SAVE_ARTIFACT }}
+      docker-image: docker-save.tar
       scan-report: titus-backend
 
   deploy-titus-backend:
