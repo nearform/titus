@@ -58,7 +58,9 @@ jobs:
           echo "The DOCKER_SAVE_ARTIFACT envvar value is (method 2): $DOCKER_SAVE_ARTIFACT"
 
       - name: Export Docker image
-        run: docker save $DOCKER_IMAGE > /tmp/$DOCKER_SAVE_ARTIFACT
+        run: |
+          docker save $DOCKER_IMAGE > /tmp/$DOCKER_SAVE_ARTIFACT
+          ls -l /tmp
 
       - name: Store Docker image as artifact
         uses: actions/upload-artifact@v2
