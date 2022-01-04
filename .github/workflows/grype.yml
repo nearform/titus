@@ -23,7 +23,8 @@ jobs:
 
       - name: Install Grype tool
         run: |
-          curl -sSfL https://github.com/anchore/grype/releases/download/v0.28.0/grype_0.28.0_linux_amd64.tar.gz -o /tmp/grype_0.28.0_linux_amd64.tar.gz
+          cd /tmp
+          curl -sSfL https://github.com/anchore/grype/releases/download/v0.28.0/grype_0.28.0_linux_amd64.tar.gz -o grype_0.28.0_linux_amd64.tar.gz
           tar xzvf grype_0.28.0_linux_amd64.tar.gz
           chmod +x grype
           mv -v grype /usr/local/bin/
