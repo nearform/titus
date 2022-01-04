@@ -62,10 +62,10 @@ jobs:
 
   docker-scan:
     needs: build-titus-backend
-      uses: nearform/titus/.github/workflows/grype.yml@17fe88d0bdec2a2c42fa885085b4d91787084e5e
-      with:
-        docker-image: docker-save.tar
-        scan-report: titus-backend
+    uses: nearform/titus/.github/workflows/grype.yml@17fe88d0bdec2a2c42fa885085b4d91787084e5e
+    with:
+      docker-image: docker-save.tar
+      scan-report: titus-backend
 
   deploy-titus-backend:
     name: Deploy titus-backend
