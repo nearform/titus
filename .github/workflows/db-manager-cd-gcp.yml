@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - fix/cloudrun-service-name
     paths:
       - 'packages/titus-db-manager/**'
       - '.github/workflows/db-manager-cd-gcp.yml'
