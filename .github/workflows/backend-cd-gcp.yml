@@ -11,7 +11,7 @@ on:
       - '.github/workflows/backend-cd-gcp.yml'
 
 jobs:
-  deploy-titus-backend:
+  build-titus-backend:
     name: Build & Deploy titus-backend
     runs-on: ubuntu-latest
 
@@ -50,12 +50,29 @@ jobs:
         working-directory: ./packages/titus-backend
         run: docker build -t $DOCKER_IMAGE .
 
-      - name: Scan image for vulnerabilities
-        uses: nearform/titus/.github/workflows/grype.yml@17fe88d0bdec2a2c42fa885085b4d91787084e5e
-        with:
-          docker-image: $DOCKER_IMAGE
-          scan-report: titus-backend
+      - name: Export Docker image
+        run: docker save $DOCKER_IMAGE > /tmp/docker-save.tar
 
+      - name: Store api image as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: docker-save.tar
+          path: /tmp/docker-save.tar
+          retention-days: 1
+
+  docker-scan:
+    needs: build-titus-backend
+      uses: nearform/titus/.github/workflows/grype.yml@17fe88d0bdec2a2c42fa885085b4d91787084e5e
+      with:
+        docker-image: docker-save.tar
+        scan-report: titus-backend
+
+  deploy-titus-backend:
+    name: Deploy titus-backend
+    runs-on: ubuntu-latest
+    needs: docker-scan
+
+    steps:
       # - name: Push container
       #   working-directory: ./packages/titus-backend
       #   run: docker push $DOCKER_IMAGE
@@ -68,3 +85,8 @@ jobs:
       #     credentials: ${{ secrets.GCP_SA_KEY }}
       #     region: ${{ env.CLOUDRUN_SERVICE_REGION }}
       #     project_id: ${{ env.PROJECT_ID }}
+
+      - name: Delete Docker artifacts
+        uses: geekyeggo/delete-artifact@v1
+        with:
+          name: docker-save.tar   
