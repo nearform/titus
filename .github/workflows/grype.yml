@@ -28,11 +28,13 @@ jobs:
           tar xzvf grype_0.28.0_linux_amd64.tar.gz
           chmod +x grype
           mv -v grype /usr/local/bin/
+          echo -n "Installed "
+          /usr/local/bin/grype version | grep -i "^version"
+          echo "Download the latest vulnerability database..."
+          /usr/local/bin/grype db update -v
 
       - name: Scan image for vulnerabilities
-        run: |
-          /usr/local/bin/grype db update
-          /usr/local/bin/grype /tmp/${{ inputs.docker-image }} | tee /tmp/vuln-scan-${{ inputs.scan-report }}.txt
+        run: /usr/local/bin/grype /tmp/${{ inputs.docker-image }} | tee /tmp/vuln-scan-${{ inputs.scan-report }}.txt
 
       - name: Publish image scan results
         uses: actions/upload-artifact@v2
