@@ -63,7 +63,7 @@ jobs:
 
   docker-scan:
     needs: build-titus-backend
-    uses: nearform/titus/.github/workflows/grype.yml@feature/optimize-docker-images
+    uses: nearform/titus/.github/workflows/grype.yml@master
     with:
       docker-image: docker-save.tar
       scan-report: titus-backend

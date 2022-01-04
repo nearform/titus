@@ -67,7 +67,7 @@ jobs:
 
   docker-scan:
     needs: build-titus-storybook
-    uses: nearform/titus/.github/workflows/grype.yml@feature/optimize-docker-images
+    uses: nearform/titus/.github/workflows/grype.yml@master
     with:
       docker-image: docker-save.tar
       scan-report: titus-storybook
