@@ -82,12 +82,10 @@ jobs:
           path: /tmp
 
       - name: Load Docker image
-        run: docker load --input /tmp/$DOCKER_SAVE_ARTIFACT
+        run: docker load --input /tmp/$DOCKER_SAVE_ARTIFACT | tee /tmp/docker-image.txt
 
       - name: Push Docker image
-        run: |
-          echo $DOCKER_IMAGE
-          docker push $DOCKER_IMAGE
+        run: docker push $(cat /tmp/docker-image.txt | cut -d " " -f 3)
 
       - name: Run service
         uses: google-github-actions/deploy-cloudrun@v0.7.0
