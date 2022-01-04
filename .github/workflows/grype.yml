@@ -9,6 +9,10 @@ on:
       scan-report:
         required: true
         type: string
+      grype-version:
+        required: false
+        type: string
+        default: '0.28.0'
 
 jobs:
   grype_scan:
@@ -24,8 +28,8 @@ jobs:
       - name: Install Grype tool
         run: |
           cd /tmp
-          curl -sSfL https://github.com/anchore/grype/releases/download/v0.28.0/grype_0.28.0_linux_amd64.tar.gz -o grype_0.28.0_linux_amd64.tar.gz
-          tar xzvf grype_0.28.0_linux_amd64.tar.gz
+          curl -sSfL https://github.com/anchore/grype/releases/download/v${{ inputs.grype-version }}/grype_${{ inputs.grype-version }}_linux_amd64.tar.gz -o grype_${{ inputs.grype-version }}_linux_amd64.tar.gz
+          tar xzvf grype_${{ inputs.grype-version }}_linux_amd64.tar.gz
           chmod +x grype
           mv -v grype /usr/local/bin/
           echo -n "Installed "
