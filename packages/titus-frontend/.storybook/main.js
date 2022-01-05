@@ -1,18 +1,12 @@
 const path = require('path')
+
 module.exports = {
-  stories: ['../src/**/*.story.@(js|mdx)'],
+  stories: ['../src/**/*.story.js'],
   addons: [
-    '@storybook/addon-a11y',
-    {
-      name: '@storybook/addon-docs',
-      options: {
-        configureJSX: true
-      }
-    },
-    '@storybook/addon-actions/register',
-    '@storybook/addon-links/register',
-    '@storybook/addon-knobs',
     '@storybook/preset-create-react-app',
+    '@storybook/addon-essentials',
+    '@storybook/addon-a11y',
+    '@storybook/addon-links',
     'storybook-readme/register'
   ],
   webpackFinal: async config => {
@@ -21,5 +15,8 @@ module.exports = {
       '.storybook': path.resolve(__dirname)
     }
     return config
+  },
+  core: {
+    builder: 'webpack5'
   }
 }

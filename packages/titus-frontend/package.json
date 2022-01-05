@@ -23,7 +23,7 @@
     "react-dom": "^17.0.2",
     "react-i18next": "^11.11.4",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.3",
+    "react-scripts": "^5.0.0",
     "regenerator-runtime": "^0.13.9",
     "yup": "^0.32.9"
   },
@@ -44,20 +44,21 @@
     "validate:env": "node bin/validateEnv.js"
   },
   "devDependencies": {
-    "@storybook/addon-a11y": "^6.3.6",
-    "@storybook/addon-actions": "^6.3.6",
-    "@storybook/addon-docs": "^6.3.6",
-    "@storybook/addon-knobs": "^6.2.9",
-    "@storybook/addon-links": "^6.3.6",
-    "@storybook/addons": "^6.3.6",
+    "@storybook/addon-a11y": "^6.4.9",
+    "@storybook/addon-essentials": "^6.4.9",
+    "@storybook/addon-links": "^6.4.9",
+    "@storybook/addons": "^6.4.9",
+    "@storybook/builder-webpack5": "^6.4.9",
+    "@storybook/manager-webpack5": "^6.4.9",
     "@storybook/preset-create-react-app": "^4.0.0",
-    "@storybook/react": "^6.3.6",
+    "@storybook/react": "^6.4.9",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
     "chalk": "^5.0.0",
     "dotenv": "^10.0.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-config-react-app": "^6.0.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-jsx-a11y": "^6.4.1",
@@ -67,7 +68,8 @@
     "lint-staged": "^12.0.2",
     "prettier": "^2.3.2",
     "storybook-readme": "^5.0.9",
-    "typescript": "^4.3.5"
+    "typescript": "^4.3.5",
+    "webpack": "^5.65.0"
   },
   "lint-staged": {
     "*.{js,css,md}": [
