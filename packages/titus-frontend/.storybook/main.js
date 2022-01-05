@@ -11,7 +11,7 @@ module.exports = {
     },
     '@storybook/addon-actions/register',
     '@storybook/addon-links/register',
-    '@storybook/addon-knobs/register',
+    '@storybook/addon-knobs',
     '@storybook/preset-create-react-app',
     'storybook-readme/register'
   ],
