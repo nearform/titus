@@ -251,7 +251,7 @@ resource "aws_security_group_rule" "inbound" {
   from_port   = 80
   to_port     = 80
   protocol    = "tcp"
-  cidr_blocks = ["0.0.0.0/0"] # This could also be the network interface IP of the NLB
+  cidr_blocks = ["0.0.0.0/0"] # ECS is load balanced with NLB, so we must open the port for all IPs
 
   security_group_id = aws_security_group.this.id
 }
