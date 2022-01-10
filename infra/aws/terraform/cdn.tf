@@ -1,3 +1,11 @@
+resource "aws_cloudfront_origin_access_identity" "this" {
+  comment = "Static content"
+}
+
+locals {
+  s3_origin_id = "static-content"
+}
+
 resource "aws_cloudfront_distribution" "this" {
   default_cache_behavior {
     allowed_methods = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
@@ -39,9 +47,13 @@ resource "aws_cloudfront_distribution" "this" {
   }
 
   origin {
-    domain_name = format("s3-content.%s.%s.vittle.ai.s3.amazonaws.com", var.region, var.environment)
+    domain_name = aws_s3_bucket.this.bucket_regional_domain_name
+    origin_id   = local.s3_origin_id
     origin_path = "/static-content"
-    origin_id   = format("S3-content.%s.%s.vittle.ai/static-content", var.region, var.environment)
+
+    s3_origin_config {
+      origin_access_identity = aws_cloudfront_origin_access_identity.this.cloudfront_access_identity_path
+    }
   }
 
   price_class = "PriceClass_All"
@@ -51,11 +63,12 @@ resource "aws_cloudfront_distribution" "this" {
       restriction_type = "none"
     }
   }
+
   ordered_cache_behavior {
     path_pattern           = "/static-content"
     allowed_methods        = ["GET", "HEAD", "OPTIONS"]
     cached_methods         = ["GET", "HEAD", "OPTIONS"]
-    target_origin_id       = format("S3-content.%s.%s.vittle.ai/static-content", var.region, var.environment)
+    target_origin_id       = local.s3_origin_id
     viewer_protocol_policy = "redirect-to-https"
     min_ttl                = 0
     default_ttl            = 3600
@@ -70,7 +83,6 @@ resource "aws_cloudfront_distribution" "this" {
     }
   }
 
-
   retain_on_delete = "false"
 
   viewer_certificate {
@@ -81,5 +93,4 @@ resource "aws_cloudfront_distribution" "this" {
     aws_api_gateway_integration.config,
     aws_api_gateway_integration.api
   ]
-
 }
