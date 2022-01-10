@@ -251,7 +251,7 @@ resource "aws_security_group_rule" "inbound" {
   from_port   = 80
   to_port     = 80
   protocol    = "tcp"
-  cidr_blocks = ["1.1.1.1/32"] # Network interface IPs of NLB
+  cidr_blocks = ["0.0.0.0/0"] # This could also be the network interface IP of the NLB
 
   security_group_id = aws_security_group.this.id
 }
