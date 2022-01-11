@@ -3,38 +3,30 @@ resource "aws_cloudfront_origin_access_identity" "this" {
 }
 
 locals {
-  s3_origin_id = "static-content"
+  s3_origin_id    = "static-content"
+  apigw_origin_id = "apigw"
 }
 
 resource "aws_cloudfront_distribution" "this" {
-  default_cache_behavior {
-    allowed_methods = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
-    cached_methods  = ["HEAD", "GET", "OPTIONS"]
-    compress        = "true"
-    forwarded_values {
-      query_string = true
-      headers      = ["Accept", "Authorization", "CloudFront-Forwarded-Proto", "Host", "Origin"]
+  enabled          = "true"
+  http_version     = "http2"
+  is_ipv6_enabled  = "true"
+  price_class      = "PriceClass_All"
+  retain_on_delete = "false"
 
-      cookies {
-        forward = "all"
-      }
-    }
-    default_ttl            = "0"
-    max_ttl                = "0"
-    min_ttl                = "0"
-    smooth_streaming       = "false"
-    target_origin_id       = regex(format("%s-[a-z0-9]+.elb.[a-z-0-9]+.amazonaws.com", var.default_name), "${aws_api_gateway_integration.api.uri}")
-    viewer_protocol_policy = "allow-all"
-  }
-
-  enabled         = "true"
-  http_version    = "http2"
-  is_ipv6_enabled = "true"
 
   origin {
-    domain_name = regex(format("%s-[a-z0-9]+.elb.[a-z-0-9]+.amazonaws.com", var.default_name), "${aws_api_gateway_integration.api.uri}")
-    origin_id   = regex(format("%s-[a-z0-9]+.elb.[a-z-0-9]+.amazonaws.com", var.default_name), "${aws_api_gateway_integration.api.uri}")
-    origin_path = "/api"
+    domain_name = aws_s3_bucket.this.bucket_regional_domain_name
+    origin_id   = local.s3_origin_id
+
+    s3_origin_config {
+      origin_access_identity = aws_cloudfront_origin_access_identity.this.cloudfront_access_identity_path
+    }
+  }
+
+  origin {
+    domain_name = replace(aws_api_gateway_deployment.live.invoke_url, "/^https?://([^/]*).*/", "$1")
+    origin_id   = local.apigw_origin_id
 
     custom_origin_config {
       http_port                = "80"
@@ -46,36 +38,38 @@ resource "aws_cloudfront_distribution" "this" {
     }
   }
 
-  origin {
-    domain_name = aws_s3_bucket.this.bucket_regional_domain_name
-    origin_id   = local.s3_origin_id
-    origin_path = "/static-content"
-
-    s3_origin_config {
-      origin_access_identity = aws_cloudfront_origin_access_identity.this.cloudfront_access_identity_path
-    }
-  }
-
-  price_class = "PriceClass_All"
-
   restrictions {
     geo_restriction {
       restriction_type = "none"
     }
   }
 
-  ordered_cache_behavior {
-    path_pattern           = "/static-content"
-    allowed_methods        = ["GET", "HEAD", "OPTIONS"]
-    cached_methods         = ["GET", "HEAD", "OPTIONS"]
+  default_cache_behavior {
+    allowed_methods        = ["GET", "HEAD"]
+    cache_policy_id        = "658327ea-f89d-4fab-a63d-7e88639e58f6"
+    cached_methods         = ["GET", "HEAD"]
+    compress               = true
     target_origin_id       = local.s3_origin_id
-    viewer_protocol_policy = "redirect-to-https"
+    viewer_protocol_policy = "allow-all"
+    default_ttl            = 0
     min_ttl                = 0
-    default_ttl            = 3600
-    max_ttl                = 86400
+    max_ttl                = 0
+  }
+
+  ordered_cache_behavior {
+    path_pattern           = "/api/*"
+    allowed_methods        = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
+    cached_methods         = ["HEAD", "GET", "OPTIONS"]
+    compress               = true
+    target_origin_id       = local.apigw_origin_id
+    viewer_protocol_policy = "allow-all"
+    default_ttl            = 0
+    min_ttl                = 0
+    max_ttl                = 0
 
     forwarded_values {
-      query_string = false
+      query_string = true
+      headers      = ["Accept", "Authorization", "CloudFront-Forwarded-Proto", "Host", "Origin"]
 
       cookies {
         forward = "all"
@@ -83,12 +77,11 @@ resource "aws_cloudfront_distribution" "this" {
     }
   }
 
-  retain_on_delete = "false"
-
   viewer_certificate {
     cloudfront_default_certificate = "true"
     minimum_protocol_version       = "TLSv1"
   }
+
   depends_on = [
     aws_api_gateway_integration.config,
     aws_api_gateway_integration.api
