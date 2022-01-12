@@ -1,3 +1,7 @@
+data "aws_cloudfront_cache_policy" "this" {
+  name = "Managed-CachingOptimized"
+}
+
 resource "aws_cloudfront_origin_access_identity" "this" {
   comment = "Static content"
 }
@@ -13,7 +17,6 @@ resource "aws_cloudfront_distribution" "this" {
   is_ipv6_enabled  = "true"
   price_class      = "PriceClass_All"
   retain_on_delete = "false"
-
 
   origin {
     domain_name = aws_s3_bucket.this.bucket_regional_domain_name
@@ -46,7 +49,7 @@ resource "aws_cloudfront_distribution" "this" {
 
   default_cache_behavior {
     allowed_methods        = ["GET", "HEAD"]
-    cache_policy_id        = "658327ea-f89d-4fab-a63d-7e88639e58f6"
+    cache_policy_id        = data.aws_cloudfront_cache_policy.this.id
     cached_methods         = ["GET", "HEAD"]
     compress               = true
     target_origin_id       = local.s3_origin_id
