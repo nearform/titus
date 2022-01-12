@@ -4,8 +4,8 @@ resource "aws_cognito_user_pool" "user_pool" {
 }
 
 resource "aws_cognito_user_pool_client" "user_pool_client" {
-  name                         = format("%s-user-pool-client", var.default_name)
-  user_pool_id                 = aws_cognito_user_pool.user_pool.id
+  name         = format("%s-user-pool-client", var.default_name)
+  user_pool_id = aws_cognito_user_pool.user_pool.id
   #allowed_oauth_flows          = ["client_credentials"]
   callback_urls                = ["http://localhost"]
   default_redirect_uri         = "http://localhost"
