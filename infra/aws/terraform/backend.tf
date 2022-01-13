@@ -33,10 +33,10 @@ resource "aws_ecs_task_definition" "titus" {
       ]
       logConfiguration = {
         logDriver = "awslogs",
-        options: {
-          "awslogs-group": aws_cloudwatch_log_group.this.name,
-          "awslogs-region": var.region,
-          "awslogs-stream-prefix": "ecs"
+        options : {
+          "awslogs-group" : aws_cloudwatch_log_group.this.name,
+          "awslogs-region" : var.region,
+          "awslogs-stream-prefix" : "ecs"
         }
       }
       environment = [
@@ -94,11 +94,11 @@ resource "aws_ecs_task_definition" "titus" {
 }
 
 resource "aws_ecs_service" "titus" {
-  name            = var.default_name
-  cluster         = aws_ecs_cluster.this.id
-  launch_type     = "FARGATE"
-  task_definition = aws_ecs_task_definition.titus.arn
-  desired_count   = 1
+  name                 = var.default_name
+  cluster              = aws_ecs_cluster.this.id
+  launch_type          = "FARGATE"
+  task_definition      = aws_ecs_task_definition.titus.arn
+  desired_count        = 1
   force_new_deployment = true
   network_configuration {
     security_groups = [aws_security_group.this.id]

@@ -1,6 +1,6 @@
 # Titus AWS Deploy with Terraform
 
-This package allows to deploy easily the titus project on a AWS account.
+This package allows to deploy easily the Titus project on an AWS account.
 
 
 ### Overview
@@ -19,9 +19,9 @@ The schema below shows the deployed architecture:
 
 The web stack contains a React.js [Single Page Application](https://en.wikipedia.org/wiki/Single-page_application) which provides the UI.
 
-The application has a single entry point through CloudFront that manage the routing serving static files from an S3 Bucket and the api calls from the Api Gateway.
+The application has a single entry point through CloudFront that manage the routing serving static files from an S3 Bucket and the api calls from the Api Gateway. The Terraform code uploads a static placeholder website (https://github.com/sebastian9486/static-placeholder-website) as a test landing page.
 
-The Api service runs on Ecs Fargate container service with a Network Load Balancer (NLB) and an Autoscaling.
+The Api service runs on Ecs Fargate container service with a Network Load Balancer (NLB) and Autoscaling.
 
 The Authentication is managed by Api Gateway through a Cognito UserPool. 
 
@@ -76,7 +76,7 @@ This stack contains the CloudFront configuration, the DNS creation and the stora
 
 Terraform will use the profile named `titus` in your AWS credential files. Either create an entry on your `~/.aws/credentials` file named `[titus]` or configure a `[profile titus]` in your `~/.aws/config` file.
 
-Install Terraform `>= 1.0.0` and the aws cli. Navigate to the infra/aws folder and run
+Install Terraform `>= 1.0.0` and the aws cli. Navigate to the infra/aws folder and run the following commands:
 
 ```
 terraform plan -out "titus.tfplan"

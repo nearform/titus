@@ -19,15 +19,15 @@ resource "aws_secretsmanager_secret_version" "db_password" {
 }
 
 resource "aws_db_instance" "this" {
-  allocated_storage    = 5
-  engine               = "postgres"
-  engine_version       = "12.6"
-  instance_class       = "db.t3.micro"
-  identifier           = var.default_name
-  name                 = "titus_backend"
-  username             = "titus_db_user"
-  password             = random_password.db_password.result
-  db_subnet_group_name = aws_db_subnet_group.this.name
-  skip_final_snapshot  = true
-  vpc_security_group_ids = [ aws_security_group.this.id ]
+  allocated_storage      = 5
+  engine                 = "postgres"
+  engine_version         = "12.6"
+  instance_class         = "db.t3.micro"
+  identifier             = var.default_name
+  name                   = "titus_backend"
+  username               = "titus_db_user"
+  password               = random_password.db_password.result
+  db_subnet_group_name   = aws_db_subnet_group.this.name
+  skip_final_snapshot    = true
+  vpc_security_group_ids = [aws_security_group.this.id]
 }
