@@ -68,7 +68,7 @@ const routeResponseSchemaOpts = Type.Strict(
   })
 ).properties
 
-const isProduction = /^\s$production\s*$/i.test(config.NODE_ENV)
+const isProduction = config.NODE_ENV === 'production'
 
 // Global configuration, from env variables
 export const configOptions = {

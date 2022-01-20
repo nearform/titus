@@ -19,7 +19,7 @@ const config = envSchema({
     .prop('SECRETS_PG_PASS', S.string().required())
 })
 
-const isProduction = /^\s$production\s*$/i.test(config.NODE_ENV)
+const isProduction = config.NODE_ENV === 'production'
 
 /**
  * Global configuration, from env variables

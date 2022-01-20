@@ -51,7 +51,7 @@ const routeResponseSchemaOpts = S.object()
   )
   .valueOf().properties
 
-const isProduction = /^\s$production\s*$/i.test(config.NODE_ENV)
+const isProduction = config.NODE_ENV === 'production'
 
 // Global configuration, from env variables
 module.exports = {
