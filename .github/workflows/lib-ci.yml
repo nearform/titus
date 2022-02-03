@@ -1,0 +1,46 @@
+name: Lib CI
+on:
+  push:
+    paths:
+      - '.github/workflows/lib-ci.yml'
+      - 'lib/**'
+  pull_request:
+    paths:
+      - '.github/workflows/lib-ci.yml'
+      - 'lib/**'
+
+jobs:
+  integration-checks:
+    name: 'Testing'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checking out code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: Installing dependencies
+        working-directory: lib
+        run: |
+          npm ci
+
+      - name: Running tests
+        working-directory: lib
+        run: |
+          npm run test
+
+  automerge:
+    needs: integration-checks
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: write
+    steps:
+      - uses: fastify/github-action-merge-dependabot@v3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
