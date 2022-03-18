@@ -32,7 +32,7 @@ jobs:
           node-version-file: '.nvmrc'
 
       - name: Set up gcloud CLI
-        uses: google-github-actions/setup-gcloud@master
+        uses: google-github-actions/setup-gcloud@v0
         with:
           version: latest
           service_account_email: ${{ secrets.GCP_SA_EMAIL }}
@@ -73,7 +73,7 @@ jobs:
 
     steps:
       - name: Set up gcloud CLI
-        uses: google-github-actions/setup-gcloud@master
+        uses: google-github-actions/setup-gcloud@v0
         with:
           version: latest
           service_account_email: ${{ secrets.GCP_SA_EMAIL }}
