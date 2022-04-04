@@ -20,7 +20,7 @@ jobs:
         with:
           fetch-depth: 1
 
-      - uses: actions/setup-node@v3.1.0
+      - uses: actions/setup-node@v3
         with:
           node-version-file: '.nvmrc'
 
