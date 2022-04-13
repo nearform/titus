@@ -87,7 +87,7 @@ jobs:
           echo "DOCKER_IMAGE=$DOCKER_REGISTRY_HOST/$PROJECT_ID/titus/storybook:$GITHUB_SHA" >> $GITHUB_ENV
 
       - name: Download Docker image from artifacts store
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: ${{ env.DOCKER_SAVE_ARTIFACT }}
           path: /tmp
