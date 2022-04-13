@@ -11,6 +11,7 @@ const config = envSchema({
     .prop('HTTP_HOST', S.string().default('localhost'))
     .prop('HTTP_PORT', S.string().required())
     .prop('NODE_ENV', S.string().required())
+    .prop('IS_PRODUCTION', S.boolean().required())
     .prop('PG_HOST', S.string().required())
     .prop('PG_PORT', S.string().required())
     .prop('PG_USER', S.string().required())
@@ -19,13 +20,11 @@ const config = envSchema({
     .prop('SECRETS_PG_PASS', S.string().required())
 })
 
-const isProduction = config.NODE_ENV === 'production'
-
 /**
  * Global configuration, from env variables
  */
 module.exports = {
-  isProduction,
+  isProduction: config.IS_PRODUCTION,
   // Fastify options: https://www.fastify.io/docs/latest/Server/:
   fastify: {
     host: config.HTTP_HOST,
