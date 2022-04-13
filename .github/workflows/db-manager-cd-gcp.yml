@@ -53,7 +53,7 @@ jobs:
         run: docker save $DOCKER_IMAGE > /tmp/$DOCKER_SAVE_ARTIFACT
 
       - name: Store Docker image as artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: ${{ env.DOCKER_SAVE_ARTIFACT }}
           path: /tmp/${{ env.DOCKER_SAVE_ARTIFACT }}

@@ -41,7 +41,7 @@ jobs:
         run: /usr/local/bin/grype /tmp/${{ inputs.docker-image }} | tee /tmp/vuln-scan-${{ inputs.scan-report }}.txt
 
       - name: Publish image scan results
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: vuln-scan-${{ inputs.scan-report }}.txt
           path: /tmp/vuln-scan-${{ inputs.scan-report }}.txt

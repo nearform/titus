@@ -65,7 +65,7 @@ jobs:
 
       - name: Persist test artifacts
         if: ${{ failure() }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: image-snapshots
           path: packages/titus-frontend/src/__image_snapshots__/__diff_output__
