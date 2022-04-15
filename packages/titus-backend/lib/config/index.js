@@ -9,6 +9,7 @@ const config = envSchema({
   dotenv: true,
   schema: S.object()
     .prop('NODE_ENV', S.string().required())
+    .prop('IS_PRODUCTION', S.boolean().required())
     .prop('API_HOST', S.string().required())
     .prop('API_PORT', S.string().required())
     .prop('CORS_ORIGIN', S.string())
@@ -51,11 +52,9 @@ const routeResponseSchemaOpts = S.object()
   )
   .valueOf().properties
 
-const isProduction = config.NODE_ENV === 'production'
-
 // Global configuration, from env variables
 module.exports = {
-  isProduction,
+  isProduction: config.IS_PRODUCTION,
   server: {
     host: config.API_HOST,
     port: config.API_PORT

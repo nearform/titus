@@ -11,6 +11,7 @@ import swaggerConfig from './swagger'
 const envJsonSchema = Type.Strict(
   Type.Object({
     NODE_ENV: Type.String(),
+    IS_PRODUCTION: Type.Boolean(),
     API_HOST: Type.String(),
     API_PORT: Type.Number(),
     CORS_ORIGIN: Type.Optional(Type.String()),
@@ -68,11 +69,9 @@ const routeResponseSchemaOpts = Type.Strict(
   })
 ).properties
 
-const isProduction = config.NODE_ENV === 'production'
-
 // Global configuration, from env variables
 export const configOptions = {
-  isProduction,
+  isProduction: config.IS_PRODUCTION,
   server: {
     host: config.API_HOST,
     port: config.API_PORT
