@@ -37,6 +37,10 @@ resource "google_cloud_run_service" "backend" {
           value = "8080"
         }
         env {
+          name  = "IS_PRODUCTION"
+          value = true
+        }
+        env {
           name  = "CORS_ORIGIN"
           value = google_cloud_run_service.frontend.status.0.url
         }
