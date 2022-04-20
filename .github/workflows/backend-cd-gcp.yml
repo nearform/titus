@@ -13,6 +13,7 @@ env:
   DOCKER_REGISTRY_HOST: europe-west1-docker.pkg.dev
   CLOUDRUN_SERVICE_NAME: titus-backend
   CLOUDRUN_SERVICE_REGION: europe-west1
+  IS_PRODUCTION: false
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
 
 jobs:
@@ -106,6 +107,8 @@ jobs:
           credentials: ${{ secrets.GCP_SA_KEY }}
           region: ${{ env.CLOUDRUN_SERVICE_REGION }}
           project_id: ${{ env.PROJECT_ID }}
+          env_vars: |
+            IS_PRODUCTION=${{ env.IS_PRODUCTION }}
 
       - name: Delete Docker artifacts
         if: always()
