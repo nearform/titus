@@ -38,7 +38,7 @@ resource "google_cloud_run_service" "backend" {
         }
         env {
           name  = "IS_PRODUCTION"
-          value = true
+          value = var.is_production
         }
         env {
           name  = "CORS_ORIGIN"

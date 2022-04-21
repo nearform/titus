@@ -66,7 +66,7 @@ resource "google_cloud_run_service" "db_manager" {
         }
         env {
           name  = "IS_PRODUCTION"
-          value = true
+          value = var.is_production
         }
         env {
           name  = "AUTH0_DOMAIN"
