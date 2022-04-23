@@ -7,4 +7,6 @@ variable "cloudsql_tier" {}
 variable "cloudsql_db_name" {}
 variable "cloudsql_db_user" {}
 
+variable "is_production" {}
+
 variable "artifact_registry_repository_name" {}
