@@ -1,6 +1,8 @@
 name: 'DB Manager CD to GCP'
 
 on:
+  workflow_dispatch:
+  
   push:
     branches:
       - master
