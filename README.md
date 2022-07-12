@@ -1,5 +1,10 @@
 &nbsp;
 
+<h1 align="center">PLEASE NOTE </h1> 
+<p align="center">Titus has been sunsetted and now exists for reference. It is no longer updated as of July 2022.  Thanks for all the support. </p>
+
+&nbsp;
+
 [![Logo][logo-img]][docs]
 
 &nbsp;
