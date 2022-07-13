@@ -15,7 +15,7 @@ describe('truncate', () => {
     expect(pg.query).toHaveBeenCalledWith(`
     TRUNCATE TABLE
       foo.some_table
-    RESTART IDENTITY;
+    RESTART IDENTITY CASCADE;
   `)
   })
 })
